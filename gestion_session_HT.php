@@ -85,18 +85,20 @@ if (!isset($_SESSION['horsConnexion'])) {
         Now access is granted for your application
         You can save user token and token secret and/or request xml files
         */
+		$userId = $_SESSION['HT']->getClub()->getUserId();
+		$teamNb = $_SESSION['HT']->getNumberOfTeams($userId);
+		for ($tsidx=$teamNb-1; $tsidx >= 0; $tsidx--) {
+			// On commence par le 2e club s'il y a pour faire la maj
+			$team2 = $_SESSION['HT']->getSecondaryTeam($userId, $tsidx);
+			if ($team2 != null)
+			{
+				$clubHT = getDataClubFromHT_usingPHT($team2->getTeamId());
+				$clubHT['userToken'] = $_SESSION['HT']->getOauthToken();
+				$clubHT['userTokenSecret'] = $_SESSION['HT']->getOauthTokenSecret();
 
-        // On commence par le 2e club s'il y a pour faire la maj
-        $team2 = $_SESSION['HT']->getSecondaryTeam();
-				if ($team2 != null)
-				{
-					$clubHT = getDataClubFromHT_usingPHT($team2->getTeamId());
-          $clubHT['userToken'] = $_SESSION['HT']->getOauthToken();
-          $clubHT['userTokenSecret'] = $_SESSION['HT']->getOauthTokenSecret();
-
-          $majClub=insertionClub($clubHT); // Insertion ou Maj des tokens dans la bdd DTN
-        }        
-        
+				$majClub=insertionClub($clubHT); // Insertion ou Maj des tokens dans la bdd DTN
+			}        
+        }
         $clubHT = getDataClubFromHT_usingPHT($_SESSION['HT']->getTeam()->getTeamId()); // On récupère sur HT les informations sur le club connecté
         $clubHT['userToken'] = $_SESSION['HT']->getOauthToken();
         $clubHT['userTokenSecret'] = $_SESSION['HT']->getOauthTokenSecret();
