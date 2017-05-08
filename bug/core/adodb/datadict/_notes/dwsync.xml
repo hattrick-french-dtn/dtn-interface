@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<dwsync>
+<file name="datadict-access.inc.php" server="62.23.12.131" local="128195851565468750" remote="128351273400000000" />
+<file name="datadict-db2.inc.php" server="62.23.12.131" local="128195851566875000" remote="128351273400000000" />
+<file name="datadict-firebird.inc.php" server="62.23.12.131" local="128195851569843750" remote="128351273400000000" />
+<file name="datadict-generic.inc.php" server="62.23.12.131" local="128195851569218750" remote="128351273400000000" />
+<file name="datadict-ibase.inc.php" server="62.23.12.131" local="128195851569218750" remote="128351273400000000" />
+<file name="datadict-informix.inc.php" server="62.23.12.131" local="128195851570937500" remote="128351273400000000" />
+<file name="datadict-mssql.inc.php" server="62.23.12.131" local="128195851571562500" remote="128351273400000000" />
+<file name="datadict-mysql.inc.php" server="62.23.12.131" local="128195851573281250" remote="128351273400000000" />
+<file name="datadict-oci8.inc.php" server="62.23.12.131" local="128195851575156250" remote="128351273400000000" />
+<file name="datadict-postgres.inc.php" server="62.23.12.131" local="128195851576250000" remote="128351273400000000" />
+<file name="datadict-sapdb.inc.php" server="62.23.12.131" local="128195851573906250" remote="128351273400000000" />
+<file name="datadict-sybase.inc.php" server="62.23.12.131" local="128195851574531250" remote="128351273400000000" />
+</dwsync>

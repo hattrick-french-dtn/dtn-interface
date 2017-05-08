@@ -1,0 +1,91 @@
+body,.btn{background-color:#ffffff}
+body,p,td,select,li,ul{color:#000;font-size:x-small;font-family:Arial,Helvetica}
+br{font-size:x-small;font-family:Arial,Helvetica}
+ul{list-style-image:url(/dtn/interface/images/arrow.jpg)}
+input,textarea{font-family:Ghost}
+a:link,a:visited{color:#000}
+a:hover,a:visited:hover{color:#0179c6}
+.list{font-weight:bold}
+a:link.btn,a:visited.btn,a:link.special,a:visited.special,a:link.form,a:visited.form,a:link.tool.btn,a:visited.tool,a:link.inser,a:visited.inser,a:link.efface,a:visited.efface,.btnnew,a:link.btnnew,a:visited.btnnew,.btn,.special,.form,.tool,.inser,.efface,a.tools:link,a.tools:visited{color:#000000;text-decoration:none}
+a:hover.btn,a:hover.visited.btn,a:hover.snav,a:hover.visited.snav,a:hover.special,a:hover.visited.special,a:hover.form,a:hover.visited.form,a:hover.tool,a:hover.visited.tool{color:#cc0000}
+.snav{background-color:#999999}
+a:link.snav,a:visited.snav,.snav,.tool2,a:link.tool2,a:visited.tool2{color:#ffffff;text-decoration:none}
+.special{background-color:#ff9966}
+.form{background-color:#ffcc99}
+.activ,a:link.activ,a:visited.activ{background-color:#efefef;color:#cc0000;text-decoration:none}
+.tool{background-color:#ffeebb}
+.bgtool,.bgtool2{background-color:#CC0000}
+.tool2{background-color:#777777}
+a:hover.tool2,a:hover.visited.tool2{color:#ffcc99}
+.bg{background-color:#000000}
+.small,a.tools:link,a.tools:visited{font-size:10px}
+.medium{font-size:11px}
+.field,.inser,.plus,select{font-size:12px}
+.efface,.minus{font-size:14px}
+a:hover.inser,a:hover.visited.inser,a:hover.efface,a:hover.visited.efface{color:#cc0000;text-decoration:none}
+a.nav:link,a.nav:visited{color:#666;font-weight:bold;font-size:11px;text-decoration:none}
+a.nav:hover,.navon{color:#ff8f69;font-weight:bold;font-size:11px;text-decoration:none}
+a:hover.btnnew,a:hover.visited.btnnew{color:#317}
+a.toolsU:visited,a.toolsU:hover,a.toolsU:link,a.tools:hover{color:#000;font-size:10px;text-decoration:underline}
+.bigone,.bigonevar,.bigonelow{font-size:30px;text-decoration:none}
+.bigone{color:#666}
+.bigonevar{color:#0179c6}
+.bigonelow{color:#ffe5cc}
+.titleboxe{color:#666;font-weight:bold;font-size:13px}
+.titleboxevar{color:#0179c6;font-weight:bold;font-size:13px}
+a.smliensorange:link,a.smliensorange:visited{color:#317;font-weight:bold;font-size:x-small;text-decoration:underline}
+a.smliensorange:hover{color:#317;font-weight:bold;font-size:x-small;text-decoration:none}
+a.smliensorangesmall:link,a.smliensorangesmall:visited{color:#317;font-weight:bold;font-size:10px;text-decoration:underline}
+a.smliensorangesmall:hover{color:#317;font-weight:bold;font-size:10px;text-decoration:none}
+.titleinterpel{color:#666;font-weight:bold;font-size:16px}
+.titleinterpelvar{color:#0179c6;font-weight:bold;font-size:16px}
+.titleimg{color:#666;font-size:20px}
+.titleimgvar{color:#0179c6;font-size:20px}
+.puce{color:#0179c6;font-size:11px;font-weight:bold;}
+.new{color:#c33;font-size:xx-small;vertical-align:super}
+.bred{color:#666;font-weight:bold;font-size:14px}
+.breadvar{color:#0179c6;font-weight:bold;font-size:14px}
+a:link.breadvar,a:visited.breadvar{color:#0179c6;font-weight:bold;font-size:14px;text-decoration:none}
+a:hover.breadvar,a:hover.visited.breadvar{color:#0179c6;font-weight:bold;font-size:14px;text-decoration:underline}
+.premium{color:#cc4048;font-size:2em}
+.space{line-height:21px}
+.plus,.minus{text-decoration:none}
+a.vnavrequest:link{color:#000;font-size:x-small;text-decoration:none}
+a.vnavrequest:hover{color:#f60;font-size:x-small;text-decoration:none}
+.oblig{border:solid 1px #0179c6}
+.cadre{border:solid 1px #ccc}
+.bred1 { color: #333;  font-size: 11px }
+.bred1:link { color: #333;  font-size: 11px; TEXT-DECORATION: none}
+.bred1:visited { color: #333;  font-size: 11px; TEXT-DECORATION: none}
+.bred1:hover { color: #66C;  font-size: 11px; TEXT-DECORATION: underline}
+A.bred2:link{ FONT-WEIGHT: bold; FONT-SIZE: 14px; COLOR: #666; TEXT-DECORATION: none}
+A.bred2:visited{ FONT-WEIGHT: bold; FONT-SIZE: 14px; COLOR: #666; TEXT-DECORATION: none}
+A.bred2:hover{ FONT-WEIGHT: bold; FONT-SIZE: 14px; COLOR: #666; TEXT-DECORATION: none}
+.cadreleftdwn  { border-top: 1px #ccc; border-right: 1px #ccc; border-bottom: 1px solid #ccc; border-left: 1px solid #ccc }
+.cadreleftrightdwn { border-style: none solid solid solid; border-width: 1px; border-color: #ccc #ccc #ccc #ccc }
+.cadreleftrighttop { border-style: solid solid solid solid; border-width: 1px; border-color: #ccc #ccc #ccc #ccc }
+.cadrerightdwn   { border-top: 1px none #ccc; border-right: 1px solid #ccc; border-bottom: 1px solid #ccc; border-left: 1px #ccc }
+.cadrelefttop { border-top: 1px solid #ccc; border-right: 1px #ccc; border-bottom: 1px #ccc; border-left: 1px solid #ccc }
+.cadreleft { border-top: 1px #ccc; border-right: 1px #ccc; border-bottom: 1px #ccc; border-left: 1px solid #ccc }
+.cadretop { border-top: 1px solid #ccc; border-right: 1px #ccc; border-bottom: 1px #ccc; border-left: 1px #ccc }
+.cadredwn { border-style: none none solid none; border-width: 1px; border-color: #ccc #ccc #ccc #ccc }
+
+.Bleu:link{color: #0000ff;text-decoration:underline;}
+.Bleu:visited{color: #0000ff;text-decoration:underline;}
+.Bleu:hover{color: #0088ff;text-decoration:underline;}
+.Bleu:active{color: #6600ff;text-decoration:underline;}
+
+.Vert:link,.Vert:visited{font-weight:bold;color:#FFFFFF;background-color:#85A275;text-align:center;padding:0em;text-decoration:none;}
+.Vert:visited:hover{color:#EFEAA8;}
+.Vert:hover{color:#EFEAA8;background-color:#7A991A;}
+.Vert:active{color:#EFEAA8;background-color:#7A991A;}
+
+.Rouge:link,.Vert:visited{font-weight:bold;color:#FFFFFF;background-color:#E56E51;text-align:center;padding:0em;text-decoration:none;}
+.Rouge:visited:hover{color:#EFEAA8;}
+.Rouge:hover{color:#EFEAA8;background-color:#F91A1A;}
+.Rouge:active{color:#EFEAA8;background-color:#F91A1A;}
+
+.Mauve:link,.Mauve:visited{font-weight:bold;color:#000000;background-color:#BCB0C1;text-align:center;padding:0.2em;text-decoration:none;}
+.Mauve:visited:hover{color:#EFEAA8;}
+.Mauve:hover{color:#EFEAA8;background-color:#57579F;}
+.Mauve:active{color:#EFEAA8;background-color:#579F63;}

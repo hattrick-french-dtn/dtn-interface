@@ -1,0 +1,32 @@
+body
+{scrollbar-face-color: #000000; scrollbar-shadow-color: #FFFFFF; 
+scrollbar-highlight-color: #000000; scrollbar-3dlight-color: #000000; 
+scrollbar-darkshadow-color: #000000; scrollbar-track-color: #2E2E2E; 
+scrollbar-arrow-color: #000000}
+
+th {
+	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	text-decoration: none;
+}
+
+
+td {
+	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+	font-size: 11px;
+    text-align: justify;
+}
+
+a       {
+         text-decoration: none;
+         color: #000066
+}
+
+a:hover      { 
+         text-decoration: underline;
+         color: #000066
+}
+
+.titre {
+font-size:14px;
+}

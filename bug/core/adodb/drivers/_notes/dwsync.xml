@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<dwsync>
+<file name="adodb-access.inc.php" server="62.23.12.131" local="128351346249531250" remote="128351273400000000" />
+<file name="adodb-ado.inc.php" server="62.23.12.131" local="128351346251250000" remote="128351273400000000" />
+<file name="adodb-ado5.inc.php" server="62.23.12.131" local="128351346251562500" remote="128351273400000000" />
+<file name="adodb-ado_access.inc.php" server="62.23.12.131" local="128351346256250000" remote="128351273400000000" />
+<file name="adodb-ado_mssql.inc.php" server="62.23.12.131" local="128351346262343750" remote="128351273400000000" />
+<file name="adodb-borland_ibase.inc.php" server="62.23.12.131" local="128351346262343750" remote="128351273400000000" />
+<file name="adodb-csv.inc.php" server="62.23.12.131" local="128351346284687500" remote="128351273400000000" />
+<file name="adodb-db2.inc.php" server="62.23.12.131" local="128351346289843750" remote="128351273400000000" />
+<file name="adodb-fbsql.inc.php" server="62.23.12.131" local="128351346298437500" remote="128351273400000000" />
+<file name="adodb-firebird.inc.php" server="62.23.12.131" local="128351346297968750" remote="128351273400000000" />
+<file name="adodb-ibase.inc.php" server="62.23.12.131" local="128351346300156250" remote="128351273400000000" />
+<file name="adodb-informix.inc.php" server="62.23.12.131" local="128351346297656250" remote="128351273400000000" />
+<file name="adodb-informix72.inc.php" server="62.23.12.131" local="128351346299531250" remote="128351273400000000" />
+<file name="adodb-ldap.inc.php" server="62.23.12.131" local="128351346304531250" remote="128351273400000000" />
+<file name="adodb-mssql.inc.php" server="62.23.12.131" local="128351346310468750" remote="128351274000000000" />
+<file name="adodb-mssqlpo.inc.php" server="62.23.12.131" local="128351346308281250" remote="128351274000000000" />
+<file name="adodb-mysql.inc.php" server="62.23.12.131" local="128351346334687500" remote="128351274000000000" />
+<file name="adodb-mysqli.inc.php" server="62.23.12.131" local="128351346340312500" remote="128351274000000000" />
+<file name="adodb-mysqlt.inc.php" server="62.23.12.131" local="128351346349062500" remote="128351274000000000" />
+<file name="adodb-netezza.inc.php" server="62.23.12.131" local="128351346349843750" remote="128351274000000000" />
+<file name="adodb-oci8.inc.php" server="62.23.12.131" local="128351346351875000" remote="128351274000000000" />
+<file name="adodb-oci805.inc.php" server="62.23.12.131" local="128351346349062500" remote="128351274000000000" />
+<file name="adodb-oci8po.inc.php" server="62.23.12.131" local="128351346350156250" remote="128351274000000000" />
+<file name="adodb-odbc.inc.php" server="62.23.12.131" local="128351346355781250" remote="128351274000000000" />
+<file name="adodb-odbc_mssql.inc.php" server="62.23.12.131" local="128351346360781250" remote="128351274000000000" />
+<file name="adodb-odbc_oracle.inc.php" server="62.23.12.131" local="128351346361406250" remote="128351274000000000" />
+<file name="adodb-odbtp.inc.php" server="62.23.12.131" local="128351346386562500" remote="128351274000000000" />
+<file name="adodb-odbtp_unicode.inc.php" server="62.23.12.131" local="128351346389531250" remote="128351274000000000" />
+<file name="adodb-oracle.inc.php" server="62.23.12.131" local="128351346401562500" remote="128351274000000000" />
+<file name="adodb-pdo.inc.php" server="62.23.12.131" local="128351346401562500" remote="128351274000000000" />
+<file name="adodb-postgres.inc.php" server="62.23.12.131" local="128351346400000000" remote="128351274000000000" />
+<file name="adodb-postgres64.inc.php" server="62.23.12.131" local="128351346403281250" remote="128351274000000000" />
+<file name="adodb-postgres7.inc.php" server="62.23.12.131" local="128351346402031250" remote="128351274000000000" />
+<file name="adodb-proxy.inc.php" server="62.23.12.131" local="128351346405312500" remote="128351274000000000" />
+<file name="adodb-sapdb.inc.php" server="62.23.12.131" local="128351346411406250" remote="128351274000000000" />
+<file name="adodb-sqlanywhere.inc.php" server="62.23.12.131" local="128351346411406250" remote="128351274000000000" />
+<file name="adodb-sqlite.inc.php" server="62.23.12.131" local="128195851552031250" remote="128351274000000000" />
+<file name="adodb-sqlite.inc.php.bak" server="62.23.12.131" local="128195851552968750" remote="128351274000000000" />
+<file name="adodb-sqlitepo.inc.php" server="62.23.12.131" local="128195851551406250" remote="128351274000000000" />
+<file name="adodb-sybase.inc.php" server="62.23.12.131" local="128195851554062500" remote="128351274000000000" />
+<file name="adodb-vfp.inc.php" server="62.23.12.131" local="128195851553437500" remote="128351274000000000" />
+</dwsync>

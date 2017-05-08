@@ -1,0 +1,6 @@
+Debut traitement : 10/07/2012 03:06:01
+======================================
+Purge ht_clubs_histo : 3118 lignes
+Purge ht_clubs : 262 lignes
+Purge ht_clubs_histo_joueurs : 2800 lignes
+======================================

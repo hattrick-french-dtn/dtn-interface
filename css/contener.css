@@ -1,0 +1,19 @@
+body {
+  width:800px;
+}
+#menuLangue{
+	height:200px;
+	width:30px;
+	float:left;
+}
+/**** MENU HTFFF ***/
+#menu{
+	margin-left:40px;	
+}
+#menu_htfff{
+	width:100%;
+	height:80px;
+	background-image: url(../img/bg_menu_htfff.gif);
+	text-align:right;
+	background-repeat: repeat-x;
+}

@@ -1,0 +1,70 @@
+4 Dec 2005 release_1_0_10
+Gwedalou 
+	Modif:  - mise à jour automatique depuis hattrick des joueurs (playerDetails.asp)
+		- et des matchs joués pendant la semaine.
+		- mise à jour de toute la base pour DTN+ et DTN#
+
+10 Sep 2005 release_1_0_9
+Gwedalou 
+	Modif:  - possibilité suppression joueurs ->table obsolete players
+		- passage à la saison 27
+		- page top avec 10 par section et affichage de la note
+
+5 Sep 2005 release_1_0_8
+Gwedalou 
+	Modif:  - notations joueurs
+		- tops publics 
+		- fiche joueur 
+
+21 Aug 2005 release_1_0_7
+Gwedalou
+	Modif navigation joueur
+
+14 Aug 2005 relaese_1_0_6
+Gwedalou
+	Page dédiée club
+	Modif messages histos
+
+
+31 Jul 2005 relaese_1_0_5
+Gwedalou
+	Etoiles : check javascript entrées
+	+ suppression match
+	+ Modification match
+
+29 Jul 2005 relaese_1_0_4
+Guyroux/Adjanakis/Gwedalou
+
+	Avec notamment :
+	Migration nouvelle interface nouveau lien :
+http://http://www.ht-fff.org/dtn/interface	(gwedalou)
+	Beaucoup de bugs de date corrigés par adjanakis
+	Purge clubs par adjanakis
+	Ajout du niveau divin+1 guyroux
+	Acces aux tops pour tout le monde
+	Vision pour les DTN de qui s'occupe des tops.
+		
+
+12 Jul 2005 relaese_1_0_3
+Gwedalou
+	Version V2 popup epuree
+	Navigation menuCoach implementee
+	FicheDTN caracteristiques Textuelles
+
+09 Jul 2005  relaese_1_0_2
+Guyroux/Alf
+	
+-maj de clubs directement depuis hattrick
+
+ancienne fonctions -> nouvelles fonctions
+-ajout club -> maj club
+-modification club -> maj club
+-suppression club -> supprimé
+-lister les clubs -> supprimé 
+
+
+07 Jul 2005 relaese_1_0_1
+Gwedalou
+	Version V2 popup epuree
+	Navigation menuCoach implementee
+	FicheDTN caracteristiques Textuelles

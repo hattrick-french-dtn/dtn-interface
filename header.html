@@ -1,0 +1,85 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+    <meta name="description" content="DTN Hattrick France" />
+    <meta name="keywords" content="hattrick,France,DTN,scout,equipes,nationales,joueurs" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <link rel='shortcut icon' type='image/x-icon' href='img/dtn.ico'/>
+
+    <?php
+    // Affichage du titre suivant la page ou l'on se trouve
+    if  ($_SESSION['lang']=='fr') {
+      switch($nomFicPhpCourant[0]) {
+        case "/index.php" :?>
+          <title>ht-fff.org| hattrick | FFF - F&eacute;d&eacute;ration Fran&ccedil;aise de Formation</title>
+        <?php break;
+        case "/dtn_u20age.php" : ?>
+          <title>ht-fff.org| U20|Age maxi</title>
+        <?php break;
+        case "/dtn_requirement.php" : ?>
+          <title>ht-fff.org| Pr&eacute;-requis</title>
+        <?php break; 
+        case "/fff_help.php" : ?>
+          <title>ht-fff.org| &iexcl;&iexcl;&iexcl;help!</title>
+        <?php break; 
+        case "/contact.php" : ?>
+          <title>ht-fff.org| Contact</title>
+        <?php break; 
+        case "/fff_federation.php" : ?>
+          <title>ht-fff.org| F&eacute;d&eacute;ration Hattrick</title>
+        <?php break; 
+        case "/dtn_members.php" : ?>
+          <title>ht-fff.org| Membres</title>
+        <?php break; 
+        case "/links.php" : ?>
+          <title>ht-fff.org| Liens</title>
+        <?php break;
+        case "/faq_index.php" : ?>
+          <title>ht-fff.org| Foire Aux Questions</title>
+        <?php break; 
+        default :?>
+          <title>ht-fff.org| hattrick - F&eacute;d&eacute;ration Fran&ccedil;aise de Formation.</title>
+        <?php break;
+      }
+    } else { ?>
+      <title>ht-fff.org| hattrick - French Federation Formation.</title>
+    <?php }?>
+
+
+  <style type="text/css"><!--
+  a:link {
+  	text-decoration: none;
+  	color:#000000;
+  	font-size: 12px;
+  	font-family: "Century Gothic";
+  }
+  a:visited {
+  	color:#000000;
+  	text-decoration: none;
+  	font-size: 12px;
+  	font-family: "Century Gothic";
+  }
+  a:active {
+  	color:#000000;
+  	text-decoration: underline;
+  	font-size: 12px;
+  	font-family: "Century Gothic";
+  }--></style>
+  <link rel="stylesheet" type="text/css" href="css/contener.css" />
+  <link rel="stylesheet" type="text/css" href="css/style.css" />
+  <script language="JavaScript" src="inc/fonctions.js" type="text/javascript"></script>
+  <script language="JavaScript" src="inc/layer.js" type="text/javascript"></script>
+  <script language="JavaScript" type="text/javascript">
+  <!--
+  	var layer = new Array();
+  	layer[0] = '<span class="style40">f&eacute;d&eacute;ration fran&ccedil;aise de formation <span class="style31">french training federation <\/span><br>'+'...encourager la formation des joueurs fran&ccedil;ais vers l\'infini et au-del&agrave;.<\/span>';
+  	layer[1] = '<span class="style40">direction technique nationale <span class="style17">french scouting group <\/span><br>...rep&eacute;rer et suivre les meilleurs potentiels et internationaux fran&ccedil;ais.<\/span>';
+  	setupPops();
+  -->
+  </script>
+  </head>
+  
+  <body onLoad="MM_preloadImages('img/bann_fff_over.gif','img/bann_dtn_over.gif','img/bann_hattrick_over.gif','img/bott_01_chpp_ro.gif')">

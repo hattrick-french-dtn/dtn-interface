@@ -1,0 +1,479 @@
+html, body {
+	font-family: "Century Gothic";
+	font-size: 12px;
+	color: #000000;
+}
+
+.interface {
+  background-color:#ffffff;
+  color:#000;
+  font-size:x-small;
+  font-family:Arial,Helvetica;
+}
+
+.titrepage {
+	font-family: "Century Gothic";
+	font-size: 14px;
+	color: #000000;
+	padding-left:75px;
+}
+.titrepageGras {
+	font-family: "Century Gothic";
+	font-size: 14px;
+	color: #666666;
+	font-weight: bold;
+}
+#contenu{
+	text-align:center;
+	font-size: 12px;
+	color: #000000;
+	font-family: "Century Gothic";
+}
+.style122 {font-family: "Century Gothic";font-size: 10px}
+.style121 {font-family: "Century Gothic";font-size: 10px}
+.style172 {font-family: "Century Gothic";color: #7B00C6}
+.style401 {font-family: "Century Gothic";color: #000000}
+.style46 {font-family: "Century Gothic";font-size: 10px; color: #7B00C6; }
+.style171 {font-family: "Century Gothic";color: #7B00C6;}
+.style49 {font-family: "Century Gothic";color: #FFFFFF;font-size: 12px;}
+.style11 {font-family: "Century Gothic";font-size: 11px; }
+.style12 {font-family: "Century Gothic";font-size: 10px;}
+.style17 {font-family: "Century Gothic";color: #7B00C6;}
+.style21 {font-family: "Century Gothic";color: #D32526;}
+.style31 {font-family: "Century Gothic";color: #017DFF;}
+.style22 {font-family: "Century Gothic";color: #277E30;}
+.style40 {font-family: "Century Gothic";color: #000000; font-size: 12px; }
+.style19 {font-family: "Century Gothic";color: #007DFF; font-size: 12px;}
+.style38 {font-family: "Century Gothic";font-size: 12px; color: #000000; }
+.style24 {
+	font-family: "Century Gothic";
+	font-size: 14px;
+	color: #7B00C6;
+}
+.style36 {font-family: "Century Gothic"; font-size: 12px; color: #7B00C6; }
+.style38 {font-family: "Century Gothic"; font-size: 12px; color: #000000; }
+.style39 {color: #017DFF}
+.style40 {color: #000000}
+.style41 {font-size: 12px}
+.style42 {font-weight: bold}
+.style43 {
+	color: #FFFFFF;
+	font-weight: bold;
+}
+.style44 {font-family: "Century Gothic"; font-size: 14px; color: #FFCC00; font-weight: bold;}
+.style36 {font-family: "Century Gothic"; color: #666666; }
+.style45 {color: #FFFFFF; font-size: 10px; }
+.style46 {color: #9966FF}
+.style47 {font-family: "Century Gothic"; font-size: 12px;color: #000000;}
+
+
+
+.style40 {font-family: "Century Gothic";color: #000000; font-size: 12px; }
+.style19 {font-family: "Century Gothic";color: #007DFF; font-size: 12px;}
+.style38 {font-family: "Century Gothic";font-size: 12px; color: #000000; }
+.style24 {font-family: "Century Gothic";font-size: 14px; color: #7B00C6; }
+.style25 {font-family: "Century Gothic";font-size: 14px; color: #007DFF; }
+.style26 {font-family: "Century Gothic";font-size: 14px; color: #D32526; }
+.style27 {font-family: "Century Gothic";font-size: 14px; color: #277E30; }
+
+
+
+.contenuJustifie 
+{
+  font-family: "Century Gothic";
+  color: #000000; 
+  font-size: 12px;
+  text-align: justify; 
+}
+
+.enteteiiiHelp 
+{
+  font-family: "Century Gothic";
+  color: #FFFFFF;
+  background-color: #007DFF;
+  font-size: 12px;
+  font-weight: bold;
+  text-align: center;
+}
+
+/***************************/
+/* CLASS bouton            */
+/***************************/
+.bouton,.boutonGris
+{
+  border:2px outset black;
+  font-weight:bold;
+  color:white;
+  text-decoration:none;
+  cursor:pointer;
+  text-align:center;
+  vertical-align:middle;
+  background-color:#7A991A;
+  margin:5px;
+  padding:10px;
+  -moz-border-radius: 10px; 
+  -webkit-border-radius: 10px; 
+  border-radius: 10px;         
+  -webkit-border-top-left-radius: 10px; /* pour Chrome */ 
+  -webkit-border-top-right-radius: 10px; /* pour Chrome */  
+  -moz-box-shadow: 8px 8px 12px #aaa;  
+  -webkit-box-shadow: 8px 8px 12px #aaa;  
+  box-shadow: 8px 8px 12px #555;  
+}
+
+.bouton:hover,.bouton:active 
+{
+  background-color:#98bf21;
+}
+
+.boutonGris
+{
+  background-color:#ACACAC;
+}
+
+.boutonGris:hover,.boutonGris:active
+{
+  background-color:#919191;
+}
+
+
+
+
+/***************************/
+/* CLASS info              */
+/***************************/
+.detailInfo {
+  font-size: 0.8em;
+  color: green;
+  text-align: left;
+}
+
+a.info,a.infoGauche {
+   position: relative;
+   color: black;
+   text-decoration: none;
+}
+
+a.info span,a.infoGauche span {
+   display: none; /* on masque l'infobulle */
+}
+
+a.info:hover,a.infoGauche:hover {
+   background: none; /* correction d'un bug IE */
+   z-index: 500; /* on définit une valeur pour l'ordre d'affichage */
+}
+
+a.info:hover span,a.infoGauche:hover span {
+   display: block; /* on affiche l'infobulle */
+   width: 200px;
+   text-align: left;
+   position: absolute;
+   white-space: normal; /* on change la valeur de la propriété white-space pour qu'il n'y ait pas de retour à la ligne non-désiré */
+   top: 30px; /* on positionne notre infobulle */
+   background: #F5F98B;
+   font-weight: normal;
+   padding: 3px;
+   border: 1px solid green;
+   color: green;
+}
+
+a.info:hover span {
+  left: 0px;
+}
+
+a.infoGauche:hover span {
+  right: 0px;
+}
+
+/***************************/
+/* CLASS menu              */
+/***************************/
+#menu {
+  height:27px;
+  font: bold 11px verdana, arial, sans-serif;
+  list-style-type: none;
+  border-bottom: 1px solid #900093;
+  margin:0;
+  padding:0;
+}
+
+#menu ul 
+{
+ margin-left: 40px;
+ list-style-type:none;
+ text-align:center;
+}
+#menu li 
+{
+  float:left;
+  border: 1px solid #900093;
+  padding:0;
+  background-color: #F1F1F1;
+  -moz-border-radius: 10px 10px 0 0; 
+  -webkit-border-radius: 10px 10px 0 0; 
+  border-radius: 10px 10px 0 0;         
+  -webkit-border-top-left-radius: 10px; /* pour Chrome */ 
+  -webkit-border-top-right-radius: 10px; /* pour Chrome */ 
+}
+#menu li a 
+{
+  display:block;
+  color: #666;
+  text-decoration:none;
+  padding: 6px 7px 6px 7px;
+  margin: 0 2px 0 2px;
+}
+
+#menu li a:hover 
+{
+  background-color: #fff;
+  -moz-border-radius: 10px 10px 0 0; 
+  -webkit-border-radius: 10px 10px 0 0; 
+  border-radius: 10px 10px 0 0;         
+  -webkit-border-top-left-radius: 10px; /* pour Chrome */ 
+  -webkit-border-top-right-radius: 10px; /* pour Chrome */ 
+}
+#menu ul li a.sous_menu,#menu ul li ul a
+{
+  width:80px;
+}
+#menu ul li ul a:hover 
+{
+  background-color: #fff;
+  -moz-border-radius: 0; 
+  -webkit-border-radius: 0; 
+  border-radius: 0;         
+  -webkit-border-top-left-radius: 0; /* pour Chrome */ 
+  -webkit-border-top-right-radius: 0; /* pour Chrome */ 
+}
+#menu ul li ul 
+{
+  display:none;
+  margin: 0;
+  padding: 0;
+}
+#menu ul li:hover ul 
+{
+  display:block;
+}
+#menu li:hover ul li {
+  float:none;
+  -moz-border-radius: 0; 
+  -webkit-border-radius: 0; 
+  border-radius: 0;         
+  -webkit-border-top-left-radius: 0; /* pour Chrome */ 
+  -webkit-border-top-right-radius: 0; /* pour Chrome */
+  margin: 0;
+  padding: 0;
+  border-top: 0;
+  border-bottom: 1px solid grey;
+}
+#menu li ul {
+ position:absolute;
+}
+
+/* Onglet actif */
+#menu li.active {
+    border-bottom: 1px solid #fff;
+    background-color: #fff;
+}
+
+#menu li.active a {
+    color: #000;
+}
+
+#menu ul li ul a.info:hover span {
+   top: 0px; /* on positionne notre infobulle */
+   left: 100px;
+}
+
+/***************************/
+/* CLASS Contenu           */
+/***************************/
+.Contenu,.ContenuCentrer, .EnteteContenu
+{
+  border-width:0.5em;
+  border-radius:0.5em;
+  -moz-border-radius:0.5em;
+  -webkit-border-radius:0.5em;
+  background-color:#E6D6C0;
+  text-align:left;
+}
+.Contenu a:link,.Contenu a:visited,.ContenuCentrer a:link,.ContenuCentrer a:visited
+{
+  text-decoration:none;
+  color:#000000;
+  padding:0.3em;
+  font-weight:bold;
+}
+
+.Contenu a:hover,.Contenu a:active,.ContenuCentrer a:hover,.ContenuCentrer a:active
+{
+  color:#E12C44;
+}
+
+.ContenuCentrer,.EnteteContenu
+{
+  vertical-align: middle;
+  text-align: center;
+  margin:0 auto;
+}
+
+.EnteteContenu
+{
+	font-weight:bold;
+  background-color:#000000;
+  color:#ffffff;
+  padding:0.1em;
+}
+
+
+/***************************/
+/* CLASS statutConnexion   */
+/***************************/
+.statutConnexion, .statutConnexionKO
+{
+  font-weight:bold;
+  font-size:0.8em;
+  color:#98bf21;
+  padding:0.5em;
+  text-align: right;
+}
+
+.statutConnexion a, .statutConnexionKO a
+{
+  font-size:1em;
+  color: #98bf21;
+  text-decoration: underline;
+}
+
+.statutConnexion a:hover, .statutConnexionKO a:hover
+{
+  color: #7A991A;
+}
+
+.statutConnexionKO
+{
+  color: #DF1E01;
+}
+
+/***************************/
+/* CLASS Tableau           */
+/***************************/
+table.Tableau
+{
+	border-collapse: collapse;
+	width:100%;
+}
+
+
+table.Tableau tbody tr td
+{
+	border:1px solid #ffffff;
+	padding:0.1em;
+	vertical-align:middle;
+}
+
+table.Tableau thead.entete tr td,table.Tableau tfoot.entete tr
+{
+	font-weight:bold;
+  background-color:#000000;
+  border:1px solid #BDBDBD;
+  color:#ffffff;
+  padding:0.1em;
+  text-align:center;
+}
+
+table.Tableau tbody
+{
+  border:1px solid #BDBDBD;
+}
+
+table.Tableau tr.paire
+{
+	background-color: #EDEDED;
+}
+
+table.Tableau tr.impaire
+{
+	background-color: #FFFFFF;
+}
+
+table.Tableau tr.new
+{
+	background-color: #F9A085;
+}
+
+table.Tableau tr.notnew
+{
+	background-color: #FFFF99;
+}
+
+table.Tableau tbody tr:hover
+{
+	background-color: #A692E9;
+}
+
+table.Tableau tr.rupture
+{
+	background-color: transparent;
+	color: #616766;
+	font-size:1.2em;
+	font-weight:bold;
+  text-transform:uppercase;
+  font-style: italic;
+  padding-top:1.0em;
+}
+table.Tableau tbody tr.rupture:hover
+{
+	background-color: transparent;
+	cursor:auto;
+}
+
+table.Tableau thead.breadvar tr td
+{
+  border:0px;
+  text-align:center;
+  color:#0179c6;
+  font-weight:bold;
+  font-size: 1em;
+}
+
+
+/*************************************/
+/* CLASS grid (tableau sans bordure) */
+/*************************************/
+table.grid tr td
+{
+  padding-top:0.3em;
+  padding-bottom:0.3em;
+  padding-right:0.3em;
+  padding-left:0.3em;
+  border-width:0em;
+  vertical-align:top;
+  border:0em solid;
+}
+
+/*******************************/
+/* CLASS PoliceRouge,MsgErreur */
+/*******************************/
+.PoliceRouge,.MsgErreur
+{
+  color:#DF1E01;
+}
+.MsgErreur
+{
+  font-weight:bold;
+}
+
+/*******************************/
+/* CLASS PoliceVerte,MsgSucces */
+/*******************************/
+.PoliceVerte,.MsgSucces
+{
+  color:#1E781E;
+}
+.MsgSucces
+{
+  font-weight:bold;
+}

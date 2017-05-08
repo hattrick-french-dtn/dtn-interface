@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<dwsync>
+<file name="core.assemble_plugin_filepath.php" server="62.23.12.131" local="128195852554062500" remote="128352246600000000" />
+<file name="core.assign_smarty_interface.php" server="62.23.12.131" local="128195852553906250" remote="128352246600000000" />
+<file name="core.create_dir_structure.php" server="62.23.12.131" local="128195852554687500" remote="128352246600000000" />
+<file name="core.display_debug_console.php" server="62.23.12.131" local="128195852554687500" remote="128352246600000000" />
+<file name="core.get_include_path.php" server="62.23.12.131" local="128195852554687500" remote="128352246600000000" />
+<file name="core.get_microtime.php" server="62.23.12.131" local="128195852554843750" remote="128352246600000000" />
+<file name="core.get_php_resource.php" server="62.23.12.131" local="128195852555468750" remote="128352246600000000" />
+<file name="core.is_secure.php" server="62.23.12.131" local="128195852555625000" remote="128352246600000000" />
+<file name="core.is_trusted.php" server="62.23.12.131" local="128195852556562500" remote="128352246600000000" />
+<file name="core.load_plugins.php" server="62.23.12.131" local="128195852557656250" remote="128352246600000000" />
+<file name="core.load_resource_plugin.php" server="62.23.12.131" local="128195852557343750" remote="128352246600000000" />
+<file name="core.process_cached_inserts.php" server="62.23.12.131" local="128195852558125000" remote="128352246600000000" />
+<file name="core.process_compiled_include.php" server="62.23.12.131" local="128195852557812500" remote="128352246600000000" />
+<file name="core.read_cache_file.php" server="62.23.12.131" local="128195852558437500" remote="128352246600000000" />
+<file name="core.rmdir.php" server="62.23.12.131" local="128195852558281250" remote="128352246600000000" />
+<file name="core.rm_auto.php" server="62.23.12.131" local="128195852558593750" remote="128352246600000000" />
+<file name="core.run_insert_handler.php" server="62.23.12.131" local="128195852559062500" remote="128352246600000000" />
+<file name="core.smarty_include_php.php" server="62.23.12.131" local="128195852559531250" remote="128352246600000000" />
+<file name="core.write_cache_file.php" server="62.23.12.131" local="128195852560625000" remote="128352246600000000" />
+<file name="core.write_compiled_include.php" server="62.23.12.131" local="128195852560937500" remote="128352246600000000" />
+<file name="core.write_compiled_resource.php" server="62.23.12.131" local="128195852560781250" remote="128352246600000000" />
+<file name="core.write_file.php" server="62.23.12.131" local="128195852560937500" remote="128352246600000000" />
+</dwsync>

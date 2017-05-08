@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<dwsync>
+<file name="adodb-compress-bzip2.php" server="62.23.12.131" local="128351346014687500" remote="128351274000000000" />
+<file name="adodb-compress-gzip.php" server="62.23.12.131" local="128351346038906250" remote="128351274000000000" />
+<file name="adodb-cryptsession.php" server="62.23.12.131" local="128351346043906250" remote="128351274000000000" />
+<file name="adodb-encrypt-mcrypt.php" server="62.23.12.131" local="128351346053437500" remote="128351274000000000" />
+<file name="adodb-encrypt-md5.php" server="62.23.12.131" local="128351346052968750" remote="128351274000000000" />
+<file name="adodb-encrypt-secret.php" server="62.23.12.131" local="128351346053125000" remote="128351274000000000" />
+<file name="adodb-sess.txt" server="62.23.12.131" local="128351346054218750" remote="128351274000000000" />
+<file name="adodb-session-clob.php" server="62.23.12.131" local="128351346053437500" remote="128351274000000000" />
+<file name="adodb-session.php" server="62.23.12.131" local="128351346060468750" remote="128351274000000000" />
+<file name="adodb-sessions.mysql.sql" server="62.23.12.131" local="128351346063437500" remote="128351274000000000" />
+<file name="adodb-sessions.oracle.clob.sql" server="62.23.12.131" local="128351346063437500" remote="128351274000000000" />
+<file name="adodb-sessions.oracle.sql" server="62.23.12.131" local="128351346087656250" remote="128351274000000000" />
+<file name="crypt.inc.php" server="62.23.12.131" local="128351346092656250" remote="128351274000000000" />
+</dwsync>
