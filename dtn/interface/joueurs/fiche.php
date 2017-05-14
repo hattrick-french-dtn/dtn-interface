@@ -15,6 +15,8 @@ if(!$_SESSION['sesUser']["idAdmin"])
 
 $lang = "FR";
 
+global $msg;
+
 if (isset($htid))
 {
   $joueurDTN = getJoueurHt($htid);
@@ -99,7 +101,7 @@ $ordreDeTri=" ORDER BY CAL.week DESC,M.date_match DESC";
 $limitSql=" LIMIT 0,10";
 
 $sqlHJ=$sqlreel.$sql.$ordreDeTri.$limitSql;
-$reqHJ = mysql_query($sqlHJ) or die(mysql_error()."\n".$sqlHJ);
+$reqHJ = $conn->query($sqlHJ);
 
 ?>
 
@@ -440,8 +442,8 @@ if ($datemaj >$mkday -$huit){
               }
               
               $sql =  "select * from $tbl_caracteristiques where numCarac = ".$val;
-              $req = mysql_query($sql);
-              $res = mysql_fetch_array($req);?>
+              $req = $conn->query($sql);
+              $res = $req->fetch(); ?>
                 
                   
               <tr <?php if ($i % 2 == 0) {?>bgcolor="#EEEEEE"<?php }?>>
@@ -517,9 +519,8 @@ if ($datemaj >$mkday -$huit){
                       ORDER BY all_histo.dateHisto desc, all_histo.heureHisto desc 
                       LIMIT 0,5";
         
-              $req = mysql_query($sql) or die(mysql_error()."\n".$sql) ;
               $i=1;
-              while($l = mysql_fetch_array($req)){?>
+              foreach($conn->query($sql) as $l) { ?>
                 <tr <?php if ($i % 2 == 0) {?>bgcolor="#EEEEEE"<?php } else {?>bgcolor="#FFFFFF"<?php }?>>
                   <td><div align="center"><?=dateToHTML($l["dateHisto"])?></div></td>
                   <td><div align="center"><?=$l["heureHisto"]?></div></td>
@@ -559,7 +560,7 @@ if ($datemaj >$mkday -$huit){
             </tr>          
             <?php $j=0;
             
-            while ($lstHJ=mysql_fetch_array($reqHJ)){?>
+            foreach($reqHJ as $lstHJ){?>
             <tr <?php if ($j % 2 == 0) {?>bgcolor="#EEEEEE"<?php } else {?>bgcolor="white"<?php }?>>
               <td align="left"><?=$lstHJ["season"].'.'.$lstHJ["week"]?></td>
               <td align="center"><?=$lstHJ["forme"]?></td>
@@ -642,9 +643,8 @@ if ($datemaj >$mkday -$huit){
                                 ORDER BY ht_clubs_histo.date_histo desc 
                                 LIMIT 0,10";
       
-            $req = mysql_query($sqlClubsHisto) or die(mysql_error()."\n".$sqlClubsHisto);
             $i=1;
-            while($lHisto = mysql_fetch_array($req)){
+            foreach($conn->query($sqlClubsHisto) as $lHisto){
               if ($lHisto["role_createur"]=="D") {$lHisto["createur"]='[DTN]';}
               else if ($lHisto["role_createur"]=="P") {$lHisto["createur"]='[Proprio]';}
               $lHisto["createur"].=$lHisto["cree_par"];?>

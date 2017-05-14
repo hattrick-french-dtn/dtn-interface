@@ -13,10 +13,11 @@ require_once("../_config/CstGlobals.php");
 $maBase = initBD();
 
 if(!$_SESSION['sesUser']["idAdmin"])
-	{
+{
 	header("location: ../index.php?ErrorMsg=Session Expiree");
-	}
+}
 
+global $msg;
 
 
 if(!isset($lang)) $lang = "FR";
@@ -138,6 +139,7 @@ switch($_SESSION['sesUser']["idNiveauAcces"]){
 
 }
 $idHT=$infJ['idHattrickJoueur'];
+$idClubHT=$infJ["teamid"];
 
 require("../menu/menuJoueur.php");
 

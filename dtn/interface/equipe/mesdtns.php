@@ -1,15 +1,15 @@
 <?php 
-        require_once "../fonctions/AccesBase.php"; // fonction de connexion ? la base
-        require_once "../fonctions/AdminDtn.php"; // fonctions d'admin
-        require_once("../includes/head.inc.php");
-        require_once("../includes/serviceListesDiverses.php");
-		require_once "../_config/CstGlobals.php";
+require_once "../fonctions/AccesBase.php"; // fonction de connexion ? la base
+require_once "../fonctions/AdminDtn.php"; // fonctions d'admin
+require_once("../includes/head.inc.php");
+require_once("../includes/serviceListesDiverses.php");
+require_once "../_config/CstGlobals.php";
 
 
 if(!$sesUser["idAdmin"])
-	{
+{
 	header("location: ../entry.php?ErrorMsg=Session Expiree");
-	}
+}
 
 
 ?>
@@ -17,29 +17,27 @@ if(!$sesUser["idAdmin"])
 <script language="JavaScript" src="../includes/javascript/navigation.js"></script>
 <?php
 switch($sesUser["idNiveauAcces"]){
-		case "1":
+	case "1":
 		require("../menu/menuAdmin.php");
 		break;
 		
-		case "2":
+	case "2":
 		require("../menu/menuSuperviseur.php");
 		require("../menu/menuSuperviseurGestion.php");
 		break;
 
-
-		case "3":
+	case "3":
 		require("../menu/menuDTN.php");
 		exit;
 		break;
 		
-		case "4":
+	case "4":
 		require("../menu/menuCoach.php");
 		exit;
 		break;
 		
-		default;
+	default;
 		break;
-
 
 }
 
@@ -51,16 +49,16 @@ if(!isset($lesmails)) $lesmails = "";
 
 $sql = "select * from $tbl_admin  left join $tbl_position on idPosition = idPosition_fk where idPosition_fk = ".$sesUser["idPosition_fk"]." and affAdmin!=0 ";
 $sql .= "order by $ordre $sens";
-$req = mysql_query($sql);
+$req = $conn->query($sql);
 
-	  $huit = 60 * 60 * 24 * 8; //time_0
-			  $quinze = 60 * 60 * 24 * 15; //time_1
-			  $trente = 60 * 60 * 24 * 30; //time_2
-			  $twomonths = 60 * 60 * 24 * 60; //time_3
-			  $fourmonths = 60 * 60 * 24 * 120; //time_4
-			  
-			  // Date du jour
-			 $mkday = mktime(0,0,0,date('m'), date('d'),date('Y'));
+$huit = 60 * 60 * 24 * 8; //time_0
+$quinze = 60 * 60 * 24 * 15; //time_1
+$trente = 60 * 60 * 24 * 30; //time_2
+$twomonths = 60 * 60 * 24 * 60; //time_3
+$fourmonths = 60 * 60 * 24 * 120; //time_4
+
+// Date du jour
+$mkday = mktime(0,0,0,date('m'), date('d'),date('Y'));
 
 ?><title>DTN</title>
 <p>&nbsp;</p>
@@ -69,8 +67,7 @@ $req = mysql_query($sql);
     <td height="55" ><div align="center">
         <table width="100%" border="0" cellspacing="0" cellpadding="0">
           <tr>
-            <td height="20" bgcolor="#000000"><div align="center"><font color="#FFFFFF">Liste
-                  de mes DTNs</font></div>
+            <td height="20" bgcolor="#000000"><div align="center"><font color="#FFFFFF">Liste de mes DTNs</font></div>
             </td>
           </tr>
           <tr>
@@ -91,45 +88,43 @@ $req = mysql_query($sql);
               </tr>
 			      
 			  <?php
-			  $j=0;
-			 while($lstSuperviseur = mysql_fetch_array($req)){
-			 			 if($j%2 == 1) $bgcolor = "#e8e8e8"; else $bgcolor="#ffffff";
+				$j=0;
+				while($lstSuperviseur = $req->fetch(PDO::FETCH_ASSOC)){
+			 		if($j%2 == 0) $bgcolor = "#e8e8e8"; else $bgcolor="#ffffff";
 
- 			$sqlnb = "select count(*) from ht_joueurs where dtnSuiviJoueur_fk ='".$lstSuperviseur["idAdmin"]."' ";
-			$nbjsuivis=current(mysql_fetch_array(mysql_query($sqlnb)));
+					$sqlnb = "select count(*) from ht_joueurs where dtnSuiviJoueur_fk ='".$lstSuperviseur["idAdmin"]."' ";
+					$nbjsuivis=current($conn->query($sqlnb)->fetch(PDO::FETCH_ASSOC));
 
 
-			 $date = explode("-",$lstSuperviseur["dateDerniereConnexion"]);
-			 $datemaj= mktime(0,0,0,$date[1],$date[2],$date[0]);
+					$date = explode("-",$lstSuperviseur["dateDerniereConnexion"]);
+					$datemaj= mktime(0,0,0,$date[1],$date[2],$date[0]);
 			
-			 $img_nb=0;
-			 if ($datemaj >$mkday -$huit){
-			 	$img_nb=0;
-			 	$strtiming="moins de 8 jours";	
-			 }else if ($datemaj >$mkday -$quinze){
-			 	$img_nb=1;
-			 	$strtiming="moins de 15 jours";
-			 }else if ($datemaj >$mkday -$trente){
-			 	$img_nb=2;
-			 	$strtiming="moins de 30 jours";
-			 	
-			 }else if ($datemaj >$mkday -$twomonths){
-			 	$img_nb=3;
-			 	$strtiming="moins de 2 mois";
-			 	
-			 }else if ($datemaj >$mkday -$fourmonths){
-			 	$img_nb=4;
-			 	$strtiming="moins de 4 mois";
+					$img_nb=0;
+					if ($datemaj >$mkday -$huit){
+						$img_nb=0;
+						$strtiming="moins de 8 jours";	
+					}else if ($datemaj >$mkday -$quinze){
+						$img_nb=1;
+						$strtiming="moins de 15 jours";
+					}else if ($datemaj >$mkday -$trente){
+						$img_nb=2;
+						$strtiming="moins de 30 jours";
+						
+					}else if ($datemaj >$mkday -$twomonths){
+						$img_nb=3;
+						$strtiming="moins de 2 mois";
+						
+					}else if ($datemaj >$mkday -$fourmonths){
+						$img_nb=4;
+						$strtiming="moins de 4 mois";
+					 
+					}else{
+							$img_nb=5;
+						$strtiming="plus que 4 mois";
+					}
 			 
-			 }else{
-			 		$img_nb=5;
-			 	$strtiming="plus que 4 mois";
-			 }
-			 
-			 // Date de la dernier modif de ce joueur
-			 $zealt="[ Connect&eacute; il y a  ".round(($mkday - $datemaj)/(60*60*24) )." jours ] ";
-			 
-			 			  	
+					// Date de la dernier modif de ce joueur
+					$zealt="[ Connect&eacute; il y a  ".round(($mkday - $datemaj)/(60*60*24) )." jours ] ";
 
 			  ?>
 			      

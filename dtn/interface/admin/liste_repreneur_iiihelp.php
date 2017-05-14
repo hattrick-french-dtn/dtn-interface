@@ -59,7 +59,7 @@ if (!isset ($_REQUEST['sens']))
 $sql = get_iiihelp_repreneur_clubs_SQL();
 if (isset($ent) && $ent!="Tous") {	$sql .="AND (entrainement_voulu1=$ent or entrainement_voulu2=$ent)";}
 $sql .= " ORDER BY etat ".$_REQUEST['sens'].",".$_REQUEST['ordre'];
-$req  = mysql_query($sql) or die(mysql_error()."\n".$sql);
+$req  = $conn->query($sql);
 
 // Liste des entrainements
 $liste_entrainement=listEntrainement();

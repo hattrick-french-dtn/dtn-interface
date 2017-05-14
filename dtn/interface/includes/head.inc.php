@@ -1,6 +1,7 @@
 <?php
 
 $monServeur=$_SERVER["DOCUMENT_ROOT"];
+global $sesUser;
 
 // Initialisation des variables suivant environnement
 if ($_SERVER["HTTP_HOST"] == "www.ht-fff.org")
@@ -25,7 +26,6 @@ else
 
 require($cheminComplet."includes/connect.inc.php");
 require($cheminComplet."includes/nomTables.inc.php");
-$conn = connect();
 require($cheminComplet."/includes/fonctions.php");
 require($cheminComplet."/fonctions/HT_Client.php");
 include($monServeur."/framework/PHT/PHT.php");

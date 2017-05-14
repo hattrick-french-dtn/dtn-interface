@@ -33,7 +33,7 @@ if (isset($_POST['nomForm']) && $_POST['nomForm']=='formConnexion') {
     $erreurForm=true;
   }
 
-  if ($_POST['horsConnexion']==1) {
+  if (isset($_POST['horsConnexion']) && $_POST['horsConnexion']==1) {
     $_SESSION['horsConnexion']=$_POST['horsConnexion'];
   }
 
@@ -49,72 +49,74 @@ if (isset($_POST['nomForm']) && $_POST['nomForm']=='formConnexion') {
             AND   $tbl_admin.passAdmin = '".$_POST['password']."' 
             AND   $tbl_admin.idNiveauAcces_fk = $tbl_niveauAcces.idNiveauAcces";
     
-    $req  = mysql_query($sql) or die(mysql_error()."\n".$sql);
+    $req  = $conn->query($sql);
 
     if(!$req){
-      echo('Erreur : Prenez contact avec les d&eacute;veloppeurs ou les administrateurs de la DTN');
-      exit;
-    } elseif (mysql_num_rows($req) != 1) {
-      $erreurAuthentification="Le login et/ou le password saisis sont inconnus.";
+		echo('Erreur : Prenez contact avec les d&eacute;veloppeurs ou les administrateurs de la DTN');
+		exit;
+    } elseif ($req->rowCount() != 1) {
+		$erreurAuthentification="Le login et/ou le password saisis sont inconnus.";
     } else {
     
-      // Le Login et le password existe dans la base
-      $_SESSION['sesUser'] = mysql_fetch_array($req);
-      mysql_free_result($req);
+	// Le Login et le password existe dans la base
+	$_SESSION['sesUser'] = $req->fetch(PDO::FETCH_ASSOC);
+	$req->closeCursor();
+	$req = NULL;
 //var_dump($_SESSION);echo('<br /><br />');
    
-    if (isset($_SESSION['sesUser']['idAdminHT'])) {
-      // Information sur le club
-      $sql = "SELECT 
-                    $tbl_clubs.idClubHT,
-                    $tbl_clubs.nomClub,
-                    $tbl_clubs.nomUser
-              FROM  $tbl_clubs 
-              WHERE $tbl_clubs.idUserHT = ".$_SESSION['sesUser']['idAdminHT'];
-      } else { // Ne devrait plus se produire lorsque tous les adminHT seront correctement renseignés
-          echo ('ID utilisateur absent - Contactez un administrateur de la DTN afin de reconfigurer votre compte');
-          exit;
-      }
+    if (!isset($_SESSION['sesUser']['idAdminHT'])) {
+		// Ne devrait plus se produire lorsque tous les adminHT seront correctement renseignés
+        echo ('ID utilisateur absent - Contactez un administrateur de la DTN afin de reconfigurer votre compte');
+        exit;
+	}
+	// Information sur le club
+	$sql = "SELECT 
+				$tbl_clubs.idClubHT,
+				$tbl_clubs.nomClub,
+				$tbl_clubs.nomUser
+		  FROM  $tbl_clubs 
+		  WHERE $tbl_clubs.idUserHT = ".$_SESSION['sesUser']['idAdminHT'];
       
-      $req  = mysql_query($sql) or die(mysql_error()."\n".$sql);
+    $req  = $conn->query($sql);
   
-      if(!$req){
+    if(!$req){
         echo('Erreur : Prenez contact avec les d&eacute;veloppeurs ou les administrateurs de la DTN');
         exit;
-      } else {
-        $_SESSION['sesUser']['club'] = mysql_fetch_array($req);
-        mysql_free_result($req);
+    } else {
+        $_SESSION['sesUser']['club'] = $req->fetch(PDO::FETCH_ASSOC);
+        $req = NULL;
 //print_r($_SESSION['sesUser']['club']);echo('<br /><br />');
-      }
+    }
 
-      // On calcule le numéro de saison et le nombre de secondes écoulé entre la saison 0 jour 1 et le premier jour de la saison courante
-      $sql = " SELECT
+    // On calcule le numéro de saison et le nombre de secondes écoulé entre la saison 0 jour 1 et le premier jour de la saison courante
+    $sql = " SELECT
       		truncate((UNIX_TIMESTAMP(sysdate())-UNIX_TIMESTAMP('1997-05-31'))/86400/112,0) as saison,
       		UNIX_TIMESTAMP('1997-05-31') as date0
       		FROM dual";
-      $req  = mysql_query($sql) or die(mysql_error()."\n".$sql);
-      $res = mysql_fetch_array($req);
+	$req  = $conn->query($sql);
+	$res = $req->fetch(PDO::FETCH_ASSOC);
       
-      $_SESSION['sesUser']["saison"] = $res["saison"];
-      $_SESSION['sesUser']["dateSemaine0"] = $res["date0"]+112*86400*$_SESSION['sesUser']["saison"];
+    $_SESSION['sesUser']["saison"] = $res["saison"];
+    $_SESSION['sesUser']["dateSemaine0"] = $res["date0"]+112*86400*$_SESSION['sesUser']["saison"];
+	$req = NULL;
 
-      // MAJ des dates de connexion du membre
-      if(count($_SESSION['sesUser']) > 0){
+    // MAJ des dates de connexion du membre
+    if(count($_SESSION['sesUser']) > 0){
       
         // Date avant dernière connexion = Date dernière connexion
         $sql = "UPDATE $tbl_admin SET 
                   dateAvantDerniereConnexion = dateDerniereConnexion, 
                   heureAvantDerniereConnexion = heureDerniereConnexion
                 WHERE idAdmin = ".$_SESSION['sesUser']["idAdmin"];
-        $req  = mysql_query($sql) or die(mysql_error()."\n".$sql);
+        $req  = $conn->exec($sql);
         
         // Date dernière connexion = Date courante
         $sql = "UPDATE $tbl_admin SET 
                   dateDerniereConnexion = '".date("Y-m-d")."',
                   heureDerniereConnexion = '".date("H:i:s")."'
                 WHERE idAdmin = ".$_SESSION['sesUser']["idAdmin"];
-        $req  = mysql_query($sql) or die(mysql_error()."\n".$sql);
-        if (mysql_affected_rows() != 1) {
+        $req  = $conn->exec($sql);
+        if ($req != 1) {
           echo('ERREUR LORS DE LA CONNEXION : Prenez contact avec les d&eacute;veloppeurs ou les administrateurs de la DTN');
           exit;
         }
@@ -181,6 +183,7 @@ if (isset($_POST['nomForm']) && $_POST['nomForm']=='formConnexion') {
       <tr>
         <td class="MsgErreur">
           <?php
+		    $ErrorMsg = isset($_GET['ErrorMsg'])?$_GET['ErrorMsg']:NULL;
       		if($ErrorMsg) echo(stripslashes($ErrorMsg."<br />"));
       		if(isset($erreurObligatoire)) echo ($erreurObligatoire."<br />");
       		if(isset($erreurAuthentification)) echo ($erreurAuthentification."<br />");

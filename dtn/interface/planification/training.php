@@ -5,21 +5,17 @@ require("../includes/serviceJoueur.php");
 <?php
 
 // 1. Liste des joueurs avec un entrainement de selectionner. 
-$sql =  "
-		SELECT * from ht_joueurs, ht_entrainement where ht_joueurs.idJoueur = ht_entrainement.idJoueur_fk ";
+$sql =  "SELECT * from ht_joueurs, ht_entrainement where ht_joueurs.idJoueur = ht_entrainement.idJoueur_fk ";
 		
-		$req = mysql_query($sql);
-		while($result = mysql_fetch_array($req)){
-		
+foreach($conn->query($sql) as $result){
 
-				
-			echo $result["nomJoueur"]."<br>";
-$semaine["construction"] = $result["nbSemaineConstruction"];
-$semaine["gardien"] = $result["nbSemaineGardien"];
-$semaine["passe"] = $result["nbSemainePasses"];
-$semaine["defense"] = $result["nbSemaineDefense"];
-$semaine["buteur"] = $result["nbSemaineButeur"];
-$semaine["ailier"] = $result["nbSemaineAilier"] ;
+	echo $result["nomJoueur"]."<br>";
+	$semaine["construction"] = $result["nbSemaineConstruction"];
+	$semaine["gardien"] = $result["nbSemaineGardien"];
+	$semaine["passe"] = $result["nbSemainePasses"];
+	$semaine["defense"] = $result["nbSemaineDefense"];
+	$semaine["buteur"] = $result["nbSemaineButeur"];
+	$semaine["ailier"] = $result["nbSemaineAilier"] ;
 
 /*
 switch($result["entrainement_id"]){
@@ -48,23 +44,23 @@ break;
 }
 */
 
-$carac["endurance"] = $result["idEndurance"] ;
-$carac["defense"] = $result["idDefense"] ;
-$carac["ailier"] = $result["idAilier"] ;
-$carac["gardien"] = $result["idGardien"] ;
-$carac["construction"] = $result["idConstruction"] ;
-$carac["passe"] = $result["idPasse"] ;
-$carac["buteur"] = $result["idButeur"] ;
-$carac["xp"] = $result["idExperience_fk"] ;
-$carac["cf"] = $result["idPA"] ;
-		  
-		
-$score = calculNote($result["idJoueur"],$carac,$semaine);
+	$carac["endurance"] = $result["idEndurance"] ;
+	$carac["defense"] = $result["idDefense"] ;
+	$carac["ailier"] = $result["idAilier"] ;
+	$carac["gardien"] = $result["idGardien"] ;
+	$carac["construction"] = $result["idConstruction"] ;
+	$carac["passe"] = $result["idPasse"] ;
+	$carac["buteur"] = $result["idButeur"] ;
+	$carac["xp"] = $result["idExperience_fk"] ;
+	$carac["cf"] = $result["idPA"] ;
+			  
+			
+	$score = calculNote($result["idJoueur"],$carac,$semaine);
 
-$valeur = $result["valeurEnCours"];
-$fin = $result["finFormation"];
-$maj = majCaracJoueur($result["idJoueur"], $carac, $semaine, $score);
-		}
+	$valeur = $result["valeurEnCours"];
+	$fin = $result["finFormation"];
+	$maj = majCaracJoueur($result["idJoueur"], $carac, $semaine, $score);
+}
 // 2. +1 semaine pour l'entrainement en question
 
 ?>

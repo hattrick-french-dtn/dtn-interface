@@ -124,6 +124,8 @@ switch ($sens) {
 		$tri = "Tri decroissant";
 		break;
 }
+
+global $selection;
 ?>
 <script language="JavaScript" type="text/JavaScript">
 <!--
@@ -171,7 +173,7 @@ document.body.scrollTop = scrollPos;
       <td> 
           <table width="100%" border="0" cellspacing="0" cellpadding="0" bgcolor="#EFEFEF">
             <tr > 
-              <td width="28%" height="21"> <div align="center">Poste : <?=$infPos["intitulePosition"]?></div></td>
+              <td width="28%" height="21"> <div align="center">Poste : <?php echo (isset($infPos["intitulePosition"])?$infPos["intitulePosition"]:""); ?></div></td>
               <td> <div align="center"><font color="#000000">Liste des joueurs suivis par <?=$sesUser["loginAdmin"]?></font></div></td>
             </tr>
             <tr> 
@@ -314,7 +316,7 @@ switch ($sesUser["idPosition_fk"]) {
 ?>
                     
                   </tr>
-                <?php
+<?php
 
 $AgeAnneeSQL=getCalculAgeAnneeSQL();
 $AgeJourSQL=getCalculAgeJourSQL();
@@ -325,30 +327,28 @@ $sql = "select $tbl_joueurs.*,".$AgeAnneeSQL." as AgeAn,".$AgeJourSQL." as AgeJo
       
                    
 $sql .= " and affJoueur = 1  order by $ordre $sens";
-$req = mysql_query($sql);
-
 $listID="";
 
-while ($l = mysql_fetch_array($req)) {
+foreach ($conn->query($sql) as $l) {
 
-
-  $intensite="-";
-  $endurance="-";
-  $adjoints="-";
-  $medecin="-";
-  $physio="-";
-  $libelle_type_entrainement="-";
+	$intensite="-";
+	$endurance="-";
+	$adjoints="-";
+	$medecin="-";
+	$physio="-";
+	$libelle_type_entrainement="-";
   
-  $sql2 = "select * from $tbl_clubs_histo A left join $tbl_type_entrainement2 on idEntrainement = id_type_entrainement where idClubHT = ".$l["teamid"]." order by date_histo desc";
-  error_log($sql2);
-  $req2 = mysql_query($sql2);
-  $ligne = mysql_fetch_assoc($req2);
-  extract($ligne);
+	$sql2 = "select * from $tbl_clubs_histo A left join $tbl_type_entrainement2 on idEntrainement = id_type_entrainement where idClubHT = ".$l["teamid"]." order by date_histo desc";
+	error_log($sql2);
+	$req2 = $conn->query($sql2);
+	$ligne = $req2->fetch(PDO::FETCH_ASSOC);
+	if (is_array($ligne))
+		extract($ligne);
 
-  $sql3 = "select * from $tbl_clubs where idClubHT = ".$l["teamid"];
-  $req3 = mysql_query($sql3);
-  $ligne3 = mysql_fetch_assoc($req3);
-  extract($ligne3);
+	$sql3 = "select * from $tbl_clubs where idClubHT = ".$l["teamid"];
+	$req3 = $conn->query($sql3);
+	$ligne3 = $req3->fetch(PDO::FETCH_ASSOC);
+	extract($ligne3);
 
 	$infJ = getJoueur($l["idJoueur"]);
 	
@@ -356,46 +356,46 @@ while ($l = mysql_fetch_array($req)) {
 
 	$date = explode("-",$infJ["dateDerniereModifJoueur"]);
 //echo($l["nomJoueur"]);print_r($date);echo('<br>');
-			 $mkJoueur =  mktime(0,0,0,$date[1],$date[2],$date[0]); 
-			 $datesaisie = explode("-",$infJ["dateSaisieJoueur"]);
-			 $mkSaisieJoueur= mktime(0,0,0,$datesaisie[1],$datesaisie[2],$datesaisie[0]);
-			 if ($mkSaisieJoueur>$mkJoueur){
-			 	$datemaj=$mkSaisieJoueur;
-			 }else{
-			 	$datemaj=$mkJoueur;
-			 }
+	$mkJoueur =  mktime(0,0,0,$date[1],$date[2],$date[0]); 
+	$datesaisie = explode("-",$infJ["dateSaisieJoueur"]);
+	$mkSaisieJoueur= mktime(0,0,0,$datesaisie[1],$datesaisie[2],$datesaisie[0]);
+	if ($mkSaisieJoueur>$mkJoueur){
+		$datemaj=$mkSaisieJoueur;
+	}else{
+		$datemaj=$mkJoueur;
+	}
 			
-			 $img_nb=0;
-			 if ($datemaj >$mkday -$huit){
-			 	$img_nb=0;
-			 	$strtiming="moins de 8 jours";	
-			 }else if ($datemaj >$mkday -$quinze){
-			 	$img_nb=1;
-			 	$strtiming="moins de 15 jours";
-			 }else if ($datemaj >$mkday -$trente){
-			 	$img_nb=2;
-			 	$strtiming="moins de 30 jours";
-			 	
-			 }else if ($datemaj >$mkday -$twomonths){
-			 	$img_nb=3;
-			 	$strtiming="moins de 2 mois";
-			 	
-			 }else if ($datemaj >$mkday -$fourmonths){
-			 	$img_nb=4;
-			 	$strtiming="moins de 4 mois";
+	$img_nb=0;
+	if ($datemaj >$mkday -$huit){
+		$img_nb=0;
+		$strtiming="moins de 8 jours";	
+	}else if ($datemaj >$mkday -$quinze){
+		$img_nb=1;
+		$strtiming="moins de 15 jours";
+	}else if ($datemaj >$mkday -$trente){
+		$img_nb=2;
+		$strtiming="moins de 30 jours";
+		
+	}else if ($datemaj >$mkday -$twomonths){
+		$img_nb=3;
+		$strtiming="moins de 2 mois";
+		
+	}else if ($datemaj >$mkday -$fourmonths){
+		$img_nb=4;
+		$strtiming="moins de 4 mois";
+	 
+	}else{
+			$img_nb=5;
+		$strtiming="plus que 4 mois";
+	}
 			 
-			 }else{
-			 		$img_nb=5;
-			 	$strtiming="plus que 4 mois";
-			 }
-			 
-			 // Date de la dernier modif de ce joueur
-			 $zealt=" Date dtn : ".$infJ["dateDerniereModifJoueur"].
+	// Date de la dernier modif de ce joueur
+	$zealt=" Date dtn : ".$infJ["dateDerniereModifJoueur"].
 					"<br> Date proprio : ".$infJ["dateSaisieJoueur"].
 					"<br> [ Mis &agrave; jour il y a  ".round(($mkday - $datemaj)/(60*60*24) )." jours ]";
 
 
-
+	global $class;
 ?>
                   <tr bgcolor="#FFFFFF" align="right"> 
                     <td align="left" nowrap>&nbsp;<img src="../images/time_<?=$img_nb?>.gif" onmouseover="return escape('<?=$zealt?>')" >&nbsp;
@@ -412,7 +412,7 @@ while ($l = mysql_fetch_array($req)) {
                       <?=strtolower($l["prenomJoueur"])?></span>   
                       </a> 
                       
-                      </td>
+                    </td>
                     
                     <td width="55" nowrap align="center"><?=$date[2]?>/<?=$date[1]?>/<?=$date[0]?></td>
                     <td width="55" nowrap align="center"><?=$datesaisie[2]?>/<?=$datesaisie[1]?>/<?=$datesaisie[0]?></td>

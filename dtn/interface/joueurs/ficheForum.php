@@ -18,6 +18,10 @@ if (isset($htid))
 }
 else
   $infJ = getJoueur($id);
+  
+global $mode;
+$idHT = $infJ["idHattrickJoueur"];
+$idClubHT=$infJ["teamid"];
 
 switch($sesUser["idNiveauAcces"]){
     
@@ -111,35 +115,59 @@ switch($infJ["idPosition"]){
       break;
 }
   $sql = "SELECT idPays_fk from ht_clubs,ht_joueurs   where   idJoueur = '".$infJ["idJoueur"]."' and  ht_joueurs.teamid = ht_clubs.idClubHT ";
-  $result= mysql_query($sql);
-  $idPaysFK = mysql_fetch_array($result);
+  $result= $conn->query($sql);
+  $idPaysFK = $result->fetch();
   $sql = "SELECT nomPays from ht_pays   where idPays= '".$idPaysFK[0]."' ";
-  $result= mysql_query($sql);
-  $nomPays = mysql_fetch_array($result);
-  
+  $result= $conn->query($sql);
+  $nomPays = $result->fetch();
   
   
 
 ?>
-<html><title> Fiche DTN <?=$infJ["nomJoueur"]?> <?=$infJ["prenomJoueur"]?> 
+<html>
+<head>
+<title> Fiche DTN <?=$infJ["nomJoueur"]?> <?=$infJ["prenomJoueur"]?> 
       </title>
 
-<body >
-
-
-
-
-
-<p>
-  <SCRIPT language="Javascript">
-<!-- 
+<script language="JavaScript" type="text/JavaScript">
 function copy2Clipboard(obj)
 {
-                var textRange = document.body.createTextRange();
+      var textRange = document.body.createTextRange();
       textRange.moveToElementText(obj);
       textRange.execCommand("Copy");
 }
---></SCRIPT>
+</script>
+</head>
+<?php
+switch($_SESSION['sesUser']["idNiveauAcces"]){
+    case "1":
+    require("../menu/menuAdmin.php");
+    break;
+    
+    case "2":
+    require("../menu/menuSuperviseur.php");
+    break;
+
+
+    case "3":
+    require("../menu/menuDTN.php");
+    break;
+    
+    case "4":
+    require("../menu/menuCoach.php");
+    break;
+    
+    default;
+    break;
+}
+
+
+require("../menu/menuJoueur.php");
+
+
+?>
+
+<p>
   
   <SPAN ID=textespan>
     
@@ -246,7 +274,7 @@ function copy2Clipboard(obj)
   <?=$infJ["nbSemaineDefense"]?>
   <br/>
   <?php } ?>
-  coup de pied : 
+  Coup de pied : 
   <?=$lstCaractJ[$infJ["idPA"]]["intituleCaracFR"]?>
   </i> ( 
   <?=$infJ["idPA"]?> 
@@ -254,7 +282,7 @@ function copy2Clipboard(obj)
   
   <br/>
   [u]Entrainement et commentaires[/u]: 
-  <?php if($infJ["finFormation"] == "") $infJ["finFormation"] = "Inconnu";?>
+  <?php if(!isset($infJ["finFormation"]) || $infJ["finFormation"] == "") $infJ["finFormation"] = "Inconnu";?>
   <?=$infJ["finFormation"]?>
   <br/>
   </span></p>
@@ -269,4 +297,4 @@ function copy2Clipboard(obj)
 <A HREF=# style=\"text-decoration:none\" onClick="javascript:history.go(-1);">Retour</A>
 </body>
 </html>
-<?php  deconnect(); ?>
+

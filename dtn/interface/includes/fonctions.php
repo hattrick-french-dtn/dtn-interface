@@ -6,7 +6,7 @@ function dateToHtml ($string = "")
 
   if (empty ($string))
     return date ("d/m/y");
-  $date = split ("-", $string);
+  $date = explode ("-", $string);
   return $date[2]."/".$date[1]."/".substr ($date[0], 2, 2);
 
 }
@@ -47,7 +47,7 @@ function dateToBD ($string = "")
 
 function construitListe ($sql)
 {
-
+  global $conn;
   global $dbName;
   if (!isset ($tableau))
     $tableau = array ();
@@ -60,8 +60,8 @@ function construitListe ($sql)
     }
 
   // Execution de la requette
-  $req = mysql_query ($sql);
-  if ($req && mysql_num_rows ($req) > 0)
+  $req = $conn->query ($sql);
+  if ($req && $req->rowCount() > 0)
     {
       // Connexion au serveur a la bdd pour retourner le nombre de champ par argument
       $tblChamp = array ();
@@ -71,16 +71,16 @@ function construitListe ($sql)
 
           //This section has been changed due to errors
           //after reading deprecated informations on mysql_list_fields command
-          $result_columns = mysql_query ("SHOW COLUMNS FROM ".$arg[$a]);
+          $result_columns = $conn->query ("SHOW COLUMNS FROM ".$arg[$a]);
           if (!$result_columns)
             {
-              echo 'Could not run query: '.mysql_error ();
+              echo 'Could not run query: '.$conn->errorCode();
 
               //      exit;
             }
-          if (mysql_num_rows ($result_columns) > 0)
+          if ($result_columns->rowCount() > 0)
             {
-              while ($row_found = mysql_fetch_assoc ($result_columns))
+            	foreach ($result_columns as $row_found)
                 {
 
                   $typeField[$k] = $row_found["Type"];
@@ -102,7 +102,7 @@ function construitListe ($sql)
         }
 
       $i = 0;
-      while ($res = mysql_fetch_array ($req))
+      foreach ($req as $res)
         {
           // Construction du tableau
           for ($j = 0; $j < count ($tblChamp); $j++)
@@ -135,8 +135,9 @@ function construitListe ($sql)
           $i++;
         }
     }
+    $req = NULL;
   return $tableau;
-  mysql_free_result ($req);
+
 }
 
 

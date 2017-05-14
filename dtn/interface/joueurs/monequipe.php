@@ -53,7 +53,7 @@ $sql .= " where ht_posteAssigne = 0";
 
 $sql .= " and affJoueur = 1   order by $ordre $sens";
 
-$reqJoueurs = mysql_query($sql);
+$reqJoueurs = $conn->query($sql);
 
 
 switch($affPosition){
@@ -370,13 +370,12 @@ break;
                   </tr>
                 </table>
                  
-				             <?php
-				$lst = 1;
+<?php
+	$lst = 1;
 			 
-			while($lstJoueurs = mysql_fetch_array($reqJoueurs)){
+	foreach ($reqJoueurs as $lstJoueurs){
 			
-			  
-			  $infTraining = getEntrainement($lstJoueurs["idJoueur"]);
+		$infTraining = getEntrainement($lstJoueurs["idJoueur"]);
 			  
 		switch($lst){
 			case 1:
@@ -388,14 +387,11 @@ break;
 			$bgcolor = "white";
 			$lst = 1;
 			break;
-			}
+		}
 			
-		
 
 
-
-
- $val = array($lstJoueurs["scoreGardien"],$lstJoueurs["scoreDefense"],$lstJoueurs["scoreAilierDef"],$lstJoueurs["scoreAilierOff"],$lstJoueurs["scoreWtm"],$lstJoueurs["scoreMilieu"],$lstJoueurs["scoreMilieuOff"],$lstJoueurs["scoreAttaquant"]);
+$val = array($lstJoueurs["scoreGardien"],$lstJoueurs["scoreDefense"],$lstJoueurs["scoreAilierDef"],$lstJoueurs["scoreAilierOff"],$lstJoueurs["scoreWtm"],$lstJoueurs["scoreMilieu"],$lstJoueurs["scoreMilieuOff"],$lstJoueurs["scoreAttaquant"]);
 sort($val);
 $valMax =  $val[7];
 $val2 = $val[6];

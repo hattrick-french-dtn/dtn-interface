@@ -2,18 +2,21 @@
 
 // Liste les entrainement spossible.
 function listEntrainement(){
-		$sql = "select id_type_entrainement,code_type_entrainement,libelle_type_entrainement,afficher from ht_type_entrainement order by code_type_entrainement";
-		$req = mysql_query($sql) or die("Erreur : ".$sql);
-		while($result = mysql_fetch_array($req)){
+	global $conn;
+	$tabP = array();
+	
+	$sql = "select id_type_entrainement,code_type_entrainement,libelle_type_entrainement,afficher from ht_type_entrainement order by code_type_entrainement";
+
+	foreach ($conn->query($sql) as $result){
     	$arP = array( 'id_type_entrainement' => $result["id_type_entrainement"],
                     'code_type_entrainement' => $result["code_type_entrainement"],
                     'libelle_type_entrainement' => stripslashes($result["libelle_type_entrainement"]),
                     'afficher' => $result["afficher"]
 					);
-					$tabP[] = $arP;
-		}			
+		array_push($tabP, $arP);
+	}			
 
-		return	$tabP;
+	return	$tabP;
 }
 
 function getEntrainementName($training_id,$trainingList){
@@ -46,16 +49,16 @@ function getEntrainementCode($id_type_entrainement,$trainingList){
 //Change l'entrainement d'un joueur
 function chgTraining($joueur_id, $training_id)
 {
-		
-		$sql2 = "
+	global $conn;
+	
+	$sql2 = "
 			UPDATE ht_joueurs
 			SET entrainement_id = '".$training_id."'
 			WHERE idJoueur = '".$joueur_id."'";
-		 $result = mysql_query($sql2);
-		
-		
-		require("serviceHistorique.php");
-		majHistorique($joueur_id,"chgTraining");
+	$result = $conn->exec($sql2);
+
+	require("serviceHistorique.php");
+	majHistorique($joueur_id,"chgTraining");
 		
 }
 

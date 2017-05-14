@@ -14,9 +14,10 @@
 /************************************************************************************************/
 function listClubs($limitDeb=null,$limitFin=null)
 {
-  $tabS = array();
+	global $conn;
+	$tabS = array();
   
-  $sql = "SELECT 
+	$sql = "SELECT 
                 idClub,
                 idClubHT,
                 idUserHT,
@@ -30,26 +31,28 @@ function listClubs($limitDeb=null,$limitFin=null)
                 AES_DECRYPT(userTokenSecret,'userTokenSecret_HT_DTN') AS userTokenSecret
            FROM ht_clubs 
            ORDER BY idClubHT ASC";
-  if ($limitDeb != null && $limitFin != null) {
-    $sql .= " LIMIT $limitDeb,$limitFin";
-  } elseif ($limitDeb != null && $limitFin == null) {
-    $sql .= " LIMIT $limitDeb";
-  } elseif ($limitDeb == null && $limitFin != null) {
-    $sql .= " LIMIT $limitFin";
-  }
+	if ($limitDeb != null && $limitFin != null) {
+		$sql .= " LIMIT $limitDeb,$limitFin";
+	} elseif ($limitDeb != null && $limitFin == null) {
+		$sql .= " LIMIT $limitDeb";
+	} elseif ($limitDeb == null && $limitFin != null) {
+		$sql .= " LIMIT $limitFin";
+	}
    
-  $result = mysql_query($sql) or die(mysql_error()."\n".$sql);
-	while($row =  mysql_fetch_array($result)){
-    $tabS[] = $row;
+	foreach ($conn->query($sql) as $row) {
+		array_push($tabS, $row);
 	}
 	
-	mysql_free_result($result);
 	return	$tabS;
 }
 
 
-function getClub($id){
-$sql = "SELECT idClub,
+function getClub($id)
+{
+	global $conn;
+	$tabS = array();
+
+	$sql = "SELECT idClub,
              idClubHT,
              idUserHT,
              nomClub,
@@ -62,10 +65,10 @@ $sql = "SELECT idClub,
              AES_DECRYPT(userTokenSecret,'userTokenSecret_HT_DTN') AS userTokenSecret
         FROM ht_clubs WHERE idClub = $id";
 
-  $result = mysql_query($sql) or die(mysql_error()."\n".$sql);
-	$tabS = mysql_fetch_array($result);
+	foreach ($conn->query($sql) as $row) {
+		array_push($tabS, $row);
+	}
 	
-	mysql_free_result($result);
 	return	$tabS;
 }
 
@@ -82,8 +85,9 @@ $sql = "SELECT idClub,
 /********************************************************************************************/
 function getClubID($idClub,$idUser=null) 
 {
-  $tabS=array();
-  $sql = "SELECT 
+	global $conn;
+	$tabS=array();
+	$sql = "SELECT 
             idClub,
             idClubHT,
             idUserHT,
@@ -97,19 +101,14 @@ function getClubID($idClub,$idUser=null)
             AES_DECRYPT(userTokenSecret,'userTokenSecret_HT_DTN') AS userTokenSecret
           FROM ht_clubs ";
           
-  if ($idClub!==null) {$sql .= "WHERE idClubHT = $idClub";}
-  elseif ($idUser!==null) {$sql .= "WHERE idUserHT = $idUser";}
-  elseif ($idClub===null && $idUser===null) {return $tabS;}
-//echo"$sql";  
-  $result = mysql_query($sql) or die(mysql_error()."\n".$sql);
+	if ($idClub!==null) {$sql .= "WHERE idClubHT = $idClub";}
+	elseif ($idUser!==null) {$sql .= "WHERE idUserHT = $idUser";}
+	elseif ($idClub===null && $idUser===null) {return $tabS;}
 
-  if(mysql_num_rows($result) == 1){
-    $tabS = mysql_fetch_array($result);
-	} else {
-    $tabS = false;
-  }
+	foreach ($conn->query($sql) as $row) {
+		array_push($tabS, $row);
+	}
 	
-	mysql_free_result($result);
 	return	$tabS;
 }
 
@@ -125,7 +124,7 @@ function getClubID($idClub,$idUser=null)
 /*           - ./dtn/interface/maj/includes/serviceEquipes.php                              */
 /********************************************************************************************/
 function getClubSQL($idClubHT=null,$idUserHT=null,$ht_session=null){
-$sql="SELECT idClub,
+	$sql="SELECT idClub,
              idClubHT,
              idUserHT,
              nomClub,
@@ -138,11 +137,11 @@ $sql="SELECT idClub,
              AES_DECRYPT(userTokenSecret,'userTokenSecret_HT_DTN') AS userTokenSecret
       FROM ht_clubs ";
 
-if ($idClubHT!==null) {$sql .= "WHERE idClubHT = $idClubHT";}
-elseif ($idUserHT!==null) {$sql .= "WHERE idUserHT = $idUserHT";}
-elseif ($idClubHT===null && $idUserHT===null) {return $tabS;}
+	if ($idClubHT!==null) {$sql .= "WHERE idClubHT = $idClubHT";}
+	elseif ($idUserHT!==null) {$sql .= "WHERE idUserHT = $idUserHT";}
+	elseif ($idClubHT===null && $idUserHT===null) {return $tabS;}
 
-return $sql;
+	return $sql;
 }
 
 
@@ -159,10 +158,10 @@ return $sql;
 /********************************************************************************************/
 function getClubHREF($idClubHT, $nomClub=null)
 {
-  $lien = '<a href="http://'.$_SERVER["HTTP_HOST"].'/dtn/interface/clubs/fiche_club.php?idClubHT='.$idClubHT.'">'.$idClubHT;
-  if ($nomClub != null) {$lien .= '-'.$nomClub;}
-  $lien .= '</a>';
-  return $lien;
+	$lien = '<a href="http://'.$cheminComplet.'/clubs/fiche_club.php?idClubHT='.$idClubHT.'">'.$idClubHT;
+	if ($nomClub != null) {$lien .= '-'.$nomClub;}
+	$lien .= '</a>';
+	return $lien;
 }
 
 
@@ -306,18 +305,19 @@ function getDataClubFromHT_usingPHT($idClubHT=null, $idUserHT=null){
 /*           - ./dtn/interface/includes/serviceJoueurs.php                    */
 /******************************************************************************/
 function insertionClub($club){
+	global $conn;
 
-  require($_SERVER['DOCUMENT_ROOT'].'/dtn/interface/includes/nomTables.inc.php');
+	require($cheminComplet.'includes/nomTables.inc.php');
 
-  $sql = getClubSQL($club['idClubHT'], $club['idUserHT']);
-  $req = mysql_query($sql) or die(mysql_error()."\n".$sql);
-  if(!$req){
-    return false;
-  } elseif (mysql_num_rows($req) == 0) { /* le club n'existe pas dans la base => on l'ins�re*/
-      if (!isset($club['userToken'])) $club['userToken']='NULL';
-      if (!isset($club['userTokenSecret'])) $club['userTokenSecret']='NULL';
+	$sql = getClubSQL($club['idClubHT'], $club['idUserHT']);
+	$req = $conn->query($sql);
+	if(!$req){
+		return false;
+	} elseif ($req->rowCount() == 0) { /* le club n'existe pas dans la base => on l'ins�re*/
+		if (!isset($club['userToken'])) $club['userToken']='NULL';
+		if (!isset($club['userTokenSecret'])) $club['userTokenSecret']='NULL';
   
-      $sql = "INSERT INTO $tbl_clubs 
+		$sql = "INSERT INTO $tbl_clubs 
                 ( idClubHT,
                   idUserHT,
                   nomClub,
@@ -341,22 +341,21 @@ function insertionClub($club){
                   AES_ENCRYPT('".$club['userTokenSecret']."','userTokenSecret_HT_DTN')
                 )";
                  
-      $reqValid= mysql_query($sql) or die(mysql_error()."\n".$sql);
+		$reqValid= $conn->exec($sql);
       
-      if (!$reqValid) {
-        return false;
-      } else {
-        return mysql_insert_id();
-      }
+		if (!$reqValid) {
+			return false;
+		} else {
+			return $conn->lastInsertId();
+		}
 
-  } elseif(mysql_num_rows($req) == 1){ /* le club existe dans la base => on le met � jour */
-          $tab = mysql_fetch_array ($req);
-          $club['idClub'] = $tab['idClub'];
-          return updateClub($club);
-  } else {
-          return false;
-  }
+	} elseif(mysql_num_rows($req) == 1){ /* le club existe dans la base => on le met � jour */
+        $tab = $req->fetch(PDO::FETCH_ASSOC);
+        $club['idClub'] = $tab['idClub'];
+        return updateClub($club);
+	}
 
+    return false;
 }
 
 
@@ -374,36 +373,37 @@ function insertionClub($club){
 /*           - ./dtn/interface/maj/majEquipesAuto.php                         */
 /******************************************************************************/
 function updateClub($club){
+	global $conn;
 
-  require($_SERVER['DOCUMENT_ROOT'].'/dtn/interface/includes/nomTables.inc.php');
-  //print_r($club);
-  $sql="UPDATE $tbl_clubs SET ";
-  if (isset($club["idUserHT"]))             {$sql.="idUserHT = '".$club["idUserHT"]."',";}
-  if (isset($club["nomClub"]))              {$sql.="nomClub = '".$club["nomClub"]."',";}
-  if (isset($club["nomUser"]))              {$sql.="nomUser = '".$club["nomUser"]."',";}
-  if (isset($club["idPays_fk"]))            {$sql.="idPays_fk = ".$club["idPays_fk"].",";}
-  if (isset($club["niv_Entraineur"]))       {$sql.="niv_Entraineur = ".$club["niv_Entraineur"].",";}
-  if (isset($club["isBot"]))                {$sql.="isBot = ".$club["isBot"].",";}
-  if (isset($club["date_last_connexion"]))  {$sql.="date_last_connexion = '".$club["date_last_connexion"]."',";}
-  if (isset($club["userToken"]))            {$sql.="userToken = AES_ENCRYPT('".$club['userToken']."','userToken_HT_DTN'),";}
-  if (isset($club["userTokenSecret"]))      {$sql.="userTokenSecret = AES_ENCRYPT('".$club['userTokenSecret']."','userTokenSecret_HT_DTN'),";}
-  $sql=substr($sql,0,strlen($sql)-1);
+	require($cheminComplet.'includes/nomTables.inc.php');
+	//print_r($club);
+	$sql="UPDATE $tbl_clubs SET ";
+	if (isset($club["idUserHT"]))             {$sql.="idUserHT = '".$club["idUserHT"]."',";}
+	if (isset($club["nomClub"]))              {$sql.="nomClub = '".$club["nomClub"]."',";}
+	if (isset($club["nomUser"]))              {$sql.="nomUser = '".$club["nomUser"]."',";}
+	if (isset($club["idPays_fk"]))            {$sql.="idPays_fk = ".$club["idPays_fk"].",";}
+	if (isset($club["niv_Entraineur"]))       {$sql.="niv_Entraineur = ".$club["niv_Entraineur"].",";}
+	if (isset($club["isBot"]))                {$sql.="isBot = ".$club["isBot"].",";}
+	if (isset($club["date_last_connexion"]))  {$sql.="date_last_connexion = '".$club["date_last_connexion"]."',";}
+	if (isset($club["userToken"]))            {$sql.="userToken = AES_ENCRYPT('".$club['userToken']."','userToken_HT_DTN'),";}
+	if (isset($club["userTokenSecret"]))      {$sql.="userTokenSecret = AES_ENCRYPT('".$club['userTokenSecret']."','userTokenSecret_HT_DTN'),";}
+	$sql=substr($sql,0,strlen($sql)-1);
 
-  if (isset($club["idClub"])) {
-    $sql.=" WHERE
+	if (isset($club["idClub"])) {
+		$sql.=" WHERE
               idClub  = ".$club["idClub"];
-  } elseif (isset($club["idClubHT"])) {
-    $sql.=" WHERE
+	} elseif (isset($club["idClubHT"])) {
+		$sql.=" WHERE
               idClubHT = ".$club["idClubHT"];
-  } else return false;
+	} else return false;
         
-  $reqValid= mysql_query($sql) or die(mysql_error()."\n".$sql);
+	$reqValid = $conn->exec($sql);
 
-  if (!$reqValid) {
-    return false;
-  } else {
-      return $club["idClub"];
-  }
+	if (!$reqValid) {
+		return false;
+	} else {
+		return $club["idClub"];
+	}
 
 }
 
@@ -420,10 +420,11 @@ function updateClub($club){
 /******************************************************************************/
 function insertHistoClub_Joueurs($id_Clubs_Histo,$idClubHT)
 {
+	global $conn;
 
-  require($_SERVER['DOCUMENT_ROOT'].'/dtn/interface/includes/nomTables.inc.php');
+	require($cheminComplet.'includes/nomTables.inc.php');
 
-  $sql="INSERT INTO $tbl_clubs_histo_joueurs (id_clubs_histo,id_joueur)
+	$sql="INSERT INTO $tbl_clubs_histo_joueurs (id_clubs_histo,id_joueur)
         SELECT
             $id_Clubs_Histo,
             idJoueur
@@ -433,16 +434,16 @@ function insertHistoClub_Joueurs($id_Clubs_Histo,$idClubHT)
             teamid=$idClubHT
         AND archivejoueur = 0";
 
-  $reqValid= mysql_query($sql) or die(mysql_error()."\n".$sql);
+	$reqValid= $conn->exec($sql);
   
-  if (!$reqValid) {
-    return -1;
-  } else {
-    $id_clubs_histo_joueurs=mysql_insert_id();
-    if (update_entrainementJoueursDeEquipe($id_Clubs_Histo)) {
-      return $id_clubs_histo_joueurs;
-    }
-  }
+	if (!$reqValid) {
+		return -1;
+	} else {
+		$id_clubs_histo_joueurs=$conn->lastInsertId();
+		if (update_entrainementJoueursDeEquipe($id_Clubs_Histo)) {
+			return $id_clubs_histo_joueurs;
+		}
+	}
 
 }
 
@@ -458,22 +459,23 @@ function insertHistoClub_Joueurs($id_Clubs_Histo,$idClubHT)
 /*           - ./serviceEquipes.php                                           */
 /******************************************************************************/
 function update_entrainementJoueursDeEquipe($id_Clubs_Histo){
+	global $conn;
 
-  require($_SERVER['DOCUMENT_ROOT'].'/dtn/interface/includes/nomTables.inc.php');
+	require($cheminComplet.'includes/nomTables.inc.php');
 
-  $sql="UPDATE $tbl_joueurs 
+	$sql="UPDATE $tbl_joueurs 
         SET
             entrainement_id= (SELECT idEntrainement FROM $tbl_clubs_histo WHERE id_Clubs_Histo=$id_Clubs_Histo)
         WHERE
             idJoueur IN (SELECT id_joueur FROM $tbl_clubs_histo_joueurs WHERE id_Clubs_Histo=$id_Clubs_Histo)";
 
-  $reqValid= mysql_query($sql) or die(mysql_error()."\n".$sql);
+	$reqValid= $conn->exec($sql);
   
-  if (!$reqValid) {
-    return false;
-  } else {
-    return true;
-  }
+	if (!$reqValid) {
+		return false;
+	} else {
+		return true;
+	}
 
 }
 
@@ -492,17 +494,17 @@ function update_entrainementJoueursDeEquipe($id_Clubs_Histo){
 /*           - ./dtn/interface/includes/serviceEquipes.php                    */
 /******************************************************************************/
 function getNivEntraineurHT($idClubHT,$ht_session,$team=null){
-  $niv_entraineur=0;
+	$niv_entraineur=0;
   
-  if ($team==null) {
-    $team = GetXMLTree($ht_session->GetTeamDetails($idClubHT));
-  }
-  $identraineur = $team["HATTRICKDATA"][0]["TEAM"][0]["TRAINER"][0]["PLAYERID"][0]["VALUE"];
+	if ($team==null) {
+		$team = GetXMLTree($ht_session->GetTeamDetails($idClubHT));
+	}
+	$identraineur = $team["HATTRICKDATA"][0]["TEAM"][0]["TRAINER"][0]["PLAYERID"][0]["VALUE"];
 	
 	$xmlEntraineur=GetXMLTree($ht_session->GetSinglePlayer($identraineur));
 	$niv_entraineur=$xmlEntraineur["HATTRICKDATA"][0]["PLAYER"][0]["TRAINERDATA"][0]["TRAINERSKILL"][0]["VALUE"];
 
-  return $niv_entraineur;
+	return $niv_entraineur;
 }
 
 
@@ -527,57 +529,56 @@ function getNivEntraineurHT($idClubHT,$ht_session,$team=null){
 function getDataClubsHistoFromHT_usingPHT($idClubHT=null){
 //echo('toto');
 
-  require_once("serviceEntrainement.php");
-  $row_clubs_histo=array();
-  $lTraining=listEntrainement();
+	  require_once("serviceEntrainement.php");
+	  $row_clubs_histo=array();
+	  $lTraining=listEntrainement();
   
-  try
-  {
-    if ($idClubHT != null) {
-      // On recherche dans la base dtn si le proprio du joueur nous a autoriser � utiliser son acc�s CHPP et si c'est acc�s est toujours valide, on l'utilisera
-      $ht_session=existAutorisationClub($idClubHT);
-    } else {
-      // On utilise la connexion du membre DTN connect� si aucun idClubHT envoy�
-      $ht_session=$_SESSION['HT'];
-    }
+	try
+	{
+		if ($idClubHT != null) {
+			// On recherche dans la base dtn si le proprio du joueur nous a autoriser � utiliser son acc�s CHPP et si c'est acc�s est toujours valide, on l'utilisera
+			$ht_session=existAutorisationClub($idClubHT);
+		} else {
+			// On utilise la connexion du membre DTN connect� si aucun idClubHT envoy�
+			$ht_session=$_SESSION['HT'];
+		}
     
-    if (isset($ht_session) && $ht_session!=false) {
+		if (isset($ht_session) && $ht_session!=false) {
 
-      $club = $ht_session->getClub($idClubHT);
+			$club = $ht_session->getClub($idClubHT);
 //      $staff = $club->getSpecialists();   // Personnel du club
-      $entrainement = $ht_session->getTraining($idClubHT); // Entrainement du club
+			$entrainement = $ht_session->getTraining($idClubHT); // Entrainement du club
 
-      // On vide le cache
-      $ht_session->clearClub();
-      $ht_session->clearTraining();
-      unset($ht_session);
+			// On vide le cache
+			$ht_session->clearClub();
+			$ht_session->clearTraining();
+			unset($ht_session);
     
-      $row_clubs_histo["idClubHT"]       = $club->getTeamId($idClubHT);
-      $row_clubs_histo["idEntrainement"] = getEntrainementId($entrainement->getTrainingType(),$lTraining);
-      $row_clubs_histo["intensite"]      = $entrainement->getTrainingLevel();
-      $row_clubs_histo["endurance"]      = $entrainement->getStaminaTrainingPart();
+			$row_clubs_histo["idClubHT"]       = $club->getTeamId($idClubHT);
+			$row_clubs_histo["idEntrainement"] = getEntrainementId($entrainement->getTrainingType(),$lTraining);
+			$row_clubs_histo["intensite"]      = $entrainement->getTrainingLevel();
+			$row_clubs_histo["endurance"]      = $entrainement->getStaminaTrainingPart();
 //      $row_clubs_histo["adjoints"]       = $staff->getAssistantTrainers();
-      $row_clubs_histo["adjoints"]       = $club->getAssistantTrainerLevels();
-      $row_clubs_histo["medecin"]       = $club->getMedicLevels();
-      $row_clubs_histo["physio"]       = $club->getFormCoachLevels();
+			$row_clubs_histo["adjoints"]       = $club->getAssistantTrainerLevels();
+			$row_clubs_histo["medecin"]       = $club->getMedicLevels();
+			$row_clubs_histo["physio"]       = $club->getFormCoachLevels();
     
-      // D�sallocation des variables
-      unset($club);
-      unset($staff);
-      unset($entrainement);
+			// D�sallocation des variables
+			unset($club);
+			unset($staff);
+			unset($entrainement);
       
-    	return $row_clubs_histo;
-  	} else {
-  	 return 0;
-    }
-  }
-  catch(HTError $e)
-  {
-    echo $e->getMessage();
-    return false;
-  } 
+			return $row_clubs_histo;
+		} else {
+			return 0;
+		}
+	}
+	catch(HTError $e)
+	{
+		echo $e->getMessage();
+		return false;
+	} 
 }
-
 
 
 
@@ -592,19 +593,20 @@ function getDataClubsHistoFromHT_usingPHT($idClubHT=null){
 /*           - ./form.php                                                     */
 /******************************************************************************/
 function insertHistoClub($row_clubs_histo){
+	global $conn;
 
-  require($_SERVER['DOCUMENT_ROOT'].'/dtn/interface/includes/nomTables.inc.php');
-  
-  if (!isset($row_clubs_histo["idEntrainement"])||$row_clubs_histo["idEntrainement"]=='') {$row_clubs_histo["idEntrainement"]='NULL';}
-  if (!isset($row_clubs_histo["intensite"])||$row_clubs_histo["intensite"]=='')           {$row_clubs_histo["intensite"]='NULL';}
-  if (!isset($row_clubs_histo["endurance"])||$row_clubs_histo["endurance"]=='')           {$row_clubs_histo["endurance"]='NULL';}
-  if (!isset($row_clubs_histo["adjoints"])||$row_clubs_histo["adjoints"]=='')             {$row_clubs_histo["adjoints"]='NULL';}
-  if (!isset($row_clubs_histo["medecin"])||$row_clubs_histo["medecin"]=='')             {$row_clubs_histo["medecin"]='NULL';}
-  if (!isset($row_clubs_histo["physio"])||$row_clubs_histo["physio"]=='')             {$row_clubs_histo["physio"]='NULL';}
-  if (!isset($row_clubs_histo["Commentaire"])||$row_clubs_histo["Commentaire"]=='')       {$row_clubs_histo["Commentaire"]=NULL;}
-  $row_clubs_histo["date_histo"] = date('Y-m-d H:i:s');
+	require($cheminComplet.'includes/nomTables.inc.php');
 
-  $sql="INSERT INTO $tbl_clubs_histo (
+	if (!isset($row_clubs_histo["idEntrainement"])||$row_clubs_histo["idEntrainement"]=='') {$row_clubs_histo["idEntrainement"]='NULL';}
+	if (!isset($row_clubs_histo["intensite"])||$row_clubs_histo["intensite"]=='')           {$row_clubs_histo["intensite"]='NULL';}
+	if (!isset($row_clubs_histo["endurance"])||$row_clubs_histo["endurance"]=='')           {$row_clubs_histo["endurance"]='NULL';}
+	if (!isset($row_clubs_histo["adjoints"])||$row_clubs_histo["adjoints"]=='')             {$row_clubs_histo["adjoints"]='NULL';}
+	if (!isset($row_clubs_histo["medecin"])||$row_clubs_histo["medecin"]=='')             {$row_clubs_histo["medecin"]='NULL';}
+	if (!isset($row_clubs_histo["physio"])||$row_clubs_histo["physio"]=='')             {$row_clubs_histo["physio"]='NULL';}
+	if (!isset($row_clubs_histo["Commentaire"])||$row_clubs_histo["Commentaire"]=='')       {$row_clubs_histo["Commentaire"]=NULL;}
+	$row_clubs_histo["date_histo"] = date('Y-m-d H:i:s');
+
+	$sql="INSERT INTO $tbl_clubs_histo (
               date_histo,
               idClubHT,
               idEntrainement,
@@ -630,18 +632,18 @@ function insertHistoClub($row_clubs_histo){
               '".$row_clubs_histo["Commentaire"]."'
         )";
 
-  $reqValid= mysql_query($sql) or die(mysql_error()."\n".$sql);
+	$reqValid= $conn->exec($sql);
   
-  if (!$reqValid) {
-    return -1;
-  } else { 
-    $id_Clubs_Histo = mysql_insert_id();
-    if (insertHistoClub_Joueurs($id_Clubs_Histo,$row_clubs_histo["idClubHT"]) != -1) {
-      return $id_Clubs_Histo;
-    } else {
-      return -1;
-    }
-  }
+	if (!$reqValid) {
+		return -1;
+	} else { 
+		$id_Clubs_Histo = $conn->lastInsertId();
+		if (insertHistoClub_Joueurs($id_Clubs_Histo,$row_clubs_histo["idClubHT"]) != -1) {
+			return $id_Clubs_Histo;
+		} else {
+			return -1;
+		}
+	}
 
 }
 
@@ -658,21 +660,22 @@ function insertHistoClub($row_clubs_histo){
 /*           - ./dtn_scan_team.php                                           */
 /******************************************************************************/
 function selectHistoClub($id_clubs_histo){
+	global $conn;
 
-  $sql="SELECT
+	$sql="SELECT
           *
         FROM 
           $tbl_clubs_histo
         WHERE
           id_clubs_histo=$id_clubs_histo";
   
-  $reqValid= mysql_query($sql) or die(mysql_error()."\n".$sql);
+	$reqValid= $conn->query($sql);
   
-  if (!$reqValid) {
-    return -1;
-  } else {
-    return mysql_num_rows($reqValid);
-  }
+	if (!$reqValid) {
+		return -1;
+	} else {
+		return $reqValid->rowCount();
+	}
 
 }
 
@@ -688,31 +691,32 @@ function selectHistoClub($id_clubs_histo){
 /*           - ./dtn_scan_team.php                                           */
 /******************************************************************************/
 function updateHistoClub($row_clubs_histo){
+	global $conn;
 
-  require($_SERVER['DOCUMENT_ROOT'].'/dtn/interface/includes/nomTables.inc.php');
+	require($cheminComplet.'includes/nomTables.inc.php');
 
-  $sql="UPDATE $tbl_clubs_histo 
-        SET ";
-  if (isset($row_clubs_histo["idEntrainement"]))  {$sql.="idEntrainement = '".$row_clubs_histo["idEntrainement"]."',";}
-  if (isset($row_clubs_histo["intensite"]))       {$sql.="intensite = '".$row_clubs_histo["intensite"]."',";}
-  if (isset($row_clubs_histo["endurance"]))       {$sql.="endurance = '".$row_clubs_histo["endurance"]."',";}
-  if (isset($row_clubs_histo["adjoints"]))        {$sql.="adjoints = '".$row_clubs_histo["adjoints"]."',";}
-  if (isset($row_clubs_histo["medecin"]))        {$sql.="medecin = '".$row_clubs_histo["medecin"]."',";}
-  if (isset($row_clubs_histo["physio"]))        {$sql.="physio = '".$row_clubs_histo["physio"]."',";}
-  if (isset($row_clubs_histo["Commentaire"]))     {$sql.="Commentaire = '".$row_clubs_histo["Commentaire"]."',";}
+	$sql="UPDATE $tbl_clubs_histo 
+		SET ";
+	if (isset($row_clubs_histo["idEntrainement"]))  {$sql.="idEntrainement = '".$row_clubs_histo["idEntrainement"]."',";}
+	if (isset($row_clubs_histo["intensite"]))       {$sql.="intensite = '".$row_clubs_histo["intensite"]."',";}
+	if (isset($row_clubs_histo["endurance"]))       {$sql.="endurance = '".$row_clubs_histo["endurance"]."',";}
+	if (isset($row_clubs_histo["adjoints"]))        {$sql.="adjoints = '".$row_clubs_histo["adjoints"]."',";}
+	if (isset($row_clubs_histo["medecin"]))        {$sql.="medecin = '".$row_clubs_histo["medecin"]."',";}
+	if (isset($row_clubs_histo["physio"]))        {$sql.="physio = '".$row_clubs_histo["physio"]."',";}
+	if (isset($row_clubs_histo["Commentaire"]))     {$sql.="Commentaire = '".$row_clubs_histo["Commentaire"]."',";}
   
-  $sql=substr($sql,0,strlen($sql)-1);
-  $sql.=" WHERE
+	$sql=substr($sql,0,strlen($sql)-1);
+	$sql.=" WHERE
            id_clubs_histo  = ".$row_clubs_histo["id_clubs_histo"]
         ;
   
-  $reqValid= mysql_query($sql) or die(mysql_error()."\n".$sql);
+	$reqValid= $conn->exec($sql);
   
-  if (!$reqValid) {
-    return false;
-  } else {
-      return $row_clubs_histo["id_clubs_histo"];
-  }
+	if (!$reqValid) {
+		return false;
+	} else {
+		return $row_clubs_histo["id_clubs_histo"];
+	}
 
 }
 
@@ -756,10 +760,11 @@ function getNbJourLastConnexion($date_last_connexion){
 /*           - ./dtn_scan_team.php                                           */
 /******************************************************************************/
 function getLastHistoClub($idClubHT){
+	global $conn;
 
-  require($_SERVER['DOCUMENT_ROOT'].'/dtn/interface/includes/nomTables.inc.php');
+	require($cheminComplet.'includes/nomTables.inc.php');
 
-  $sql="SELECT
+	$sql="SELECT
             $tbl_clubs_histo.*
         FROM 
             $tbl_clubs_histo,
@@ -767,19 +772,19 @@ function getLastHistoClub($idClubHT){
         WHERE
             lastHC.id_Clubs_Histo=$tbl_clubs_histo.id_Clubs_Histo";
 
-  $reqValid = mysql_query($sql) or die(mysql_error()."\n".$sql);
+	$reqValid = $conn->query($sql);
   
-  if (!$reqValid) {
-    return -1;
-  } else {
-    if(mysql_num_rows($reqValid) == 1){
-      $tabS = mysql_fetch_array($reqValid);
-  	} else {
-      $tabS = 0;
-    }
-    mysql_free_result($reqValid);
-    return $tabS;
-  }
+	if (!$reqValid) {
+		return NULL;
+	} else {
+		if($reqValid->rowCount() == 1){
+			$tabS = $reqValid->fetch(PDO::FETCH_ASSOC);
+		} else {
+			$tabS = NULL;
+		}
+		$reqValid=NULL;
+		return $tabS;
+	}
 
 }
 
@@ -797,53 +802,54 @@ function getLastHistoClub($idClubHT){
 /********************************************************************************************/
 function creerConnexionHT()
 {
-  $connexionActive==false;
-  $i=0;
+	global $conn;
+	$connexionActive==false;
+	$i=0;
   
-  $clubConnexion[0]=getClubID(296241); // On utilise l'autorisation de Musta56 par d�faut
+	$clubConnexion[0]=getClubID(296241); // On utilise l'autorisation de Musta56 par d�faut
   
   
-  if (!isset($clubConnexion[0]['userToken']) || 
-      !isset($clubConnexion[0]['userTokenSecret']) || 
-      empty($clubConnexion[0]['userToken']) || 
-      empty($clubConnexion[0]['userTokenSecret']) ) {
+	if (!isset($clubConnexion[0]['userToken']) || 
+		!isset($clubConnexion[0]['userTokenSecret']) || 
+		empty($clubConnexion[0]['userToken']) || 
+		empty($clubConnexion[0]['userTokenSecret']) ) {
 
-    $sql="SELECT idAdminHT FROM ht_admin WHERE idNiveauAcces_fk IN ('1','2') AND affAdmin = '1'";
+		$sql="SELECT idAdminHT FROM ht_admin WHERE idNiveauAcces_fk IN ('1','2') AND affAdmin = '1'";
   
-    $reqValid = mysql_query($sql) or die(mysql_error()."\n".$sql);
+		$reqValid = $conn->query($sql);
     
-    if (!$reqValid) {
-      return false;
-    } else {
-      $clubConnexion[] = mysql_fetch_array($reqValid);
-      mysql_free_result($reqValid);
-    }
-  }
+		if (!$reqValid) {
+			return false;
+		} else {
+			$clubConnexion[] = $reqValid->fetch(PDO::FETCH_ASSOC);;
+			$reqValid=NULL;
+		}
+	}
   
-  while ($i<count($clubConnexion) && $connexionActive==false) {
-    $connexionHT = new CHPPConnection(CONSUMERKEY,CONSUMERSECRET);
+	while ($i<count($clubConnexion) && $connexionActive==false) {
+		$connexionHT = new CHPPConnection(CONSUMERKEY,CONSUMERSECRET);
   
-    $connexionHT->setOauthToken($clubConnexion[$i]['userToken']);
-    $connexionHT->setOauthTokenSecret($clubConnexion[$i]['userTokenSecret']);
+		$connexionHT->setOauthToken($clubConnexion[$i]['userToken']);
+		$connexionHT->setOauthTokenSecret($clubConnexion[$i]['userTokenSecret']);
     
-    //echo("<br />HT_proprio=");var_dump($HT_proprio);
-    if (isset($connexionHT)) {
+		//echo("<br />HT_proprio=");var_dump($HT_proprio);
+		if (isset($connexionHT)) {
   
-      /*      VERIFICATION VALIDITE SESSION                                         */
-      // V�rifier que la session est valide
-      $check = $connexionHT->checkToken();
-      //var_dump($check);echo("<br><br>".$check->isValid());exit;
-      if ($check->isValid()===false) {
-        unset($connexionHT);
-        $i++;
-      } else {
-        $connexionActive=true;
-      }
-    }
+			/*      VERIFICATION VALIDITE SESSION                                         */
+			// V�rifier que la session est valide
+			$check = $connexionHT->checkToken();
+			//var_dump($check);echo("<br><br>".$check->isValid());exit;
+			if ($check->isValid()===false) {
+				unset($connexionHT);
+				$i++;
+			} else {
+				$connexionActive=true;
+			}
+		}
     
-  }
+	}
 
-  return $connexionHT;
+	return $connexionHT;
 
 }
 
@@ -864,129 +870,129 @@ function creerConnexionHT()
 /********************************************************************************************/
 function majClub($idClubHT=null,$idUserHT=null,$clubDTN=null)
 {
-  unset($clubHT);
-  unset($resu);
-  $modifclub=False;
-  if ($idClubHT === null && $idUserHT === null) {
-    return false;
-  }
+	unset($clubHT);
+	unset($resu);
+	$modifclub=False;
+	if ($idClubHT === null && $idUserHT === null) {
+		return false;
+	}
   
-  // Infos du club dans base DTN 
-  if ($clubDTN === null) {
-    $clubDTN = getClubID($idClubHT,$idUserHT);
-  }
+	// Infos du club dans base DTN 
+	if ($clubDTN === null) {
+		$clubDTN = getClubID($idClubHT,$idUserHT);
+	}
    
-  // r�cup�ration des donn�es du club sur HT
-  $clubHT=getDataClubFromHT_usingPHT($idClubHT,$idUserHT);
+	// r�cup�ration des donn�es du club sur HT
+	$clubHT=getDataClubFromHT_usingPHT($idClubHT,$idUserHT);
 
-  if ($clubHT == false) {
-    $resu["logModif"] .= "==NON CONNECTE A HATTRICK==\n";
-  }
+	if ($clubHT == false) {
+		$resu["logModif"] .= "==NON CONNECTE A HATTRICK==\n";
+	}
 
-  $resu["logModif"]="";
-  $resu["HTML"]="";
-  $resu["histoModifMsg"]="";
-  $resu["maj"]=false;
+	$resu["logModif"]="";
+	$resu["HTML"]="";
+	$resu["histoModifMsg"]="";
+	$resu["maj"]=false;
 
-  if ($clubDTN != false) {
+	if ($clubDTN != false) {
  
-    //Test idUserHT
-    if ($clubDTN["idUserHT"]!=$clubHT["idUserHT"])
-    {
-      $modifclub=True;
-      $resu["logModif"] .= "ID user : ".$clubDTN["idUserHT"]." -> ".$clubHT["idUserHT"]."\n";
-      $resu["HTML"] .= "Changement proprio-ID user :".$clubDTN["idUserHT"]." -&gt; ".$clubHT["idUserHT"]."<br />";
-    }
-    //Test status de bot
-    if ($clubDTN["isBot"]!=$clubHT["isBot"])
-    {
-      $modifclub=True;
-      $resu["logModif"] .= "Bot : ".$clubDTN["isBot"]." -> ".$clubHT["isBot"]."\n";
-      if ($clubHT["isBot"]==1) {
-        $resu["HTML"] .= "Club Botifi&eacute;<br />";
-        $resu["histoModifMsg"].= "Club Botifie";
-      } elseif ($clubHT["isBot"]==2) {
-        $resu["HTML"] .= "Club sans manager humain<br />";
-        $resu["histoModifMsg"].= "Club sans manager humain";
-      }
-    }
+		//Test idUserHT
+		if ($clubDTN["idUserHT"]!=$clubHT["idUserHT"])
+		{
+			$modifclub=True;
+			$resu["logModif"] .= "ID user : ".$clubDTN["idUserHT"]." -> ".$clubHT["idUserHT"]."\n";
+			$resu["HTML"] .= "Changement proprio-ID user :".$clubDTN["idUserHT"]." -&gt; ".$clubHT["idUserHT"]."<br />";
+		}
+		//Test status de bot
+		if ($clubDTN["isBot"]!=$clubHT["isBot"])
+		{
+			$modifclub=True;
+			$resu["logModif"] .= "Bot : ".$clubDTN["isBot"]." -> ".$clubHT["isBot"]."\n";
+			if ($clubHT["isBot"]==1) {
+				$resu["HTML"] .= "Club Botifi&eacute;<br />";
+				$resu["histoModifMsg"].= "Club Botifie";
+			} elseif ($clubHT["isBot"]==2) {
+				$resu["HTML"] .= "Club sans manager humain<br />";
+				$resu["histoModifMsg"].= "Club sans manager humain";
+			}
+		}
 
-    if ($clubHT["idUserHT"]!=0 && $clubHT["idClubHT"]!=null) {
-      //Test nomClub
-      if ($clubDTN["nomClub"]!=$clubHT["nomClub"])
-      {
-        $modifclub=True;
-        $resu["logModif"] .= "Nom du Club : ".$clubDTN["nomClub"]." -> ".$clubHT["nomClub"]."\n";
-      }      
-      //Test nomUser
-      if ($clubDTN["nomUser"]!=$clubHT["nomUser"])
-      {
-        $modifclub=True;
-        $resu["logModif"] .= "Nom de l'utilisateur : ".$clubDTN["nomUser"]." -> ".$clubHT["nomUser"]."\n";      
-      }      
-      //Test idPays_fk
-      if ($clubDTN["idPays_fk"]!=$clubHT["idPays_fk"])
-      {
-        $modifclub=True;
-        $resu["logModif"] .= "Pays : ".$clubDTN["idPays_fk"]." -> ".$clubHT["idPays_fk"]."\n";
-      }     
-      //Test niv_Entraineur
-      if ($clubDTN["niv_Entraineur"]!=$clubHT["niv_Entraineur"])
-      {
-        $modifclub=True;
-        $resu["logModif"] .= "Niveau de l'entraineur : ".$clubDTN["niv_Entraineur"]." -> ".$clubHT["niv_Entraineur"]."\n";
-        $resu["HTML"] .= 'Entraineur : '.$clubDTN['niv_Entraineur'].' -&gt; '.$clubHT['niv_Entraineur'].'<br />';
-        $resu["histoModifMsg"].= "Entraineur : ".$clubDTN["niv_Entraineur"]." -> ".$clubHT["niv_Entraineur"];
-      }
-      // Test date_last_connexion
-	    if($clubDTN['date_last_connexion']!=$clubHT['date_last_connexion'])
-      {
-  			$modifclub=True;
-         $nb_jour_last_connexion=getNbJourLastConnexion($clubHT['date_last_connexion']);
-  			if ($nb_jour_last_connexion>=28) {
-  			 $resu['HTML'] .= ' Pas de connexion du proprio depuis '.$nb_jour_last_connexion.' jours !<br />';
-        }
-		  }
-    } // Fin Si : Club Actif sur HT
-  } else { // $clubDTN n'existe pas
-    if ($clubHT["idUserHT"]!=0 && $clubHT["idClubHT"]!=null) { // Existence d'un manager humain et d'un club
-      $modifclub=True;
-      $resu['HTML'].='<font color=red><b>(ajout club - '.getClubHREF($clubHT['idClubHT']).')</b></font><br />';
-    } else {
-      $modifclub=False;
-    }
-  } // Fin comparaison $clubDTN et $clubHT
+		if ($clubHT["idUserHT"]!=0 && $clubHT["idClubHT"]!=null) {
+			//Test nomClub
+			if ($clubDTN["nomClub"]!=$clubHT["nomClub"])
+			{
+				$modifclub=True;
+				$resu["logModif"] .= "Nom du Club : ".$clubDTN["nomClub"]." -> ".$clubHT["nomClub"]."\n";
+			}      
+			//Test nomUser
+			if ($clubDTN["nomUser"]!=$clubHT["nomUser"])
+			{
+				$modifclub=True;
+				$resu["logModif"] .= "Nom de l'utilisateur : ".$clubDTN["nomUser"]." -> ".$clubHT["nomUser"]."\n";      
+			}      
+			//Test idPays_fk
+			if ($clubDTN["idPays_fk"]!=$clubHT["idPays_fk"])
+			{
+				$modifclub=True;
+				$resu["logModif"] .= "Pays : ".$clubDTN["idPays_fk"]." -> ".$clubHT["idPays_fk"]."\n";
+			}     
+			//Test niv_Entraineur
+			if ($clubDTN["niv_Entraineur"]!=$clubHT["niv_Entraineur"])
+			{
+				$modifclub=True;
+				$resu["logModif"] .= "Niveau de l'entraineur : ".$clubDTN["niv_Entraineur"]." -> ".$clubHT["niv_Entraineur"]."\n";
+				$resu["HTML"] .= 'Entraineur : '.$clubDTN['niv_Entraineur'].' -&gt; '.$clubHT['niv_Entraineur'].'<br />';
+				$resu["histoModifMsg"].= "Entraineur : ".$clubDTN["niv_Entraineur"]." -> ".$clubHT["niv_Entraineur"];
+			}
+			// Test date_last_connexion
+			if($clubDTN['date_last_connexion']!=$clubHT['date_last_connexion'])
+			{
+				$modifclub=True;
+				$nb_jour_last_connexion=getNbJourLastConnexion($clubHT['date_last_connexion']);
+				if ($nb_jour_last_connexion>=28) {
+					$resu['HTML'] .= ' Pas de connexion du proprio depuis '.$nb_jour_last_connexion.' jours !<br />';
+				}
+			}
+		} // Fin Si : Club Actif sur HT
+	} else { // $clubDTN n'existe pas
+		if ($clubHT["idUserHT"]!=0 && $clubHT["idClubHT"]!=null) { // Existence d'un manager humain et d'un club
+			$modifclub=True;
+			$resu['HTML'].='<font color=red><b>(ajout club - '.getClubHREF($clubHT['idClubHT']).')</b></font><br />';
+		} else {
+			$modifclub=False;
+		}
+	} // Fin comparaison $clubDTN et $clubHT
     
-  //si modification d'une ou plusieurs donn�es du club, alors maj base DTN
-  if ($modifclub==True)
-  {
-    $resu["logModif"] .= "-id=".$clubDTN["idClubHT"]."-\n";
-    //$clubHT["idClub"]=$clubDTN["idClub"]; //n�cessaire � la fonction update qui rep�re le club sur son idClub et non son idClubHT
-    $resu["idClub"]=insertionClub($clubHT);
+	//si modification d'une ou plusieurs donn�es du club, alors maj base DTN
+	if ($modifclub==True)
+	{
+		$resu["logModif"] .= "-id=".$clubDTN["idClubHT"]."-\n";
+		//$clubHT["idClub"]=$clubDTN["idClub"]; //n�cessaire � la fonction update qui rep�re le club sur son idClub et non son idClubHT
+		$resu["idClub"]=insertionClub($clubHT);
 
-    if ($resu["idClub"]==False)
-    {
-      //�chec de la maj
-      $resu["logModif"] .= "=> Erreur : �chec de la MAJ en base\n";
-      $resu["HTML"] .= '&Eacute;chec de la MAJ club<br />';
-    }
-    else
-    {
-      //r�ussite de la maj
-      $resu["logModif"] .= "=> MAJ OK\n";
-      $resu["maj"]=true;
-    }
-    $resu["logModif"] .= "___________________\n";
-  }
+		if ($resu["idClub"]==False)
+		{
+			//�chec de la maj
+			$resu["logModif"] .= "=> Erreur : �chec de la MAJ en base\n";
+			$resu["HTML"] .= '&Eacute;chec de la MAJ club<br />';
+		}
+		else
+		{
+			//r�ussite de la maj
+			$resu["logModif"] .= "=> MAJ OK\n";
+			$resu["maj"]=true;
+		}
+		$resu["logModif"] .= "___________________\n";
+	}
     
-  if (!isset($resu["idClub"]) && isset($clubDTN["idClub"])) {$resu["idClub"]=$clubDTN["idClub"];}
+	if (!isset($resu["idClub"]) && isset($clubDTN["idClub"])) {$resu["idClub"]=$clubDTN["idClub"];}
   
-  unset($clubDTN);
-  unset($clubHT);
-  unset($modifclub);
-  unset($nb_jour_last_connexion);
+	unset($clubDTN);
+	unset($clubHT);
+	unset($modifclub);
+	unset($nb_jour_last_connexion);
 
-  return $resu;
+	return $resu;
 
 }
 
@@ -1006,7 +1012,7 @@ function majClub($idClubHT=null,$idUserHT=null,$clubDTN=null)
 /********************************************************************************************/
 function majClubHisto($idClubHT,$cree_par,$role_createur)
 {
-  require_once($_SERVER['DOCUMENT_ROOT'].'/dtn/interface/includes/serviceEntrainement.php');
+  require_once($cheminComplet.'includes/serviceEntrainement.php');
 
   unset ($resu);
   $modif=false;
@@ -1082,7 +1088,7 @@ function majClubHisto($idClubHT,$cree_par,$role_createur)
 	
 	unset($trainingList);
 	unset($row_clubs_histo);
-  unset($modif);
+	unset($modif);
    
 	return $resu;
 

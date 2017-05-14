@@ -133,79 +133,77 @@ if ($typeExport=="recherche") {$sql .=stripslashes(urldecode($laSelection)).$ord
 if ($typeExport=="unjoueur") {$sql .="from $tbl_joueurs where idHattrickJoueur = ".$idPlayer;}
 //echo $sql;
 
-$req = mysql_query($sql);
-
-while ($l = mysql_fetch_array($req)) {
+foreach ($conn->query($sql) as $l) {
 	$infJ = getJoueur($l["idJoueur"]);
 	$date = explode("-",$infJ["dateDerniereModifJoueur"]);
 
-			 $mkJoueur =  mktime(0,0,0,$date[1],$date[2],$date[0]); 
-			 $datesaisie = explode("-",$infJ["dateSaisieJoueur"]);
-			 $mkSaisieJoueur= mktime(0,0,0,$datesaisie[1],$datesaisie[2],$datesaisie[0]);
-			 if ($mkSaisieJoueur>$mkJoueur){
-			 	$datemaj=$mkSaisieJoueur;
-			 }else{
-			 	$datemaj=$mkJoueur;
-			 }
+	$mkJoueur =  mktime(0,0,0,$date[1],$date[2],$date[0]); 
+	$datesaisie = explode("-",$infJ["dateSaisieJoueur"]);
+	$mkSaisieJoueur= mktime(0,0,0,$datesaisie[1],$datesaisie[2],$datesaisie[0]);
+	if ($mkSaisieJoueur>$mkJoueur){
+		$datemaj=$mkSaisieJoueur;
+	}else{
+		$datemaj=$mkJoueur;
+	}
 
 ?><?=strtolower($l["prenomJoueur"])?><?=strtolower($l["nomJoueur"])?>;<?php
-echo $l["idHattrickJoueur"].";";
-echo $l["dateDerniereModifJoueur"].";";
-echo $l["dateSaisieJoueur"].";";
-echo round(($mkday - $datemaj)/(60*60*24) ).";";
-echo $l["AgeAn"].";";
-echo $l["AgeJour"].";";
-echo $l["idExperience_fk"].";";
-echo $l["idLeader_fk"].";";
-echo $specabbrevs[$l["optionJoueur"]].";";
-echo $l["idEndurance"].";";
+	echo $l["idHattrickJoueur"].";";
+	echo $l["dateDerniereModifJoueur"].";";
+	echo $l["dateSaisieJoueur"].";";
+	echo round(($mkday - $datemaj)/(60*60*24) ).";";
+	echo $l["AgeAn"].";";
+	echo $l["AgeJour"].";";
+	echo $l["idExperience_fk"].";";
+	echo $l["idLeader_fk"].";";
+	echo $specabbrevs[$l["optionJoueur"]].";";
+	echo $l["idEndurance"].";";
 
 
-echo $l["idConstruction"].";".$infJ["nbSemaineConstruction"].";"; 
-echo  $l["idAilier"].";".$infJ["nbSemaineAilier"].";";
-echo  $l["idButeur"].";".$infJ["nbSemaineButeur"].";";
-echo  $l["idGardien"].";".$infJ["nbSemaineGardien"].";";
-echo  $l["idPasse"].";".$infJ["nbSemainePasses"].";"; 
-echo  $l["idDefense"].";".$infJ["nbSemaineDefense"].";";
-echo  $l["idPA"].";";
+	echo $l["idConstruction"].";".$infJ["nbSemaineConstruction"].";"; 
+	echo  $l["idAilier"].";".$infJ["nbSemaineAilier"].";";
+	echo  $l["idButeur"].";".$infJ["nbSemaineButeur"].";";
+	echo  $l["idGardien"].";".$infJ["nbSemaineGardien"].";";
+	echo  $l["idPasse"].";".$infJ["nbSemainePasses"].";"; 
+	echo  $l["idDefense"].";".$infJ["nbSemaineDefense"].";";
+	echo  $l["idPA"].";";
 
-echo $infJ["niv_Entraineur"].";";
-if ($infJ["dtnSuiviJoueur_fk"] != 0)	{echo $infJ["loginAdminSuiveur"].";";}
-else echo ";";
+	echo $infJ["niv_Entraineur"].";";
+	if ($infJ["dtnSuiviJoueur_fk"] != 0)	{echo $infJ["loginAdminSuiveur"].";";}
+	else echo ";";
 
-switch ($sesUser["idPosition_fk"]) {
+	switch ($sesUser["idPosition_fk"]) {
 		case "1" : //gK
-echo $l["scoreGardien"].";";
+			echo $l["scoreGardien"].";";
 			break;
 		case "2" : // cD
-echo $l["scoreDefense"].";";
-echo $l["scoreDefCentralOff"].";";
-echo $l["scoreDefLat"].";";
-echo $l["scoreDefLatOff"].";";
+			echo $l["scoreDefense"].";";
+			echo $l["scoreDefCentralOff"].";";
+			echo $l["scoreDefLat"].";";
+			echo $l["scoreDefLatOff"].";";
 			break;
 		case "3" : // Wg
-echo $l["scoreAilier"].";";
-echo $l["scoreAilierVersMilieu"].";";
-echo $l["scoreAilierOff"].";";
+			echo $l["scoreAilier"].";";
+			echo $l["scoreAilierVersMilieu"].";";
+			echo $l["scoreAilierOff"].";";
 			break;
 		case "4" : //IM 
-echo $l["scoreMilieuDef"].";";
-echo $l["scoreMilieu"].";";
-echo $l["scoreMilieuOff"].";";
+			echo $l["scoreMilieuDef"].";";
+			echo $l["scoreMilieu"].";";
+			echo $l["scoreMilieuOff"].";";
 			break;
 		case "5" : // Fw
-echo $l["scoreAttaquantDef"].";";
-echo $l["scoreAttaquant"].";";
+			echo $l["scoreAttaquantDef"].";";
+			echo $l["scoreAttaquant"].";";
 			break;
 		default :
-echo $l["scoreGardien"].";";
-echo $l["scoreDefense"].";";
-echo $l["scoreMilieu"].";";
-echo $l["scoreAilierOff"].";";
-echo $l["scoreAttaquant"].";";
-		break;
+			echo $l["scoreGardien"].";";
+			echo $l["scoreDefense"].";";
+			echo $l["scoreMilieu"].";";
+			echo $l["scoreAilierOff"].";";
+			echo $l["scoreAttaquant"].";";
+			break;
 	}
-echo "\n";
+	echo "\n";
 }
 
 deconnect();
