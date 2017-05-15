@@ -30,8 +30,8 @@ $sql = "SELECT *,ht_iiihelp_joueur.commentaire as comment,".$AgeAnneeSQL." as Ag
         AND ht_iiihelp_joueur.id_HT = ".$_REQUEST['id_HT']." 
         AND ht_iiihelp_joueur.id_HT = ht_joueurs.idHattrickJoueur 
         AND ht_iiihelp_joueur.entrainement_souhaite = ".$_REQUEST['training'];
-$req=  $conn->query($sql);
-$res = $req->fetch(PDO::FETCH_OBJ);
+$req=  mysql_query($sql);
+$res = mysql_fetch_object($req);
 
 
 ?>
@@ -50,28 +50,28 @@ document.form1.button.disabled = true;
 
 <?php
 switch($sesUser["idNiveauAcces"]){
-    case "1":
-		require("../menu/menuAdmin.php");
-		require("../menu/menuAdminGestion.php");
-		break;
+                case "1":
+                require("../menu/menuAdmin.php");
+                require("../menu/menuAdminGestion.php");
+                break;
 
-	case "2":
-		require("../menu/menuSuperviseur.php");
-		require("../menu/menuSuperviseurGestion.php");
-		break;
+                case "2":
+                require("../menu/menuSuperviseur.php");
+                require("../menu/menuSuperviseurGestion.php");
+                break;
 
-    case "3":
-		require("../menu/menuDTN.php");
-		require("../menu/menuDTNGestion.php");
-		break;
+                case "3":
+                require("../menu/menuDTN.php");
+                require("../menu/menuDTNGestion.php");
+                break;
 
-    case "4":
-		require("../menu/menuCoach.php");
-		require("../menu/menuCoachGestion.php");
-		break;
+                case "4":
+                require("../menu/menuCoach.php");
+                require("../menu/menuCoachGestion.php");
+                break;
 
-    default;
-		break;
+                default;
+                break;
 }
 ?>
 <title>Repreneurs</title>
@@ -131,7 +131,7 @@ switch($sesUser["idNiveauAcces"]){
     </tr>
 <?php
 
-	$sql  = get_iiihelp_repreneur_clubs_SQL();
+  $sql  = get_iiihelp_repreneur_clubs_SQL();
 	$sql .= " AND etat = 0 
 	          AND (
                 (entrainement_voulu1 in ($res->entrainement_souhaite,-1) AND age_voulu1='Tous')
@@ -147,15 +147,16 @@ switch($sesUser["idNiveauAcces"]){
   	$sql .= " OR (entrainement_voulu2 in ($res->entrainement_souhaite,-1) AND age_voulu2='17-20 ans')";
 	}
 	$sql .= ") ORDER BY idClubHT";
-	while ($conn->query($sql) as $restest)
+	$reqtest = mysql_query($sql) or die(mysql_error()."\n".$sql);
+	while ($restest = mysql_fetch_object($reqtest))
 	{
 	
-?>
+				  ?>
     <tr>
-      <td><?=$restest['nomClub']?></td>
-      <td><?=$restest['nomUser']?></td>
+      <td><?=$restest->nomClub?></td>
+      <td><?=$restest->nomUser?></td>
     </tr>
-<?php } ?>
+    <?php } ?>
   </table>
  <br> 
   <input type="radio" name="type" id="type" value=1>Vente prochaine

@@ -8,13 +8,12 @@ if(!$sesUser["idAdmin"])
 }
 
 if(!isset($lang)) $lang = "FR";
-global $from;
 
 require("../includes/langue.inc.php");
 
 $sql = "select * from $tbl_config where nomConfig = \"rapport\"";
-$req = $conn->query($sql);
-$lstRapport = $req->fetch();
+$req = mysql_query($sql);
+$lstRapport = mysql_fetch_array($req);
 $valeurConfig = $lstRapport["valeurConfig"];
 
 if (isset($htid))
@@ -52,8 +51,8 @@ switch($sesUser["idNiveauAcces"]){
 
 }
 
-$sql = $conn->query("select * from $tbl_histomodif where idJoueur_fk = $idJoueur ");
-$numMaxHisto = $sql->rowCount();
+$sql = mysql_query("select * from $tbl_histomodif where idJoueur_fk = $idJoueur ");
+$numMaxHisto = mysql_num_rows($sql);
 
 
 function ht_stripos($string,$word)
@@ -171,7 +170,8 @@ require("../menu/menuJoueur.php");
 		   $sql = "select * from $tbl_histomodif LEFT JOIN ht_admin ON idAdmin = idAdmin_fk where idJoueur_fk = $idJoueur order by dateHisto desc, heureHisto desc ";
 			$sql .= " limit $numEnr, $nbParPage";
 			
-			foreach($conn->query($sql) as $l){
+			$req = mysql_query($sql);
+			while($l = mysql_fetch_array($req)){
 		   
 		   
 		   ?>

@@ -310,8 +310,9 @@ $lstJ = $maBase->select($sql);
                                 WHERE ht_clubs_histo.idClubHT=".$idClubHT." 
                                 ORDER BY ht_clubs_histo.date_histo desc ";
       
+            $req = mysql_query($sqlClubsHisto) or die(mysql_error()."\n".$sqlClubsHisto);
             $i=1;
-            foreach($conn->query($sqlClubsHisto) as $lHisto){
+            while($lHisto = mysql_fetch_array($req)){
               $lHisto["createur"]="";
               if ($lHisto["role_createur"]=="D") {$lHisto["createur"]='[DTN]';}
               else if ($lHisto["role_createur"]=="P") {$lHisto["createur"]='[Proprio]';}

@@ -15,19 +15,16 @@ class AccesBase{
 		
 	function signaleErr($numErr) {
 		if($numErr==2) {
-			print("Erreur de connexion<br/>".$this->CONNECTION->errorCode().":");
-			print_r($this->CONNECTION->errorInfo());
+			print("Erreur de connexion<br/>(".mysql_errno()."/".mysql_error().")");
 			return false;
 		}
 	
 		if($numErr==1) {
-			print("Erreur d'execution Mysql<br/>Requete non appropriée<br/>".$this->CONNECTION->errorCode().":");
-			print_r($this->CONNECTION->errorInfo());
+			print("Erreur d'execution Mysql<br/>Requete non appropriée<br/>(".mysql_errno()."/".mysql_error().")");
 			return false;
 		}
 	
-		print("Erreur d'execution Mysql<br/>".$this->CONNECTION->errorCode().":");
-		print_r($this->CONNECTION->errorInfo());
+		print("Erreur d'execution Mysql<br/>(".mysql_errno()."/".mysql_error().")");
 		return false;
 	}
 
@@ -37,7 +34,9 @@ class AccesBase{
 		$server = $this->SERVER;
 		$dbase = $this->DATABASE;
 
-		$this->CONNECTION = new PDO('mysql:host=127.0.0.1;port=3307;charset=utf8;dbname=dtn_htfff', "htfff", "ht!fff_2k15", array(PDO::ATTR_PERSISTENT => true));
+		$conn = mysql_pconnect($server,$user,$pass);
+		if(!$conn || !mysql_select_db($dbase,$conn)) {$this->signaleErr(0); return false; }
+		$this->CONNECTION = $conn;
 		return true;
 	}
 
@@ -64,8 +63,8 @@ class AccesBase{
 				}
 				// Write $somecontent to our opened file.
 				if (!fwrite($handle, $sql.";\r\n")) {
-					print "Impossible d'écrire dans le fichier ($filename)";
-					exit;
+				print "Impossible d'écrire dans le fichier ($filename)";
+				exit;
 				}
 				fclose($handle);
 			} else {
@@ -80,16 +79,17 @@ class AccesBase{
 		if(!eregi("^select",$sql)) { $this->signaleErr(1); return false; }
 
 		if(empty($this->CONNECTION)) {$this->signaleErr(2); return false; }
-		$results = $this->CONNECTION->query($sql);
+		$conn = $this->CONNECTION;
+		$results = mysql_query($sql,$conn);
 		if( (!$results) or (empty($results)) ) {$this->signaleErr(0); return false; }
 		$c = 0;
 		$data = array();
-		while ( $row = $results->fetch(PDO::FETCH_ASSOC))
+		while ( $row = mysql_fetch_array($results))
 		{
-			$data[$c] = $row;
-			$c++;
+				$data[$c] = $row;
+				$c++;
 		}
-		$results=NULL;
+		mysql_free_result($results);
 		return $data;
 	}
 
@@ -97,11 +97,12 @@ class AccesBase{
 		if(empty($sql)) { return false; }
 		if(!eregi("^insert",$sql))
 		{
-			$this->signaleErr(1);
-			return false;
+				$this->signaleErr(1);
+				return false;
 		}
 		if(empty($this->CONNECTION)) {$this->signaleErr(2); return false; }
-		$results = $this->CONNECTION->exec($sql);
+		$conn = $this->CONNECTION;
+		$results = mysql_query($sql,$conn);
 		if(!$results) {$this->signaleErr(0); return false; }
 		$this->trace($sql);
 		//$result = mysql_insert_id();
@@ -111,62 +112,66 @@ class AccesBase{
 
 	function update($sql)
 	{
-		if(empty($sql)) return false;
-		if(!eregi("^update",$sql)) {$this->signaleErr(1); return false; }
-		if(empty($this->CONNECTION)) {$this->signaleErr(2); return false; }
-		$results = $this->CONNECTION->exec($sql);
-		if(!$results) {$this->signaleErr(0); return false; }
-		$this->trace($sql);
-		return true;
+			if(empty($sql)) return false;
+			if(!eregi("^update",$sql)) {$this->signaleErr(1); return false; }
+			if(empty($this->CONNECTION)) {$this->signaleErr(2); return false; }
+			$conn = $this->CONNECTION;
+			$results = mysql_query($sql,$conn);
+			if(!$results) {$this->signaleErr(0); return false; }
+			$this->trace($sql);
+		   return true;
 	}
 
 	function delete($sql)
 	{
-		if(empty($sql)) return false;
-		if(!eregi("^delete",$sql)) {$this->signaleErr(1); return false; }
-		if(empty($this->CONNECTION)) {$this->signaleErr(2); return false; }
-		$results = $this->CONNECTION->exec($sql);
-		if(!$results) {$this->signaleErr(0); return false; }
-		$this->trace($sql);
-		return true;
+			if(empty($sql)) return false;
+			if(!eregi("^delete",$sql)) {$this->signaleErr(1); return false; }
+			if(empty($this->CONNECTION)) {$this->signaleErr(2); return false; }
+			$conn = $this->CONNECTION;
+			$results = mysql_query($sql,$conn);
+			if(!$results) {$this->signaleErr(0); return false; }
+			$this->trace($sql);
+		   return true;
 	}
 
 	function query($sql)
 	{
 		if(empty($sql)) {$this->signaleErr(1); return false; }
 		if(empty($this->CONNECTION)) {$this->signaleErr(2); return false; }
-		$results = $this->CONNECTION->query($sql);
+		$conn = $this->CONNECTION;
+		$results = mysql_query($sql,$conn);
 		if(!$results) {$this->signaleErr(0); return false; }
 		return true;
 	}
 	
 	function close()
 	{
-		$this->CONNECTION = NULL;
+		$conn = $this->CONNECTION;
+		mysql_close($conn);
 	}
 
 	function last_index_id() {
-		return($this->CONNECTION->lastInsertId());
+		return(mysql_insert_id());
 	}
 
-	// function list_tables($db) {
-		// return(mysql_list_tables($db));
-	// }
+	function list_tables($db) {
+		return(mysql_list_tables($db));
+	}
 
-	// function count_rows($table) {
-		// return(mysql_numrows($table));
-	// }
+	function count_rows($table) {
+		return(mysql_numrows($table));
+	}
 
-	// function nom_tables($table,$i) {
-		// return(mysql_tablename($table,$i));
-	// }
+	function nom_tables($table,$i) {
+		return(mysql_tablename($table,$i));
+	}
 
 
-	// function count_records($db,$table) {
-		// $result = mysql_db_query($db, "select count(*) as num from ".$table);
-		// $num = mysql_result($result,0,"num");
-		// return($num);
-	// }
+	function count_records($db,$table) {
+		$result = mysql_db_query($db, "select count(*) as num from ".$table);
+		$num = mysql_result($result,0,"num");
+		return($num);
+	}
 }
 
 //--------------------------------------------------------------------------
@@ -175,10 +180,10 @@ class AccesBase{
 function initBD() {
         //création de l'objet base
 		$maBase                   = new AccesBase;
-        // $maBase->DATABASE         = DATABASE;
-        // $maBase->USERNAME         = USERNAME;
-        // $maBase->PASSWORD         = PASSWORD;
-        // $maBase->SERVER           = SERVER;
+        $maBase->DATABASE         = DATABASE;
+        $maBase->USERNAME         = USERNAME;
+        $maBase->PASSWORD         = PASSWORD;
+        $maBase->SERVER           = SERVER;
         $maBase->init();
 
 		//activation trace SQL

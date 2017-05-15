@@ -8,9 +8,6 @@ require("../includes/serviceListesDiverses.php");
 require("../includes/serviceJoueurTeam.php");
 require("../includes/nomTables.inc.php");
 
-global $mode;
-global $sesUser;
-
 if(!$sesUser["idAdmin"])
 	{
 	header("location: index.php?ErrorMsg=Session Expiree");
@@ -174,22 +171,22 @@ if(isset($msg)) {?>
   <?php // iiihelp!
           if($sesUser["idNiveauAcces"] == 2 ||  $sesUser["idNiveauAcces"] == 1)
           {
-          		?>&nbsp;&nbsp;<a href="ajouteraiiihelp.php?id=<?=$id?>">Vente pr&eacute;vu -&gt; iiihelp!</a><?php
+          		?>&nbsp;&nbsp;<a href="ajouteraiiihelp.php?id=<?=$id?>">Vente pr&eacute;vu -&gt; iiihelp!</a><? 
           }?> 
 	       </td>
 	       <td width="20%" align="left" colspan="2">
          <b>Club Actuel : </b><a href="<?=$url?>/clubs/fiche_club.php?idClubHT=<?=$joueurDTN["teamid"]?>"><?php if ($joueurDTN["isBot"]!=0) {?><b><font color="red">[BOT]</b></font><?php }?><?=$joueurDTN["nomClub"]?></a> <img src="../images/time_<?=$img_nb?>.gif" title="Derni&egrave;re connexion du propri&eacute;taire sur HT, il y a <?=($mkday-$datemaj)/(60*60*24)?> jour(s)">
           <?php if (existAutorisationClub($idClubHT,null)==false) {?>
             <img height="16" src="../images/non_autorise.JPG" title="Ce club n'a pas autoris&eacute; la DTN &agrave; acc&eacute;der &agrave; ses donn&eacute;es">
-          <?php } else { ?>
+          <?php } else {?>
             <img height="16" src="../images/Autorise.PNG" title="Ce club a autoris&eacute; la DTN &agrave; acc&eacute;der &agrave; ses donn&eacute;es">
-          <?php } ?>
+          <?php }?>
       		<?php if (!empty($_SESSION['numServeurHT'])){?>
       			&nbsp;<a href="http://www<?=$_SESSION['numServeurHT']?>.hattrick.org/Club/?TeamID=<?=$idClubHT?>&SendMessage=true" target="_NEW"
-      		<?php } else { ?>
+      		<?php }else{?>
       			&nbsp;<a href="#" onClick='AlertNumServeurHT();'
-      		<?php } ?>
-      		    alt="ht">HT-mail</a>
+      		<?php }?>
+      		alt="ht">HT-mail</a>
         </td>
         </tr>
       </table>
@@ -318,12 +315,12 @@ if(isset($msg)) {?>
                 }
                 
                 $sql =  "select * from $tbl_caracteristiques where numCarac = ".$val;
-                $req = $conn->query($sql);
-                $res = $req->fetch();
+                $req = mysql_query($sql) or die("Erreur : ".$sql);
+                $res = mysql_fetch_array($req);
               
                 
                 ?>
-                <tr <?php if ($i % 2 == 0) {?>bgcolor="#EEEEEE"<?php } ?> >
+                <tr <?php if ($i % 2 == 0) {?>bgcolor="#EEEEEE"<?php }?>>
                 <td><b><?=$int?> :</b></td>
                 <td><?php for ($j=1; $j<=$res["numCarac"]; $j++) {?><img src="../images/carre.JPG">&nbsp;<?php }?></td>
                 <td>&nbsp;<?='['.$res["numCarac"].'] '.$res["intituleCaracFR"]?> <?=$nbSemaineE?></td>
@@ -430,8 +427,9 @@ if(isset($msg)) {?>
                     ORDER BY all_histo.dateHisto desc, all_histo.heureHisto desc 
                     LIMIT 0,5";
     
+          $req = mysql_query($sql) or die(mysql_error()."\n".$sql) ;
           $i=1;
-          foreach($conn->query($sql) as $l) { ?>
+          while($l = mysql_fetch_array($req)){?>
           <tr <?php if ($i % 2 == 0) {?>bgcolor="#EEEEEE"<?php } else {?>bgcolor="#FFFFFF"<?php }?>>
             <td><div align="left"><?=dateToHTML($l["dateHisto"]).' '.$l["heureHisto"]?></div></td>
             <td><div align="left">&nbsp;<?=$l["intituleHisto"]?></div></td>
@@ -490,8 +488,9 @@ if(isset($msg)) {?>
                               ORDER BY ht_clubs_histo.date_histo desc 
                               LIMIT 0,10";
 
+          $req = mysql_query($sqlClubsHisto) or die(mysql_error()."\n".$sqlClubsHisto);
           $i=1;
-          foreach($conn->query($sqlClubsHisto) as $lHisto) {
+          while($lHisto = mysql_fetch_array($req)){
             if ($lHisto["role_createur"]=="D") {$lHisto["createur"]='[DTN]';}
             else if ($lHisto["role_createur"]=="P") {$lHisto["createur"]='[Proprio]';}
             $lHisto["createur"].=$lHisto["cree_par"];?>

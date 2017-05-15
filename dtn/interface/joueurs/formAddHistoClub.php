@@ -15,6 +15,8 @@ require("../includes/connect.inc.php");
 require("../includes/serviceEntrainement.php");
 require("../includes/serviceEquipes.php");
 
+$conn = connect();
+
 // Dernier historique club
 $lastHistoClub=getLastHistoClub($_GET['idClubHT']);
 

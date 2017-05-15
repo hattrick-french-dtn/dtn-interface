@@ -130,13 +130,13 @@ $_SESSION['ListeFicheResume']=$lstJoueur;
           $libelle_type_entrainement="-";
           
           $sql2 = "select * from $tbl_clubs_histo A left join $tbl_type_entrainement2 on idEntrainement = id_type_entrainement where idClubHT = ".$lstJoueur[$j]["idClubHT"]." order by date_histo desc";
-          $req2 = $conn->query($sql2);
-          $ligne = $req2->fetch(PDO::FETCH_ASSOC);
+          $req2 = mysql_query($sql2);
+          $ligne = mysql_fetch_assoc($req2);
           extract($ligne);
         
           $sql3 = "select * from $tbl_clubs where idClubHT = ".$lstJoueur[$j]["idClubHT"];
-          $req3 = $conn->query($sql3);
-          $ligne3 = $req3->fetch(PDO::FETCH_ASSOC);
+          $req3 = mysql_query($sql3);
+          $ligne3 = mysql_fetch_assoc($req3);
           extract($ligne3);
           ?>
 

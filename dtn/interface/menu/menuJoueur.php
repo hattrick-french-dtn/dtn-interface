@@ -1,7 +1,5 @@
 <?php
 if(isset($idHT)) {
-	
-	global $infJ;
 
 /***********************************************
 * Type de menus :

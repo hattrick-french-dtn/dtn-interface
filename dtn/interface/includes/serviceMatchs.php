@@ -4,19 +4,18 @@
 // with playerid=$joueur_id
 
 function listMatchJoueur($joueur_id){
-	global $conn;
-  	global $limitMatch;
-  	$sql =  "SELECT *
+  global $limitMatch;
+  $sql =  "SELECT *
           FROM ht_perfs_individuelle where id_joueur = $joueur_id  ORDER BY date_match DESC ";
 
-  	if($limitMatch != "") $sql .= $limitMatch;
-
-  	$tabS = array();
-  	foreach ($conn->query($sql) as $row){
-	 	array_push($tabS, $row);
+  if($limitMatch != "") $sql .= $limitMatch;
+ 
+  $result= mysql_query($sql);
+	while($row =  mysql_fetch_array($result)){
+	 $tabS[] = $row;
 	}
 
-  	return $tabS;
+  return $tabS;
 }
 
 // This function checkif a match exists in database for a specific week and a specific player  
@@ -135,28 +134,26 @@ function updateSeasonWeekMatch($matchid,$playerid,$season,$week){
 /*           - dtn/interface/includes/serviceMatchs.php                                   */
 /******************************************************************************************/
 function getSeasonWeekOfMatch($unixTime){
-	global $conn;
 
-	$sql = " SELECT
+$sql = " SELECT
 		UNIX_TIMESTAMP('1997-05-31') as date0
 		FROM dual";
+$req=  mysql_query($sql);
+$res = mysql_fetch_array($req);
 
-	$req=  $conn->query($sql);
-	$res = $req->fetch();
-	
-	$dateInitial = $res["date0"];
-	$moisDebutSaison=date("m",$dateInitial);
-	$jourDebutSaison=date("d",$dateInitial);
-	$anneeDebutSaison=date("Y",$dateInitial);
-	
-	$difference = round(($unixTime - $dateInitial)/(24*60*60),0); //différence entre la date de la semaine 0(1) saison 1 et la date en paramètre
-	$res["season"]=floor($difference/112);
-	
-	$datedebutsaison = mktime(0, 0, 0, $moisDebutSaison, $jourDebutSaison+(112*$res["season"]), $anneeDebutSaison);
-	$difference = round(($unixTime - $datedebutsaison)/(24*60*60),0); //différence entre la date du début de saison de la date en paramètre et la date en paramètre
-	$res["week"]=floor(1+$difference/7);
-	
-	return $res;
+$dateInitial = $res["date0"];
+$moisDebutSaison=date("m",$dateInitial);
+$jourDebutSaison=date("d",$dateInitial);
+$anneeDebutSaison=date("Y",$dateInitial);
+
+$difference = round(($unixTime - $dateInitial)/(24*60*60),0); //différence entre la date de la semaine 0(1) saison 1 et la date en paramètre
+$res["season"]=floor($difference/112);
+
+$datedebutsaison = mktime(0, 0, 0, $moisDebutSaison, $jourDebutSaison+(112*$res["season"]), $anneeDebutSaison);
+$difference = round(($unixTime - $datedebutsaison)/(24*60*60),0); //différence entre la date du début de saison de la date en paramètre et la date en paramètre
+$res["week"]=floor(1+$difference/7);
+
+return $res;
 	
 }
 

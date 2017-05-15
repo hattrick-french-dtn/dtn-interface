@@ -32,20 +32,20 @@ $liste_carac = listTypeCaracEntrainable();
 $datevieille = time()-3600*24*7;
 $datetest = date("Y-m-d",$datevieille);
 $sql = "delete from ht_iiihelp_joueur where etat = 3 and date_vente < '$datetest'";
-$req=  $conn->exec($sql);
+$req=  mysql_query($sql);
 
 // Joueurs supprimés manuellement avec le lien supprimer
 if (isset($_REQUEST['joueurhelpsupr']))
 {
 	 $sqlsupression= "delete from ht_iiihelp_joueur where id_HT=".$_REQUEST['joueurhelpsupr'];
-	 $req2 = $conn->exec($sqlsupression);
+	 $req2 = mysql_query($sqlsupression);
 }
 
 // Joueurs supprimés manuellement avec le lien supprimer
 if (isset($_REQUEST['vendu']))
 {
 	 $sql = "update ht_iiihelp_joueur set etat = 3, date_vente = NOW() where ht_iiihelp_joueur.id_HT = ".$_REQUEST['vendu'];
-	 $req = $conn->exec($sql);
+	 $req = mysql_query($sql);
 }	  
 
 
@@ -60,28 +60,28 @@ if (isset($_REQUEST['vendu']))
 <script language="JavaScript" src="../includes/javascript/navigation.js"></script>
 <?php
 switch($sesUser["idNiveauAcces"]){
-    case "1":
-		require("../menu/menuAdmin.php");
-		require("../menu/menuAdminGestion.php");
-		break;
+                case "1":
+                require("../menu/menuAdmin.php");
+                require("../menu/menuAdminGestion.php");
+                break;
 
-	case "2":
-		require("../menu/menuSuperviseur.php");
-		require("../menu/menuSuperviseurGestion.php");
-		break;
+                case "2":
+                require("../menu/menuSuperviseur.php");
+                require("../menu/menuSuperviseurGestion.php");
+                break;
 
-	case "3":
-		require("../menu/menuDTN.php");
-		require("../menu/menuDTNGestion.php");
-		break;
+                case "3":
+                require("../menu/menuDTN.php");
+                require("../menu/menuDTNGestion.php");
+                break;
 
-	case "4":
-		require("../menu/menuCoach.php");
-		require("../menu/menuCoachGestion.php");
-		break;
+                case "4":
+                require("../menu/menuCoach.php");
+                require("../menu/menuCoachGestion.php");
+                break;
 
-	default;
-		break;
+                default;
+                break;
 }
 ?>
 <title>Joueurs</title>
@@ -110,66 +110,68 @@ switch($sesUser["idNiveauAcces"]){
   </tr>
 <?php             
 				 
-		$sql = "select * from ht_iiihelp_joueur, ht_joueurs where ht_iiihelp_joueur.id_dtn = ht_joueurs.idJoueur and etat = 0 order by id_HT";
-		$i = 0;
-		while ($conn->query($sql) as $res)
-		{
-			$i++;
+				 $sql = "select * from ht_iiihelp_joueur, ht_joueurs where ht_iiihelp_joueur.id_dtn = ht_joueurs.idJoueur and etat = 0 order by id_HT";
+                 $req=  mysql_query($sql);
+				 $i = 0;
+				 while ($res = mysql_fetch_object($req))
+				 {
+				 $i++;
 ?>  
 <tr <?php if ($i % 2 == 0) echo "bgcolor=#CCCCCC";  else echo "bgcolor=#FFFFFF";?> >
-  <td><a href="<?=$url?>/joueurs/fiche.php?htid=<?=$res['id_HT']?>"><?=$res['id_HT']?> </td>
-  <td><a href="<?=$url?>/joueurs/fiche.php?htid=<?=$res['id_HT']?>"><?=$res['nomJoueur']?></td>
-  <td><?=$res['date']?></td>
+  <td><a href="<?=$url?>/joueurs/fiche.php?htid=<?=$res->id_HT?>"><?=$res->id_HT?> </td>
+  <td><a href="<?=$url?>/joueurs/fiche.php?htid=<?=$res->id_HT?>"><?=$res->nomJoueur?></td>
+  <td><?=$res->date?></td>
   <td><?php
-  $carac=get_Carac_byID($res['entrainement_souhaite'],$liste_carac);
+  $carac=get_Carac_byID($res->entrainement_souhaite,$liste_carac);
   echo $carac['nomTypeCarac'];
   ?></td>
-  <td><?=str_replace("+21 ans","21 ans et +",$res['cat_age'])?></td>
-  <td><?=$res['map']?> &euro;</td>
+  <td><?=str_replace("+21 ans","21 ans et +",$res->cat_age)?></td>
+  <td><?=$res->map?> &euro;</td>
   <td><?php
-  switch($res['etat'])
+  switch($res->etat)
   {
   	case "0":
 		echo "ajout&eacute;";
-		break;
+	break;
   	case "1":
 		echo "vente pr&eacute;-annonc&eacute;e";
-		break;
+	break;
   	case "2":
 		echo "vente en cours annonc&eacute;e";
-		break;
+	break;
   	case "3":
 		echo "vendu";
-		break;
+	break;
   }?></td>
-	<td><a href="liste_repreneur_mail1.php?id_HT=<?=$res['id_HT']?>&training=<?=$res['entrainement_souhaite']?>">Envoi Mail Repreneur</a><br>
-      <a href="?vendu=<?=$res['id_HT']?>">Vendu</a><br>
-	  <a href="?joueurhelpsupr=<?=$res['id_HT']?>">Supprimer</a></td>
-	</tr>
+  <td><a href="liste_repreneur_mail1.php?id_HT=<?=$res->id_HT?>&training=<?=$res->entrainement_souhaite?>">Envoi Mail Repreneur</a><br>
+      <a href="?vendu=<?=$res->id_HT?>">Vendu</a><br>
+	  <a href="?joueurhelpsupr=<?=$res->id_HT?>">Supprimer</a></td>
+</tr>
   <?php } ?>
 
   <tr>
     <td ALIGN="center" bgcolor="#9600B4" colspan="8"><font color="#FFFFFF">Mailing effectu&eacute; pour :</font></td>
   </tr>
 <?php 
-	$sql = "select * from ht_iiihelp_joueur, ht_joueurs where ht_iiihelp_joueur.id_dtn = ht_joueurs.idJoueur and etat > 0 and etat < 3 order by id_HT";
-	$i = 0;
-	foreach ($conn->query($sql) as $res)
-	{
-		$i++;
+                 $sql = "select * from ht_iiihelp_joueur, ht_joueurs where ht_iiihelp_joueur.id_dtn = ht_joueurs.idJoueur and etat > 0 and etat < 3 order by id_HT";
+                 $req=  mysql_query($sql);
+				 $i = 0;
+				 while ($res = mysql_fetch_object($req))
+				 {
+				 $i++;
 ?>  
 <tr <?php if ($i % 2 == 0) echo "bgcolor=#CCCCCC";  else echo "bgcolor=#FFFFFF";?> >
-  <td><a href="<?=$url?>/joueurs/fiche.php?htid=<?=$res['id_HT']?>"><?=$res['id_HT']?> </td>
-  <td><a href="<?=$url?>/joueurs/fiche.php?htid=<?=$res['id_HT']?>"><?=$res['nomJoueur']?></td>
-  <td><?=$res['date']?></td>
+  <td><a href="<?=$url?>/joueurs/fiche.php?htid=<?=$res->id_HT?>"><?=$res->id_HT?> </td>
+  <td><a href="<?=$url?>/joueurs/fiche.php?htid=<?=$res->id_HT?>"><?=$res->nomJoueur?></td>
+  <td><?=$res->date?></td>
   <td><?php
-  $carac=get_Carac_byID($res['entrainement_souhaite'],$liste_carac);
+  $carac=get_Carac_byID($res->entrainement_souhaite,$liste_carac);
   echo $carac['nomTypeCarac'];
   ?></td>
-  <td><?=str_replace("+21 ans","21 ans et +",$res['cat_age'])?></td>
-  <td><?=$res['map']?> &euro;</td>
+  <td><?=str_replace("+21 ans","21 ans et +",$res->cat_age)?></td>
+  <td><?=$res->map?> &euro;</td>
   <td><?php
-  switch($res['etat'])
+  switch($res->etat)
   {
   	case "0":
 		echo "ajout&eacute;";
@@ -184,8 +186,8 @@ switch($sesUser["idNiveauAcces"]){
 		echo "vendu";
 	break;
   }?></td>
-  <td><a href="liste_repreneur_mail1.php?id_HT=<?=$res['id_HT']?>&training=<?=$res['entrainement_souhaite']?>">R&eacute;-envoi Mail Repreneur</a><br>
-      <a href="vendu.php?id_HT=<?=$res['id_HT']?>">Vendu</a></td>
+  <td><a href="liste_repreneur_mail1.php?id_HT=<?=$res->id_HT?>&training=<?=$res->entrainement_souhaite?>">R&eacute;-envoi Mail Repreneur</a><br>
+      <a href="vendu.php?id_HT=<?=$res->id_HT?>">Vendu</a></td>
 </tr>
   <?php } ?>
 
@@ -193,24 +195,25 @@ switch($sesUser["idNiveauAcces"]){
     <td ALIGN="center" bgcolor="#9600B4" colspan="8"><font color="#FFFFFF">Vendu :</font></td>
   </tr>
 <?php 
-	$sql = "select * from ht_iiihelp_joueur, ht_joueurs where ht_iiihelp_joueur.id_dtn = ht_joueurs.idJoueur and etat = 3 order by id_HT";
-	$i = 0;
-	foreach ($conn->query($sql) as $res)
-	{
-		$i++;
+                 $sql = "select * from ht_iiihelp_joueur, ht_joueurs where ht_iiihelp_joueur.id_dtn = ht_joueurs.idJoueur and etat = 3 order by id_HT";
+                 $req=  mysql_query($sql);
+				 $i = 0;
+				 while ($res = mysql_fetch_object($req))
+				 {
+				 $i++;
 ?>  
 <tr <?php if ($i % 2 == 0) echo "bgcolor=#CCCCCC";  else echo "bgcolor=#FFFFFF";?> >
-  <td><a href="<?=$url?>/joueurs/fiche.php?htid=<?=$res['id_HT']?>"><?=$res['id_HT']?> </td>
-  <td><a href="<?=$url?>/joueurs/fiche.php?htid=<?=$res['id_HT']?>"><?=$res['nomJoueur']?></td>
-  <td><?=$res['date']?></td>
+  <td><a href="<?=$url?>/joueurs/fiche.php?htid=<?=$res->id_HT?>"><?=$res->id_HT?> </td>
+  <td><a href="<?=$url?>/joueurs/fiche.php?htid=<?=$res->id_HT?>"><?=$res->nomJoueur?></td>
+  <td><?=$res->date?></td>
   <td><?php 
-  $carac=get_Carac_byID($res['entrainement_souhaite'],$liste_carac);
+  $carac=get_Carac_byID($res->entrainement_souhaite,$liste_carac);
   echo $carac['nomTypeCarac'];
   ?></td>
-  <td><?=str_replace("+21 ans","21 ans et +",$res['cat_age'])?></td>
-  <td><?=$res['map']?> &euro;</td>
+  <td><?=str_replace("+21 ans","21 ans et +",$res->cat_age)?></td>
+  <td><?=$res->map?> &euro;</td>
   <td><?php
-  switch($res['etat'])
+  switch($res->etat)
   {
   	case "0":
 		echo "ajout&eacute;";
@@ -225,7 +228,7 @@ switch($sesUser["idNiveauAcces"]){
 		echo "vendu";
 	break;
   }?></td>
-  <td><a href="liste_joueur_iiihelp.php?joueurhelpsupr=<?=$res['id_HT']?>">Supprimer</a>
+  <td><a href="liste_joueur_iiihelp.php?joueurhelpsupr=<?=$res->id_HT?>">Supprimer</a>
 </tr>
   <?php } ?>
 </table>

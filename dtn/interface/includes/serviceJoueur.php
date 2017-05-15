@@ -187,19 +187,17 @@ function getJoueurSQL($joueur_id){
 
 function getJoueur($joueur_id)
 {
-	global $conn;
-
-	if (isset($joueur_id) && $joueur_id != "" && $joueur_id!=null) {
-		$sql=getJoueurSQL($joueur_id);
-
-		$result = $conn->query($sql);
-		$tabS = $result->fetch();
-		$result=NULL;
-		return  $tabS;
-	} else {
-		echo ("Parametre non renseigne => Impossible d'extraire le joueur.");
-		return false;
-	}
+  if (isset($joueur_id) && $joueur_id != "" && $joueur_id!=null) {
+    $sql=getJoueurSQL($joueur_id);
+  #echo "<br>".$sql."<br>";
+    $result= mysql_query($sql) or die(mysql_error()."\n".$sql);
+    $tabS = mysql_fetch_array($result);
+    mysql_free_result($result);
+    return  $tabS;
+  } else {
+    echo ("Parametre non renseigne => Impossible d'extraire le joueur.");
+    return false;
+  }
 }
 
 // ajout gege recherche sur htId 
@@ -213,19 +211,17 @@ function getJoueurHtSQL($joueur_id){
 
 function getJoueurHt($joueur_id)
 {
-	global $conn;
-
-	if (isset($joueur_id) && $joueur_id != "" && $joueur_id!=null) {
-		$sql=getJoueurHtSQL($joueur_id);
-
-		$result = $conn->query($sql);
-		$tabS = $result->fetch();
-		$result=NULL;
-		return  $tabS;
-	} else {
-		echo ("Parametre non renseigne => Impossible d'extraire le joueur.");
-		return false;
-	}
+  if (isset($joueur_id) && $joueur_id != "" && $joueur_id!=null) {
+    $sql=getJoueurHtSQL($joueur_id);
+  #echo "<br>".$sql."<br>";
+    $result= mysql_query($sql) or die(mysql_error()."\n".$sql);
+    $tabS = mysql_fetch_array($result);
+    mysql_free_result($result);
+    return  $tabS;
+  } else {
+    echo ("Parametre non renseigne => Impossible d'extraire le joueur.");
+    return false;
+  }
 }
 
 
@@ -266,16 +262,15 @@ function getListeJoueursArchivesSQL($limitDeb=null,$limitFin=null){
 /******************************************************************************/
 function getListeJoueursArchives($limitDeb=null,$limitFin=null)
 {
-	global $conn;
-	$tabS = array();
-
-	$sql=getListeJoueursArchivesSQL($limitDeb,$limitFin);
-
-	foreach($conn->query($sql) as $row){
-		array_push($tabS, $row);
-	}
-
-	return  $tabS;
+  $sql=getListeJoueursArchivesSQL($limitDeb,$limitFin);
+  $result= mysql_query($sql) or die(mysql_error()."\n".$sql);
+  $i=0;
+  while($i<mysql_num_rows($result)) {
+    $tabS[$i] = mysql_fetch_array($result);
+    $i++;
+  }
+  mysql_free_result($result);
+  return  $tabS;
 }
 
 
@@ -309,16 +304,18 @@ function getJoueurByDTNSQL($id_dtn){
 /******************************************************************************/
 function getJoueurByDTN($id_dtn)
 {
-	global $conn;
-	$tabS = array();
+  $sql=getJoueurByDTNSQL($id_dtn);
 
-	$sql=getJoueurByDTNSQL($id_dtn);
+  $result= mysql_query($sql) or die(mysql_error()."\n".$sql);
+  $i=0;
 
-	foreach($conn->query($sql) as $row){
-		array_push($tabS, $row);
-	}
+  while($i<mysql_num_rows($result)) {
+    $tabS[$i] = mysql_fetch_array($result);
+    $i++;
+  }
+  mysql_free_result($result);
+  return  $tabS;
 
-	return  $tabS;
 }
 
 
@@ -336,20 +333,21 @@ function getJoueurByDTN($id_dtn)
 /******************************************************************************/
 function getJoueurs_by_idClubHT($idClubHT, $tous=false)
 {
-	global $conn;
-	$tabS = array();
-
-	$sql = getTousJoueurSQL()." AND ht_clubs.idClubHT = $idClubHT ";
-
-	if ($tous == false) {
-		$sql .= " AND  ht_joueurs.affJoueur = 1 ";
-	}
+  $tabS = array();
+  $sql = getTousJoueurSQL()." AND ht_clubs.idClubHT = $idClubHT ";
+//echo $sql;  
+  if ($tous == false) {
+    $sql .= " AND  ht_joueurs.affJoueur = 1 ";
+  }
   
-	foreach($conn->query($sql) as $row){
-		array_push($tabS, $row);
-	}
-
-	return  $tabS;
+  $result= mysql_query($sql) or die(mysql_error()."\n".$sql);
+  $i=0;
+  while($i<mysql_num_rows($result)) {
+    $tabS[$i] = mysql_fetch_array($result);
+    $i++;
+  }
+  mysql_free_result($result);
+  return  $tabS;
 }
 
 
@@ -359,100 +357,100 @@ function getJoueurs_by_idClubHT($idClubHT, $tous=false)
  * recuperation du nom du dtn
  */
 function getDtnName($iddtn){
-	global $conn;
+  $sql = "SELECT loginAdmin FROM ht_admin  WHERE idAdmin = '".$iddtn."' ";
+  //print $sql;
+  $result= mysql_query($sql) or die(mysql_error()."\n".$sql);
+  //  print_r( $result);
+  $res = mysql_fetch_array($result);
+  //mysql_free_result($result);
+  
+  if($res=="") {
+    return "-";
+  }
 
-	$sql = "SELECT loginAdmin FROM ht_admin  WHERE idAdmin = '".$iddtn."' ";
-
-	$result= $conn->query($sql);
-
-	if($result->rowCount()==0) {
-		return "-";
-	}
-
-	$res = $result->fetch();
-	$result = NULL;
-
-	return $res["loginAdmin"];
+  return $res["loginAdmin"];
 }
 
 function getScout($idJoueur){
-	global $conn;
 
-	$sql = "SELECT idHattrickJoueur ,dtnSuiviJoueur_fk,   loginAdmin , idAdminHT   FROM ht_joueurs, ht_admin  WHERE idHattrickJoueur = '".$idJoueur."' AND dtnSuiviJoueur_fk = idAdmin ";
-	$result= $conn->query($sql);
-	$tabS = $result->fetch();
-	$result=NULL;
-	return  $tabS;
+  $sql = "SELECT idHattrickJoueur ,dtnSuiviJoueur_fk,   loginAdmin , idAdminHT   FROM ht_joueurs, ht_admin  WHERE idHattrickJoueur = '".$idJoueur."' AND dtnSuiviJoueur_fk = idAdmin ";
+  $result= mysql_query($sql) or die(mysql_error()."\n".$sql);
+  $tabS = mysql_fetch_array($result);
+  mysql_free_result($result);
+  return  $tabS;
 
 }
 // Mise a jour de l'historique :
 function listJoueur($affArchive , $affPosition)
 {
-	global $conn;
-	global $ordre, $sens;
-	if($affArchive == "") $affArchive = 0;
+  global $ordre, $sens;
+  if($affArchive == "") $affArchive = 0;
 
-	//correction bug age joueurs par jojoje86 le 20/07/09
+  //correction bug age joueurs par jojoje86 le 20/07/09
 	$AgeAnneeSQL=getCalculAgeAnneeSQL();
 	$AgeJourSQL=getCalculAgeJourSQL();
 
-	$sql = "SELECT *,".$AgeAnneeSQL." as AgeAn,".$AgeJourSQL." as AgeJour FROM ht_joueurs ";
+  $sql = "SELECT *,".$AgeAnneeSQL." as AgeAn,".$AgeJourSQL." as AgeJour FROM ht_joueurs ";
     
-	if($affPosition != "") $sql . ", ht_position  ";
-	$sql .= "WHERE";
-	if($affPosition != "") $sql ."     ht_posteAssigne = idPosition AND";
+  if($affPosition != "") $sql . ", ht_position  ";
+  $sql .= "WHERE";
+  if($affPosition != "") $sql ."     ht_posteAssigne = idPosition AND";
   
-	$sql .= "     joueurActif = 1 
+  $sql .= "     joueurActif = 1 
             AND affJoueur = 1 
             AND archiveJoueur = $affArchive 
             AND ht_posteAssigne  = $affPosition ";
-	$sql .= " ORDER BY $ordre $sens";
+  $sql .= " ORDER BY $ordre $sens";
 
 
 //echo $sql;
-	$tabS = array();
-	foreach($conn->query($sql) as $row){
-		array_push($tabS, $row);
-	}
-	return	$tabS;
+
+  $result= mysql_query($sql) or die(mysql_error()."\n".$sql);
+  while($lst = mysql_fetch_array($result)){
+    $tabS[] = $lst;
+  }
+  mysql_free_result($result);
+  return  $tabS;
 }
 
 
 function listJoueurSelection()
 {
-	global $conn;
-	global $sesUser, $ordre, $sens;
-  
-	$sql = "SELECT s.id,  s.id_joueur,  s.selection, j.* 
+  global $sesUser, $ordre, $sens;
+  $sql = "SELECT s.id,  s.id_joueur,  s.selection, j.* 
           FROM ht_selection s, ht_joueurs j 
           WHERE s.id_joueur = j.idJoueur 
           AND s.selection = '".$sesUser["selection"]."'";
-	$sql .= "ORDER BY $ordre $sens";
+  $sql .= "ORDER BY $ordre $sens";
 
-	$tabs = array();
-	foreach($conn->query($sql) as $row){
-		array_push($tabS, $row);
-	}
-	return	$tabS;
+  $result= mysql_query($sql) or die(mysql_error()."\n".$sql);
+  while($lst = mysql_fetch_array($result)){
+    $tabS[] = $lst;
+  }
+  mysql_free_result($result);
+  return  $tabS;
 }
 
 
 
+
+
+
 function joueursSelection($selection){
-	global $conn;
-	global $sesUser, $ordre, $sens;
-  
-	$sql = "SELECT s.id,  s.id_joueur,  s.selection, j.* 
+  global $sesUser, $ordre, $sens;
+  $sql = "SELECT s.id,  s.id_joueur,  s.selection, j.* 
           FROM ht_selection s, ht_joueurs j 
           WHERE s.id_joueur = j.idJoueur 
           AND s.selection = '".$selection."'";
-	$sql .= "ORDER BY $ordre $sens";
+  $sql .= "ORDER BY $ordre $sens";
 
-	$tabs = array();
-	foreach($conn->query($sql) as $row){
-		array_push($tabS, $row);
-	}
-	return	$tabS;
+
+  $result= mysql_query($sql) or die(mysql_error()."\n".$sql);
+  while($lst = mysql_fetch_array($result)){
+    $tabS[] = $lst;
+  }
+  mysql_free_result($result);
+  return  $tabS;
 }
 
 
@@ -826,9 +824,9 @@ function calculNotePotentiel($joueur){
 
 
 function calculNoteDynamique($carac,$semaine,$coeff){
-	$sum = $coeff["coeffGardien"] + $coeff["coeffDefense"] + $coeff["coeffPasse"] +  $coeff["coeffAilier"]+$coeff["coeffConstruction"]+ $coeff["coeffButeur"]+$coeff["coeffEndurance"]+$coeff["coeffXp"];
+$sum = $coeff["coeffGardien"] + $coeff["coeffDefense"] + $coeff["coeffPasse"] +  $coeff["coeffAilier"]+$coeff["coeffConstruction"]+ $coeff["coeffButeur"]+$coeff["coeffEndurance"]+$coeff["coeffXp"];
 
-	$note =     (  
+$note =     (  
 
           (($carac["gardien"] + $semaine["gardien"] * 0.1) * $coeff["coeffGardien"])
       +      (($carac["defense"] + $semaine["defense"] * 0.1) * $coeff["coeffDefense"])
@@ -839,40 +837,33 @@ function calculNoteDynamique($carac,$semaine,$coeff){
       +   ($carac["endurance"] * $coeff["coeffEndurance"])
       +   ($carac["xp"] * $coeff["xp"]));
     
-    echo round($note/$sum,2);
+       echo round($note/$sum,2);
     
 }
 
 function getEntrainement($idJoueur){
-	global $conn;
 
-	$sql = "SELECT * FROM  ht_entrainement WHERE idJoueur_fk = $idJoueur";
-  
-	$result= $conn->query($sql);
-	$tabS = $result->fetch();
-	$result = NULL;
-
-	return  $tabS;
+$sql = "SELECT * FROM  ht_entrainement WHERE idJoueur_fk = $idJoueur";
+  $result= mysql_query($sql) or die(mysql_error()."\n".$sql);
+  $tabS = mysql_fetch_array($result);
+  mysql_free_result($result);
+  return  $tabS;
 }
 
 
 function  verifSelection($idJ){
-	global $conn;
 
-	$sql = "SELECT * FROM ht_selection WHERE id_joueur = $idJ";
-
-	$result= $conn->query($sql);
-	$tabS = $result->fetch();
+  $sql = "SELECT * FROM ht_selection WHERE id_joueur = $idJ";
+  $result= mysql_query($sql) or die(mysql_error()."\n".$sql);
+  $tabS = mysql_fetch_array($result);
   
-	$result = NULL;
-	return  $tabS["selection"];
+  mysql_free_result($result);
+  return  $tabS["selection"];
 }
 
 
 function toplist_new($position, $max, $ordre, $age, $debsaison, $nosaison){
-	global $conn;
-
-	$sql = "SELECT ht_joueurs.*, hte.*, cl1.nomClub as nomActuel 
+  $sql = "SELECT ht_joueurs.*, hte.*, cl1.nomClub as nomActuel 
           FROM (ht_joueurs ,ht_clubs cl1 ) 
                 LEFT JOIN ht_entrainement hte ON hte.idJoueur_fk = ht_joueurs.idJoueur 
           WHERE 
@@ -881,83 +872,81 @@ function toplist_new($position, $max, $ordre, $age, $debsaison, $nosaison){
           AND affJoueur = 1 
           AND archiveJoueur = 0 AND ";
 
-	$jouractuel = round((mktime(0,0,0,date("m"),date("d"),date("Y"))-574729200)/3600/24,0);
-	if ($age == "SUP") 
-	{
-		$sql .= getCalculAgeAnneeSQL()." > '20'  "; 
-	}
-	else if($age < 6) 
-	{
-		if ($nosaison % 2 == 0)
-		{
-			$max1 = 108;
-			$max2 = 106;
-		}
-		else
-		{
-			$max1 = 106;
-			$max2 = 108;
-		}
-		$jourj0 = ($debsaison+3600-574729200)/3600/24;
+  $jouractuel = round((mktime(0,0,0,date("m"),date("d"),date("Y"))-574729200)/3600/24,0);
+  if ($age == "SUP") 
+  {
+    $sql .= getCalculAgeAnneeSQL()." > '20'  "; 
+  }
+  else if($age < 6) 
+  {
+    if ($nosaison % 2 == 0)
+    {
+      $max1 = 108;
+      $max2 = 106;
+    }
+    else
+    {
+      $max1 = 106;
+      $max2 = 108;
+    }
+      $jourj0 = ($debsaison+3600-574729200)/3600/24;
     
-		if ($age == 1)
-		{
-			$datenaissmin = $jourj0 - 1796 - $max1;
-			$sql .= " datenaiss >= $datenaissmin  "; 
-		}
-		if ($age == 2)
-		{
-			$datenaissmin1 = $jourj0 - 1795 - $max1;
-			$datenaissmin = $jourj0 - 1908 - $max2;
-			$sql .= " datenaiss between $datenaissmin and $datenaissmin1  "; 
-		}
-		if ($age == 3)
-		{
-			$datenaissmin1 = $jourj0 - 1907 - $max2;
-			$datenaissmin = $jourj0 - 2020 - $max1;
-			$sql .= " datenaiss between $datenaissmin and $datenaissmin1  "; 
-		}
-		if ($age == 4)
-		{
-			$datenaissmin1 = $jourj0 - 2019 - $max1;
-			$datenaissmin = $jourj0 - 2132 - $max2;
-			$sql .= " datenaiss between $datenaissmin and $datenaissmin1  "; 
-		}
-		if ($age == 5)
-		{
-			$datenaissmin = $jourj0 - 2132 - $max2;
-			$jourmax = $jouractuel - 21 * 112;
-			$sql .= " datenaiss < $datenaissmin and datenaiss > $jourmax "; 
-		}
-	}
-	else if (strpos($age,"|"))
-	{
-		$age2 = explode("|",$age);
-		$jour1 = intval($age2[1]) - 56;
-		$sql .= getCalculAgeAnneeSQL()." = '".$age2[0]."'  and ".getCalculAgeJourSQL()." between ".$jour1." and ".$age2[1]."  ";
-	}
-	else
-	{
-		$datenaissmin = $jouractuel - intval($age) * 112 - 1;
-		$jourmax = $jouractuel - (intval($age)+1) * 112;
-		$sql .= " datenaiss < $datenaissmin and datenaiss > $jourmax "; 
-	}
+    if ($age == 1)
+    {
+      $datenaissmin = $jourj0 - 1796 - $max1;
+      $sql .= " datenaiss >= $datenaissmin  "; 
+    }
+    if ($age == 2)
+    {
+      $datenaissmin1 = $jourj0 - 1795 - $max1;
+      $datenaissmin = $jourj0 - 1908 - $max2;
+      $sql .= " datenaiss between $datenaissmin and $datenaissmin1  "; 
+    }
+    if ($age == 3)
+    {
+      $datenaissmin1 = $jourj0 - 1907 - $max2;
+      $datenaissmin = $jourj0 - 2020 - $max1;
+      $sql .= " datenaiss between $datenaissmin and $datenaissmin1  "; 
+    }
+    if ($age == 4)
+    {
+      $datenaissmin1 = $jourj0 - 2019 - $max1;
+      $datenaissmin = $jourj0 - 2132 - $max2;
+      $sql .= " datenaiss between $datenaissmin and $datenaissmin1  "; 
+    }
+    if ($age == 5)
+    {
+      $datenaissmin = $jourj0 - 2132 - $max2;
+      $jourmax = $jouractuel - 21 * 112;
+      $sql .= " datenaiss < $datenaissmin and datenaiss > $jourmax "; 
+    }
+  }
+  else if (strpos($age,"|"))
+  {
+    $age2 = explode("|",$age);
+    $jour1 = intval($age2[1]) - 56;
+    $sql .= getCalculAgeAnneeSQL()." = '".$age2[0]."'  and ".getCalculAgeJourSQL()." between ".$jour1." and ".$age2[1]."  ";
+  }
+  else
+  {
+    $datenaissmin = $jouractuel - intval($age) * 112 - 1;
+    $jourmax = $jouractuel - (intval($age)+1) * 112;
+    $sql .= " datenaiss < $datenaissmin and datenaiss > $jourmax "; 
+  }
      
-	$sql .= "ORDER BY ".$ordre." DESC";
-	$sql .= " LIMIT 0,$max";
+  $sql .= "ORDER BY ".$ordre." DESC";
+  $sql .= " LIMIT 0,$max";
 
-	$tabS = array();
-	foreach($conn->query($sql) as $row){
-		array_push($tabS, $row);
-	}
-	return	$tabS;
+  $result= mysql_query($sql) or die(mysql_error()."\n".$sql);
+  while($lst = mysql_fetch_array($result)){
+    $tabS[] = $lst;
+  }
+  return $tabS;
 }
 
 
 function toplist_potentiels($position, $max, $ordre, $age){
-	global $conn;
-
-	$sql = "SELECT 
+  $sql = "SELECT 
               ht_joueurs.*, 
               hte.*, htnp.*, 
               cl1.nomClub as nomActuel 
@@ -973,11 +962,11 @@ function toplist_potentiels($position, $max, $ordre, $age){
           ORDER BY ".$ordre." DESC 
           LIMIT 0,$max";
 
-	$tabS = array();
-	foreach($conn->query($sql) as $row){
-		array_push($tabS, $row);
-	}
-	return	$tabS;
+  $result= mysql_query($sql) or die(mysql_error()."\n".$sql);
+  while($lst = mysql_fetch_array($result)){
+    $tabS[] = $lst;
+  }
+  return $tabS;
 }
 
 
@@ -1054,8 +1043,7 @@ function checkCarac($player,$carac,$level){
 /******************************************************************************/
 function validateMinimaPlayer($player,$todaySeason)
 {
-	require("nomTables.inc.php");
-	global $conn;
+  require("nomTables.inc.php");
 
   $age=ageetjour($player["datenaiss"],"2");
   $week = floor($age["jourJoueur"]/7);
@@ -1067,22 +1055,22 @@ function validateMinimaPlayer($player,$todaySeason)
   }
   //echo("<br /> player=".$player['nomJoueur']."-".$age["ageJoueur"]." ans ".$age["jourJoueur"]." jours-".$sql);
 
-  $reqValid = $conn->query($sql);
+  $reqValid = mysql_query($sql) or die(mysql_error()."\n".$sql);
   
   if (!$reqValid) {
     return -1;
   } else {
-    if($reqValid->rowCount() == 0){
+    if(mysql_num_rows($reqValid) == 0){
       //** ATTENTION! dans ce cas, les joueurs sont tous acceptes, soit la semaine n'est pas valide (>16 ou negative)
       return -2;
-    } elseif ($reqValid->rowCount() > 0) {
+    } elseif (mysql_num_rows($reqValid) > 0) {
       $i=0;
-      while($i<$reqValid->rowCount()) {
-        $lstReq[$i] = $reqValid->fetch();
+      while($i<mysql_num_rows($reqValid)) {
+        $lstReq[] = mysql_fetch_array($reqValid);
         $i++;
       }
   	}
-    $reqValid=NULL;
+    mysql_free_result($reqValid);
   }
   
   $result=-1;
@@ -1106,9 +1094,8 @@ function validateMinimaPlayer($player,$todaySeason)
 
 
 function majCaracJoueur($joueur){
-	global $conn;
 
-	$sql = 'UPDATE ht_joueurs SET
+$sql = 'UPDATE ht_joueurs SET
       scoreGardien = "'.$joueur["score"]["gardien"].'", 
       scoreDefense  = "'.$joueur["score"]["defense"].'", 
       scoreDefCentralOff  = "'.$joueur["score"]["defCentralOff"].'", 
@@ -1125,7 +1112,7 @@ function majCaracJoueur($joueur){
       scoreAttaquantDef = "'.$joueur["score"]["attaquantDef"].'"
     WHERE idJoueur = "'.$joueur["idJoueur"].'"';
     
-    $result= $conn->exec($sql);
+    $result= mysql_query($sql) or die(mysql_error()."\n".$sql);
 
     $sql = 'UPDATE ht_entrainement SET 
       nbSemaineConstruction = "'.$joueur["nbSemaineConstruction"].'",
@@ -1135,7 +1122,7 @@ function majCaracJoueur($joueur){
       nbSemainePasses= "'.$joueur["nbSemainePasses"].'",
       nbSemaineDefense = "'.$joueur["nbSemaineDefense"].'"
       WHERE idJoueur_fk = "'.$joueur["idJoueur"].'"';
-    $result= $conn->exec($sql);
+    $result= mysql_query($sql) or die(mysql_error()."\n".$sql);
     
     $sql = 'UPDATE ht_notes_potentiel SET
       noteGardien = "'.$joueur["scorePotentiel"]["gardien"].'",
@@ -1145,7 +1132,7 @@ function majCaracJoueur($joueur){
       noteAilier = "'.$joueur["scorePotentiel"]["ailier"].'",
       noteAttaquant = "'.$joueur["scorePotentiel"]["attaquant"].'"
       WHERE idJoueur_fk = "'.$joueur["idJoueur"].'"';
-    $result= $conn->exec($sql);
+    $result= mysql_query($sql) or die(mysql_error()."\n".$sql);
 }
 
 
@@ -1167,42 +1154,41 @@ function majCaracJoueur($joueur){
 /******************************************************************************/
 function delJoueur($joueurDTN)
 {
-	global $conn;
-	$sql = "DELETE FROM  ht_entrainement WHERE idJoueur_fk = '".$joueurDTN["idJoueur"]."' ";
-	$req = $conn->exec($sql);
-
-	$sql = "DELETE FROM  ht_histomodif WHERE idJoueur_fk = '".$joueurDTN["idJoueur"]."'";
-	$req = $conn->exec($sql);
-
-	$sql = "DELETE FROM  ht_perfs_individuelle WHERE id_joueur = '".$joueurDTN["idHattrickJoueur"]."'";
-	$req = $conn->exec($sql);
-
-	$sql = "DELETE FROM  ht_joueurs_histo WHERE id_joueur_fk = '".$joueurDTN["idHattrickJoueur"]."'";
-	$req = $conn->exec($sql);
-
-	$sql = "DELETE FROM  ht_clubs_histo_joueurs WHERE id_joueur = '".$joueurDTN["idJoueur"]."'";
-	$req = $conn->exec($sql);
-
-	// Insertion dans la table ht_obsolete_players
-	$_POST["dateSuppression"] = date('Y-m-d H:i');
-	$_POST["loginAdmin"] = $sesUser["loginAdmin"];
-	$_POST["idHattrickJoueur"] = $joueurDTN["idHattrickJoueur"];
-	$_POST["idEndurance"] = $joueurDTN["idEndurance"];
-	$_POST["idGardien"] = $joueurDTN["idGardien"];
-	$_POST["idConstruction"] = $joueurDTN["idConstruction"];
-	$_POST["idPasse"] = $joueurDTN["idPasse"];
-	$_POST["idAilier"] = $joueurDTN["idAilier"];
-	$_POST["idDefense"] = $joueurDTN["idDefense"];
-	$_POST["idButeur"] = $joueurDTN["idButeur"];
-	$_POST["idPA"] = $joueurDTN["idPA"];
-	$_POST["optionJoueur"] = $joueurDTN["optionJoueur"];
-	$_POST["ageJoueur"] = $joueurDTN["ageJoueur"];
-	$_POST["dateDerniereModifJoueur"] = $joueurDTN["dateDerniereModifJoueur"];
-
-	$sql = insertDB("ht_obsolete_players");
-
-	$sql = "DELETE FROM  ht_joueurs WHERE idJoueur = '".$joueurDTN["idJoueur"]."'";
-	$req = $conn->exec($sql);
+  $sql = "DELETE FROM  ht_entrainement WHERE idJoueur_fk = '".$joueurDTN["idJoueur"]."' ";
+  $req= mysql_query($sql) or die(mysql_error()."\n".$sql);
+  
+  $sql = "DELETE FROM  ht_histomodif WHERE idJoueur_fk = '".$joueurDTN["idJoueur"]."'";
+  $req= mysql_query($sql) or die(mysql_error()."\n".$sql);
+  
+  $sql = "DELETE FROM  ht_perfs_individuelle WHERE id_joueur = '".$joueurDTN["idHattrickJoueur"]."'";
+  $req= mysql_query($sql) or die(mysql_error()."\n".$sql);
+  
+  $sql = "DELETE FROM  ht_joueurs_histo WHERE id_joueur_fk = '".$joueurDTN["idHattrickJoueur"]."'";
+  $req= mysql_query($sql) or die(mysql_error()."\n".$sql);
+  
+  $sql = "DELETE FROM  ht_clubs_histo_joueurs WHERE id_joueur = '".$joueurDTN["idJoueur"]."'";
+  $req= mysql_query($sql) or die(mysql_error()."\n".$sql);
+  
+  // Insertion dans la table ht_obsolete_players
+  $_POST["dateSuppression"] = date('Y-m-d H:i');
+  $_POST["loginAdmin"] = $sesUser["loginAdmin"];
+  $_POST["idHattrickJoueur"] = $joueurDTN["idHattrickJoueur"];
+  $_POST["idEndurance"] = $joueurDTN["idEndurance"];
+  $_POST["idGardien"] = $joueurDTN["idGardien"];
+  $_POST["idConstruction"] = $joueurDTN["idConstruction"];
+  $_POST["idPasse"] = $joueurDTN["idPasse"];
+  $_POST["idAilier"] = $joueurDTN["idAilier"];
+  $_POST["idDefense"] = $joueurDTN["idDefense"];
+  $_POST["idButeur"] = $joueurDTN["idButeur"];
+  $_POST["idPA"] = $joueurDTN["idPA"];
+  $_POST["optionJoueur"] = $joueurDTN["optionJoueur"];
+  $_POST["ageJoueur"] = $joueurDTN["ageJoueur"];
+  $_POST["dateDerniereModifJoueur"] = $joueurDTN["dateDerniereModifJoueur"];
+  
+  $sql = insertDB("ht_obsolete_players");
+  
+  $sql = "DELETE FROM  ht_joueurs WHERE idJoueur = '".$joueurDTN["idJoueur"]."'";
+  $req= mysql_query($sql) or die(mysql_error()."\n".$sql);
 }
 
 
@@ -1219,13 +1205,11 @@ function delJoueur($joueurDTN)
 /********************************************************************************************/
 function updateDateScanMatchJoueur($idHTJoueur)
 {
-	global $conn;
-
-	$sql='UPDATE ht_joueurs 
+  $sql='UPDATE ht_joueurs 
         SET dateLastScanMatch=\''.date("Y-m-d H:i:s").'\' 
         WHERE idHattrickJoueur=\''.$idHTJoueur.'\' LIMIT 1';
   
-	$reqValid= $conn->exec($sql);
+  $reqValid= mysql_query($sql) or die(mysql_error()."\n".$sql);
 
   if (!$reqValid) {
     return false;
@@ -1508,7 +1492,6 @@ function getDataJoueursSelectionsFromHT_usingPHT($idNT){
 /* - ./form.php cas ajoutJoueur                                               */
 /******************************************************************************/
 function ajoutJoueur($ht_user,$role_user,$joueurHT,$joueurDTN,$posteAssigne) {
-	global $conn;
 
   require($_SERVER['DOCUMENT_ROOT'].'/dtn/interface/includes/nomTables.inc.php');
   
@@ -1626,12 +1609,12 @@ function ajoutJoueur($ht_user,$role_user,$joueurHT,$joueurDTN,$posteAssigne) {
     $sql .= ",'".$joueurHT['salary']."'";
     $sql .= " ) ";
      
-    $reqValid= $conn->exec($sql);
+    $reqValid= mysql_query($sql) or die(mysql_error()."\n".$sql);
     
     if (!$reqValid) {
       return false;
     } else {
-      $resu['idJoueur']=$conn->lastInsertId();
+      $resu['idJoueur']=mysql_insert_id();
     }
 
 
@@ -1640,12 +1623,12 @@ function ajoutJoueur($ht_user,$role_user,$joueurHT,$joueurDTN,$posteAssigne) {
     $sql = "INSERT INTO $tbl_entrainement (idJoueur_fk, valeurEnCours) 
             VALUES ('".$resu['idJoueur']."','".$joueurHT['tsi']."') ";
 
-    $reqValid= $conn->exec($sql);
+    $reqValid= mysql_query($sql) or die(mysql_error()."\n".$sql);
 
     if (!$reqValid) {
       return false;
     } else {
-      $resu['idEntrainement']=$conn->lastInsertId();
+      $resu['idEntrainement']=mysql_insert_id();
     }
 
     //******* INSERT dans la table HT_NOTES_POTENTIEL *******//
@@ -1684,12 +1667,12 @@ function ajoutJoueur($ht_user,$role_user,$joueurHT,$joueurDTN,$posteAssigne) {
                         '".date("H:i")."',
                         'Joueur cree automatiquement par ".$ht_user."(".$lib_role.") ".$histo."') ";
 
-    $reqValid= $conn->exec($sqlhisto);
+    $reqValid= mysql_query($sqlhisto) or die(mysql_error()."\n".$sqlhisto);
     
     if (!$reqValid) {
       return false;
     } else {
-      $resu['idHisto']=$conn->lastInsertId();
+      $resu['idHisto']=mysql_insert_id();
     }
     
     
@@ -1742,7 +1725,6 @@ function ajoutJoueur($ht_user,$role_user,$joueurHT,$joueurDTN,$posteAssigne) {
 /*           - ./dtn/interface/includes/serviceJoueur.php                     */
 /******************************************************************************/
 function updateJoueur($joueur) {
-	global $conn;
 
   require($_SERVER['DOCUMENT_ROOT'].'/dtn/interface/includes/nomTables.inc.php');
   
@@ -1797,8 +1779,10 @@ function updateJoueur($joueur) {
   if (isset($joueur['salary']))                   {$sql.="salary = '".$joueur['salary']."',";}
   if (isset($club["dateLastScanMatch"]))          {$sql.="dateLastScanMatch = '".$club["dateLastScanMatch"]."',";}
   $sql=substr($sql,0,strlen($sql)-1);
-  $sql.=" WHERE idJoueur  = ".$joueur["idJoueur"];
-  $reqValid= $conn->exec($sql);
+  $sql.=" WHERE
+            idJoueur  = ".$joueur["idJoueur"]
+        ;
+  $reqValid= mysql_query($sql) or die(mysql_error()."\n".$sql);
 
   if (!$reqValid) {
     return false;
@@ -1821,7 +1805,6 @@ function updateJoueur($joueur) {
 /*           - ./dtn/interface/includes/serviceJoueur.php                     */
 /******************************************************************************/
 function updateEntrainement($entrainement) {
-	global $conn;
 
   require($_SERVER['DOCUMENT_ROOT'].'/dtn/interface/includes/nomTables.inc.php');
   
@@ -1834,8 +1817,10 @@ function updateEntrainement($entrainement) {
   if (isset($entrainement['nbSemaineDefense']))       {$sql.="nbSemaineDefense = '".$entrainement['nbSemaineDefense']."',";}
   if (isset($entrainement['valeurEnCours']))          {$sql.="valeurEnCours = '".$entrainement['valeurEnCours']."',";}
   $sql=substr($sql,0,strlen($sql)-1);
-  $sql.=" WHERE idJoueur_fk  = ".$entrainement["idJoueur_fk"];
-  $reqValid= $conn->exec($sql);
+  $sql.=" WHERE
+            idJoueur_fk  = ".$entrainement["idJoueur_fk"]
+        ;
+  $reqValid= mysql_query($sql) or die(mysql_error()."\n".$sql);
 
   if (!$reqValid) {
     return false;
@@ -1870,7 +1855,6 @@ function updateEntrainement($entrainement) {
 /* - ..\maj\majJoueursArchives.php                                            */
 /******************************************************************************/
 function majJoueur($ht_user,$role_user,$joueurHT,$joueurDTN){
-	global $conn;
 
   unset($update_joueur);
 
@@ -2264,7 +2248,6 @@ function majJoueur($ht_user,$role_user,$joueurHT,$joueurDTN){
 /*           - ./dtn/interface/includes/serviceJoueur.php                     */
 /******************************************************************************/
 function getDataJoueurHisto($joueurHT,$actualSeason=null) {
-	global $conn;
 
   require($_SERVER['DOCUMENT_ROOT'].'/dtn/interface/includes/nomTables.inc.php');
 
@@ -2280,10 +2263,11 @@ function getDataJoueurHisto($joueurHT,$actualSeason=null) {
           AND C.idPays_fk = P.idPays
           LIMIT 1";
 
-    $result= $conn->query($sql);
-    $tabS = $result->fetch();
+    $result= mysql_query($sql) or die(mysql_error()."\n".$sql);
+    $tabS = mysql_fetch_array($result);
     $coef=$tabS[0]["coefSalary"];
-    $result=NULL;
+    mysql_free_result($result);
+    unset($result);
     unset($sql);
     unset($tabS);
   } else { // teamid introuvable car le joueur n'a plus de club
@@ -2329,7 +2313,6 @@ function getDataJoueurHisto($joueurHT,$actualSeason=null) {
 /*           - ./dtn/interface/includes/serviceJoueur.php                     */
 /******************************************************************************/
 function updateJoueurHisto($row_joueurs_histo) {
-	global $conn;
 
   require($_SERVER['DOCUMENT_ROOT'].'/dtn/interface/includes/nomTables.inc.php');
 
@@ -2348,7 +2331,7 @@ function updateJoueurHisto($row_joueurs_histo) {
   $sql.=" WHERE
             id_joueur_histo  = ".$row_joueurs_histo["id_joueur_histo"]
         ;
-  $reqValid= $conn->exec($sql);
+  $reqValid= mysql_query($sql) or die(mysql_error()."\n".$sql);
 
   if (!$reqValid) {
     return false;
@@ -2372,7 +2355,6 @@ function updateJoueurHisto($row_joueurs_histo) {
 /*           - ./dtn/interface/includes/serviceJoueur.php                     */
 /******************************************************************************/
 function insertJoueurHisto($row_joueurs_histo){
-	global $conn;
 
   require($_SERVER['DOCUMENT_ROOT'].'/dtn/interface/includes/nomTables.inc.php');
 
@@ -2408,7 +2390,7 @@ function insertJoueurHisto($row_joueurs_histo){
               $row_joueurs_histo["transferListed"]."
         )";
 
- $reqValid= $conn->exec($sql);
+ $reqValid= mysql_query($sql) or die(mysql_error()."\n".$sql);
   
   if (!$reqValid) {
     return -1;
@@ -2433,7 +2415,6 @@ function insertJoueurHisto($row_joueurs_histo){
 /*           - ./includes/serviceJoueur.php                                   */
 /******************************************************************************/
 function existHistoJoueur($idHTjoueur,$season,$week){
-	global $conn;
 
   require($_SERVER['DOCUMENT_ROOT'].'/dtn/interface/includes/nomTables.inc.php');
 	  
@@ -2444,9 +2425,9 @@ function existHistoJoueur($idHTjoueur,$season,$week){
           AND   week='.$week.' 
           LIMIT 1';
 	
-  $result= $conn->query($sql);
-  $tabS = $result->fetch();
-  $result = NULL;
+  $result= mysql_query($sql) or die(mysql_error()."\n".$sql);
+  $tabS = mysql_fetch_array($result);
+  mysql_free_result($result);
   
 	return $tabS;
 }
@@ -2465,10 +2446,9 @@ function existHistoJoueur($idHTjoueur,$season,$week){
 /* - dtn/interface/includes/serviceJoueurs.php (getDataUnJoueurFromHT_usingPHT*/
 /******************************************************************************/
 function marqueJoueurDisparuHT($joueurDTN){
-	global $conn;
   // Joueur n'existe plus
   $sql="UPDATE ht_joueurs SET joueurActif=0 WHERE idJoueur='".$joueurDTN["idJoueur"]."' LIMIT 1";
-  $reqValid= $conn->exec($sql);
+  $reqValid= mysql_query($sql) or die(mysql_error()."\n".$sql);
   unset($sql);
 
   if (!$reqValid) {
@@ -2486,7 +2466,7 @@ function marqueJoueurDisparuHT($joueurDTN){
                         '".date("Y-m-d")."',
                         '".date("H:i:s")."',
                         '[MAJ auto](hattrick) Joueur introuvable sur HT')";
-      $reqValid= $conn->exec($sqlhisto);
+      $reqValid= mysql_query($sqlhisto) or die(mysql_error()."\n".$sqlhisto);
       unset($sqlhisto);
       unset($reqValid);
   
