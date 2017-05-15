@@ -3,7 +3,7 @@
 
 
 function deconnect(){
-	$conn = NULL;
+	//$conn = NULL;
 }
 
 

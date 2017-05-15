@@ -294,8 +294,8 @@ require("../menu/menuJoueur.php");
 			
 			}
 $sql =  "select * from $tbl_caracteristiques where numCarac = ".$val;
-$req = mysql_query($sql);
-$res = mysql_fetch_array($req);
+$req = $conn->query($sql);
+$res = $req->fetch();
 		
 			
 			?><td width = 25%><b><?=$int?> :</B></td><td width = 25%>&nbsp;<?=$res["intituleCaracFR"]?> <?=$nbSemaineE?></td><?php	
@@ -336,8 +336,8 @@ if($sesUser["idNiveauAcces"] == 2 ||  $sesUser["idNiveauAcces"] == 1)
 {
 // verif si joueur déjà rentrer :
                  $sql = "select * from ht_iiihelp_joueur where etat = 0 and id_HT = ".$infJ["idHattrickJoueur"];
-                 $req=  mysql_query($sql);
-				 if ($res = mysql_fetch_array($req))
+                 $req =  $conn->query($sql);
+				 if ($res = $req->fetch())
 				 {?>
 					Le joueur est d&eacute;j&agrave; dans la table des ventes et les mails ne sont pas envoy&eacute;s !
 				<?php }

@@ -64,7 +64,7 @@ if ($sesUser["selection"]== "A"){
 }
 $sql .= " and affJoueur = 1  order by $ordre $sens";
 
-$reqJoueurs = mysql_query($sql);
+$reqJoueurs = $conn->query($sql);
 
 
 switch($affPosition){
@@ -482,13 +482,13 @@ if ($masque=="on"){
                   <td width="43" ><div align="center"><font color="#FFFFFF">Sel.</font></div></td>
             </tr>
                 
-				             <?php
-				$lst = 1;
+	<?php
+	$lst = 1;
 			 
-			while($lstJoueurs = mysql_fetch_array($reqJoueurs)){
+	foreach($reqJoueurs as $lstJoueurs){
 			
 			  
-			  $infTraining = getEntrainement($lstJoueurs["idJoueur"]);
+		$infTraining = getEntrainement($lstJoueurs["idJoueur"]);
 			  
 		switch($lst){
 			case 1:
@@ -500,45 +500,43 @@ if ($masque=="on"){
 			$bgcolor = "white";
 			$lst = 1;
 			break;
-			}
+		}
 			
 		
 
 
 
 
- $val = array($lstJoueurs["scoreGardien"],$lstJoueurs["scoreDefense"],$lstJoueurs["scoreAilierDef"],$lstJoueurs["scoreAilierOff"],$lstJoueurs["scoreWtm"],$lstJoueurs["scoreMilieu"],$lstJoueurs["scoreMilieuOff"],$lstJoueurs["scoreAttaquant"]);
-sort($val);
-$valMax =  $val[7];
-$val2 = $val[6];
+		$val = array($lstJoueurs["scoreGardien"],$lstJoueurs["scoreDefense"],$lstJoueurs["scoreAilierDef"],$lstJoueurs["scoreAilierOff"],$lstJoueurs["scoreWtm"],$lstJoueurs["scoreMilieu"],$lstJoueurs["scoreMilieuOff"],$lstJoueurs["scoreAttaquant"]);
+		sort($val);
+		$valMax =  $val[7];
+		$val2 = $val[6];
 			  
-			  $class = "#";
-			  $quinze = 60 * 60 * 24 * 15;
-			  $trente = 60 * 60 * 24 * 30;
-			 
-			 
-			 $date = explode("-",$lstJoueurs["dateDerniereModifJoueur"]);
-			 
-			 // Date de la dernier modif de ce joueur
-			  $mkJoueur =  mktime(0,0,0,$date[1],$date[2],$date[0]); 
-			  
-			  // Date du jour
-			 $mkDay = mktime(0,0,0,date('m'), date('d'),date('Y'));
-			 $d1 =  $mkDay - $quinze;
-			 $d2 =  $mkDay - $trente;
-			 
-			if($mkJoueur >  $d1) $class= "#"; 
-			else if( $mkJoueur > $d2 && $mkJoueur < $d1 ) $class = "style3";	
-			else if($mkJoueur < $d2) $class = "style4";
-			 
-			 
-			 if($settings["useit"] == 1){
-			 $lstJoueurs["scoreGardien"] = 5;
-			}
+		$class = "#";
+		$quinze = 60 * 60 * 24 * 15;
+		$trente = 60 * 60 * 24 * 30;
 
+
+		$date = explode("-",$lstJoueurs["dateDerniereModifJoueur"]);
+			 
+		// Date de la dernier modif de ce joueur
+		$mkJoueur =  mktime(0,0,0,$date[1],$date[2],$date[0]); 
+
+		// Date du jour
+		$mkDay = mktime(0,0,0,date('m'), date('d'),date('Y'));
+		$d1 =  $mkDay - $quinze;
+		$d2 =  $mkDay - $trente;
+
+		if($mkJoueur >  $d1) $class= "#"; 
+		else if( $mkJoueur > $d2 && $mkJoueur < $d1 ) $class = "style3";	
+		else if($mkJoueur < $d2) $class = "style4";
 			 
 			 
-			  ?>
+		if($settings["useit"] == 1){
+		$lstJoueurs["scoreGardien"] = 5;
+	}
+
+	?>
 	  <tr bgcolor = "<?=$bgcolor?>" align="right">  
                     <td align="left" >&nbsp;<a href ="<?=$url?>/joueurs/fiche.php?id=<?=$lstJoueurs["idJoueur"]?>" class=<?=$class?>>
                     <span class=<?=$class?>><b><?=strtolower($lstJoueurs["nomJoueur"])?></b><?=strtolower($lstJoueurs["prenomJoueur"])?>

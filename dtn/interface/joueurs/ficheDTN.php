@@ -12,9 +12,9 @@ global $mode;
 global $sesUser;
 
 if(!$sesUser["idAdmin"])
-	{
+{
 	header("location: index.php?ErrorMsg=Session Expiree");
-	}
+}
 
 if (isset($htid))
 {

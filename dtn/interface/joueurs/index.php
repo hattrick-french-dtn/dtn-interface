@@ -508,14 +508,11 @@ else return true;
                   <td width="1" bgcolor="#000000"><div align="center"><strong><img src="../images/spacer.gif" width="1" height="1"></strong></div></td>
                   <td width="132"><div align="center"><strong>Archiver</strong></div></td>
                 </tr>
-                <?php
-				
-				$lst = 1;
-			$reqJ = mysql_query($sqlJ);
-			while($lstJoueurs = mysql_fetch_array($reqJ)){
+		<?php
+		
+		$lst = 1;
 
-
-
+		foreach($conn->query($sqlJ) as $lstJoueurs){
 
 			switch($lst){
 			case 1:

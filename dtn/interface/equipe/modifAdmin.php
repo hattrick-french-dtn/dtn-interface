@@ -69,12 +69,11 @@ $infDTN = getDTN($idAdmin);
                   <td height="20"><select name="idNiveauAcces_fk" >
 				  <?php
 				$sql = "select * from $tbl_niveauAcces WHERE idNiveauAcces != 1";
-				$req = mysql_query($sql);
 				
 				
-				while($lstNA = mysql_fetch_array($req)){
-				  if($lstNA["idNiveauAcces"] == $infDTN["idNiveauAcces_fk"]) $etat = "selected"; else $etat = "";
-				  echo "<option value = ".$lstNA["idNiveauAcces"]." $etat>".$lstNA["IntituleNiveauAcces"]."</option>";
+				foreach($conn->query($sql) as $lstNA){
+					if($lstNA["idNiveauAcces"] == $infDTN["idNiveauAcces_fk"]) $etat = "selected"; else $etat = "";
+					echo "<option value = ".$lstNA["idNiveauAcces"]." $etat>".$lstNA["IntituleNiveauAcces"]."</option>";
 				
 				}
 				  

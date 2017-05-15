@@ -33,8 +33,8 @@ switch($sesUser["idNiveauAcces"]){
 $infDTN = getDTN($dtn);
 
 
-$sql = mysql_query("select * from $tbl_histomodif, $tbl_admin where idAdmin = $dtn and idAdmin = idAdmin_fk ");
-$numMaxHisto = mysql_num_rows($sql);
+$sql = $conn->query("select * from $tbl_histomodif, $tbl_admin where idAdmin = $dtn and idAdmin = idAdmin_fk ");
+$numMaxHisto = $sql->rowCount();
 
 
 
@@ -102,10 +102,9 @@ $prev = $numEnr-$nbParPage;
         <td height="1" bgcolor="#000000"><img src="../images/spacer.gif" width="1" height="1"></td>
       </tr>
       <?php
-	  $sql = "select * from $tbl_histomodif, $tbl_admin where idAdmin = $dtn and idAdmin = idAdmin_fk order by dateHisto desc, heureHisto desc ";
-  	  $sql .= " limit $numEnr, $nbParPage";
-	  $req = mysql_query($sql);
-		while($l = mysql_fetch_array($req)){
+		$sqls = "select * from $tbl_histomodif, $tbl_admin where idAdmin = $dtn and idAdmin = idAdmin_fk order by dateHisto desc, heureHisto desc ";
+		$sqls .= " limit $numEnr, $nbParPage";
+		foreach($conn->query($sqls) as $l){
 		   
 		   
 		   ?>

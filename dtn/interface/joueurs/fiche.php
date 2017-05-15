@@ -298,16 +298,13 @@ if ($datemaj >$mkday -$huit){
                     } else {
                       $sql = "select * from $tbl_admin where idPosition_fk = ".$joueurDTN["ht_posteAssigne"]." AND affAdmin = 1 ";
                     }
-                    $req = mysql_query($sql);
-                    while($lst = mysql_fetch_array($req)){
-                    $lstDtn[] = $lst;
-                    }
-                    foreach($lstDtn as $lstDtn){
-                      echo "<option value = ".$lstDtn["idAdmin"]." $etat >".$lstDtn["loginAdmin"]."";
-                      if($total[$lstDtn["idAdmin"]] != 0){
-                         echo " (".$total[$lstDtn["idAdmin"]].")";
-                      }
-                      "</option>";
+                    $req = ;
+                    foreach($conn->query($sql) as $lst){
+						echo "<option value = ".$lst["idAdmin"]." $etat >".$lst["loginAdmin"]."";
+						if($total[$lst["idAdmin"]] != 0){
+							echo " (".$total[$lst["idAdmin"]].")";
+						}
+						echo "</option>";
                     }
                     ?>
                     </select>

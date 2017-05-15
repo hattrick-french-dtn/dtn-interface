@@ -38,10 +38,11 @@ if (isset($_POST['action']) && $_POST['action']=="ajoutCommentaire")
 /******************************************************************************/
 // Initialisation variables
 $scan_code=0;
-  
+$teams = array();
 // Récupération de la liste des joueurs
 $list_joueur_HT = getDataMesJoueursFromHT_usingPHT($_SESSION['HT']->getTeam()->getTeamId());
-$teamID1 = $_SESSION['HT']->getTeam()->getTeamId();
+$team1 = ('id' => $_SESSION['HT']->getTeam()->getTeamId(), 'name' => $_SESSION['HT']->getTeam()->getTeamName());
+array_push($teams, $team1);
 // Si c'est la première visite avec ce browser
 if ((isset($_SESSION['newVisit']) && $_SESSION['newVisit']==1))  
 { // On met à jour les informations clubs et les informations joueurs 
@@ -80,8 +81,7 @@ else
 /******************************************************************************/
 /*      GESTION AFFICHAGE LISTE JOUEURS                                       */
 /******************************************************************************/
-$nomeq = $_SESSION['HT']->getTeam()->getTeamName();
-echo"<font size=\"4\" color=\"red\" face=\"Century Gothic\"><U>$nomeq</U></font>";
+echo"<font size=\"4\" color=\"red\" face=\"Century Gothic\"><U>$team1['name']</U></font>";
 
 if (isset($resuScan) && $resuScan!=false) 
 {
@@ -180,13 +180,14 @@ unset($resuScan);
 $msg = "";
 $userId = $_SESSION['HT']->getClub()->getUserId();
 $teamNb = $_SESSION['HT']->getNumberOfTeams($userId);
-for ($tsidx=$teamNb; $tsidx >= 0; $tsidx--) {
+for ($tsidx=$teamNb-1; $tsidx >= 0; $tsidx--) {
 	$team2 = $_SESSION['HT']->getSecondaryTeam($userId, $tsidx);
 	if ($team2 != null)
 	{
 	  // Récupération de la liste des joueurs
 	  $list_joueur_HT = getDataMesJoueursFromHT_usingPHT($team2->getTeamId());
-	  $teamID2 = $team2->getTeamId();
+	  $teamid2 = ('id' => $team2->getTeamId(), 'name' => $team2->getTeamName());
+	  array_push($teams, $teamid2);
 	  
 	  // Si c'est la première visite avec ce browser
 	  if ((isset($_SESSION['newVisit']) && $_SESSION['newVisit']==1))  
@@ -224,8 +225,7 @@ for ($tsidx=$teamNb; $tsidx >= 0; $tsidx--) {
 	  /******************************************************************************/
 	  /*      GESTION AFFICHAGE LISTE JOUEURS                                       */
 	  /******************************************************************************/
-	  $nomeq2 = $team2->getTeamName();
-	  echo"<font size=\"4\" color=\"red\" face=\"Century Gothic\"><U>$nomeq2</U></font>";
+	  echo"<font size=\"4\" color=\"red\" face=\"Century Gothic\"><U>$teamid2['name']</U></font>";
 	  
 	  if (isset($resuScan) && $resuScan!=false) 
 	  {
@@ -362,6 +362,10 @@ if ($idClubComment != "")
    <?=AJOUT_COMMENTAIRE?><br />
    <form name="form_comment" method="post" action="<?=$_SERVER['PHP_SELF']."?lang=".$_SESSION['lang']?>" onSubmit="return verifComment();">
    <?php
+	foreach($teamIDs as $teamId)
+	{
+		
+	}
       if ($teamID2 == "")
       {
 ?>

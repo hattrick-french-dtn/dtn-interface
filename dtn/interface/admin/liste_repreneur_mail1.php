@@ -123,7 +123,7 @@ switch($sesUser["idNiveauAcces"]){
     <td><?=$res->idPA?> </td>
   </tr>
 </table>
-<form name="form1" method="post" action="../mailing/liste_repreneur_mail.php?training=<?=$training?>" onsubmit="lockSubmit()">
+<form name="form1" method="post" action="../mailing/liste_repreneur_mail.php?id_HT=<?=$id_HT?>&training=<?=$training?>" onsubmit="lockSubmit()">
   <table border="1" cellpadding="4" cellspacing="0" bordercolor="#000000">
     <tr>
       <td bgcolor="#000000"><font color="#FFFFFF">club </font></td>

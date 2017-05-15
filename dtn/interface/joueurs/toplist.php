@@ -203,20 +203,18 @@ $lstPos = listAllPosition();
 		 $sql .= "ORDER BY ".$ordre." ".$sens."";
 		 $sql .= " LIMIT 0,$nb";
 		 
-			  $huit = 60 * 60 * 24 * 8; //time_0
-			  $quinze = 60 * 60 * 24 * 15; //time_1
-			  $trente = 60 * 60 * 24 * 30; //time_2
-			  $twomonths = 60 * 60 * 24 * 60; //time_3
-			  $fourmonths = 60 * 60 * 24 * 120; //time_4
+		$huit = 60 * 60 * 24 * 8; //time_0
+		$quinze = 60 * 60 * 24 * 15; //time_1
+		$trente = 60 * 60 * 24 * 30; //time_2
+		$twomonths = 60 * 60 * 24 * 60; //time_3
+		$fourmonths = 60 * 60 * 24 * 120; //time_4
 			  
 			  // Date du jour
-			 $mkday = mktime(0,0,0,date('m'), date('d'),date('Y'));
-			 
-		 $req = mysql_query($sql);
+		$mkday = mktime(0,0,0,date('m'), date('d'),date('Y'));
+
+		foreach($conn->query($sql) as $lst){
 		 
-		 while($lst = mysql_fetch_array($req)){
-		 
-		 $verifInternational = verifSelection($lst["idJoueur"]);
+			$verifInternational = verifSelection($lst["idJoueur"]);
 		 
 		 	 $date = explode("-",$lst["dateDerniereModifJoueur"]);
 			 

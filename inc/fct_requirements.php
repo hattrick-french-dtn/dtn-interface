@@ -10,7 +10,7 @@ FCT qui renvoi dans une chaine de caractère, un tableau tout fait des requiremen
 */
 function afficheRequirements( $type, $lang ) 
 {
-	connect();
+	global $conn;
 	//Semaine en cours
 	$todaySeason = getSeasonWeekOfMatch(mktime(0,0,0,date('m'), date('d'),date('Y')));
 	$week = $todaySeason["week"];
@@ -25,21 +25,21 @@ function afficheRequirements( $type, $lang )
 			AND r.level_1 = c.idCarac ".$age.
 			"AND week = ".$week." ORDER BY position_id, age";
 	
-	$rst = mysql_query($req);
+	$rst = $conn->query($req);
 	
 	//remplissage d'un tableau à 2D pour les monocaracs
-	while($lst = mysql_fetch_object($rst))
+	foreach($rst as $lst)
 	{
-		if( $lang == "fr" ) {$carac = $lst->intituleCaracFR;}
-		else {if( $lang == "de" ) {$carac = $lst->intituleCaracDE;}
-		      else {$carac = $lst->intituleCaracUK;}
+		if( $lang == "fr" ) {$carac = $lst['intituleCaracFR'];}
+		else {if( $lang == "de" ) {$carac = $lst['intituleCaracDE'];}
+		      else {$carac = $lst['intituleCaracUK'];}
 		}
 	
-		$tab_rqrm[$lst->descriptifPosition][$lst->age] = $lst->level_1;
-		$carac_nom[$lst->level_1] = $carac;
+		$tab_rqrm[$lst['descriptifPosition']][$lst['age']] = $lst['level_1'];
+		$carac_nom[$lst['level_1']] = $carac;
 	}
 	
-	deconnect();
+	//deconnect();
 	
 	$i = 1;
 	$out = "<table width='95%' border='0' cellpadding='0' cellspacing='0' align='center'><tr>";

@@ -17,14 +17,14 @@ if (!isset ($typeExport)) $typeExport = "maliste";
 require ("../includes/langue.inc.php");
 
 $infPos = getPosition($sesUser["idPosition_fk"]);
-		  $huit = 60 * 60 * 24 * 8; //time_0
-			  $quinze = 60 * 60 * 24 * 15; //time_1
-			  $trente = 60 * 60 * 24 * 30; //time_2
-			  $twomonths = 60 * 60 * 24 * 60; //time_3
-			  $fourmonths = 60 * 60 * 24 * 120; //time_4
-			  
-			  // Date du jour
-			 $mkday = mktime(0,0,0,date('m'), date('d'),date('Y'));
+$huit = 60 * 60 * 24 * 8; //time_0
+$quinze = 60 * 60 * 24 * 15; //time_1
+$trente = 60 * 60 * 24 * 30; //time_2
+$twomonths = 60 * 60 * 24 * 60; //time_3
+$fourmonths = 60 * 60 * 24 * 120; //time_4
+
+// Date du jour
+$mkday = mktime(0,0,0,date('m'), date('d'),date('Y'));
   
 header("Content-Disposition: attachment; filename = liste_".date('d')."-".date('m')."-".date('Y').".csv");
   
@@ -99,7 +99,7 @@ switch ($sens) {
 		$tri = "Tri decroissant";
 		break;
 }
-?>NomJoueur;idHattrick;Date Maj DTN;Date Maj Proprio;last maj(jours);age;jours;xp;leader;spe;endu;construction;+;ailier;+;buteur;+;gardien;+;passe;+;defenseur;+;coup francs;entraineur;DTN;note<?php
+?>NomJoueur;idHattrick;Date Maj DTN;Date Maj Proprio;last maj(jours);age;jours;xp;leader;spe;endu;construction;+;ailier;+;buteur;+;gardien;+;passe;+;defenseur;+;coup francs;entraineur;entrainement;DTN;note<?php
 switch ($sesUser["idPosition_fk"]) {
 	case "1" : //gK
 ?> gardien;<?php
@@ -127,6 +127,8 @@ $AgeAnneeSQL=getCalculAgeAnneeSQL();
 $AgeJourSQL=getCalculAgeJourSQL();
 
 $sql = "select $tbl_joueurs.*,".$AgeAnneeSQL." as AgeAn,".$AgeJourSQL." as AgeJour ";
+
+$listEntrainement = listEntrainement();
 
 if ($typeExport=="maliste") {$sql .=" from $tbl_joueurs where dtnSuiviJoueur_fk  = ".$sesUser["idAdmin"]." and affJoueur = 1  order by $ordre $sens";}
 if ($typeExport=="recherche") {$sql .=stripslashes(urldecode($laSelection)).$ordre;}
@@ -168,6 +170,8 @@ foreach ($conn->query($sql) as $l) {
 	echo  $l["idPA"].";";
 
 	echo $infJ["niv_Entraineur"].";";
+	$nom_entrainement=getEntrainementName($infJ["entrainement_id"],$listEntrainement);
+	echo $nom_entrainement.";";
 	if ($infJ["dtnSuiviJoueur_fk"] != 0)	{echo $infJ["loginAdminSuiveur"].";";}
 	else echo ";";
 

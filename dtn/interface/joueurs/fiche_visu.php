@@ -326,8 +326,8 @@ $idHT=$infJ['idHattrickJoueur'];
 			
 			}
 $sql =  "select * from $tbl_caracteristiques where numCarac = ".$val;
-$req = mysql_query($sql);
-$res = mysql_fetch_array($req);
+$req = $conn->query($sql);
+$res = $req->fetch();
 		
 			
 			?><td width = 25%><b><?=$int?> :</B></td><td width = 25%>&nbsp;<?=$res["intituleCaracFR"]?> <?=$nbSemaineE?></td><?php	
@@ -412,11 +412,10 @@ $i++;
                 <td width=15%><div align="center"><b>Auteur</b></div></td>
               </tr>
                <?php
-		   $sql = "select * from $tbl_histomodif LEFT JOIN ht_admin ON idAdmin = idAdmin_fk where idJoueur_fk = $id order by dateHisto desc, heureHisto desc ";
+			$sql = "select * from $tbl_histomodif LEFT JOIN ht_admin ON idAdmin = idAdmin_fk where idJoueur_fk = $id order by dateHisto desc, heureHisto desc ";
 			$sql .= " limit 0,5";
 			
-			$req = mysql_query($sql);
-			while($l = mysql_fetch_array($req)){
+			foreach($conn->query($sql) as $l){
 		   
 		   
 		   ?>
@@ -443,9 +442,9 @@ $i++;
                 <td width=80%><div align="center"><b>Info club [<?=$infJ["nomClub"]?>]</b></div></td>
               </tr>
                <?php
-		   $sqlClubsHisto = "select * from ht_clubs_histo LEFT JOIN ht_clubs ON idClubHT=idClubHT_fk  where idClubHT=".$infJ["teamid"]." order by dateHisto desc, timeHisto desc LIMIT 0,5";
-			$req = mysql_query($sqlClubsHisto);
-			while($lHisto = mysql_fetch_array($req)){
+			$sqlClubsHisto = "select * from ht_clubs_histo LEFT JOIN ht_clubs ON idClubHT=idClubHT_fk  where idClubHT=".$infJ["teamid"]." order by dateHisto desc, timeHisto desc LIMIT 0,5";
+			$req = ;
+			foreach($conn->query($sqlClubsHisto) as $lHisto){
 		   
 		   
 		   ?>

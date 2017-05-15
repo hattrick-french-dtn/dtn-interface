@@ -1,5 +1,5 @@
 <?php
-     ini_set('error_reporting', E_ERROR);
+ini_set('error_reporting', E_ERROR);
 require("../../includes/head.inc.php");
 
 
@@ -20,7 +20,7 @@ if(!isset($tri)) $tri = 10;
 $sql .= " limit 0,".$tri;
 
 
-$req = mysql_query($sql);
+$req = $conn->query($sql);
 
 
 $echelleDate[] = 0;
@@ -29,17 +29,12 @@ $valeurPerf[] =  0;
 $scorePerf[] = 0;
 
 
-while($lstPerf = mysql_fetch_array($req)){
-$echelleDate[] = substr($lstPerf["date_match"],0,10);
+foreach($req as $lstPerf){
+	$echelleDate[] = substr($lstPerf["date_match"],0,10);
 
-$formePerf[] =  $lstPerf["forme"];
-$valeurPerf[] =  $lstPerf["tsi"];
-$scorePerf[] =  $lstPerf["etoile"];
-
-
-
-
-
+	$formePerf[] =  $lstPerf["forme"];
+	$valeurPerf[] =  $lstPerf["tsi"];
+	$scorePerf[] =  $lstPerf["etoile"];
 
 }
 
@@ -51,8 +46,6 @@ require("../../graph/jpgraph_line.php");
 require("../../graph/jpgraph_bar.php");
 
 
-
-
 // A medium complex example of JpGraph
 // Note: You can create a graph in far fewwr lines of code if you are
 // willing to go with the defaults. This is an illustrative example of
@@ -60,18 +53,12 @@ require("../../graph/jpgraph_bar.php");
 
 
 
-
-
-
-
-
 // Create some datapoints 
-$steps=mysql_num_rows($req);
+$steps=$req->rowCount();
 for($i=1; $i<$steps; $i++) {
 	
-	
-	 $datay[]=$formePerf[$i];
-	 $datatsiy[]=$valeurPerf[$i];
+	$datay[]=$formePerf[$i];
+	$datatsiy[]=$valeurPerf[$i];
 	 
 	$databary[] = $scorePerf[$i];
 	$databarx[] = $echelleDate[$i];

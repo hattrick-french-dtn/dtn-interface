@@ -12,9 +12,9 @@ $buteurColor = "#FFFFFF";
 
 
 if(!$sesUser["idAdmin"])
-	{
+{
 	header("location: index.php?ErrorMsg=Session Expire");
-	}
+}
 	
 if(!isset($ordre)) $ordre = "nomJoueur";
 if(!isset($sens)) $sens = "ASC";
@@ -36,13 +36,12 @@ $mkday = mktime(0,0,0,date('m'), date('d'),date('Y'));
 
 
 $sql = "SELECT count( * ) as sum , dtnSuiviJoueur_fk
-FROM ht_joueurs
-where dtnSuiviJoueur_fk != 0
-GROUP BY dtnSuiviJoueur_fk";
-$req = mysql_query($sql);
-while($count = mysql_fetch_array($req))
+	FROM ht_joueurs
+	where dtnSuiviJoueur_fk != 0
+	GROUP BY dtnSuiviJoueur_fk";
+foreach($conn->query($sql) as $count)
 {
-$total[$count["dtnSuiviJoueur_fk"]] = $count["sum"];
+	$total[$count["dtnSuiviJoueur_fk"]] = $count["sum"];
 }
 
 $sql = "select * from $tbl_position";
@@ -79,9 +78,9 @@ switch($sesUser["idNiveauAcces_fk"]){
 
 $sql .= " AND affAdmin = 1 ";
 
-$req = mysql_query($sql);
-while($lst = mysql_fetch_array($req)){
-$lstDtn[] = $lst;
+$lstDtn = array();
+foreach($conn->query($sql) as $lst){
+	array_push($lstDtn, $lst);
 }
 
 
@@ -107,29 +106,28 @@ if($masque == 1) $sql.= " and dtnSuiviJoueur_fk = 0";
 
 $sql .= " order by $ordre $sens";
 
-$req = mysql_query($sql);
-
-while($lst = mysql_fetch_array($req)){
-$lstJoueurs[] = $lst;
+$lstJoueurs = array();
+while($conn->query($sql) as $lst){
+	array_push($lstJoueurs, $lst);
 }
 
 
 switch($affPosition){
 
-		case "1":
+	case "1":
 		//gK
 		$k = 1;
 		$keeperColor = "#9999FF";
 		break;
 		
-		case "2":
+	case "2":
 		// cD
 		$d = 1;
 		$defense = 1;
 		$defenseColor = "#9999FF";
 		break;
 		
-		case "3":
+	case "3":
 		// Wg
 		$construction = 1;
 		$constructionColor = "#CCCCCC";
@@ -145,7 +143,8 @@ switch($affPosition){
 		$wingwtm = 1;
 
 		break;
-		case "4":
+	
+	case "4":
 		//IM
 		$m = 1;
 		$moff = 1;
@@ -157,7 +156,7 @@ switch($affPosition){
 		$passeColor = "#CCCCCC";
 		break;
 		
-		case "5":
+	case "5":
 		// Fw
 			
 		$att = 1;
@@ -167,7 +166,7 @@ switch($affPosition){
 		$buteurColor = "#9999FF";
 		break;
 	
-		default:
+	default:
 		$font = "<font color = black>";
 		$$font = "</font>";
 		break;
@@ -185,27 +184,26 @@ $tri = "Tri decroissant";
 break;
 }
 switch($sesUser["idNiveauAcces"]){
-		case "1":
+	case "1":
 		require("../menu/menuAdmin.php");
 		require("../menu/menuAdminGestion.php");
 		break;
 		
-		case "2":
+	case "2":
 		require("../menu/menuSuperviseur.php");
 		require("../menu/menuSuperviseurGestion.php");
 		break;
 
-
-		case "3":
+	case "3":
 		require("../menu/menuDTN.php");
 		require("../menu/menuDTNGestion.php");
 		break;
 		
-		case "4":
+	case "4":
 		require("../menu/menuCoach.php");
 		break;
 		
-		default;
+	default;
 		break;
 
 
