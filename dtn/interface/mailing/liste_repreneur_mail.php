@@ -14,19 +14,21 @@ require_once ("../includes/serviceiihelp.php");
 
 require_once ("../includes/langue.inc.php"); // 23/01/2010 jojoje86 besoin pour la spécialité
 
-		$headers ='from:contact@ht-fff.org'."\n";
-		$headers .='Content-Type: text/html; charset="iso-8859-1"'."\n";
-		$headers .='Content-Transfer-Encoding: 8bit'; 
-		$i=0;
-		$erreur="Personne pour cet entrainement";
-        $maBase = initBD();
-		
+$headers ='from:contact@ht-fff.org'."\n";
+$headers .='Content-Type: text/html; charset="iso-8859-1"'."\n";
+$headers .='Content-Transfer-Encoding: 8bit'; 
+$i=0;
+$erreur="Personne pour cet entrainement";
+$maBase = initBD();
+
+if (isset($_POST['training'])) $training = $_POST['training'];
+if (isset($_POST['id_HT'])) $id_HT = $_POST['id_HT'];
 
 if(!$sesUser["idAdmin"])
-        {
-        header("location: ../index.php?ErrorMsg=Session_Expire");
-		exit();
-        }
+{
+    header("location: ../index.php?ErrorMsg=Session_Expire");
+    exit();
+}
 				 
 				$AgeAnneeSQL=getCalculAgeAnneeSQL();
 				$AgeJourSQL=getCalculAgeJourSQL();		
