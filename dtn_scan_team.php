@@ -1,4 +1,5 @@
 <?php
+require("dtn/interface/includes/head.inc.php");
 require("dtn/interface/includes/serviceMatchs.php");
 require("dtn/interface/includes/serviceJoueur.php");
 //require("dtn/interface/includes/serviceEquipes.php");
@@ -318,17 +319,17 @@ $commentSaved=false;
 
 if ($idClubComment != "")
 {
-      $sql="select max(id_Clubs_Histo) id_Clubs_Histo from ht_clubs_histo where idClubHT = '$idClubComment'";
-      $result= mysql_query($sql) or die(mysql_error()."\n".$sql);
-      $ligne = mysql_fetch_assoc($result);
-      extract($ligne);
-      $nblig = mysql_num_rows($result);
-      if ($nblig > 0)
-      {
+    $sql="select max(id_Clubs_Histo) id_Clubs_Histo from ht_clubs_histo where idClubHT = '$idClubComment'";
+    $result= $conn->query($sql);
+    $ligne = $result->fetch(PDO::FETCH_ASSOC);
+    extract($ligne);
+    $nblig = $result->rowCount();
+    if ($nblig > 0)
+    {
         $sql="update ht_clubs_histo set Commentaire = '$commentaire' where id_Clubs_Histo = '$id_Clubs_Histo'";
-        $result= mysql_query($sql) or die(mysql_error()."\n".$sql);
-      }
-  		$commentSaved=true;
+        $result= $conn->exec($sql);
+    }
+  	$commentSaved=true;
 } 
 
   	

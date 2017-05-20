@@ -41,30 +41,26 @@
                             AND NOT EXISTS (SELECT 1 FROM $tbl_admin WHERE idAdminHT = C.idUserHT AND idAdminHT != 0)
                             AND NOT EXISTS (SELECT 1 FROM $tbl_iiihelp_repreneur WHERE idClubHT = C.idClubHT)
                           )";
-    $reqValid= mysql_query($sql) or die(mysql_error()."\n".$sql);
-    fwrite($myfile, "Purge $tbl_clubs_histo : ".mysql_affected_rows()." lignes\n");
+    $reqValid = $conn->exec($sql);
+    fwrite($myfile, "Purge $tbl_clubs_histo : ".$reqValid." lignes\n");
     unset($sql);
-    unset($reqValid);
 
     $sql = "DELETE FROM $tbl_clubs 
             WHERE
                   NOT EXISTS (SELECT 1 FROM $tbl_joueurs WHERE teamid = $tbl_clubs.idClubHT )
               AND NOT EXISTS (SELECT 1 FROM $tbl_admin WHERE $tbl_admin.idAdminHT = $tbl_clubs.idUserHT AND $tbl_admin.idAdminHT != 0)
               AND NOT EXISTS (SELECT 1 FROM $tbl_iiihelp_repreneur WHERE $tbl_iiihelp_repreneur.idClubHT = $tbl_clubs.idClubHT)";
-    $reqValid= mysql_query($sql) or die(mysql_error()."\n".$sql);
-    fwrite($myfile, "Purge $tbl_clubs : ".mysql_affected_rows()." lignes\n");
+    $reqValid = $conn->exec($sql);
+    fwrite($myfile, "Purge $tbl_clubs : ".$reqValid." lignes\n");
     unset($sql);
-    unset($reqValid);
       
     $sql = "DELETE FROM $tbl_clubs_histo_joueurs 
             WHERE
                id_clubs_histo NOT IN (SELECT id_Clubs_Histo FROM $tbl_clubs_histo)
             OR id_joueur NOT IN (SELECT idJoueur FROM $tbl_joueurs)";
-    $reqValid= mysql_query($sql) or die(mysql_error()."\n".$sql);
-    fwrite($myfile, "Purge $tbl_clubs_histo_joueurs : ".mysql_affected_rows()." lignes\n");
+    $reqValid = $conn->exec($sql);
+    fwrite($myfile, "Purge $tbl_clubs_histo_joueurs : ".$reqValid." lignes\n");
     unset($sql);
-    unset($reqValid);
-    
     
     fwrite($myfile, "======================================\n");
   }
@@ -124,6 +120,6 @@
   
   // Insertion dans la table ht_maj_auto
   $sql="INSERT INTO $tbl_maj_auto (date_maj,nom_traitement,nbre_maj,nom_script) VALUES (curdate(),'[CLUB] Recherche et MAJ des clubs botifiés',$nbUpdate,'majEquipesAuto.php')";
-  $reqValid= mysql_query($sql) or die(mysql_error()."\n".$sql);
+  $reqValid= $conn->exec($sql);
 
 ?>

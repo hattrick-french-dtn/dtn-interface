@@ -5,6 +5,8 @@ $urlsource = $nomFicPhpCourant[0]; // Utilisé pour setlang.php
 $callbackUrl="http://".$_SERVER['HTTP_HOST'].$nomFicPhpCourant[0]."?mode=retour"; // Url de retour après authentification sur HT
 //$file="members"; // Nom du fichier pour include
 
+require("dtn/interface/includes/head.inc.php");
+
 include("init.php");
 require("dtn/interface/includes/serviceJoueur.php");
 require("dtn/interface/includes/serviceMatchs.php");
@@ -52,14 +54,14 @@ if (isset($_SESSION['HT'])) {
     
     // Recherche dans la base DTN des informations repreneurs
     $sql = get_iiihelp_repreneurSQL($row_club['idClubHT']);
-    $req = mysql_query($sql) or die(mysql_error()."\n".$sql);
+    $req = $conn->query($sql);
   
     // Si le formulaire n'a pas encore été soumis, on initialise les variables du formulaire
     $_POST['action']            = "";
     if(!$req){
         echo("ERROR REQUEST MYSQL. Please contact Staff Members!");
         exit;
-    } elseif (mysql_num_rows($req) == 0) { /* le repreneur n'existe pas dans la base => on initialise le formulaire */
+    } elseif ($req->rowCount() == 0) { /* le repreneur n'existe pas dans la base => on initialise le formulaire */
   
       $_POST['email']               ="";
       $_POST['commentaire']         ="";
@@ -67,7 +69,7 @@ if (isset($_SESSION['HT'])) {
       $_POST['entrainement_voulu2'] ="99";
       $_POST['age_Entrainement1']   =array();
       $_POST['age_Entrainement2']   =array();
-    } elseif(mysql_num_rows($req) == 1){ /* le repreneur existe dans la base => on alimente le formulaire avec ses données */
+    } elseif($req->rowCount() == 1){ /* le repreneur existe dans la base => on alimente le formulaire avec ses données */
       $dtn_iiihelp_repreneurSQL   = mysql_fetch_array ($req);
       //echo ("<br />");print_r($dtn_iiihelp_repreneurSQL);echo ("<br />");
       $_POST['email']               = $dtn_iiihelp_repreneurSQL['email'];
