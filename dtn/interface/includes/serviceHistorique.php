@@ -2,21 +2,22 @@
 
 // Mise a jour de l'historique :
 function majHistorique($joueur_id,$codeHisto){
-		global $sesUser;
-		global $idProgression_fk ;
-		global $idPerf_fk  ;
-		
-		switch($codeHisto){
-			case "chgTraining":
-			$intituleHisto  = "Modification de l'entrainement ";
-			break;
-		}
-		
+	global $conn;
+	global $sesUser;
+	global $idProgression_fk ;
+	global $idPerf_fk  ;
+	
+	switch($codeHisto){
+		case "chgTraining":
+		$intituleHisto  = "Modification de l'entrainement ";
+		break;
+	}
+	
 
-		$date = date("Y-m-d");
-		$heure = date("H:i");
+	$date = date("Y-m-d");
+	$heure = date("H:i");
 
-		$sql = ' 
+	$sql = ' 
 		INSERT INTO  ht_histomodif (
 		idJoueur_fk,
 		idAdmin_fk,
@@ -35,7 +36,7 @@ function majHistorique($joueur_id,$codeHisto){
 		"'.$idPerf_fk.'"
 		)
 		';
-		$req = mysql_query($sql);
+	$req = $conn->exec($sql);
 }
 
 ?>

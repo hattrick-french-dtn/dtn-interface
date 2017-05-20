@@ -84,13 +84,13 @@ function get_iiihelp_repreneur_clubs_SQL()
 /******************************************************************************/
 function del_iiihelp_repreneur($idClubHT)
 {
-  require($_SERVER['DOCUMENT_ROOT'].'/dtn/interface/includes/nomTables.inc.php');
+	global $conn;
+	require($_SERVER['DOCUMENT_ROOT'].'/dtn/interface/includes/nomTables.inc.php');
   
-  $sql = " DELETE FROM $tbl_iiihelp_repreneur 
-           WHERE idClubHT = $idClubHT";
-  $reqValid = mysql_query($sql) or die(mysql_error()."\n".$sql);
+	$sql = " DELETE FROM $tbl_iiihelp_repreneur WHERE idClubHT = $idClubHT";
+	$reqValid = $conn->exec($sql);
   
-  return $reqValid;
+	return $reqValid;
 }
 
 
@@ -106,23 +106,22 @@ function del_iiihelp_repreneur($idClubHT)
 /*           - fff_help.php                                                   */
 /******************************************************************************/
 function insertionRepreneuriiiHelp($row_iiihelp_repreneur){
+	global $conn;
+	require($_SERVER['DOCUMENT_ROOT'].'/dtn/interface/includes/nomTables.inc.php');
 
-  require($_SERVER['DOCUMENT_ROOT'].'/dtn/interface/includes/nomTables.inc.php');
+	if (!isset($row_iiihelp_repreneur["entrainement_voulu2"]) || (empty($row_iiihelp_repreneur["entrainement_voulu2"])) ) {$row_iiihelp_repreneur["entrainement_voulu2"]=0;}
+	if (!isset($row_iiihelp_repreneur["age_voulu2"]) || (empty($row_iiihelp_repreneur["age_voulu2"])) ) {$row_iiihelp_repreneur["age_voulu2"]='';}
 
-  if (!isset($row_iiihelp_repreneur["entrainement_voulu2"]) || (empty($row_iiihelp_repreneur["entrainement_voulu2"])) ) {$row_iiihelp_repreneur["entrainement_voulu2"]=0;}
-  if (!isset($row_iiihelp_repreneur["age_voulu2"]) || (empty($row_iiihelp_repreneur["age_voulu2"])) ) {$row_iiihelp_repreneur["age_voulu2"]='';}
+	$sql = get_iiihelp_repreneurSQL($row_iiihelp_repreneur['idClubHT']);
+	$req = $conn->query($sql);
 
-  $sql = get_iiihelp_repreneurSQL($row_iiihelp_repreneur['idClubHT']);
-  $req = mysql_query($sql) or die(mysql_error()."\n".$sql);
-
-  if(!$req){
-    return false;
-  } elseif (mysql_num_rows($req) == 0) { /* le club n'existe pas dans la base => on l'insère*/
-  
-      if (!isset($row_iiihelp_repreneur["entrainement_voulu2"]))  {$row_iiihelp_repreneur["entrainement_voulu2"]=0;}
-      if (!isset($row_iiihelp_repreneur["age_voulu2"]))           {$row_iiihelp_repreneur["age_voulu2"]='';}
+	if(!$req){
+		return false;
+	} elseif (mysql_num_rows($req) == 0) { /* le club n'existe pas dans la base => on l'insère*/
+		if (!isset($row_iiihelp_repreneur["entrainement_voulu2"]))  {$row_iiihelp_repreneur["entrainement_voulu2"]=0;}
+		if (!isset($row_iiihelp_repreneur["age_voulu2"]))           {$row_iiihelp_repreneur["age_voulu2"]='';}
       
-      $sql = "INSERT INTO $tbl_iiihelp_repreneur 
+		$sql = "INSERT INTO $tbl_iiihelp_repreneur 
                 ( idClubHT,
                   leagueLevel,
                   email,
@@ -143,21 +142,21 @@ function insertionRepreneuriiiHelp($row_iiihelp_repreneur){
                   $row_iiihelp_repreneur['entrainement_voulu2'].",
                   '".$row_iiihelp_repreneur['age_voulu2']."')";
                  
-      $reqValid= mysql_query($sql) or die(mysql_error()."\n".$sql);
+		$reqValid= $conn->exec($sql);
       
-      if (!$reqValid) {
-        return false;
-      } else {
-        return mysql_insert_id();
-      }
+		if (!$reqValid) {
+			return false;
+		} else {
+			return $conn->lastInsertId();
+		}
 
-  } elseif(mysql_num_rows($req) == 1){ /* le repreneur existe dans la base => on le met à jour */
-          $tab = mysql_fetch_array ($req);
-          $row_iiihelp_repreneur['id_iiihelp_repreneur'] = $tab['id_iiihelp_repreneur'];
-          return updateRepreneuriiiHelp($row_iiihelp_repreneur);
-  } else {
-          return false;
-  }
+	} elseif($req->rowCount() == 1){ /* le repreneur existe dans la base => on le met à jour */
+        $tab = $req->fetch();
+        $row_iiihelp_repreneur['id_iiihelp_repreneur'] = $tab['id_iiihelp_repreneur'];
+        return updateRepreneuriiiHelp($row_iiihelp_repreneur);
+	} else {
+        return false;
+	}
 
 }
 
@@ -174,37 +173,35 @@ function insertionRepreneuriiiHelp($row_iiihelp_repreneur){
 /*           - dtn/interface/includes/serviceiihelp.php                       */
 /******************************************************************************/
 function updateRepreneuriiiHelp($row_iiihelp_repreneur){
-
-  require($_SERVER['DOCUMENT_ROOT'].'/dtn/interface/includes/nomTables.inc.php');
+	global $conn;
+	require($_SERVER['DOCUMENT_ROOT'].'/dtn/interface/includes/nomTables.inc.php');
    
-  $sql="UPDATE $tbl_iiihelp_repreneur SET ";
-  if (isset($row_iiihelp_repreneur["leagueLevel"]))          {$sql.="leagueLevel = ".$row_iiihelp_repreneur["leagueLevel"].",";}
-  if (isset($row_iiihelp_repreneur["email"]))                {$sql.="email = '".$row_iiihelp_repreneur["email"]."',";}
-  if (isset($row_iiihelp_repreneur["commentaire"]))          {$sql.="commentaire = '".$row_iiihelp_repreneur["commentaire"]."',";}
-  if (isset($row_iiihelp_repreneur["etat"]))                 {$sql.="etat = ".$row_iiihelp_repreneur["etat"].",";}
-  if (isset($row_iiihelp_repreneur["entrainement_voulu1"]))  {$sql.="entrainement_voulu1 = ".$row_iiihelp_repreneur["entrainement_voulu1"].",";}
-  if (isset($row_iiihelp_repreneur["age_voulu1"]))           {$sql.="age_voulu1 = '".$row_iiihelp_repreneur["age_voulu1"]."',";}
-  if (isset($row_iiihelp_repreneur["entrainement_voulu2"]))  {$sql.="entrainement_voulu2 = ".$row_iiihelp_repreneur["entrainement_voulu2"].",";}
-  if (isset($row_iiihelp_repreneur["age_voulu2"]))           {$sql.="age_voulu2 = '".$row_iiihelp_repreneur["age_voulu2"]."',";}
+	$sql="UPDATE $tbl_iiihelp_repreneur SET ";
+	if (isset($row_iiihelp_repreneur["leagueLevel"]))          {$sql.="leagueLevel = ".$row_iiihelp_repreneur["leagueLevel"].",";}
+	if (isset($row_iiihelp_repreneur["email"]))                {$sql.="email = '".$row_iiihelp_repreneur["email"]."',";}
+	if (isset($row_iiihelp_repreneur["commentaire"]))          {$sql.="commentaire = '".$row_iiihelp_repreneur["commentaire"]."',";}
+	if (isset($row_iiihelp_repreneur["etat"]))                 {$sql.="etat = ".$row_iiihelp_repreneur["etat"].",";}
+	if (isset($row_iiihelp_repreneur["entrainement_voulu1"]))  {$sql.="entrainement_voulu1 = ".$row_iiihelp_repreneur["entrainement_voulu1"].",";}
+	if (isset($row_iiihelp_repreneur["age_voulu1"]))           {$sql.="age_voulu1 = '".$row_iiihelp_repreneur["age_voulu1"]."',";}
+	if (isset($row_iiihelp_repreneur["entrainement_voulu2"]))  {$sql.="entrainement_voulu2 = ".$row_iiihelp_repreneur["entrainement_voulu2"].",";}
+	if (isset($row_iiihelp_repreneur["age_voulu2"]))           {$sql.="age_voulu2 = '".$row_iiihelp_repreneur["age_voulu2"]."',";}
 
 
-  $sql=substr($sql,0,strlen($sql)-1);
+	$sql=substr($sql,0,strlen($sql)-1);
 
-  if (isset($row_iiihelp_repreneur["id_iiihelp_repreneur"])) {
-    $sql.=" WHERE
-              id_iiihelp_repreneur  = ".$row_iiihelp_repreneur["id_iiihelp_repreneur"];
-  } elseif (isset($row_iiihelp_repreneur["idClubHT"])) {
-    $sql.=" WHERE
-              idClubHT = ".$row_iiihelp_repreneur["idClubHT"];
-  } else return false;
+	if (isset($row_iiihelp_repreneur["id_iiihelp_repreneur"])) {
+		$sql.=" WHERE id_iiihelp_repreneur  = ".$row_iiihelp_repreneur["id_iiihelp_repreneur"];
+	} elseif (isset($row_iiihelp_repreneur["idClubHT"])) {
+		$sql.=" WHERE idClubHT = ".$row_iiihelp_repreneur["idClubHT"];
+	} else return false;
   
-  $reqValid= mysql_query($sql) or die(mysql_error()."\n".$sql);
+	$reqValid = $conn->exec($sql);
 
-  if (!$reqValid) {
-    return false;
-  } else {
-      return $row_iiihelp_repreneur["id_iiihelp_repreneur"];
-  }
+	if (!$reqValid) {
+		return false;
+	} else {
+		return $row_iiihelp_repreneur["id_iiihelp_repreneur"];
+	}
 
 }
 

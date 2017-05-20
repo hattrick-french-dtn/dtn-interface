@@ -84,8 +84,8 @@ $verifInternational = verifSelection($id);
 
 
 // ajout à iiihelp!
-                 $sql = "insert into ht_iiihelp_joueur values (0, ".$infJ["idHattrickJoueur"].", $id, NOW(), $ent_voulu, $map, '$comment', '0000-00-00', 0, '$catage')";
-                 $req=  mysql_query($sql);
+$sql = "insert into ht_iiihelp_joueur values (0, ".$infJ["idHattrickJoueur"].", $id, NOW(), $ent_voulu, $map, '$comment', '0000-00-00', 0, '$catage')";
+$req=  $conn->exec($sql);
 
 
 
@@ -295,19 +295,12 @@ require("../menu/menuJoueur.php");
 			
 			}
 $sql =  "select * from $tbl_caracteristiques where numCarac = ".$val;
-$req = mysql_query($sql);
-$res = mysql_fetch_array($req);
-		
-			
-			?><td width = 25%><b><?=$int?> :</B></td><td width = 25%>&nbsp;<?=$res["intituleCaracFR"]?> <?=$nbSemaineE?></td><?php	
-
-
-
-
-		  if($i % 2 == 0)  print("</tr><tr>");
-$i++;
-}
-
+$req = $conn->query($sql);
+$res = $req->fetch();
+		?><td width = 25%><b><?=$int?> :</B></td><td width = 25%>&nbsp;<?=$res["intituleCaracFR"]?> <?=$nbSemaineE?></td><?php	
+			if($i % 2 == 0)  print("</tr><tr>");
+				$i++;
+			}
 
 ?>
                     </tr>

@@ -40,8 +40,8 @@ switch($sesUser["idNiveauAcces"]){
 }
 
 $sql = "select * from $tbl_niveauAcces where idNiveauAcces = 3";
-$req = mysql_query($sql);
-$lstNA = mysql_fetch_array($req);
+$req = $conn->query($sql);
+$lstNA = $req->fetch();
 
 
 $lstPosition = listPosition();
@@ -166,17 +166,16 @@ if(!isset($nbJoueurs)) $nbJoueurs ="false";
 			  $i=0;
 			  $sql = "select * from $tbl_admin  left join $tbl_position on idPosition = idPosition_fk where idNiveauAcces_fk = 3 ";
 			  $sql .= "order by $ordre $sens";
-			  $req =mysql_query($sql);
-			  while($l = mysql_fetch_array($req)){
-		
-		$nbjsuivis="?";
-		if ($nbJoueurs !="false"){ 	  	
-		if($l["affAdmin"] == 1){
- 			$sqlnb = "select count(*) from ht_joueurs where dtnSuiviJoueur_fk ='".$l["idAdmin"]."' ";
-			$nbjsuivis=current(mysql_fetch_array(mysql_query($sqlnb)));
-		}
-		}
-			if($i%2 == 0) $bgcolor = "E8E8E8"; else $bgcolor = "#FFFFFF";
+
+			  while($conn->query($sql) as $l){
+				$nbjsuivis="?";
+				if ($nbJoueurs !="false"){ 	  	
+					if($l["affAdmin"] == 1){
+						$sqlnb = "select count(*) from ht_joueurs where dtnSuiviJoueur_fk ='".$l["idAdmin"]."' ";
+						$nbjsuivis=current($conn->query($sqlnb)->fetch());
+					}
+				}
+				if($i%2 == 0) $bgcolor = "E8E8E8"; else $bgcolor = "#FFFFFF";
 			  ?>
 			  
                <tr bgcolor="<?=$bgcolor?>">

@@ -10,11 +10,11 @@ if (!isset($_POST["ht_posteAssigne"])) $_POST["ht_posteAssigne"]=0;
 
 
 if ($FromMenu=="Ma Liste") {
-  $filtreDTN="AND ht_joueurs.dtnSuiviJoueur_fk = ".$sesUser["idAdmin"]." ";
+	$filtreDTN="AND ht_joueurs.dtnSuiviJoueur_fk = ".$sesUser["idAdmin"]." ";
 }
 
 if ($FromMenu=="Mon Secteur") {  
-  if (isset($_POST["ht_posteAssigne"])) {$filtrePoste="AND ht_joueurs.ht_posteAssigne  = '".$_POST["ht_posteAssigne"]."' ";}  
+	if (isset($_POST["ht_posteAssigne"])) {$filtrePoste="AND ht_joueurs.ht_posteAssigne  = '".$_POST["ht_posteAssigne"]."' ";}  
 }
 
 
@@ -28,19 +28,19 @@ if ($_POST["TypeFiltre"]==2 ) {
 		  WHERE
 		      idAdmin = ".$sesUser["idAdmin"];
 
-	$req = mysql_query($sql);
-	$res = mysql_fetch_array($req);
-  $filtreDate="AND ht_clubs_histo.date_histo >='".$res["dateAvantDerniereConnexion"]." ".$res["heureAvantDerniereConnexion"]."' ";
-  $affFiltre="depuis le : ".$res["dateAvantDerniereConnexion"]." &agrave; ".$res["heureAvantDerniereConnexion"];
+	$req = $conn->query($sql);
+	$res = $req->fetch();
+	$filtreDate="AND ht_clubs_histo.date_histo >='".$res["dateAvantDerniereConnexion"]." ".$res["heureAvantDerniereConnexion"]."' ";
+	$affFiltre="depuis le : ".$res["dateAvantDerniereConnexion"]." &agrave; ".$res["heureAvantDerniereConnexion"];
 }
 
 if ($_POST["TypeFiltre"]==3 ) {
-  $filtreDate="AND ht_clubs_histo.date_histo >='".$_POST["DateFiltre"]."' ";
-  $affFiltre="depuis le : ".$_POST["DateFiltre"];
+	$filtreDate="AND ht_clubs_histo.date_histo >='".$_POST["DateFiltre"]."' ";
+	$affFiltre="depuis le : ".$_POST["DateFiltre"];
 }
 
 
-		$sql = 
+	$sql = 
       "SELECT 
           ht_joueurs.idJoueur,
           ht_joueurs.idHattrickJoueur,
@@ -68,7 +68,8 @@ if ($_POST["TypeFiltre"]==3 ) {
           ht_clubs_histo.date_histo DESC
       LIMIT 0,100";
 
-		  $req = mysql_query($sql) or die ($sql);?>
+	$req = $conn->query($sql);
+?>
 
   <table width="90%"  border="0" align="center" cellpadding="0" cellspacing="0">
   <br><br>
@@ -103,9 +104,11 @@ if ($_POST["TypeFiltre"]==3 ) {
       <td colspan="1"><div align="center"><img src="../images/spacer.gif" width="1" height="1"></div>          </td>
       </tr>
 		 
-		  <?php $i=0;
-        while($lst = mysql_fetch_array($req)){ 
-        $i++;?>
+<?php 
+	$i=0;
+    while($lst = $req->fetch()){ 
+        $i++;
+?>
         <tr bgcolor="<?php if ($i%2==0) {?>lightblue<?php } else {?>white<?php }?>">
           <td width="1" bgcolor="#000000"><img src="../images/spacer.gif" width="1" height="1"></td>
           <td  nowrap>

@@ -32,8 +32,8 @@ switch($sesUser["idNiveauAcces"]){
 }
 
 $sql = "select * from $tbl_niveauAcces where idNiveauAcces = 2";
-$req = mysql_query($sql);
-$lstNA = mysql_fetch_array($req);
+$req = $conn->query($sql);
+$lstNA = $req->fetch();
 
 $lstPosition = listPosition();
 ?>
@@ -154,9 +154,9 @@ if(!isset($sens)) $sens = "ASC";
 			  $i=0;
 			  $sql = "select * from $tbl_admin  left join $tbl_position on idPosition = idPosition_fk where idNiveauAcces_fk = 2 ";
 			  $sql .= "order by $ordre $sens";
-			  $req =mysql_query($sql);
-			  while($l = mysql_fetch_array($req)){
-			  if($i%2 == 0) $bgcolor = "E8E8E8"; else $bgcolor = "#FFFFFF";
+
+			  foreach($conn->query($sql) as $l){
+				if($i%2 == 0) $bgcolor = "E8E8E8"; else $bgcolor = "#FFFFFF";
 			  ?>
 			  
               <tr bgcolor="<?=$bgcolor?>">

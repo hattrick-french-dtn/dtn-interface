@@ -91,27 +91,27 @@ if (!isset ($_POST['mesJoueurs'])) {
 if($mesJoueurs=="1"){
   $sql.=$sqlFrom2.$sqlWhere3;
 	$sqlC="select count(*) as nb ".$sqlFrom2.$sqlWhere3;
-	$nb=mysql_query($sqlC) or die(mysql_error()."\n".$sqlC);	
-	$nombre=mysql_fetch_array($nb);
+	$nb=$conn->query($sqlC);	
+	$nombre=current($nb->fetch());
 }
 elseif($sesUser["idNiveauAcces"]=="1"){
 	$sql.=$sqlFrom1.$sqlWhere1;
 	$sqlC="select count(*) as nb ".$sqlFrom1.$sqlWhere1;
-	$nb=mysql_query($sqlC) or die(mysql_error()."\n".$sqlC);
-	$nombre=mysql_fetch_array($nb);
+	$nb=$conn->query($sqlC);
+	$nombre=current($nb->fetch());
 }
 elseif(($sesUser["idNiveauAcces"]=="2") || ($sesUser["idNiveauAcces"]=="3")){
   $sql.=$sqlFrom2.$sqlWhere2;
 	$sqlC="select count(*) as nb ".$sqlFrom2.$sqlWhere2;
-	$nb=mysql_query($sqlC) or die(mysql_error()."\n".$sqlC);	
-	$nombre=mysql_fetch_array($nb);
+	$nb=$conn->query($sqlC);	
+	$nombre=current($nb->fetch());
 }
 
 
 if (!isset ($suivant))
 	$suivant =0;
 $sql.=" order by $ordre $sens LIMIT 30 OFFSET $suivant";
-$result= mysql_query($sql) or die(mysql_error()."\n".$sql);
+$result= $conn->query($sql);
 
 
 /******************************************************************************/
@@ -165,7 +165,7 @@ $result= mysql_query($sql) or die(mysql_error()."\n".$sql);
 	</tr>
 <?php
 
-while ($res=mysql_fetch_object($result)){
+while ($res=$result->fetch(PDO::FETCH_OBJ))){
 $i++;
 ?>
 	<tr <?php if ($i % 2 == 0) echo "bgcolor=#CCCCCC";  else echo "bgcolor=#FFFFFF";?> ><?php
@@ -215,8 +215,8 @@ $sql3="select
       and J.archiveJoueur!=1 
       group by 
           J.entrainement_id";
-$result3= mysql_query($sql3) or die(mysql_error()."\n".$sql3);
-$resentrainement=mysql_num_rows($result3);
+$result3= $conn->query($sql3);
+$resentrainement=$result3->rowCount();
 	if ($resentrainement==0){
 		?><td align="center">?<?php
 	}
@@ -234,8 +234,8 @@ $resentrainement=mysql_num_rows($result3);
             and C.idClubHT = $res->idClubHT
             group by 
                 E.libelle_type_entrainement";
-		$result4= mysql_query($sql4) or die(mysql_error()."\n".$sql4);
-		$res4=mysql_fetch_object($result4);
+		$result4= $conn->query($sql4);
+		$res4=$result4->fetch(PDO::FETCH_OBJ);
 		if($res4->entrainement_id==0){
 			?><td align="center">?<?php
 		}
@@ -260,10 +260,10 @@ $sql2=" select
         where 
             J.archiveJoueur!=1 
         and J.teamid=$res->idClubHT";
-$result2= mysql_query($sql2) or die(mysql_error()."\n".$sql2);
-while ($res2=mysql_fetch_object($result2)){
+
+		while ($conn->query($sql2) as $res2){
 ?>
-		<tr><td align="left"><a href="<?=$url?>/joueurs/fiche.php?id=<?=$res2->idJoueur?>"><?=$res2->nomJoueur?> (<?=$res2->idHattrickJoueur?>)</a></td></tr>
+		<tr><td align="left"><a href="<?=$url?>/joueurs/fiche.php?id=<?=$res2['idJoueur']?>"><?=$res2['nomJoueur']?> (<?=$res2['idHattrickJoueur']?>)</a></td></tr>
 
 <?php
 }
@@ -273,7 +273,7 @@ while ($res2=mysql_fetch_object($result2)){
 	</tr>
 <?php
 }
-mysql_free_result($result);
+$result=NULL;
 ?>
 	</table>
 	<br><center>
@@ -292,15 +292,6 @@ mysql_free_result($result);
 	<br><br>
 	<font color="red">*</font> : Il y a des entrainements différents dans la base pour les joueurs du m&ecirc;me club !
 </center>
-
-
-
-
-
-
-
-
-
 
 <br>
  <table width="450"  border="0" align="center" cellspacing=0 >
