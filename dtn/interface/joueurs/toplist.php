@@ -5,44 +5,36 @@ require("../includes/serviceJoueur.php");
 
 
 if(!$sesUser["idAdmin"])
-	{
+{
 	header("location: index.php?ErrorMsg=Session Expiree");
-	}
-
-
-
+}
 
 ?>
 <link href="../css/ht.css" rel="stylesheet" type="text/css">
 <script language="JavaScript" src="../includes/javascript/navigation.js"></script>
 <?php
 switch($sesUser["idNiveauAcces"]){
-		case "1":
+	case "1":
 		require("../menu/menuAdmin.php");
 		require("../menu/menuSuperviseurConsulter.php");
-		
 		break;
 		
-		case "2":
+	case "2":
 		require("../menu/menuSuperviseur.php");
 		require("../menu/menuSuperviseurConsulter.php");
 		break;
 
-
-
-
-		case "3":
+	case "3":
 		require("../menu/menuDTN.php");
 		require("../menu/menuDTNConsulter.php");
 		break;
-
 		
-		case "4":
+	case "4":
 		require("../menu/menuCoach.php");
 		require("../menu/menuCoachConsulter.php");
 		break;
 		
-		default;
+	default;
 		break;
 }
 
@@ -53,56 +45,40 @@ if($age == "") $age = "17";
 
 if($affPosition == "") {
 	if (($sesUser["idPosition_fk"] == "") or ($sesUser["idPosition_fk"] == "0")){
-	$affPosition ="1";	
+		$affPosition ="1";	
 	}else{
-	$affPosition = $sesUser["idPosition_fk"] ;
+		$affPosition = $sesUser["idPosition_fk"] ;
 	}
 }
 
-
-
-
-
-
-
-
-
-
 switch($affPosition){
 case "1";
-$titre = "gardiens";
-$colonne = "scoreGardien";
-break;
-
+	$titre = "gardiens";
+	$colonne = "scoreGardien";
+	break;
 
 case "2";
-$titre = "defenseurs";
-$colonne = "scoreDefense";
-break;
-
+	$titre = "defenseurs";
+	$colonne = "scoreDefense";
+	break;
 
 case "4";
-$titre = "milieux";
-$colonne = "scoreMilieu";
-break;
-
+	$titre = "milieux";
+	$colonne = "scoreMilieu";
+	break;
 
 case "3";
-$titre = "ailiers";
-$colonne = "scoreAilierOff";
-break;
-
+	$titre = "ailiers";
+	$colonne = "scoreAilierOff";
+	break;
 
 case "5";
-$titre = "attaquants";
-$colonne = "scoreAttaquant";
-break;
-
+	$titre = "attaquants";
+	$colonne = "scoreAttaquant";
+	break;
 
 default;
-break;
-
-
+	break;
 }
 if($ordre == "") $ordre = $colonne;
 if($sens == "") $sens = "DESC";
@@ -119,13 +95,7 @@ $tri = $colonne;
 break;
 }
 
-
-
-
 $lstPos = listAllPosition();
-
-
-
 
 ?><title>Top liste</title>
 <style type="text/css">
@@ -149,8 +119,8 @@ $lstPos = listAllPosition();
       <td width="153"><select name="affPosition">
 	  <?php
 	  foreach($lstPos as $l){
-	  if($l["idPosition"] == $affPosition) $etat = "selected"; else $etat ="";
-	  echo "<option value = '".$l["idPosition"]."' ".$etat.">".$l["intitulePosition"]."</option>";
+		if($l["idPosition"] == $affPosition) $etat = "selected"; else $etat ="";
+		echo "<option value = '".$l["idPosition"]."' ".$etat.">".$l["intitulePosition"]."</option>";
 	  }
 	  ?>
       </select></td>
@@ -290,16 +260,9 @@ $lstPos = listAllPosition();
         <td colspan="12"><div align="center"><img src="../images/spacer.gif" width="1" height="1"></div>          </td>
         </tr><?php } ?>
 
-
-
-
-
-
     </table></td>
   </tr>
 </table>
-
-
 
 
 <br>

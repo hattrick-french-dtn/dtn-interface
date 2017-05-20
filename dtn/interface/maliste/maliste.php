@@ -23,14 +23,14 @@ if (!isset ($typeExport))
 require ("../includes/langue.inc.php");
 
 $infPos = getPosition($sesUser["idPosition_fk"]);
-		  $huit = 60 * 60 * 24 * 8; //time_0
-			  $quinze = 60 * 60 * 24 * 15; //time_1
-			  $trente = 60 * 60 * 24 * 30; //time_2
-			  $twomonths = 60 * 60 * 24 * 60; //time_3
-			  $fourmonths = 60 * 60 * 24 * 120; //time_4
-			  
-			  // Date du jour
-			 $mkday = mktime(0,0,0,date('m'), date('d'),date('Y'));
+$huit = 60 * 60 * 24 * 8; //time_0
+$quinze = 60 * 60 * 24 * 15; //time_1
+$trente = 60 * 60 * 24 * 30; //time_2
+$twomonths = 60 * 60 * 24 * 60; //time_3
+$fourmonths = 60 * 60 * 24 * 120; //time_4
+
+// Date du jour
+$mkday = mktime(0,0,0,date('m'), date('d'),date('Y'));
   
 switch ($sesUser["idPosition_fk"]) {
 

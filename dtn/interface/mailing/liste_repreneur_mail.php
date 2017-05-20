@@ -30,77 +30,77 @@ if(!$sesUser["idAdmin"])
     exit();
 }
 				 
-				$AgeAnneeSQL=getCalculAgeAnneeSQL();
-				$AgeJourSQL=getCalculAgeJourSQL();		
-						
-				$sql = "select *,ht_joueurs.optionJoueur as specialite,ht_iiihelp_joueur.commentaire as comment,".$AgeAnneeSQL." as AgeAn,".$AgeJourSQL." as AgeJour from ht_iiihelp_joueur, ht_joueurs, ht_clubs, ht_pays where ht_iiihelp_joueur.id_dtn = ht_joueurs.idJoueur and ht_iiihelp_joueur.id_HT = $id_HT and ht_iiihelp_joueur.id_HT = ht_joueurs.idHattrickJoueur and ht_iiihelp_joueur.entrainement_souhaite = $training and ht_joueurs.teamid = ht_clubs.idClubHT and ht_pays.idPays=ht_clubs.idPays_fk";
-				$req=  mysql_query($sql);
-				$res = mysql_fetch_object($req);
-				 
-				$carac=get_Carac_byID($res->entrainement_souhaite);
-				
-				$sql3 = "select intituleCaracFR from ht_caracteristiques where numCarac=$res->idEndurance";
-				$req3 = mysql_query($sql3);
-				$endu = mysql_fetch_object($req3);
-				
-				$sql3 = "select *, idCaractere as nbCaractere from ht_caractere where numCaractere=$res->idCaractere_fk";
-				$req3 = mysql_query($sql3);
-				$caractere = mysql_fetch_object($req3);
-				
-				$sql3 = "select *, idAggres-1 as nbAggres from ht_aggres where numAggres=$res->idAggre_fk";
-				$req3 = mysql_query($sql3);
-				$aggres = mysql_fetch_object($req3);
+$AgeAnneeSQL=getCalculAgeAnneeSQL();
+$AgeJourSQL=getCalculAgeJourSQL();		
+		
+$sql = "select *,ht_joueurs.optionJoueur as specialite,ht_iiihelp_joueur.commentaire as comment,".$AgeAnneeSQL." as AgeAn,".$AgeJourSQL." as AgeJour from ht_iiihelp_joueur, ht_joueurs, ht_clubs, ht_pays where ht_iiihelp_joueur.id_dtn = ht_joueurs.idJoueur and ht_iiihelp_joueur.id_HT = $id_HT and ht_iiihelp_joueur.id_HT = ht_joueurs.idHattrickJoueur and ht_iiihelp_joueur.entrainement_souhaite = $training and ht_joueurs.teamid = ht_clubs.idClubHT and ht_pays.idPays=ht_clubs.idPays_fk";
+$req=  $conn->query($sql);
+$res = $req->fetch();
+ 
+$carac=get_Carac_byID($res['entrainement_souhaite']);
 
-				$sql3 = "select *, idHonnetete as nbHonnetete from ht_honnetete where numHonnetete=$res->idHonnetete_fk";
-				$req3 = mysql_query($sql3);
-				$honnetete = mysql_fetch_object($req3);
-				
-				$sql3 = "select intituleCaracFR from ht_caracteristiques where idCarac=$res->idExperience_fk";
-				$req3 = mysql_query($sql3);
-				$xp = mysql_fetch_object($req3);
+$sql3 = "select intituleCaracFR from ht_caracteristiques where numCarac=".$res['idEndurance'];
+$req3 = $conn->query($sql3);
+$endu = $req3->fetch(PDO::FETCH_OBJ);
 
-				$sql3 = "select intituleCaracFR from ht_caracteristiques where idCarac=$res->idLeader_fk";
-				$req3 = mysql_query($sql3);
-				$tdc = mysql_fetch_object($req3);	
+$sql3 = "select *, idCaractere as nbCaractere from ht_caractere where numCaractere=".$res['idCaractere_fk'];
+$req3 = $conn->query($sql3);
+$caractere = $req3->fetch(PDO::FETCH_OBJ);
 
-				$sql3 = "select intituleCaracFR from ht_caracteristiques where idCarac=$res->idGardien";
-				$req3 = mysql_query($sql3);
-				$gb = mysql_fetch_object($req3);		
+$sql3 = "select *, idAggres-1 as nbAggres from ht_aggres where numAggres=".$res['idAggre_fk'];
+$req3 = $conn->query($sql3);
+$aggres = $req3->fetch(PDO::FETCH_OBJ);
 
-				$sql3 = "select intituleCaracFR from ht_caracteristiques where idCarac=$res->idDefense";
-				$req3 = mysql_query($sql3);
-				$def = mysql_fetch_object($req3);	
+$sql3 = "select *, idHonnetete as nbHonnetete from ht_honnetete where numHonnetete=".$res['idHonnetete_fk'];
+$req3 = $conn->query($sql3);
+$honnetete = $req3->fetch(PDO::FETCH_OBJ);
 
-				$sql3 = "select intituleCaracFR from ht_caracteristiques where idCarac=$res->idConstruction";
-				$req3 = mysql_query($sql3);
-				$const = mysql_fetch_object($req3);				
+$sql3 = "select intituleCaracFR from ht_caracteristiques where idCarac=".$res['idExperience_fk'];
+$req3 = $conn->query($sql3);
+$xp = $req3->fetch(PDO::FETCH_OBJ);
 
-				$sql3 = "select intituleCaracFR from ht_caracteristiques where idCarac=$res->idAilier";
-				$req3 = mysql_query($sql3);
-				$ailier = mysql_fetch_object($req3);
-				
-				$sql3 = "select intituleCaracFR from ht_caracteristiques where idCarac=$res->idPasse";
-				$req3 = mysql_query($sql3);
-				$passe = mysql_fetch_object($req3);
-				
-				$sql3 = "select intituleCaracFR from ht_caracteristiques where idCarac=$res->idButeur";
-				$req3 = mysql_query($sql3);
-				$but = mysql_fetch_object($req3);
-				
-				$sql3 = "select intituleCaracFR from ht_caracteristiques where idCarac=$res->idPA";
-				$req3 = mysql_query($sql3);
-				$cf = mysql_fetch_object($req3);
-				
-				
-				$type_age="erreur";
-				if ($res->cat_age=="+21 ans")
-				{
-				$type_age="21 ans et +";
-				}
-				if ($res->cat_age=="17-20 ans")
-				{
-				$type_age="17-20 ans";
-				}
+$sql3 = "select intituleCaracFR from ht_caracteristiques where idCarac=".$res['idLeader_fk'];
+$req3 = $conn->query($sql3);
+$tdc = $req3->fetch(PDO::FETCH_OBJ);	
+
+$sql3 = "select intituleCaracFR from ht_caracteristiques where idCarac=".$res['idGardien'];
+$req3 = $conn->query($sql3);
+$gb = $req3->fetch(PDO::FETCH_OBJ);		
+
+$sql3 = "select intituleCaracFR from ht_caracteristiques where idCarac=".$res['idDefense'];
+$req3 = $conn->query($sql3);
+$def = $req3->fetch(PDO::FETCH_OBJ);	
+
+$sql3 = "select intituleCaracFR from ht_caracteristiques where idCarac=".$res['idConstruction'];
+$req3 = $conn->query($sql3);
+$const = $req3->fetch(PDO::FETCH_OBJ);				
+
+$sql3 = "select intituleCaracFR from ht_caracteristiques where idCarac=".$res['idAilier'];
+$req3 = $conn->query($sql3);
+$ailier = $req3->fetch(PDO::FETCH_OBJ);
+
+$sql3 = "select intituleCaracFR from ht_caracteristiques where idCarac=".$res['idPasse'];
+$req3 = $conn->query($sql3);
+$passe = $req3->fetch(PDO::FETCH_OBJ);
+
+$sql3 = "select intituleCaracFR from ht_caracteristiques where idCarac=".$res['idButeur'];
+$req3 = $conn->query($sql3);
+$but = $req3->fetch(PDO::FETCH_OBJ);
+
+$sql3 = "select intituleCaracFR from ht_caracteristiques where idCarac=".$res['idPA'];
+$req3 = $conn->query($sql3);
+$cf = $req3->fetch(PDO::FETCH_OBJ);
+
+
+$type_age="erreur";
+if ($res['cat_age']=="+21 ans")
+{
+	$type_age="21 ans et +";
+}
+if ($res['cat_age']=="17-20 ans")
+{
+	$type_age="17-20 ans";
+}
 
 $messagemail = "Bonjour,<br><br> 
 
@@ -108,30 +108,30 @@ Vous recevez ce message suite &agrave; votre inscription &agrave; iiihelp pour u
 
 Le joueur suivant : <br><br>
 
-<b>".$res->nomJoueur." (".$id_HT.")</b><br>
-Age : <b>".$res->AgeAn." ans</b> et <b>".$res->AgeJour." jours</b><br><br>
+<b>".$res['nomJoueur']." (".$id_HT.")</b><br>
+Age : <b>".$res['AgeAn']." ans</b> et <b>".$res['AgeJour']." jours</b><br><br>
 
-Endurance : ".$endu->intituleCaracFR." (".$res->idEndurance.")<br><br>
+Endurance : ".$endu->intituleCaracFR." (".$res['idEndurance'].")<br><br>
 
 Un type ".$caractere->intituleCaractereFR." (".$caractere->nbCaractere.") qui est ".$aggres->intituleAggresFR." (".$aggres->nbAggres.") et ".$honnetete->intituleHonneteteFR." (".$honnetete->nbHonnetete.")<br>
-Poss&egrave;de un ".$xp->intituleCaracFR." (".$res->idExperience_fk.") niveau d'exp&eacute;rience et un ".$tdc->intituleCaracFR." (".$res->idLeader_fk.") temp&eacute;rament de chef.<br><br>
+Poss&egrave;de un ".$xp->intituleCaracFR." (".$res['idExperience_fk'].") niveau d'exp&eacute;rience et un ".$tdc->intituleCaracFR." (".$res['idLeader_fk'].") temp&eacute;rament de chef.<br><br>
 
-Salaire : ".(($res->salary)/10)." &euro;<br>
-Salaire en France : ".((ROUND($res->salary/$res->coefSalary))/10)." &euro;<br><br>";
+Salaire : ".(($res['salary'])/10)." &euro;<br>
+Salaire en France : ".((ROUND($res['salary']/$res['coefSalary']))/10)." &euro;<br><br>";
 
-if ($res->specialite != 0)
+if ($res['specialite'] != 0)
 {
-$messagemail .= "Sp&eacute;cialit&eacute; : ".$option[$res->specialite]["FR"]. "<br><br>";
+$messagemail .= "Sp&eacute;cialit&eacute; : ".$option[$res['specialite']]["FR"]. "<br><br>";
 }
 
 $messagemail .= "Caract&eacute;ristiques :<br>
-Gardien : ".$gb->intituleCaracFR." (".$res->idGardien.")<br>
-D&eacute;fense : ".$def->intituleCaracFR." (".$res->idDefense.")<br>
-Construction : ".$const->intituleCaracFR." (".$res->idConstruction.")<br>
-Ailier : ".$ailier->intituleCaracFR." (".$res->idAilier.")<br>
-Passe : ".$passe->intituleCaracFR." (".$res->idPasse.")<br>
-Buteur : ".$but->intituleCaracFR." (".$res->idButeur.")<br>
-Coup Franc : ".$cf->intituleCaracFR." (".$res->idPA.")<br>";
+Gardien : ".$gb->intituleCaracFR." (".$res['idGardien'].")<br>
+D&eacute;fense : ".$def->intituleCaracFR." (".$res['idDefense'].")<br>
+Construction : ".$const->intituleCaracFR." (".$res['idConstruction'].")<br>
+Ailier : ".$ailier->intituleCaracFR." (".$res['idAilier'].")<br>
+Passe : ".$passe->intituleCaracFR." (".$res['idPasse'].")<br>
+Buteur : ".$but->intituleCaracFR." (".$res['idButeur'].")<br>
+Coup Franc : ".$cf->intituleCaracFR." (".$res['idPA'].")<br>";
 if ($type == 1)
 {
 $messagemail .= "<br>
@@ -155,50 +155,51 @@ Vente suivie par : ".stripslashes($dtn)."<br><br>
 
 Commentaire : ".stripslashes($commentaire);
 
-  $listmail = "";
-  $sql  = get_iiihelp_repreneur_clubs_SQL();
-	$sql .= " AND etat = 0 
-	          AND (
-                (entrainement_voulu1 in ($res->entrainement_souhaite,-1) AND age_voulu1='Tous')
-            OR  (entrainement_voulu2 in ($res->entrainement_souhaite,-1) AND age_voulu2='Tous')";
-	if ($res->cat_age=="+21 ans")
-	{
-  	$sql .= " OR (entrainement_voulu1 in ($res->entrainement_souhaite,-1) AND age_voulu1='+21 ans')";
-  	$sql .= " OR (entrainement_voulu2 in ($res->entrainement_souhaite,-1) AND age_voulu2='+21 ans')";
-	}
-	if ($res->cat_age=="17-20 ans")
-	{
-  	$sql .= " OR (entrainement_voulu1 in ($res->entrainement_souhaite,-1) AND age_voulu1='17-20 ans')";
-  	$sql .= " OR (entrainement_voulu2 in ($res->entrainement_souhaite,-1) AND age_voulu2='17-20 ans')";
-	}
-	$sql .= ") ORDER BY idClubHT";
-	$req2 = mysql_query($sql) or die(mysql_error()."\n".$sql);
-  while ($res2 = mysql_fetch_object($req2))
-  {
-  $listmail = $res2->email; 
-				
-  $desinscription = "<br /><br /><br />
-Pour vous d&eacute;sincrire de iiihelp : <a href='http://".$_SERVER['SERVER_NAME']."/desinscription_iiihelp.php?id=".$res2->id_iiihelp_repreneur."'>Cliquez ici</a>";
+$listmail = "";
+$sql  = get_iiihelp_repreneur_clubs_SQL();
+$sql .= " AND etat = 0 
+          AND (
+                (entrainement_voulu1 in ($res['entrainement_souhaite'],-1) AND age_voulu1='Tous')
+            OR  (entrainement_voulu2 in ($res['entrainement_souhaite'],-1) AND age_voulu2='Tous')";
+if ($res['cat_age']=="+21 ans")
+{
+  	$sql .= " OR (entrainement_voulu1 in ($res['entrainement_souhaite'],-1) AND age_voulu1='+21 ans')";
+  	$sql .= " OR (entrainement_voulu2 in ($res['entrainement_souhaite'],-1) AND age_voulu2='+21 ans')";
+}
+if ($res['cat_age']=="17-20 ans")
+{
+  	$sql .= " OR (entrainement_voulu1 in ($res['entrainement_souhaite'],-1) AND age_voulu1='17-20 ans')";
+  	$sql .= " OR (entrainement_voulu2 in ($res['entrainement_souhaite'],-1) AND age_voulu2='17-20 ans')";
+}
+$sql .= ") ORDER BY idClubHT";
 
-  $modifinscription = "<br />
+foreach ($conn->query($sql) as $res2)
+{
+	$listmail = $res2['email']; 
+				
+	$desinscription = "<br /><br /><br />
+Pour vous d&eacute;sincrire de iiihelp : <a href='http://".$_SERVER['SERVER_NAME']."/desinscription_iiihelp.php?id=".$res2['id_iiihelp_repreneur']."'>Cliquez ici</a>";
+
+	$modifinscription = "<br />
 Pour modifier votre inscription iiihelp : <a href='http://".$_SERVER['SERVER_NAME']."/fff_help.php'>Cliquez ici</a>";
 
-if(mail($listmail, "DTN Hattrick : vente de joueur", $messagemail.$desinscription.$modifinscription, $headers)) 
-{
-  $erreur="good";
-  $i=$i+1;
-}
-else
-{
-  $erreur="Echec sur un ou plusieurs envois";
-}
+	if(mail($listmail, "DTN Hattrick : vente de joueur", $messagemail.$desinscription.$modifinscription, $headers)) 
+	{
+		$erreur="good";
+		$i=$i+1;
+	}
+	else
+	{
+		$erreur="Echec sur un ou plusieurs envois";
+	}
 //echo $listmail;
 /*mail("g.fayollecoinde@free.fr", "DTN Hattrick : vente de joueur", utf8_decode($messagemail), "from:contact@ht-fff.org");
 mail("pouin23@hotmail.com", "DTN Hattrick : vente de joueur", utf8_decode($messagemail), "from:contact@ht-fff.org");*/
 }
-	$newetat = $type;
-	$sqlupdate = "update ht_iiihelp_joueur set etat = $newetat where ht_iiihelp_joueur.id_HT = $id_HT ";
-	$req=  mysql_query($sqlupdate);
+
+$newetat = $type;
+$sqlupdate = "update ht_iiihelp_joueur set etat = $newetat where ht_iiihelp_joueur.id_HT = $id_HT ";
+$req=  $conn->exec($sqlupdate);
 
 if ($erreur=="good")
 {?>

@@ -32,12 +32,13 @@ class AccesBase{
 	}
 
 	function init() {
+		global $conn;
 		$user = $this->USERNAME;
 		$pass = $this->PASSWORD;
 		$server = $this->SERVER;
 		$dbase = $this->DATABASE;
 
-		$this->CONNECTION = new PDO('mysql:host=127.0.0.1;port=3307;charset=utf8;dbname=dtn_htfff', "htfff", "ht!fff_2k15", array(PDO::ATTR_PERSISTENT => true));
+		$this->CONNECTION = $conn;
 		return true;
 	}
 
