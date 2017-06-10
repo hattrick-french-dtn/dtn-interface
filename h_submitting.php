@@ -29,7 +29,7 @@
 	</tr>
 
   <tr>
-	<td align="left" valign="middle" ><?=ENTRAINEMENT_SOUHAITE_IIIHELP?> n°1 :</td>
+	<td align="left" valign="middle" ><?=ENTRAINEMENT_SOUHAITE_IIIHELP?> n&deg;1 :</td>
 	<td align="left" valign="middle">
 		<select name="entrainement_voulu1" id="entrainement_voulu1">
 		      <option value="99" <?php if ($_POST['entrainement_voulu1']=="99") {?>selected="selected"<?php }?>><?=LISTE_AUCUN_IIIHELP?></option>
@@ -61,7 +61,7 @@
   </tr>
 
 	<tr>
-	<td align="left" valign="middle" ><?=ENTRAINEMENT_SOUHAITE_IIIHELP?> n°2 :<br /><br /></td>
+	<td align="left" valign="middle" ><?=ENTRAINEMENT_SOUHAITE_IIIHELP?> n&deg;2 :<br /><br /></td>
 	<td align="left" valign="middle" nowrap>
 		<select name="entrainement_voulu2" id="entrainement_voulu2">
     	    <option value="99" <?php if ($_POST['entrainement_voulu2']=="99") {?>selected="selected"<?php }?>><?=LISTE_AUCUN_IIIHELP?></option>

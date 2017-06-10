@@ -92,7 +92,7 @@ $list_matchs = listMatchsU20(); // Listes des matchs U20 à venir
 // Liste des joueurs de l'équipe connecté de moins de 21 ans
 unset($playersU20);
 if (isset($_SESSION['HT'])) {
-  $players=getDataMesJoueursFromHT_usingPHT();
+  $players=getDataMesJoueursFromHT_usingPHT($_SESSION['HT']->getTeam()->getTeamId());
 
   foreach ($players as $p) {
     if (intval($p['AGE']) < 21) {
@@ -158,7 +158,7 @@ if (isset($_SESSION['HT'])) {
           <?php }?>
   		  </tr>
   		  
-        <?php if ( $list_matchs[$i]['season']!=$list_matchs[$i+1]['season'] && $i+1<count($list_matchs) ) {?>
+        <?php if ( (($i+1) < count($list_matchs)) && $list_matchs[$i]['season']!=$list_matchs[$i+1]['season']) {?>
           <tr class="rupture">
             <td colspan="5"><?php echo($motSaison." ".$list_matchs[$i+1]['season']." - World Cup ".$list_matchs[$i+1]['numWC']);?></td>
           </tr>

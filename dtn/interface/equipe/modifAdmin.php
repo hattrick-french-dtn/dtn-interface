@@ -1,5 +1,5 @@
 <?php 
-require("../includes/head.inc.php");
+require_once("../includes/head.inc.php");
 require("../includes/serviceListesDiverses.php");
 require("../includes/serviceDTN.php");
 

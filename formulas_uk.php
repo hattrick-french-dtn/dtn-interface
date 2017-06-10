@@ -53,7 +53,7 @@ body,td,th {
       <table width="100%" border="0" cellspacing="0" cellpadding="1">
         <tr>
           <td><div align="left"> <span class="styleFont14"><b>Lokomotiv Lund (9952)</b></span></div></td>
-          <td width="110" rowspan="5"><img src="http://www.ht-fff.org/images/lokomotivlund.gif" name="lokomotivlund" width="110" height="90" id="lokomotivlund">            <div align="right"></div></td>
+          <td width="110" rowspan="5"><img src="/images/lokomotivlund.gif" name="lokomotivlund" width="110" height="90" id="lokomotivlund">            <div align="right"></div></td>
         </tr>
         <tr>
           <td><div align="left"> <span class="styleFont14"><strong>Country:</strong> Sverige</span></div></td>

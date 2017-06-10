@@ -367,6 +367,7 @@ if ($idClubComment != "")
    <?php
 	if (count($teams) == 1)
 	{
+		$teamId = $teams[0];
 ?>
          <input name="idClubHT" type="hidden" value="<?=$teamId['id']?>">
 <?php
@@ -415,3 +416,8 @@ if ($_SESSION['ajoutCommentaire'] == "1")
    </p>		
    </td></tr>
    </table>
+   <script>
+   function verifComment() {
+	   return true;
+   }
+   </script>

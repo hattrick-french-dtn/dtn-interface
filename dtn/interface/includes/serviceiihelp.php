@@ -117,7 +117,7 @@ function insertionRepreneuriiiHelp($row_iiihelp_repreneur){
 
 	if(!$req){
 		return false;
-	} elseif (mysql_num_rows($req) == 0) { /* le club n'existe pas dans la base => on l'insère*/
+	} elseif ($req->rowCount() == 0) { /* le club n'existe pas dans la base => on l'insère*/
 		if (!isset($row_iiihelp_repreneur["entrainement_voulu2"]))  {$row_iiihelp_repreneur["entrainement_voulu2"]=0;}
 		if (!isset($row_iiihelp_repreneur["age_voulu2"]))           {$row_iiihelp_repreneur["age_voulu2"]='';}
       
@@ -250,6 +250,7 @@ function libelleAgeFormulaire($age_voulu)
   switch($age_voulu)
   {
   	case "17-20 ans" :
+	default:
   		$AgeFormulaire[] = "1";
   	break;
   	case "+21 ans" :

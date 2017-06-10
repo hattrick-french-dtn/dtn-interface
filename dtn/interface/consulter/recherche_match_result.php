@@ -6,7 +6,7 @@ require_once "../_config/CstGlobals.php"; // fonctions d'admin
 require_once "../fonctions/phpxml.php"; // XML to Tree converter
 require_once "../fonctions/AccesBase.php"; // fonction de connexion a la base
 require_once "../fonctions/AdminDtn.php"; // fonctions d'admin
-require("../includes/head.inc.php");
+require_once("../includes/head.inc.php");
 require("../includes/serviceMatchs.php");
 require_once("../CHPP/config.php");
 $maBase = initBD();

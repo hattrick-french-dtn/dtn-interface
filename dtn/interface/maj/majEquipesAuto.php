@@ -5,7 +5,7 @@
 
   include($_SERVER['DOCUMENT_ROOT'].'/gestion_session_HT.php'); // Pour récupérer les constantes CONSUMER
 
-  require("../includes/head.inc.php");
+  require_once("../includes/head.inc.php");
   include_once "../includes/serviceEquipes.php";
   include_once "../includes/nomTables.inc.php";
   

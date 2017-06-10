@@ -107,7 +107,7 @@ function afficheRequirements( $type, $lang )
 		$out .= "<td width='200'>	
 			<table width='80' border='0' cellpadding='0' cellspacing='0'>
 			  <tr>
-				<td colspan='2' height='5'><img src='http://www.ht-fff.org/images/index_submit_01_up.gif' width='200' height='5'/></td>
+				<td colspan='2' height='5'><img src='/images/index_submit_01_up.gif' width='200' height='5'/></td>
 			  </tr>
 			  <tr>
 				<td colspan='2' bgcolor='#7B00C6' height='15'><div align='center' class='style49'><strong>".$pos."</strong></div></td>
@@ -128,7 +128,7 @@ function afficheRequirements( $type, $lang )
 		}	
 			
 		$out .= "<tr>
-			<td colspan='2' height='10'><img src='http://www.ht-fff.org/images/index_submit_03_down.gif' width='200' height='10'/></td>
+			<td colspan='2' height='10'><img src='/images/index_submit_03_down.gif' width='200' height='10'/></td>
 				</tr>
 			</table>
 		  </td>";

@@ -2,20 +2,20 @@
         // Affiche toutes les erreurs
 //        error_reporting(E_ALL);
 
-        require("../includes/head.inc.php");
-        require_once "../_config/CstGlobals.php"; // fonctions d'admin
-        require_once "../fonctions/HT_Client.php"; // Hattrick Client New (with Advanced HTTP Client)
-        require_once "../fonctions/phpxml.php"; // XML to Tree converter
-        require_once "../fonctions/AccesBase.php"; // fonction de connexion � la base
-        require_once "../fonctions/AdminDtn.php"; // fonctions d'admin
-        require_once "maj_pays.php"; // fonctions de mise � jour pays
+require_once("../includes/head.inc.php");
+require_once "../_config/CstGlobals.php"; // fonctions d'admin
+require_once "../fonctions/HT_Client.php"; // Hattrick Client New (with Advanced HTTP Client)
+require_once "../fonctions/phpxml.php"; // XML to Tree converter
+require_once "../fonctions/AccesBase.php"; // fonction de connexion � la base
+require_once "../fonctions/AdminDtn.php"; // fonctions d'admin
+require_once "maj_pays.php"; // fonctions de mise � jour pays
 
-        $maBase = initBD();
+$maBase = initBD();
 
 /*if(!$sesUser["idAdmin"])
-        {
-        header("location: index.php?ErrorMsg=Session Expire");
-        }
+{
+    header("location: index.php?ErrorMsg=Session Expire");
+}
 */
 
 
