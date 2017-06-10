@@ -1,26 +1,19 @@
 <?php 
-require("../includes/head.inc.php");
+require_once("../includes/head.inc.php");
 require("../includes/serviceEquipes.php");
 require("../includes/serviceListesDiverses.php");
 
 
 if(!$sesUser["idAdmin"])
-	{
+{
 	header("location: index.php?ErrorMsg=Session Expir�");
-	}
+}
 if(!isset($ordre)) $ordre = "nomJoueur";
 if(!isset($sens)) $sens = "ASC";
 if(!isset($lang)) $lang = "FR";
 
 
 require("../includes/langue.inc.php");
-
-
-
-
-
-
-
 
 
 

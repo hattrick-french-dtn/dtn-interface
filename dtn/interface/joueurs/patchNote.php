@@ -1,5 +1,5 @@
 <?php
-require("../includes/head.inc.php");
+require_once("../includes/head.inc.php");
 require("../includes/nomTables.inc.php");
 require("../includes/serviceJoueur.php");
 require("../includes/serviceEntrainement.php");

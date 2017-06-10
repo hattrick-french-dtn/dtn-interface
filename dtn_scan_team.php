@@ -1,5 +1,5 @@
 <?php
-require("dtn/interface/includes/head.inc.php");
+require_once("dtn/interface/includes/head.inc.php");
 require("dtn/interface/includes/serviceMatchs.php");
 require("dtn/interface/includes/serviceJoueur.php");
 //require("dtn/interface/includes/serviceEquipes.php");
@@ -42,7 +42,7 @@ $scan_code=0;
 $teams = array();
 // Récupération de la liste des joueurs
 $list_joueur_HT = getDataMesJoueursFromHT_usingPHT($_SESSION['HT']->getTeam()->getTeamId());
-$team1 = ('id' => $_SESSION['HT']->getTeam()->getTeamId(), 'name' => $_SESSION['HT']->getTeam()->getTeamName());
+$team1 = array('id' => $_SESSION['HT']->getTeam()->getTeamId(), 'name' => $_SESSION['HT']->getTeam()->getTeamName());
 array_push($teams, $team1);
 // Si c'est la première visite avec ce browser
 if ((isset($_SESSION['newVisit']) && $_SESSION['newVisit']==1))  
@@ -82,8 +82,9 @@ else
 /******************************************************************************/
 /*      GESTION AFFICHAGE LISTE JOUEURS                                       */
 /******************************************************************************/
-echo"<font size=\"4\" color=\"red\" face=\"Century Gothic\"><U>$team1['name']</U></font>";
-
+?>
+<font size='4' color='red' face='Century Gothic'><U><?=$team1['name']?></U></font>
+<?php
 if (isset($resuScan) && $resuScan!=false) 
 {
   $scan_code=count($resuScan);
@@ -187,7 +188,7 @@ for ($tsidx=$teamNb-1; $tsidx >= 0; $tsidx--) {
 	{
 	  // Récupération de la liste des joueurs
 	  $list_joueur_HT = getDataMesJoueursFromHT_usingPHT($team2->getTeamId());
-	  $teamid2 = ('id' => $team2->getTeamId(), 'name' => $team2->getTeamName());
+	  $teamid2 = array('id' => $team2->getTeamId(), 'name' => $team2->getTeamName());
 	  array_push($teams, $teamid2);
 	  
 	  // Si c'est la première visite avec ce browser
@@ -226,8 +227,9 @@ for ($tsidx=$teamNb-1; $tsidx >= 0; $tsidx--) {
 	  /******************************************************************************/
 	  /*      GESTION AFFICHAGE LISTE JOUEURS                                       */
 	  /******************************************************************************/
-	  echo"<font size=\"4\" color=\"red\" face=\"Century Gothic\"><U>$teamid2['name']</U></font>";
-	  
+	?>
+	  <font size="4" color="red" face="Century Gothic"><U><?=$teamid2['name']?></U></font>
+	<?php
 	  if (isset($resuScan) && $resuScan!=false) 
 	  {
 		$scan_code=count($resuScan);
@@ -363,44 +365,21 @@ if ($idClubComment != "")
    <?=AJOUT_COMMENTAIRE?><br />
    <form name="form_comment" method="post" action="<?=$_SERVER['PHP_SELF']."?lang=".$_SESSION['lang']?>" onSubmit="return verifComment();">
    <?php
-	foreach($teamIDs as $teamId)
+	if (count($teams) == 1)
 	{
-		
-	}
-      if ($teamID2 == "")
-      {
 ?>
-         <input name="idClubHT" type="hidden" value="<?=$teamID1?>">
+         <input name="idClubHT" type="hidden" value="<?=$teamId['id']?>">
 <?php
-      }
-      else
-      {
-       if ($idClubComment != "")
-       {
-        if ($idClubComment == $teamID1)
-        {
+    }
+	else {
+		foreach($teams as $teamId) {
 ?>
-         <input name="idClubHT" type="radio" value="<?=$teamID1?>" checked><?php echo"$nomeq";?>
-         <input name="idClubHT" type="radio" value="<?=$teamID2?>"><?php echo"$nomeq2";?>
+         <input name="idClubHT" type="radio" value="<?=$teamId['id']?>" checked><?=$teamId['name']?>
 <?php
-        }
-        else
-        {
+		}
+    }
+	
 ?>
-         <input name="idClubHT" type="radio" value="<?=$teamID1?>"><?php echo"$nomeq";?>
-         <input name="idClubHT" type="radio" value="<?=$teamID2?>" checked><?php echo"$nomeq2";?>
-<?php
-        }
-       }
-       else
-       {
-?>
-         <input name="idClubHT" type="radio" value="<?=$teamID1?>" checked><?php echo"$nomeq";?>
-         <input name="idClubHT" type="radio" value="<?=$teamID2?>"><?php echo"$nomeq2";?>
-<?php
-       }
-      }
-    ?>
          <br /><textarea name="ht_comment"  cols=60 rows=2>
 <?php
          echo"$commentaire";

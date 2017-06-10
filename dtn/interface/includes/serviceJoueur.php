@@ -18,23 +18,23 @@ return $sql;
 
 function ageetjour($datenaissjoueur,$formatSortie="1")
 {        
-      $jouractuel = round((mktime(0,0,0,date("m"),date("d"),date("Y"))-574729200)/3600/24,0);
-      $nbjourjoueur = $jouractuel-$datenaissjoueur;
-      $jourjoueur = $nbjourjoueur % 112;
-      $agejoueur = ($nbjourjoueur-$jourjoueur)/112;
-      
-      if ($formatSortie=="1") {
-        return($agejoueur." - ".$jourjoueur);
-      } else if ($formatSortie=="2") {
-        $resu["ageJoueur"] = $agejoueur;
-        $resu["jourJoueur"] = $jourjoueur;
-        return($resu);
-      }
+	$jouractuel = round((mktime(0,0,0,date("m"),date("d"),date("Y"))-574729200)/3600/24,0);
+	$nbjourjoueur = $jouractuel-$datenaissjoueur;
+	$jourjoueur = $nbjourjoueur % 112;
+	$agejoueur = ($nbjourjoueur-$jourjoueur)/112;
+
+	if ($formatSortie=="1") {
+		return($agejoueur." - ".$jourjoueur);
+	} else if ($formatSortie=="2") {
+		$resu["ageJoueur"] = $agejoueur;
+		$resu["jourJoueur"] = $jourjoueur;
+		return($resu);
+	}
 }  
 
 
 function getTousJoueurSQL(){
-  $sql = "SELECT 
+	$sql = "SELECT 
         idJoueur,
         nomJoueur,
         prenomJoueur,
@@ -1711,9 +1711,9 @@ function ajoutJoueur($ht_user,$role_user,$joueurHT,$joueurDTN,$posteAssigne) {
       $resu['joueurs_histo']['id_joueur_histo'] = insertJoueurHisto($update_joueurs_histo);
     } else {
       //Sinon, on remet � jour uniquement si le joueur est en vente
-      if (($existHJ[0]['transferListed']==0) && ($joueurHT['transferListed']==1)) {
+      if (($existHJ['transferListed']==0) && ($joueurHT['transferListed']==1)) {
           $update_joueurs_histo['transferListed']=$joueurHT['transferListed'];
-          $update_joueurs_histo['id_joueur_histo']=$existHJ[0]['id_joueur_histo'];
+          $update_joueurs_histo['id_joueur_histo']=$existHJ['id_joueur_histo'];
           $resu['id_joueur_histo'] = updateJoueurHisto($update_joueurs_histo);
       }
     }
@@ -1744,67 +1744,67 @@ function ajoutJoueur($ht_user,$role_user,$joueurHT,$joueurDTN,$posteAssigne) {
 function updateJoueur($joueur) {
 	global $conn;
 
-  require($_SERVER['DOCUMENT_ROOT'].'/dtn/interface/includes/nomTables.inc.php');
-  
-  $sql="UPDATE $tbl_joueurs SET ";
-  if (isset($joueur['nomJoueur']))                {$sql.="nomJoueur = '".$joueur['nomJoueur']."',";}
-  if (isset($joueur['prenomJoueur']))             {$sql.="prenomJoueur = '".$joueur['prenomJoueur']."',";}
-  if (isset($joueur['teamid']))                   {$sql.="teamid = '".$joueur['teamid']."',";}
-  if (isset($joueur['idHattrickJoueur']))         {$sql.="idHattrickJoueur = '".$joueur['idHattrickJoueur']."',";}
-  if (isset($joueur['idAggre_fk']))               {$sql.="idAggre_fk = '".$joueur['idAggre_fk']."',";}
-  if (isset($joueur['idLeader_fk']))              {$sql.="idLeader_fk = '".$joueur['idLeader_fk']."',";}
-  if (isset($joueur['idCaractere_fk']))           {$sql.="idCaractere_fk = '".$joueur['idCaractere_fk']."',";}
-  if (isset($joueur['idHonnetete_fk']))           {$sql.="idHonnetete_fk = '".$joueur['idHonnetete_fk']."',";}
-  if (isset($joueur['idExperience_fk']))          {$sql.="idExperience_fk = '".$joueur['idExperience_fk']."',";}
-  if (isset($joueur['idEndurance']))              {$sql.="idEndurance = '".$joueur['idEndurance']."',";}
-  if (isset($joueur['idGardien']))                {$sql.="idGardien = '".$joueur['idGardien']."',";}
-  if (isset($joueur['idConstruction']))           {$sql.="idConstruction = '".$joueur['idConstruction']."',";}
-  if (isset($joueur['idPasse']))                  {$sql.="idPasse = '".$joueur['idPasse']."',";}
-  if (isset($joueur['idAilier']))                 {$sql.="idAilier = '".$joueur['idAilier']."',";}
-  if (isset($joueur['idDefense']))                {$sql.="idDefense = '".$joueur['idDefense']."',";}
-  if (isset($joueur['idButeur']))                 {$sql.="idButeur = '".$joueur['idButeur']."',";}
-  if (isset($joueur['idPA']))                     {$sql.="idPA = '".$joueur['idPA']."',";}
-  if (isset($joueur['optionJoueur']))             {$sql.="optionJoueur = '".$joueur['optionJoueur']."',";}
-  if (isset($joueur['dateSaisieJoueur']))         {$sql.="dateSaisieJoueur = '".$joueur['dateSaisieJoueur']."',";}
-  if (isset($joueur['dateDerniereModifJoueur']))  {$sql.="dateDerniereModifJoueur = '".$joueur['dateDerniereModifJoueur']."',";}
-  if (isset($joueur['date_modif_effectif']))      {$sql.="date_modif_effectif = '".$joueur['date_modif_effectif']."',";}
-  if (isset($joueur['saisonApparitionJoueur']))   {$sql.="saisonApparitionJoueur = '".$joueur['saisonApparitionJoueur']."',";}
-  if (isset($joueur['ageJoueur']))                {$sql.="ageJoueur = '".$joueur['ageJoueur']."',";}
-  if (isset($joueur['jourJoueur']))               {$sql.="jourJoueur = '".$joueur['jourJoueur']."',";}
-  if (isset($joueur['datenaiss']))                {$sql.="datenaiss = '".$joueur['datenaiss']."',";}
-  if (isset($joueur['AdminSaisieJoueur_fk']))     {$sql.="AdminSaisieJoueur_fk = '".$joueur['AdminSaisieJoueur_fk']."',";}
-  if (isset($joueur['dtnSuiviJoueur_fk']))        {$sql.="dtnSuiviJoueur_fk = '".$joueur['dtnSuiviJoueur_fk']."',";}
-  if (isset($joueur['ht_posteAssigne']))          {$sql.="ht_posteAssigne = '".$joueur['ht_posteAssigne']."',";}
-  if (isset($joueur['scoreGardien']))             {$sql.="scoreGardien = '".$joueur['scoreGardien']."',";}
-  if (isset($joueur['scoreDefense']))             {$sql.="scoreDefense = '".$joueur['scoreDefense']."',";}
-  if (isset($joueur['scoreAilierOff']))           {$sql.="scoreAilierOff = '".$joueur['scoreAilierOff']."',";}
-  if (isset($joueur['scoreMilieu']))              {$sql.="scoreMilieu = '".$joueur['scoreMilieu']."',";}
-  if (isset($joueur['scoreAttaquant']))           {$sql.="scoreAttaquant = '".$joueur['scoreAttaquant']."',";}
-  if (isset($joueur['scoreAttaquantVersAile']))   {$sql.="scoreAttaquantVersAile = '".$joueur['scoreAttaquantVersAile']."',";}
-  if (isset($joueur['scoreAttaquantDef']))        {$sql.="scoreAttaquantDef = '".$joueur['scoreAttaquantDef']."',";}
-  if (isset($joueur['scoreDefCentralOff']))       {$sql.="scoreDefCentralOff = '".$joueur['scoreDefCentralOff']."',";}
-  if (isset($joueur['scoreDefLat']))              {$sql.="scoreDefLat = '".$joueur['scoreDefLat']."',";}
-  if (isset($joueur['scoreDefLatOff']))           {$sql.="scoreDefLatOff = '".$joueur['scoreDefLatOff']."',";}
-  if (isset($joueur['scoreMilieuOff']))           {$sql.="scoreMilieuOff = '".$joueur['scoreMilieuOff']."',";}
-  if (isset($joueur['scoreMilieuDef']))           {$sql.="scoreMilieuDef = '".$joueur['scoreMilieuDef']."',";}
-  if (isset($joueur['scoreAilier']))              {$sql.="scoreAilier = '".$joueur['scoreAilier']."',";}
-  if (isset($joueur['scoreAilierVersMilieu']))    {$sql.="scoreAilierVersMilieu = '".$joueur['scoreAilierVersMilieu']."',";}
-  if (isset($joueur['joueurActif']))              {$sql.="joueurActif = '".$joueur['joueurActif']."',";}
-  if (isset($joueur['affJoueur']))                {$sql.="affJoueur = '".$joueur['affJoueur']."',";}
-  if (isset($joueur['idopinion']))                {$sql.="idopinion = '".$joueur['idopinion']."',";}
-  if (isset($joueur['archiveJoueur']))            {$sql.="archiveJoueur = '".$joueur['archiveJoueur']."',";}
-  if (isset($joueur['entrainement_id']))          {$sql.="entrainement_id = '".$joueur['entrainement_id']."',";}
-  if (isset($joueur['salary']))                   {$sql.="salary = '".$joueur['salary']."',";}
-  if (isset($club["dateLastScanMatch"]))          {$sql.="dateLastScanMatch = '".$club["dateLastScanMatch"]."',";}
-  $sql=substr($sql,0,strlen($sql)-1);
-  $sql.=" WHERE idJoueur  = ".$joueur["idJoueur"];
-  $reqValid= $conn->exec($sql);
+	require($_SERVER['DOCUMENT_ROOT'].'/dtn/interface/includes/nomTables.inc.php');
 
-  if (!$reqValid) {
-    return false;
-  } else {
-      return $joueur["idJoueur"];
-  }
+	$sql="UPDATE $tbl_joueurs SET ";
+	if (isset($joueur['nomJoueur']))                {$sql.="nomJoueur = '".$joueur['nomJoueur']."',";}
+	if (isset($joueur['prenomJoueur']))             {$sql.="prenomJoueur = '".$joueur['prenomJoueur']."',";}
+	if (isset($joueur['teamid']))                   {$sql.="teamid = '".$joueur['teamid']."',";}
+	if (isset($joueur['idHattrickJoueur']))         {$sql.="idHattrickJoueur = '".$joueur['idHattrickJoueur']."',";}
+	if (isset($joueur['idAggre_fk']))               {$sql.="idAggre_fk = '".$joueur['idAggre_fk']."',";}
+	if (isset($joueur['idLeader_fk']))              {$sql.="idLeader_fk = '".$joueur['idLeader_fk']."',";}
+	if (isset($joueur['idCaractere_fk']))           {$sql.="idCaractere_fk = '".$joueur['idCaractere_fk']."',";}
+	if (isset($joueur['idHonnetete_fk']))           {$sql.="idHonnetete_fk = '".$joueur['idHonnetete_fk']."',";}
+	if (isset($joueur['idExperience_fk']))          {$sql.="idExperience_fk = '".$joueur['idExperience_fk']."',";}
+	if (isset($joueur['idEndurance']))              {$sql.="idEndurance = '".$joueur['idEndurance']."',";}
+	if (isset($joueur['idGardien']))                {$sql.="idGardien = '".$joueur['idGardien']."',";}
+	if (isset($joueur['idConstruction']))           {$sql.="idConstruction = '".$joueur['idConstruction']."',";}
+	if (isset($joueur['idPasse']))                  {$sql.="idPasse = '".$joueur['idPasse']."',";}
+	if (isset($joueur['idAilier']))                 {$sql.="idAilier = '".$joueur['idAilier']."',";}
+	if (isset($joueur['idDefense']))                {$sql.="idDefense = '".$joueur['idDefense']."',";}
+	if (isset($joueur['idButeur']))                 {$sql.="idButeur = '".$joueur['idButeur']."',";}
+	if (isset($joueur['idPA']))                     {$sql.="idPA = '".$joueur['idPA']."',";}
+	if (isset($joueur['optionJoueur']))             {$sql.="optionJoueur = '".$joueur['optionJoueur']."',";}
+	if (isset($joueur['dateSaisieJoueur']))         {$sql.="dateSaisieJoueur = '".$joueur['dateSaisieJoueur']."',";}
+	if (isset($joueur['dateDerniereModifJoueur']))  {$sql.="dateDerniereModifJoueur = '".$joueur['dateDerniereModifJoueur']."',";}
+	if (isset($joueur['date_modif_effectif']))      {$sql.="date_modif_effectif = '".$joueur['date_modif_effectif']."',";}
+	if (isset($joueur['saisonApparitionJoueur']))   {$sql.="saisonApparitionJoueur = '".$joueur['saisonApparitionJoueur']."',";}
+	if (isset($joueur['ageJoueur']))                {$sql.="ageJoueur = '".$joueur['ageJoueur']."',";}
+	if (isset($joueur['jourJoueur']))               {$sql.="jourJoueur = '".$joueur['jourJoueur']."',";}
+	if (isset($joueur['datenaiss']))                {$sql.="datenaiss = '".$joueur['datenaiss']."',";}
+	if (isset($joueur['AdminSaisieJoueur_fk']))     {$sql.="AdminSaisieJoueur_fk = '".$joueur['AdminSaisieJoueur_fk']."',";}
+	if (isset($joueur['dtnSuiviJoueur_fk']))        {$sql.="dtnSuiviJoueur_fk = '".$joueur['dtnSuiviJoueur_fk']."',";}
+	if (isset($joueur['ht_posteAssigne']))          {$sql.="ht_posteAssigne = '".$joueur['ht_posteAssigne']."',";}
+	if (isset($joueur['scoreGardien']))             {$sql.="scoreGardien = '".$joueur['scoreGardien']."',";}
+	if (isset($joueur['scoreDefense']))             {$sql.="scoreDefense = '".$joueur['scoreDefense']."',";}
+	if (isset($joueur['scoreAilierOff']))           {$sql.="scoreAilierOff = '".$joueur['scoreAilierOff']."',";}
+	if (isset($joueur['scoreMilieu']))              {$sql.="scoreMilieu = '".$joueur['scoreMilieu']."',";}
+	if (isset($joueur['scoreAttaquant']))           {$sql.="scoreAttaquant = '".$joueur['scoreAttaquant']."',";}
+	if (isset($joueur['scoreAttaquantVersAile']))   {$sql.="scoreAttaquantVersAile = '".$joueur['scoreAttaquantVersAile']."',";}
+	if (isset($joueur['scoreAttaquantDef']))        {$sql.="scoreAttaquantDef = '".$joueur['scoreAttaquantDef']."',";}
+	if (isset($joueur['scoreDefCentralOff']))       {$sql.="scoreDefCentralOff = '".$joueur['scoreDefCentralOff']."',";}
+	if (isset($joueur['scoreDefLat']))              {$sql.="scoreDefLat = '".$joueur['scoreDefLat']."',";}
+	if (isset($joueur['scoreDefLatOff']))           {$sql.="scoreDefLatOff = '".$joueur['scoreDefLatOff']."',";}
+	if (isset($joueur['scoreMilieuOff']))           {$sql.="scoreMilieuOff = '".$joueur['scoreMilieuOff']."',";}
+	if (isset($joueur['scoreMilieuDef']))           {$sql.="scoreMilieuDef = '".$joueur['scoreMilieuDef']."',";}
+	if (isset($joueur['scoreAilier']))              {$sql.="scoreAilier = '".$joueur['scoreAilier']."',";}
+	if (isset($joueur['scoreAilierVersMilieu']))    {$sql.="scoreAilierVersMilieu = '".$joueur['scoreAilierVersMilieu']."',";}
+	if (isset($joueur['joueurActif']))              {$sql.="joueurActif = '".$joueur['joueurActif']."',";}
+	if (isset($joueur['affJoueur']))                {$sql.="affJoueur = '".$joueur['affJoueur']."',";}
+	if (isset($joueur['idopinion']))                {$sql.="idopinion = '".$joueur['idopinion']."',";}
+	if (isset($joueur['archiveJoueur']))            {$sql.="archiveJoueur = '".$joueur['archiveJoueur']."',";}
+	if (isset($joueur['entrainement_id']))          {$sql.="entrainement_id = '".$joueur['entrainement_id']."',";}
+	if (isset($joueur['salary']))                   {$sql.="salary = '".$joueur['salary']."',";}
+	if (isset($club["dateLastScanMatch"]))          {$sql.="dateLastScanMatch = '".$club["dateLastScanMatch"]."',";}
+	$sql=substr($sql,0,strlen($sql)-1);
+	$sql.=" WHERE idJoueur = ".$joueur["idJoueur"];
+	$reqValid = $conn->exec($sql);
+
+	if ($reqValid === FALSE) {
+		return false;
+	} else {
+		return $joueur["idJoueur"];
+	}
 
 }
 
@@ -1837,11 +1837,11 @@ function updateEntrainement($entrainement) {
   $sql.=" WHERE idJoueur_fk  = ".$entrainement["idJoueur_fk"];
   $reqValid= $conn->exec($sql);
 
-  if (!$reqValid) {
-    return false;
-  } else {
-      return $entrainement['idJoueur_fk'];
-  }
+	if ($reqValid === FALSE) {
+		return false;
+	} else {
+		return $entrainement['idJoueur_fk'];
+	}
 
 }
 
@@ -2174,20 +2174,21 @@ function majJoueur($ht_user,$role_user,$joueurHT,$joueurDTN){
     
     //******* UPDATE dans la table HT_JOUEURS *******//
     if (isset($update_joueur)) {
-       $resMAJ['idJoueur']=$update_joueur['idJoueur']=$joueurDTN['idJoueur'];
-       //******** Date Derniere Modif Joueur ************//
-       $update_joueur['dateDerniereModifJoueur']=date('Y-m-d');
-       $idJoueur=updateJoueur($update_joueur);
-    	 if (!$idJoueur) {
-          $resMAJ['HTML'].='<font color=orange>Echec de la MAJ du joueur : '.$joueurDTN["idHattrickJoueur"].'</font>';
-          $filename = $_SERVER['DOCUMENT_ROOT'].'/log/gg.txt';
-          $myfile=fopen($filename,'a+');
-          fputs($myfile, "Echec de la MAJ du joueur : ".$joueurDTN["idHattrickJoueur"]."\n");
-          fclose($myfile);
-            
-          return $resMAJ;  
+		$resMAJ['idJoueur']=$update_joueur['idJoueur']=$joueurDTN['idJoueur'];
+		//******** Date Derniere Modif Joueur ************//
+		$update_joueur['dateDerniereModifJoueur']=date('Y-m-d');
+		$idJoueur=updateJoueur($update_joueur);
+    	if (!$idJoueur) {
+			$resMAJ['HTML'].='<font color=orange>Echec de la MAJ du joueur : '.$joueurDTN["idHattrickJoueur"].'</font>';
+			$filename = $_SERVER['DOCUMENT_ROOT'].'/log/gg.txt';
+			$myfile=fopen($filename,'a+');
+			if ($myfile != FALSE) {
+				fputs($myfile, "Echec de la MAJ du joueur : ".$joueurDTN["idHattrickJoueur"]."\n");
+				fclose($myfile);
+            }
+			return $resMAJ;  
        } else {
-          $resMAJ['joueur_est_maj']=true;
+			$resMAJ['joueur_est_maj']=true;
        }
     }
     unset($update_joueur);
@@ -2201,14 +2202,14 @@ function majJoueur($ht_user,$role_user,$joueurHT,$joueurDTN){
     $existHJ = existHistoJoueur($joueurDTN["idHattrickJoueur"],$actualSeason["season"],$actualSeason["week"]);
 
     if ($existHJ==false) {
-      $resMAJ['joueurs_histo']=$update_joueurs_histo=getDataJoueurHisto($joueurHT,$actualSeason);
-      $resMAJ['joueurs_histo']['id_joueur_histo'] = insertJoueurHisto($update_joueurs_histo);
+		$resMAJ['joueurs_histo']=$update_joueurs_histo=getDataJoueurHisto($joueurHT,$actualSeason);
+		$resMAJ['joueurs_histo']['id_joueur_histo'] = insertJoueurHisto($update_joueurs_histo);
     } else {
       //echo("<br />nom=".$joueurDTN["nomJoueur"]."|old=".$existHJ[0]['transferListed']."|new=".$joueurHT['transferListed']);
       //Sinon, on remet � jour uniquement si le joueur est en vente
-      if (($existHJ[0]['transferListed']==0) && ($joueurHT['transferListed']==1)) {
+      if (($existHJ['transferListed']==0) && ($joueurHT['transferListed']==1)) {
           $resMAJ["transferListed"]=$update_joueurs_histo["transferListed"]=$joueurHT["transferListed"];
-          $update_joueurs_histo['id_joueur_histo']=$existHJ[0]['id_joueur_histo'];
+          $update_joueurs_histo['id_joueur_histo']=$existHJ['id_joueur_histo'];
           $resMAJ['id_joueur_histo'] = updateJoueurHisto($update_joueurs_histo);
       }
     }
@@ -2226,24 +2227,23 @@ function majJoueur($ht_user,$role_user,$joueurHT,$joueurDTN){
 
     //******* INSERT dans la table HT_HISTOMODIF si il y a une modification *******//
     if ($histoModifMsg!=null){
-      $histoModifMsg="[".$ht_user."](hattrick) ".$histoModifMsg;
-      $_POST["idHisto"]="";    
-      $_POST["idAdmin_fk"] ="";
-      $_POST["idProgression_fk"]="";
-      $_POST["idPerf_fk"]="";    
-      $_POST["idJoueur_fk"] = $joueurDTN["idJoueur"];
-      $_POST["dateHisto"] = date("Y-m-d");
-      $_POST["heureHisto"] = date("H:i:s");
-      $_POST["intituleHisto"]  = $histoModifMsg;
-      $sql = insertDB("ht_histomodif");
-      unset($_POST);
-    } else 
-  
-    $resMAJ['idJoueur']=$joueurDTN['idJoueur'];
-    $resMAJ['idHattrickJoueur']=$joueurDTN['idHattrickJoueur'];
-    if (isset($joueurHT['teamid'])) {$resMAJ['teamid']=$joueurHT['teamid'];} else {$resMAJ['teamid']=$joueurDTN['teamid'];}
+		$histoModifMsg="[".$ht_user."](hattrick) ".$histoModifMsg;
+		$_POST["idHisto"]="";    
+		$_POST["idAdmin_fk"] ="";
+		$_POST["idProgression_fk"]="";
+		$_POST["idPerf_fk"]="";    
+		$_POST["idJoueur_fk"] = $joueurDTN["idJoueur"];
+		$_POST["dateHisto"] = date("Y-m-d");
+		$_POST["heureHisto"] = date("H:i:s");
+		$_POST["intituleHisto"]  = $histoModifMsg;
+		$sql = insertDB("ht_histomodif");
+		unset($_POST);
+    }
 
-  return ($resMAJ);
+	$resMAJ['idJoueur']=$joueurDTN['idJoueur'];
+	$resMAJ['idHattrickJoueur']=$joueurDTN['idHattrickJoueur'];
+	if (isset($joueurHT['teamid'])) {$resMAJ['teamid']=$joueurHT['teamid'];} else {$resMAJ['teamid']=$joueurDTN['teamid'];}
+	return ($resMAJ);
         
 }
 
@@ -2271,7 +2271,7 @@ function getDataJoueurHisto($joueurHT,$actualSeason=null) {
   if (isset($joueurHT['teamid'])) {
     // Coefficient � utiliser pour le calcul du salaire hors charges
     $sql="SELECT 
-              P.coefSalary 
+              P.coefSalary as coefSalary
           FROM 
               $tbl_pays   P,
               $tbl_clubs  C
@@ -2413,7 +2413,7 @@ function insertJoueurHisto($row_joueurs_histo){
   if (!$reqValid) {
     return -1;
   } else {
-    return mysql_insert_id();
+    return $conn->lastInsertId();
   }
 
 }
@@ -2435,7 +2435,7 @@ function insertJoueurHisto($row_joueurs_histo){
 function existHistoJoueur($idHTjoueur,$season,$week){
 	global $conn;
 
-  require($_SERVER['DOCUMENT_ROOT'].'/dtn/interface/includes/nomTables.inc.php');
+	require($_SERVER['DOCUMENT_ROOT'].'/dtn/interface/includes/nomTables.inc.php');
 	  
 	$sql = 'SELECT * 
           FROM  '.$tbl_joueurs_histo.' 
@@ -2444,9 +2444,9 @@ function existHistoJoueur($idHTjoueur,$season,$week){
           AND   week='.$week.' 
           LIMIT 1';
 	
-  $result= $conn->query($sql);
-  $tabS = $result->fetch();
-  $result = NULL;
+	$result= $conn->query($sql);
+	$tabS = $result->fetch(PDO::FETCH_ASSOC);
+	$result = NULL;
   
 	return $tabS;
 }
@@ -2523,55 +2523,54 @@ function scanListeJoueurs($listeIDJoueur,$utilisateur,$role,$faireMAJ=true,$char
 	if (isset($resuJ)) {unset($resuJ);}
 	$j=0;
 
-  // Recherche du joueur sur HT et dans la base DTN
-  foreach ($listeIDJoueur as $IDJoueur) {
-    
-    $trouveDTN=true;
-    $trouveHT=true;
-    $joueurDTN=getJoueurHt($IDJoueur);
-    
-    if ($faireMAJ==false) {
+	// Recherche du joueur sur HT et dans la base DTN
+	foreach ($listeIDJoueur as $IDJoueur) {
+		$trouveDTN=true;
+		$trouveHT=true;
+		$joueurDTN=getJoueurHt($IDJoueur);
 
-      if ($joueurDTN != false) { // joueur existe dans base DTN
-        $resuJ[$j]['poste']=validateMinimaPlayer($joueurDTN,$todaySeason); // Est-ce que le joueur v�rifie les minimas ?
-        $resuJ[$j]['idJoueur']=$joueurDTN['idJoueur'];
-      }
+		if ($faireMAJ==false) {
+
+			if ($joueurDTN != false) { // joueur existe dans base DTN
+				$resuJ[$j]['poste']=validateMinimaPlayer($joueurDTN,$todaySeason); // Est-ce que le joueur v�rifie les minimas ?
+				$resuJ[$j]['idJoueur']=$joueurDTN['idJoueur'];
+			}
       
-    } elseif ($faireMAJ==true) {
+		} elseif ($faireMAJ==true) {
     
-      $joueurHT=getDataUnJoueurFromHT_usingPHT($IDJoueur);
+			$joueurHT=getDataUnJoueurFromHT_usingPHT($IDJoueur);
 //echo($joueurHT["idHattrickJoueur"]);            
-      if ($joueurHT != false) {
-        if ($joueurHT['caracVisible']==true) {
-          $poste=validateMinimaPlayer($joueurHT,$todaySeason); // Est-ce que le joueur v�rifie les minimas ?
-        } else {
-          $poste=-2; // Tous les joueurs sont accept�s si on ne connait pas les caracs. Ne devrait arriver que lors d'une soumission par un dtn
-        }
+			if ($joueurHT != false) {
+				if ($joueurHT['caracVisible']==true) {
+					$poste=validateMinimaPlayer($joueurHT,$todaySeason); // Est-ce que le joueur v�rifie les minimas ?
+				} else {
+					$poste=-2; // Tous les joueurs sont accept�s si on ne connait pas les caracs. Ne devrait arriver que lors d'une soumission par un dtn
+				}
 
-        if ($joueurDTN != false) { // joueur existe dans base DTN
-          $resuJ[$j]=majJoueur($utilisateur,$role,$joueurHT,$joueurDTN); // Joueur mis � jour si d�j� existant en base. Sinon, on ne fait rien. 
+				if ($joueurDTN != false) { // joueur existe dans base DTN
+					$resuJ[$j]=majJoueur($utilisateur,$role,$joueurHT,$joueurDTN); // Joueur mis � jour si d�j� existant en base. Sinon, on ne fait rien. 
 
-        } else { /* Joueur inexistant dans base DTN */
-          $trouveDTN=false;
+				} else { /* Joueur inexistant dans base DTN */
+					$trouveDTN=false;
         
-          if ($poste == -2){ // multi ou incoh�rence d�tect�e => aucun poste assign�
-      				$resuJ[$j]=ajoutJoueur($utilisateur,$role,$joueurHT,$joueurDTN,0);
-      		} elseif ($poste != -1) {
-      				$resuJ[$j]=ajoutJoueur($utilisateur,$role,$joueurHT,$joueurDTN,$poste);
-      		}
-        }
+					if ($poste == -2){ // multi ou incoh�rence d�tect�e => aucun poste assign�
+						$resuJ[$j]=ajoutJoueur($utilisateur,$role,$joueurHT,$joueurDTN,0);
+					} elseif ($poste != -1) {
+						$resuJ[$j]=ajoutJoueur($utilisateur,$role,$joueurHT,$joueurDTN,$poste);
+					}
+				}
         
-        $resuJ[$j]['poste']=$poste;
+				$resuJ[$j]['poste']=$poste;
       
-      } else { // Joueur inexistant sur HT ou connexion plant�e
-        $trouveHT=false;
-        $resuJ[$j]['HTML']='<tr><td colspan=10><br /><font color=orange>Joueur introuvable ou connexion ht termin&eacute;e : '.$IDJoueur.'</font></td></tr>';
-      }
+			} else { // Joueur inexistant sur HT ou connexion plant�e
+				$trouveHT=false;
+				$resuJ[$j]['HTML']='<tr><td colspan=10><br /><font color=orange>Joueur introuvable ou connexion ht termin&eacute;e : '.$IDJoueur.'</font></td></tr>';
+			}
 
-    } else {
-      echo("Valeur param�tre faire MAJ incorrecte");
-      exit;
-    }
+		} else {
+			echo("Valeur param�tre faire MAJ incorrecte");
+			exit;
+		}
 
 
     // Chargement des matchs
@@ -2593,29 +2592,28 @@ function scanListeJoueurs($listeIDJoueur,$utilisateur,$role,$faireMAJ=true,$char
 
   } // Fin Boucle sur liste ID joueurs
 
-  // maj Club
-  if ($faireMAJ==true) {
-    $liste_clubs=array_unique($liste_clubs); // Suppression des doublons
+	// maj Club
+	if ($faireMAJ==true) {
+		$liste_clubs=array_unique($liste_clubs); // Suppression des doublons
 
-    foreach ($liste_clubs as $club) {
-      $resuC[$club]['club']=majClub($club);
-      $resuC[$club]['clubHisto']=majClubHisto($club,$utilisateur,$role);
-    }
+		foreach ($liste_clubs as $club) {
+			$resuC[$club]['club']=majClub($club);
+			$resuC[$club]['clubHisto']=majClubHisto($club,$utilisateur,$role);
+		}
 
-    // Concat�nation de l'affichage HTML & r�cup�ration des identifiants maj Club et histo club
-    for ($j=0;$j<count($resuJ);$j++) {
-      if (isset($resuJ[$j]['idJoueur']) && $resuJ[$j]['idJoueur'] > 0) { // Il y a eu maj ou ajout du joueur
-         if (isset($resuC[$resuJ[$j]['teamid']]['club']['idClub'])) $resuJ[$j]['idClub']=$resuC[$resuJ[$j]['teamid']]['club']['idClub'];
-         if (isset($resuC[$resuJ[$j]['teamid']]['clubHisto']['id_clubs_histo'])) $resuJ[$j]['id_clubs_histo']=$resuC[$resuJ[$j]['teamid']]['clubHisto']['id_clubs_histo'];
-         if (!isset($resuJ[$j]['HTML'])) $resuJ[$j]['HTML']="";
-         if (isset($resuC[$resuJ[$j]['teamid']]['club']['HTML'])) $resuJ[$j]['HTML'] .= $resuC[$resuJ[$j]['teamid']]['club']['HTML']; // Club
-         if (isset($resuC[$resuJ[$j]['teamid']]['clubHisto']['HTML'])) $resuJ[$j]['HTML'] .= $resuC[$resuJ[$j]['teamid']]['clubHisto']['HTML']; // Club
-         $resuJ[$j]['HTML'] .= "</td>";
-         if (isset($resuM[$j]['HTML'])) $resuJ[$j]['HTML'] .= $resuM[$j]['HTML']; // Matchs
-      }
-    }
-    
-  }
+		// Concat�nation de l'affichage HTML & r�cup�ration des identifiants maj Club et histo club
+		for ($j=0;$j<count($resuJ);$j++) {
+			if (isset($resuJ[$j]['idJoueur']) && $resuJ[$j]['idJoueur'] > 0) { // Il y a eu maj ou ajout du joueur
+				if (isset($resuC[$resuJ[$j]['teamid']]['club']['idClub'])) $resuJ[$j]['idClub']=$resuC[$resuJ[$j]['teamid']]['club']['idClub'];
+				if (isset($resuC[$resuJ[$j]['teamid']]['clubHisto']['id_clubs_histo'])) $resuJ[$j]['id_clubs_histo']=$resuC[$resuJ[$j]['teamid']]['clubHisto']['id_clubs_histo'];
+				if (!isset($resuJ[$j]['HTML'])) $resuJ[$j]['HTML']="";
+				if (isset($resuC[$resuJ[$j]['teamid']]['club']['HTML'])) $resuJ[$j]['HTML'] .= $resuC[$resuJ[$j]['teamid']]['club']['HTML']; // Club
+				if (isset($resuC[$resuJ[$j]['teamid']]['clubHisto']['HTML'])) $resuJ[$j]['HTML'] .= $resuC[$resuJ[$j]['teamid']]['clubHisto']['HTML']; // Club
+				$resuJ[$j]['HTML'] .= "</td>";
+				if (isset($resuM[$j]['HTML'])) $resuJ[$j]['HTML'] .= $resuM[$j]['HTML']; // Matchs
+			}
+		}
+	}
   
 	return $resuJ;	 					
 }

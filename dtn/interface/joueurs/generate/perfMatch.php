@@ -1,6 +1,6 @@
 <?php
 ini_set('error_reporting', E_ERROR);
-require("../../includes/head.inc.php");
+require_once("../../includes/head.inc.php");
 
 
 $sql = "select * from $tbl_joueurs, $tbl_position where idJoueur = $id and ht_posteAssigne  = idPosition";

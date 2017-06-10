@@ -26,9 +26,9 @@ else
 
 require($cheminComplet."includes/connect.inc.php");
 require($cheminComplet."includes/nomTables.inc.php");
-require($cheminComplet."/includes/fonctions.php");
-require($cheminComplet."/fonctions/HT_Client.php");
-include($monServeur."/framework/PHT/PHT.php");
+require_once($cheminComplet."/includes/fonctions.php");
+require_once($cheminComplet."/fonctions/HT_Client.php");
+include_once($monServeur."/framework/PHT/PHT.php");
 
 // Variables de session
 session_start();

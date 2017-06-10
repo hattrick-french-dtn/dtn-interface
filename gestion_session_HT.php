@@ -87,7 +87,7 @@ if (!isset($_SESSION['horsConnexion'])) {
         */
 		$userId = $_SESSION['HT']->getClub()->getUserId();
 		$teamNb = $_SESSION['HT']->getNumberOfTeams($userId);
-		for ($tsidx=$teamNb; $tsidx >= 0; $tsidx--) {
+		for ($tsidx=$teamNb-1; $tsidx >= 0; $tsidx--) {
 			// On commence par le 2e club s'il y a pour faire la maj
 			$team2 = $_SESSION['HT']->getSecondaryTeam($userId, $tsidx);
 			if ($team2 != null)

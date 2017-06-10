@@ -1,5 +1,5 @@
 <?php
-require("../includes/head.inc.php");
+require_once("../includes/head.inc.php");
 require("../CHPP/config.php");
 require("../includes/serviceJoueur.php");
 
@@ -7,9 +7,9 @@ require("../includes/serviceJoueur.php");
 
 
 if(!$sesUser["idAdmin"])
-	{
+{
 	header("location: index.php?ErrorMsg=Session Expir�");
-	}
+}
 
 
 if(!isset($lang)) $lang = "FR";

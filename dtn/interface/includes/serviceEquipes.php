@@ -105,9 +105,8 @@ function getClubID($idClub,$idUser=null)
 	elseif ($idUser!==null) {$sql .= "WHERE idUserHT = $idUser";}
 	elseif ($idClub===null && $idUser===null) {return $tabS;}
 
-	foreach ($conn->query($sql) as $row) {
-		array_push($tabS, $row);
-	}
+	$res = $conn->query($sql);
+	$tabS = $res->fetch(PDO::FETCH_ASSOC);
 	
 	return	$tabS;
 }
@@ -306,6 +305,7 @@ function getDataClubFromHT_usingPHT($idClubHT=null, $idUserHT=null){
 /******************************************************************************/
 function insertionClub($club){
 	global $conn;
+	global $cheminComplet;
 
 	require($cheminComplet.'includes/nomTables.inc.php');
 
@@ -349,7 +349,7 @@ function insertionClub($club){
 			return $conn->lastInsertId();
 		}
 
-	} elseif(mysql_num_rows($req) == 1){ /* le club existe dans la base => on le met � jour */
+	} elseif($req->rowCount() == 1){ /* le club existe dans la base => on le met � jour */
         $tab = $req->fetch(PDO::FETCH_ASSOC);
         $club['idClub'] = $tab['idClub'];
         return updateClub($club);
@@ -374,6 +374,7 @@ function insertionClub($club){
 /******************************************************************************/
 function updateClub($club){
 	global $conn;
+	global $cheminComplet;
 
 	require($cheminComplet.'includes/nomTables.inc.php');
 	//print_r($club);
@@ -421,6 +422,7 @@ function updateClub($club){
 function insertHistoClub_Joueurs($id_Clubs_Histo,$idClubHT)
 {
 	global $conn;
+	global $cheminComplet;
 
 	require($cheminComplet.'includes/nomTables.inc.php');
 
@@ -460,6 +462,7 @@ function insertHistoClub_Joueurs($id_Clubs_Histo,$idClubHT)
 /******************************************************************************/
 function update_entrainementJoueursDeEquipe($id_Clubs_Histo){
 	global $conn;
+	global $cheminComplet;
 
 	require($cheminComplet.'includes/nomTables.inc.php');
 
@@ -594,6 +597,7 @@ function getDataClubsHistoFromHT_usingPHT($idClubHT=null){
 /******************************************************************************/
 function insertHistoClub($row_clubs_histo){
 	global $conn;
+	global $cheminComplet;
 
 	require($cheminComplet.'includes/nomTables.inc.php');
 
@@ -761,6 +765,7 @@ function getNbJourLastConnexion($date_last_connexion){
 /******************************************************************************/
 function getLastHistoClub($idClubHT){
 	global $conn;
+	global $cheminComplet;
 
 	require($cheminComplet.'includes/nomTables.inc.php');
 
@@ -897,14 +902,14 @@ function majClub($idClubHT=null,$idUserHT=null,$clubDTN=null)
 	if ($clubDTN != false) {
  
 		//Test idUserHT
-		if ($clubDTN["idUserHT"]!=$clubHT["idUserHT"])
+		if (isset($clubDTN["idUserHT"]) && $clubDTN["idUserHT"]!=$clubHT["idUserHT"])
 		{
 			$modifclub=True;
 			$resu["logModif"] .= "ID user : ".$clubDTN["idUserHT"]." -> ".$clubHT["idUserHT"]."\n";
 			$resu["HTML"] .= "Changement proprio-ID user :".$clubDTN["idUserHT"]." -&gt; ".$clubHT["idUserHT"]."<br />";
 		}
 		//Test status de bot
-		if ($clubDTN["isBot"]!=$clubHT["isBot"])
+		if (isset($clubDTN["isBot"]) && $clubDTN["isBot"]!=$clubHT["isBot"])
 		{
 			$modifclub=True;
 			$resu["logModif"] .= "Bot : ".$clubDTN["isBot"]." -> ".$clubHT["isBot"]."\n";
@@ -1012,7 +1017,8 @@ function majClub($idClubHT=null,$idUserHT=null,$clubDTN=null)
 /********************************************************************************************/
 function majClubHisto($idClubHT,$cree_par,$role_createur)
 {
-  require_once($cheminComplet.'includes/serviceEntrainement.php');
+	global $cheminComplet;
+	require_once($cheminComplet.'includes/serviceEntrainement.php');
 
   unset ($resu);
   $modif=false;

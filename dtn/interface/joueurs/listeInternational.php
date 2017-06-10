@@ -1,11 +1,11 @@
 <?php 
-require("../includes/head.inc.php");
+require_once("../includes/head.inc.php");
 require("../includes/serviceJoueur.php");
 require("../includes/serviceDTN.php");
 if(!$sesUser["idAdmin"])
-	{
+{
 	header("location: index.php?ErrorMsg=Session Expire");
-	}
+}
 if(!isset($ordre)) $ordre = "nomJoueur";
 if(!isset($sens)) $sens = "ASC";
 if(!isset($lang)) $lang = "FR";

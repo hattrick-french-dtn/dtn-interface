@@ -1,14 +1,14 @@
 <?php 
-          error_reporting(E_ALL);
-        require_once "../_config/CstGlobals.php"; // fonctions d'admin
-        require_once "../fonctions/AccesBase.php"; // fonction de connexion � la base
-        require_once "../fonctions/AdminDtn.php"; // fonctions d'admin
-        require_once("../includes/head.inc.php");
-        $maBase = initBD();
+error_reporting(E_ALL);
+require_once "../_config/CstGlobals.php"; // fonctions d'admin
+require_once "../fonctions/AccesBase.php"; // fonction de connexion � la base
+require_once "../fonctions/AdminDtn.php"; // fonctions d'admin
+require_once("../includes/head.inc.php");
+$maBase = initBD();
 if(!$sesUser["idAdmin"])
-	{
+{
 	header("location: ../index.php?ErrorMsg=Session Expiree");
-	}
+}
 
 
 switch($sesUser["idNiveauAcces"]){

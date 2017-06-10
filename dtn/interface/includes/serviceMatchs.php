@@ -254,7 +254,7 @@ function existMatchBaseDTN($matchid,$joueurid,$maBase=null)
 		$res = $maBase->select($sql);
 		$countMatch  = $res[0]['nbMatch'];
 	} else {
-		$req= $conn->query($sql));
+		$req= $conn->query($sql);
     
 		if ($req!=false) {
 			$res = $req->fetch();

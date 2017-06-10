@@ -1,18 +1,18 @@
 <?php 
-        require_once "../_config/CstGlobals.php"; // fonctions d'admin
-        require_once "../fonctions/AccesBase.php"; // fonction de connexion a la base
-        require_once "../fonctions/AdminDtn.php"; // fonctions d'admin
-        require("../includes/head.inc.php");
-        $maBase = initBD();
-        
-		require("../includes/serviceJoueur.php");
-		require("../includes/langue.inc.php");
-		require("../includes/serviceListesDiverses.php");
+require_once("../_config/CstGlobals.php"); // fonctions d'admin
+require_once("../fonctions/AccesBase.php"); // fonction de connexion a la base
+require_once("../fonctions/AdminDtn.php"); // fonctions d'admin
+require_once("../includes/head.inc.php");
+$maBase = initBD();
+
+require("../includes/serviceJoueur.php");
+require("../includes/langue.inc.php");
+require("../includes/serviceListesDiverses.php");
 		
 if(!$sesUser["idAdmin"])
-	{
+{
 	header("location: index.php?ErrorMsg=Session Expiree");
-	}
+}
 		
 ?>
 <link href="../css/ht2.css" rel="stylesheet" type="text/css">

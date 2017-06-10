@@ -180,7 +180,7 @@ function insertDB ($table)
 	$k = 0;
 	// Recuperation du nombre de champ et libelle par table
 	if ($nbChamp > 0) {
-		while ($row_found = $result_columns->fetch()))
+		while ($row_found = $result_columns->fetch())
         {
 			$typeField[$k] = $row_found['Type']; // mysql_field_type ($list, $j);
 			$tblChamp[$k] =  $row_found['Field']; // mysql_field_name ($list, $j);
@@ -322,7 +322,7 @@ function majDB ()
     }
 	if ($result_columns->rowCount() > 0)
     {
-		while ($row_found = $result_columns->fetch()))
+		while ($row_found = $result_columns->fetch())
         {
 			$typeField[$k] = $row_found["Type"];
 			$tblChamp[$k] = $row_found["Field"];
@@ -416,7 +416,7 @@ function supprDB ()
 	$k = 0;
 	// Recuperation du nombre de champ et libelle par table
 	if ($nbChamp > 0) {
-		while ($row_found = $result_columns->fetch()))
+		while ($row_found = $result_columns->fetch())
         {
 			$typeField[$k] = $row_found['Type']; // mysql_field_type ($list, $j);
 			$tblChamp[$k] =  $row_found['Field']; // mysql_field_name ($list, $j);

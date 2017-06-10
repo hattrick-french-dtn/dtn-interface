@@ -5,7 +5,7 @@
 // some of the capabilities of JpGraph.
 
 
-require("../../includes/head.inc.php");
+require_once("../../includes/head.inc.php");
 require("../../CHPP/config.php");
 
 $sql =" SELECT * , count( id_match ) AS nbPerf, AVG( etoile ) AS perfMoyenne ".

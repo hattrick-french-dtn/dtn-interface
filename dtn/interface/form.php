@@ -1,6 +1,6 @@
 <?php
 ini_set('display_errors','1');
-require("includes/head.inc.php");
+require_once("includes/head.inc.php");
 require("includes/nomTables.inc.php");
 require("includes/serviceJoueur.php");
 require("includes/serviceEquipes.php");

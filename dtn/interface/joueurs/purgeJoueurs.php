@@ -1,9 +1,9 @@
 <?php
-require_once "../includes/head.inc.php";
+require_once("../includes/head.inc.php");
 
 if ( (!isset($_SESSION['sesUser'])) || (empty($_SESSION['sesUser'])) )
 {
-  header("location: ../index.php?ErrorMsg=Session Expiree");
+	header("location: ../index.php?ErrorMsg=Session Expiree");
 }
 
 require_once "../_config/CstGlobals.php"; // fonctions d'admin
