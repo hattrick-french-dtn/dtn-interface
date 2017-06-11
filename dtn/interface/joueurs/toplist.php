@@ -41,7 +41,7 @@ switch($sesUser["idNiveauAcces"]){
 
 if(!isset($nb) || $nb == "") $nb = "15";
 if(!isset($age) || $age == "") $age = "17";
-
+if (!isset($masque)) $masque = 0;
 
 if(!isset($affPosition) || $affPosition == "") {
 	if (($sesUser["idPosition_fk"] == "") or ($sesUser["idPosition_fk"] == "0")){

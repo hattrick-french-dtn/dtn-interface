@@ -212,7 +212,7 @@ case 13:
 
 
 <br>
-<form name="form_htwww" method="post" action="<?=$PHP_SELF?>?action=setnbplayers&secteur=<?=$secteur?>" >
+<form name="form_htwww" method="post" action="<?=$_SERVER['PHP_SELF']?>?action=setnbplayers&secteur=<?=$secteur?>" >
   <b><font color=red>[<a href="formules.php">Formules!</a>]</font></b><?php
 
 
