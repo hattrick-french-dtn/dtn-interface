@@ -78,14 +78,14 @@ class AccesBase{
 
 	function select ($sql) {
 		if(empty($sql)) return false;
-		if(!eregi("^select",$sql)) { $this->signaleErr(1); return false; }
+		if(!preg_match("/^select/i",$sql)) { $this->signaleErr(1); return false; }
 
 		if(empty($this->CONNECTION)) {$this->signaleErr(2); return false; }
 		$results = $this->CONNECTION->query($sql);
 		if( (!$results) or (empty($results)) ) {$this->signaleErr(0); return false; }
 		$c = 0;
 		$data = array();
-		while ( $row = $results->fetch(PDO::FETCH_ASSOC))
+		while ( $row = $results->fetch(PDO::FETCH_BOTH))
 		{
 			$data[$c] = $row;
 			$c++;
@@ -96,7 +96,7 @@ class AccesBase{
 
 	function insert ($sql) {
 		if(empty($sql)) { return false; }
-		if(!eregi("^insert",$sql))
+		if(!preg_match("/^insert/i",$sql))
 		{
 			$this->signaleErr(1);
 			return false;
@@ -113,7 +113,7 @@ class AccesBase{
 	function update($sql)
 	{
 		if(empty($sql)) return false;
-		if(!eregi("^update",$sql)) {$this->signaleErr(1); return false; }
+		if(!preg_match("/^update/i",$sql)) {$this->signaleErr(1); return false; }
 		if(empty($this->CONNECTION)) {$this->signaleErr(2); return false; }
 		$results = $this->CONNECTION->exec($sql);
 		if(!$results) {$this->signaleErr(0); return false; }
@@ -124,7 +124,7 @@ class AccesBase{
 	function delete($sql)
 	{
 		if(empty($sql)) return false;
-		if(!eregi("^delete",$sql)) {$this->signaleErr(1); return false; }
+		if(!preg_match("/^delete/i",$sql)) {$this->signaleErr(1); return false; }
 		if(empty($this->CONNECTION)) {$this->signaleErr(2); return false; }
 		$results = $this->CONNECTION->exec($sql);
 		if(!$results) {$this->signaleErr(0); return false; }
