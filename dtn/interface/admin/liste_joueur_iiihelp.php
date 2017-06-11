@@ -112,7 +112,7 @@ switch($sesUser["idNiveauAcces"]){
 				 
 		$sql = "select * from ht_iiihelp_joueur, ht_joueurs where ht_iiihelp_joueur.id_dtn = ht_joueurs.idJoueur and etat = 0 order by id_HT";
 		$i = 0;
-		while ($conn->query($sql) as $res)
+		foreach ($conn->query($sql) as $res)
 		{
 			$i++;
 ?>  

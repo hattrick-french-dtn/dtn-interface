@@ -6,9 +6,10 @@ require("../includes/serviceJoueur.php");
 require("../includes/serviceDTN.php");
 require("../includes/serviceListesDiverses.php");
 if(!$sesUser["idAdmin"])
-	{
+{
 	header("location: index.php?ErrorMsg=Session Expir�");
-	}
+}
+
 if(!isset($ordre)) $ordre = "ht_posteAssigne";
 if(!isset($sens)) $sens = "ASC";
 if(!isset($lang)) $lang = "FR";
@@ -18,47 +19,31 @@ if(!isset($affPosition)) $affPosition = 0;
 
 require("../includes/langue.inc.php");
 
-
-
-
-
-
 switch($sesUser["idNiveauAcces"]){
-		case "1":
+	case "1":
 		require("../menu/menuAdmin.php");
 		require("../menu/menuNational.php");
 		break;
 		
-		case "2":
+	case "2":
 		require("../menu/menuSuperviseur.php");
 		require("../menu/menuNational.php");
 		break;
 
-
-
-
-		case "3":
+	case "3":
 		require("../menu/menuDTN.php");
 		require("../menu/menuNational.php");
 		break;
 		
-		case "4":
+	case "4":
 		require("../menu/menuCoach.php");
 		require("../menu/menuNational.php");
 		break;
 		
-		default;
+	default;
 		break;
 
-
-
-
 }
-
-
-
-
-
 
 
 
@@ -196,12 +181,12 @@ document.body.scrollTop = scrollPos;
 
 
 
- $val = array($l["scoreGardien"],$l["scoreDefense"],$l["scoreAilierDef"],$l["scoreAilierOff"],$l["scoreWtm"],$l["scoreMilieu"],$l["scoreMilieuOff"],$l["scoreAttaquant"]);
+$val = array($l["scoreGardien"],$l["scoreDefense"],$l["scoreAilier"],$l["scoreAilierOff"],$l["scoreAilierVersMilieu"],$l["scoreMilieu"],$l["scoreMilieuOff"],$l["scoreAttaquant"]);
 sort($val);
 $valMax =  $val[7];
 $val2 = $val[6];
 			  
-			  $class = "#";
+	$class = "#";
 			  
 			 
 			 $date = explode("-",$l["dateDerniereModifJoueur"]);
@@ -270,8 +255,11 @@ $val2 = $val[6];
                     </td>
                     <td ><?=$infTraining["valeurEnCours"]?></td>
                     <td ><?=$lstPos[$l["ht_posteAssigne"]-1]["intitulePosition"]?></td>
-                    <td nowrap="nowrap"><div align="center"><?=$l["ageJoueur"]?> 
-                      - <?=$l["jourJoueur"]?>
+                    <td nowrap="nowrap"><div align="center"><?php
+						$ageetjours = ageetjour($l["datenaiss"]);
+						$tabage = explode(" - ",$ageetjours);
+						echo "$ageetjours";
+						?> 
                     </div></td>
                     <td width="20"> <div align="center"><?=$l["idExperience_fk"]?></div></td>
                     
@@ -284,22 +272,22 @@ $val2 = $val[6];
                     <td > <div align="center">
                     <?=$l["idEndurance"]?></div></td>
                     <td > <div align="center"> 
-                    <?=$l["idConstruction"]?><?php afficheLesPlus($l,"nbSemaineConstruction"); ?> 
+                    <?=$l["idConstruction"]?><?php afficheLesPlus($infTraining,"nbSemaineConstruction"); ?> 
                       </div></td>
                     <td > <div align="center"> 
-                    <?=$l["idAilier"]?><?php afficheLesPlus($l,"nbSemaineAilier"); ?> 
+                    <?=$l["idAilier"]?><?php afficheLesPlus($infTraining,"nbSemaineAilier"); ?> 
                       </div></td>
                     <td > <div align="center"> 
-                    <?=$l["idButeur"]?><?php afficheLesPlus($l,"nbSemaineButeur"); ?> 
+                    <?=$l["idButeur"]?><?php afficheLesPlus($infTraining,"nbSemaineButeur"); ?> 
                       </div></td>
                     <td > <div align="center"> 
-                    <?=$l["idGardien"]?><?php afficheLesPlus($l,"nbSemaineGardien"); ?> 
+                    <?=$l["idGardien"]?><?php afficheLesPlus($infTraining,"nbSemaineGardien"); ?> 
                       </div></td>
                     <td > <div align="center"> 
-                    <?=$l["idPasse"]?><?php afficheLesPlus($l,"nbSemainePasse"); ?> 
+                    <?=$l["idPasse"]?><?php afficheLesPlus($infTraining,"nbSemainePasses"); ?> 
                       </div></td>
                     <td > <div align="center"> 
-                    <?=$l["idDefense"]?><?php afficheLesPlus($l,"nbSemaineDefense"); ?> 
+                    <?=$l["idDefense"]?><?php afficheLesPlus($infTraining,"nbSemaineDefense"); ?> 
                       </div></td>
                     <td > <div align="center"> 
                     <?=$l["idPA"]?> 
@@ -326,7 +314,7 @@ $val2 = $val[6];
 
 
                     <td width="30"> <div align="center"> 
-                        <?=$specabbrevs[$l["optionJoueur"]]["FR"]?>
+                        <?=$specabbrevs[$l["optionJoueur"]]?>
                       </div></td>
     <?php
 				}

@@ -449,8 +449,11 @@ function joueursSelection($selection){
 	$sql .= "ORDER BY $ordre $sens";
 
 	$tabs = array();
-	foreach($conn->query($sql) as $row){
-		array_push($tabS, $row);
+	$req = $conn->query($sql);
+	if ($req) {
+		foreach($req as $row){
+			$tabS[] = $row;
+		}
 	}
 	return	$tabS;
 }

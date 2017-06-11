@@ -288,9 +288,9 @@ function getPosition($id)
 	$tabS = array();
 
 	$sql = "SELECT * FROM ht_position WHERE idPosition = '".$id."' ";
-	foreach($conn->query($sql) as $row){
-		array_push($tabS, $row);
-	}
+	$res = $conn->query($sql);
+	$tabS = $res->fetch(PDO::FETCH_BOTH);
+
 	return	$tabS;
 
 }

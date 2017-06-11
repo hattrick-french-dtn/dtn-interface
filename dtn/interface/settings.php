@@ -28,21 +28,28 @@ switch($_SESSION['sesUser']["idNiveauAcces"]){
 		break;
 }
 
+$mod="";
+$modperso="";
 $affCoeff = 0;
 $affinfoPerso = 0;
-if (isset($_GET['affCoeff'])
+if (isset($_GET['affCoeff']))
 	$affCoeff = $_GET['affCoeff'];
-if (isset($_GET['affinfoPerso'])
+if (isset($_GET['affinfoPerso']))
 	$affinfoPerso = $_GET['affinfoPerso'];
+if (isset($_POST['mod']))
+	$mod=$_POST['mod'];
+if (isset($_POST['modperso']))
+	$modperso=$_POST['modperso'];
 
 $lstPos = listPosition();
-if(!isset($id_postes)) $id_postes = 1;?>
+if(!isset($id_postes)) $id_postes = 1;
+?>
 
 
 <head>
 <title>Document sans titre</title>
 <link href="css/ht.css" rel="stylesheet" type="text/css">
-<script language="JavaScript" src="../includes/javascript/navigation.js"></script>
+<script language="JavaScript" src="includes/javascript/navigation.js"></script>
 
 <script language="javascript">
 function chgPos(){
