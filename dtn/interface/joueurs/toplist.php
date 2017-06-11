@@ -39,11 +39,11 @@ switch($sesUser["idNiveauAcces"]){
 }
 
 
-if($nb == "") $nb = "15";
-if($age == "") $age = "17";
+if(!isset($nb) || $nb == "") $nb = "15";
+if(!isset($age) || $age == "") $age = "17";
 
 
-if($affPosition == "") {
+if(!isset($affPosition) || $affPosition == "") {
 	if (($sesUser["idPosition_fk"] == "") or ($sesUser["idPosition_fk"] == "0")){
 		$affPosition ="1";	
 	}else{
@@ -80,8 +80,8 @@ case "5";
 default;
 	break;
 }
-if($ordre == "") $ordre = $colonne;
-if($sens == "") $sens = "DESC";
+if(!isset($ordre) || $ordre == "") $ordre = $colonne;
+if(!isset($sens) || $sens == "") $sens = "DESC";
 
 
 switch($ordre){
@@ -170,8 +170,8 @@ $lstPos = listAllPosition();
 		 floor((datediff(CURRENT_DATE,'1970-01-01')-(574729200/86400)-datenaiss)/112) = '".$age."' AND
 		 ht_posteAssigne  = '".$affPosition."'
 		 ";
-		 $sql .= "ORDER BY ".$ordre." ".$sens."";
-		 $sql .= " LIMIT 0,$nb";
+		$sql .= "ORDER BY ".$ordre." ".$sens."";
+		$sql .= " LIMIT 0,$nb";
 		 
 		$huit = 60 * 60 * 24 * 8; //time_0
 		$quinze = 60 * 60 * 24 * 15; //time_1
@@ -179,7 +179,7 @@ $lstPos = listAllPosition();
 		$twomonths = 60 * 60 * 24 * 60; //time_3
 		$fourmonths = 60 * 60 * 24 * 120; //time_4
 			  
-			  // Date du jour
+		// Date du jour
 		$mkday = mktime(0,0,0,date('m'), date('d'),date('Y'));
 
 		foreach($conn->query($sql) as $lst){
@@ -222,8 +222,8 @@ $lstPos = listAllPosition();
 			 }
 			 
 			 // Date de la dernier modif de ce joueur
-			 $d1 =  $mkDay - $quinze;
-			 $d2 =  $mkDay - $trente;
+			 $d1 =  $mkday - $quinze;
+			 $d2 =  $mkday - $trente;
 			 $zealt=" Date dtn : ".$lst["dateDerniereModifJoueur"].
 					"<br> Date proprio : ".$lst["dateSaisieJoueur"].
 					"<br> [ Mis &agrave; jour il y a  ".round(($mkday - $datemaj)/(60*60*24) )." jours ]";

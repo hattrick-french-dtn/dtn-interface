@@ -122,8 +122,8 @@ function afficheTraining($lstTrain,$idTraining){
 		return ;
 	}
 	foreach($lstTrain as $l){
-		if($idTraining == $l["entrainement_id"]){ 
-			echo $l["entrainement_nom"];
+		if($idTraining == $l["id_type_entrainement"]){ 
+			echo $l["libelle_type_entrainement"];
 			return;
 		}
 	}
@@ -416,7 +416,7 @@ if(count($lstJ)==0) {
 						<TD colspan=4><B>Motif Purge:&nbsp;
 						<?php if (empty($_SESSION['numServeurHT'])){?>
                   <?php if ($lstJ[$j]["isBot"]==1)      {?><font color="red">[BOT]</font><?php }?>&nbsp;
-                  <?php if ($lstJ[$j]["isBot"]==2 && $lstJ[$j]["ht_clubs.idUserHT"]==0) {?><font color="red">[Pas de manager humain]</font><?php }?>&nbsp;
+                  <?php if ($lstJ[$j]["isBot"]==2 && $lstJ[$j]["idUserHT"]==0) {?><font color="red">[Pas de manager humain]</font><?php }?>&nbsp;
                   <?php if ($lstJ[$j]["joueurActif"]==0){?><font color="red">[Disparu sur HT]</font><?php }?>
                 <font color="green"><i>D&eacute;finir num serveur HT pour activer les liens</i></font>
 						  <?php } else {

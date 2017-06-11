@@ -131,7 +131,7 @@ if(isset($msg)) {?>
 </center>
 <p>
 <?php
-if($action == "verif"){
+if(isset($action) && $action == "verif"){
 
 	if($stylereq == "id"){
 		$sql = "SELECT idJoueur FROM ht_joueurs WHERE idHattrickJoueur = '".$id."' order by archiveJoueur ASC,nomJoueur";

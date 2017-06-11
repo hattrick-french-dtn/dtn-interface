@@ -25,27 +25,27 @@ $maBase = initBD();
 <script language="JavaScript" src="../includes/javascript/navigation.js"></script>
 <?php
 switch($sesUser["idNiveauAcces"]){
-                case "1":
-                require("../menu/menuAdmin.php");
-                require("../menu/menuSuperviseurConsulter.php");
-                break;
+	case "1":
+		require("../menu/menuAdmin.php");
+		require("../menu/menuSuperviseurConsulter.php");
+		break;
 
-                case "2":
-                require("../menu/menuSuperviseur.php");
-                require("../menu/menuSuperviseurConsulter.php");
-                break;
+	case "2":
+		require("../menu/menuSuperviseur.php");
+		require("../menu/menuSuperviseurConsulter.php");
+		break;
 
-                case "3":
-                require("../menu/menuDTN.php");
-                require("../menu/menuDTNConsulter.php");
-                break;
+	case "3":
+		require("../menu/menuDTN.php");
+		require("../menu/menuDTNConsulter.php");
+		break;
 
-                case "4":
-                require("../menu/menuCoach.php");
-                break;
+	case "4":
+		require("../menu/menuCoach.php");
+		break;
 
-                default;
-                break;
+	default;
+		break;
 }
 
 ?>
@@ -86,18 +86,18 @@ switch($sesUser["idNiveauAcces"]){
                                         <br>
 <div><?php
 
-                // param�tres
+            // param�tres
 			if (isset($_POST['ht_user'])) {
-	                $ht_user=$_POST['ht_user'];
-	                $ht_password=$_POST['ht_password'];
-	                $HTCli= &new HT_Client();
-	                if ($HTCli->Login($ht_user, $ht_password)) {
-						echo "maj";
-	                        majPays($maBase,$HTCli);
-	                } else {
-	                        printErr("<center>Erreur de connexion � HT</center>");
-	                }
-                }
+				$ht_user=$_POST['ht_user'];
+				$ht_password=$_POST['ht_password'];
+				$HTCli= new HT_Client();
+				if ($HTCli->Login($ht_user, $ht_password)) {
+					echo "maj";
+						majPays($maBase,$HTCli);
+				} else {
+						printErr("<center>Erreur de connexion � HT</center>");
+				}
+			}
 ?>
 </div>
 </td>

@@ -2,10 +2,10 @@
 require_once("../includes/head.inc.php");
 
 if(!$sesUser["idAdmin"])
-	{
+{
 	header("location: index.php?ErrorMsg=Session Expiree");
 	exit();
-	}
+}
 
 if(!isset($lang)) $lang = "FR";
 if($lang == "fr") $lang = "FR";
@@ -16,31 +16,32 @@ require("../includes/serviceJoueur.php");
 require("../includes/langue.inc.php");
 require("../includes/serviceListesDiverses.php");
 
-if ($origine=="unique") //appel provient de la fiche d'un joueur
-  {
-  if (isset($htid))
-  {
-  	$infJs[1] = getJoueurHt($htid);
-  	$id = $infJs[1]["idJoueur"];
-  }
-  else
-  	$infJs[1] = getJoueur($id);
-  }
+if (isset($origine) && $origine=="unique") //appel provient de la fiche d'un joueur
+{
+	if (isset($htid))
+	{
+		$infJs[1] = getJoueurHt($htid);
+		$id = $infJs[1]["idJoueur"];
+	}
+	else
+		$infJs[1] = getJoueur($id);
+}
 else  //appel provient de ficherecupchoix.php
-  {
-  $tlistID = split(";",$listID);  //extraire les différents id
-  for($i=0;$i<count($tlistID);$i++)
+{
+	$origine = "";
+	$tlistID = explode(";",$listID);  //extraire les différents id
+	for($i=0;$i<count($tlistID);$i++)
     {
-    $infJs[$i+1] = getJoueurHt($tlistID[$i]); //reconstruit un tableau contenant toutes les données des joueurs sélectionnés
+		$infJs[$i+1] = getJoueurHt($tlistID[$i]); //reconstruit un tableau contenant toutes les données des joueurs sélectionnés
     }
-  }
+}
 
 $infJs[0]=$infJs[1];
 if ($origine!="unique")
-  {
-  $infJs[0][nomJoueur]="Résumé Multijoueurs";
-  $infJs[0][prenomJoueur]=""; //au cas où !!!
-  }
+{
+	$infJs[0]['nomJoueur']="R&eacute;sum&eacute; Multijoueurs";
+	$infJs[0]['prenomJoueur']=""; //au cas où !!!
+}
   
 $infJ = $infJs[0];
 
@@ -469,26 +470,54 @@ function copy2Clipboard(obj)
 
 
 <?php
-switch($sesUser["idNiveauAcces"]){
-		case "1":
+global $sesUser;
+if ($origine=="unique") {
+	switch($sesUser["idNiveauAcces"]){
+	case "1":
 		require("../menu/menuAdmin.php");
 		break;
 		
-		case "2":
+	case "2":
 		require("../menu/menuSuperviseur.php");
 		break;
 
-
-		case "3":
+	case "3":
 		require("../menu/menuDTN.php");
 		break;
 		
-		case "4":
+	case "4":
 		require("../menu/menuCoach.php");
 		break;
 		
-		default;
+	default;
 		break;
+	}
+} else {
+	switch($sesUser["idNiveauAcces"]){
+		case "1":
+			require("../menu/menuAdmin.php");
+			require("../menu/menuSuperviseurConsulter.php");
+			
+			break;
+			
+		case "2":
+			require("../menu/menuSuperviseur.php");
+			require("../menu/menuSuperviseurConsulter.php");
+			break;
+
+		case "3":
+			require("../menu/menuDTN.php");
+			require("../menu/menuDTNConsulter.php");
+			break;
+			
+		case "4":
+			require("../menu/menuCoach.php");
+			require("../menu/menuCoachConsulter.php");
+			break;
+			
+		default;
+			break;
+	}
 }
 
 $idClubHT=$infJs[1]['teamid'];
@@ -504,24 +533,25 @@ $dtnsuivi="aucun";
 if ($infJs[1]["dtnSuiviJoueur_fk"]!=0) $dtnsuivi=$infJs[1]["loginAdminSuiveur"];    
 
 if ($origine=="unique") require("../menu/menuJoueur.php");
+
 ?>
 
 <table width="99%" border="1" cellspacing="0" cellpadding="0">
     <tr>
-      <?php
-      if ($origine=="unique")
-        {
-      ?>
+    <?php
+    if ($origine=="unique")
+    {
+    ?>
         <td width="100%" colspan="2" bgcolor="#000000"><div align="center"><b><font color="#FFFFFF">Fiche R&eacute;sum&eacute; : <?=$infJs[1]['nomJoueur']?>&nbsp;<?=$infJs[1]['prenomJoueur']?>&nbsp;-&nbsp;<?=$listID?>&nbsp;-&nbsp;Entrainement : <?=$infJs[1]['entrainement_type']?>&nbsp;-&nbsp;Secteur : <?=$pos?>&nbsp;-&nbsp;DTN : <?=$dtnsuivi?>
-      <?php
-        }
-      else
-        {
-      ?>
-        <td width="100%" colspan="2" bgcolor="#000000"><div align="center"><b><font color="#FFFFFF">Fiche R&eacute;sum&eacute; Multijoueurs : <?=count($infJ)-1?>&nbsp; joueur(s)        
-      <?php
-        }
-      ?>
+    <?php
+    }
+    else
+    {
+    ?>
+		<td width="100%" colspan="2" bgcolor="#000000"><div align="center"><b><font color="#FFFFFF">Fiche R&eacute;sum&eacute; Multijoueurs : <?=count($infJ)-1?>&nbsp; joueur(s)        
+    <?php
+    }
+    ?>
       </font></b></div>
       </td>
     </tr>
@@ -530,7 +560,7 @@ if ($origine=="unique") require("../menu/menuJoueur.php");
       <td width="50%" align="left" valign="top">
         <form name="form1" id="form1" method="get">
           <table width="100%" border="0" cellpadding="0" cellspacing="0">
-            <tr><td colspan="3" align="center">Choisissez le type de résumé souhaité :<br><br></td></tr>
+            <tr><td colspan="3" align="center">Choisissez le type de r&eacute;sum&eacute; souhait&eacute; :<br><br></td></tr>
             <tr>
               <td width="33%"><input name="typeresume" type="Radio" onClick="scanid();" Value="GK">GK (G/D/CF)<br></td>
               <td width="33%"><input name="typeresume" type="Radio" onClick="scanid();" Value="CD">CD (D/P/C/A)<br></td>
@@ -556,7 +586,7 @@ if ($origine=="unique") require("../menu/menuJoueur.php");
       <td width="50%" align="left" valign="top">
         <form name="form2" method="get">
           <table width="100%" border="0" cellpadding="0" cellspacing="0">
-            <tr><td colspan="3" align="center">Choisissez les paramètres supplémentaires :<br><br></td></tr>
+            <tr><td colspan="3" align="center">Choisissez les param&egrave;tres suppl&eacute;mentaires :<br><br></td></tr>
             <tr>
               <td width="33%"><input name="parasup" type="Checkbox" onClick="choixcompl();" value="gk">Gardien<br></td>
               <td width="33%"><input name="parasup" type="Checkbox" onClick="choixcompl();" value="de">Défense<br></td>
@@ -593,7 +623,7 @@ Fireproofed le 28/01/2011
       
 <table width="99%" rules="none" border="1" cellspacing="0" cellpadding="0">
     <tr> 
-      <td width="100%" colspan="2" bgcolor="#000000"><div align="center"><b><font color="#FFFFFF">Résultat de la requête 
+      <td width="100%" colspan="2" bgcolor="#000000"><div align="center"><b><font color="#FFFFFF">R&eacute;sultat de la requ&ecirc;te 
       </font></b></div>
       </td>
     </tr>
@@ -634,9 +664,7 @@ if (i>'0') document.forms.form1.typeresume[j].click();
 
 <div align="center"><a href="javascript:history.go(-1);">Retour</a></div>
 <script type="text/javascript">
-<!--
 var spryselect1 = new Spry.Widget.ValidationSelect("spryselect1", {validateOn:["change"]});
-//-->
 </script>
     </body>
 </html>

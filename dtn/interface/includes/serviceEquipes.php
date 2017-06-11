@@ -38,9 +38,11 @@ function listClubs($limitDeb=null,$limitFin=null)
 	} elseif ($limitDeb == null && $limitFin != null) {
 		$sql .= " LIMIT $limitFin";
 	}
-   
-	foreach ($conn->query($sql) as $row) {
-		array_push($tabS, $row);
+	//print($sql."<br/>");
+	$req = $conn->query($sql);
+	//print($req->rowCount()."<br/>");
+	foreach ($req as $row) {
+		$tabS[]= $row;
 	}
 	
 	return	$tabS;

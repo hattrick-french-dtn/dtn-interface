@@ -19,3 +19,22 @@ function chgFormule(affposition){
 	}
 	else document.location = "liste.php?affPosition="+affposition+"&useFormule=0";
 }
+
+// Fonction générant une alerte si un des champs du formulaire d'ajout transfert n'est pas renseigné
+function testChamp1(){
+	if (document.form1.htlogin.value == "" || document.form1.htseccode.value == "") {
+		alert("Vous devez saisir votre login et password HT");
+		return false;
+	}
+	else return true;
+}
+
+// Fonction générant une alerte si un des champs du formulaire d'ajout transfert n'est pas renseigné
+function testListId(){
+	if (document.form1.listID.value == "" ) {
+		alert("Vous devez saisir les identifiants Hattrick des joueurs à ajouter dans la base");
+		return false;
+	}
+	else return true;
+}
+

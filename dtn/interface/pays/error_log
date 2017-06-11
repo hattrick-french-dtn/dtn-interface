@@ -1,3 +1,0 @@
-[01-Nov-2011 21:44:27] PHP Warning:  Invalid error type specified in /home/francest/public_html/ht-fff.org/dtn/interface/fonctions/HTTP_Advanced/http.inc on line 764
-[01-Nov-2011 21:44:27] PHP Warning:  fsockopen() [<a href='function.fsockopen'>function.fsockopen</a>]: php_network_getaddresses: getaddrinfo failed: Name or service not known in /home/francest/public_html/ht-fff.org/dtn/interface/fonctions/HTTP_Advanced/http.inc on line 766
-[01-Nov-2011 21:44:27] PHP Warning:  fsockopen() [<a href='function.fsockopen'>function.fsockopen</a>]: unable to connect to :80 (php_network_getaddresses: getaddrinfo failed: Name or service not known) in /home/francest/public_html/ht-fff.org/dtn/interface/fonctions/HTTP_Advanced/http.inc on line 766

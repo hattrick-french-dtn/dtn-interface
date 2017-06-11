@@ -1,15 +1,15 @@
 <?php 
-	  ini_set('memory_limit','64M');
-      error_reporting(E_ALL);
+ini_set('memory_limit','64M');
+error_reporting(E_ALL);
 
-        require_once "../_config/CstGlobals.php"; // fonctions d'admin
-        //require_once "../fonctions/HT_Client.php"; // Hattrick Client New (with Advanced HTTP Client)
-        require_once "../fonctions/phpxml.php"; // XML to Tree converter
-        require_once "../fonctions/AccesBase.php"; // fonction de connexion a la base
-        require_once "../fonctions/AdminDtn.php"; // fonctions d'admin
-        require("../includes/head.inc.php");
+require_once "../_config/CstGlobals.php"; // fonctions d'admin
+//require_once "../fonctions/HT_Client.php"; // Hattrick Client New (with Advanced HTTP Client)
+require_once "../fonctions/phpxml.php"; // XML to Tree converter
+require_once "../fonctions/AccesBase.php"; // fonction de connexion a la base
+require_once "../fonctions/AdminDtn.php"; // fonctions d'admin
+require("../includes/head.inc.php");
 
-        $maBase = initBD();
+$maBase = initBD();
         
         
 require("../includes/serviceListesDiverses.php");
@@ -18,9 +18,9 @@ require("../includes/serviceJoueur.php");
 require("../includes/langue.inc.php");
 
 if(!$sesUser["idAdmin"])
-	{
+{
 	header("location: index.php?ErrorMsg=Session Expiree");
-	}
+}
 
 if(isset($_POST['action']) and $_POST['action'] == 'submitted') {
   $ht_posteAssigne=$_POST['ht_posteAssigne'];
@@ -387,7 +387,7 @@ if ($maxAge!="" ){
 /***** Filtre sur la spécialité ****/
 if ($specialty!=-1 ){
 	$sql=$sql." AND optionJoueur=".$specialty;
-	?><li> Avec comme sp&eacute;cialit&eacute; :<font color="#CC22DD"><?=$option[$specialty]["FR"]?></font><?
+	?><li> Avec comme sp&eacute;cialit&eacute; :<font color="#CC22DD"><?=$option[$specialty]["FR"]?></font><?php
 } 
 if ($minValue!="" ||$maxValue!=""){ 
 ?><li><?php
@@ -535,7 +535,8 @@ if(count($lstJ)==0) {
 
     ?>
 				<?=$nbjoueur?>&nbsp;joueurs ont &eacute;t&eacute; trouv&eacute;s.&nbsp;<br> 
-    <?$nbPages=floor(($nbjoueur / 50)+1);
+    <?php
+	$nbPages=floor(($nbjoueur / 50)+1);
     
     if ($nbPages>1) {?>
 

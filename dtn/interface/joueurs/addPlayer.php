@@ -9,33 +9,33 @@ require("../includes/langue.inc.php");
 
 if(!$sesUser["idAdmin"])
 {
-  header("location: index.php?ErrorMsg=Session Expire");
+	header("location: index.php?ErrorMsg=Session Expire");
 }
 
 
 switch($sesUser["idNiveauAcces"]){
-		case "1":
-		require("../menu/menuAdmin.php");
-		require("../menu/menuSuperviseurConsulter.php");
-		break;
-		
-		case "2":
-		require("../menu/menuSuperviseur.php");
-		require("../menu/menuSuperviseurConsulter.php");
-		break;
+case "1":
+	require("../menu/menuAdmin.php");
+	require("../menu/menuSuperviseurConsulter.php");
+	break;
+	
+case "2":
+	require("../menu/menuSuperviseur.php");
+	require("../menu/menuSuperviseurConsulter.php");
+	break;
 
-		case "3":
-		require("../menu/menuDTN.php");
-		require("../menu/menuDTNConsulter.php");
-		break;
-		
-		case "4":
-		require("../menu/menuCoach.php");
-		require("../menu/menuCoachSubmit.php");
-		break;
-		
-		default;
-		break;
+case "3":
+	require("../menu/menuDTN.php");
+	require("../menu/menuDTNConsulter.php");
+	break;
+	
+case "4":
+	require("../menu/menuCoach.php");
+	require("../menu/menuCoachSubmit.php");
+	break;
+	
+default;
+	break;
 }
 
 
@@ -55,46 +55,7 @@ if (isset($_SESSION['listID']) && !isset($_REQUEST['listID']) )  {
 <link href="../css/ht.css" rel="stylesheet" type="text/css">
 <script language="JavaScript" src="../includes/javascript/navigation.js"></script>
 <title>Superviseur</title>
-<script language="JavaScript" type="text/JavaScript">
-<!--
-<!--
-
-
-//-->
-
-
-function init()
-{
-var scrollPos = "<?=$scrollPos?>";
-document.body.scrollTop = scrollPos;
-}
-
-
-// Fonction générant une alerte si un des champs du formulaire d'ajout transfert n'est pas renseigné
-function testChamp1(){
-	
-if (document.form1.htlogin.value == "" || document.form1.htseccode.value == "") {
-    alert("Vous devez saisir votre login et password HT");
-    return false;
-}
-else return true;
-}
-
-
-
-// Fonction générant une alerte si un des champs du formulaire d'ajout transfert n'est pas renseigné
-function testListId(){
-	
-if (document.form1.listID.value == "" ) {
-    alert("Vous devez saisir les identifiants Hattrick des joueurs à ajouter dans la base");
-    return false;
-}
-else return true;
-}
-
-</script>
-
-
+<script language="JavaScript" src="menu_joueur.js"></script>
 
 <body onLoad = "init();">
 
@@ -164,7 +125,7 @@ else return true;
   </tr>
   <tr>
   <td class="ContenuCentrer">
-    <textarea name="listID" id="listID" style="font-size:7pt;font-family:Arial" cols=150 rows=6 <?php if (!isset($_SESSION['HT'])) {?> DISABLED <?php }?> ><?php echo ($_SESSION['listID']);?></textarea>
+    <textarea name="listID" id="listID" style="font-size:7pt;font-family:Arial" cols=150 rows=6 <?php if (!isset($_SESSION['HT'])) {?> DISABLED <?php }?> ><?php if (isset($_SESSION['listID'])) echo ($_SESSION['listID']);?></textarea>
   </td>
   </tr>
   <tr>

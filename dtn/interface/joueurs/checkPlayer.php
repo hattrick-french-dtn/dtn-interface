@@ -73,10 +73,6 @@ break;
 
 }
 
-
-$lstClubs = listClubs();
-
-
 ?>
 <link href="../css/ht.css" rel="stylesheet" type="text/css">
 <script language="JavaScript" src="../includes/javascript/navigation.js"></script>

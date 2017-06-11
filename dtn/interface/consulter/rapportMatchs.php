@@ -20,31 +20,28 @@ require("../includes/langue.inc.php");
 require_once "../includes/nomTables.inc.php";
 	
 switch($sesUser["idNiveauAcces"]){
-		case "1":
+	case "1":
 		require("../menu/menuAdmin.php");
 		require("../menu/menuSuperviseurConsulter.php");
 		break;
 		
-		case "2":
+	case "2":
 		require("../menu/menuSuperviseur.php");
 		require("../menu/menuSuperviseurConsulter.php");
 		break;
 
-
-		case "3":
+	case "3":
 		require("../menu/menuDTN.php");
 		require("../menu/menuDTNConsulter.php");
 		break;
 		
-		case "4":
+	case "4":
 		require("../menu/menuCoach.php");
 		require("../menu/menuCoachConsulter.php"); 
 		break;
 		
-		default;
+	default;
 		break;
-
-
 }
 
 // Liste des saison et semaine de la table ht_perfs_individuelle
@@ -325,7 +322,7 @@ if(count($lstJ)==0) {
               </tr>
           	<?php }?>
             <tr>
-              <?php if ($lstJ[$j]["idJoueur"]==$lstJ[$j-1]["idJoueur"]){?>
+              <?php if ($j>0 && $lstJ[$j]["idJoueur"]==$lstJ[$j-1]["idJoueur"]){?>
                 <i>
                 <td colspan=2>...........</td>
                 <td colspan=9>&nbsp;</td>

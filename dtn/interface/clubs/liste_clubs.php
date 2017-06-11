@@ -3,35 +3,32 @@ require_once("../includes/head.inc.php");
 require_once("../includes/nomTables.inc.php");
 
 if(!$sesUser["idAdmin"])
-	{
+{
 	header("location: ../index.php?ErrorMsg=Session Expiree");
-	}
+}
 
 switch($sesUser["idNiveauAcces"]){
-		case "1":
+	case "1":
 		require("../menu/menuAdmin.php");
 		require("../menu/menuSuperviseurConsulter.php");
 		break;
 		
-		case "2":
+	case "2":
 		require("../menu/menuSuperviseur.php");
 		require("../menu/menuSuperviseurConsulter.php");
 		break;
 
-
-
-
-		case "3":
+	case "3":
 		require("../menu/menuDTN.php");
 		require("../menu/menuDTNConsulter.php");
 		break;
 		
-		case "4":
+	case "4":
 		require("../menu/menuCoach.php");
 		require("../menu/menuCoachConsulter.php"); 
 		break;
 		
-		default;
+	default;
 		break;
 }
 
@@ -148,8 +145,9 @@ $result= $conn->query($sql);
       ?>
   		<a href="<?=$urlSansLeGet?>?suivant=0&ordre=<?=$ordre?>&sens=<?=$sens?>"> D&eacute;but</a>
   		  <a href="<?=$urlSansLeGet?>?suivant=<?=$suivant-30?>&ordre=<?=$ordre?>&sens=<?=$sens?>"> <<</a> | <?php
-  	}  
-  	if(($suivant+30)<$nombre["nb"]){?>
+  	}
+
+  	if(($suivant+30)<$nombre){?>
   		<a href="<?=$urlSansLeGet?>?suivant=<?=$suivant+30?>&ordre=<?=$ordre?>&sens=<?=$sens?>"> >></a>
   		  <a href="<?=$urlSansLeGet?>?suivant=<?=$nombre["nb"]-30?>&ordre=<?=$ordre?>&sens=<?=$sens?>"> Fin</a><?php 
   	}?>
@@ -165,8 +163,8 @@ $result= $conn->query($sql);
 	</tr>
 <?php
 
-while ($res=$result->fetch(PDO::FETCH_OBJ))){
-$i++;
+while ($res=$result->fetch(PDO::FETCH_OBJ)) {
+	$i++;
 ?>
 	<tr <?php if ($i % 2 == 0) echo "bgcolor=#CCCCCC";  else echo "bgcolor=#FFFFFF";?> ><?php
 	
@@ -235,12 +233,12 @@ $resentrainement=$result3->rowCount();
             group by 
                 E.libelle_type_entrainement";
 		$result4= $conn->query($sql4);
-		$res4=$result4->fetch(PDO::FETCH_OBJ);
-		if($res4->entrainement_id==0){
+		$res4=$result4->fetch(PDO::FETCH_ASSOC);
+		if($res4['entrainement_id']==0){
 			?><td align="center">?<?php
 		}
 		else{
-		?><td align="center"><?=$res4->entrainement_nom?><?php
+		?><td align="center"><?=$res4['libelle_type_entrainement']?><?php
 		}
 	}
 	else{
@@ -251,7 +249,7 @@ $resentrainement=$result3->rowCount();
 		<td align="center">
 			<table width="100%" border="0" cellspacing="0" cellpadding="0">	
 <?php
-$sql2=" select 
+		$sql2=" select 
             J.idJoueur, 
             J.nomJoueur, 
             J.idHattrickJoueur 
@@ -261,7 +259,7 @@ $sql2=" select
             J.archiveJoueur!=1 
         and J.teamid=$res->idClubHT";
 
-		while ($conn->query($sql2) as $res2){
+		foreach($conn->query($sql2) as $res2){
 ?>
 		<tr><td align="left"><a href="<?=$url?>/joueurs/fiche.php?id=<?=$res2['idJoueur']?>"><?=$res2['nomJoueur']?> (<?=$res2['idHattrickJoueur']?>)</a></td></tr>
 
@@ -283,14 +281,14 @@ $result=NULL;
 			<a href="<?=$urlSansLeGet?>?suivant=0&ordre=<?=$ordre?>&sens=<?=$sens?>"> D&eacute;but</a>
 			  <a href="<?=$urlSansLeGet?>?suivant=<?=$suivant-30?>&ordre=<?=$ordre?>&sens=<?=$sens?>"> <<</a> | <?php
 		}  
-		if(($suivant+30)<$nombre["nb"]){?>
+		if(($suivant+30)<$nombre){?>
 			<a href="<?=$urlSansLeGet?>?suivant=<?=$suivant+30?>&ordre=<?=$ordre?>&sens=<?=$sens?>"> >></a>
 			  <a href="<?=$urlSansLeGet?>?suivant=<?=$nombre["nb"]-30?>&ordre=<?=$ordre?>&sens=<?=$sens?>"> Fin</a><?php 
 		}?>
 	</span></b></center>
 	</td></tr></table>
 	<br><br>
-	<font color="red">*</font> : Il y a des entrainements différents dans la base pour les joueurs du m&ecirc;me club !
+	<font color="red">*</font> : Il y a des entrainements diff&eacute;rents dans la base pour les joueurs du m&ecirc;me club !
 </center>
 
 <br>
