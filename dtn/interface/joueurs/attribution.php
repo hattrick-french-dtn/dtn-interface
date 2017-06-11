@@ -107,7 +107,7 @@ if($masque == 1) $sql.= " and dtnSuiviJoueur_fk = 0";
 $sql .= " order by $ordre $sens";
 
 $lstJoueurs = array();
-while($conn->query($sql) as $lst){
+foreach($conn->query($sql) as $lst){
 	array_push($lstJoueurs, $lst);
 }
 
@@ -211,22 +211,7 @@ switch($sesUser["idNiveauAcces"]){
 
 ?>
 <script language="JavaScript" src="../includes/javascript/navigation.js"></script>
-<script language="JavaScript" type="text/JavaScript">
-<!--
-function MM_jumpMenu(targ,selObj,restore){ //v3.0
-  eval(targ+".location='"+selObj.options[selObj.selectedIndex].value+"'");
-  if (restore) selObj.selectedIndex=0;
-}
-//-->
-
-
-function init()
-{
-var scrollPos = "<?=$scrollPos?>";
-document.body.scrollTop = scrollPos;
-
-}//-->
-</script>
+<script language="JavaScript" src="menu_joueur.js"></script>
 <style type="text/css">
 <!--
 .Style1 {color: #FFFFFF}
@@ -376,7 +361,7 @@ document.body.scrollTop = scrollPos;
                 <?php
 			  foreach($lstJoueurs as $l){
 
- $val = array($l["scoreGardien"],$l["scoreDefense"],$l["scoreAilierDef"],$l["scoreAilierOff"],$l["scoreWtm"],$l["scoreMilieu"],$l["scoreMilieuOff"],$l["scoreAttaquant"]);
+ $val = array($l["scoreGardien"],$l["scoreDefense"],$l["scoreAilier"],$l["scoreAilierOff"],$l["scoreAilierVersMilieu"],$l["scoreMilieu"],$l["scoreMilieuOff"],$l["scoreAttaquant"]);
 sort($val);
 $valMax =  $val[7];
 $val2 = $val[6];
@@ -601,24 +586,19 @@ $val2 = $val[6];
       <td width="256"> <div align="right"> 
           <select name="idDtn" id="select">
             <?php
-			  foreach($lstDtn as $lstDtn){
-			  echo "<option value = ".$lstDtn["idAdmin"]." $etat >".$lstDtn["loginAdmin"]."";
+			foreach($lstDtn as $lstDtn){
+				echo "<option value = ".$lstDtn["idAdmin"]." $etat >".$lstDtn["loginAdmin"]."";
+				if (array_key_exists($lstDtn["idAdmin"], $total)) {
+					if($total[$lstDtn["idAdmin"]] != 0){
+			  			echo " (".$total[$lstDtn["idAdmin"]].")";
+			  		}
+				}
 			  
+				"</option>";
+			}
 			  
-			  
-			  if($total[$lstDtn["idAdmin"]] != 0){
-			  
-			  echo " (".$total[$lstDtn["idAdmin"]].")";
-			  
-			  }
-			  
-			  
-			  "</option>";
-			  }
-			  
-			  
-			  ?>
-          <option value="309">Paros59</option>
+			?>
+<!--          <option value="309">Paros59</option>-->
           </select>
           <input type="submit" name="Submit" value="Assigner">
         </div></td>

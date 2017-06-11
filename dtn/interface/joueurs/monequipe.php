@@ -148,22 +148,7 @@ switch($sesUser["idNiveauAcces"]){
 
 
 ?><title>Superviseur</title>
-<script language="JavaScript" type="text/JavaScript">
-<!--
-function MM_jumpMenu(targ,selObj,restore){ //v3.0
-  eval(targ+".location='"+selObj.options[selObj.selectedIndex].value+"'");
-  if (restore) selObj.selectedIndex=0;
-}
-//-->
-
-
-function init()
-{
-var scrollPos = "<?=$scrollPos?>";
-document.body.scrollTop = scrollPos;
-
-}//-->
-</script>
+<script language="JavaScript" src="menu_joueur.js"></script>
 <style type="text/css">
 <!--
 .Style1 {color: #FFFFFF}

@@ -4,49 +4,59 @@ require("../includes/serviceJoueur.php");
 require("../includes/serviceListesDiverses.php");
 require("../includes/serviceDTN.php");
 if(!$sesUser["idAdmin"])
-	{
+{
 	header("location: index.php?ErrorMsg=Session Expire");
-	}
+}
 if(!isset($ordre)) $ordre = "nomJoueur";
 if(!isset($sens)) $sens = "ASC";
 if(!isset($lang)) $lang = "FR";
 if(!isset($masque)) $masque = 0;
 if(!isset($affPosition)) $affPosition = 0;
+if(!isset($affArchive))  $affArchive = 0;
+if(!isset($useFormule)) $useFormule = 0;
+if (!is_numeric($affPosition))
+	$affPosition = substr($affPosition, 0, 1);
 
 require("../includes/langue.inc.php");
 
-
-
 //
+$huit = 60 * 60 * 24 * 8; //time_0
+$quinze = 60 * 60 * 24 * 15; //time_1
+$trente = 60 * 60 * 24 * 30; //time_2
+$twomonths = 60 * 60 * 24 * 60; //time_3
+$fourmonths = 60 * 60 * 24 * 120; //time_4
 
-			  $huit = 60 * 60 * 24 * 8; //time_0
-			  $quinze = 60 * 60 * 24 * 15; //time_1
-			  $trente = 60 * 60 * 24 * 30; //time_2
-			  $twomonths = 60 * 60 * 24 * 60; //time_3
-			  $fourmonths = 60 * 60 * 24 * 120; //time_4
-			  
-			  // Date du jour
-			 $mkday = mktime(0,0,0,date('m'), date('d'),date('Y'));
+// Date du jour
+$mkday = mktime(0,0,0,date('m'), date('d'),date('Y'));
 
 $lstPosition = listPosition();
 $lstJoueurs = listJoueur($affArchive, $affPosition);
-
+$d = 0;
+$wing=0;
+$wingoff = 0;
+$wingwtm = 0;
+$m=0;
+$moff=0;
+$att=0;
+$k=0;
+$font = "<font color = black>";
+$ffont = "</font>";
 switch($affPosition){
 
-		case "1":
+	case "1":
 		//gK
 		$k = 1;
 		$keeperColor = "#9999CC";
 		break;
 		
-		case "2":
+	case "2":
 		// cD
 		$d = 1;
 		$defense = 1;
 		$defenseColor = "#9999CC";
 		break;
 		
-		case "3":
+	case "3":
 		// Wg
 		$construction = 1;
 		$constructionColor = "#CCCCCC";
@@ -60,9 +70,9 @@ switch($affPosition){
 		$wing = 1;
 		$wingoff = 1;
 		$wingwtm = 1;
-
 		break;
-		case "4":
+
+	case "4":
 		//IM
 		$m = 1;
 		$moff = 1;
@@ -74,21 +84,15 @@ switch($affPosition){
 		$passeColor = "#CCCCCC";
 		break;
 		
-		case "5":
+	case "5":
 		// Fw
-				
 		$att = 1;
 		$passe = 1;
 		$passeColor = "#999999";
 		$buteur = 1;
 		$buteurColor = "#9999CC";
 		break;
-	
-		default:
-		$font = "<font color = black>";
-		$ffont = "</font>";
-		break;
-		
+			
 }
 
 ?>
@@ -125,38 +129,8 @@ switch($sesUser["idNiveauAcces"]){
 
 
 ?><title>Superviseur</title>
-<script language="JavaScript" type="text/JavaScript">
-<!--
-function MM_jumpMenu(targ,selObj,restore){ //v3.0
-  eval(targ+".location='"+selObj.options[selObj.selectedIndex].value+"'");
-  if (restore) selObj.selectedIndex=0;
-}
-//-->
+<script language="JavaScript" src="menu_joueur.js"></script>
 
-
-function fiche(id,url){
-	
-document.location='<?=$url?>/joueurs/fiche.php?url='+url+'&id='+id
-}
-
-function init()
-{
-var scrollPos = "<?=$scrollPos?>";
-document.body.scrollTop = scrollPos;
-
-}//-->
-
-function chgFormule(){
-
-if(window.document.form1.useFormule.checked == true){
-document.location = "liste.php?affPosition=<?=$affPosition?>&useFormule=1";
-}
-else document.location = "liste.php?affPosition=<?=$affPosition?>&useFormule=0";
-
-
-}
-
-</script>
 <style type="text/css">
 <!--
 .Style1 {color: #FFFFFF}
@@ -286,12 +260,12 @@ break;
             <tr> 
               <td width="28%" height="21"> <div align="center">Poste : 
                   <select name="menu1" onChange="MM_jumpMenu('parent',this,0)">
-			<option value = liste.php?affPosition=0>Liste des non assignes</option>
+					<option value = liste.php?affPosition=0>Liste des non assignes</option>
 			 
-			  <?php
+			<?php
 			  for($i=0;$i<count($lstPosition);$i++){
-			  if($affPosition == $lstPosition[$i]["idPosition"]) $etat = "selected"; else $etat = "";
-			  echo "<option value = liste.php?useFormule=".$useFormule."&affPosition=".$lstPosition[$i]["idPosition"]." $etat >".$lstPosition[$i]["intitulePosition"]."</option>";
+				if($affPosition == $lstPosition[$i]["idPosition"]) $etat = "selected"; else $etat = "";
+				echo "<option value = liste.php?useFormule=".$useFormule."&affPosition=".$lstPosition[$i]["idPosition"]." $etat >".$lstPosition[$i]["intitulePosition"]."</option>";
 			  
 			  }
 			  
@@ -304,7 +278,7 @@ break;
                   des joueurs</font></div></td>
               <td width="22%">
 			  <?php if($useFormule == 1) $etat = "checked"; else $etat = "";?>
-			  <input name="useFormule" type="checkbox" id="useFormule" value="1" onClick="chgFormule()" <?=$etat?>>
+			  <input name="useFormule" type="checkbox" id="useFormule" value="1" onClick="chgFormule(<?=$affPosition?>)" <?=$etat?>>
 			  
 			  
               Utiliser mes formules </td>
@@ -370,73 +344,73 @@ break;
                     <td bgcolor="#000000"><img src="../images/spacer.gif" width="1" height="1"></td>
                   </tr>
                 </table>
-                 
-				             <?php
-				$lst = 1;
 
-			if(is_array($lstJoueurs)) foreach($lstJoueurs as $l){
+<?php
+	$lst = 1;
+
+	if(is_array($lstJoueurs))
+		foreach($lstJoueurs as $l){
+
+			$infTraining = getEntrainement($l["idJoueur"]);
 			  
-			  $infTraining = getEntrainement($l["idJoueur"]);
-			  
-		switch($lst){
+			switch($lst){
 			case 1:
-			$bgcolor = "#EEEEEE";
-			$lst = 0;
-			break;
-			
+				$bgcolor = "#EEEEEE";
+				$lst = 0;
+				break;
 			case 0:
-			$bgcolor = "white";
-			$lst = 1;
-			break;
+				$bgcolor = "white";
+				$lst = 1;
+				break;
 			}
 
- $val = array($l["scoreGardien"],$l["scoreDefense"],$l["scoreAilierDef"],$l["scoreAilierOff"],$l["scoreWtm"],$l["scoreMilieu"],$l["scoreMilieuOff"],$l["scoreAttaquant"]);
-sort($val);
-$valMax =  $val[7];
-$val2 = $val[6];
+			$val = array($l["scoreGardien"],$l["scoreDefense"],$l["scoreAilier"],$l["scoreAilierOff"],$l["scoreAilierVersMilieu"],$l["scoreMilieu"],$l["scoreMilieuOff"],$l["scoreAttaquant"]);
+			sort($val);
+			$valMax =  $val[7];
+			$val2 = $val[6];
 			  
-			   	$date = explode("-",$l["dateDerniereModifJoueur"]);
-			 $mkJoueur =  mktime(0,0,0,$date[1],$date[2],$date[0]); 
-			 $datesaisie = explode("-",$l["dateSaisieJoueur"]);
-			 $mkSaisieJoueur= mktime(0,0,0,$datesaisie[1],$datesaisie[2],$datesaisie[0]);
-			 if ($mkSaisieJoueur>$mkJoueur){
+			$date = explode("-",$l["dateDerniereModifJoueur"]);
+			$mkJoueur =  mktime(0,0,0,$date[1],$date[2],$date[0]); 
+			$datesaisie = explode("-",$l["dateSaisieJoueur"]);
+			$mkSaisieJoueur= mktime(0,0,0,$datesaisie[1],$datesaisie[2],$datesaisie[0]);
+			if ($mkSaisieJoueur>$mkJoueur){
 			 	$datemaj=$mkSaisieJoueur;
-			 }else{
+			}else{
 			 	$datemaj=$mkJoueur;
-			 }
+			}
 			
-			 $img_nb=0;
-			 if ($datemaj >$mkday -$huit){
+			$img_nb=0;
+			if ($datemaj >$mkday -$huit){
 			 	$img_nb=0;
 			 	$strtiming="moins de 8 jours";	
-			 }else if ($datemaj >$mkday -$quinze){
+			}else if ($datemaj >$mkday -$quinze){
 			 	$img_nb=1;
 			 	$strtiming="moins de 15 jours";
-			 }else if ($datemaj >$mkday -$trente){
+			}else if ($datemaj >$mkday -$trente){
 			 	$img_nb=2;
 			 	$strtiming="moins de 30 jours";
 			 	
-			 }else if ($datemaj >$mkday -$twomonths){
+			}else if ($datemaj >$mkday -$twomonths){
 			 	$img_nb=3;
 			 	$strtiming="moins de 2 mois";
 			 	
-			 }else if ($datemaj >$mkday -$fourmonths){
+			}else if ($datemaj >$mkday -$fourmonths){
 			 	$img_nb=4;
 			 	$strtiming="moins de 4 mois";
 			 
-			 }else{
+			}else{
 			 		$img_nb=5;
 			 	$strtiming="plus que 4 mois";
-			 }
+			}
 			 
-			 // Date de la dernier modif de ce joueur
-			 $zealt=" Date dtn : ".$l["dateDerniereModifJoueur"].
+			// Date de la dernier modif de ce joueur
+			$zealt=" Date dtn : ".$l["dateDerniereModifJoueur"].
 					"<br> Date proprio : ".$l["dateSaisieJoueur"].
 					"<br> [ Mis &agrave; jour il y a  ".round(($mkday - $datemaj)/(60*60*24) )." jours ]";
 			 
 			 			  	
 			  
-			  			  ?>
+	?>
 
 				               
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
@@ -527,13 +501,13 @@ $val2 = $val[6];
                       </div></td>
                     <td width="2" rowspan="6" bgcolor="#000000"><img src="../images/spacer.gif" width="1" height="1"></td>
                     <td width="40" witdth = "20"> <div align="center"> 
-                      <?php
-					  if($k == 1)
-					  {
-					echo "<font color = #000099><b>";
-					  }
-					  else
-					echo "<font color = gray>";
+    <?php
+		if($k == 1)
+		{
+			echo "<font color = #000099><b>";
+		}
+		else
+			echo "<font color = gray>";
 
 
 				   
@@ -552,34 +526,32 @@ $semaine["construction"] = $infTraining["nbSemaineConstruction"];
 $semaine["ailier"] = $infTraining["nbSemaineAilier"];
 $semaine["buteur"] = $infTraining["nbSemaineButeur"];
 $semaine["gardien"] = $infTraining["nbSemaineGardien"];
-$semaine["passe"] = $infTraining["nbSemainePasse"];
+$semaine["passe"] = $infTraining["nbSemainePasses"];
 $semaine["defense"] = $infTraining["nbSemaineDefense"];
 
-			  $coeff = getCoeffSelectionneur(1);
-				if($useFormule == 1 && $coeff["useit"] == 1){
+			$coeff = getCoeffSelectionneur(1);
+			if($useFormule == 1 && $coeff["useit"] == 1){
 					
-					$score = calculNoteDynamique($carac,$semaine,$coeff);
+				$score = calculNoteDynamique($carac,$semaine,$coeff);
 				echo $score;
-				   } else{
+			} else{
 				   
-					echo $l["scoreGardien"];
-					echo $ffont;
-				}
+				echo $l["scoreGardien"];
+				echo $ffont;
+			}
 
 
-					  ?>
+	?>
 					  
-					  </div></td>
+				</div></td>
                     <td width="1" rowspan="6" bgcolor="#000000"> <div align="center"><img src="../images/spacer.gif" width="1" height="1"></div>
-                      <img src="../images/spacer.gif" width="1" height="1"> <div align="center"><img src="../images/spacer.gif" width="1" height="1"></div></td>
+						<img src="../images/spacer.gif" width="1" height="1"> <div align="center"><img src="../images/spacer.gif" width="1" height="1"></div></td>
                     <td width="40" height="17" witdth = "20"> <div align="center"> 
-                      <?php
-					  if($d == 1)
-					 {
-					echo "<font color = #000099><b>";
-					 }
-					  else
-					echo "<font color = gray>";
+                    <?php
+						if($d == 1)
+							echo "<font color = #000099><b>";
+						else
+							echo "<font color = gray>";
 					
 					
 $carac["endurance"] = $l["idEndurance"];
@@ -596,7 +568,7 @@ $semaine["construction"] = $infTraining["nbSemaineConstruction"];
 $semaine["ailier"] = $infTraining["nbSemaineAilier"];
 $semaine["buteur"] = $infTraining["nbSemaineButeur"];
 $semaine["gardien"] = $infTraining["nbSemaineGardien"];
-$semaine["passe"] = $infTraining["nbSemainePasse"];
+$semaine["passe"] = $infTraining["nbSemainePasses"];
 $semaine["defense"] = $infTraining["nbSemaineDefense"];
 
 			  $coeff = getCoeffSelectionneur(2);
@@ -620,11 +592,9 @@ $semaine["defense"] = $infTraining["nbSemaineDefense"];
 						  
 												                      <?php
 					  
-					  if($wingoff == 1)
-					 {
+				if($wingoff == 1)
 					echo "<font color = #000099><b>";
-					 }
-					  else
+				else
 					echo "<font color = gray>";
 					 
 $carac["endurance"] = $l["idEndurance"];
@@ -641,7 +611,7 @@ $semaine["construction"] = $infTraining["nbSemaineConstruction"];
 $semaine["ailier"] = $infTraining["nbSemaineAilier"];
 $semaine["buteur"] = $infTraining["nbSemaineButeur"];
 $semaine["gardien"] = $infTraining["nbSemaineGardien"];
-$semaine["passe"] = $infTraining["nbSemainePasse"];
+$semaine["passe"] = $infTraining["nbSemainePasses"];
 $semaine["defense"] = $infTraining["nbSemaineDefense"];
 
 			  $coeff = getCoeffSelectionneur(3);
@@ -684,7 +654,7 @@ $semaine["construction"] = $infTraining["nbSemaineConstruction"];
 $semaine["ailier"] = $infTraining["nbSemaineAilier"];
 $semaine["buteur"] = $infTraining["nbSemaineButeur"];
 $semaine["gardien"] = $infTraining["nbSemaineGardien"];
-$semaine["passe"] = $infTraining["nbSemainePasse"];
+$semaine["passe"] = $infTraining["nbSemainePasses"];
 $semaine["defense"] = $infTraining["nbSemaineDefense"];
 
 			  $coeff = getCoeffSelectionneur(4);
@@ -730,7 +700,7 @@ $semaine["construction"] = $infTraining["nbSemaineConstruction"];
 $semaine["ailier"] = $infTraining["nbSemaineAilier"];
 $semaine["buteur"] = $infTraining["nbSemaineButeur"];
 $semaine["gardien"] = $infTraining["nbSemaineGardien"];
-$semaine["passe"] = $infTraining["nbSemainePasse"];
+$semaine["passe"] = $infTraining["nbSemainePasses"];
 $semaine["defense"] = $infTraining["nbSemaineDefense"];
 
 			  $coeff = getCoeffSelectionneur(5);
@@ -754,40 +724,37 @@ $semaine["defense"] = $infTraining["nbSemaineDefense"];
 					
 
 			if($l["ht_posteAssigne"] != "0" ) 
-						{
+			{
 						
-$pos = getPosition($l["ht_posteAssigne"]);
+				$pos = getPosition($l["ht_posteAssigne"]);
 
-							switch($sesUser["idNiveauAcces_fk"]) 
-							{
-							case "1":
-							
+					switch($sesUser["idNiveauAcces_fk"]) 
+					{
+					case "1":
+						echo '<a href = ../form.php?affPosition='.$affPosition.'&masque='.$masque.'&ordre='.$ordre.'&sens='.$sens.'&mode=annuleAssignation&idJoueur='.$l["idJoueur"].' alt = "Supprimer cette assignation">';
+						echo $pos["intitulePosition"]."</a>";
+						break;
+					
+					case "2":
+						if($affPosition == $sesUser["idPosition_fk"]){
 							echo '<a href = ../form.php?affPosition='.$affPosition.'&masque='.$masque.'&ordre='.$ordre.'&sens='.$sens.'&mode=annuleAssignation&idJoueur='.$l["idJoueur"].' alt = "Supprimer cette assignation">';
 							echo $pos["intitulePosition"]."</a>";
-							break;
-							
-							case "2":
-							
-							if($affPosition == $sesUser["idPosition_fk"]){
-							echo '<a href = ../form.php?affPosition='.$affPosition.'&masque='.$masque.'&ordre='.$ordre.'&sens='.$sens.'&mode=annuleAssignation&idJoueur='.$l["idJoueur"].' alt = "Supprimer cette assignation">';
-							echo $pos["intitulePosition"]."</a>";
-							}
-							else
-							{
-							echo $pos["intitulePosition"];
-							}
-							break;
-
-							}
 						}
 						else
-						
 						{
-						?>
-                        <input name="assigne[]" type="checkbox" id="assigne[]"  value="<?=$l["idJoueur"]?>"> 
-                        <?php
+							echo $pos["intitulePosition"];
 						}
-						?>
+						break;
+
+					}
+			}
+			else
+			{
+	?>
+                        <input name="assigne[]" type="checkbox" id="assigne[]"  value="<?=$l["idJoueur"]?>"> 
+    <?php
+			}
+	?>
                       </div></td>
                   </tr>
 				 

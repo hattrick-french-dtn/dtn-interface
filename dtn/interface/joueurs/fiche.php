@@ -233,7 +233,7 @@ if ($datemaj >$mkday -$huit){
               <td width="40%" align="left">&nbsp; <font color="#000099"><b><?=$joueurDTN["idHattrickJoueur"]?>&nbsp;-&nbsp;<?=$joueurDTN["nomJoueur"]?> <?=$joueurDTN["prenomJoueur"]?>&nbsp;-&nbsp;<?php 
               $ageetjours = ageetjour($joueurDTN["datenaiss"]);
               $tabage = explode(" - ",$ageetjours);
-              echo $tabage[0];?>&nbsp;ans&nbsp;-&nbsp;<?=$tabage[1]?>&nbsp;jours<br>&nbsp; <?=round(($joueurDTN["salary"]/10),2)?>&nbsp;€/semaine&nbsp;
+              echo $tabage[0];?>&nbsp;ans&nbsp;-&nbsp;<?=$tabage[1]?>&nbsp;jours<br>&nbsp; <?=round(($joueurDTN["salary"]/10),2)?>&nbsp;&euro;/semaine&nbsp;
               <a href="http://alltid.org/player/<?=$joueurDTN["idHattrickJoueur"]?>" target="_blank"><img src="../images/ahstats.png" width="47" height="16" border="0" align="absmiddle"></a>
               <a href="../outils/ExportCsv.php?ordre=<?=$ordre?>&sens=<?=$sens?>&lang=<?=$lang?>&masque=<?=$masque?>&affPosition=<?=$affPosition?>&typeExport=unjoueur&idPlayer=<?=$joueurDTN["idHattrickJoueur"]?>"><img border=1 width="16" height="16" align="absmiddle" src="../images/icone-excel.jpg"></a></b></font>            
               </td>
@@ -298,8 +298,8 @@ if ($datemaj >$mkday -$huit){
                     } else {
                       $sql = "select * from $tbl_admin where idPosition_fk = ".$joueurDTN["ht_posteAssigne"]." AND affAdmin = 1 ";
                     }
-                    $req = ;
-                    foreach($conn->query($sql) as $lst){
+                    $req = $conn->query($sql);
+                    foreach($req as $lst){
 						echo "<option value = ".$lst["idAdmin"]." $etat >".$lst["loginAdmin"]."";
 						if($total[$lst["idAdmin"]] != 0){
 							echo " (".$total[$lst["idAdmin"]].")";
