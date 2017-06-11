@@ -26,7 +26,7 @@ unset($tabJoueur);
 							for ($i = 0 ; $i <= 0; $i++) {
 							
 								//echo $i . " ";
-								$HTCli = &new HT_Client();
+								$HTCli = new HT_Client();
 								if (!$HTCli->Login($ht_user, $ht_password))
 									{
 										echo "  Couldn't connect to Hattrick.";

@@ -952,7 +952,7 @@ if (!isset($zeurl)){
 	if (!session_is_registered("ht_session")){
 		if ( isset($htlogin) && isset($htseccode) && $htlogin!="" && $htseccode!=""){
 		
-			$ht_session = &new HT_Client();
+			$ht_session = new HT_Client();
 			if (!$ht_session->Login($htlogin, $htseccode))
 			{
 				//		echo "  Couldn't connect to Hattrick.";

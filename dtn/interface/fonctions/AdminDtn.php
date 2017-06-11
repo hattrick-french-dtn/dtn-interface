@@ -35,7 +35,7 @@ function HT_getConnection() {
 }
 
 function HT_connect($ht_user, $ht_password) {
-	$HTCli = &new HT_Client();
+	$HTCli = new HT_Client();
 	$connected=$HTCli->Login($ht_user, $ht_password);
 	
 	if ($connected) {

@@ -12,7 +12,7 @@ class HT_Client
 	
 	function HT_Client()
 	{
-		$this->HTClient = &new http( HTTP_V11, false);
+		$this->HTClient = new http( HTTP_V11, false);
 	}
 
 	function GetActivePage()
