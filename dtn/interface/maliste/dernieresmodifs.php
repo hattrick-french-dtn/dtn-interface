@@ -12,24 +12,24 @@ if(!$sesUser["idAdmin"])
 
 
 switch($sesUser["idNiveauAcces"]){
-		case "1":
+	case "1":
 		require("../menu/menuAdmin.php");
 		break;
 		
-		case "2":
+	case "2":
 		require("../menu/menuSuperviseur.php");
 		break;
 
 
-		case "3":
+	case "3":
 		require("../menu/menuDTN.php");
 		break;
 		
-		case "4":
+	case "4":
 		require("../menu/menuCoach.php");
 		break;
 		
-		default;
+	default;
 		break;
 }
  require ("../menu/menuMaListe.php"); 
@@ -69,24 +69,25 @@ document.location='<?=$url?>/joueurs/ficheDTN.php?url='+url+'&id='+id
 </table>
 <?php
 }?>
-    <?php
+<?php
       
-		   $sqlClubs = "select teamid from ht_joueurs where dtnSuiviJoueur_fk ='".$sesUser["idAdmin"]."' ";
-		   $listeClubs = $maBase->select($sqlClubs);
-		   $j=0;
-		   $listeTeamid ="";
-			while ($j<count($listeClubs)){
+	$sqlClubs = "select teamid from ht_joueurs where dtnSuiviJoueur_fk ='".$sesUser["idAdmin"]."' ";
+	$listeClubs = $maBase->select($sqlClubs);
+	$j=0;
+	$listeTeamid ="";
+		 
+	while ($j<count($listeClubs)){
 			 
-			 if ($j+1>=count($listeClubs) ){
+		if ($j+1>=count($listeClubs) ){
 			$listeTeamid = $listeTeamid ."'".$listeClubs[$j][0]."'";
-			 }else{
-			 	$listeTeamid = $listeTeamid ."'".$listeClubs[$j][0]."',";
-			 }
-				$j=$j+1;
-			}
+		}else{
+		 	$listeTeamid = $listeTeamid ."'".$listeClubs[$j][0]."',";
+		}
+			$j=$j+1;
+		}
 		   
-		   if ($j!=0){
-		   ?>
+		if ($j!=0){
+	?>
 
 <p>
 Derni&egrave;res infos club :

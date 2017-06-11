@@ -2282,7 +2282,7 @@ function getDataJoueurHisto($joueurHT,$actualSeason=null) {
 
     $result= $conn->query($sql);
     $tabS = $result->fetch();
-    $coef=$tabS[0]["coefSalary"];
+    $coef=$tabS["coefSalary"];
     $result=NULL;
     unset($sql);
     unset($tabS);

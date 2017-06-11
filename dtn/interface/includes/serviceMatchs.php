@@ -252,13 +252,13 @@ function existMatchBaseDTN($matchid,$joueurid,$maBase=null)
 
 	if ($maBase!=null) {
 		$res = $maBase->select($sql);
-		$countMatch  = $res[0]['nbMatch'];
+		$countMatch  = $res['nbMatch'];
 	} else {
 		$req= $conn->query($sql);
     
 		if ($req!=false) {
 			$res = $req->fetch();
-			$countMatch = $res[0]['nbMatch'];
+			$countMatch = $res['nbMatch'];
 		}
 	}
 	if ($countMatch==1) {return true;}
@@ -614,7 +614,7 @@ function insert_perfs_individuelle($row_perf)
 		if (!$reqValid) {
 			return false;
 		} else {
-			return mysql_insert_id();
+			return $conn->lastInsertId();
 		}
 
 	} elseif (isset($row_perf['id_perfs_individuelle']) == 1){ /* la perf existe dans la base => on le met à jour */
@@ -661,13 +661,13 @@ function insererMatchsJoueur($playerid,$teamid,$dateLastScanMatchJoueur=null)
           $perf['HTML'].="<tr><td colspan=7>&nbsp;</td>";
         }
 //echo('01');
-//        $role=get_role_byID($perf[$nbMatchsInsere]["id_role"]);
+        $role=get_role_byID($perf[$nbMatchsInsere]["id_role"]);
 //echo('toto');
 //        $behaviour=get_behaviour_byID($perf[$nbMatchsInsere]["id_behaviour"]);
 //echo('02');
         $perf['HTML'].="<td>".$perf[$nbMatchsInsere]['id_match']."</td>
                         <td align=center bgcolor=#fded84><b>".$perf[$nbMatchsInsere]['etoile']."/".$perf[$nbMatchsInsere]['etoileFin']."</b></td>
-                        <td>".$role["nom_role_abbrege"].' '.$behaviour["nom_behaviour"]."</td></tr>";
+                        <td>".$role['nom_role_abbrege']."</td></tr>";
 
         $perf[$nbMatchsInsere]['id_perfs_individuelle'] = insert_perfs_individuelle($perf[$nbMatchsInsere]);
         $nbMatchsInsere++;
