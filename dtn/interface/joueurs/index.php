@@ -5,9 +5,9 @@ require("../includes/serviceListesDiverses.php");
 
 
 if(!$sesUser["idAdmin"])
-	{
-	header("location: index.php?ErrorMsg=Session Expiree");
-	}
+{
+	header("location: ../index.php?ErrorMsg=Session Expiree");
+}
 if(!isset($ordre)) $ordre = "nomJoueur";
 if(!isset($sens)) $sens = "ASC";
 if(!isset($lang)) $lang = "FR";
