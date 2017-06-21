@@ -13,30 +13,27 @@ if(!$sesUser["idAdmin"])
 <script language="JavaScript" src="../includes/javascript/navigation.js"></script>
 <?php
 switch($sesUser["idNiveauAcces"]){
-		case "1":
+	case "1":
 		require("../menu/menuAdmin.php");
 		require("../menu/menuAdminGestion.php");
 		break;
 		
-		case "2":
+	case "2":
 		require("../menu/menuSuperviseur.php");
 		require("../menu/menuSuperviseurGestion.php");
 		break;
 
-
-		case "3":
+	case "3":
 		require("../menu/menuDTN.php");
 		require("../menu/menuDTNGestion.php");
 		break;
 		
-		case "4":
+	case "4":
 		require("../menu/menuCoach.php");
 		break;
 		
-		default;
+	default;
 		break;
-
-
 }
 
 $sql = "select * from $tbl_niveauAcces where idNiveauAcces = 3";
@@ -121,7 +118,7 @@ if(!isset($nbJoueurs)) $nbJoueurs ="false";
                   </tr>
               </table>
               <br><?php
-			  if($msg) echo "<h3><center><font color = red>".stripslashes($msg)."</font></center></h2>";
+			  if (isset($msg)) echo "<h3><center><font color = red>".stripslashes($msg)."</font></center></h2>";
 			  ?></td>	
           </tr>
         </table>
@@ -167,7 +164,7 @@ if(!isset($nbJoueurs)) $nbJoueurs ="false";
 			  $sql = "select * from $tbl_admin  left join $tbl_position on idPosition = idPosition_fk where idNiveauAcces_fk = 3 ";
 			  $sql .= "order by $ordre $sens";
 
-			  while($conn->query($sql) as $l){
+			  foreach($conn->query($sql) as $l){
 				$nbjsuivis="?";
 				if ($nbJoueurs !="false"){ 	  	
 					if($l["affAdmin"] == 1){
@@ -219,4 +216,3 @@ if($l["affAdmin"] == 1){
   </tr>
 </table>
 <p>&nbsp;</p>
-<?php  deconnect(); ?>

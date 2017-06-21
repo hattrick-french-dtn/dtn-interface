@@ -57,7 +57,7 @@ $lstCaracJoueur = array($endurance["$lang"]=>$lstJoueur[0]["idEndurance"],
 						$pa["$lang"]=>$lstJoueur[0]["idPA"]
 						);
 						
-$val = array($lstJoueur[0]["scoreGardien"],$lstJoueur[0]["scoreDefense"],$lstJoueur[0]["scoreAilierDef"],$lstJoueur[0]["scoreAilierOff"],$lstJoueur[0]["scoreWtm"],$lstJoueur[0]["scoreMilieu"],$lstJoueur[0]["scoreMilieuOff"],$lstJoueur[0]["scoreAttaquant"]);
+$val = array($lstJoueur[0]["scoreGardien"],$lstJoueur[0]["scoreDefense"],$lstJoueur[0]["scoreAilier"],$lstJoueur[0]["scoreAilierOff"],$lstJoueur[0]["scoreAilierVersMilieu"],$lstJoueur[0]["scoreMilieu"],$lstJoueur[0]["scoreMilieuOff"],$lstJoueur[0]["scoreAttaquant"]);
 sort($val);
 $valMax =  round($val[7],2);
 $val2 = round($val[6],2);
@@ -278,11 +278,11 @@ $i++;
                 <td width = "1" bgcolor="#000000"><div align="center"><img src="../images/spacer.gif" width="1" height="1"></div></td>
                 <td width = "65"><div align="center"> 
                     <?php
-				   if($valMax == $lstJoueur[0]["scoreAilierDef"]){; $font = "<b><font color = red>"; $ffont = "</font></b>"; } 
-				   else if($val2 ==  $lstJoueur[0]["scoreAilierDef"]){; $font = "<b><font color = green>"; $ffont = "</font></b>"; } else {$font = ""; $ffont = ""; }
+				   if($valMax == $lstJoueur[0]["scoreAilier"]){; $font = "<b><font color = red>"; $ffont = "</font></b>"; } 
+				   else if($val2 ==  $lstJoueur[0]["scoreAilier"]){; $font = "<b><font color = green>"; $ffont = "</font></b>"; } else {$font = ""; $ffont = ""; }
 					
 					echo $font;
-					echo  $lstJoueur[0]["scoreAilierDef"];
+					echo  $lstJoueur[0]["scoreAilier"];
 					echo $ffont;
 					?>
                   </div></td>
@@ -300,11 +300,11 @@ $i++;
                 <td width = "1" bgcolor="#000000"><div align="center"><img src="../images/spacer.gif" width="1" height="1"></div></td>
                 <td width = "65"><div align="center"> 
                     <?php
-				   if($valMax == $lstJoueur[0]["scoreWtm"]){; $font = "<b><font color = red>"; $ffont = "</font></b>"; } 
-				   else if($val2 == $lstJoueur[0]["scoreWtm"]){; $font = "<b><font color = green>"; $ffont = "</font></b>"; } else {$font = ""; $ffont = ""; }
+				   if($valMax == $lstJoueur[0]["scoreAilierVersMilieu"]){; $font = "<b><font color = red>"; $ffont = "</font></b>"; } 
+				   else if($val2 == $lstJoueur[0]["scoreAilierVersMilieu"]){; $font = "<b><font color = green>"; $ffont = "</font></b>"; } else {$font = ""; $ffont = ""; }
 					
 					echo $font;
-					echo $lstJoueur[0]["scoreWtm"];
+					echo $lstJoueur[0]["scoreAilierVersMilieu"];
 					echo $ffont;
 					?>
                   </div></td>

@@ -376,7 +376,7 @@ break;
 			
 
 
-$val = array($lstJoueurs["scoreGardien"],$lstJoueurs["scoreDefense"],$lstJoueurs["scoreAilierDef"],$lstJoueurs["scoreAilierOff"],$lstJoueurs["scoreWtm"],$lstJoueurs["scoreMilieu"],$lstJoueurs["scoreMilieuOff"],$lstJoueurs["scoreAttaquant"]);
+$val = array($lstJoueurs["scoreGardien"],$lstJoueurs["scoreDefense"],$lstJoueurs["scoreAilier"],$lstJoueurs["scoreAilierOff"],$lstJoueurs["scoreAilierVersMilieu"],$lstJoueurs["scoreMilieu"],$lstJoueurs["scoreMilieuOff"],$lstJoueurs["scoreAttaquant"]);
 sort($val);
 $valMax =  $val[7];
 $val2 = $val[6];

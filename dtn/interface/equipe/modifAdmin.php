@@ -4,9 +4,9 @@ require("../includes/serviceListesDiverses.php");
 require("../includes/serviceDTN.php");
 
 if(!$sesUser["idAdmin"])
-	{
+{
 	header("location: ../entry.php?ErrorMsg=Session Expiree");
-	}
+}
 
 
 ?>
@@ -89,10 +89,10 @@ $infDTN = getDTN($idAdmin);
 				  <?php
 				foreach($lstPosition as $l){  
 								  
-				  if($l["idPosition"] == $infDTN["idPosition_fk"]) $etat = "selected"; else $etat = "";
-				  echo "<option value = ".$l["idPosition"]." $etat>".$l["intitulePosition"]."</option>";
+					if($l["idPosition"] == $infDTN["idPosition_fk"]) $etat = "selected"; else $etat = "";
+					echo "<option value = ".$l["idPosition"]." $etat>".$l["intitulePosition"]."</option>";
 				  
-				  }
+				}
 				  ?>
 				  
                   </select></td>
@@ -111,7 +111,7 @@ $infDTN = getDTN($idAdmin);
                   </tr>
               </table>
               <br><?php
-			  if($msg) echo "<center><font color = red>".stripslashes($msg)."</font></center>";
+			  if (isset($msg)) echo "<center><font color = red>".stripslashes($msg)."</font></center>";
 			  ?></td>
           </tr>
         </table>

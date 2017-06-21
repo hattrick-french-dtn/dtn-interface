@@ -3,9 +3,9 @@ require_once("../includes/head.inc.php");
 require("../includes/serviceListesDiverses.php");
 
 if(!$sesUser["idAdmin"])
-	{
+{
 	header("location: entry.php?ErrorMsg=Session Expir�");
-	}
+}
 
 
 ?>
@@ -13,27 +13,26 @@ if(!$sesUser["idAdmin"])
 <script language="JavaScript" src="../includes/javascript/navigation.js"></script>
 <?php
 switch($sesUser["idNiveauAcces"]){
-		case "1":
+	case "1":
 		require("../menu/menuAdmin.php");
 		require("../menu/menuAdminGestion.php");
 		break;
 		
-		case "2":
+	case "2":
 		require("../menu/menuSuperviseur.php");
 		require("../menu/menuSuperviseurGestion.php");
 		break;
 
-
-		case "3":
+	case "3":
 		require("../menu/menuDTN.php");
 		require("../menu/menuDTNGestion.php");
 		break;
-
 }
 
 $sql = "select * from $tbl_niveauAcces where idNiveauAcces = 2";
 $req = $conn->query($sql);
-$lstNA = $req->fetch();
+$lstNA = $req->fetch(PDO::FETCH_ASSOC);
+
 
 $lstPosition = listPosition();
 ?>
@@ -61,7 +60,7 @@ if(!isset($sens)) $sens = "ASC";
             <td height="1" bgcolor="#000000"><img src="../images/spacer.gif" width="1" height="1"></td>
           </tr>
           <tr>
-            <td><br>              <table width="50%" border="0" align="center" cellpadding="0" cellspacing="0">
+            <td><br><table width="50%" border="0" align="center" cellpadding="0" cellspacing="0">
                 <tr>
                   <td height="20">Login</td>
                   <td height="20"><input name="loginAdmin" type="text" id="loginAdmin"></td>
@@ -80,9 +79,9 @@ if(!isset($sens)) $sens = "ASC";
                 </tr>
                 <tr>
                   <td height="20">Niveau d'acc&egrave;s</td>
-                  <td height="20"><input type = "hidden" name="idNiveauAcces_fk" value = "<?=$lstNA[0]["idNiveauAcces"]?>">
+                  <td height="20"><input type = "hidden" name="idNiveauAcces_fk" value = "<?=$lstNA["idNiveauAcces"]?>">
 				  <?php
-				  	echo $lstNA[0]["IntituleNiveauAcces"];
+				  	echo $lstNA["IntituleNiveauAcces"];
 				  ?>
                  </td>
                 </tr>
@@ -112,7 +111,7 @@ if(!isset($sens)) $sens = "ASC";
                   </tr>
               </table>
               <br><?php
-			  if($msg) echo "<h3><center><font color = red>".stripslashes($msg)."</font></center></h2>";
+			  if (isset($msg)) echo "<h3><center><font color = red>".stripslashes($msg)."</font></center></h2>";
 			  ?></td>	
           </tr>
         </table>

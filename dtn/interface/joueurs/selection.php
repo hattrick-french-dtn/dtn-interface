@@ -5,102 +5,64 @@ require("../includes/serviceDTN.php");
 
 
 if(!$sesUser["idAdmin"])
-	{
+{
 	header("location: index.php?ErrorMsg=Session Expir�");
-	}
+}
 if(!isset($ordre)) $ordre = "nomJoueur";
 if(!isset($sens)) $sens = "ASC";
 if(!isset($lang)) $lang = "FR";
 if(!isset($masque)) $masque = 0;
 if(!isset($affPosition)) $affPosition = 0;
 
-
 require("../includes/langue.inc.php");
 
-
-
-
 //
-
-
 $sql = "select * from $tbl_position";
 
-
-
-
 switch($sesUser["idNiveauAcces_fk"]){
-		case "1":
+	case "1":
 		break;
-		case "2":
+	case "2":
 		if($sesUser["idPosition_fk"] != 0){
-		$sql .= " where idPosition = ".$sesUser["idPosition_fk"];
+			$sql .= " where idPosition = ".$sesUser["idPosition_fk"];
 		}
-		break;
-		
-		
+		break;	
 }
-//OPB
-//$infAdmin = getDTN($sesUser["idAdmin"]);
 
-
-		$lstJoueurs = listJoueurSelection($infAdmin["selection"]);
-
-
-
+$lstJoueurs = listJoueurSelection();
 
 switch($sesUser["idNiveauAcces"]){
-		case "1":
+	case "1":
 		require("../menu/menuAdmin.php");
 		break;
 		
-		case "2":
+	case "2":
 		require("../menu/menuSuperviseur.php");
 		break;
 
-
-
-
-		case "3":
+	case "3":
 		require("../menu/menuDTN.php");
 		break;
 		
-		case "4":
+	case "4":
 		require("../menu/menuCoach.php");
 		require("../menu/menuCoachSubmit.php");
 		break;
 		
-		default;
+	default;
 		break;
-
-
 }
-
-
-
-
-
-
-
-
+$font = "<font color = black>";
+$ffont = "</font>";
 
 
 ?><title>Superviseur</title>
 <script language="JavaScript" type="text/JavaScript">
-<!--
-
-
-//-->
-
-
-
-
 function init()
 {
 var scrollPos = "<?=$scrollPos?>";
 document.body.scrollTop = scrollPos;
-
-
-}//-->
+}
 </script>
 <link href="../css/ht2.css" rel="stylesheet" type="text/css">
 <script language="JavaScript" src="../includes/javascript/navigation.js"></script>
@@ -118,11 +80,6 @@ document.body.scrollTop = scrollPos;
     <br>
     <b><span class="titre">Liste des joueurs de l'&eacute;quipe de France
     <?=$sesUser["selection"]?>
-  
-
-
-  
-
 
     <br>
     </span></b>    
@@ -198,72 +155,119 @@ document.body.scrollTop = scrollPos;
                   </tr>
                 </table>
                  
-				             <?php
-				$lst = 1;
-
-
-			foreach($lstJoueurs as $l){
-			
-			  
-			  $infTraining = getEntrainement($l["idJoueur"]);
-			  
+<?php
+	$lst = 1;
+	foreach($lstJoueurs as $l){
+		$infTraining = getEntrainement($l["idJoueur"]);
+	  
 		switch($lst){
-			case 1:
+		case 1:
 			$bgcolor = "#EEEEEE";
 			$lst = 0;
 			break;
-			
-			case 0:
+	
+		case 0:
 			$bgcolor = "white";
 			$lst = 1;
 			break;
-			}
-			
+		}
+
+		$val = array($l["scoreGardien"],$l["scoreDefense"],$l["scoreAilier"],$l["scoreAilierOff"],$l["scoreAilierVersMilieu"],$l["scoreMilieu"],$l["scoreMilieuOff"],$l["scoreAttaquant"]);
+		sort($val);
+		$valMax =  $val[7];
+		$val2 = $val[6];
+
+		$d = 0;
+		$wing=0;
+		$wingoff = 0;
+		$wingwtm = 0;
+		$m=0;
+		$moff=0;
+		$att=0;
+		$k=0;
+		$buteurColor = $passeColor = $ailierColor = $constructionColor = $defenseColor = $keeperColor = $bgcolor;
 		
-
-
-
-
- $val = array($l["scoreGardien"],$l["scoreDefense"],$l["scoreAilierDef"],$l["scoreAilierOff"],$l["scoreWtm"],$l["scoreMilieu"],$l["scoreMilieuOff"],$l["scoreAttaquant"]);
-sort($val);
-$valMax =  $val[7];
-$val2 = $val[6];
+		if ($valMax == $l["scoreGardien"]) {
+			//gK
+			$k = 1;
+			$keeperColor = "#9999CC";
+		}				
+		if ($valMax == $l["scoreDefense"]) {
+			// cD
+			$d = 1;
+			$defense = 1;
+			$defenseColor = "#9999CC";
+		}				
+		if ($valMax == $l["scoreAilier"]) {
+			// Wg
+			$construction = 1;
+			$constructionColor = "#CCCCCC";
+			$ailier = 1;
+			$ailierColor = "#9999CC";
+			$defense = 1;
+			$defenseColor = "#CCCCCC";
+			$passe = 1;
+			$passeColor = "#CCCCCC";
+			
+			$wing = 1;
+			$wingoff = 1;
+			$wingwtm = 1;
+		}
+		if ($valMax == $l["scoreMilieu"]) {
+			//IM
+			$m = 1;
+			$moff = 1;
+			$construction = 1;
+			$constructionColor = "#9999CC";
+			$defense = 1;
+			$defenseColor = "#CCCCCC";
+			$passe = 1;
+			$passeColor = "#CCCCCC";
+		}				
+		if ($valMax == $l["scoreAttaquant"]) {
+			// Fw
+			$att = 1;
+			$passe = 1;
+			$passeColor = "#999999";
+			$buteur = 1;
+			$buteurColor = "#9999CC";
+		}
 			  
-			  $class = "#";
-			  $quinze = 60 * 60 * 24 * 15;
-			  $trente = 60 * 60 * 24 * 30;
+		$class = "#";
+		$quinze = 60 * 60 * 24 * 15;
+		$trente = 60 * 60 * 24 * 30;
+
+
+		$date = explode("-",$l["dateDerniereModifJoueur"]);
+
+		// Date de la dernier modif de ce joueur
+		$mkJoueur =  mktime(0,0,0,$date[1],$date[2],$date[0]); 
+
+		// Date du jour
+		$mkDay = mktime(0,0,0,date('m'), date('d'),date('Y'));
+		$d1 =  $mkDay - $quinze;
+		$d2 =  $mkDay - $trente;
+
+		if($mkJoueur > $d1) $class= "#"; 
+		else if( $mkJoueur > $d2 && $mkJoueur < $d1 ) $class = "style3";	
+		else if( $mkJoueur < $d2 ) $class = "style4";
 			 
-			 
-			 $date = explode("-",$l["dateDerniereModifJoueur"]);
-			 
-			 // Date de la dernier modif de ce joueur
-			  $mkJoueur =  mktime(0,0,0,$date[1],$date[2],$date[0]); 
-			  
-			  // Date du jour
-			 $mkDay = mktime(0,0,0,date('m'), date('d'),date('Y'));
-			 $d1 =  $mkDay - $quinze;
-			 $d2 =  $mkDay - $trente;
-			 
-			if($mkJoueur >  $d1) $class= "#"; 
-			else if( $mkJoueur > $d2 && $mkJoueur < $d1 ) $class = "style3";	
-			else if($mkJoueur < $d2) $class = "style4";
-			 
-			  ?>
+?>
 
 
 				               
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
-				  <tr bgcolor = "<?=$bgcolor?>">  
-                    <td width="200" > 
-                      &nbsp;<a href ="<?=$url?>/joueurs/fiche.php?id=<?=$l["idJoueur"]?>" class=<?=$class?>><span class=<?=$class?>>  <b><?=strtolower($l["nomJoueur"])?></b>
-                   <?=strtolower($l["prenomJoueur"])?></span>
-                      </a>
-                      <div align="center"> </div></td>
-                    <td width="1" bgcolor="#000000" ><img src="../images/spacer.gif" width="1" height="1"></td>
-                    <td ><img src="../images/spacer.gif" width="1" height="1">
+	<tr bgcolor = "<?=$bgcolor?>">  
+        <td width="200" > 
+            &nbsp;<a href ="<?=$url?>/joueurs/fiche.php?id=<?=$l["idJoueur"]?>" class=<?=$class?>><span class=<?=$class?>>  <b><?=strtolower($l["nomJoueur"])?></b>
+            <?=strtolower($l["prenomJoueur"])?></span>
+        </a>
+        <div align="center"> </div></td>
+            <td width="1" bgcolor="#000000" ><img src="../images/spacer.gif" width="1" height="1"></td>
+                <td ><img src="../images/spacer.gif" width="1" height="1">
                     <?=$infTraining["valeurEnCours"]?></td>
-                    <td width="1" rowspan="6" bgcolor="#000000"><img src="../images/spacer.gif" width="1" height="1"></td>
-                    <td width="25"><div align="center"> 
+                <td width="1" rowspan="6" bgcolor="#000000"><img src="../images/spacer.gif" width="1" height="1"></td>
+                <td width="25"><div align="center"> 
                         <?=$l["ageJoueur"]?>
                       </div></td>
                     <td width="1" rowspan="6" bgcolor="#000000"><img src="../images/spacer.gif" width="1" height="1"></td>
@@ -334,21 +338,15 @@ $val2 = $val[6];
                     <td width="2" rowspan="6" bgcolor="#000000"><img src="../images/spacer.gif" width="1" height="1"></td>
                     <td width="40" witdth = "20"> <div align="center"> 
                       <?php
-					  if($k == 1)
-					  {
-					echo "<font color = #000099><b>";
-					  }
-					  else
-					echo "<font color = gray>";
-
-
-
-
-				   
+					if($k == 1)
+					{
+						echo "<font color = #000099><b>";
+					}
+					else
+						echo "<font color = gray>";
 				   
 					echo $l["scoreGardien"];
 					echo $ffont;
-
 
 					  ?>
 					  
@@ -357,17 +355,15 @@ $val2 = $val[6];
                       <img src="../images/spacer.gif" width="1" height="1"> <div align="center"><img src="../images/spacer.gif" width="1" height="1"></div></td>
                     <td width="40" height="17" witdth = "20"> <div align="center"> 
                       <?php
-					  if($d == 1)
-					 {
-					echo "<font color = #000099><b>";
-					 }
-					  else
-					echo "<font color = gray>";
-					
+					if($d == 1)
+					{
+						echo "<font color = #000099><b>";
+					}
+					else
+						echo "<font color = gray>";
 					
 					echo $l["scoreDefense"];
 					echo $ffont;
-
 
 					  ?>
                       </div></td>

@@ -75,8 +75,8 @@ break;
 case "supprAdmin";
 
 // Suppression des asssignations des joueurs qu'il suit
-    $sql2 = $conn->exec("UPDATE ht_joueurs SET dtnSuiviJoueur_fk = '0' WHERE dtnSuiviJoueur_fk = '".$idAdmin."'") or die("Erreur Req 2 : $sql2");
-    $sql2 = $conn->exec("UPDATE ht_admin SET affAdmin = '0' WHERE idAdmin = '".$idAdmin."'") or die("Erreur Req 2 : $sql2");
+    $sql2 = $conn->exec("UPDATE ht_joueurs SET dtnSuiviJoueur_fk = '0' WHERE dtnSuiviJoueur_fk = '".$idAdmin."'");
+    $sql2 = $conn->exec("UPDATE ht_admin SET affAdmin = '0' WHERE idAdmin = '".$idAdmin."'");
 
 	header("location: equipe/$from.php?msg=Administrateur bien supprime");
 
@@ -104,8 +104,15 @@ case "ajoutAdmin":
 
 
 	if($req->rowCount() > 0){
-		header("location: equipe/$from.php?msg=!! Erreur. Cette administrateur existe deja !!");
+		if ($req["idNiveauAcces_fk"] == $idNiveauAcces_fk) {
+			header("location: equipe/$from.php?msg=!! Erreur. Cette administrateur existe deja !!");
+			break;
+		}
 
+		$conn->exec("UPDATE ht_admin SET   loginAdmin = '".$loginAdmin."', passAdmin  ='".$passAdmin."',idAdminHT= '".$idAdminHT."' ,
+											 emailAdmin  = '".$emailAdmin."' ,idNiveauAcces_fk = '".$idNiveauAcces_fk."'  ,  idPosition_fk  = '".$idPosition_fk."' WHERE idAdmin = '".$idAdmin."'");
+
+		header("location: equipe/$from.php?msg=L administrateur a bien ete modifie");
 	}
 	else{
 

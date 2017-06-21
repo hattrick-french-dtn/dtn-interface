@@ -20,24 +20,15 @@ var scrollT = document.body.scrollTop;
 
 window.location = "?selection="+selection+"&ordre="+ordre+"&sens="+sens2+"&scrollPos="+scrollT+"&masque="+masque+"&affPosition="+position;
 
-
-
-
 }
 
-
-
-function supprAdmin(idAdmin,from){
-
-conf = confirm("Etes vous sur de vouloir supprimer ce compte ?");
-
-if(conf == true) window.location = "../form.php?mode=supprAdmin&from="+from+"&idAdmin="+idAdmin;
-
+function supprAdmin(idAdmin,pagefrom){
+	conf = confirm("Etes vous sur de vouloir supprimer ce compte ?");
+	if(conf == true) window.location = "../form.php?mode=supprAdmin&from="+pagefrom+"&idAdmin="+idAdmin;
 }
 
-function modifAdmin(idAdmin, from){
-
-popUpAddCoach = window.open('modifAdmin.php?titre=Modifier&idAdmin='+idAdmin+'&from='+from+'','popUpAddCoach','toolbar=0,location=0,directories=0,status=0,scrollbars=0,resizable=0,copyhistory=0,menuBar=0,width=530,height=268');
+function modifAdmin(idAdmin, pagefrom){
+	window.location = 'modifAdmin.php?titre=Modifier&idAdmin='+idAdmin+'&from='+pagefrom;
 
 }
 

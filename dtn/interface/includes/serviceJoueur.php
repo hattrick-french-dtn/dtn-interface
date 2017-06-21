@@ -426,12 +426,12 @@ function listJoueurSelection()
 	$sql = "SELECT s.id,  s.id_joueur,  s.selection, j.* 
           FROM ht_selection s, ht_joueurs j 
           WHERE s.id_joueur = j.idJoueur 
-          AND s.selection = '".$sesUser["selection"]."'";
+          AND s.selection = '".$sesUser["selection"]."' ";
 	$sql .= "ORDER BY $ordre $sens";
 
 	$tabs = array();
 	foreach($conn->query($sql) as $row){
-		array_push($tabS, $row);
+		$tabS[] = $row;
 	}
 	return	$tabS;
 }

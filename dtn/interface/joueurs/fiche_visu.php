@@ -67,7 +67,7 @@ if ($infJ["loginAdminSuiveur"] == $sesUser["loginAdmin"]){
 $lienModif="on";					
 
 }						
-$val = array($infJ["scoreGardien"],$infJ["scoreDefense"],$infJ["scoreAilierDef"],$infJ["scoreAilierOff"],$infJ["scoreWtm"],$infJ["scoreMilieu"],$infJ["scoreMilieuOff"],$lstJoueur["scoreAttaquant"]);
+$val = array($infJ["scoreGardien"],$infJ["scoreDefense"],$infJ["scoreAilier"],$infJ["scoreAilierOff"],$infJ["scoreAilierVersMilieu"],$infJ["scoreMilieu"],$infJ["scoreMilieuOff"],$lstJoueur["scoreAttaquant"]);
 sort($val);
 $valMax =  round($val[7],2);
 $val2 = round($val[6],2);

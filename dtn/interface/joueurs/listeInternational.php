@@ -14,37 +14,26 @@ if(!isset($affPosition)) $affPosition = 0;
 $defautFiltre="";
 if ($masque=="on")   $defautFiltre = "CHECKED";
 	
-
 require("../includes/langue.inc.php");
 
-
-
 //
-
 $sql = "select * from $tbl_position";
 
 
 switch($sesUser["idNiveauAcces_fk"]){
-		case "1":
+	case "1":
 		break;
-		case "2":
+	case "2":
 		if($sesUser["idPosition_fk"] != 0){
-		$sql .= " where idPosition = ".$sesUser["idPosition_fk"];
+			$sql .= " where idPosition = ".$sesUser["idPosition_fk"];
 		}
 		break;
-		
-		
 }
 
 $lstPosition = construitListe($sql,$tbl_position);
-
 $sql = "select * from $tbl_position";
 
 $lstPosition2 = construitListe($sql,$tbl_position);
-
-
-
-
 $sql = "select * from $tbl_joueurs ";
 
 if(isset($affPosition) && $affPosition != 0) $sql .= " left join $tbl_position on ht_posteAssigne = idPosition where ht_posteAssigne = $affPosition ";
@@ -69,20 +58,20 @@ $reqJoueurs = $conn->query($sql);
 
 switch($affPosition){
 
-		case "1":
+	case "1":
 		//gK
 		$k = 1;
 		$keeperColor = "#999999";
 		break;
 		
-		case "2":
+	case "2":
 		// cD
 		$d = 1;
 		$defense = 1;
 		$defenseColor = "#999999";
 		break;
 		
-		case "3":
+	case "3":
 		// Wg
 		$construction = 1;
 		$constructionColor = "#CCCCCC";
@@ -98,7 +87,7 @@ switch($affPosition){
 		$wingwtm = 1;
 
 		break;
-		case "4":
+	case "4":
 		//IM
 		$m = 1;
 		$moff = 1;
@@ -110,7 +99,7 @@ switch($affPosition){
 		$passeColor = "#CCCCCC";
 		break;
 		
-		case "5":
+	case "5":
 		// Fw
 				
 		$att = 1;
@@ -120,7 +109,7 @@ switch($affPosition){
 		$buteurColor = "#999999";
 		break;
 	
-		default:
+	default:
 		$font = "<font color = black>";
 		$ffont = "</font>";
 		break;
@@ -128,24 +117,23 @@ switch($affPosition){
 }
 
 switch($sesUser["idNiveauAcces"]){
-		case "1":
+	case "1":
 		require("../menu/menuAdmin.php");
 		break;
 		
-		case "2":
+	case "2":
 		require("../menu/menuSuperviseur.php");
 		break;
 
-
-		case "3":
+	case "3":
 		require("../menu/menuDTN.php");
 		break;
 		
-		case "4":
+	case "4":
 		require("../menu/menuCoach.php");
 		break;
 		
-		default;
+	default;
 		break;
 }
 
@@ -507,7 +495,7 @@ if ($masque=="on"){
 
 
 
-		$val = array($lstJoueurs["scoreGardien"],$lstJoueurs["scoreDefense"],$lstJoueurs["scoreAilierDef"],$lstJoueurs["scoreAilierOff"],$lstJoueurs["scoreWtm"],$lstJoueurs["scoreMilieu"],$lstJoueurs["scoreMilieuOff"],$lstJoueurs["scoreAttaquant"]);
+		$val = array($lstJoueurs["scoreGardien"],$lstJoueurs["scoreDefense"],$lstJoueurs["scoreAilier"],$lstJoueurs["scoreAilierOff"],$lstJoueurs["scoreAilierVersMilieu"],$lstJoueurs["scoreMilieu"],$lstJoueurs["scoreMilieuOff"],$lstJoueurs["scoreAttaquant"]);
 		sort($val);
 		$valMax =  $val[7];
 		$val2 = $val[6];
@@ -528,13 +516,13 @@ if ($masque=="on"){
 		$d2 =  $mkDay - $trente;
 
 		if($mkJoueur >  $d1) $class= "#"; 
-		else if( $mkJoueur > $d2 && $mkJoueur < $d1 ) $class = "style3";	
+		else if($mkJoueur > $d2 && $mkJoueur < $d1 ) $class = "style3";	
 		else if($mkJoueur < $d2) $class = "style4";
 			 
 			 
-		if($settings["useit"] == 1){
-		$lstJoueurs["scoreGardien"] = 5;
-	}
+//		if($settings["useit"] == 1){
+//			$lstJoueurs["scoreGardien"] = 5;
+//		}
 
 	?>
 	  <tr bgcolor = "<?=$bgcolor?>" align="right">  
@@ -609,12 +597,12 @@ $carac["defense"] = $lstJoueurs["idDefense"];
 $carac["xp"] = $lstJoueurs["idExperience_fk"];
 
 
-$semaine["construction"] = $lstJoueurs["nbSemaineConstruction"];
-$semaine["ailier"] = $lstJoueurs["nbSemaineAilier"];
-$semaine["buteur"] = $lstJoueurs["nbSemaineButeur"];
-$semaine["gardien"] = $lstJoueurs["nbSemaineGardien"];
-$semaine["passe"] = $lstJoueurs["nbSemainePasse"];
-$semaine["defense"] = $lstJoueurs["nbSemaineDefense"];
+$semaine["construction"] = $infTraining["nbSemaineConstruction"];
+$semaine["ailier"] = $infTraining["nbSemaineAilier"];
+$semaine["buteur"] = $infTraining["nbSemaineButeur"];
+$semaine["gardien"] = $infTraining["nbSemaineGardien"];
+$semaine["passe"] = $infTraining["nbSemainePasses"];
+$semaine["defense"] = $infTraining["nbSemaineDefense"];
 
 
 	switch($affPosition){
