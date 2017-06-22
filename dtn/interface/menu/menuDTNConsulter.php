@@ -9,6 +9,6 @@
 	&nbsp;<A class="smliensorange" href="<?=$url?>/joueurs/verifPlayer.php" >Chercher joueur</a>&nbsp;|
 	&nbsp;<A class="smliensorange" href="<?=$url?>/joueurs/purgeJoueurs.php" >Purge</a>&nbsp;|
 	&nbsp;<A class="smliensorange" href="<?=$url?>/clubs/liste_clubs.php">Clubs</a>&nbsp;|
-	&nbsp;<A class="smliensorange" href="<?=$url?>/joueurs/ficherecupchoix.php" alt="Fiches résumés">Fiches résumés</a>&nbsp;|&nbsp;
+	&nbsp;<A class="smliensorange" href="<?=$url?>/joueurs/ficherecupchoix.php" alt="Fiches r&eacute;sum&eacute;s">Fiches r&eacute;sum&eacute;s</a>&nbsp;|&nbsp;
 	&nbsp;<A class="smliensorange" href="<?=$url?>/consulter/rapportMatchs.php">Rapports Matchs</a>&nbsp;
 </td></tr></table>

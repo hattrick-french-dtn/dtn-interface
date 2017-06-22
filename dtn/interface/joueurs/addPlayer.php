@@ -119,7 +119,7 @@ if (isset($_SESSION['listID']) && !isset($_REQUEST['listID']) )  {
   <tr>
   <td> 
     <br /> 
-    2 - Entrez la liste des IDs de joueurs actuellement sur le marché des transfert que vous souhaitez ajouter dans la base :<br>
+    2 - Entrez la liste des IDs de joueurs actuellement sur le march&eacute; des transfert que vous souhaitez ajouter dans la base :<br>
     <br />
   </td>
   </tr>
@@ -130,7 +130,7 @@ if (isset($_SESSION['listID']) && !isset($_REQUEST['listID']) )  {
   </tr>
   <tr>
   <td>
-    <i>Remarque : Chaque ID de joueur doit être séparé par un ";"</i>
+    <i>Remarque : Chaque ID de joueur doit &ecirc;tre s&eacute;par&eacute; par un ";"</i>
   </td>
   </tr> 
   <tr> 
