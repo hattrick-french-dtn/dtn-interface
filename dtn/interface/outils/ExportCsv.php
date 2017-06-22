@@ -2,6 +2,7 @@
 require_once ("../includes/head.inc.php");
 require ("../includes/serviceListesDiverses.php");
 require ("../includes/serviceJoueur.php");
+require ("../includes/serviceEntrainement.php");
 
 if (!$sesUser["idAdmin"]) {
 	header("location: ../index.php?ErrorMsg=Session Expiree");

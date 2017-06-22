@@ -257,7 +257,7 @@ $val2 = $val[6];
                     <td ><?=$lstPos[$l["ht_posteAssigne"]-1]["intitulePosition"]?></td>
                     <td nowrap="nowrap"><div align="center"><?php
 						$ageetjours = ageetjour($l["datenaiss"]);
-						$tabage = explode(" - ",$ageetjours);
+						//$tabage = explode(" - ",$ageetjours);
 						echo "$ageetjours";
 						?> 
                     </div></td>

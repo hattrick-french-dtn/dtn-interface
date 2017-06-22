@@ -16,21 +16,23 @@ return $sql;
 }
 
 
-function ageetjour($datenaissjoueur,$formatSortie="1")
+function ageetjour($datenaissjoueur,$formatSortie=1)
 {        
 	$jouractuel = round((mktime(0,0,0,date("m"),date("d"),date("Y"))-574729200)/3600/24,0);
 	$nbjourjoueur = $jouractuel-$datenaissjoueur;
 	$jourjoueur = $nbjourjoueur % 112;
 	$agejoueur = ($nbjourjoueur-$jourjoueur)/112;
 
-	if ($formatSortie=="1") {
-		return($agejoueur." - ".$jourjoueur);
-	} else if ($formatSortie=="2") {
+	if ($formatSortie==2) {
 		$resu["ageJoueur"] = $agejoueur;
 		$resu["jourJoueur"] = $jourjoueur;
 		return($resu);
+	} else if ($formatSortie==3) {
+		return($agejoueur.".".$jourjoueur);
 	}
-}  
+
+	return($agejoueur." - ".$jourjoueur);
+}
 
 
 function getTousJoueurSQL(){
@@ -2269,11 +2271,11 @@ function majJoueur($ht_user,$role_user,$joueurHT,$joueurDTN){
 function getDataJoueurHisto($joueurHT,$actualSeason=null) {
 	global $conn;
 
-  require($_SERVER['DOCUMENT_ROOT'].'/dtn/interface/includes/nomTables.inc.php');
-
-  if (isset($joueurHT['teamid'])) {
-    // Coefficient � utiliser pour le calcul du salaire hors charges
-    $sql="SELECT 
+	require($_SERVER['DOCUMENT_ROOT'].'/dtn/interface/includes/nomTables.inc.php');
+	$coef=1;
+	if (isset($joueurHT['teamid'])) {
+		// Coefficient � utiliser pour le calcul du salaire hors charges
+		$sql="SELECT 
               P.coefSalary as coefSalary
           FROM 
               $tbl_pays   P,
@@ -2283,40 +2285,40 @@ function getDataJoueurHisto($joueurHT,$actualSeason=null) {
           AND C.idPays_fk = P.idPays
           LIMIT 1";
 
-    $result= $conn->query($sql);
-    $tabS = $result->fetch();
-    $coef=$tabS["coefSalary"];
-    $result=NULL;
-    unset($sql);
-    unset($tabS);
-  } else { // teamid introuvable car le joueur n'a plus de club
-    if ($joueurHT['isAbroad']) { // joue a l'etranger
-      $coef=1.2;
-    } else { // Joue en france
-      $coef=1;
-    }
-  }
+		$result= $conn->query($sql);
+		$tabS = $result->fetch();
+		$coef=$tabS["coefSalary"];
+		$result=NULL;
+		unset($sql);
+		unset($tabS);
+	} else { // teamid introuvable car le joueur n'a plus de club
+		if ($joueurHT['isAbroad']) { // joue a l'etranger
+			$coef=1.2;
+		} else { // Joue en france
+			$coef=1;
+		}
+	}
   
-  if ($actualSeason==null) {
-    $actualSeason=getSeasonWeekOfMatch(mktime(date('H'),date('i'),date('s'),date('m'),date('d'),date('Y')));
-  }
+	if ($actualSeason==null) {
+		$actualSeason=getSeasonWeekOfMatch(mktime(date('H'),date('i'),date('s'),date('m'),date('d'),date('Y')));
+	}
   
-  $data_joueurs_histo["id_joueur_fk"]=$joueurHT["idHattrickJoueur"];
-  $data_joueurs_histo["season"]=$actualSeason["season"];
-  $data_joueurs_histo["week"]=$actualSeason["week"];
-  $data_joueurs_histo["date_histo"]=date('Y-m-d H:i:s');
-  $data_joueurs_histo["forme"]=$joueurHT["forme"];
-  $data_joueurs_histo["tsi"]=$joueurHT["tsi"];
-  $data_joueurs_histo["xp"]=$joueurHT["idExperience_fk"];
-  $data_joueurs_histo["salaire"]=round((($joueurHT["salary"]/10)/$coef),2);
-  if (isset($joueurHT["blessure"])) {$data_joueurs_histo["blessure"]=$joueurHT["blessure"];}
-  $data_joueurs_histo["transferListed"]=$joueurHT["transferListed"];
+	$data_joueurs_histo["id_joueur_fk"]=$joueurHT["idHattrickJoueur"];
+	$data_joueurs_histo["season"]=$actualSeason["season"];
+	$data_joueurs_histo["week"]=$actualSeason["week"];
+	$data_joueurs_histo["date_histo"]=date('Y-m-d H:i:s');
+	$data_joueurs_histo["forme"]=$joueurHT["forme"];
+	$data_joueurs_histo["tsi"]=$joueurHT["tsi"];
+	$data_joueurs_histo["xp"]=$joueurHT["idExperience_fk"];
+	$data_joueurs_histo["salaire"]=round((($joueurHT["salary"]/10)/$coef),2);
+	if (isset($joueurHT["blessure"])) {$data_joueurs_histo["blessure"]=$joueurHT["blessure"];}
+	$data_joueurs_histo["transferListed"]=$joueurHT["transferListed"];
 
-  unset($actualSeason);
-  unset($joueurHT);
-  unset($coef);
+	unset($actualSeason);
+	unset($joueurHT);
+	unset($coef);
   
-  return $data_joueurs_histo;
+	return $data_joueurs_histo;
 }
 
 /******************************************************************************/

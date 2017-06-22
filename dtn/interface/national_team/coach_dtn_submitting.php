@@ -3,8 +3,8 @@ require_once("../includes/head.inc.php");
 require("../includes/serviceJoueur.php");
 require("../includes/serviceEquipes.php");
 require("../includes/serviceDTN.php");
-require("../includes/langue.inc.php");
-require("../../../language/fr.php");
+require_once("../includes/langue.inc.php");
+require_once("../../../language/fr.php");
 require("../includes/serviceMatchs.php");
 require_once "../_config/CstGlobals.php"; 
 
