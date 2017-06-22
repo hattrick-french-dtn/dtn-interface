@@ -178,9 +178,8 @@ require("../menu/menuJoueur.php");
     <?=strtolower($infJ["idHattrickJoueur"])?>
     ) 
     <?php 
-      $ageetjours = ageetjour($infJ["datenaiss"]);
-      $tabage = explode(" - ",$ageetjours);
-      echo $tabage[0];?>&nbsp;ans&nbsp;-&nbsp;<?=$tabage[1]
+      $tabage = ageetjour($infJ["datenaiss"], 2);
+      echo $tabage[ageJoueur];?>&nbsp;ans&nbsp;-&nbsp;<?=$tabage[jourJoueur]
     ?> 
     jours[/b]</b><br>
     Proprietaire :  

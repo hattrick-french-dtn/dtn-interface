@@ -162,7 +162,7 @@ document.body.scrollTop = scrollPos;
              &nbsp &nbsp &nbsp Export Fiche R&eacute;sum&eacute; :&nbsp;</td>              
       <td valign="middle">
         <a href="../joueurs/ficherecupchoix.php?origine=<?php echo "maliste"?>">
-          <img border=1 src="../images/jst.bmp" title="Exporter la liste des joueurs sous forme d'une fiche résumé globale"></a></td>
+          <img border=1 src="../images/jst.bmp" title="Exporter la liste des joueurs sous forme d'une fiche r&eacute;sum&eacute; globale"></a></td>
                  
     </tr>
 </table> 

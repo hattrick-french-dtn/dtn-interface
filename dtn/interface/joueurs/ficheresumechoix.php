@@ -83,7 +83,7 @@ if ($infJs[1]['entrainement_type']=='') $infJs[1]['entrainement_type']='non rens
 	$infJs[0]=$infJs[1];
   //âge du joueur
 	for  ($k=1;$k<count($infJs);$k++)
-	  {
+	{
     $ageetjours = ageetjour($infJs[$k]["datenaiss"]);
   	$tabage[$k] = explode(" - ",$ageetjours);
     //calcul du nombre de jours depuis la dernière modification

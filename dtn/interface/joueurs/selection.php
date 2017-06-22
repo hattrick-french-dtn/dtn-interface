@@ -6,7 +6,7 @@ require("../includes/serviceDTN.php");
 
 if(!$sesUser["idAdmin"])
 {
-	header("location: index.php?ErrorMsg=Session Expir�");
+	header("location: index.php?ErrorMsg=Session Expiré");
 }
 if(!isset($ordre)) $ordre = "nomJoueur";
 if(!isset($sens)) $sens = "ASC";
@@ -102,7 +102,7 @@ document.body.scrollTop = scrollPos;
                 <tr bgcolor="#000000">
                   <td width="213" onClick="chgTri('nomJoueur','<?=$sens?>','<?=$masque?>','<?=$affPosition?>')"><font color="#FFFFFF">Identit&eacute;</font></td>
                   <td width="82" rowspan="5"><div align="center"><span class="Style1">TSI</span></div></td>
-                  <td width="25" onClick="chgTri('ageJoueur','<?=$sens?>','<?=$masque?>','<?=$affPosition?>')">
+                  <td width="35" onClick="chgTri('ageJoueur','<?=$sens?>','<?=$masque?>','<?=$affPosition?>')">
                     <div align="center"><font color="#FFFFFF">Age</font></div></td>
                   <td width="22" onClick="chgTri('idExperience_fk','<?=$sens?>','<?=$masque?>','<?=$affPosition?>')">
                     <div align="center"><font color="#FFFFFF">Xp</font></div></td>
@@ -254,8 +254,6 @@ document.body.scrollTop = scrollPos;
 			 
 ?>
 
-
-				               
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
 	<tr bgcolor = "<?=$bgcolor?>">  
         <td width="200" > 
@@ -267,8 +265,8 @@ document.body.scrollTop = scrollPos;
                 <td ><img src="../images/spacer.gif" width="1" height="1">
                     <?=$infTraining["valeurEnCours"]?></td>
                 <td width="1" rowspan="6" bgcolor="#000000"><img src="../images/spacer.gif" width="1" height="1"></td>
-                <td width="25"><div align="center"> 
-                        <?=$l["ageJoueur"]?>
+                <td width="35"><div align="center"> 
+                        <?=ageetjour($l["datenaiss"], 3)?>
                       </div></td>
                     <td width="1" rowspan="6" bgcolor="#000000"><img src="../images/spacer.gif" width="1" height="1"></td>
                     <td width="20"> <div align="center"> 
