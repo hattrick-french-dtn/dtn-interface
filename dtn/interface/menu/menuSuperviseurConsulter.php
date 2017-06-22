@@ -12,7 +12,7 @@
 		<A class="smliensorange" href="<?=$url?>/joueurs/purgeJoueurs.php" >Purge</a>&nbsp;|
 	&nbsp;
 	<?php } ?>
-	<A class="smliensorange" href="<?=$url?>/joueurs/ficherecupchoix.php?origine=<?php echo "menu"?>" alt="Fiches résumés">Fiches résumés</a>&nbsp;|
+	<A class="smliensorange" href="<?=$url?>/joueurs/ficherecupchoix.php?origine=<?php echo "menu"?>" alt="Fiches r&eacute;sum&eacute;s">Fiches r&eacute;sum&eacute;s</a>&nbsp;|
 	&nbsp;
 	<?php if ($sesUser["idPosition_fk"]!=0) { ?>
 		<A class="smliensorange" href="<?=$url?>/joueurs/checkPlayer.php"  >Modifier joueur</a>&nbsp;|
