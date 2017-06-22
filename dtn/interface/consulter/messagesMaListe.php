@@ -55,11 +55,11 @@ $FromMenu="Ma Liste";
 
     <td width="35%">
       <div align="left">
-      <INPUT TYPE="radio" NAME="TypeFiltre" VALUE="1" <?php if ($_POST['TypeFiltre']==1) {?>CHECKED<?php }?> >Tous
+      <INPUT TYPE="radio" NAME="TypeFiltre" VALUE="1" <?php if (isset($_POST['TypeFiltre']) && $_POST['TypeFiltre']==1) {?>CHECKED<?php }?> >Tous
       <br>
 			<INPUT TYPE="radio" NAME="TypeFiltre" VALUE="2" <?php if ((!isset($_POST['TypeFiltre']))||($_POST['TypeFiltre']==2)) {?>CHECKED<?php }?> >Depuis derni&egrave;re connexion
 			<br>
-			<INPUT TYPE="radio" NAME="TypeFiltre" VALUE="3" <?php if ($_POST['TypeFiltre']==3) {?>CHECKED<?php }?> >Depuis le
+			<INPUT TYPE="radio" NAME="TypeFiltre" VALUE="3" <?php if (isset($_POST['TypeFiltre']) && $_POST['TypeFiltre']==3) {?>CHECKED<?php }?> >Depuis le
 			<INPUT TYPE="text" NAME="DateFiltre" <?php if (isset($_POST['DateFiltre'])) {?>VALUE="<?=$_POST['DateFiltre']?>"<?php } else {?>VALUE="JJ/MM/AAAA"<?php }?> > <br> 
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i>(Saisir la date au format:<b>JJ/MM/AAAA</b> !!)</i>
 			<br>
