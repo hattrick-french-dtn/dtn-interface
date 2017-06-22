@@ -202,56 +202,45 @@ window.close();
 }
 
 function verifValeur(){
-if(window.document.form1.valeurEnCours.value == ""){
-alert("Vous devez preciser le TSI du joueur");
-return false;
+	if(window.document.form1.valeurEnCours.value == ""){
+		alert("Vous devez preciser le TSI du joueur");
+		return false;
+	}
+	else return true;
 }
-else return true;
-
-}
-
 
 function EtatHisto(){
-
-if(window.document.form1.noHistory2.value == 1){
-window.document.form1.noHistory2.value = 0;;
-}
-else
-{
-window.document.form1.noHistory2.value = 1 ;;
-
-}
+	if(window.document.form1.noHistory2.value == 1){
+		window.document.form1.noHistory2.value = 0;;
+	}
+	else
+	{
+		window.document.form1.noHistory2.value = 1 ;;
+	}
 }
 
 function suppPerf(idJoueur,idPerf){
-conf = confirm("Etes vous sur de vouloir supprimer ce match ?");
-
-if(conf == true) window.location = "../form.php?mode=supprMatch&idJoueur="+idJoueur+"&idPerf="+idPerf;
-
+	conf = confirm("Etes vous sur de vouloir supprimer ce match ?");
+	if(conf == true) window.location = "../form.php?mode=supprMatch&idJoueur="+idJoueur+"&idPerf="+idPerf;
 }
 
 function sortirJoueur(idJoueur, nom){
-conf = confirm("Etes vous sur de vouloir sortir "+nom+" de l'�quipe ?");
-
-if(conf == true) window.location = "../form.php?mode=sortJoueur&idJoueur="+idJoueur;
+	conf = confirm("Etes vous sur de vouloir sortir "+nom+" de l'équipe ?");
+	if(conf == true) window.location = "../form.php?mode=sortJoueur&idJoueur="+idJoueur;
 }
 
 function Blessure(){
-if(window.document.form1.blessure.checked == true){
-window.document.form1.typeMatch.disabled = true;
-window.document.form1.postePerf.disabled = true;
-window.document.form1.ordrePerf.disabled = true;
-
-}
-else
-{
-window.document.form1.typeMatch.disabled = false;
-window.document.form1.postePerf.disabled = false;
-window.document.form1.ordrePerf.disabled = false;
-}
-
-
-
+	if(window.document.form1.blessure.checked == true){
+		window.document.form1.typeMatch.disabled = true;
+		window.document.form1.postePerf.disabled = true;
+		window.document.form1.ordrePerf.disabled = true;
+	}
+	else
+	{
+		window.document.form1.typeMatch.disabled = false;
+		window.document.form1.postePerf.disabled = false;
+		window.document.form1.ordrePerf.disabled = false;
+	}
 }
 
 function verifNb(){
