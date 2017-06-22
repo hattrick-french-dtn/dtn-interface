@@ -619,7 +619,7 @@ if(count($lstJ)==0) {
                      &nbsp &nbsp &nbsp Export Fiche R&eacute;sum&eacute; des joueurs de la page :&nbsp;</td>              
               <td valign="middle">
                 <a href="../joueurs/ficherecupchoix.php?origine=<?php echo "selection"?>">
-                  <img border=1 src="../images/jst.bmp" title="Exporter le r&eacute;sultat affiché dans la page sous forme d'une fiche résumé globale"></a></td>
+                  <img border=1 src="../images/jst.bmp" title="Exporter le r&eacute;sultat affich&eacute; dans la page sous forme d'une fiche r&eacute;sum&eacute; globale"></a></td>
               
             </tr>
         </table> 				
@@ -638,7 +638,7 @@ if(count($lstJ)==0) {
                      &nbsp &nbsp &nbsp Export Fiche R&eacute;sum&eacute; des joueurs de la page :&nbsp;</td>              
               <td valign="middle">
                 <a href="../joueurs/ficherecupchoix.php?origine=<?php echo "selection"?>"
-                  <img border=1 src="../images/jst.bmp" title="Exporter le r&eacute;sultat affiché dans la page sous forme d'une fiche résumé globale"></a></td>              
+                  <img border=1 src="../images/jst.bmp" title="Exporter le r&eacute;sultat affich&eacute; dans la page sous forme d'une fiche r&eacute;sum&eacute; globale"></a></td>              
             </tr>
         </table> 				
  <?php       
