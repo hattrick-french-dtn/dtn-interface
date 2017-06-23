@@ -134,7 +134,6 @@ $listEntrainement = listEntrainement();
 if ($typeExport=="maliste") {$sql .=" from $tbl_joueurs where dtnSuiviJoueur_fk  = ".$sesUser["idAdmin"]." and affJoueur = 1  order by $ordre $sens";}
 if ($typeExport=="recherche") {$sql .=stripslashes(urldecode($laSelection)).$ordre;}
 if ($typeExport=="unjoueur") {$sql .="from $tbl_joueurs where idHattrickJoueur = ".$idPlayer;}
-//echo $sql;
 
 foreach ($conn->query($sql) as $l) {
 	$infJ = getJoueur($l["idJoueur"]);
