@@ -119,7 +119,7 @@ if ($origine=="maliste")
 
 
 <form name="form1" method="post" action="ficheresumechoix.php" onsubmit="return verifta()">
-  <br>Entrez la liste des IDs (séparés par un ";") :<br>
+  <br>Entrez la liste des IDs (s&eacute;par&eacute;s par un ";") :<br>
     <textarea name="listID" id="listID" style="font-size:7pt;font-family:Arial" cols=220 rows=10><?php echo $listID?></textarea><br>
 
   <input type="submit" name="button" id="button" value="Envoyer">
