@@ -165,51 +165,6 @@ function getClubHREF($idClubHT, $nomClub=null)
 	return $lien;
 }
 
-/********************************************************************************************/
-/* Objet : Existe t'il dans la bdd DTN une autorisation pour accéder aux données d'un club  */
-/********************************************************************************************/
-function existAutorisationClubv3($idClubHT,$idUserHT=null)
-{
-//echo ("<br> $idClubHT ");
-	if ($idClubHT===null && $idUserHT===null) {return false;} // Paramètres non renseignés
-	$clubDTN = getClubID($idClubHT,$idUserHT); // Extraction du club dans la bdd DTN
-//echo("<br />club=");print_r($clubDTN);
-
-	if (isset($clubDTN['userToken']) && isset($clubDTN['userTokenSecret']) && !empty($clubDTN['userToken']) && !empty($clubDTN['userTokenSecret']) ) {
-/*    	echo("<br />consumerKey=".CONSUMERKEY);
-		echo("<br />consumerSecret=".CONSUMERSECRET);
-		echo("<br />userToken=".$clubDTN['userToken']);
-		echo("<br />userTokenSecret=".$clubDTN['userTokenSecret']);*/
-		$config = array(
-			'CONSUMER_KEY' => CONSUMERKEY,
-			'CONSUMER_SECRET' => CONSUMERSECRET,
-			'CACHE' => 'memcached',
-		);
-		$HT_proprio = new \PHT\Connection($config);
-
-		/*      VERIFICATION VALIDITE SESSION                                         */
-		// Vérifier que la session est valide
-		$check = $HT_proprio->checkChppAccess($clubDTN['userToken'], $clubDTN['userTokenSecret']);
-		//var_dump($check);echo("<br><br>".$check->isValid());exit;
-		if (!$check->isValid()) 
-		{
-			unset($HT_proprio);
-			//echo ("Autorisation non valide");
-			// Si session non Valide alors retourner false
-			return false;
-		}
-		unset($HT_proprio);
-		
-		$config['OAUTH_TOKEN'] = $clubDTN['userToken'];
-		$config['OAUTH_TOKEN_SECRET'] = $clubDTN['userTokenSecret'];
-		$HT_proprio = new \PHT\PHT($config);
-
-		return $HT_proprio;
-    
-	}
-//echo ("Pas d'info connexion en base DTN");
-	return false;
-}
 
 /********************************************************************************************/
 /* Objet : Existe t'il dans la bdd DTN une autorisation pour accéder aux données d'un club  */
@@ -265,37 +220,6 @@ function existAutorisationClub($idClubHT,$idUserHT=null)
 
 /******************************************************************************/
 /* Objet : Récupération des données du club                                   */
-/******************************************************************************/
-function getDataClubFromHT_usingPHTv3($team,$idClubHT=null)
-{
-	if ($team == null) {
-		$team = $_SESSION['HT']->getClub($idClubHT)->getTeam();
-	}
-	$row_club["idClubHT"] = $team->getId();
-	$row_club["idUserHT"] = $team->getUserId();   
-    if (($row_club["idUserHT"] === null) || ($row_club["idUserHT"] == "0") || ($row_club["idClubHT"]===null)) {
-		$row_club['isBot']=2; // Pas de manager Humain ou Pas de club
-    } else {
-		if ($team->isBot()==false) {$row_club['isBot']=0;} // équipe active non botifiée
-		if ($team->isBot()==true)  {$row_club['isBot']=1;} // équipe botifiée
-    }
-
-    if ( ($row_club['isBot']==0) || ($row_club['isBot']==1) ) {
-		$row_club["nomClub"]              = stripslashes(htmlspecialchars(utf8_decode(strtolower(str_replace("'"," ",$team->getName())))));
-		$row_club["nomUser"]              = stripslashes(htmlspecialchars(utf8_decode(strtolower(str_replace("'"," ",$team->getLoginName())))));
-		$row_club["idPays_fk"]            = $team->getLeagueId();
-		$row_club["niv_Entraineur"]       = $_SESSION['HT']->getSeniorPlayer($team->getTrainerId(), false)->getTrainerSkill();
-		$row_club["date_last_connexion"]  = substr($team->getLastLoginDate(), 0, -9);
-      
-		// Données pour iiihelp
-		$row_club["leagueLevel"] = $team->getSeniorLeagueLevel();
-    }
-
-  	return $row_club;
-}
-
-/******************************************************************************/
-/* Objet : Récupération des données du club                                   */
 /* Modifié le 11/06/2010 par Musta56 - Création fonction                      */
 /* Modifié le 15/03/2011 par Musta56 - Utilisation du framework PHT           */
 /* Modifié le 05/05/2011 par Musta56 - Ajout leagueLevel                      */
@@ -320,14 +244,14 @@ function getDataClubFromHT_usingPHT($idClubHT=null, $idUserHT=null){
   try
   {
     if ($idClubHT === null && $idUserHT === null) {
-      $team = $_SESSION['HTCP']->getTeam();
+      $team = $_SESSION['HT']->getTeam();
     } elseif ($idClubHT != null) {
-      $team = $_SESSION['HTCP']->getTeam($idClubHT);
+      $team = $_SESSION['HT']->getTeam($idClubHT);
     } elseif ($idUserHT != null) {
-      $team = $_SESSION['HTCP']->getTeamByUserId($idUserHT);
+      $team = $_SESSION['HT']->getTeamByUserId($idUserHT);
     }
 
-    $_SESSION['HTCP']->clearTeam(); // On vide le cache de l'objet
+    $_SESSION['HT']->clearTeam(); // On vide le cache de l'objet
     
     $row_club["idClubHT"] = $team->getTeamId();
     $row_club["idUserHT"] = $team->getUserId();   
@@ -342,8 +266,8 @@ function getDataClubFromHT_usingPHT($idClubHT=null, $idUserHT=null){
       $row_club["nomClub"]              = stripslashes(htmlspecialchars(strtolower(str_replace("'"," ",$team->getTeamName()))));
       $row_club["nomUser"]              = stripslashes(htmlspecialchars(strtolower(str_replace("'"," ",$team->getLoginName()))));
       $row_club["idPays_fk"]            = $team->getLeagueId();
-      $row_club["niv_Entraineur"]       = $_SESSION['HTCP']->getPlayer($team->getTrainerId())->getTrainerSkill();
-      $_SESSION['HTCP']->clearPlayer($team->getTrainerId());
+      $row_club["niv_Entraineur"]       = $_SESSION['HT']->getPlayer($team->getTrainerId())->getTrainerSkill();
+      $_SESSION['HT']->clearPlayer($team->getTrainerId());
       $row_club["date_last_connexion"]  = substr($team->getLastLoginDate(), 0, -9);
       
       // Données pour iiihelp
@@ -585,61 +509,6 @@ function getNivEntraineurHT($idClubHT,$ht_session,$team=null){
 	return $niv_entraineur;
 }
 
-/*******************************************************************************/
-/* Objet : Récupération des données du club                                    */
-/*******************************************************************************/
-function getDataClubsHistoFromHT_usingPHTv3($team, $idClubHT){
-	require_once("serviceEntrainement.php");
-	$row_clubs_histo=array();
-	$lTraining=listEntrainement();
-  
-	try
-	{
-		if ($team != null) {
-			// On recherche dans la base dtn si le proprio du joueur nous a autoriser à utiliser son accès CHPP et si c'est accès est toujours valide, on l'utilisera
-			$ht_session=existAutorisationClubv3($team->getId());
-			if ($ht_session == false && isset($_SESSION['HT'])) {
-				$ht_session = $_SESSION['HT'];
-			}
-		} else {
-			// On utilise la connexion du membre DTN connecté si aucun idClubHT envoyé
-			$ht_session=$_SESSION['HT'];
-		}
-    
-		if (isset($ht_session) && $ht_session!=false) {
-
-			$club = $ht_session->getClub($idClubHT);
-			$entrainement = $ht_session->getTraining($idClubHT); // Entrainement du club
-
-			// On vide le cache
-			unset($ht_session);
-    
-			$row_clubs_histo["idClubHT"]       = $idClubHT;
-			$row_clubs_histo["idEntrainement"] = getEntrainementId($entrainement->getTrainingType(),$lTraining);
-			$row_clubs_histo["intensite"]      = $entrainement->getTrainingLevel();
-			$row_clubs_histo["endurance"]      = $entrainement->getStaminaTrainingPart();
-			$row_clubs_histo["adjoints"]       = $club->getAssistantTrainerLevels();
-			$row_clubs_histo["medecin"]        = $club->getMedicLevels();
-			$row_clubs_histo["physio"]         = $club->getFormCoachLevels();
-    
-			// Désallocation des variables
-			unset($club);
-			unset($staff);
-			unset($entrainement);
-      
-			return $row_clubs_histo;
-		} else {
-			return 0;
-		}
-	}
-	catch(HTError $e)
-	{
-		echo $e->getMessage();
-		return false;
-	} 
-}
-
-
 
 /*******************************************************************************/
 /* Objet : Récupération des données du club                                    */
@@ -671,7 +540,7 @@ function getDataClubsHistoFromHT_usingPHT($idClubHT=null){
 			$ht_session=existAutorisationClub($idClubHT);
 		} else {
 			// On utilise la connexion du membre DTN connecté si aucun idClubHT envoyé
-			$ht_session=$_SESSION['HTCP'];
+			$ht_session=$_SESSION['HT'];
 		}
     
 		if (isset($ht_session) && $ht_session!=false) {
@@ -986,137 +855,6 @@ function creerConnexionHT()
 
 }
 
-/********************************************************************************************/
-/* Objet : maj d'un club (Ajout si n'existe pas)                                            */
-/********************************************************************************************/
-function updateClubv3($team, $idClubHT=null, $idUserHT=null, $clubDTN=null)
-{
-	unset($clubHT);
-	unset($resu);
-	$modifclub=False;
-	if ($idClubHT === null && $idUserHT === null) {
-		return false;
-	}
-  
-	// Infos du club dans base DTN 
-	if ($clubDTN === null) {
-		$clubDTN = getClubID($idClubHT,$idUserHT);
-	}
-   
-	// récupération des données du club sur HT
-	$clubHT=getDataClubFromHT_usingPHTv3($team, $idClubHT);
-
-	if ($clubHT == false) {
-		$resu["logModif"] .= "==NON CONNECTE A HATTRICK==\n";
-	}
-
-	$resu["logModif"]="";
-	$resu["HTML"]="";
-	$resu["histoModifMsg"]="";
-	$resu["maj"]=false;
-
-	if ($clubDTN != false) {
- 
-		//Test idUserHT
-		if (isset($clubDTN["idUserHT"]) && $clubDTN["idUserHT"]!=$clubHT["idUserHT"])
-		{
-			$modifclub=True;
-			$resu["logModif"] .= "ID user : ".$clubDTN["idUserHT"]." -> ".$clubHT["idUserHT"]."\n";
-			$resu["HTML"] .= "Changement proprio-ID user :".$clubDTN["idUserHT"]." -&gt; ".$clubHT["idUserHT"]."<br />";
-		}
-		//Test status de bot
-		if (isset($clubDTN["isBot"]) && $clubDTN["isBot"]!=$clubHT["isBot"])
-		{
-			$modifclub=True;
-			$resu["logModif"] .= "Bot : ".$clubDTN["isBot"]." -> ".$clubHT["isBot"]."\n";
-			if ($clubHT["isBot"]==1) {
-				$resu["HTML"] .= "Club Botifi&eacute;<br />";
-				$resu["histoModifMsg"].= "Club Botifie";
-			} elseif ($clubHT["isBot"]==2) {
-				$resu["HTML"] .= "Club sans manager humain<br />";
-				$resu["histoModifMsg"].= "Club sans manager humain";
-			}
-		}
-
-		if ($clubHT["idUserHT"]!=0 && $clubHT["idClubHT"]!=null) {
-			//Test nomClub
-			if ($clubDTN["nomClub"]!=$clubHT["nomClub"])
-			{
-				$modifclub=True;
-				$resu["logModif"] .= "Nom du Club : ".$clubDTN["nomClub"]." -> ".$clubHT["nomClub"]."\n";
-			}      
-			//Test nomUser
-			if ($clubDTN["nomUser"]!=$clubHT["nomUser"])
-			{
-				$modifclub=True;
-				$resu["logModif"] .= "Nom de l'utilisateur : ".$clubDTN["nomUser"]." -> ".$clubHT["nomUser"]."\n";      
-			}      
-			//Test idPays_fk
-			if ($clubDTN["idPays_fk"]!=$clubHT["idPays_fk"])
-			{
-				$modifclub=True;
-				$resu["logModif"] .= "Pays : ".$clubDTN["idPays_fk"]." -> ".$clubHT["idPays_fk"]."\n";
-			}     
-			//Test niv_Entraineur
-			if ($clubDTN["niv_Entraineur"]!=$clubHT["niv_Entraineur"])
-			{
-				$modifclub=True;
-				$resu["logModif"] .= "Niveau de l'entraineur : ".$clubDTN["niv_Entraineur"]." -> ".$clubHT["niv_Entraineur"]."\n";
-				$resu["HTML"] .= 'Entraineur : '.$clubDTN['niv_Entraineur'].' -&gt; '.$clubHT['niv_Entraineur'].'<br />';
-				$resu["histoModifMsg"].= "Entraineur : ".$clubDTN["niv_Entraineur"]." -> ".$clubHT["niv_Entraineur"];
-			}
-			// Test date_last_connexion
-			if($clubDTN['date_last_connexion']!=$clubHT['date_last_connexion'])
-			{
-				$modifclub=True;
-				$nb_jour_last_connexion=getNbJourLastConnexion($clubHT['date_last_connexion']);
-				if ($nb_jour_last_connexion>=28) {
-					$resu['HTML'] .= ' Pas de connexion du proprio depuis '.$nb_jour_last_connexion.' jours !<br />';
-				}
-			}
-		} // Fin Si : Club Actif sur HT
-	} else { // $clubDTN n'existe pas
-		if ($clubHT["idUserHT"]!=0 && $clubHT["idClubHT"]!=null) { // Existence d'un manager humain et d'un club
-			$modifclub=True;
-			$resu['HTML'].='<font color=red><b>(ajout club - '.getClubHREF($clubHT['idClubHT']).')</b></font><br />';
-		} else {
-			$modifclub=False;
-		}
-	} // Fin comparaison $clubDTN et $clubHT
-    
-	//si modification d'une ou plusieurs données du club, alors maj base DTN
-	if ($modifclub==True)
-	{
-		$resu["logModif"] .= "-id=".$clubDTN["idClubHT"]."-\n";
-		//$clubHT["idClub"]=$clubDTN["idClub"]; //nécessaire à la fonction update qui repère le club sur son idClub et non son idClubHT
-		$resu["idClub"]=insertionClub($clubHT);
-
-		if ($resu["idClub"]==False)
-		{
-			//échec de la maj
-			$resu["logModif"] .= "=> Erreur : échec de la MAJ en base\n";
-			$resu["HTML"] .= '&Eacute;chec de la MAJ club<br />';
-		}
-		else
-		{
-			//réussite de la maj
-			$resu["logModif"] .= "=> MAJ OK\n";
-			$resu["maj"]=true;
-		}
-		$resu["logModif"] .= "___________________\n";
-	}
-    
-	if (!isset($resu["idClub"]) && isset($clubDTN["idClub"])) {$resu["idClub"]=$clubDTN["idClub"];}
-  
-	unset($clubDTN);
-	unset($clubHT);
-	unset($modifclub);
-	unset($nb_jour_last_connexion);
-
-	return $resu;
-
-}
-
 
 /********************************************************************************************/
 /* Objet : maj d'un club (Ajout si n'existe pas)                                            */
@@ -1257,90 +995,6 @@ function majClub($idClubHT=null,$idUserHT=null,$clubDTN=null)
 
 	return $resu;
 
-}
-
-/********************************************************************************************/
-/* Objet : maj d'un histo club                                                              */
-/********************************************************************************************/
-function updateClubHistov3($team, $idClubHT, $cree_par, $role_createur)
-{
-	global $cheminComplet;
-	require_once($cheminComplet.'includes/serviceEntrainement.php');
-
-	unset ($resu);
-	$modif=false;
-	$trainingList = listEntrainement();
-	// Collecte information sur HT
-	$row_clubs_histo = getDataClubsHistoFromHT_usingPHTv3($team, $idClubHT);
-
-	if ($row_clubs_histo == false) { // Erreur lors de la récupération des données 
-		unset($trainingList);
-		unset($row_clubs_histo);
-		unset($modif);
-		return false;
-	} 
-  
-	if ($row_clubs_histo != 0) { // Si on a récupéré les données
-		$row_clubs_histo['cree_par']=$cree_par;
-		$row_clubs_histo['role_createur']=$role_createur;
-		$resu["HTML"] = "<font color=\"blue\"><b>";
-		$resu["histoModifMsg"] = "";
-		
-		$row_last_clubs_histo=getLastHistoClub($idClubHT);
-    
-		if ($row_last_clubs_histo != 0 && $row_last_clubs_histo != -1) { // Il existe déjà un histo club
-			if ($row_last_clubs_histo["idEntrainement"] != $row_clubs_histo["idEntrainement"]) {
-				$resu["HTML"] .= "Entrainement : ".getEntrainementName($row_last_clubs_histo["idEntrainement"],$trainingList)."-&gt;".getEntrainementName($row_clubs_histo["idEntrainement"],$trainingList)."<br />";
-				$resu["histoModifMsg"] .= "Entrainement : ".getEntrainementName($row_last_clubs_histo["idEntrainement"],$trainingList)."-&gt;".getEntrainementName($row_clubs_histo["idEntrainement"],$trainingList);
-				$modif=true;
-			}
-			if ($row_last_clubs_histo["intensite"] != $row_clubs_histo["intensite"]) {
-				$resu["HTML"] .= "intensite : ".$row_last_clubs_histo["intensite"]."-&gt;".$row_clubs_histo["intensite"]."<br />";
-				$modif=true;
-			}
-			if ($row_last_clubs_histo["endurance"] != $row_clubs_histo["endurance"]) {
-				$resu["HTML"] .= "% endu : ".$row_last_clubs_histo["endurance"]."-&gt;".$row_clubs_histo["endurance"]."<br />";
-				$modif=true;
-			}
-			if ($row_last_clubs_histo["adjoints"] != $row_clubs_histo["adjoints"]) {
-				$resu["HTML"] .= "Nbre adjoints : ".$row_last_clubs_histo["adjoints"]."-&gt;".$row_clubs_histo["adjoints"]."<br />";
-				$modif=true;
-			}
-			if ($row_last_clubs_histo["medecin"] != $row_clubs_histo["medecin"]) {
-				$resu["HTML"] .= "Medecin : ".$row_last_clubs_histo["medecin"]."-&gt;".$row_clubs_histo["medecin"]."<br />";
-				$modif=true;
-			}
-			if ($row_last_clubs_histo["physio"] != $row_clubs_histo["physio"]) {
-				$resu["HTML"] .= "Prepa physique : ".$row_last_clubs_histo["physio"]."-&gt;".$row_clubs_histo["physio"]."<br />";
-				$modif=true;
-			}
-		} elseif ($row_last_clubs_histo == 0) { // C'est le premier histo d'un club
-			$modif=true;
-		}
-
-		// Si la maj est faite par le proprio, on insère systématiquement l'histo
-		if ($role_createur = 'P') {
-			$modif=true;
-		}
-  
-		if ($modif==true) {
-			// Insertion HistoClub
-			$resu["id_clubs_histo"]=insertHistoClub($row_clubs_histo);
-			$resu["HTML"] .= "</b></font>";
-		} else {
-			unset ($resu["HTML"]);
-			unset ($resu["histoModifMsg"]);
-			$resu=false;
-		}
-	} else { // On a pas l'autorisation du proprio
-		$resu=0;
-	}
-	
-	unset($trainingList);
-	unset($row_clubs_histo);
-	unset($modif);
-   
-	return $resu;
 }
 
 
