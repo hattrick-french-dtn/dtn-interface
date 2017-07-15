@@ -4017,9 +4017,9 @@ class CHPPConnection
 		{
 			$params['maxSkillValue4'] = $skill4[2];
 		}
-		if($criteria->getSpeciality() !== null)
+		if($criteria->getSpecialty() !== null)
 		{
-			$params['specialty'] = $criteria->getSpeciality();
+			$params['specialty'] = $criteria->getSpecialty();
 		}
 		if($criteria->getCountry() !== null)
 		{
@@ -9714,15 +9714,15 @@ class HTYouthPlayer extends HTGlobal
 	 *
 	 * @return Integer
 	 */
-	public function getSpeciality()
+	public function getSpecialty()
 	{
 		if($this->hasDetails())
 		{
-			if(!isset($this->speciality) || $this->speciality === null)
+			if(!isset($this->specialty) || $this->specialty === null)
 			{
-				$this->speciality = $this->getXml()->getElementsByTagName('Specialty')->item(0)->nodeValue;
+				$this->specialty = $this->getXml()->getElementsByTagName('Specialty')->item(0)->nodeValue;
 			}
-			return $this->speciality;
+			return $this->specialty;
 		}
 		return null;
 	}
@@ -16460,13 +16460,13 @@ class HTTeamPlayer extends HTXml
 	 *
 	 * @return Integer
 	 */
-	public function getSpeciality()
+	public function getSpecialty()
 	{
-		if(!isset($this->specialityCode) || $this->specialityCode === null)
+		if(!isset($this->specialtyCode) || $this->specialtyCode === null)
 		{
-			$this->specialityCode = $this->getXml()->getElementsByTagName('Specialty')->item(0)->nodeValue;
+			$this->specialtyCode = $this->getXml()->getElementsByTagName('Specialty')->item(0)->nodeValue;
 		}
-		return $this->specialityCode;
+		return $this->specialtyCode;
 	}
 
 	/**
@@ -17327,13 +17327,13 @@ class HTPlayer extends HTCommonSubscriber
 	 *
 	 * @return Integer
 	 */
-	public function getSpeciality()
+	public function getSpecialty()
 	{
-		if(!isset($this->specialityCode) || $this->specialityCode === null)
+		if(!isset($this->specialtyCode) || $this->specialtyCode === null)
 		{
-			$this->specialityCode = $this->getXml()->getElementsByTagName('Specialty')->item(0)->nodeValue;
+			$this->specialtyCode = $this->getXml()->getElementsByTagName('Specialty')->item(0)->nodeValue;
 		}
-		return $this->specialityCode;
+		return $this->specialtyCode;
 	}
 
 	/**
@@ -32118,13 +32118,13 @@ class HTSearchTransferResult extends HTXml
 	 *
 	 * @return Integer
 	 */
-	public function getSpeciality()
+	public function getSpecialty()
 	{
-		if(!isset($this->speciality) || $this->speciality === null)
+		if(!isset($this->specialty) || $this->specialty === null)
 		{
-			$this->speciality = $this->getXml()->getElementsByTagName('Specialty')->item(0)->nodeValue;
+			$this->specialty = $this->getXml()->getElementsByTagName('Specialty')->item(0)->nodeValue;
 		}
-		return $this->speciality;
+		return $this->specialty;
 	}
 
 	/**
@@ -32639,9 +32639,9 @@ class HTSearchTransferCriteria
 	 *
 	 * @return Integer
 	 */
-	public function getSpeciality()
+	public function getSpecialty()
 	{
-		return $this->speciality;
+		return $this->specialty;
 	}
 
 	/**
