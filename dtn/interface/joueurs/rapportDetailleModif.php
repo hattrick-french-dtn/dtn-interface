@@ -216,7 +216,7 @@ if ($fonction == "modification"){
           <td colspan="3">&nbsp;</td>
         </tr>
         <tr> 
-          <td width="50%" align="left">&nbsp; <font color="#000099"><b><?=$infJ["idHattrickJoueur"]?>&nbsp;-&nbsp;<?=$infJ["nomJoueur"]?> <?=$infJ["prenomJoueur"]?>&nbsp;-&nbsp;<?=$infJ["ageJoueur"]?>&nbsp;ans&nbsp;-&nbsp;<?=$infJ["intitulePosition"]?></b></font></td>
+          <td width="50%" align="left">&nbsp; <font color="#000099"><b><?=$infJ["idHattrickJoueur"]?>&nbsp;-&nbsp;<?=$infJ["prenomJoueur"]?> <?=$infJ["nomJoueur"]?>&nbsp;-&nbsp;<?=$infJ["ageJoueur"]?>&nbsp;ans&nbsp;-&nbsp;<?=$infJ["intitulePosition"]?></b></font></td>
           <td width="20%" align="left"><b>Club Actuel : </b><?=$infJ["nomClub"]?>
           </td>
           <td width="30%">&nbsp;</td>

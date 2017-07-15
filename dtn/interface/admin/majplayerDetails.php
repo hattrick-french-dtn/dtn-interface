@@ -81,7 +81,7 @@ function checkNumberPoste($maBase,$poste){
 <a href="index.php?redirect=matchsOverview.php"><u>Acc&eacute;der aux options de gestion/administration des matchs</u></a>
 </center>
 <?php
-if (!isset($_SESSION['HTCP'])) {
+if (!isset($_SESSION['HT'])) {
 	$todaySeason=getSeasonWeekOfMatch(mktime(0,0,0,date('m'), date('d'),date('Y')));
 	$mseason=$todaySeason["season"];
 	$mweek=$todaySeason["week"];
@@ -143,7 +143,7 @@ if (!isset($_SESSION['HTCP'])) {
   Vous devez etre connect&eacute; &agrave; Hattrick.&nbsp;&nbsp;
   <br />
 
-  <?php if ( isset($_SESSION['HTCP']) ) {?>
+  <?php if ( isset($_SESSION['HT']) ) {?>
     
     Votre compte DTN est li&eacute; &agrave; votre compte Hattrick : <?php echo($_SESSION['nomUser']." [".$_SESSION['idUserHT']."]"); ?>
     

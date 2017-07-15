@@ -15,7 +15,7 @@
   $filename = $_SERVER['DOCUMENT_ROOT'].'/dtn/interface/maj/log/majEquipesAuto.txt';
   $myfile=fopen($filename,'w');
   
-  $_SESSION['HTCP']=creerConnexionHT();  
+  $_SESSION['HT']=creerConnexionHT();  
 
   fwrite($myfile, "Debut traitement : ".date("d/m/Y H:i:s")."\n");
   fwrite($myfile, "======================================\n");

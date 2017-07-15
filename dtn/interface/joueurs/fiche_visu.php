@@ -78,7 +78,7 @@ $verifInternational = verifSelection($id);
 
 ?><html>
 <head>
-<title>Fiche <?=$infJ["nomJoueur"]?> <?=$infJ["prenomJoueur"]?></title>
+<title>Fiche <?=$infJ["prenomJoueur"]?> <?=$infJ["nomJoueur"]?></title>
 <script language="JavaScript" type="text/JavaScript">
 <!--
 
@@ -190,7 +190,7 @@ $idHT=$infJ['idHattrickJoueur'];
           		<td colspan="3">&nbsp;</td>
         	</tr>
         	<tr> 
-          	<td width="40%" align="left">&nbsp; <font color="#000099"><b><?=$infJ["idHattrickJoueur"]?>&nbsp;-&nbsp;<?=$infJ["nomJoueur"]?> <?=$infJ["prenomJoueur"]?>&nbsp;-&nbsp;<?php 
+          	<td width="40%" align="left">&nbsp; <font color="#000099"><b><?=$infJ["idHattrickJoueur"]?>&nbsp;-&nbsp;<?=<?=$infJ["prenomJoueur"]?> $infJ["nomJoueur"]?>&nbsp;-&nbsp;<?php 
 			$ageetjours = ageetjour($infJ["datenaiss"]);
 			$tabage = explode(" - ",$ageetjours);
 			echo $tabage[0];?>&nbsp;ans&nbsp;-&nbsp;<?=$tabage[1]?>&nbsp;jours<br>&nbsp; <?=round(($infJ["salary"]/10),2)?>&nbsp;€/semaine&nbsp;<a href="http://alltid.org/player/<?=$infJ["idHattrickJoueur"]?>" target="_blank"><img src="../images/ahstats.png" width="47" height="16" border="0" align="absmiddle"></a></b></font>          	</td>
