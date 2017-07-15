@@ -18,31 +18,28 @@ require("../includes/serviceJoueur.php");
 require("../includes/langue.inc.php");
 	
 switch($sesUser["idNiveauAcces"]){
-		case "1":
+	case "1":
 		require("../menu/menuAdmin.php");
 		require("../menu/menuSuperviseurConsulter.php");
 		break;
 		
-		case "2":
+	case "2":
 		require("../menu/menuSuperviseur.php");
 		require("../menu/menuSuperviseurConsulter.php");
 		break;
 
-
-		case "3":
+	case "3":
 		require("../menu/menuDTN.php");
 		require("../menu/menuDTNConsulter.php");
 		break;
 		
-		case "4":
+	case "4":
 		require("../menu/menuCoach.php");
 		require("../menu/menuCoachConsulter.php"); 
 		break;
 		
-		default;
+	default;
 		break;
-
-
 }
 
 $keeperColor = "#000000";
@@ -77,18 +74,18 @@ if(isset($_POST['action']) and $_POST['action'] == 'submitted') {
 
 
 switch($sesUser["idPosition_fk"])
-  {
-		case "1":
+{
+	case "1":
 		//gK
 		$keeperColor = "#BBBBEE";
 		break;
 		
-		case "2":
+	case "2":
 		// cD
 		$defenseColor = "#BBBBEE";
 		break;
 		
-		case "3":
+	case "3":
 		// Wg
 		$constructionColor = "#DDDDDD";
 		$ailierColor = "#BBBBEE";
@@ -103,7 +100,7 @@ switch($sesUser["idPosition_fk"])
 		$passeColor = "#DDDDDD";
 		break;
 		
-		case "5":
+	case "5":
 		// Fw
 		$passeColor = "#BBBBEE";
 		$buteurColor = "#BBBBEE";
@@ -113,7 +110,7 @@ switch($sesUser["idPosition_fk"])
 
 $lstPos = listAllPosition();
 $lstTypeCarac = listTypeCarac();
-$lstCarac = listCarac("ASC",23);
+$lstCarac = listCarac("ASC",30);
 $lstTrain=listEntrainement();
 
 function afficheTraining($lstTrain,$idTraining){
