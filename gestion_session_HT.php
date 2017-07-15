@@ -79,7 +79,7 @@ if (!isset($_SESSION['horsConnexion'])) {
 		$config = array(
 			'CONSUMER_KEY' => CONSUMERKEY,
 			'CONSUMER_SECRET' => CONSUMERSECRET,
-			'CACHE' => 'apc',
+			'CACHE' => 'memcached',
 		);
 		$HT = new \PHT\Connection($config);
 		if (isset($_REQUEST['connexion_permanente']) && $_REQUEST['connexion_permanente']==1) {
@@ -98,7 +98,7 @@ if (!isset($_SESSION['horsConnexion'])) {
 		Needed to validate the connection
 		*/
 		$_SESSION['HTToken'] = $auth->temporaryToken;
-		
+				
 		/*
 		Redirect user to Hattrick for login
 		or put a link with this url on your site
@@ -127,15 +127,15 @@ if (!isset($_SESSION['horsConnexion'])) {
         $access = $HTCon->getChppAccess($_SESSION['HTToken'], $_REQUEST['oauth_token'], $_REQUEST['oauth_verifier']);
 		
 		if ($access === false) {
-			print("access failed");
+			//print($_SESSION['HTToken']);exit();
+			print("<br/>access failed");
 			exit();
 		}
-        if (isset($_REQUEST['connexion_permanente']) && $_REQUEST['connexion_permanente']==1) {
-			$config['OAUTH_TOKEN'] = $access->oauthToken;
-			$config['OAUTH_TOKEN_SECRET'] = $access->oauthTokenSecret;
-		}
+		$config['OAUTH_TOKEN'] = $access->oauthToken;
+		$config['OAUTH_TOKEN_SECRET'] = $access->oauthTokenSecret;
 		$HT = new \PHT\PHT($config);
 		$_SESSION['HT'] = $HT;
+
         /*
         Now access is granted for your application
         You can save user token and token secret and/or request xml files
@@ -191,19 +191,19 @@ if (!isset($_SESSION['horsConnexion'])) {
         $_SESSION['newVisit']=1;
         
         if (isset($_REQUEST['connexion_permanente']) && $_REQUEST['connexion_permanente']==1) {
-          // Si la case "garder ma session active" est cochée alors on ajoute un cookie valable 5 ans
-          setcookie('idClubHT',$clubHT['idClubHT'], time() + 5*365*24*3600, null, null, false, true);        
+			// Si la case "garder ma session active" est cochée alors on ajoute un cookie valable 5 ans
+			setcookie('idClubHT',$clubHT['idClubHT'], time() + 5*365*24*3600, null, null, false, true);        
         } else if (isset($_REQUEST['connexion_permanente']) && $_REQUEST['connexion_permanente']==0) {
-          // Si la case "garder ma session active" est décochée alors on supprime les cookies
-          setcookie('idClubHT');
+			// Si la case "garder ma session active" est décochée alors on supprime les cookies
+			setcookie('idClubHT');
         }
       }
       catch(\PHT\Exception\ChppException $e)
       {
-		echo $e->getErrorCode().': '.$e->getError();
-		// you can also get whole xml response like any other chpp request:
-		echo $e->getXml(false);
-        echo $e->getMessage();
+			echo $e->getErrorCode().': '.$e->getError();
+			// you can also get whole xml response like any other chpp request:
+			echo $e->getXml(false);
+			//echo $e->getMessage();
       }
       catch(\PHT\Exception\NetworkException $e)
       {
@@ -236,7 +236,7 @@ if (!isset($_SESSION['horsConnexion'])) {
 		$config = array(
 			'CONSUMER_KEY' => CONSUMERKEY,
 			'CONSUMER_SECRET' => CONSUMERSECRET,
-			'CACHE' => 'apc',
+			'CACHE' => 'memcached',
 		);
 		$HT = new \PHT\PHT($config);
         $clubDTN = getClubID($_COOKIE['idClubHT']);
@@ -257,14 +257,14 @@ if (!isset($_SESSION['horsConnexion'])) {
       /******************************************************************************/
       if ($_SESSION['acces']=='INTERFACE') {
   
-        $_SESSION['HT']=existAutorisationClub(null,$_SESSION['sesUser']['idAdminHT']);
+        $_SESSION['HT']=existAutorisationClubv3(null,$_SESSION['sesUser']['idAdminHT']);
   
         if (!$_SESSION['HT']) {
-          unset($_SESSION['HT']);
+			unset($_SESSION['HT']);
         } else {
-          $clubDTN = getClubID(null,$_SESSION['sesUser']['idAdminHT']); // Extraction du club dans la bdd DTN
-          $_SESSION['nomUser']=$clubDTN['nomUser'];
-          $_SESSION['idUserHT']=$clubDTN['idUserHT'];
+			$clubDTN = getClubID(null,$_SESSION['sesUser']['idAdminHT']); // Extraction du club dans la bdd DTN
+			$_SESSION['nomUser']=$clubDTN['nomUser'];
+			$_SESSION['idUserHT']=$clubDTN['idUserHT'];
         }
         /*echo("<br />===INTERFACE===<br />");
         echo("idAdminHT=");var_dump($_SESSION['sesUser']['idAdminHT']);
