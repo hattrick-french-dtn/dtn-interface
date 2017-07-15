@@ -166,7 +166,7 @@ $_SESSION['ListeFicheResume']=$lstJoueur;
             <td width="20"> <div align="center"><?=$adjoints?></div></td>
             <td width="20"> <div align="center"><?=$medecin?></div></td>
             <td width="20"> <div align="center"><?=$physio?></div></td>
-            <td>&nbsp;(<?php echo($lstJoueur[$j]["idHattrickJoueur"]);?>)&nbsp;<?php echo($lstJoueur[$j]["nomJoueur"]." ".$lstJoueur[$j]["prenomJoueur"]);?>
+            <td>&nbsp;(<?php echo($lstJoueur[$j]["idHattrickJoueur"]);?>)&nbsp;<?php echo ($lstJoueur[$j]["prenomJoueur"]." ".$lstJoueur[$j]["nomJoueur"]);?>
                 &nbsp;<img src="../images/time_<?=$img_nb?>.gif" onmouseover="return escape('<?=$zealt?>')" ></td>
             <td><?=$lstJoueur[$j]["ageJoueur"]." - ".$lstJoueur[$j]["jourJoueur"]?></td>
             <td><CENTER> <?=($lstJoueur[$j]["dateDerniereModifJoueur"])?></CENTER></td>

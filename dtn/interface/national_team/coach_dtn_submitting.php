@@ -97,7 +97,7 @@ error_reporting (E_ALL & ~E_NOTICE);
 // Initialisation variables
 if (!isset($action))	$action=null;
 
-if (isset($_SESSION['HT'])) {
+if (isset($_SESSION['HTCP'])) {
 
   if (isset($_POST['load']) && $_POST['load']==1) { // On met à jour les informations clubs et les informations joueurs 
   
@@ -116,7 +116,7 @@ if (isset($_SESSION['HT'])) {
       if (count($listeID)>0) {
         
         // Login User sur HT 
-        $userHT=$_SESSION['HT']->getTeam()->getLoginName();
+        $userHT=$_SESSION['HTCP']->getTeam()->getLoginName();
         
         // Insertion ou mise à jour joueurs
     		$resuScan=scanListeJoueurs($listeID,$userHT,'S',true,false);
@@ -150,7 +150,7 @@ if (isset($_SESSION['HT'])) {
   <!-- FORMULAIRE AUTORISATION -->
   <div class="ContenuCentrer">
   
-    <?php if ( isset($_SESSION['HT']) ) {?>
+    <?php if ( isset($_SESSION['HTCP']) ) {?>
       
       Votre compte DTN est li&eacute; &agrave; votre compte Hattrick : <?php echo($_SESSION['nomUser']." [".$_SESSION['idUserHT']."]"); ?>
       
@@ -206,7 +206,7 @@ if (isset($resuScan) && $resuScan!=false && !empty($resuScan)) {
       		
           <tr>
           <td width=5% nowrap valign="top">
-            <font size="2" face="Century Gothic">&nbsp;<b>-&nbsp;<?=$joueurDTN["nomJoueur"]?></b></font>
+            <font size="2" face="Century Gothic">&nbsp;<b>-&nbsp;<?=$joueurDTN["prenomJoueur"]?> <?=$joueurDTN["nomJoueur"]?></b></font>
           </td>
           <td align="left" width=95% nowrap valign="top">
             <font size="2" face="Century Gothic">

@@ -431,7 +431,7 @@ for ($lstnb=16;$lstnb<27;$lstnb++ ){
 				?><a href ="<?=$url?>/joueurs/fiche.php?id=<?=$l["idJoueur"]?>" class="bred1"><?php
 			}
 ?>
-			<?=strtolower($l["nomJoueur"])?>&nbsp;<?=strtolower($l["prenomJoueur"])?>
+			<?=strtolower($l["prenomJoueur"])?>&nbsp;<?=strtolower($l["nomJoueur"])?>
 		
 <?php
 			if 	( ($_SESSION['sesUser']["idNiveauAcces"]==1 || $_SESSION['sesUser']["idNiveauAcces"]==2 || $_SESSION['sesUser']["idNiveauAcces"]==4) 

@@ -398,7 +398,7 @@ $lstJ = $maBase->select($sql);
 			    <tr align=right>
 			    <td width=15% align=left>
 			     	&nbsp; <a href ="../joueurs/ficheDTN.php?id=<?=$lstJ[$j]["idJoueur"]?>" > 
-                      <b> <?=strtolower($lstJ[$j]["nomJoueur"])?> <?=strtolower($lstJ[$j]["prenomJoueur"])?></b> 
+                      <b> <?=strtolower($lstJ[$j]["prenomJoueur"])?> <?=strtolower($lstJ[$j]["nomJoueur"])?> </b> 
                       </a></td>
 			    <td width=5%  align=center><?=$lstJ[$j]["ageJoueur"]?></td>
 			    <td width=5%  align=center><?php 

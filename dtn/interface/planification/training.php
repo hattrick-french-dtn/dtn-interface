@@ -9,6 +9,9 @@ $sql =  "SELECT * from ht_joueurs, ht_entrainement where ht_joueurs.idJoueur = h
 		
 foreach($conn->query($sql) as $result){
 
+	if (isset($result["prenomJoueur"]) && strlen($result["prenomJoueur"]) > 0) {
+		echo $result["prenomJoueur"]."&nbsp;";
+	}
 	echo $result["nomJoueur"]."<br>";
 	$semaine["construction"] = $result["nbSemaineConstruction"];
 	$semaine["gardien"] = $result["nbSemaineGardien"];

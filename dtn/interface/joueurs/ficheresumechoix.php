@@ -59,7 +59,7 @@ if ($infJs[1]['entrainement_type']=='') $infJs[1]['entrainement_type']='non rens
 
 ?><html>
 <head>
-<title>Fiche <?=$infJs[0]["nomJoueur"]?> <?=$infJs[0]["prenomJoueur"]?></title>
+<title>Fiche <?=$infJs[0]["prenomJoueur"]?> <?=$infJs[0]["nomJoueur"]?></title>
 <script src="../../../SpryAssets/SpryValidationSelect.js" type="text/javascript"></script>
 <link href="../../../SpryAssets/SpryValidationSelect.css" rel="stylesheet" type="text/css">
 
@@ -164,8 +164,8 @@ function scanid()
     if ('<?=$infJs[$i]["niv_Entraineur"]?>'==8) a=a+' :D ';
     
     a=a+'[b]';
+    a=a+'<?=ucwords(strtolower($infJs[$i]["prenomJoueur"]))?> ';
     a=a+'<?=ucwords(strtolower($infJs[$i]["nomJoueur"]))?>';
-    a=a+'<?=ucwords(strtolower($infJs[$i]["prenomJoueur"]))?>';
     a=a+' (<?=strtolower($infJs[$i]["idHattrickJoueur"])?>)';
     a=a+'[/b]'; 
   	a=a+' <?=$tabage[$i][0]?> ans et <?=$tabage[$i][1]?> jour';
@@ -542,7 +542,7 @@ if ($origine=="unique") require("../menu/menuJoueur.php");
     if ($origine=="unique")
     {
     ?>
-        <td width="100%" colspan="2" bgcolor="#000000"><div align="center"><b><font color="#FFFFFF">Fiche R&eacute;sum&eacute; : <?=$infJs[1]['nomJoueur']?>&nbsp;<?=$infJs[1]['prenomJoueur']?>&nbsp;-&nbsp;<?=$listID?>&nbsp;-&nbsp;Entrainement : <?=$infJs[1]['entrainement_type']?>&nbsp;-&nbsp;Secteur : <?=$pos?>&nbsp;-&nbsp;DTN : <?=$dtnsuivi?>
+        <td width="100%" colspan="2" bgcolor="#000000"><div align="center"><b><font color="#FFFFFF">Fiche R&eacute;sum&eacute; : <?=$infJs[1]['prenomJoueur']?> <?=$infJs[1]['nomJoueur']?>&nbsp;-&nbsp;<?=$listID?>&nbsp;-&nbsp;Entrainement : <?=$infJs[1]['entrainement_type']?>&nbsp;-&nbsp;Secteur : <?=$pos?>&nbsp;-&nbsp;DTN : <?=$dtnsuivi?>
     <?php
     }
     else
@@ -589,7 +589,7 @@ if ($origine=="unique") require("../menu/menuJoueur.php");
             <tr><td colspan="3" align="center">Choisissez les param&egrave;tres suppl&eacute;mentaires :<br><br></td></tr>
             <tr>
               <td width="33%"><input name="parasup" type="Checkbox" onClick="choixcompl();" value="gk">Gardien<br></td>
-              <td width="33%"><input name="parasup" type="Checkbox" onClick="choixcompl();" value="de">Défense<br></td>
+              <td width="33%"><input name="parasup" type="Checkbox" onClick="choixcompl();" value="de">D&eacute;fense<br></td>
               <td width="33%"><input name="parasup" type="Checkbox" onClick="choixcompl();" value="pm">Construction<br></td>            </tr>
             </tr>
             <tr>  

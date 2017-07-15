@@ -25,20 +25,20 @@ $infPos = getPosition($_SESSION['sesUser']["idPosition_fk"]);
 
 switch($_SESSION['sesUser']["idPosition_fk"]){
 
-		case "1":
+	case "1":
 		//gK
 		$k = 1;
 		$keeperColor = "#9999CC";
 		break;
 		
-		case "2":
+	case "2":
 		// cD
 		$d = 1;
 		$defense = 1;
 		$defenseColor = "#9999CC";
 		break;
 		
-		case "3":
+	case "3":
 		// Wg
 		$construction = 1;
 		$constructionColor = "#CCCCCC";
@@ -54,7 +54,8 @@ switch($_SESSION['sesUser']["idPosition_fk"]){
 		$wingwtm = 1;
 
 		break;
-		case "4":
+	
+	case "4":
 		//IM
 		$m = 1;
 		$moff = 1;
@@ -66,7 +67,7 @@ switch($_SESSION['sesUser']["idPosition_fk"]){
 		$passeColor = "#CCCCCC";
 		break;
 		
-		case "5":
+	case "5":
 		// Fw
 				
 		$att = 1;
@@ -76,31 +77,30 @@ switch($_SESSION['sesUser']["idPosition_fk"]){
 		$buteurColor = "#9999CC";
 		break;
 	
-		default:
+	default:
 		$font = "<font color = black>";
 		$$font = "</font>";
 		break;
 		
 }
 switch($_SESSION['sesUser']["idNiveauAcces"]){
-		case "1":
+	case "1":
 		require("../menu/menuAdmin.php");
 		break;
 		
-		case "2":
+	case "2":
 		require("../menu/menuSuperviseur.php");
 		break;
 
-
-		case "3":
+	case "3":
 		require("../menu/menuDTN.php");
 		break;
 		
-		case "4":
+	case "4":
 		require("../menu/menuCoach.php");
 		break;
 		
-		default;
+	default;
 		break;
 }
  require ("../menu/menuMaListe.php");
@@ -137,7 +137,7 @@ document.body.scrollTop = scrollPos;
 <br />
 
 <?php
-if (isset($_SESSION['HT'])) {
+if (isset($_SESSION['HTCP'])) {
 
   $listeJoueursDTN=getJoueurByDTN($_SESSION['sesUser']["idAdmin"]);
 
@@ -162,16 +162,16 @@ if (isset($_SESSION['HT'])) {
     <p><b>Chargement des donn&eacute;es depuis hattrick. Attendez la fin de l'op&eacute;ration.</b></p>
     <table class="cadre" width="97%">
     <tr class="activ">
-      <td> joueur </td>
-      <td>age</td>
-      <td>forme</td>
-      <td>tsi?</td>
-      <td>salaire?</td>
-      <td>xp?</td>
-      <td>vente/blessure/entraineur</td>
-      <td>matchid</td>
-      <td>etoiles</td>
-      <td>poste</td>
+      <td>&nbsp;joueur </td>
+      <td>&nbsp;age</td>
+      <td>&nbsp;forme</td>
+      <td>&nbsp;tsi?</td>
+      <td>&nbsp;salaire?</td>
+      <td>&nbsp;xp?</td>
+      <td>&nbsp;vente/blessure/entraineur</td>
+      <td>&nbsp;matchid</td>
+      <td>&nbsp;etoiles</td>
+      <td>&nbsp;poste</td>
     </tr>
     <?php
   
@@ -186,16 +186,16 @@ if (isset($_SESSION['HT'])) {
     		</table><br>.
     		<table class="cadre" width="97%">
     		<tr class="activ">
-          <td> joueur </td>
-          <td>age</td>
-          <td>forme</td>
-          <td>tsi?</td>
-          <td>salaire?</td>
-          <td>xp?</td>
-          <td>vente/blessure/entraineur</td>
-          <td>matchid</td>
-          <td>etoiles</td>
-          <td>poste</td>
+          <td>&nbsp;joueur </td>
+          <td>&nbsp;age</td>
+          <td>&nbsp;forme</td>
+          <td>&nbsp;tsi?</td>
+          <td>&nbsp;salaire?</td>
+          <td>&nbsp;xp?</td>
+          <td>&nbsp;vente/blessure/entraineur</td>
+          <td>&nbsp;matchid</td>
+          <td>&nbsp;etoiles</td>
+          <td>&nbsp;poste</td>
         </tr>
     		<?php
         //flush();
@@ -216,7 +216,7 @@ if (isset($_SESSION['HT'])) {
     Vous devez etre connect&eacute; &agrave; Hattrick.&nbsp;&nbsp;
     <br />
   
-    <?php if ( isset($_SESSION['HT']) ) {?>
+    <?php if ( isset($_SESSION['HTCP']) ) {?>
       
       Votre compte DTN est li&eacute; &agrave; votre compte Hattrick : <?php echo($_SESSION['nomUser']." [".$_SESSION['idUserHT']."]"); ?>
       

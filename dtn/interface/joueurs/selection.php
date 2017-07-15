@@ -257,8 +257,8 @@ document.body.scrollTop = scrollPos;
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
 	<tr bgcolor = "<?=$bgcolor?>">  
         <td width="200" > 
-            &nbsp;<a href ="<?=$url?>/joueurs/fiche.php?id=<?=$l["idJoueur"]?>" class=<?=$class?>><span class=<?=$class?>>  <b><?=strtolower($l["nomJoueur"])?></b>
-            <?=strtolower($l["prenomJoueur"])?></span>
+            &nbsp;<a href ="<?=$url?>/joueurs/fiche.php?id=<?=$l["idJoueur"]?>" class=<?=$class?>><span class=<?=$class?>>  <b><?=strtolower($l["prenomJoueur"])?> <?=strtolower($l["nomJoueur"])?></b>
+            </span>
         </a>
         <div align="center"> </div></td>
             <td width="1" bgcolor="#000000" ><img src="../images/spacer.gif" width="1" height="1"></td>
@@ -437,12 +437,6 @@ document.body.scrollTop = scrollPos;
                        <a href = "javascript:sortirJoueur('<?=$l["idJoueur"]?>','<?=$l["nomJoueur"]?>')"> X </a>
                       </div></td>
                   </tr>
-				 
-				 
-				 
-				 
-				
-				 
 				 
                 </table>
     <?php

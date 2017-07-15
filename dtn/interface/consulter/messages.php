@@ -121,7 +121,7 @@ if ($_POST["TypeFiltre"]==3 ) {
           <td width="1" bgcolor="#000000"><img src="../images/spacer.gif" width="1" height="1"></td>
           <td  nowrap>
             <a href ="<?=$url?>/joueurs/fiche.php?id=<?=$lst["idJoueur"]?>" class="bred1">
-            <?=$lst["idHattrickJoueur"]."-".strtolower($lst["nomJoueur"])?><?=strtolower($lst["prenomJoueur"])?>
+            <?=$lst["idHattrickJoueur"]." - ".strtolower($lst["prenomJoueur"])." ".strtolower($lst["nomJoueur"])?>
             </a>    
           </td>
           <td width="1" bgcolor="#000000"><img src="../images/spacer.gif" width="1" height="1"></td>

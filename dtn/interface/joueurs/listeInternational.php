@@ -527,7 +527,7 @@ if ($masque=="on"){
 	?>
 	  <tr bgcolor = "<?=$bgcolor?>" align="right">  
                     <td align="left" >&nbsp;<a href ="<?=$url?>/joueurs/fiche.php?id=<?=$lstJoueurs["idJoueur"]?>" class=<?=$class?>>
-                    <span class=<?=$class?>><b><?=strtolower($lstJoueurs["nomJoueur"])?></b><?=strtolower($lstJoueurs["prenomJoueur"])?>
+                    <span class=<?=$class?>><b><?=strtolower($lstJoueurs["prenomJoueur"])?> <?=strtolower($lstJoueurs["nomJoueur"])?></b>
                     </span></a></td>
                     
                     <td >

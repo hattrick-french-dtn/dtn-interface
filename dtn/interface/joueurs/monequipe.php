@@ -4,7 +4,7 @@ require("../includes/serviceJoueur.php");
 
 if(!$sesUser["idAdmin"])
 	{
-	header("location: index.php?ErrorMsg=Session Expirï¿½");
+	header("location: index.php?ErrorMsg=Session Expirée");
 	}
 if(!isset($ordre)) $ordre = "nomJoueur";
 if(!isset($sens)) $sens = "ASC";
@@ -169,22 +169,22 @@ $tri = "Tri croissant";
 break;
 
 case "DESC":
-$tri = "Tri dï¿½croissant";
+$tri = "Tri décroissant";
 break;
 }
 
 switch($ordre){
 
 case "nomJoueur":
-$intitule = "identitï¿½";
+$intitule = "identité";
 break;
 
 case "ageJoueur":
-$intitule = "ï¿½ge";
+$intitule = "Age";
 break;
 
 case "idExperience_fk":
-$intitule = "expï¿½rience";
+$intitule = "expérience";
 break;
 
 case "idLeader_fk":
@@ -192,20 +192,20 @@ $intitule = "leadership";
 break;
 
 case "idCaractere_fk":
-$intitule = "popularitï¿½";
+$intitule = "popularité";
 break;
 
 
 case "idAggre_fk":
-$intitule = "agrï¿½ssivitï¿½";
+$intitule = "agréssivité";
 break;
 
 case "idHonnetete_fk":
-$intitule = "honnï¿½tetï¿½";
+$intitule = "honnêteté";
 break;
 
 case "optionJoueur":
-$intitule = "spï¿½cialitï¿½";
+$intitule = "spécialité";
 break;
 
 
@@ -234,11 +234,11 @@ $intitule = "passe";
 break;
 
 case "idDefense":
-$intitule = "dï¿½fense";
+$intitule = "défense";
 break;
 
 case "idPA":
-$intitule = "coup de pieds arretï¿½";
+$intitule = "coup de pieds arreté";
 break;
 
 case "scoreGardien":
@@ -276,7 +276,7 @@ break;
             <tr> 
               <td width="28%" height="21"> <div align="center">Poste : 
                   <select name="menu1" onChange="MM_jumpMenu('parent',this,0)">
-			<option value = listeInternational.php?affPosition=0>Liste des non assignï¿½s</option>
+			<option value = listeInternational.php?affPosition=0>Liste des non assignés</option>
 			 
 			  <?php
 			  for($i=0;$i<count($lstPosition);$i++){

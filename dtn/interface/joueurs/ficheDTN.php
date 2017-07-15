@@ -73,7 +73,7 @@ if($mode == "transfere") $lstClub = listClubs();
 $lstCaractJ = listCarac('ASC',22);
 		
 
-?><html><head><title> Fiche DTN <?=$joueurDTN["nomJoueur"]?> <?=$joueurDTN["prenomJoueur"]?></title>
+?><html><head><title> Fiche DTN <?=$joueurDTN["prenomJoueur"]?> <?=$joueurDTN["nomJoueur"]?></title>
 
 <script>
 function AlertNumServeurHT()
@@ -165,7 +165,7 @@ if(isset($msg)) {?>
           <td colspan="3">&nbsp;</td>
           </tr>
           <tr> 
-          <td align="left" width="50%">&nbsp;<font color="#000099"> <?=strtolower($joueurDTN["idHattrickJoueur"])?>&nbsp;-&nbsp;<?=strtolower($joueurDTN["nomJoueur"])?>&nbsp;<?=strtolower($joueurDTN["prenomJoueur"])?>&nbsp;-&nbsp;
+          <td align="left" width="50%">&nbsp;<font color="#000099"> <?=strtolower($joueurDTN["idHattrickJoueur"])?>&nbsp;-&nbsp;<?=strtolower($joueurDTN["prenomJoueur"])?>&nbsp;<?=strtolower($joueurDTN["nomJoueur"])?>&nbsp;-&nbsp;
           <?=$tabage[0];?>&nbsp;ans&nbsp;-&nbsp;<?=$tabage[1]?>&nbsp;jours<br>&nbsp;
           <?=round(($joueurDTN["salary"]/10),2)?>&nbsp;&euro;/semaine&nbsp;-&nbsp;<?=$joueurDTN["intitulePosition"]?> 
 		      <b><a href="http://alltid.org/player/<?=$joueurDTN["idHattrickJoueur"]?>" target="_blank"><img src="../images/ahstats.png" width="47" height="16" border="0" align="absmiddle"></a>
@@ -395,7 +395,7 @@ if(isset($msg)) {?>
         <table width="98%" style="border:1px solid #C5C7C7" align="center" cellpadding="0" cellspacing="0" bgcolor="#000000" rules=COLS>
           <tr bgcolor="#85A275"> 
             <td width=20%><div align="center" style="font-size: 9pt;color: white"><b>Date</b></div></td>
-            <td width=65%><div align="center" style="font-size: 9pt;color: white"><b>Info joueur [<?=strtolower($joueurDTN["nomJoueur"])?> <?=strtolower($joueurDTN["prenomJoueur"])?>]</b></div></td>
+            <td width=65%><div align="center" style="font-size: 9pt;color: white"><b>Info joueur [<?=strtolower($joueurDTN["prenomJoueur"])?> <?=strtolower($joueurDTN["nomJoueur"])?>]</b></div></td>
             <td width=15%><div align="center" style="font-size: 9pt;color: white"><b>Auteur</b></div></td>
           </tr>
         
@@ -527,7 +527,7 @@ if(isset($msg)) {?>
               <tr>
               <td class="name" style="width:95%;padding-left:10px;">
               <!-- Ici se trouve le titre du panneau -->
-              Ajout information : Joueur [<?=$joueurDTN["nomJoueur"]?>] | club [<?=$joueurDTN["nomClub"]?>]
+              Ajout information : Joueur [<?=$joueurDTN["prenomJoueur"]?> <?=$joueurDTN["nomJoueur"]?>] | club [<?=$joueurDTN["nomClub"]?>]
               </td>
               <td class="title" style="text-align:center;"><img src="../images/croix.bmp" onclick="hidePopup();"></td> 
               </tr>

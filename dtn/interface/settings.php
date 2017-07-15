@@ -132,7 +132,7 @@ if ($affinfoPerso == 1) {
 <div class="ContenuCentrer">
   <br />
 
-  <?php if ( isset($_SESSION['HT']) ) {?>
+  <?php if ( isset($_SESSION['HTCP']) ) {?>
     
     Votre compte DTN est li&eacute; &agrave; votre compte Hattrick : <?php echo($_SESSION['nomUser']." [".$_SESSION['idUserHT']."]"); ?>
     

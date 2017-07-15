@@ -167,8 +167,8 @@ if ($bgcol=="#F4F4FF"){
 }
 ?>
                 <tr bgcolor="<?=$bgcol?>">
-                <td> &nbsp;<a href ="<?=$url?>/joueurs/ficheDTN.php?id=<?=$l["idJoueur"]?>" ><b><?=strtolower($l["nomJoueur"])?>
-                      <?=strtolower($l["prenomJoueur"])?></b>
+                <td> &nbsp;<a href ="<?=$url?>/joueurs/ficheDTN.php?id=<?=$l["idJoueur"]?>" ><b><?=strtolower($l["prenomJoueur"])?> <?=strtolower($l["nomJoueur"])?>
+                      </b>
                       </a></td>
                 <td> <div align="center"><?=dateToHTML($l["dateHisto"])?>&nbsp;<?=$l["heureHisto"]?></div></td>
                 <td > <div align="left">&nbsp;<?=$l["intituleHisto"]?></div></td>

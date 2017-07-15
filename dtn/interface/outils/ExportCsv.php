@@ -148,7 +148,7 @@ foreach ($conn->query($sql) as $l) {
 		$datemaj=$mkJoueur;
 	}
 
-?><?=strtolower($l["prenomJoueur"])?><?=strtolower($l["nomJoueur"])?>;<?php
+?><?=strtolower($l["prenomJoueur"])?> <?=strtolower($l["nomJoueur"])?>;<?php
 	echo $l["idHattrickJoueur"].";";
 	echo $l["dateDerniereModifJoueur"].";";
 	echo $l["dateSaisieJoueur"].";";

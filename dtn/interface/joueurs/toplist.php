@@ -235,8 +235,7 @@ $lstPos = listAllPosition();
         <td  nowrap>&nbsp;
     <img src="../images/time_<?=$img_nb?>.gif" onmouseover="return escape('<?=$zealt?>')" >&nbsp;        
     <a href ="<?=$url?>/joueurs/fiche.php?id=<?=$lst["idJoueur"]?>" class="bred1">
-
-      <?=strtolower($lst["nomJoueur"])?><?=strtolower($lst["prenomJoueur"])?>
+	    <?=strtolower($lst["prenomJoueur"])?> <?=strtolower($lst["nomJoueur"])?>
     </a>
         
         

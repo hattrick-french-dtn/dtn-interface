@@ -158,7 +158,7 @@ require("../menu/menuJoueur.php");
           <td colspan="3">&nbsp;</td>
         </tr>
         <tr> 
-          <td width="50%" align="left">&nbsp; <font color="#000099"><b><?=$infJ["idHattrickJoueur"]?>&nbsp;-&nbsp;<?=$infJ["nomJoueur"]?> <?=$infJ["prenomJoueur"]?>&nbsp;-&nbsp;<?=$infJ["ageJoueur"]?>&nbsp;ans&nbsp;-&nbsp;<?=$infJ["intitulePosition"]?> 
+          <td width="50%" align="left">&nbsp; <font color="#000099"><b><?=$infJ["idHattrickJoueur"]?>&nbsp;-&nbsp;<?=$infJ["prenomJoueur"]?> <?=$infJ["nomJoueur"]?>&nbsp;-&nbsp;<?=$infJ["ageJoueur"]?>&nbsp;ans&nbsp;-&nbsp;<?=$infJ["intitulePosition"]?> 
                 <a href="http://alltid.org/player/<?=$infJ["idHattrickJoueur"]?>" target="_blank"><img src="../images/ahstats.png" width="47" height="16" border="0" align="absmiddle"></a></b></font></td>
           <td width="20%" align="left"colspan="2"><b>Club Actuel : </b><a href="<?=$url?>/clubs/fiche_club.php?idClubHT=<?=$infJ["teamid"]?>"><?=$infJ["nomClub"]?></a>
           </td>

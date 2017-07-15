@@ -3,7 +3,7 @@
   ini_set('max_execution_time',3600); // 3600 secondes = 60 minutes -> à la main on se met un timeout de 60 minutes
   ini_set("memory_limit",'256M');
 
-  include($_SERVER['DOCUMENT_ROOT'].'/gestion_session_HT.php'); // Pour récupérer les constantes CONSUMER
+  include($_SERVER['DOCUMENT_ROOT'].'/dtn/interface/gestion_session_HT.php'); // Pour récupérer les constantes CONSUMER
 
   require("../includes/head.inc.php");
   include_once "../includes/serviceEquipes.php";
@@ -15,7 +15,7 @@
   $filename = $_SERVER['DOCUMENT_ROOT'].'/dtn/interface/maj/log/repriseClubsDTN.txt';
   $myfile=fopen($filename,'w');
   
-  $_SESSION['HT']=creerConnexionHT();  
+  $_SESSION['HTCP']=creerConnexionHT();  
 
   fwrite($myfile, "Debut traitement : ".date("d/m/Y H:i:s")."\n");
   fwrite($myfile, "======================================\n");

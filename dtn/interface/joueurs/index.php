@@ -536,8 +536,8 @@ else return true;
                 </tr>
                 <tr bgcolor="<?=$bgcolor?>"> 
                   <td>&nbsp; 
-                    <?=$lstJoueurs["nomJoueur"]?>
-    <?=$lstJoueurs["prenomJoueur"]?>
+                    <?=$lstJoueurs["prenomJoueur"]?> <?=$lstJoueurs["nomJoueur"]?>
+    
                   </td>
                   <td width="1" bgcolor="#000000"><img src="../images/spacer.gif" width="1" height="1"></td>
                   <td onClick="javascript:fiche('<?=$lstJoueurs["idJoueur"]?>')"><div align="center"><a href="javascript:fiche('<?=$lstJoueurs["idJoueur"]?>');"><img src="../images/carre-rouge.gif" width="10" height="10" border="0"></a></div></td>

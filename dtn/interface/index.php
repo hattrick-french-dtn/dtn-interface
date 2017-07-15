@@ -1,4 +1,5 @@
 <?php
+$_SESSION['HT'] = null;
 include_once($_SERVER["DOCUMENT_ROOT"]."/dtn/interface/includes/head.inc.php");
 $_SESSION['acces']="INTERFACE"; // sert à avoir un affichage personnalisé pour les composants utilisés dans le portail et l'interface
 
