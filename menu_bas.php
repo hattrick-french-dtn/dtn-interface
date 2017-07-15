@@ -20,7 +20,7 @@
       </tr>
       <tr>
         <td>
-        <center><span class="style122">&copy;2003-2011 ht-fff.org (v2.1). All rights reserved. Uses <a href="http://pht.htloto.org/">PHT</a> by Teles</span></center>
+        <center><span class="style122">&copy;2003-2017 ht-fff.org (v2.2). All rights reserved. Uses <a href="https://github.com/jetwitaussi/PHT/tree/v2">PHT</a> by Teles</span></center>
         </td>
       </tr>
       </table>
