@@ -3,7 +3,7 @@
   ini_set('max_execution_time',3600); // 3600 secondes = 60 minutes -> à la main on se met un timeout de 60 minutes
   ini_set("memory_limit",'256M');
 
-  include($_SERVER['DOCUMENT_ROOT'].'/dtn/interface/gestion_session_HT.php'); // Pour récupérer les constantes CONSUMER
+  include($_SERVER['DOCUMENT_ROOT'].'/gestion_session_HT.php'); // Pour récupérer les constantes CONSUMER
 
   require_once("../includes/head.inc.php");
   include_once "../includes/serviceEquipes.php";
