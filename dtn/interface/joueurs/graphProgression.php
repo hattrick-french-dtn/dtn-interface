@@ -120,7 +120,7 @@ require("../menu/menuJoueur.php");
 			$ageetjours = ageetjour($lstJoueur[0]["datenaiss"]);
             $tabage = explode(" - ",$ageetjours);
 		?>
-          <td width="50%" align="left">&nbsp; <font color="#000099"><b><?=$lstJoueur[0]["idHattrickJoueur"]?>&nbsp;-&nbsp;<?=$lstJoueur[0]["nomJoueur"]?> <?=$lstJoueur[0]["prenomJoueur"]?>&nbsp;-&nbsp;<?=$tabage[0]?>&nbsp;ans&nbsp;-&nbsp;<?=$lstJoueur[0]["intitulePosition"]?></b></font></td>
+          <td width="50%" align="left">&nbsp; <font color="#000099"><b><?=$lstJoueur[0]["idHattrickJoueur"]?>&nbsp;-&nbsp;<?=$lstJoueur[0]["prenomJoueur"]?> <?=$lstJoueur[0]["nomJoueur"]?>&nbsp;-&nbsp;<?=$tabage[0]?>&nbsp;ans&nbsp;-&nbsp;<?=$lstJoueur[0]["intitulePosition"]?></b></font></td>
           <td width="20%" align="left"><b>Club Actuel : </b><?=$lstClubActuel[0]["nomClub"]?></td>
                   <td width="30%" align="left">&nbsp;</td>
         

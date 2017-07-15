@@ -195,32 +195,6 @@ function getSeasonWeekOfMatch($unixTime){
 }
 */
 
-/******************************************************************************************/
-/* Objet : Renvoi les derniers matchs terminés de l'équipe à partir des données Hattrick  */
-/******************************************************************************************/
-function getDataDerniersMatchsTeam_usingPHTv3($teamid,$date_mini_match=null)
-{
-	$lesMatchs=$_SESSION['HT']->getSeniorMatches($teamid)->getLastMatches();
-	$matchToLoad=array();
-	$i=0;
-	
-	print('CHPP Matches<br/>');
-	var_dump($lesMatchs);
-	print('<br/><br/>');
-
-	//   iterate through match list to find appropriate game.
-	foreach($lesMatchs as $match){
-		if (($match->getDate() >= $date_mini_match || $date_mini_match === null) && ($match->isTournament()==false) && $match->getType() != 62){
-			$matchToLoad[$i]["MATCHID"]=$match->getId();
-			$matchToLoad[$i]["MATCHDATE"]=$match->getDate();
-			$matchToLoad[$i]["MATCHTYPE"]=$match->getType();
-			$i++;
-		}
-	}
-
-	unset($lesMatchs);
-	return $matchToLoad;
-}
 
 /******************************************************************************************/
 /* Objet : Renvoi les derniers matchs terminés de l'équipe à partir des données Hattrick  */
@@ -236,7 +210,7 @@ function getDataDerniersMatchsTeam_usingPHTv3($teamid,$date_mini_match=null)
 /******************************************************************************************/
 function getDataDerniersMatchsTeam_usingPHT($teamid,$date_mini_match=null)
 {
-  $lesMatchs=$_SESSION['HTCP']->getSeniorTeamMatches($teamid)->getLastMatches();
+  $lesMatchs=$_SESSION['HT']->getSeniorTeamMatches($teamid)->getLastMatches();
   $matchToLoad=array();
   $i=0;
 
@@ -249,7 +223,7 @@ function getDataDerniersMatchsTeam_usingPHT($teamid,$date_mini_match=null)
       $i++;
     }
   }
-  $_SESSION['HTCP']->clearSeniorTeamMatches();
+  $_SESSION['HT']->clearSeniorTeamMatches();
   unset($lesMatchs);
   return $matchToLoad;
 }
@@ -443,89 +417,6 @@ function getPositionFromRole($roleID)
    //return 0;
 }
 
-/******************************************************************************************/
-/* Objet : Récupère sur HT le détail match d'un joueur et insère dans la base             */
-/******************************************************************************************/
-function getDataMatchJoueurv3($playerid,$teamid,$matchID=null)
-{
-  //echo('<br />joueur='.$playerid.'-match='.$matchID.'-teamid='.$teamid.'<br />');
-  // Initialisation des variables
-  $perfIndividuelle=array();
-  $i=0;
-  $joueurTrouve=false;
-  
-  print($matchID.'<br>');
-  // On récupère sur HT la compo du match
-  $lineUp=$_SESSION['HT']->getSeniorMatchLineup($matchID, $teamid);
-
-  // On supprime les compos du cache
-
-  // Boucle sur les joueurs de la compo
-  while ($i < $lineUp->getFinalPlayerNumber() && $joueurTrouve==false) {
-	$player = $lineUp->getFinalPlayer($i);
-    if ($player && $playerid==$player->getId()){
-      $joueurTrouve=true; // Pour sortir de la boucle à la prochaine itération
-
-      $id_role=$player->getRole();     
-      $matchDate=$lineUp->getMatchDate(); // Obligé de stocker dans une variable parce que le framework ne permet pas d'écraser la valeur d'1 propriété
-      
-      if (  ( isset($id_role) && 
-              $id_role!=12 &&
-              $id_role!=13 &&
-              $id_role!=14 &&
-              $id_role!=15 &&
-              $id_role!=16 &&
-              $id_role!=17 &&
-              $id_role!=18 &&
-              $id_role!=114 &&
-              $id_role!=115 &&
-              $id_role!=116 &&
-              $id_role!=117 &&
-              $id_role!=118
-            ) ||
-            (!isset($id_role)) )
-      {
-        // dans ce cas il a vraiment joue sur le terrain ou a voulu jouer mais a ete remplace
-        // On exclut les roles remplacant, capitaine et tireur de CF
-
-        $matchSeason=getSeasonWeekOfMatch(mktime( HTFunction::convertDate($matchDate, "H"),
-                                                  HTFunction::convertDate($matchDate, "i"),
-                                                  HTFunction::convertDate($matchDate, "s"),
-                                                  HTFunction::convertDate($matchDate, "n"),
-                                                  HTFunction::convertDate($matchDate, "j"),
-                                                  HTFunction::convertDate($matchDate, "Y")));  
-        $perfIndividuelle["season"]=$matchSeason["season"];
-        $perfIndividuelle["week"]=$matchSeason["week"];
-        $perfIndividuelle["id_joueur"]=$playerid;
-        $perfIndividuelle["id_match"]=$lineUp->getMatchId();
-        $perfIndividuelle["date_match"]=$matchDate;
-        $perfIndividuelle["id_club"]=$teamid;
-        if (!isset($perfIndividuelle["id_role"])) {$perfIndividuelle["id_role"]=0;}
-        $perfIndividuelle["id_position"]=getPositionFromRole($id_role);
-        if (!isset($perfIndividuelle["id_position"]) || empty($perfIndividuelle["id_position"])) {$perfIndividuelle["id_position"]=0;}
-        $perfIndividuelle["id_behaviour"]=$lineUp->getFinalLineup()->getPlayer($i)->getIndividualOrder(); 
-        if (!isset($perfIndividuelle["id_behaviour"]) || empty($perfIndividuelle["id_behaviour"])) {$perfIndividuelle["id_behaviour"]=0;}
-        $perfIndividuelle["etoile"]=$lineUp->getFinalLineup()->getPlayer($i)->getRatingStars();
-        $perfIndividuelle["etoileFin"]=$lineUp->getFinalLineup()->getPlayer($i)->getRatingStarsAtEndOfMatch();
-        $perfIndividuelle["idTypeMatch_fk"]=$lineUp->getMatchType();
-        $perfIndividuelle["id_role"]=$id_role;
-        
-        unset ($matchSeason);
-      }
-      
-      unset ($id_role);
-      unset ($matchDate);
-    }
-    $i++;
-    
-  } // Fin Boucle
-  
-  unset ($lineUp);
-  unset ($joueurTrouve);
-  unset ($i);
-  
-  return $perfIndividuelle;
-}
 
 /******************************************************************************************/
 /* Objet : Récupère sur HT le détail match d'un joueur et insère dans la base             */
@@ -550,10 +441,10 @@ function getDataMatchJoueur($playerid,$teamid,$matchID=null)
   $joueurTrouve=false;
   
   // On récupère sur HT la compo du match
-  $lineUp=$_SESSION['HTCP']->getSeniorLineup($matchID, $teamid);
+  $lineUp=$_SESSION['HT']->getSeniorLineup($matchID, $teamid);
 
   // On supprime les compos du cache
-  $_SESSION['HTCP']->clearSeniorLineups();
+  $_SESSION['HT']->clearSeniorLineups();
 
   // Boucle sur les joueurs de la compo
   while ($i <= $lineUp->getFinalLineup()->getPlayersNumber() && $joueurTrouve==false) {
@@ -733,61 +624,6 @@ function insert_perfs_individuelle($row_perf)
 	} else {
 		return false;
 	}
-}
-
-/******************************************************************************************/
-/* Objet : Insère dans la base DTN les matchs récents d'un joueur                         */
-/******************************************************************************************/
-function insererMatchsJoueurv3($playerid,$teamid,$dateLastScanMatchJoueur=null)
-{
-	// Rechercher matchs du joueur sur Hattrick
-	$listMatchs=getDataDerniersMatchsTeam_usingPHTv3($teamid,$dateLastScanMatchJoueur);
-	print('DTN Matches '.$teamid.'<br/>');
-	print_r($listMatchs);
-	print('<br/><br/>');
-	$perf=array();
-	$perf['HTML']="";
-
-	// Boucle sur les matchs
-	$i=0;
-	$nbMatchsInsere=0;
-	try {
-		while ($i < count($listMatchs)) {
-			if (!existMatchBaseDTN($listMatchs[$i]["MATCHID"],$playerid)) { // Si le match n'existe pas dans la bdd dtn => on l'insère
-				//echo("<br />matchid=".$listMatchs[$i]["MATCHID"]."///playerid=".$playerid);
-				$perf[$nbMatchsInsere]=getDataMatchJoueurv3($playerid,$teamid,$listMatchs[$i]["MATCHID"]);
-
-				if (!empty($perf[$nbMatchsInsere])) { // Le joueur a été aligné dans le match => On insère
-
-					if ($nbMatchsInsere>0) {
-						$perf['HTML'].="<tr><td colspan=7>&nbsp;</td>";
-					}
-	//echo('01');
-					$role=get_role_byID($perf[$nbMatchsInsere]["id_role"]);
-	//echo('toto');
-	//        $behaviour=get_behaviour_byID($perf[$nbMatchsInsere]["id_behaviour"]);
-	//echo('02');
-					$perf['HTML'].="<td>".$perf[$nbMatchsInsere]['id_match']."</td>
-							<td align=center bgcolor=#fded84><b>".$perf[$nbMatchsInsere]['etoile']."/".$perf[$nbMatchsInsere]['etoileFin']."</b></td>
-							<td>".$role['nom_role_abbrege']."</td></tr>";
-
-					$perf[$nbMatchsInsere]['id_perfs_individuelle'] = insert_perfs_individuelle($perf[$nbMatchsInsere]);
-					$nbMatchsInsere++;
-				} else {
-					unset($perf[$nbMatchsInsere]);
-				}
-			}
-			$i++;
-		}
-	}
-	catch (\PHT\Exception\ChppException $e) {
-		echo $e->getError();
-	}
-	if ($nbMatchsInsere==0) {
-		$perf['HTML'].="<td colspan=3>Pas de nouveaux match.</td></tr>";
-	}
-  
-	return $perf;
 }
 
 

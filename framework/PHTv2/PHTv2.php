@@ -7,10 +7,15 @@
  * @version 2.21
  * @license http://www.php.net/license/3_0.txt
  */
+ 
 
 /** */
 class CHPPConnection
 {
+    const PRIMARY = 1;
+    const SECONDARY = 2;
+    const INTERNATIONAL = 3;
+
 	//---global---
 	private $consumerKey;
 	private $consumerSecret;
@@ -140,6 +145,7 @@ class CHPPConnection
 	private $tournamentMatchesDetails = array();
 	private $primaryTeam = array();
 	private $secondaryTeam = array();
+	private $internationalTeam = array();
 	private $tournament = array();
 	private $tournaments = array();
 	private $tournamentLeagues = array();
@@ -676,6 +682,39 @@ class CHPPConnection
 	{
 		$this->teams = array();
 	}
+	
+	protected function getSpecificTeam($type, $userId = null) {
+		$params = array('file'=>'teamdetails', 'version'=>'3.4');
+		if($userId !== null)
+		{
+			 $params['userID'] = $userId;
+		}
+		$url = $this->buildUrl($params);
+		$xml = $this->fetchUrl($url);
+
+		$doc = new DOMDocument('1.0', 'UTF-8');
+		$doc->loadXml($xml);
+
+		$teams = $doc->getElementsByTagName('Team');
+		for($t=0; $t<$teams->length; $t++)
+		{
+			$txml = new DOMDocument('1.0', 'UTF-8');
+			$txml->appendChild($txml->importNode($teams->item($t), true));
+			$isHti = $txml->getElementsByTagName('LeagueID')->item(0)->nodeValue == 1000;
+			$isPrimary = strtolower($txml->getElementsByTagName('IsPrimaryClub')->item(0)->nodeValue) == 'true';
+			if($type == CHPPConnection::PRIMARY && $isPrimary) {
+				continue;
+			}
+			if($type == CHPPConnection::SECONDARY && !$isPrimary && !$isHti) {
+				continue;
+			}
+			if($type == CHPPConnection::INTERNATIONAL && $isHti) {
+				continue;
+			}
+			$doc->getElementsByTagName('Teams')->item(0)->removeChild($teams->item($t));
+		}
+		return $doc; 
+	}
 
 	/**
 	 * Returns HTTeam object
@@ -687,27 +726,7 @@ class CHPPConnection
 	{
 		if(!isset($this->primaryTeam[$userId]) || $this->primaryTeam[$userId] === null)
 		{
-			$params = array('file'=>'teamdetails', 'version'=>'3.4');
-			if($userId !== null)
-			{
-				 $params['userID'] = $userId;
-			}
-			$url = $this->buildUrl($params);
-			$xml = $this->fetchUrl($url);
-
-			$doc = new DOMDocument('1.0', 'UTF-8');
-			$doc->loadXml($xml);
-
-			$teams = $doc->getElementsByTagName('Team');
-			for($t=0; $t<$teams->length; $t++)
-			{
-				$txml = new DOMDocument('1.0', 'UTF-8');
-				$txml->appendChild($txml->importNode($teams->item($t), true));
-				if(strtolower($txml->getElementsByTagName('IsPrimaryClub')->item(0)->nodeValue) == 'false')
-				{
-					$doc->getElementsByTagName('Teams')->item(0)->removeChild($teams->item($t));
-				}
-			}
+			$doc = $this->getSpecificTeam(CHPPConnection::PRIMARY, $userId);
 			if($doc->getElementsByTagName('Team')->length)
 			{
 				$this->primaryTeam[$userId] = new HTTeam($doc->saveXML());
@@ -738,33 +757,6 @@ class CHPPConnection
 		$this->primaryTeam = array();
 	}
 
-	/**
-	 * Returns number of teams controlled by user
-	 * 
-	 * @param Integer $userId
-	 * @return Integer
-	 */
-	public function getNumberOfTeams($userId = null)
-	{
-		$params = array('file'=>'teamdetails', 'version'=>'3.4');
-		if($userId !== null)
-		{
-			$params['userID'] = $userId;
-		}
-		$url = $this->buildUrl($params);
-		$xml = $this->fetchUrl($url);
-		if($this->canLog())
-		{
-			$this->log("URL: ".$url);
-		}
-	
-		$doc = new DOMDocument('1.0', 'UTF-8');
-		$doc->loadXml($xml);
-	
-		$teams = $doc->getElementsByTagName('Team');
-		$this->nTeams=$teams->length;
-		return $this->nTeams;
-	}
 		
 	/**
 	 * Returns HTTeam object with the user's secondary team (or tertiary if $secIndex is specified)
@@ -773,36 +765,14 @@ class CHPPConnection
 	 * @param Integer $secIndex
 	 * @return HTTeam
 	 */
-	public function getSecondaryTeam($userId = null, $secIndex=0)
+	public function getSecondaryTeam($userId = null)
 	{
 		if(!isset($this->secondaryTeam[$userId]) || $this->secondaryTeam[$userId] === null)
 		{
-			$params = array('file'=>'teamdetails', 'version'=>'3.4');
-			if($userId !== null)
-			{
-				 $params['userID'] = $userId;
-			}
-			$url = $this->buildUrl($params);
-			$xml = $this->fetchUrl($url);
-
-			$doc = new DOMDocument('1.0', 'UTF-8');
-			$doc->loadXml($xml);
-
-			$teams = $doc->getElementsByTagName('Team');
-			for($t=0; $t<$teams->length; $t++)
-			{
-				$txml = new DOMDocument('1.0', 'UTF-8');
-				$txml->appendChild($txml->importNode($teams->item($t), true));
-				if(strtolower($txml->getElementsByTagName('IsPrimaryClub')->item($t)->nodeValue) == 'true')
-				{
-					$doc->getElementsByTagName('Teams')->item(0)->removeChild($teams->item($t));
-				}
-			}
+			$doc = $this->getSpecificTeam(CHPPConnection::SECONDARY, $userId);
 			if($doc->getElementsByTagName('Team')->length)
 			{
-				$resxml = new DOMDocument('1.0', 'UTF-8');
-				$resxml->appendChild($resxml->importNode($teams->item($secIndex), true));
-				$this->secondaryTeam[$userId] = new HTTeam($resxml->saveXML());
+				$this->secondaryTeam[$userId] = new HTTeam($doc->saveXML());
 			}
 			else
 			{
@@ -828,6 +798,48 @@ class CHPPConnection
 	public function clearSecondaryTeams()
 	{
 		$this->secondaryTeam = array();
+	}
+
+	/**
+	 * Returns HTTeam object with the user's international team (or tertiary if $secIndex is specified)
+	 *
+	 * @param Integer $userId
+	 * @param Integer $secIndex
+	 * @return HTTeam
+	 */
+	public function getInternationalTeam($userId = null)
+	{
+		if(!isset($this->internationalTeam[$userId]) || $this->internationalTeam[$userId] === null)
+		{
+			$doc = $this->getSpecificTeam(CHPPConnection::INTERNATIONAL, $userId);
+			if($doc->getElementsByTagName('Team')->length)
+			{
+				$this->internationalTeam[$userId] = new HTTeam($doc->saveXML());
+			}
+			else
+			{
+				return null;
+			}
+		}
+		return $this->internationalTeam[$userId];
+	}
+
+	/**
+	 * Clear secondary team
+	 *
+	 * @param Integer $userId
+	 */
+	public function clearInternationalTeam($userId = null)
+	{
+		$this->internationalTeam[$userId] = null;
+	}
+
+	/**
+	 * Clear all secondary teams
+	 */
+	public function clearInternationalTeams()
+	{
+		$this->internationalTeam = array();
 	}
 
 	/**

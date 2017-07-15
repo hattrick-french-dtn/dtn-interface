@@ -12,9 +12,9 @@ require_once($_SERVER['DOCUMENT_ROOT']."/dtn/interface/includes/serviceEquipes.p
 /******************************************************************************/
 /******************************************************************************/
 
-if (isset($_SESSION['HTCP']) && $_SESSION['HTCP']->pingChppServer(5000)==false) { // Si le serveur CHPP est inaccessible durant 10 secondes
+if (isset($_SESSION['HT']) && $_SESSION['HT']->pingChppServer(5000)==false) { // Si le serveur CHPP est inaccessible durant 10 secondes
    $_SESSION['CHPP_KO'] = true;
-   unset($_SESSION['HTCP']);
+   unset($_SESSION['HT']);
 } else {
    $_SESSION['CHPP_KO'] = false;
 }
@@ -59,7 +59,7 @@ if (!isset($_SESSION['horsConnexion'])) {
       Be sure to store $HT in session before redirect user
       to Hattrick chpp login page
       */
-      $_SESSION['HTCP'] = $HT;
+      $_SESSION['HT'] = $HT;
       /*
       Redirect user to Hattrick for login
       or put a link with this url on your site
@@ -75,33 +75,33 @@ if (!isset($_SESSION['horsConnexion'])) {
     /******************************************************************************/
     /******************************************************************************/
     
-    if ($_REQUEST['mode']=='retour' && isset($_SESSION['HTCP'])) {
+    if ($_REQUEST['mode']=='retour' && isset($_SESSION['HT'])) {
   
       // On récupère les données d'authentification passé dans l'url
       try
       {
-        $_SESSION['HTCP']->retrieveAccessToken($_REQUEST['oauth_token'], $_REQUEST['oauth_verifier']);
+        $_SESSION['HT']->retrieveAccessToken($_REQUEST['oauth_token'], $_REQUEST['oauth_verifier']);
         /*
         Now access is granted for your application
         You can save user token and token secret and/or request xml files
         */
-		$userId = $_SESSION['HTCP']->getClub()->getUserId();
-		$teamNb = $_SESSION['HTCP']->getNumberOfTeams($userId);
+		$userId = $_SESSION['HT']->getClub()->getUserId();
+		$teamNb = $_SESSION['HT']->getNumberOfTeams($userId);
 		for ($tsidx=$teamNb-1; $tsidx >= 0; $tsidx--) {
 			// On commence par le 2e club s'il y a pour faire la maj
-			$team2 = $_SESSION['HTCP']->getSecondaryTeam($userId, $tsidx);
+			$team2 = $_SESSION['HT']->getSecondaryTeam($userId, $tsidx);
 			if ($team2 != null)
 			{
 				$clubHT = getDataClubFromHT_usingPHT($team2->getTeamId());
-				$clubHT['userToken'] = $_SESSION['HTCP']->getOauthToken();
-				$clubHT['userTokenSecret'] = $_SESSION['HTCP']->getOauthTokenSecret();
+				$clubHT['userToken'] = $_SESSION['HT']->getOauthToken();
+				$clubHT['userTokenSecret'] = $_SESSION['HT']->getOauthTokenSecret();
 
 				$majClub=insertionClub($clubHT); // Insertion ou Maj des tokens dans la bdd DTN
 			}        
         }
-        $clubHT = getDataClubFromHT_usingPHT($_SESSION['HTCP']->getTeam()->getTeamId()); // On récupère sur HT les informations sur le club connecté
-        $clubHT['userToken'] = $_SESSION['HTCP']->getOauthToken();
-        $clubHT['userTokenSecret'] = $_SESSION['HTCP']->getOauthTokenSecret();
+        $clubHT = getDataClubFromHT_usingPHT($_SESSION['HT']->getTeam()->getTeamId()); // On récupère sur HT les informations sur le club connecté
+        $clubHT['userToken'] = $_SESSION['HT']->getOauthToken();
+        $clubHT['userTokenSecret'] = $_SESSION['HT']->getOauthTokenSecret();
   
         $majClub=insertionClub($clubHT); // Insertion ou Maj des tokens dans la bdd DTN
         
@@ -126,7 +126,7 @@ if (!isset($_SESSION['horsConnexion'])) {
     
     if ($_REQUEST['mode']=='logout') {
       setcookie('idClubHT');
-      unset($_SESSION['HTCP']);
+      unset($_SESSION['HT']);
       unset($_SESSION['nomUser']);
       unset($_SESSION['idUserHT']);
       unset($_SESSION['newVisit']);
@@ -134,7 +134,7 @@ if (!isset($_SESSION['horsConnexion'])) {
      
   } else { // $_REQUEST['mode'] n'est pas défini
   
-    if (!isset($_SESSION['HTCP']) || empty($_SESSION['HTCP']) ) {
+    if (!isset($_SESSION['HT']) || empty($_SESSION['HT']) ) {
   
       /******************************************************************************/
       /******************************************************************************/
@@ -150,7 +150,7 @@ if (!isset($_SESSION['horsConnexion'])) {
         $HT->setOauthToken($clubDTN['userToken']);
         $HT->setOauthTokenSecret($clubDTN['userTokenSecret']);
       
-        $_SESSION['HTCP']=$HT;
+        $_SESSION['HT']=$HT;
         unset($HT);
         $_SESSION['nomUser']=$clubDTN['nomUser'];
         $_SESSION['idUserHT']=$clubDTN['idUserHT'];
@@ -163,10 +163,10 @@ if (!isset($_SESSION['horsConnexion'])) {
       /******************************************************************************/
       if ($_SESSION['acces']=='INTERFACE') {
   
-        $_SESSION['HTCP']=existAutorisationClub(null,$_SESSION['sesUser']['idAdminHT']);
+        $_SESSION['HT']=existAutorisationClub(null,$_SESSION['sesUser']['idAdminHT']);
   
-        if (!$_SESSION['HTCP']) {
-          unset($_SESSION['HTCP']);
+        if (!$_SESSION['HT']) {
+          unset($_SESSION['HT']);
         } else {
           $clubDTN = getClubID(null,$_SESSION['sesUser']['idAdminHT']); // Extraction du club dans la bdd DTN
           $_SESSION['nomUser']=$clubDTN['nomUser'];
@@ -174,13 +174,13 @@ if (!isset($_SESSION['horsConnexion'])) {
         }
         /*echo("<br />===INTERFACE===<br />");
         echo("idAdminHT=");var_dump($_SESSION['sesUser']['idAdminHT']);
-        echo("<br />session=");var_dump($_SESSION['HTCP']);*/
+        echo("<br />session=");var_dump($_SESSION['HT']);*/
         
       }
   
     }
     
-    if (isset($_SESSION['HTCP'])) {
+    if (isset($_SESSION['HT'])) {
       /******************************************************************************/
       /******************************************************************************/
       /*      VERIFICATION VALIDITE SESSION                                         */
@@ -188,12 +188,12 @@ if (!isset($_SESSION['horsConnexion'])) {
       /******************************************************************************/
   
       // Vérifier que la session est valide
-      $check = $_SESSION['HTCP']->checkToken();
+      $check = $_SESSION['HT']->checkToken();
       //var_dump($check);echo("<br><br>".$check->isValid());exit;
   
       if ($check->isValid()===false) {
         // Si session non Valide alors détruire la session
-        unset($_SESSION['HTCP']);
+        unset($_SESSION['HT']);
         unset($_SESSION['nomUser']);
         unset($_SESSION['idUserHT']);
         unset($_SESSION['newVisit']);
@@ -207,13 +207,13 @@ if (!isset($_SESSION['horsConnexion'])) {
   // Une seule maj par session 
   if (!isset($_SESSION['newVisit']) && $_SESSION['acces']=='PORTAIL') {$_SESSION['newVisit']=1;}
   
-  //print_r($_SESSION['HTCP']);
+  //print_r($_SESSION['HT']);
 }
 
 
-if (isset($_SESSION['HTCP']) && $_SESSION['HTCP']->pingChppServer(5000)==false) { // Si le serveur CHPP est inaccessible durant 10 secondes
+if (isset($_SESSION['HT']) && $_SESSION['HT']->pingChppServer(5000)==false) { // Si le serveur CHPP est inaccessible durant 10 secondes
    $_SESSION['CHPP_KO'] = true;
-   unset($_SESSION['HTCP']);
+   unset($_SESSION['HT']);
 } else {
    $_SESSION['CHPP_KO'] = false;
 }

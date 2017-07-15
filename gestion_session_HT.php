@@ -12,7 +12,7 @@ require_once($_SERVER['DOCUMENT_ROOT']."/dtn/interface/includes/serviceEquipes.p
 /******************************************************************************/
 /******************************************************************************/
 
-if (isset($_SESSION['HT']) && PHT\Network\Request::pingChppServer(5000)==false) { // Si le serveur CHPP est inaccessible durant 10 secondes
+if (isset($_SESSION['HT']) && $_SESSION['HT']->pingChppServer(5000)==false) { // Si le serveur CHPP est inaccessible durant 10 secondes
    $_SESSION['CHPP_KO'] = true;
    unset($_SESSION['HT']);
 } else {
@@ -44,15 +44,13 @@ if (!isset($_SESSION['horsConnexion'])) {
 		} else {
 			$callbackUrl .= "&connexion_permanente=0";
 		}
-	  
-		/* move to v3 */
+    
 		/*
 		You must supply your chpp crendentials and a callback url.
 		User will be redirected to this url after login
 		You can add your own parameters to this url if you need,
 		they will be kept on user redirection
 		*/
-		/*
 		try
 		{
 			$HT = new CHPPConnection(CONSUMERKEY,CONSUMERSECRET,$callbackUrl);
@@ -62,43 +60,11 @@ if (!isset($_SESSION['horsConnexion'])) {
 		{
 			echo $e->getMessage();
 		}
-		*/
 		/*
 		Be sure to store $HT in session before redirect user
 		to Hattrick chpp login page
 		*/
-		//$_SESSION['HT'] = $HT;
-		
-		
-		/*
-		You must supply your chpp crendentials and a callback url.
-		User will be redirected to this url after login
-		You can add your own parameters to this url if you need,
-		they will be kept on user redirection
-		*/
-		$config = array(
-			'CONSUMER_KEY' => CONSUMERKEY,
-			'CONSUMER_SECRET' => CONSUMERSECRET,
-			'CACHE' => 'memcached',
-		);
-		$HT = new \PHT\Connection($config);
-		if (isset($_REQUEST['connexion_permanente']) && $_REQUEST['connexion_permanente']==1) {
-			$auth = $HT->getPermanentAuthorization($callbackUrl);
-		} else {
-			$auth = $HT->getTemporaryAuthorization($callbackUrl);
-		}
-		if ($auth === false) {
-			echo "Impossible to initiate chpp connection";
-			exit();
-		}
-		$url = $auth->url;
-		/*
-		Be sure to store the CHPP token in session before redirect user
-		to Hattrick chpp login page
-		Needed to validate the connection
-		*/
-		$_SESSION['HTToken'] = $auth->temporaryToken;
-				
+		$_SESSION['HT'] = $HT;
 		/*
 		Redirect user to Hattrick for login
 		or put a link with this url on your site
@@ -114,100 +80,53 @@ if (!isset($_SESSION['horsConnexion'])) {
     /******************************************************************************/
     /******************************************************************************/
     
-    if ($_REQUEST['mode']=='retour' && isset($_SESSION['HTToken'])) {
+    if ($_REQUEST['mode']=='retour' && isset($_SESSION['HT'])) {
+  
       // On récupère les données d'authentification passé dans l'url
       try
       {
-		$config = array(
-			'CONSUMER_KEY' => CONSUMERKEY,
-			'CONSUMER_SECRET' => CONSUMERSECRET,
-			'CACHE' => 'memcached',
-		);
-		$HTCon = new \PHT\Connection($config);
-        $access = $HTCon->getChppAccess($_SESSION['HTToken'], $_REQUEST['oauth_token'], $_REQUEST['oauth_verifier']);
-		
-		if ($access === false) {
-			//print($_SESSION['HTToken']);exit();
-			print("<br/>access failed");
-			exit();
-		}
-		$config['OAUTH_TOKEN'] = $access->oauthToken;
-		$config['OAUTH_TOKEN_SECRET'] = $access->oauthTokenSecret;
-		$HT = new \PHT\PHT($config);
-		$_SESSION['HT'] = $HT;
-
+        $_SESSION['HT']->retrieveAccessToken($_REQUEST['oauth_token'], $_REQUEST['oauth_verifier']);
         /*
         Now access is granted for your application
         You can save user token and token secret and/or request xml files
         */
-		$userId = $_SESSION['HT']->getUser()->getId();
-		$teamcfg = new \PHT\Config\Team();
-		$teamcfg->userId = $userId;
-		try {
-			$teamcfg->international = true;
-			$team = $HT->getSeniorTeam($teamcfg);
-			if ($team != NULL) {
-				$clubHT = getDataClubFromHT_usingPHTv3($team);
-				$clubHT['userToken'] = $access->oauthToken;
-				$clubHT['userTokenSecret'] = $access->oauthTokenSecret;
+		$userId = $_SESSION['HT']->getClub()->getUserId();
+		$team = $_SESSION['HT']->getInternationalTeam($userId);
+		if ($team) {
+			$clubHT = getDataClubFromHT_usingPHT($team->getTeamId(), $userId);
+			$clubHT['userToken'] = $_SESSION['HT']->getOauthToken();
+			$clubHT['userTokenSecret'] = $_SESSION['HT']->getOauthTokenSecret();
+			$majClub=insertionClub($clubHT); // Insertion ou Maj des tokens dans la bdd DTN
+		}
 
-				$majClub=insertionClub($clubHT); // Insertion ou Maj des tokens dans la bdd DTN
-			}
+		$team = $_SESSION['HT']->getSecondaryTeam($userId);
+		if ($team) {
+			$clubHT = getDataClubFromHT_usingPHT($team->getTeamId(), $userId);
+			$clubHT['userToken'] = $_SESSION['HT']->getOauthToken();
+			$clubHT['userTokenSecret'] = $_SESSION['HT']->getOauthTokenSecret();
+			$majClub=insertionClub($clubHT); // Insertion ou Maj des tokens dans la bdd DTN
 		}
-		catch (\PHT\Exception\InvalidArguementException $e) {
-			echo $e->getMessage();
-		}
-		try {
-			$teamcfg->secondary  = true;
-			$team = $HT->getSeniorTeam($teamcfg);
-			if ($team != NULL) {
-				$clubHT = getDataClubFromHT_usingPHTv3($team);
-				$clubHT['userToken'] = $access->oauthToken;
-				$clubHT['userTokenSecret'] = $access->oauthTokenSecret;
 
-				$majClub=insertionClub($clubHT); // Insertion ou Maj des tokens dans la bdd DTN
-			}
-		}
-		catch (\PHT\Exception\InvalidArguementException $e) {
-			echo $e->getMessage();
-		}
-		try {
-			$teamcfg->primary  = true;
-			$team = $HT->getSeniorTeam($teamcfg);
-			if ($team != NULL) {
-				$clubHT = getDataClubFromHT_usingPHTv3($team);
-				$clubHT['userToken'] = $access->oauthToken;
-				$clubHT['userTokenSecret'] = $access->oauthTokenSecret;
-
-				$majClub=insertionClub($clubHT); // Insertion ou Maj des tokens dans la bdd DTN
-			}
-		}
-		catch (\PHT\Exception\InvalidArguementException $e) {
-			echo $e->getMessage();
-		}
-		        
+        $clubHT = getDataClubFromHT_usingPHT($_SESSION['HT']->getPrimaryTeam($userId)->getTeamId(), $userId); // On récupère sur HT les informations sur le club connecté
+        $clubHT['userToken'] = $_SESSION['HT']->getOauthToken();
+        $clubHT['userTokenSecret'] = $_SESSION['HT']->getOauthTokenSecret();
+  
+        $majClub=insertionClub($clubHT); // Insertion ou Maj des tokens dans la bdd DTN
+        
         $_SESSION['nomUser']=$clubHT['nomUser'];
         $_SESSION['idUserHT']=$clubHT['idUserHT'];
         $_SESSION['newVisit']=1;
         
         if (isset($_REQUEST['connexion_permanente']) && $_REQUEST['connexion_permanente']==1) {
-			// Si la case "garder ma session active" est cochée alors on ajoute un cookie valable 5 ans
-			setcookie('idClubHT',$clubHT['idClubHT'], time() + 5*365*24*3600, null, null, false, true);        
+          // Si la case "garder ma session active" est cochée alors on ajoute un cookie valable 5 ans
+          setcookie('idClubHT',$clubHT['idClubHT'], time() + 5*365*24*3600, null, null, false, true);        
         } else if (isset($_REQUEST['connexion_permanente']) && $_REQUEST['connexion_permanente']==0) {
-			// Si la case "garder ma session active" est décochée alors on supprime les cookies
-			setcookie('idClubHT');
+          // Si la case "garder ma session active" est décochée alors on supprime les cookies
+          setcookie('idClubHT');
         }
       }
-      catch(\PHT\Exception\ChppException $e)
+      catch(HTError $e)
       {
-			echo $e->getErrorCode().': '.$e->getError();
-			// you can also get whole xml response like any other chpp request:
-			echo $e->getXml(false);
-			//echo $e->getMessage();
-      }
-      catch(\PHT\Exception\NetworkException $e)
-      {
-		echo $e->getError();
         echo $e->getMessage();
       }
       
@@ -233,16 +152,11 @@ if (!isset($_SESSION['horsConnexion'])) {
       if (isset($_COOKIE['idClubHT']) && !empty($_COOKIE['idClubHT']) && $_SESSION['acces']=='PORTAIL') {
   
         //echo("<br />===PORTAIL===<br />");
-		$config = array(
-			'CONSUMER_KEY' => CONSUMERKEY,
-			'CONSUMER_SECRET' => CONSUMERSECRET,
-			'CACHE' => 'memcached',
-		);
-		$HT = new \PHT\PHT($config);
+        $HT = new CHPPConnection(CONSUMERKEY,CONSUMERSECRET);
         $clubDTN = getClubID($_COOKIE['idClubHT']);
   
-        //$HT->setOauthToken($clubDTN['userToken']);
-        //$HT->setOauthTokenSecret($clubDTN['userTokenSecret']);
+        $HT->setOauthToken($clubDTN['userToken']);
+        $HT->setOauthTokenSecret($clubDTN['userTokenSecret']);
       
         $_SESSION['HT']=$HT;
         unset($HT);
@@ -257,14 +171,14 @@ if (!isset($_SESSION['horsConnexion'])) {
       /******************************************************************************/
       if ($_SESSION['acces']=='INTERFACE') {
   
-        $_SESSION['HT']=existAutorisationClubv3(null,$_SESSION['sesUser']['idAdminHT']);
+        $_SESSION['HT']=existAutorisationClub(null,$_SESSION['sesUser']['idAdminHT']);
   
         if (!$_SESSION['HT']) {
-			unset($_SESSION['HT']);
+          unset($_SESSION['HT']);
         } else {
-			$clubDTN = getClubID(null,$_SESSION['sesUser']['idAdminHT']); // Extraction du club dans la bdd DTN
-			$_SESSION['nomUser']=$clubDTN['nomUser'];
-			$_SESSION['idUserHT']=$clubDTN['idUserHT'];
+          $clubDTN = getClubID(null,$_SESSION['sesUser']['idAdminHT']); // Extraction du club dans la bdd DTN
+          $_SESSION['nomUser']=$clubDTN['nomUser'];
+          $_SESSION['idUserHT']=$clubDTN['idUserHT'];
         }
         /*echo("<br />===INTERFACE===<br />");
         echo("idAdminHT=");var_dump($_SESSION['sesUser']['idAdminHT']);
@@ -282,7 +196,7 @@ if (!isset($_SESSION['horsConnexion'])) {
       /******************************************************************************/
   
       // Vérifier que la session est valide
-      $check = PHT\Network\Auth::checkToken();
+      $check = $_SESSION['HT']->checkToken();
       //var_dump($check);echo("<br><br>".$check->isValid());exit;
   
       if ($check->isValid()===false) {
@@ -305,7 +219,7 @@ if (!isset($_SESSION['horsConnexion'])) {
 }
 
 
-if (isset($_SESSION['HT']) && PHT\Network\Request::pingChppServer(5000)==false) { // Si le serveur CHPP est inaccessible durant 10 secondes
+if (isset($_SESSION['HT']) && $_SESSION['HT']->pingChppServer(5000)==false) { // Si le serveur CHPP est inaccessible durant 10 secondes
    $_SESSION['CHPP_KO'] = true;
    unset($_SESSION['HT']);
 } else {

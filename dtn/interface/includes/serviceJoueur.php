@@ -1242,123 +1242,6 @@ function updateDateScanMatchJoueur($idHTJoueur)
 
 /********************************************************************************************/
 /* Objet : Récupération des données d'un joueur (fichier CHPP PlayerDetail)                 */
-/********************************************************************************************/
-function getPlayerDataFromHT_usingPHTv3($team, $idJoueurHT){
-	// Indispensable pour utiliser existAutorisationClub
-	require_once($_SERVER['DOCUMENT_ROOT'].'/dtn/interface/includes/serviceEquipes.php');
-
-	$row_joueur=array();
-
-	try {
-  
-		// On recherche dans la base dtn si le proprio du joueur nous a autoriser à utiliser son accès CHPP et si c'est accès est toujours valide, on l'utilisera
-		$ht_session = null;
-		if ($team != null) {
-			$ht_session=existAutorisationClubv3($team->getId());
-		} else {
-			$ht_session=existAutorisationClubv3($_SESSION['HT']->getSeniorPlayer($idJoueurHT, false)->getTeamId());
-		}
-    
-		if ($ht_session == false && isset($_SESSION['HT'])) {
-			$ht_session = $_SESSION['HT'];
-		}
-
-		// On récupére sur HT les informations du joueur
-		$player = $ht_session->getSeniorPlayer($idJoueurHT, false);
-    
-		$row_joueur['idHattrickJoueur'] = $player->getId();
-		$row_joueur['nomJoueur']        = strtr($player->getLastName(),"'"," ");
-		$row_joueur['prenomJoueur']     = strtr($player->getFirstName(),"'"," ");
-		$jouractuel                     = (mktime(0,0,0,date("m"),date("d"),date("Y"))-574729200)/3600/24;
-		$agejoueurenj                   = $player->getAge()*112+$player->getDays();
-		$row_joueur['datenaiss']        = round(($jouractuel - $agejoueurenj),0);
-		$row_joueur['forme']            = $player->getForm();
-		if ($player->getInjury()!=null) {
-			$row_joueur['blessure'] = $player->getInjury();
-		}
-		$row_joueur['teamid']           = $player->getTeamId();
-		$row_joueur['salary']           = $player->getSalary();
-		$row_joueur['isAbroad']         = $player->isAbroad();
-		$row_joueur['idCaractere_fk']   = $player->getAgreeability();
-		$row_joueur['idAggre_fk']       = $player->getAggressiveness();
-		$row_joueur['idHonnetete_fk']   = $player->getHonesty();
-		$row_joueur['idExperience_fk']  = $player->getExperience();
-		$row_joueur['idLeader_fk']      = $player->getLeadership();
-		$row_joueur['optionJoueur']     = $player->getSpecialty();
-		$row_joueur['tsi']              = $player->getTsi();
-		$row_joueur['transferListed']   = $player->isTransferListed();
-		if ($row_joueur['transferListed'] === null || empty($row_joueur['transferListed'])) 
-		{
-			$row_joueur['transferListed']=0;
-		} else {
-			$row_joueur['transferListed']=1;
-		}
-		$row_joueur['idEndurance']      = $player->getStamina();
-
-//    $row_joueur['caracVisible']     = $player->isSkillsAvailable();
-		$row_joueur['idGardien']        = $player->getKeeper();
-		if($row_joueur['idGardien']=="")
-		{
-			$row_joueur['caracVisible'] = false;
-//echo("non_visible");
-		}
-		else
-		{
-			$row_joueur['caracVisible'] = true;
-//echo("visible");
-		}
-
-		if($row_joueur['caracVisible'])
-		{
-			$row_joueur['idGardien']        = $player->getKeeper();
-			$row_joueur['idConstruction']   = $player->getPlaymaker();
-			$row_joueur['idButeur']         = $player->getScorer();
-			$row_joueur['idPasse']          = $player->getPassing();
-			$row_joueur['idAilier']         = $player->getWinger();
-			$row_joueur['idDefense']        = $player->getDefender();
-			$row_joueur['idPA']             = $player->getSetPieces();
-		}
-		// informations non stockées en base mais utilisées par les scripts
-		$row_joueur['AGE']              = $player->getAge();
-		$row_joueur['AGEDAYS']          = $player->getDays();
-		$row_joueur['NATIVELEAGUENAME'] = $player->getNativeLeagueName();
-
-		// Libération de la mémoire
-		unset($ht_session);
-		unset($player);
-		unset($jouractuel);
-		unset($agejoueurenj);
-    
-		return $row_joueur;
-	}
-	catch(\PHT\Exception\InvalidArguementException $e)
-	{
-		if ($e->getErrorCode()!= '56') { // Si le joueur n'existe pas sur HT on affiche pas de message
-			echo $e->getMessage();
-		} else { // erreur 56, le joueur a disparu de HT
-			if (marqueJoueurDisparuHT(getJoueurHt($idJoueurHT))==false) {
-				return false;
-			}
-		}
-		return false;
-	} 
-	catch(\PHT\Exception\ChppException $e)
-	{
-		if ($e->getErrorCode()!= '56') { // Si le joueur n'existe pas sur HT on affiche pas de message
-			echo $e->getMessage();
-		} else { // erreur 56, le joueur a disparu de HT
-			if (marqueJoueurDisparuHT(getJoueurHt($idJoueurHT))==false) {
-				return false;
-			}
-		}
-		return false;
-	}
-}
-
-
-
-/********************************************************************************************/
-/* Objet : Récupération des données d'un joueur (fichier CHPP PlayerDetail)                 */
 /* Modifié le 15/06/2010 par Musta56 - Création fonction                                    */
 /* Modifié le 09/03/2011 par Musta56 - Si joueur joue un match alors on mets blessure null  */
 /* Modifié le 15/03/2011 par Musta56 - Utilisation de PHT                                   */
@@ -1383,10 +1266,10 @@ function getDataUnJoueurFromHT_usingPHT($idJoueurHT){
   try {
   
     // On recherche dans la base dtn si le proprio du joueur nous a autoriser à utiliser son accès CHPP et si c'est accès est toujours valide, on l'utilisera
-    $ht_session=existAutorisationClub($_SESSION['HTCP']->getPlayer($idJoueurHT)->getTeamId());
+    $ht_session=existAutorisationClub($_SESSION['HT']->getPlayer($idJoueurHT)->getTeamId());
     
-    if ($ht_session == false && isset($_SESSION['HTCP'])) {
-      $ht_session = $_SESSION['HTCP'];
+    if ($ht_session == false && isset($_SESSION['HT'])) {
+      $ht_session = $_SESSION['HT'];
     }
 
     // On récupére sur HT les informations du joueur
@@ -1471,85 +1354,6 @@ function getDataUnJoueurFromHT_usingPHT($idJoueurHT){
 
 /********************************************************************************************/
 /* Objet : Récup. des données des joueurs d'1 équipe (fichier CHPP Players)                 */
-/********************************************************************************************/
-function getTeamPlayersDataFromHT_usingPHTv3($team){
-
-	try
-	{
-		$teamPlayers = $team->getPlayers(false);
-		$row_joueur=array();
-		$i=0;
-		$FRANCE_ID=5;
-    
-		for($j=0; $j<=$teamPlayers->getPlayerNumber(); $j++)
-		{
-			unset($player);
-			$player = $teamPlayers->getPlayer($j);
-			if ($player && $FRANCE_ID == $player->getCountryId()) {
-				$row_joueur[$i]['idHattrickJoueur'] = $player->getId();
-				$row_joueur[$i]['nomJoueur']        = strtr($player->getLastName(),"'"," ");
-				$row_joueur[$i]['prenomJoueur']     = strtr($player->getFirstName(),"'"," ");
-				$jouractuel                         = (mktime(0,0,0,date("m"),date("d"),date("Y"))-574729200)/3600/24;
-				$agejoueurenj                       = $player->getAge()*112+$player->getDays();
-				$row_joueur[$i]['datenaiss']        = round(($jouractuel - $agejoueurenj),0);
-				$row_joueur[$i]['forme']            = $player->getForm();
-				if ($player->getInjury()!=null) {
-					$row_joueur[$i]['blessure'] = $player->getInjury();
-				}
-				$row_joueur[$i]['teamid']           = $team->getId();
-				$row_joueur[$i]['salary']           = $player->getSalary();
-				$row_joueur[$i]['isAbroad']         = $player->isAbroad();
-				$row_joueur[$i]['idCaractere_fk']   = $player->getAgreeability();
-				$row_joueur[$i]['idAggre_fk']       = $player->getAggressiveness();
-				$row_joueur[$i]['idHonnetete_fk']   = $player->getHonesty();
-				$row_joueur[$i]['idExperience_fk']  = $player->getExperience();
-				$row_joueur[$i]['idLeader_fk']      = $player->getLeadership();
-				$row_joueur[$i]['optionJoueur']     = $player->getSpecialty();
-				$row_joueur[$i]['tsi']              = $player->getTsi();
-				$row_joueur[$i]['transferListed']   = $player->isTransferListed();
-			
-				//echo("<br />Joueur=".$row_joueur[$i]['nomJoueur']."|transferListed=".$row_joueur[$i]['transferListed']);
-				if ($row_joueur[$i]['transferListed'] === null || empty($row_joueur[$i]['transferListed'])) 
-				{
-					$row_joueur[$i]['transferListed']=0;
-				} else {
-					$row_joueur[$i]['transferListed']=1;
-				}
-				//echo(" | ".$row_joueur[$i]['transferListed']);  
-				$row_joueur[$i]['idEndurance']      = $player->getStamina();
-				$row_joueur[$i]['idGardien']        = $player->getKeeper();
-				$row_joueur[$i]['idConstruction']   = $player->getPlaymaker();
-				$row_joueur[$i]['idButeur']         = $player->getScorer();
-				$row_joueur[$i]['idPasse']          = $player->getPassing();
-				$row_joueur[$i]['idAilier']         = $player->getWinger();
-				$row_joueur[$i]['idDefense']        = $player->getDefender();
-				$row_joueur[$i]['idPA']             = $player->getSetPieces();
-				$row_joueur[$i]['caracVisible']     = true;
-			
-				// informations non stockées en base mais utilisées par les scripts
-				$row_joueur[$i]['AGE']      = $player->getAge();
-				$row_joueur[$i]['AGEDAYS']  = $player->getDays();
-				$row_joueur[$i]['nomUser']  = stripslashes(htmlspecialchars(utf8_decode(strtolower(str_replace("'"," ",$team->getLoginName())))));
-				$i++;
-			}
-		}
-   
-		return $row_joueur;
-	}
-	catch(\PHT\Exception\InvalidArguementException $e)
-	{
-		if ($e->getErrorCode()!= '56') { // Si le joueur n'existe pas sur HT on affiche pas de message
-			echo $e->getMessage();
-		}
-		return false;
-	} 
-
-}
-
-
-
-/********************************************************************************************/
-/* Objet : Récup. des données des joueurs d'1 équipe (fichier CHPP Players)                 */
 /* Modifié le 15/06/2010 par Musta56 - Création fonction                                    */
 /* Modifié le 09/03/2011 par Musta56 - Si joueur joue un match alors on mets blessure null  */
 /* Modifié le 15/03/2011 par Musta56 - Utilisation de PHT                                   */
@@ -1566,10 +1370,10 @@ function getDataMesJoueursFromHT_usingPHT($teamID){
   try
   {
     if ($teamID === null) {
-      $teamID = $_SESSION['HTCP']->getTeam()->getTeamId();
+      $teamID = $_SESSION['HT']->getTeam()->getTeamId();
     }
     
-    $teamPlayers = $_SESSION['HTCP']->getTeamPlayers($teamID);
+    $teamPlayers = $_SESSION['HT']->getTeamPlayers($teamID);
     $row_joueur=array();
     $i=0;
     $FRANCE_ID=5;
@@ -1619,12 +1423,12 @@ function getDataMesJoueursFromHT_usingPHT($teamID){
         // informations non stockées en base mais utilisées par les scripts
         $row_joueur[$i]['AGE']      = $player->getAge();
         $row_joueur[$i]['AGEDAYS']  = $player->getDays();
-        $row_joueur[$i]['nomUser']  = stripslashes(htmlspecialchars(utf8_decode(strtolower(str_replace("'"," ",$_SESSION['HTCP']->getTeam()->getLoginName())))));
+        $row_joueur[$i]['nomUser']  = stripslashes(htmlspecialchars(utf8_decode(strtolower(str_replace("'"," ",$_SESSION['HT']->getTeam()->getLoginName())))));
         $i++;
       }
     }
     
-    $teamPlayers = $_SESSION['HTCP']->clearTeamPlayers($teamID);
+    $teamPlayers = $_SESSION['HT']->clearTeamPlayers($teamID);
     
     return $row_joueur;
   }
@@ -1661,10 +1465,10 @@ function getDataJoueursSelectionsFromHT_usingPHT($idNT){
   try {
 
     // On récupère sur HT les joueurs en NT
-    $players = $_SESSION['HTCP']->getNationalPlayers($idNT);
+    $players = $_SESSION['HT']->getNationalPlayers($idNT);
     
     // On libère l'espace mémoire
-    $_SESSION['HTCP']->clearNationalPlayers($idNT);
+    $_SESSION['HT']->clearNationalPlayers($idNT);
 
     for ($i=1;$i<=$players->getNumberPlayers();$i++) {
       $row_joueur[]=$players->getPlayer($i)->getId();
@@ -2680,109 +2484,6 @@ function marqueJoueurDisparuHT($joueurDTN){
   }
   
 }
-
-/******************************************************************************/
-/* Objet : Scan un ensemble de joueurs - insertion ou maj des joueurs français*/
-/******************************************************************************/
-function scanPlayerList($team, $listeIDJoueur, $utilisateur, $role, $faireMAJ=true, $chargeMatch=false)
-{
-	$todaySeason=getSeasonWeekOfMatch(mktime(0,0,0,date('m'), date('d'),date('Y')));
-	if (isset($resuJ)) {unset($resuJ);}
-	$j=0;
-
-	// Recherche du joueur sur HT et dans la base DTN
-	foreach ($listeIDJoueur as $IDJoueur) {
-		$trouveDTN=true;
-		$trouveHT=true;
-		$joueurDTN=getJoueurHt($IDJoueur);
-
-		if ($faireMAJ==false) {
-
-			if ($joueurDTN != false) { // joueur existe dans base DTN
-				$resuJ[$j]['poste']=validateMinimaPlayer($joueurDTN,$todaySeason); // Est-ce que le joueur vérifie les minimas ?
-				$resuJ[$j]['idJoueur']=$joueurDTN['idJoueur'];
-			}
-      
-		} elseif ($faireMAJ==true) {
-    
-			$joueurHT=getPlayerDataFromHT_usingPHTv3($team, $IDJoueur);
-			if ($joueurHT != false) {
-				if ($joueurHT['caracVisible']==true) {
-					$poste=validateMinimaPlayer($joueurHT,$todaySeason); // Est-ce que le joueur vérifie les minimas ?
-				} else {
-					$poste=-2; // Tous les joueurs sont acceptés si on ne connait pas les caracs. Ne devrait arriver que lors d'une soumission par un dtn
-				}
-
-				if ($joueurDTN != false) { // joueur existe dans base DTN
-					$resuJ[$j]=majJoueur($utilisateur,$role,$joueurHT,$joueurDTN); // Joueur mis à jour si déjà existant en base. Sinon, on ne fait rien. 
-
-				} else { /* Joueur inexistant dans base DTN */
-					$trouveDTN=false;
-        
-					if ($poste == -2){ // multi ou incohérence détectée => aucun poste assigné
-						$resuJ[$j]=ajoutJoueur($utilisateur,$role,$joueurHT,$joueurDTN,0);
-					} elseif ($poste != -1) {
-						$resuJ[$j]=ajoutJoueur($utilisateur,$role,$joueurHT,$joueurDTN,$poste);
-					}
-				}
-        
-				$resuJ[$j]['poste']=$poste;
-      
-			} else { // Joueur inexistant sur HT ou connexion plantée
-				$trouveHT=false;
-				$resuJ[$j]['HTML']='<tr><td colspan=10><br /><font color=orange>Joueur introuvable ou connexion ht termin&eacute;e : '.$IDJoueur.'</font></td></tr>';
-			}
-
-		} else {
-			echo("Valeur paramètre faire MAJ incorrecte");
-			exit;
-		}
-
-		// Chargement des matchs
-		if ($chargeMatch==true && $joueurDTN != false) {
-			$resuM[$j]=insererMatchsJoueurv3($joueurDTN["idHattrickJoueur"],$joueurDTN["teamid"],$joueurDTN["dateLastScanMatch"]);
-			updateDateScanMatchJoueur($joueurDTN["idHattrickJoueur"]);
-		} elseif ($joueurDTN = false) {
-			$resuJ[$j]['HTML']='<tr><td colspan=10><br /><font color=orange>Impossible de charger les matchs car joueur absent bdd : '.$IDJoueur.'</font></td></tr>';
-		}
-    
-		$resuJ[$j]['trouveDTN']=$trouveDTN;
-		$resuJ[$j]['trouveHT']=$trouveHT;
-		$resuJ[$j]['idHattrickJoueur']=$IDJoueur;
-		
-		if (isset($resuJ[$j]['idJoueur']) && $resuJ[$j]['idJoueur'] > 0 && $faireMAJ==true && $resuJ[$j]['trouveHT']==true) { // Il y a eu maj ou ajout du joueur
-			$liste_clubs[$joueurHT['teamid']]=$joueurHT['teamid']; // Liste des clubs pour appel maj Clubs
-		}
-		$j++;
-
-	} // Fin Boucle sur liste ID joueurs
-
-	// maj Club
-	if ($faireMAJ==true) {
-		$liste_clubs=array_unique($liste_clubs); // Suppression des doublons
-
-		foreach ($liste_clubs as $club) {
-			$resuC[$club]['club']=updateClubv3($team,$club);
-			$resuC[$club]['clubHisto']=updateClubHistov3($team,$club,$utilisateur,$role);
-		}
-
-		// Concaténation de l'affichage HTML & récupération des identifiants maj Club et histo club
-		for ($j=0;$j<count($resuJ);$j++) {
-			if (isset($resuJ[$j]['idJoueur']) && $resuJ[$j]['idJoueur'] > 0) { // Il y a eu maj ou ajout du joueur
-				if (isset($resuC[$resuJ[$j]['teamid']]['club']['idClub'])) $resuJ[$j]['idClub']=$resuC[$resuJ[$j]['teamid']]['club']['idClub'];
-				if (isset($resuC[$resuJ[$j]['teamid']]['clubHisto']['id_clubs_histo'])) $resuJ[$j]['id_clubs_histo']=$resuC[$resuJ[$j]['teamid']]['clubHisto']['id_clubs_histo'];
-				if (!isset($resuJ[$j]['HTML'])) $resuJ[$j]['HTML']="";
-				if (isset($resuC[$resuJ[$j]['teamid']]['club']['HTML'])) $resuJ[$j]['HTML'] .= $resuC[$resuJ[$j]['teamid']]['club']['HTML']; // Club
-				if (isset($resuC[$resuJ[$j]['teamid']]['clubHisto']['HTML'])) $resuJ[$j]['HTML'] .= $resuC[$resuJ[$j]['teamid']]['clubHisto']['HTML']; // Club
-				$resuJ[$j]['HTML'] .= "</td>";
-				if (isset($resuM[$j]['HTML'])) $resuJ[$j]['HTML'] .= $resuM[$j]['HTML']; // Matchs
-			}
-		}
-	}
-  
-	return $resuJ;	 					
-}
-
 
 /******************************************************************************/
 /* Objet : Scan un ensemble de joueurs - insertion ou maj des joueurs français*/

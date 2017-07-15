@@ -76,7 +76,7 @@ if (isset($_SESSION['listID']) && !isset($_REQUEST['listID']) )  {
   </tr>
 
   <?php
-  if (!isset($_SESSION['HTCP'])) {?>
+  if (!isset($_SESSION['HT'])) {?>
 
     <tr> 
     <td>
@@ -87,7 +87,7 @@ if (isset($_SESSION['listID']) && !isset($_REQUEST['listID']) )  {
         Vous devez etre connect&eacute; &agrave; Hattrick.&nbsp;&nbsp;
         <br />
       
-        <?php if ( isset($_SESSION['HTCP']) ) {?>
+        <?php if ( isset($_SESSION['HT']) ) {?>
           
           Votre compte DTN est li&eacute; &agrave; votre compte Hattrick : <?php echo($_SESSION['nomUser']." [".$_SESSION['idUserHT']."]"); ?>
           
@@ -125,7 +125,7 @@ if (isset($_SESSION['listID']) && !isset($_REQUEST['listID']) )  {
   </tr>
   <tr>
   <td class="ContenuCentrer">
-    <textarea name="listID" id="listID" style="font-size:7pt;font-family:Arial" cols=150 rows=6 <?php if (!isset($_SESSION['HTCP'])) {?> DISABLED <?php }?> ><?php if (isset($_SESSION['listID'])) echo ($_SESSION['listID']);?></textarea>
+    <textarea name="listID" id="listID" style="font-size:7pt;font-family:Arial" cols=150 rows=6 <?php if (!isset($_SESSION['HT'])) {?> DISABLED <?php }?> ><?php if (isset($_SESSION['listID'])) echo ($_SESSION['listID']);?></textarea>
   </td>
   </tr>
   <tr>

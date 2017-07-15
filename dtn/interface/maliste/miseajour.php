@@ -137,7 +137,7 @@ document.body.scrollTop = scrollPos;
 <br />
 
 <?php
-if (isset($_SESSION['HTCP'])) {
+if (isset($_SESSION['HT'])) {
 
   $listeJoueursDTN=getJoueurByDTN($_SESSION['sesUser']["idAdmin"]);
 
@@ -216,7 +216,7 @@ if (isset($_SESSION['HTCP'])) {
     Vous devez etre connect&eacute; &agrave; Hattrick.&nbsp;&nbsp;
     <br />
   
-    <?php if ( isset($_SESSION['HTCP']) ) {?>
+    <?php if ( isset($_SESSION['HT']) ) {?>
       
       Votre compte DTN est li&eacute; &agrave; votre compte Hattrick : <?php echo($_SESSION['nomUser']." [".$_SESSION['idUserHT']."]"); ?>
       
