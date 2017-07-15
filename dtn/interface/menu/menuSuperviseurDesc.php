@@ -11,11 +11,11 @@ En tant que superviseur DTN+, vous pouvez acc&eacute;der aux diff&eacute;rentes 
 <li>Attribuer un joueur &agrave; un DTN
 <li>Modifier vos informations personnelles
 <li>Modifier le param&eacute;trage des notes de joueurs
-<li>Acc&eacute;der à iiihelp!
+<li>Acc&eacute;der &agrave; iiihelp!
 </ul>
 
 
-<span class="breadvar">Via le menu <a href="<?=$url?>/national_team/team.php?selection=A">"Equipes Nationales"</a></span> : <br>
+<span class="breadvar">Via le menu <a href="<?=$url?>/national_team/team.php?selection=A">"&Eacute;quipes Nationales"</a></span> : <br>
 <ul>
 <li>Consulter les joueurs de l'&eacute;quipe nationale
 <li>Consulter les joueurs de l'&eacute;quipe U20

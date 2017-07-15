@@ -76,7 +76,7 @@ if (isset($_SESSION['listID']) && !isset($_REQUEST['listID']) )  {
   </tr>
 
   <?php
-  if (!isset($_SESSION['HT'])) {?>
+  if (!isset($_SESSION['HTCP'])) {?>
 
     <tr> 
     <td>
@@ -87,7 +87,7 @@ if (isset($_SESSION['listID']) && !isset($_REQUEST['listID']) )  {
         Vous devez etre connect&eacute; &agrave; Hattrick.&nbsp;&nbsp;
         <br />
       
-        <?php if ( isset($_SESSION['HT']) ) {?>
+        <?php if ( isset($_SESSION['HTCP']) ) {?>
           
           Votre compte DTN est li&eacute; &agrave; votre compte Hattrick : <?php echo($_SESSION['nomUser']." [".$_SESSION['idUserHT']."]"); ?>
           
@@ -125,7 +125,7 @@ if (isset($_SESSION['listID']) && !isset($_REQUEST['listID']) )  {
   </tr>
   <tr>
   <td class="ContenuCentrer">
-    <textarea name="listID" id="listID" style="font-size:7pt;font-family:Arial" cols=150 rows=6 <?php if (!isset($_SESSION['HT'])) {?> DISABLED <?php }?> ><?php if (isset($_SESSION['listID'])) echo ($_SESSION['listID']);?></textarea>
+    <textarea name="listID" id="listID" style="font-size:7pt;font-family:Arial" cols=150 rows=6 <?php if (!isset($_SESSION['HTCP'])) {?> DISABLED <?php }?> ><?php if (isset($_SESSION['listID'])) echo ($_SESSION['listID']);?></textarea>
   </td>
   </tr>
   <tr>
@@ -340,7 +340,7 @@ if (isset($playerToAddManual)) {
       <td height ="20" ><div align="center">
             <table width="100%" border="0" cellspacing="0" cellpadding="0">
               <tr> 
-                <td height="20" bgcolor="#00CC00"> <div align="center"><font color="#FFFFFF"><a name="<?=$playerToAddManual[$j]["idHattrickJoueur"]?>"><?=$playerToAddManual[$j]["idHattrickJoueur"]." - ".$playerToAddManual[$j]["nomJoueur"]?></a></font></div></td>
+                <td height="20" bgcolor="#00CC00"> <div align="center"><font color="#FFFFFF"><a name="<?=$playerToAddManual[$j]["idHattrickJoueur"]?>"><?=$playerToAddManual[$j]["idHattrickJoueur"]." - ".$playerToAddManual[$j]["prenomJoueur"]." ".$playerToAddManual[$j]["nomJoueur"]?></a></font></div></td>
               </tr>
               <tr> 
                 <td height="1" colspan="3" bgcolor="#000000"><img src="../images/spacer.gif" width="1" height="1"></td>
@@ -363,7 +363,7 @@ if (isset($playerToAddManual)) {
                     </tr>
                     <tr> 
                       <td height="20"><div align="left">&nbsp;Nom :</div></td>                      
-                      <td height="20"><?=$playerToAddManual[$j]["nomJoueur"]?></td>
+                      <td height="20"><?=$playerToAddManual[$j]["prenomJoueur"]?> <?=$playerToAddManual[$j]["nomJoueur"]?></td>
                     </tr>
                     <tr> 
                       <td height="20"><div align="left">&nbsp;Age</div></td>

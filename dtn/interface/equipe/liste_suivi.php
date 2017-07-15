@@ -84,7 +84,7 @@ $req = $conn->query($sql);
                     <td width="1" height="1" bgcolor="#000000"><img src="../images/spacer.gif" width="1" height="1"></td>
                   </tr>
                   <tr>  
-                    <td>&nbsp;<a href = "fiche.php?dtn=<?=$lstJoueur["idJoueur"]?>">(<?=$lstJoueur["idHattrickJoueur"]?>)&nbsp;<?=$lstJoueur["nomJoueur"]?> <?=$lstJoueur["prenomJoueur"]?></a></td>
+                    <td>&nbsp;<a href = "fiche.php?dtn=<?=$lstJoueur["idJoueur"]?>">(<?=$lstJoueur["idHattrickJoueur"]?>)&nbsp;<?=$lstJoueur["prenomJoueur"]?> <?=$lstJoueur["nomJoueur"]?></a></td>
                     <td width="1" bgcolor="#000000"><img src="../images/spacer.gif" width="1" height="1"></td>
                     <td>                     <CENTER> <?=($lstJoueur["dateDerniereModifJoueur"])?>
                     </CENTER>             </td>

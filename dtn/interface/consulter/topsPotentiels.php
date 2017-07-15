@@ -346,7 +346,7 @@ $param2="$nb_players";
 <?php	
 				}
 ?>
-				<?=strtolower($l["nomJoueur"])?>&nbsp;<?=strtolower($l["prenomJoueur"])?>
+				<?=strtolower($l["prenomJoueur"])?>&nbsp;<?=strtolower($l["nomJoueur"])?>
 <?php
 				if 	( ($sesUser["idNiveauAcces"]==1 || $sesUser["idNiveauAcces"]==2 || $sesUser["idNiveauAcces"]==4) 
 					|| (($sesUser["idNiveauAcces"]==3)

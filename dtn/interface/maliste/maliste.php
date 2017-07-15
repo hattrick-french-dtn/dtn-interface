@@ -407,9 +407,8 @@ foreach ($conn->query($sql) as $l) {
                     
                     <a href ="<?=$url?>/joueurs/ficheDTN.php?id=<?=$l["idJoueur"]?>" class=<?=$class?>> 
                       <b> 
-                      <?=strtolower($l["nomJoueur"])?>
+                      <?=strtolower($l["prenomJoueur"])?> <?=strtolower($l["nomJoueur"])?>
                       </b> 
-                      <?=strtolower($l["prenomJoueur"])?></span>   
                       </a> 
                       
                     </td>

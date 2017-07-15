@@ -88,7 +88,7 @@ $verifInternational = verifSelection($id);
 
 ?><html>
 <head>
-<title>Fiche <?=$infJ["nomJoueur"]?> <?=$infJ["prenomJoueur"]?></title>
+<title>Fiche <?=$infJ["prenomJoueur"]?> <?=$infJ["nomJoueur"]?></title>
 <script src="../../../SpryAssets/SpryValidationTextField.js" type="text/javascript"></script>
 <script src="../../../SpryAssets/SpryValidationSelect.js" type="text/javascript"></script>
 <script language="JavaScript" type="text/JavaScript">

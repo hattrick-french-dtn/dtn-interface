@@ -260,7 +260,7 @@ $val2 = $val[6];
 			 }
 			
 			  
-?><?=strtolower($l["nomJoueur"])?> <?=strtolower($l["prenomJoueur"])?>;<?=$l["idHattrickJoueur"]?>;<?=round(($mkday - $datemaj)/(60*60*24) )?>;<?php
+?><?=strtolower($l["prenomJoueur"])?> <?=strtolower($l["nomJoueur"])?>;<?=$l["idHattrickJoueur"]?>;<?=round(($mkday - $datemaj)/(60*60*24) )?>;<?php
 echo $l["dateSaisieJoueur"].";";
 echo $l["dateDerniereModifJoueur"].";";
 echo $infTraining["valeurEnCours"].";";

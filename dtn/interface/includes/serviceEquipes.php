@@ -183,7 +183,7 @@ function existAutorisationClubv3($idClubHT,$idUserHT=null)
 		$config = array(
 			'CONSUMER_KEY' => CONSUMERKEY,
 			'CONSUMER_SECRET' => CONSUMERSECRET,
-			'CACHE' => 'apc',
+			'CACHE' => 'memcached',
 		);
 		$HT_proprio = new \PHT\Connection($config);
 
@@ -266,10 +266,13 @@ function existAutorisationClub($idClubHT,$idUserHT=null)
 /******************************************************************************/
 /* Objet : Récupération des données du club                                   */
 /******************************************************************************/
-function getDataClubFromHT_usingPHTv3($team)
+function getDataClubFromHT_usingPHTv3($team,$idClubHT=null)
 {
-    $row_club["idClubHT"] = $team->getId();
-    $row_club["idUserHT"] = $team->getUserId();   
+	if ($team == null) {
+		$team = $_SESSION['HT']->getClub($idClubHT)->getTeam();
+	}
+	$row_club["idClubHT"] = $team->getId();
+	$row_club["idUserHT"] = $team->getUserId();   
     if (($row_club["idUserHT"] === null) || ($row_club["idUserHT"] == "0") || ($row_club["idClubHT"]===null)) {
 		$row_club['isBot']=2; // Pas de manager Humain ou Pas de club
     } else {
@@ -317,14 +320,14 @@ function getDataClubFromHT_usingPHT($idClubHT=null, $idUserHT=null){
   try
   {
     if ($idClubHT === null && $idUserHT === null) {
-      $team = $_SESSION['HT']->getTeam();
+      $team = $_SESSION['HTCP']->getTeam();
     } elseif ($idClubHT != null) {
-      $team = $_SESSION['HT']->getTeam($idClubHT);
+      $team = $_SESSION['HTCP']->getTeam($idClubHT);
     } elseif ($idUserHT != null) {
-      $team = $_SESSION['HT']->getTeamByUserId($idUserHT);
+      $team = $_SESSION['HTCP']->getTeamByUserId($idUserHT);
     }
 
-    $_SESSION['HT']->clearTeam(); // On vide le cache de l'objet
+    $_SESSION['HTCP']->clearTeam(); // On vide le cache de l'objet
     
     $row_club["idClubHT"] = $team->getTeamId();
     $row_club["idUserHT"] = $team->getUserId();   
@@ -336,11 +339,11 @@ function getDataClubFromHT_usingPHT($idClubHT=null, $idUserHT=null){
     }
 
     if ( ($row_club['isBot']==0) || ($row_club['isBot']==1) ) {
-      $row_club["nomClub"]              = stripslashes(htmlspecialchars(utf8_decode(strtolower(str_replace("'"," ",$team->getTeamName())))));
-      $row_club["nomUser"]              = stripslashes(htmlspecialchars(utf8_decode(strtolower(str_replace("'"," ",$team->getLoginName())))));
+      $row_club["nomClub"]              = stripslashes(htmlspecialchars(strtolower(str_replace("'"," ",$team->getTeamName()))));
+      $row_club["nomUser"]              = stripslashes(htmlspecialchars(strtolower(str_replace("'"," ",$team->getLoginName()))));
       $row_club["idPays_fk"]            = $team->getLeagueId();
-      $row_club["niv_Entraineur"]       = $_SESSION['HT']->getPlayer($team->getTrainerId())->getTrainerSkill();
-      $_SESSION['HT']->clearPlayer($team->getTrainerId());
+      $row_club["niv_Entraineur"]       = $_SESSION['HTCP']->getPlayer($team->getTrainerId())->getTrainerSkill();
+      $_SESSION['HTCP']->clearPlayer($team->getTrainerId());
       $row_club["date_last_connexion"]  = substr($team->getLastLoginDate(), 0, -9);
       
       // Données pour iiihelp
@@ -668,7 +671,7 @@ function getDataClubsHistoFromHT_usingPHT($idClubHT=null){
 			$ht_session=existAutorisationClub($idClubHT);
 		} else {
 			// On utilise la connexion du membre DTN connecté si aucun idClubHT envoyé
-			$ht_session=$_SESSION['HT'];
+			$ht_session=$_SESSION['HTCP'];
 		}
     
 		if (isset($ht_session) && $ht_session!=false) {
@@ -1001,7 +1004,7 @@ function updateClubv3($team, $idClubHT=null, $idUserHT=null, $clubDTN=null)
 	}
    
 	// récupération des données du club sur HT
-	$clubHT=getDataClubFromHT_usingPHTv3($team);
+	$clubHT=getDataClubFromHT_usingPHTv3($team, $idClubHT);
 
 	if ($clubHT == false) {
 		$resu["logModif"] .= "==NON CONNECTE A HATTRICK==\n";

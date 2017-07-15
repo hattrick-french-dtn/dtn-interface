@@ -28,7 +28,8 @@ require($cheminComplet."includes/connect.inc.php");
 require($cheminComplet."includes/nomTables.inc.php");
 require_once($cheminComplet."/includes/fonctions.php");
 require_once($cheminComplet."/fonctions/HT_Client.php");
-include_once($monServeur."/framework/PHT/PHT/autoload.php");
+include_once($monServeur."/framework/PHTv3/PHT/autoload.php");
+include_once($monServeur."/framework/PHTv2/PHTv2.php");
 
 // Variables de session
 session_start();

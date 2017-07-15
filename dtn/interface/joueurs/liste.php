@@ -418,9 +418,8 @@ break;
 				  <td align="left" width="200" nowrap>&nbsp;<img src="../images/time_<?=$img_nb?>.gif" onMouseOver="return escape('<?=$zealt?>')" >&nbsp;
                     <a href ="<?=$url?>/joueurs/fiche.php?id=<?=$l["idJoueur"]?>" class="bred1"> 
                       <b>
-                      <?=strtolower($l["nomJoueur"])?>
-                      </b> 
-                      <?=strtolower($l["prenomJoueur"])?>
+                      <?=strtolower($l["prenomJoueur"])?> <?=strtolower($l["nomJoueur"])?>
+                      </b>
                       </a>
                       </td>
                         

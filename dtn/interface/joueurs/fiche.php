@@ -107,7 +107,7 @@ $reqHJ = $conn->query($sqlHJ);
 
 <html>
 <head>
-<title>Fiche <?=$joueurDTN["nomJoueur"]?> <?=$joueurDTN["prenomJoueur"]?></title>
+<title>Fiche <?=$joueurDTN["prenomJoueur"]?> <?=$joueurDTN["nomJoueur"]?></title>
 
 <script language="JavaScript" type="text/JavaScript">
 function AlertNumServeurHT()
@@ -230,7 +230,7 @@ if ($datemaj >$mkday -$huit){
               <td colspan="3">&nbsp;</td>
             </tr>
             <tr> 
-              <td width="40%" align="left">&nbsp; <font color="#000099"><b><?=$joueurDTN["idHattrickJoueur"]?>&nbsp;-&nbsp;<?=$joueurDTN["nomJoueur"]?> <?=$joueurDTN["prenomJoueur"]?>&nbsp;-&nbsp;<?php 
+              <td width="40%" align="left">&nbsp; <font color="#000099"><b><?=$joueurDTN["idHattrickJoueur"]?>&nbsp;-&nbsp;<?=$joueurDTN["prenomJoueur"]?> <?=$joueurDTN["nomJoueur"]?>&nbsp;-&nbsp;<?php 
               $ageetjours = ageetjour($joueurDTN["datenaiss"]);
               $tabage = explode(" - ",$ageetjours);
               echo $tabage[0];?>&nbsp;ans&nbsp;-&nbsp;<?=$tabage[1]?>&nbsp;jours<br>&nbsp; <?=round(($joueurDTN["salary"]/10),2)?>&nbsp;&euro;/semaine&nbsp;
@@ -481,7 +481,7 @@ if ($datemaj >$mkday -$huit){
             <tr bgcolor="#85A275"> 
               <td width=10%><div align="center" style="font-size: 9pt;color: white"><b>Date</b></div></td>
               <td width=10%><div align="center" style="font-size: 9pt;color: white"><b>Heure</b></div></td>
-              <td width=65%><div align="center" style="font-size: 9pt;color: white"><b>Info joueur [<?=strtolower($joueurDTN["nomJoueur"])?> <?=strtolower($joueurDTN["prenomJoueur"])?>]</b></div></td>
+              <td width=65%><div align="center" style="font-size: 9pt;color: white"><b>Info joueur [<?=strtolower($joueurDTN["prenomJoueur"])?> <?=strtolower($joueurDTN["nomJoueur"])?>]</b></div></td>
               <td width=15%><div align="center" style="font-size: 9pt;color: white"><b>Auteur</b></div></td>
             </tr>
           

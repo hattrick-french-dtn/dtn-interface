@@ -172,14 +172,13 @@ require("../menu/menuJoueur.php");
   <SPAN ID=textespan>
     
     <b>[b]
-    <?=strtolower($infJ["nomJoueur"])?> 
-    <?=strtolower($infJ["prenomJoueur"])?> 
+    <?=strtolower($infJ["prenomJoueur"])?> <?=strtolower($infJ["nomJoueur"])?> 
     (
     <?=strtolower($infJ["idHattrickJoueur"])?>
     ) 
     <?php 
       $tabage = ageetjour($infJ["datenaiss"], 2);
-      echo $tabage[ageJoueur];?>&nbsp;ans&nbsp;-&nbsp;<?=$tabage[jourJoueur]
+      echo $tabage['ageJoueur'];?>&nbsp;ans&nbsp;-&nbsp;<?=$tabage['jourJoueur']
     ?> 
     jours[/b]</b><br>
     Proprietaire :  
@@ -187,10 +186,10 @@ require("../menu/menuJoueur.php");
     (
     <?=$nomPays[0]?>
     )<br/>
-    [color=darkred]> Derniere edition:
+    [color=darkred]> Derni&egrave;re &eacute;dition:
     <?=dateToHTML($infJ["dateDerniereModifJoueur"])?>
     [/color]<br/>
-    [color=red]> Derniere mise a jour par le proprietaire: (
+    [color=red]> Derni&egrave;re mise &agrave; jour par le proprietaire: (
     <?=dateToHTML($infJ["dateSaisieJoueur"])?> 
     )[/color]<br/>
     TSI: 
