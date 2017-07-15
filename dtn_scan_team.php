@@ -1,7 +1,7 @@
 <?php
 require_once("dtn/interface/includes/head.inc.php");
-require("dtn/interface/includes/serviceMatchs.php");
-require("dtn/interface/includes/serviceJoueur.php");
+require_once("dtn/interface/includes/serviceMatchs.php");
+require_once("dtn/interface/includes/serviceJoueur.php");
 //require("dtn/interface/includes/serviceEquipes.php");
 require_once "dtn/interface/_config/CstGlobals.php"; 
 
@@ -39,278 +39,229 @@ if (isset($_POST['action']) && $_POST['action']=="ajoutCommentaire")
 /******************************************************************************/
 // Initialisation variables
 $scan_code=0;
-$teams = array();
-// Récupération de la liste des joueurs
-$list_joueur_HT = getDataMesJoueursFromHT_usingPHT($_SESSION['HT']->getTeam()->getTeamId());
-$team1 = array('id' => $_SESSION['HT']->getTeam()->getTeamId(), 'name' => $_SESSION['HT']->getTeam()->getTeamName());
-array_push($teams, $team1);
-// Si c'est la première visite avec ce browser
-if ((isset($_SESSION['newVisit']) && $_SESSION['newVisit']==1))  
-{ // On met à jour les informations clubs et les informations joueurs 
-  if ($list_joueur_HT==false) 
-  {
-    $scan_code=-1;
-  }
-  else
-  {
-      // Insertion ou mise à jour 
-      if (count($list_joueur_HT)>0)
-      {
-        foreach($list_joueur_HT as $joueur)
-        {
-          $listeID[]=$joueur["idHattrickJoueur"];
-        }
-        $listeID=array_unique($listeID); // Suppression des doublons
-        // Insertion ou mise à jour des joueurs
-        $resuScan=scanListeJoueurs($listeID,$_SESSION['nomUser'],'P');
-    	} 
-      else
-      {
-    	   $scan_code=-2; // pas de français
-    	}
-  }
-} 
-else 
-{
-  // Scan des joueurs sans mise à jour
-  $resuScan=scanListeJoueurs($listeID,$_SESSION['nomUser'],'P',false,false);
+$userId = $_SESSION['HT']->getUser()->getId();
+$teamcfg = new \PHT\Config\Team();
+$teamcfg->userId = $userId;
+$listeID = null;
+try {
+	$teamcfg->international = true;
+	$team = $HT->getSeniorTeam($teamcfg);
+	if ($team != NULL) {
+		// Récupération de la liste des joueurs
+		$list_joueur_HT = getTeamPlayersDataFromHT_usingPHTv3($team);
+		if ((isset($_SESSION['newVisit']) && $_SESSION['newVisit']==1))  
+		{ // On met à jour les informations clubs et les informations joueurs 
+			if ($list_joueur_HT==false) 
+			{
+				$scan_code=-1;
+				$resuScan = null;
+			}
+			else
+			{
+				// Insertion ou mise à jour 
+				if (count($list_joueur_HT)>0)
+				{
+					foreach($list_joueur_HT as $joueur)
+					{
+						$listeID[]=$joueur["idHattrickJoueur"];
+					}
+					$listeID=array_unique($listeID); // Suppression des doublons
+					// Insertion ou mise à jour des joueurs
+					$resuScan=scanPlayerList($team, $listeID, $_SESSION['nomUser'], 'P');
+					$scan_code=count($resuScan);
+				} 
+				else
+				{
+					$scan_code=-2; // pas de français
+				}
+			}
+		} 
+		else 
+		{
+			// Scan des joueurs sans mise à jour
+			$resuScan=scanPlayerList($team, $listeID, $_SESSION['nomUser'], 'P', false, false);
+			$scan_code=count($resuScan);
+		}
+		$teams[2] = array('id' => $team->getId(), 'name' => $team->getName(), 'scan' => $resuScan, 'code' => $scan_code);
+	}
+}
+catch (\PHT\Exception\InvalidArguementException $e) {
+	echo $e->getMessage();
 }
 
-//echo('titi');
+$listeID = null;
+try {
+	$teamcfg->secondary = true;
+	$team = $HT->getSeniorTeam($teamcfg);
+	if ($team != NULL) {
+		// Récupération de la liste des joueurs
+		$list_joueur_HT = getTeamPlayersDataFromHT_usingPHTv3($team);
+		if ((isset($_SESSION['newVisit']) && $_SESSION['newVisit']==1))  
+		{ // On met à jour les informations clubs et les informations joueurs 
+			if ($list_joueur_HT==false) 
+			{
+				$scan_code=-1;
+				$resuScan = null;
+			}
+			else
+			{
+				// Insertion ou mise à jour 
+				if (count($list_joueur_HT)>0)
+				{
+					foreach($list_joueur_HT as $joueur)
+					{
+						$listeID[]=$joueur["idHattrickJoueur"];
+					}
+					$listeID=array_unique($listeID); // Suppression des doublons
+					// Insertion ou mise à jour des joueurs
+					$resuScan=scanPlayerList($team, $listeID, $_SESSION['nomUser'], 'P');
+					$scan_code=count($resuScan);
+				} 
+				else
+				{
+					$scan_code=-2; // pas de français
+				}
+			}
+		} 
+		else 
+		{
+			// Scan des joueurs sans mise à jour
+			$resuScan=scanPlayerList($team, $listeID, $_SESSION['nomUser'], 'P', false, false);
+			$scan_code=count($resuScan);
+		}
+		$teams[1] = array('id' => $team->getId(), 'name' => $team->getName(), 'scan' => $resuScan, 'code' => $scan_code);
+	}
+}
+catch (\PHT\Exception\InvalidArguementException $e) {
+	echo $e->getMessage();
+}
+
+$listeID = null;
+try {
+	$teamcfg->primary = true;
+	$team = $HT->getSeniorTeam($teamcfg);
+	if ($team != NULL) {
+		// Récupération de la liste des joueurs
+		$list_joueur_HT = getTeamPlayersDataFromHT_usingPHTv3($team);
+		if ((isset($_SESSION['newVisit']) && $_SESSION['newVisit']==1))  
+		{ // On met à jour les informations clubs et les informations joueurs 
+			if ($list_joueur_HT==false) 
+			{
+				$scan_code=-1;
+				$resuScan = null;
+			}
+			else
+			{
+				// Insertion ou mise à jour 
+				if (count($list_joueur_HT)>0)
+				{
+					foreach($list_joueur_HT as $joueur)
+					{
+						$listeID[]=$joueur["idHattrickJoueur"];
+					}
+					$listeID=array_unique($listeID); // Suppression des doublons
+					// Insertion ou mise à jour des joueurs
+					$resuScan=scanPlayerList($team, $listeID, $_SESSION['nomUser'], 'P');
+					$scan_code=count($resuScan);
+				} 
+				else
+				{
+					$scan_code=-2; // pas de français
+				}
+			}
+		} 
+		else 
+		{
+			// Scan des joueurs sans mise à jour
+			$resuScan=scanPlayerList($team, $listeID, $_SESSION['nomUser'], 'P', false, false);
+			$scan_code=count($resuScan);
+		}
+		$teams[0] = array('id' => $team->getId(), 'name' => $team->getName(), 'scan' => $resuScan, 'code' => $scan_code);
+	}
+}
+catch (\PHT\Exception\InvalidArguementException $e) {
+	echo $e->getMessage();
+}
 
 
 /******************************************************************************/
 /*      GESTION AFFICHAGE LISTE JOUEURS                                       */
 /******************************************************************************/
-?>
-<font size='4' color='red' face='Century Gothic'><U><?=$team1['name']?></U></font>
-<?php
-if (isset($resuScan) && $resuScan!=false) 
-{
-  $scan_code=count($resuScan);
-}
-
-if ($scan_code==-1)
-{
-	$msg = REPONSE_ERREUR_CXION;
-}
-else if ($scan_code==-2)
-{
-  $msg = REPONSE_PASDEFRANCAIS;
-}
-else if ($scan_code==0)
-{
-  $msg = REPONSE_PASDEJOUEUR;
-} 
-else 
-{
-  ?>
-
-   <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
-   <tr>
-   <td rowspan="3" width="20">&nbsp;</td>
-   <td class="style40">
-
-   <p align="justify"><br />
-
-   <font size="2" face="Century Gothic">
-   <?=RETENU_PRESENTATION?>
-
-   <table border=0 width=95%>	
-   <?php
-   $printedPlayers=""; 
-
-   for($i=0;$i<$scan_code;$i++) 
-   {
-     if (isset ($resuScan[$i]["idJoueur"])) 
-     {
-       $joueurDTN=getJoueur($resuScan[$i]["idJoueur"]);
-
-       $printedPlayers.="{".$joueurDTN["nomJoueur"]."}";
-       ?>
-       <tr>
-       <td width=5% nowrap valign="top"><font size="2" face="Century Gothic">&nbsp;<b>-&nbsp;<?=$joueurDTN["nomJoueur"]?></b></font></td>
-       <td align="left" width=95% nowrap valign="top"><font size="2" face="Century Gothic">
-       <?php
-        if ( $joueurDTN["dtnSuiviJoueur_fk"]!=0){
-                 echo " - <b><i>".$joueurDTN["loginAdminSuiveur"]."</i></b>".SUIVIMSG."<br />";
-           }
-        if ($resuScan[$i]["poste"]<=0){
-           if ($_SESSION['lang']=="en"){
-           ?>[This player does not satisfy our requirements.]<?php
-           }else if ($_SESSION['lang']=="de"){
-           ?>[Dieser Spieler entspricht nicht unseren Anforderungen.]<?php
-           }else{
-           ?>[Joueur en dessous de nos minimas.]<?php
-           }
-        }?>
-       </font>
-       </td>
-       </tr>
-   <?php
-     }
-   } // Fin boucle joueurs
-   ?> 
-  </table>	
-  </td>
-  </tr>
-  </table>	
-<?php
-}   
-echo"<p align=\"justify\"><br />";
-echo"<font size=\"2\" face=\"Century Gothic\">";
-if (isset($msg))
-{
-?><?=$msg?><?php
-}
-echo"</font>";
-?>
-
-
-
-<?php
-/******************************************************************************/
-/******************************************************************************/
-/*      GESTION AFFICHAGE DU CONTENU DE LA PAGE  2E EQUIPE                    */
-/******************************************************************************/
-/******************************************************************************/
-// Initialisation variables
-$scan_code=0;
-unset($listeID);
-unset($list_joueur_HT);
-unset($resuScan);
-$msg = "";
-$userId = $_SESSION['HT']->getClub()->getUserId();
-$teamNb = $_SESSION['HT']->getNumberOfTeams($userId);
-for ($tsidx=$teamNb-1; $tsidx >= 0; $tsidx--) {
-	$team2 = $_SESSION['HT']->getSecondaryTeam($userId, $tsidx);
-	if ($team2 != null)
+foreach($teams as $te) {
+	if ($te['code'] == -1)
 	{
-	  // Récupération de la liste des joueurs
-	  $list_joueur_HT = getDataMesJoueursFromHT_usingPHT($team2->getTeamId());
-	  $teamid2 = array('id' => $team2->getTeamId(), 'name' => $team2->getTeamName());
-	  array_push($teams, $teamid2);
-	  
-	  // Si c'est la première visite avec ce browser
-	  if ((isset($_SESSION['newVisit']) && $_SESSION['newVisit']==1))  
-	  { // On met à jour les informations clubs et les informations joueurs 
-		if ($list_joueur_HT==false) 
-		{
-		  $scan_code=-2;
-		}
-		else
-		{
-			// Insertion ou mise à jour 
-			if (count($list_joueur_HT)>0)
-			{
-			  foreach($list_joueur_HT as $joueur)
-			  {
-				$listeID[]=$joueur["idHattrickJoueur"];
-			  }
-			  $listeID=array_unique($listeID); // Suppression des doublons
-			  // Insertion ou mise à jour des joueurs
-			  $resuScan=scanListeJoueurs($listeID,$_SESSION['nomUser'],'P');
-		
-			} 
-			else 
-			{
-			   $scan_code=-2; // pas de français
-			}
-		}
-	  } 
-	  else 
-	  {
-		// Scan des joueurs sans mise à jour
-		$resuScan=scanListeJoueurs($listeID,$_SESSION['nomUser'],'P',false,false);
-	  }
-	  
-	  /******************************************************************************/
-	  /*      GESTION AFFICHAGE LISTE JOUEURS                                       */
-	  /******************************************************************************/
-	?>
-	  <font size="4" color="red" face="Century Gothic"><U><?=$teamid2['name']?></U></font>
-	<?php
-	  if (isset($resuScan) && $resuScan!=false) 
-	  {
-		$scan_code=count($resuScan);
-	  }
-	  
-	  if ($scan_code==-1)
-	  {
 		$msg = REPONSE_ERREUR_CXION;
-	  }
-	  else if ($scan_code==-2)
-	  {
-		$msg = REPONSE_PASDEFRANCAIS;
-	  }
-	  else if ($scan_code==0)
-	  {
-		$msg = REPONSE_PASDEJOUEUR;
-	  } 
-	  else 
-	  {
-		?>
-	  
-		 <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
-		 <tr>
-		 <td rowspan="3" width="20">&nbsp;</td>
-		 <td class="style40">
-	  
-		 <p align="justify"><br />
-	  
-		 <font size="2" face="Century Gothic">
-		 <?=RETENU_PRESENTATION?>
-	  
-		 <table border=0 width=95%>	
-		 <?php
-		 $printedPlayers=""; 
-	  
-		 for($i=0;$i<$scan_code;$i++) 
-		 {
-		   if (isset ($resuScan[$i]["idJoueur"])) 
-		   {
-			 $joueurDTN=getJoueur($resuScan[$i]["idJoueur"]);
-	  
-			 $printedPlayers.="{".$joueurDTN["nomJoueur"]."}";
-			 ?>
-			 <tr>
-			 <td width=5% nowrap valign="top"><font size="2" face="Century Gothic">&nbsp;<b>-&nbsp;<?=$joueurDTN["nomJoueur"]?></b></font></td>
-			 <td align="left" width=95% nowrap valign="top"><font size="2" face="Century Gothic">
-			 <?php
-			  if ( $joueurDTN["dtnSuiviJoueur_fk"]!=0){
-					   echo " - <b><i>".$joueurDTN["loginAdminSuiveur"]."</i></b>".SUIVIMSG."<br />";
-				 }
-			  if ($resuScan[$i]["poste"]<=0){
-				 if ($_SESSION['lang']=="en"){
-				 ?>[This player does not satisfy our requirements.]<?php
-				 }else if ($_SESSION['lang']=="de"){
-				 ?>[Dieser Spieler entspricht nicht unseren Anforderungen.]<?php
-				 }else{
-				 ?>[Joueur en dessous de nos minimas.]<?php
-				 }
-			  }?>
-			 </font>
-			 </td>
-			 </tr>
-		 <?php
-		   }
-		 } // Fin boucle joueurs
-		 ?> 
-		 </table>	
-		 </td>
-		 </tr>
-		 </table>	
-	  <?php
-	  }   
-	  echo"<p align=\"justify\"><br />";
-	  echo"<font size=\"2\" face=\"Century Gothic\">";
-	  if (isset($msg))
-	  {
-	  ?><?=$msg?><?php
-	  }
-	  echo"</font>";
 	}
-}
+	else if ($te['code'] == -2)
+	{
+		$msg = REPONSE_PASDEFRANCAIS;
+	}
+	else if ($te['code'] == 0)
+	{
+		$msg = REPONSE_PASDEJOUEUR;
+	} 
+	else 
+	{
+		$resuScan = $te['scan'];
+		$scan_code= $te['code'];
+?>
+	<font size='4' color='red' face='Century Gothic'><U><?=$te['name']?></U></font>
+	<table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
+	<tr>
+		<td rowspan="3" width="20">&nbsp;</td>
+		<td class="style40">
+
+		<p align="justify"><br />
+
+		<font size="2" face="Century Gothic">
+		<?=RETENU_PRESENTATION?>
+
+		<table border=0 width=95%>	
+<?php
+		for($i=0;$i<$scan_code;$i++) 
+		{
+			if (isset ($resuScan[$i]["idJoueur"])) 
+			{
+				$joueurDTN=getJoueur($resuScan[$i]["idJoueur"]);
+?>
+		<tr>
+		<td width=5% nowrap valign="top"><font size="2" face="Century Gothic">&nbsp;<b>-&nbsp;<?=$joueurDTN["nomJoueur"]?>&nbsp;<?=$joueurDTN["prenomJoueur"]?></b></font></td>
+		<td align="left" width=95% nowrap valign="top"><font size="2" face="Century Gothic">
+<?php
+				if ( $joueurDTN["dtnSuiviJoueur_fk"]!=0){
+					echo " - <b><i>".$joueurDTN["loginAdminSuiveur"]."</i></b>".SUIVIMSG."<br />";
+				}
+				if ($resuScan[$i]["poste"]<=0){
+					if ($_SESSION['lang']=="en"){
+					?>[This player does not satisfy our requirements.]<?php
+					}else if ($_SESSION['lang']=="de"){
+					?>[Dieser Spieler entspricht nicht unseren Anforderungen.]<?php
+					}else{
+					?>[Joueur en dessous de nos minimas.]<?php
+					}
+				}
+?>
+		</font>
+		</td>
+		</tr>
+<?php
+			}
+		} // Fin boucle joueurs
+   ?> 
+	</table>	
+	</td>
+	</tr>
+	</table>	
+<?php
+	}   
+	echo"<p align=\"justify\"><br />";
+	echo"<font size=\"2\" face=\"Century Gothic\">";
+	if (isset($msg))
+	{
+	?><?=$msg?><?php
+	}
+	echo"</font>";
+} // end foreach
 
 /******************************************************************************/
 /*      GESTION FORMULAIRE COMMENTAIRE                                        */
@@ -334,16 +285,17 @@ if ($idClubComment != "")
   	$commentSaved=true;
 } 
 
-  	
-   // gestion erreur
-   if (isset($resuScan[0]["id_clubs_histo"])) 
-   {
-      $_SESSION['id_clubs_histo']=$resuScan[0]["id_clubs_histo"];
-   }
-   elseif (isset($_POST['id_clubs_histo'])) 
-   {
-      $_SESSION['id_clubs_histo']=$_POST['id_clubs_histo'];
-   }
+$resuScan = $teams[0]['scan'];
+
+// gestion erreur
+if (isset($resuScan[0]["id_clubs_histo"])) 
+{
+	$_SESSION['id_clubs_histo']=$resuScan[0]["id_clubs_histo"];
+}
+elseif (isset($_POST['id_clubs_histo'])) 
+{
+	$_SESSION['id_clubs_histo']=$_POST['id_clubs_histo'];
+}
 /*   else
    {
       $_SESSION['id_clubs_histo']=$teamID1;
@@ -353,11 +305,10 @@ if ($idClubComment != "")
       echo("<font color='red'><b>Erreur : Joueurs mis &agrave; mais impossible de poster un commentaire</b></font>"); 
       exit;
    }*/
-   if (isset($_POST['ht_comment'])) {
-      $_SESSION['ht_comment'] = $commentaire;
-   }
-   ?>
-
+if (isset($_POST['ht_comment'])) {
+    $_SESSION['ht_comment'] = $commentaire;
+}
+?>
 
    <table>	
    <br />
@@ -367,15 +318,15 @@ if ($idClubComment != "")
    <?php
 	if (count($teams) == 1)
 	{
-		$teamId = $teams[0];
+		$teamId = $teams[0]['id'];
 ?>
-         <input name="idClubHT" type="hidden" value="<?=$teamId['id']?>">
+        <input name="idClubHT" type="hidden" value="<?=$teamId?>">
 <?php
     }
 	else {
 		foreach($teams as $teamId) {
 ?>
-         <input name="idClubHT" type="radio" value="<?=$teamId['id']?>" checked><?=$teamId['name']?>
+        <input name="idClubHT" type="radio" value="<?=$teamId['id']?>" ><?=$teamId['name']?>
 <?php
 		}
     }
