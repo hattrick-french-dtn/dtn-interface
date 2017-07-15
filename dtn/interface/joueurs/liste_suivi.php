@@ -121,35 +121,43 @@ $_SESSION['ListeFicheResume']=$lstJoueur;
 					"<br /> Date proprio : ".$lstJoueur[$j]["dateSaisieJoueur"].
 					"<br /> [ Mis &agrave; jour il y a  ".round(($mkday - $datemaj)/(60*60*24) )." jours ]";?>
 
-          <?php
-          $intensite="-";
-          $endurance="-";
-          $adjoints="-";
-          $medecin="-";
-          $physio="-";
-          $libelle_type_entrainement="-";
-          
-          $sql2 = "select * from $tbl_clubs_histo A left join $tbl_type_entrainement2 on idEntrainement = id_type_entrainement where idClubHT = ".$lstJoueur[$j]["idClubHT"]." order by date_histo desc";
-          $req2 = $conn->query($sql2);
-          $ligne = $req2->fetch(PDO::FETCH_ASSOC);
-          extract($ligne);
+    <?php
+		$intensite="-";
+		$endurance="-";
+		$adjoints="-";
+		$medecin="-";
+		$physio="-";
+		$libelle_type_entrainement="-";
+		$niv_Entraineur="-";
+		
+		if (isset($lstJoueur[$j]["idClubHT"])) {
+			$sql2 = "select * from $tbl_clubs_histo A left join $tbl_type_entrainement2 on idEntrainement = id_type_entrainement where idClubHT = ".$lstJoueur[$j]["idClubHT"]." order by date_histo desc";
+			$req2 = $conn->query($sql2);
+			$ligne = $req2->fetch(PDO::FETCH_ASSOC);
+			if ($ligne) extract($ligne);
         
-          $sql3 = "select * from $tbl_clubs where idClubHT = ".$lstJoueur[$j]["idClubHT"];
-          $req3 = $conn->query($sql3);
-          $ligne3 = $req3->fetch(PDO::FETCH_ASSOC);
-          extract($ligne3);
-          ?>
+			$sql3 = "select * from $tbl_clubs where idClubHT = ".$lstJoueur[$j]["idClubHT"];
+			$req3 = $conn->query($sql3);
+			$ligne3 = $req3->fetch(PDO::FETCH_ASSOC);
+			if ($ligne3) extract($ligne3);
+		}
+    ?>
 
-
-			      
           <tr bgcolor="<?=$bgcolor?>">
             <td>
             <?php if (existAutorisationClub($lstJoueur[$j]["idClubHT"],null)==false) {?>
               <img height="12" src="../images/non_autorise.JPG" title="Ce club n'a pas autoris&eacute; la DTN &agrave; acc&eacute;der &agrave; ses donn&eacute;es">
             <?php } else {?>
               <img height="12" src="../images/Autorise.PNG" title="Ce club a autoris&eacute; la DTN &agrave; acc&eacute;der &agrave; ses donn&eacute;es">
-            <?php }?>
+            <?php }
+				if (isset($lstJoueur[$j]["idClubHT"])) {
+			?>
             &nbsp;<a href ="../clubs/fiche_club.php?idClubHT=<?=$lstJoueur[$j]["idClubHT"]?>">(<?php echo($lstJoueur[$j]["idClubHT"]);?>)&nbsp;<?php echo($lstJoueur[$j]["nomClub"]);?></a>
+			<?php
+				} else { 
+					echo($lstJoueur[$j]["nomClub"]);
+				}
+			?>
             </td>
             <td width="20"> <div align="center"><?=$libelle_type_entrainement?></div></td>
             <td width="20"> <div align="center"><?=$intensite?></div></td>
