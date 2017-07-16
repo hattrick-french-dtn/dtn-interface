@@ -2561,36 +2561,36 @@ function scanListeJoueurs($listeIDJoueur,$utilisateur,$role,$faireMAJ=true,$char
 		}
 
 
-    // Chargement des matchs
-    if ($chargeMatch==true && $joueurDTN != false) {
-      $resuM[$j]=insererMatchsJoueur($joueurDTN["idHattrickJoueur"],$joueurDTN["teamid"],$joueurDTN["dateLastScanMatch"]);
-      updateDateScanMatchJoueur($joueurDTN["idHattrickJoueur"]);
-    } elseif ($joueurDTN = false) {
-      $resuJ[$j]['HTML']='<tr><td colspan=10><br /><font color=orange>Impossible de charger les matchs car joueur absent bdd : '.$IDJoueur.'</font></td></tr>';
-    }
+		// Chargement des matchs
+		if ($chargeMatch==true && $joueurDTN != false) {
+			$resuM[$j]=insererMatchsJoueur($joueurDTN["idHattrickJoueur"],$joueurDTN["teamid"],$joueurDTN["dateLastScanMatch"]);
+			updateDateScanMatchJoueur($joueurDTN["idHattrickJoueur"]);
+		} elseif ($joueurDTN = false) {
+			$resuJ[$j]['HTML']='<tr><td colspan=10><br /><font color=orange>Impossible de charger les matchs car joueur absent bdd : '.$IDJoueur.'</font></td></tr>';
+		}
     
-    $resuJ[$j]['trouveDTN']=$trouveDTN;
-    $resuJ[$j]['trouveHT']=$trouveHT;
-    $resuJ[$j]['idHattrickJoueur']=$IDJoueur;
-    
-    if (isset($resuJ[$j]['idJoueur']) && $resuJ[$j]['idJoueur'] > 0 && $faireMAJ==true && $resuJ[$j]['trouveHT']==true) { // Il y a eu maj ou ajout du joueur
-      $liste_clubs[$joueurHT['teamid']]=$joueurHT['teamid']; // Liste des clubs pour appel maj Clubs
-    }
-    $j++;
+		$resuJ[$j]['trouveDTN']=$trouveDTN;
+		$resuJ[$j]['trouveHT']=$trouveHT;
+		$resuJ[$j]['idHattrickJoueur']=$IDJoueur;
+		
+		if (isset($resuJ[$j]['idJoueur']) && $resuJ[$j]['idJoueur'] > 0 && $faireMAJ==true && $resuJ[$j]['trouveHT']==true) { // Il y a eu maj ou ajout du joueur
+			$liste_clubs[$joueurHT['teamid']]=$joueurHT['teamid']; // Liste des clubs pour appel maj Clubs
+		}
+		$j++;
 
-  } // Fin Boucle sur liste ID joueurs
+	} // Fin Boucle sur liste ID joueurs
 
 	// maj Club
-	if ($faireMAJ==true) {
+	if ($faireMAJ==true && isset($liste_clubs) && count($liste_clubs) > 0) {
 		$liste_clubs=array_unique($liste_clubs); // Suppression des doublons
 
 		foreach ($liste_clubs as $club) {
 			$resuC[$club]['club']=majClub($club);
 			$resuC[$club]['clubHisto']=majClubHisto($club,$utilisateur,$role);
 		}
-
+		$resulen = count($resuJ);
 		// Concaténation de l'affichage HTML & récupération des identifiants maj Club et histo club
-		for ($j=0;$j<count($resuJ);$j++) {
+		for ($j=0;$j<$resulen;$j++) {
 			if (isset($resuJ[$j]['idJoueur']) && $resuJ[$j]['idJoueur'] > 0) { // Il y a eu maj ou ajout du joueur
 				if (isset($resuC[$resuJ[$j]['teamid']]['club']['idClub'])) $resuJ[$j]['idClub']=$resuC[$resuJ[$j]['teamid']]['club']['idClub'];
 				if (isset($resuC[$resuJ[$j]['teamid']]['clubHisto']['id_clubs_histo'])) $resuJ[$j]['id_clubs_histo']=$resuC[$resuJ[$j]['teamid']]['clubHisto']['id_clubs_histo'];
