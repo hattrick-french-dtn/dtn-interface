@@ -1059,7 +1059,7 @@ function checkCarac($player,$carac,$level){
 /******************************************************************************/
 function validateMinimaPlayer($player,$todaySeason)
 {
-	require("nomTables.inc.php");
+	require_once($_SERVER['DOCUMENT_ROOT'].'/dtn/interface/includes/nomTables.inc.php');
 	global $conn;
 
   $age=ageetjour($player["datenaiss"],"2");
@@ -1508,7 +1508,7 @@ function getDataJoueursSelectionsFromHT_usingPHT($idNT){
 function ajoutJoueur($ht_user,$role_user,$joueurHT,$joueurDTN,$posteAssigne) {
 	global $conn;
 
-  require($_SERVER['DOCUMENT_ROOT'].'/dtn/interface/includes/nomTables.inc.php');
+	require_once($_SERVER['DOCUMENT_ROOT'].'/dtn/interface/includes/nomTables.inc.php');
   
   if ($role_user=='P') {$lib_role='Proprietaire';} 
   elseif ($role_user=='D') {$lib_role='DTN';} 
@@ -1742,7 +1742,7 @@ function ajoutJoueur($ht_user,$role_user,$joueurHT,$joueurDTN,$posteAssigne) {
 function updateJoueur($joueur) {
 	global $conn;
 
-	require($_SERVER['DOCUMENT_ROOT'].'/dtn/interface/includes/nomTables.inc.php');
+	require_once($_SERVER['DOCUMENT_ROOT'].'/dtn/interface/includes/nomTables.inc.php');
 
 	$sql="UPDATE $tbl_joueurs SET ";
 	if (isset($joueur['nomJoueur']))                {$sql.="nomJoueur = '".$joueur['nomJoueur']."',";}
@@ -1821,7 +1821,7 @@ function updateJoueur($joueur) {
 function updateEntrainement($entrainement) {
 	global $conn;
 
-  require($_SERVER['DOCUMENT_ROOT'].'/dtn/interface/includes/nomTables.inc.php');
+    require_once($_SERVER['DOCUMENT_ROOT'].'/dtn/interface/includes/nomTables.inc.php');
   
   $sql="UPDATE $tbl_entrainement SET ";
   if (isset($entrainement['nbSemaineConstruction']))  {$sql.="nbSemaineConstruction = '".$entrainement['nbSemaineConstruction']."',";}
@@ -2321,7 +2321,7 @@ function getDataJoueurHisto($joueurHT,$actualSeason=null) {
 function updateJoueurHisto($row_joueurs_histo) {
 	global $conn;
 
-  require($_SERVER['DOCUMENT_ROOT'].'/dtn/interface/includes/nomTables.inc.php');
+    require_once($_SERVER['DOCUMENT_ROOT'].'/dtn/interface/includes/nomTables.inc.php');
 
   $sql="UPDATE $tbl_joueurs_histo SET ";
   if (isset($row_joueurs_histo['id_joueur_fk']))   {$sql.="id_joueur_fk = '".$row_joueurs_histo['id_joueur_fk']."',";}
@@ -2364,7 +2364,7 @@ function updateJoueurHisto($row_joueurs_histo) {
 function insertJoueurHisto($row_joueurs_histo){
 	global $conn;
 
-  require($_SERVER['DOCUMENT_ROOT'].'/dtn/interface/includes/nomTables.inc.php');
+    require_once($_SERVER['DOCUMENT_ROOT'].'/dtn/interface/includes/nomTables.inc.php');
 
   if (!isset($row_joueurs_histo["date_histo"])) {$row_joueurs_histo["date_histo"]=date('Y-m-d H:i:s');}
   if (!isset($row_joueurs_histo["forme"]))      {$row_joueurs_histo["forme"]='NULL';}
