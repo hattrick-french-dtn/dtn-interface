@@ -71,11 +71,11 @@ $graph->SetShadow();
 
 
 // Use text X-scale so we can text labels on the X-axis
-$graph->SetScale("textlin");
+$graph->SetScale("textlin", 0, 0, $steps, 20);
 
 
 // Y2-axis is linear
-$graph->SetY2Scale("lin");
+$graph->SetY2Scale("lin", 0, 20);
 
 
 // Color the two Y-axis to make them easier to associate
