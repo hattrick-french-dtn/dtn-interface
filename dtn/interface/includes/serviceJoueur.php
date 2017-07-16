@@ -2207,7 +2207,7 @@ function majJoueur($ht_user,$role_user,$joueurHT,$joueurDTN){
     unset($existHJ);
     
     if ($role_user=="P" || $role_user=="S") {
-		$DebutHistoModifMsg="Joueur mis &agrave; par le $lib_role";
+		$DebutHistoModifMsg="Joueur mis &agrave; jour par le $lib_role";
 		if ($histoModifMsg!=null) {
 			$histoModifMsg = $DebutHistoModifMsg." / ".$histoModifMsg;
 		} else {

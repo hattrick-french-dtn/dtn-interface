@@ -7,7 +7,7 @@ $sql = "select * from $tbl_joueurs, $tbl_position where idJoueur = $id and ht_po
 $lstJoueur = construitListe($sql, $tbl_joueurs, $tbl_position);
 
 
-$titre="de ".$lstJoueur[0]["prenomJoueur"]." ".$lstJoueur[0]["nomJoueur"];
+$titre="de ".utf8_decode($lstJoueur[0]["prenomJoueur"])." ".utf8_decode($lstJoueur[0]["nomJoueur"]);
 //$sql =  'select * from '.$tbl_perf.', '.$tbl_caracteristiques.', '.$tbl_joueurs.' ' .
 $sql =  "select * from ".$tbl_perf.", ".$tbl_joueurs.
 		" where id_joueur = idHattrickJoueur " .
@@ -71,11 +71,11 @@ $graph->SetShadow();
 
 
 // Use text X-scale so we can text labels on the X-axis
-$graph->SetScale("textlin");
+$graph->SetScale("textlin", 0, 0, $steps, 20);
 
 
 // Y2-axis is linear
-$graph->SetY2Scale("lin");
+$graph->SetY2Scale("lin", 0, 20);
 
 
 // Color the two Y-axis to make them easier to associate
@@ -98,7 +98,7 @@ $graph->img->SetMargin(40,140,40,80);
 
 // Slightly adjust the legend from it's default position in the
 // top right corner to middle right side
-$graph->legend->Pos(0.03,0.5,"right","center");
+$graph->legend->Pos(0.03,0.98,"right","center");
 
 
 // Display every 6:th tickmark
