@@ -7,7 +7,7 @@ $sql = "select * from $tbl_joueurs, $tbl_position where idJoueur = $id and ht_po
 $lstJoueur = construitListe($sql, $tbl_joueurs, $tbl_position);
 
 
-$titre="de ".$lstJoueur[0]["prenomJoueur"]." ".$lstJoueur[0]["nomJoueur"];
+$titre="de ".utf8_decode($lstJoueur[0]["prenomJoueur"])." ".utf8_decode($lstJoueur[0]["nomJoueur"]);
 //$sql =  'select * from '.$tbl_perf.', '.$tbl_caracteristiques.', '.$tbl_joueurs.' ' .
 $sql =  "select * from ".$tbl_perf.", ".$tbl_joueurs.
 		" where id_joueur = idHattrickJoueur " .
