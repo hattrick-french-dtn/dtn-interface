@@ -98,7 +98,7 @@ $graph->img->SetMargin(40,140,40,80);
 
 // Slightly adjust the legend from it's default position in the
 // top right corner to middle right side
-$graph->legend->Pos(0.03,0.5,"right","center");
+$graph->legend->Pos(0.03,0.98,"right","center");
 
 
 // Display every 6:th tickmark
