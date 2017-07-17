@@ -1032,7 +1032,7 @@ case "addHistoClub":
 		$codeEntrainement=getEntrainementCode($_POST["idEntrainement"],$lTraining);
   	
 		if ($codeEntrainement!='??') {
-			$msgHistoModif .= "Modif entrainement (".getEntrainementName($_POST["OldEntrainementId"],$lTraining)." ->".getEntrainementName($_POST["idEntrainement"],$lTraining).")  ";
+			$msgHistoModif = "Modif entrainement (".getEntrainementName($_POST["OldEntrainementId"],$lTraining)." ->".getEntrainementName($_POST["idEntrainement"],$lTraining).")  ";
 		}
     
 		// Insertion d'un enregistrement dans l'histo des modifs
