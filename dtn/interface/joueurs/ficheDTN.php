@@ -511,7 +511,7 @@ if(isset($msg)) {?>
           }?>
           
           <tr bgcolor="#FFFFFF" style="border:1px solid #C5C7C7">
-          <td colspan=7>
+          <td colspan=9>
 
             <div align="left" valign="middle" style="padding:0.5em;">
             <img src="../images/triangle1.JPG"  border="0" align="absmiddle">

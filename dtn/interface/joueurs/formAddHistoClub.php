@@ -68,6 +68,17 @@ $lstEntrainementPossible = listEntrainement();
       </span>
     </td>
     </tr>
+    <tr>
+    <td>Nombre de m&eacute;decins :</td>
+    <td>
+      <span id="sprytextfield3">
+      <input name="adjoints" type="text" id="medecins" size=2 value="<?=$lastHistoClub["medecin"]?>">
+      <span class="textfieldInvalidFormatMsg">Entrez uniquement des chiffres et des nombres non n&eacute;gatifs</span>
+      <span class="textfieldMinValueMsg">Doit etre sup&eacute;rieure &agrave; 0</span>
+      <span class="textfieldMaxValueMsg">Doit etre inf&eacute;rieure &agrave; 10</span>
+      </span>
+    </td>
+    </tr>
     <tr><td valign="top">Commentaire sur le club :</td><td><textarea name="Commentaire" rows=10 cols=40 id="Commentaire"></textarea></td></tr>
     <input name="idClubHT" type="hidden" id="idClubHT" value="<?=$_GET['idClubHT']?>">
     <input name="idJoueur" type="hidden" id="idJoueur" value="<?=$_GET['idJoueur']?>">
