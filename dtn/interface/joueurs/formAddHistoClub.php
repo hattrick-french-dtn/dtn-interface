@@ -58,7 +58,7 @@ $lstEntrainementPossible = listEntrainement();
     </td>
     </tr>
     <tr>
-    <td>Nombre d'adjoints :</td>
+    <td>Qualit&eacute; des adjoints [0 &agrave; 10] :</td>
     <td>
       <span id="sprytextfield3">
       <input name="adjoints" type="text" id="adjoints" size=2 value="<?=$lastHistoClub["adjoints"]?>">
@@ -69,13 +69,24 @@ $lstEntrainementPossible = listEntrainement();
     </td>
     </tr>
     <tr>
-    <td>Nombre de m&eacute;decins :</td>
+    <td>Qualit&eacute; du m&eacute;decins [0 &agrave; 5] :</td>
     <td>
       <span id="sprytextfield3">
-      <input name="adjoints" type="text" id="medecins" size=2 value="<?=$lastHistoClub["medecin"]?>">
+      <input name="medecin" type="text" id="medecins" size=2 value="<?=$lastHistoClub["medecin"]?>">
       <span class="textfieldInvalidFormatMsg">Entrez uniquement des chiffres et des nombres non n&eacute;gatifs</span>
       <span class="textfieldMinValueMsg">Doit etre sup&eacute;rieure &agrave; 0</span>
-      <span class="textfieldMaxValueMsg">Doit etre inf&eacute;rieure &agrave; 10</span>
+      <span class="textfieldMaxValueMsg">Doit etre inf&eacute;rieure &agrave; 5</span>
+      </span>
+    </td>
+    </tr>
+    <tr>
+    <td>Qualit&eacute; du pr&eacute;pa phys [0 &agrave; 5] :</td>
+    <td>
+      <span id="sprytextfield3">
+      <input name="physio" type="text" id="physio" size=2 value="<?=$lastHistoClub["physio"]?>">
+      <span class="textfieldInvalidFormatMsg">Entrez uniquement des chiffres et des nombres non n&eacute;gatifs</span>
+      <span class="textfieldMinValueMsg">Doit etre sup&eacute;rieure &agrave; 0</span>
+      <span class="textfieldMaxValueMsg">Doit etre inf&eacute;rieure &agrave; 5</span>
       </span>
     </td>
     </tr>
