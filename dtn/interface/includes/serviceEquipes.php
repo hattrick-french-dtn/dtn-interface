@@ -306,7 +306,7 @@ function insertionClub($club){
 	global $conn;
 	global $cheminComplet;
 
-	require_once($_SERVER["DOCUMENT_ROOT"].'/dtn/interface/includes/nomTables.inc.php');
+	require($_SERVER["DOCUMENT_ROOT"].'/dtn/interface/includes/nomTables.inc.php');
 
 	$sql = getClubSQL($club['idClubHT'], $club['idUserHT']);
 	$req = $conn->query($sql);
@@ -375,7 +375,7 @@ function updateClub($club){
 	global $conn;
 	global $cheminComplet;
 
-	require_once($_SERVER["DOCUMENT_ROOT"].'/dtn/interface/includes/nomTables.inc.php');
+	require($_SERVER["DOCUMENT_ROOT"].'/dtn/interface/includes/nomTables.inc.php');
 	//print_r($club);
 	$sql="UPDATE $tbl_clubs SET ";
 	if (isset($club["idUserHT"]))             {$sql.="idUserHT = '".$club["idUserHT"]."',";}
@@ -423,7 +423,7 @@ function insertHistoClub_Joueurs($id_Clubs_Histo,$idClubHT)
 	global $conn;
 	global $cheminComplet;
 
-	require_once($_SERVER["DOCUMENT_ROOT"].'/dtn/interface/includes/nomTables.inc.php');
+	require($_SERVER["DOCUMENT_ROOT"].'/dtn/interface/includes/nomTables.inc.php');
 
 	$sql="INSERT INTO $tbl_clubs_histo_joueurs (id_clubs_histo,id_joueur)
         SELECT
@@ -463,7 +463,7 @@ function update_entrainementJoueursDeEquipe($id_Clubs_Histo){
 	global $conn;
 	global $cheminComplet;
 
-	require_once($_SERVER["DOCUMENT_ROOT"].'/dtn/interface/includes/nomTables.inc.php');
+	require($_SERVER["DOCUMENT_ROOT"].'/dtn/interface/includes/nomTables.inc.php');
 
 	$sql="UPDATE $tbl_joueurs 
         SET
@@ -529,7 +529,7 @@ function getNivEntraineurHT($idClubHT,$ht_session,$team=null){
 function getDataClubsHistoFromHT_usingPHT($idClubHT=null){
 //echo('toto');
 
-	  require_once("serviceEntrainement.php");
+	  require("serviceEntrainement.php");
 	  $row_clubs_histo=array();
 	  $lTraining=listEntrainement();
   
@@ -596,7 +596,7 @@ function insertHistoClub($row_clubs_histo){
 	global $conn;
 	global $cheminComplet;
 
-	require_once($_SERVER["DOCUMENT_ROOT"].'/dtn/interface/includes/nomTables.inc.php');
+	require($_SERVER["DOCUMENT_ROOT"].'/dtn/interface/includes/nomTables.inc.php');
 
 	if (!isset($row_clubs_histo["idEntrainement"])||$row_clubs_histo["idEntrainement"]=='') {$row_clubs_histo["idEntrainement"]='NULL';}
 	if (!isset($row_clubs_histo["intensite"])||$row_clubs_histo["intensite"]=='')           {$row_clubs_histo["intensite"]='NULL';}
@@ -694,7 +694,7 @@ function selectHistoClub($id_clubs_histo){
 function updateHistoClub($row_clubs_histo){
 	global $conn;
 
-	require_once($_SERVER["DOCUMENT_ROOT"].'/dtn/interface/includes/nomTables.inc.php');
+	require($_SERVER["DOCUMENT_ROOT"].'/dtn/interface/includes/nomTables.inc.php');
 
 	$sql="UPDATE $tbl_clubs_histo 
 		SET ";
@@ -764,7 +764,7 @@ function getLastHistoClub($idClubHT){
 	global $conn;
 	global $cheminComplet;
 
-	require_once($_SERVER["DOCUMENT_ROOT"].'/dtn/interface/includes/nomTables.inc.php');
+	require($_SERVER["DOCUMENT_ROOT"].'/dtn/interface/includes/nomTables.inc.php');
 
 	$sql="SELECT
             $tbl_clubs_histo.*
@@ -1014,7 +1014,7 @@ function majClub($idClubHT=null,$idUserHT=null,$clubDTN=null)
 function majClubHisto($idClubHT,$cree_par,$role_createur)
 {
 	global $cheminComplet;
-	require_once($cheminComplet.'includes/serviceEntrainement.php');
+	require($cheminComplet.'includes/serviceEntrainement.php');
 
   unset ($resu);
   $modif=false;
