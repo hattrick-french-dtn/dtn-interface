@@ -599,11 +599,11 @@ function insertHistoClub($row_clubs_histo){
 	require($_SERVER["DOCUMENT_ROOT"].'/dtn/interface/includes/nomTables.inc.php');
 
 	if (!isset($row_clubs_histo["idEntrainement"])||$row_clubs_histo["idEntrainement"]=='') {$row_clubs_histo["idEntrainement"]='NULL';}
-	if (!isset($row_clubs_histo["intensite"])||$row_clubs_histo["intensite"]=='')           {$row_clubs_histo["intensite"]='NULL';}
-	if (!isset($row_clubs_histo["endurance"])||$row_clubs_histo["endurance"]=='')           {$row_clubs_histo["endurance"]='NULL';}
-	if (!isset($row_clubs_histo["adjoints"])||$row_clubs_histo["adjoints"]=='')             {$row_clubs_histo["adjoints"]='NULL';}
-	if (!isset($row_clubs_histo["medecin"])||$row_clubs_histo["medecin"]=='')             {$row_clubs_histo["medecin"]='NULL';}
-	if (!isset($row_clubs_histo["physio"])||$row_clubs_histo["physio"]=='')             {$row_clubs_histo["physio"]='NULL';}
+	if (!isset($row_clubs_histo["intensite"])||$row_clubs_histo["intensite"]=='')           {$row_clubs_histo["intensite"]=0;}
+	if (!isset($row_clubs_histo["endurance"])||$row_clubs_histo["endurance"]=='')           {$row_clubs_histo["endurance"]=0;}
+	if (!isset($row_clubs_histo["adjoints"])||$row_clubs_histo["adjoints"]=='')             {$row_clubs_histo["adjoints"]=0;}
+	if (!isset($row_clubs_histo["medecin"])||$row_clubs_histo["medecin"]=='')               {$row_clubs_histo["medecin"]=0;}
+	if (!isset($row_clubs_histo["physio"])||$row_clubs_histo["physio"]=='')                 {$row_clubs_histo["physio"]=0;}
 	if (!isset($row_clubs_histo["Commentaire"])||$row_clubs_histo["Commentaire"]=='')       {$row_clubs_histo["Commentaire"]=NULL;}
 	$row_clubs_histo["date_histo"] = date('Y-m-d H:i:s');
 
