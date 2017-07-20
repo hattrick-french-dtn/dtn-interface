@@ -1,5 +1,10 @@
 <?php
 
+if (!function_exists('serviceEquipes')) {
+function serviceEquipes() {
+	return 0;
+}
+
 /************************************************************************************************/
 /* Objet : Liste des clubs                                                                      */
 /* Modifié le ??/??/???? par XXXX - Création fonction                                           */
@@ -1094,5 +1099,6 @@ function majClubHisto($idClubHT,$cree_par,$role_createur)
    
 	return $resu;
 
+}
 }
 ?>

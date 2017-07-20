@@ -1,4 +1,8 @@
 <?php
+if (!function_exists('serviceJoueur')) {
+function serviceJoueur() {
+	return 0;
+}
 
 function getCalculAgeAnneeSQL($nomVarDate="CURRENT_DATE")
 {
@@ -2605,5 +2609,5 @@ function scanListeJoueurs($listeIDJoueur,$utilisateur,$role,$faireMAJ=true,$char
   
 	return $resuJ;	 					
 }
-
+}
 ?>
