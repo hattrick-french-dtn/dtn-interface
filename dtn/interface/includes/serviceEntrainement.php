@@ -1,4 +1,8 @@
 <?php
+if (!function_exists('serviceEntrainement')) {
+function serviceEntrainement() {
+	return 0;
+}
 
 // Liste les entrainement spossible.
 function listEntrainement(){
@@ -61,5 +65,5 @@ function chgTraining($joueur_id, $training_id)
 	majHistorique($joueur_id,"chgTraining");
 		
 }
-
+}
 ?>
