@@ -257,7 +257,7 @@ if ($idClubComment != "")
     $nblig = $result->rowCount();
     if ($nblig > 0)
     {
-        $sql="update ht_clubs_histo set Commentaire = '$commentaire' where id_Clubs_Histo = '$id_Clubs_Histo'";
+        $sql="update ht_clubs_histo set Commentaire = '".addslashes($commentaire)."' where id_Clubs_Histo = '$id_Clubs_Histo'";
         $result= $conn->exec($sql);
     }
   	$commentSaved=true;
