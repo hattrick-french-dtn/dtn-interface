@@ -19,7 +19,7 @@ require("../includes/langue.inc.php");
 
 if(!$sesUser["idAdmin"])
 {
-	header("location: index.php?ErrorMsg=Session Expiree");
+	header("location: ../index.php?ErrorMsg=Session Expiree");
 }
 
 if(isset($_POST['action']) and $_POST['action'] == 'submitted') {
@@ -703,7 +703,7 @@ if(count($lstJ)==0) {
 			<TR>
 				<TD><BR>
 				  <?php if ($nbPages==1) {$numResu=$j+1;} else {$numResu=$j+$tbIndexDeb[$PageSelect];}?>
-					<font color="#CC2233"><?=$numResu?>.</font> <A HREF="../joueurs/fiche.php?id=<?=$lstJ[$j]["idJoueur"]?>"><?=$lstJ[$j]["prenomJoueur"]?> <?=$lstJ[$j]["nomJoueur"]?> </A>&nbsp; 
+					<font color="#CC2233"><?=$numResu?>.</font> <A HREF="../joueurs/fiche.php?id=<?=$lstJ[$j]["idJoueur"]?>"><?=$lstJ[$j]["prenomJoueur"]?> <?=$lstJ[$j]["nomJoueur"]?><?php if (isset($lstJ[$j]["surnomJoueur"])) echo " (".$lstJ[$j]["surnomJoueur"].")"; ?> </A>&nbsp; 
 					  <?php if($lstJ[$j]["optionJoueur"]) echo "<font color=\"#CC22DD\">[<i>".$option[$lstJ[$j]["optionJoueur"]]["FR"]."</i>]</font>"?>
 					  &nbsp;|&nbsp;Secteur : 
 					 <?php if ($lstJ[$j]["ht_posteAssigne"]!=0){?>

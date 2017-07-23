@@ -3,7 +3,7 @@ require_once("../includes/head.inc.php");
 require("../includes/serviceJoueur.php");
 if(!$sesUser["idAdmin"])
 {
-	header("location: index.php?ErrorMsg=Session Expiree");
+	header("location: ../index.php?ErrorMsg=Session Expiree");
 }
 
 if(!isset($lang)) $lang = "FR";
