@@ -8,10 +8,10 @@ require("../CHPP/config.php");
 require("../includes/serviceListesDiverses.php");
 
 if(!$_SESSION['sesUser']["idAdmin"])
-  {
-  header("location: index.php?ErrorMsg=Session Expiree");
-  exit();
-  }
+{
+	header("location: ../index.php?ErrorMsg=Session Expiree");
+	exit();
+}
 
 $lang = "FR";
 

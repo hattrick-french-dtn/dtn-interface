@@ -9,10 +9,10 @@ require("../includes/serviceDTN.php");
 
 
 if(!$sesUser["idAdmin"])
-	{
-	header("location: index.php?ErrorMsg=Session Expiree");
+{
+	header("location: ../index.php?ErrorMsg=Session Expiree");
 	return;
-	}
+}
 
 if(!isset($ageJoueur)) return;
 
