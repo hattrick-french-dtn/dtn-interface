@@ -90,7 +90,7 @@ window.resizeTo(550,400);
     <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
         <tr> 
           <td bgcolor="#000000"> <div align="center"><font color="#FFFFFF"> 
-              <?=$lstJoueur[0]["prenomJoueur"]?> <?=$lstJoueur[0]["nomJoueur"]?>
+              <?=$lstJoueur[0]["prenomJoueur"]?> <?=$lstJoueur[0]["nomJoueur"]?><?php if (isset($lstJoueur[0]["surnomJoueur"])) echo " (".$lstJoueur[0]["surnomJoueur"].")"; ?>
               - 
               <?=$lstJoueur[0]["ageJoueur"]?>
               ans</font></div>

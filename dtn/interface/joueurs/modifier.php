@@ -27,7 +27,7 @@ $lstAgg = listAggres();
 $lstCarac = listCaractere();
 $lstHon = listHonnetete();
 $lstLeader = listLeadership();
-$lstCaractJ = listCarac('ASC',20);
+$lstCaractJ = listCarac('ASC',30);
 $lstClubs = listClubs();
 $infJoueur = getJoueur($id);
 ?>
@@ -71,6 +71,10 @@ resizeTo(750,500);
                     <td width="40%"><div align="center"> 
                         <input name="prenomJoueur" type="text" id="prenomJoueur" value="<?=$infJoueur["prenomJoueur"]?>">
                       </div></td>
+                    <td width="11%"><div align="center">Surnom</div></td>
+                    <td width="40%"><div align="center"> 
+                        <input name="surnomJoueur" type="text" id="surnomJoueur" value="<?=$infJoueur["surnomJoueur"]?>">
+                      </div></td>
                   </tr>
                 </table>
                 <br> <table width="100%" border="0" cellspacing="0" cellpadding="0">
@@ -86,18 +90,14 @@ resizeTo(750,500);
 
                     <td height="25"><div align="left">&nbsp;Club actuel :</div></td>
                     <td height="25"><select name="teamid" id="select2">
-                        <option>Non sp�cifi�&eacute;</option>
+                        <option>Non sp&eacute;cifi&eacute;</option>
                         <?php
 					for($i=0;$i<count($lstClubs);$i++){
-					
-			if($lstClubs[$i]["idClubHT"] == $infJoueur["teamid"]) $etat = "selected"; else $etat = "";
-
-
-				echo "<option value=".$lstClubs[$i]["idClubHT"]." $etat>".$lstClubs[$i]["nomClub"]." (".$lstClubs[$i]["idClubHT"].")</option>";    
-					
+						if($lstClubs[$i]["idClubHT"] == $infJoueur["teamid"]) $etat = "selected"; else $etat = "";
+						echo "<option value=".$lstClubs[$i]["idClubHT"]." $etat>".$lstClubs[$i]["nomClub"]." (".$lstClubs[$i]["idClubHT"].")</option>";    
 					}
 					?>
-                      </select> [<a href="http://localhost/hattrick/clubs/index.php" target="_blank">Ajouter 
+                      </select> [<a href="./clubs/index.php" target="_blank">Ajouter 
                         un club</a>] </td>
                   </tr>
                   <tr> 
@@ -134,16 +134,11 @@ resizeTo(750,500);
                       </div></td>
                     <td width="25%"><p> 
                         <select name="idCaractere_fk" size="<?=count($lstCarac)?>" id="select3">
-                          <?php
+                <?php
 				for($i=0;$i<count($lstCarac);$i++)
 				{
-				
-						if($lstCarac[$i]["idCaractere"] == $infJoueur["idCaractere_fk"]) $etat = "selected"; else $etat = "";
-
-
-
-
-				echo "<option value=".$lstCarac[$i]["idCaractere"]." $etat>".$lstCarac[$i]["numCaractere"]." - ".$lstCarac[$i]["intituleCaractereFR"]."|".$lstCarac[$i]["intituleCaractereUK"]."</option>";    
+					if($lstCarac[$i]["idCaractere"] == $infJoueur["idCaractere_fk"]) $etat = "selected"; else $etat = "";
+					echo "<option value=".$lstCarac[$i]["idCaractere"]." $etat>".$lstCarac[$i]["numCaractere"]." - ".$lstCarac[$i]["intituleCaractereFR"]."|".$lstCarac[$i]["intituleCaractereUK"]."</option>";    
 				}
 				?>
                         </select>
@@ -153,14 +148,11 @@ resizeTo(750,500);
                         <?=$exp["$lang"]?>
                       </div></td>
                     <td width="32%" valign="top"> <select name="idExperience_fk" id="select7">
-                        <?php
+                <?php
 				for($i=0;$i<count($lstCaractJ);$i++)
 				{
-				
-		if($lstCaractJ[$i]["idCarac"] == $infJoueur["idExperience_fk"]) $etat = "selected"; else $etat = "";
-
-
-				echo "<option value=".$lstCaractJ[$i]["idCarac"]. " $etat>".$lstCaractJ[$i]["numCarac"]." - ".$lstCaractJ[$i]["intituleCaracFR"]."|".$lstCaractJ[$i]["intituleCaracUK"]."</option>";    
+					if($lstCaractJ[$i]["idCarac"] == $infJoueur["idExperience_fk"]) $etat = "selected"; else $etat = "";
+					echo "<option value=".$lstCaractJ[$i]["idCarac"]. " $etat>".$lstCaractJ[$i]["numCarac"]." - ".$lstCaractJ[$i]["intituleCaracFR"]."|".$lstCaractJ[$i]["intituleCaracUK"]."</option>";    
 				}
 				?>
                       </select> </td>
@@ -176,27 +168,21 @@ resizeTo(750,500);
                         <?=$agressivite["$lang"]?>
                       </div></td>
                     <td> <select name="idAggre_fk" size="<?=count($lstAgg)?>" id="idAggre_fk">
-                        <?php
+                <?php
 				for($i=0;$i<count($lstAgg);$i++){
-				
-		if($lstAgg[$i]["idAggres"] == $infJoueur["idAggre_fk"]) $etat = "selected"; else $etat = "";
-
-
-				echo "<option value=".$lstAgg[$i]["idAggres"]." $etat>".$lstAgg[$i]["numAggres"]." - ".$lstAgg[$i]["intituleAggresFR"]."|".$lstAgg[$i]["intituleAggresUK"]."</option>";    
+					if($lstAgg[$i]["idAggres"] == $infJoueur["idAggre_fk"]) $etat = "selected"; else $etat = "";
+					echo "<option value=".$lstAgg[$i]["idAggres"]." $etat>".$lstAgg[$i]["numAggres"]." - ".$lstAgg[$i]["intituleAggresFR"]."|".$lstAgg[$i]["intituleAggresUK"]."</option>";    
 				}?>
                       </select></td>
                     <td valign="top"> <div align="center"> 
                         <?=$chef["$lang"]?>
                       </div></td>
                     <td> <select name="idLeader_fk" size="<?=count($lstLeader)?>" id="select6">
-                        <?php
+                <?php
 				for($i=0;$i<count($lstLeader);$i++)
 				{
-				
-						if($lstLeader[$i]["idLeader"] == $infJoueur["idLeader_fk"]) $etat = "selected"; else $etat = "";
-
-
-				echo "<option value=".$lstLeader[$i]["idLeader"]." $etat>".$lstLeader[$i]["numLeader"]." - ".$lstLeader[$i]["intituleLeaderFR"]."|".$lstLeader[$i]["intituleLeaderUK"]."</option>";    
+					if($lstLeader[$i]["idLeader"] == $infJoueur["idLeader_fk"]) $etat = "selected"; else $etat = "";
+					echo "<option value=".$lstLeader[$i]["idLeader"]." $etat>".$lstLeader[$i]["numLeader"]." - ".$lstLeader[$i]["intituleLeaderFR"]."|".$lstLeader[$i]["intituleLeaderUK"]."</option>";    
 				}
 				?>
                       </select></td>
@@ -212,15 +198,11 @@ resizeTo(750,500);
                         <?=$honnetete["$lang"]?>
                       </center></td>
                     <td> <select name="idHonnetete_fk" size="<?=count($lstHon)?>" id="select4">
-                        <?php
+                <?php
 				for($i=0;$i<count($lstHon);$i++)
 				{
-
-				
-		if($lstHon[$i]["idHonnetete"] == $infJoueur["idHonnetete_fk"]) $etat = "selected"; else $etat = "";
-
-
-				echo "<option value=".$lstHon[$i]["idHonnetete"]." $etat>".$lstHon[$i]["numHonnetete"]." - ".$lstHon[$i]["intituleHonneteteFR"]."|".$lstHon[$i]["intituleHonneteteUK"]."</option>";    
+					if($lstHon[$i]["idHonnetete"] == $infJoueur["idHonnetete_fk"]) $etat = "selected"; else $etat = "";
+					echo "<option value=".$lstHon[$i]["idHonnetete"]." $etat>".$lstHon[$i]["numHonnetete"]." - ".$lstHon[$i]["intituleHonneteteFR"]."|".$lstHon[$i]["intituleHonneteteUK"]."</option>";    
 				}
 				?>
                       </select></td>
@@ -244,14 +226,11 @@ resizeTo(750,500);
                       <?=$endurance["$lang"]?>
                     </td>
                     <td width="25%" height="25"><select name="idEndurance" id="idEndurance">
-                        <?php
+                <?php
 				for($i=0;$i<count($lstCaractJ);$i++)
 				{
-				
-		if($lstCaractJ[$i]["numCarac"] == $infJoueur["idEndurance"]) $etat = "selected"; else $etat = "";
-
-
-				echo "<option value=".$lstCaractJ[$i]["idCarac"]." $etat>".$lstCaractJ[$i]["numCarac"]." - ".$lstCaractJ[$i]["intituleCaracFR"]."|".$lstCaractJ[$i]["intituleCaracUK"]."</option>";    
+					if($lstCaractJ[$i]["numCarac"] == $infJoueur["idEndurance"]) $etat = "selected"; else $etat = "";
+					echo "<option value=".$lstCaractJ[$i]["idCarac"]." $etat>".$lstCaractJ[$i]["numCarac"]." - ".$lstCaractJ[$i]["intituleCaracFR"]."|".$lstCaractJ[$i]["intituleCaracUK"]."</option>";    
 				}
 				?>
                       </select> </td>
@@ -259,13 +238,11 @@ resizeTo(750,500);
                       <?=$gardien["$lang"]?>
                     </td>
                     <td width="25%" height="25"><select name="idGardien" id="idGardien">
-                        <?php
+                <?php
 				for($i=0;$i<count($lstCaractJ);$i++)
 				{
-				
-		if($lstCaractJ[$i]["numCarac"] == $infJoueur["idGardien"]) $etat = "selected"; else $etat = "";
-			
-				echo "<option value=".$lstCaractJ[$i]["idCarac"]." $etat>".$lstCaractJ[$i]["numCarac"]." - ".$lstCaractJ[$i]["intituleCaracFR"]."|".$lstCaractJ[$i]["intituleCaracUK"]."</option>";    
+					if($lstCaractJ[$i]["numCarac"] == $infJoueur["idGardien"]) $etat = "selected"; else $etat = "";
+					echo "<option value=".$lstCaractJ[$i]["idCarac"]." $etat>".$lstCaractJ[$i]["numCarac"]." - ".$lstCaractJ[$i]["intituleCaracFR"]."|".$lstCaractJ[$i]["intituleCaracUK"]."</option>";    
 				}
 				?>
                       </select></td>
@@ -275,13 +252,11 @@ resizeTo(750,500);
                       <?=$construction["$lang"]?>
                     </td>
                     <td height="25"><select name="idConstruction" id="idConstruction">
-                        <?php
+                <?php
 				for($i=0;$i<count($lstCaractJ);$i++)
 				{
-				
-		if($lstCaractJ[$i]["numCarac"] == $infJoueur["idConstruction"]) $etat = "selected"; else $etat = "";
-			
-				echo "<option value=".$lstCaractJ[$i]["idCarac"]." $etat>".$lstCaractJ[$i]["numCarac"]." - ".$lstCaractJ[$i]["intituleCaracFR"]."|".$lstCaractJ[$i]["intituleCaracUK"]."</option>";    
+					if($lstCaractJ[$i]["numCarac"] == $infJoueur["idConstruction"]) $etat = "selected"; else $etat = "";
+					echo "<option value=".$lstCaractJ[$i]["idCarac"]." $etat>".$lstCaractJ[$i]["numCarac"]." - ".$lstCaractJ[$i]["intituleCaracFR"]."|".$lstCaractJ[$i]["intituleCaracUK"]."</option>";    
 				}
 				?>
                       </select></td>
@@ -289,14 +264,11 @@ resizeTo(750,500);
                       <?=$passe["$lang"]?>
                     </td>
                     <td height="25"><select name="idPasse" id="idPasse">
-                        <?php
+                <?php
 				for($i=0;$i<count($lstCaractJ);$i++)
 				{
-				
-		if($lstCaractJ[$i]["numCarac"] == $infJoueur["idPasse"]) $etat = "selected"; else $etat = "";
-
-
-				echo "<option value=".$lstCaractJ[$i]["idCarac"]." $etat>".$lstCaractJ[$i]["numCarac"]." - ".$lstCaractJ[$i]["intituleCaracFR"]."|".$lstCaractJ[$i]["intituleCaracUK"]."</option>";    
+					if($lstCaractJ[$i]["numCarac"] == $infJoueur["idPasse"]) $etat = "selected"; else $etat = "";
+					echo "<option value=".$lstCaractJ[$i]["idCarac"]." $etat>".$lstCaractJ[$i]["numCarac"]." - ".$lstCaractJ[$i]["intituleCaracFR"]."|".$lstCaractJ[$i]["intituleCaracUK"]."</option>";    
 				}
 				?>
                       </select></td>
@@ -306,14 +278,11 @@ resizeTo(750,500);
                       <?=$ailier["$lang"]?>
                     </td>
                     <td height="25"><select name="idAilier" id="idAilier">
-                        <?php
+                <?php
 				for($i=0;$i<count($lstCaractJ);$i++)
 				{
-				
-		if($lstCaractJ[$i]["numCarac"] == $infJoueur["idAilier"]) $etat = "selected"; else $etat = "";
-
-
-				echo "<option value=".$lstCaractJ[$i]["idCarac"]." $etat>".$lstCaractJ[$i]["numCarac"]." - ".$lstCaractJ[$i]["intituleCaracFR"]."|".$lstCaractJ[$i]["intituleCaracUK"]."</option>";    
+					if($lstCaractJ[$i]["numCarac"] == $infJoueur["idAilier"]) $etat = "selected"; else $etat = "";
+					echo "<option value=".$lstCaractJ[$i]["idCarac"]." $etat>".$lstCaractJ[$i]["numCarac"]." - ".$lstCaractJ[$i]["intituleCaracFR"]."|".$lstCaractJ[$i]["intituleCaracUK"]."</option>";    
 				}
 				?>
                       </select></td>
@@ -321,14 +290,11 @@ resizeTo(750,500);
                       <?=$defense["$lang"]?>
                     </td>
                     <td height="25"><select name="idDefense" id="idDefense">
-                        <?php
+                <?php
 				for($i=0;$i<count($lstCaractJ);$i++)
 				{
-				
-		if($lstCaractJ[$i]["numCarac"] == $infJoueur["idDefense"]) $etat = "selected"; else $etat = "";
-
-
-				echo "<option value=".$lstCaractJ[$i]["idCarac"]." $etat>".$lstCaractJ[$i]["numCarac"]." - ".$lstCaractJ[$i]["intituleCaracFR"]."|".$lstCaractJ[$i]["intituleCaracUK"]."</option>";    
+					if($lstCaractJ[$i]["numCarac"] == $infJoueur["idDefense"]) $etat = "selected"; else $etat = "";
+					echo "<option value=".$lstCaractJ[$i]["idCarac"]." $etat>".$lstCaractJ[$i]["numCarac"]." - ".$lstCaractJ[$i]["intituleCaracFR"]."|".$lstCaractJ[$i]["intituleCaracUK"]."</option>";    
 				}
 				?>
                       </select></td>
@@ -338,14 +304,11 @@ resizeTo(750,500);
                       <?=$buteur["$lang"]?>
                     </td>
                     <td height="25"><select name="idButeur" id="idButeur">
-                        <?php
+                <?php
 				for($i=0;$i<count($lstCaractJ);$i++)
 				{
-				
-	if($lstCaractJ[$i]["numCarac"] == $infJoueur["idButeur"]) $etat = "selected"; else $etat = "";
-
-
-				echo "<option value=".$lstCaractJ[$i]["idCarac"]." $etat>".$lstCaractJ[$i]["numCarac"]." - ".$lstCaractJ[$i]["intituleCaracFR"]."|".$lstCaractJ[$i]["intituleCaracUK"]."</option>";    
+					if($lstCaractJ[$i]["numCarac"] == $infJoueur["idButeur"]) $etat = "selected"; else $etat = "";
+					echo "<option value=".$lstCaractJ[$i]["idCarac"]." $etat>".$lstCaractJ[$i]["numCarac"]." - ".$lstCaractJ[$i]["intituleCaracFR"]."|".$lstCaractJ[$i]["intituleCaracUK"]."</option>";    
 				}
 				?>
                       </select></td>
@@ -353,13 +316,11 @@ resizeTo(750,500);
                       <?=$pa["$lang"]?>
                     </td>
                     <td height="25"><select name="idPA" id="idPA">
-                        <?php
+                <?php
 				for($i=0;$i<count($lstCaractJ);$i++)
 				{
-				
-	if($lstCaractJ[$i]["numCarac"] == $infJoueur["idPA"]) $etat = "selected"; else $etat = "";
-	
-				echo "<option value=".$lstCaractJ[$i]["idCarac"]." $etat>".$lstCaractJ[$i]["numCarac"]." - ".$lstCaractJ[$i]["intituleCaracFR"]."|".$lstCaractJ[$i]["intituleCaracUK"]."</option>";    
+					if($lstCaractJ[$i]["numCarac"] == $infJoueur["idPA"]) $etat = "selected"; else $etat = "";
+					echo "<option value=".$lstCaractJ[$i]["idCarac"]." $etat>".$lstCaractJ[$i]["numCarac"]." - ".$lstCaractJ[$i]["intituleCaracFR"]."|".$lstCaractJ[$i]["intituleCaracUK"]."</option>";    
 				}
 				?>
                       </select></td>
@@ -381,21 +342,14 @@ resizeTo(750,500);
                     <tr> 
                       <td width="25%">&nbsp;Intitul&eacute; :</td>
                       <td width="75%"><select name="optionJoueur" id="optionJoueur">
-                       
-				  
-				  				  <?php
-				  for($i=0;$i<count($option);$i++){
-				  
-						  	if($option[$i]["FR"] == $infJoueur["optionJoueur"]) $etat = "selected"; else $etat = "";
-		  
-				echo "<option value=".$i." ".$etat.">".$option[$i]["FR"]."|".$option[$i]["UK"]."</option>";    
-				  }
-				  
-				  ?>
-
-
+				<?php
+					for($i=0;$i<count($option);$i++){
+				  	  	if($option[$i]["FR"] == $infJoueur["optionJoueur"]) $etat = "selected"; else $etat = "";
+		  				echo "<option value=".$i." ".$etat.">".$option[$i]["FR"]."|".$option[$i]["UK"]."</option>";    
+					}
+				?>
                         </select>
-	</td>
+					  </td>
                     </tr>
                   </table>
                   <p> 

@@ -230,7 +230,7 @@ if ($datemaj >$mkday -$huit){
               <td colspan="3">&nbsp;</td>
             </tr>
             <tr> 
-              <td width="40%" align="left">&nbsp; <font color="#000099"><b><?=$joueurDTN["idHattrickJoueur"]?>&nbsp;-&nbsp;<?=$joueurDTN["prenomJoueur"]?> <?=$joueurDTN["nomJoueur"]?>&nbsp;-&nbsp;<?php 
+              <td width="40%" align="left">&nbsp; <font color="#000099"><b><?=$joueurDTN["idHattrickJoueur"]?>&nbsp;-&nbsp;<?=$joueurDTN["prenomJoueur"]?> <?=$joueurDTN["nomJoueur"]?><?php if (isset($joueurDTN["surnomJoueur"])) echo " (".$joueurDTN["surnomJoueur"].")"; ?>&nbsp;-&nbsp;<?php 
               $ageetjours = ageetjour($joueurDTN["datenaiss"]);
               $tabage = explode(" - ",$ageetjours);
               echo $tabage[0];?>&nbsp;ans&nbsp;-&nbsp;<?=$tabage[1]?>&nbsp;jours<br>&nbsp; <?=round(($joueurDTN["salary"]/10),2)?>&nbsp;&euro;/semaine&nbsp;

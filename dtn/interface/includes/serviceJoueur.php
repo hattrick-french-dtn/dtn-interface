@@ -44,6 +44,7 @@ function getTousJoueurSQL(){
         idJoueur,
         nomJoueur,
         prenomJoueur,
+		surnomJoueur,
         dateSaisieJoueur,
         dateDerniereModifJoueur,
         date_modif_effectif,
@@ -1273,7 +1274,7 @@ function getDataUnJoueurFromHT_usingPHT($idJoueurHT){
     $ht_session=existAutorisationClub($_SESSION['HT']->getPlayer($idJoueurHT)->getTeamId());
     
     if ($ht_session == false && isset($_SESSION['HT'])) {
-      $ht_session = $_SESSION['HT'];
+		$ht_session = $_SESSION['HT'];
     }
 
     // On récupére sur HT les informations du joueur
@@ -1282,6 +1283,9 @@ function getDataUnJoueurFromHT_usingPHT($idJoueurHT){
     $row_joueur['idHattrickJoueur'] = $player->getId();
     $row_joueur['nomJoueur']        = strtr($player->getLastName(),"'"," ");
     $row_joueur['prenomJoueur']     = strtr($player->getFirstName(),"'"," ");
+	if($player->getNickName() !== null && $player->getNickName() !== '') {
+		$row_joueur['surnomJoueur']     = strtr($player->getNickName(),"'"," ");
+	}
     $jouractuel                     = (mktime(0,0,0,date("m"),date("d"),date("Y"))-574729200)/3600/24;
     $agejoueurenj                   = $player->getAge()*112+$player->getDays();
     $row_joueur['datenaiss']        = round(($jouractuel - $agejoueurenj),0);
@@ -1300,9 +1304,9 @@ function getDataUnJoueurFromHT_usingPHT($idJoueurHT){
     $row_joueur['transferListed']   = $player->isTransferListed();
     if ($row_joueur['transferListed'] === null || empty($row_joueur['transferListed'])) 
     {
-      $row_joueur['transferListed']=0;
+		$row_joueur['transferListed']=0;
     } else {
-      $row_joueur['transferListed']=1;
+		$row_joueur['transferListed']=1;
     }
     $row_joueur['idEndurance']      = $player->getStamina();
 
@@ -1310,12 +1314,12 @@ function getDataUnJoueurFromHT_usingPHT($idJoueurHT){
     $row_joueur['idGardien']        = $player->getKeeper();
     if($row_joueur['idGardien']=="")
     {
-      $row_joueur['caracVisible'] = false;
+		$row_joueur['caracVisible'] = false;
 //echo("non_visible");
     }
     else
     {
-      $row_joueur['caracVisible'] = true;
+		$row_joueur['caracVisible'] = true;
 //echo("visible");
     }
 
@@ -1390,6 +1394,9 @@ function getDataMesJoueursFromHT_usingPHT($teamID){
         $row_joueur[$i]['idHattrickJoueur'] = $player->getId();
         $row_joueur[$i]['nomJoueur']        = strtr($player->getLastName(),"'"," ");
         $row_joueur[$i]['prenomJoueur']     = strtr($player->getFirstName(),"'"," ");
+		if($player->getNickName() !== null && $player->getNickName() !== '') {
+			$row_joueur[$i]['surnomJoueur']     = strtr($player->getNickName(),"'"," ");
+		}
         $jouractuel                         = (mktime(0,0,0,date("m"),date("d"),date("Y"))-574729200)/3600/24;
         $agejoueurenj                       = $player->getAge()*112+$player->getDays();
         $row_joueur[$i]['datenaiss']        = round(($jouractuel - $agejoueurenj),0);
@@ -1554,6 +1561,10 @@ function ajoutJoueur($ht_user,$role_user,$joueurHT,$joueurDTN,$posteAssigne) {
 
     $sql = "INSERT INTO $tbl_joueurs (";
     $sql .= " nomJoueur,";
+    $sql .= " prenomJoueur,";
+	if (isset($joueurHT['surnomJoueur'])) {
+		$sql .= " surnomJoueur,";
+	}
     $sql .= " idAggre_fk,";
     $sql .= " idLeader_fk,";
     $sql .= " idCaractere_fk,";
@@ -1591,6 +1602,10 @@ function ajoutJoueur($ht_user,$role_user,$joueurHT,$joueurDTN,$posteAssigne) {
     $sql .= " salary";
     $sql .= ") VALUES (";
     $sql .= " '".$joueurHT['nomJoueur']."'";
+    $sql .= " '".$joueurHT['prenomJoueur']."'";
+	if (isset($joueurHT['surnomJoueur'])) {
+		$sql .= " '".$joueurHT['surnomJoueur']."'";
+	}
     $sql .= ",'".$joueurHT['idAggre_fk']."'";
     $sql .= ",'".$joueurHT['idLeader_fk']."'";
     $sql .= ",'".$joueurHT['idCaractere_fk']."'";
@@ -1751,6 +1766,7 @@ function updateJoueur($joueur) {
 	$sql="UPDATE $tbl_joueurs SET ";
 	if (isset($joueur['nomJoueur']))                {$sql.="nomJoueur = '".$joueur['nomJoueur']."',";}
 	if (isset($joueur['prenomJoueur']))             {$sql.="prenomJoueur = '".$joueur['prenomJoueur']."',";}
+	if (isset($joueur['surnomJoueur']))             {$sql.="surnomJoueur = '".$joueur['surnomJoueur']."',";}
 	if (isset($joueur['teamid']))                   {$sql.="teamid = '".$joueur['teamid']."',";}
 	if (isset($joueur['idHattrickJoueur']))         {$sql.="idHattrickJoueur = '".$joueur['idHattrickJoueur']."',";}
 	if (isset($joueur['idAggre_fk']))               {$sql.="idAggre_fk = '".$joueur['idAggre_fk']."',";}
@@ -1910,8 +1926,11 @@ function majJoueur($ht_user,$role_user,$joueurHT,$joueurDTN){
 		unset($update_joueur_entrainement);
   
 		if ($joueurHT != false){ //check that correct player is fetched
-			$resMAJ['HTML']="<tr valign=\"top\"> <td><a href=\"".$_SESSION['url']."/joueurs/ficheDTN.php?id=".$joueurDTN["idJoueur"]."\">".$joueurHT["idHattrickJoueur"]."</a><b><i> / ".$joueurHT["prenomJoueur"]." ".$joueurHT["nomJoueur"]. "</b></i></td><td>";
-
+			$resMAJ['HTML']="<tr valign=\"top\"> <td><a href=\"".$_SESSION['url']."/joueurs/ficheDTN.php?id=".$joueurDTN["idJoueur"]."\">".$joueurHT["idHattrickJoueur"]."</a><b><i> / ".$joueurHT["prenomJoueur"]." ".$joueurHT["nomJoueur"];
+			if (isset($joueurHT["surnomJoueur"])) {
+				$resMAJ['HTML'].=" (".$joueurHT["surnomJoueur"].")";
+			}
+			$resMAJ['HTML'].="</b></i></td><td>";
             
 			//******** correction des noms des joueurs ************//
 			if ($joueurDTN['nomJoueur']!=$joueurHT['nomJoueur']){
@@ -1920,7 +1939,14 @@ function majJoueur($ht_user,$role_user,$joueurHT,$joueurDTN){
 			if ($joueurDTN['prenomJoueur']!=$joueurHT['prenomJoueur']){
 				$update_joueur['prenomJoueur']=$joueurHT['prenomJoueur'];
 			}
-		  
+			if (isset($joueurHT["surnomJoueur"])) {
+				if ($joueurDTN['surnomJoueur']!=$joueurHT['surnomJoueur']){
+					$update_joueur['surnomJoueur']=$joueurHT['surnomJoueur'];
+				}
+			}
+			else if (isset($joueurDTN["surnomJoueur"])) {
+				$update_joueur['surnomJoueur']='';
+			}		  
 		  
 			//*******  DATE NAISSANCE *******//
 			if ($joueurDTN['datenaiss']!=$joueurHT['datenaiss']){

@@ -172,7 +172,7 @@ require("../menu/menuJoueur.php");
   <SPAN ID=textespan>
     
     <b>[b]
-    <?=strtolower($infJ["prenomJoueur"])?> <?=strtolower($infJ["nomJoueur"])?> 
+    <?=strtolower($infJ["prenomJoueur"])?> <?=strtolower($infJ["nomJoueur"])?> <?php if (isset($infJ["surnomJoueur"])) echo " (".$infJ["surnomJoueur"].")"; ?>
     (
     <?=strtolower($infJ["idHattrickJoueur"])?>
     ) 
