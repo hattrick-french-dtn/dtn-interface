@@ -412,7 +412,9 @@ $val2 = $val[6];
 			  ?>
                 <tr bgcolor="#FFFFFF" align="right"> 
                     <td align="left" nowrap>&nbsp;<img src="../images/time_<?=$img_nb?>.gif" onMouseOver="return escape('<?=$zealt?>')" >&nbsp;<a href ="<?=$url?>/joueurs/fiche.php?id=<?=$l["idJoueur"]?>" class=bred1>
-                    <b><?=strtolower($l["prenomJoueur"])?> <?=strtolower($l["nomJoueur"])?></b></a>
+                    <b><?=strtolower($l["prenomJoueur"])?> <?=strtolower($l["nomJoueur"])?>
+					<?php if (isset($l["surnomJoueur"])) echo " (".$l["surnomJoueur"].")"; ?>
+					</b></a>
                     
                     </td>
                     

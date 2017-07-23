@@ -432,7 +432,7 @@ for ($lstnb=16;$lstnb<27;$lstnb++ ){
 			}
 ?>
 			<?=strtolower($l["prenomJoueur"])?>&nbsp;<?=strtolower($l["nomJoueur"])?>
-		
+			<?php if (isset($l["surnomJoueur"])) echo " (".$l["surnomJoueur"].")"; ?>
 <?php
 			if 	( ($_SESSION['sesUser']["idNiveauAcces"]==1 || $_SESSION['sesUser']["idNiveauAcces"]==2 || $_SESSION['sesUser']["idNiveauAcces"]==4) 
 				|| (($_SESSION['sesUser']["idNiveauAcces"]==3)

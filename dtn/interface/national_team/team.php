@@ -244,6 +244,7 @@ $val2 = $val[6];
 		?><a href ="<?=$url?>/joueurs/fiche.php?id=<?=$l["idJoueur"]?>" class="bred1">
 <?php }?>
 <?=strtolower($l["prenomJoueur"])?> <?=strtolower($l["nomJoueur"])?>
+<?php if (isset($l["surnomJoueur"])) echo " (".$l["surnomJoueur"].")"; ?>
 <?php
 	if 	( ($sesUser["idNiveauAcces"]==1 || $sesUser["idNiveauAcces"]==4) 
 		|| (($sesUser["idNiveauAcces"]==2 || $sesUser["idNiveauAcces"]==3)

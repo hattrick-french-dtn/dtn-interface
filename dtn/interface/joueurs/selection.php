@@ -257,7 +257,7 @@ document.body.scrollTop = scrollPos;
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
 	<tr bgcolor = "<?=$bgcolor?>">  
         <td width="200" > 
-            &nbsp;<a href ="<?=$url?>/joueurs/fiche.php?id=<?=$l["idJoueur"]?>" class=<?=$class?>><span class=<?=$class?>>  <b><?=strtolower($l["prenomJoueur"])?> <?=strtolower($l["nomJoueur"])?></b>
+            &nbsp;<a href ="<?=$url?>/joueurs/fiche.php?id=<?=$l["idJoueur"]?>" class=<?=$class?>><span class=<?=$class?>>  <b><?=strtolower($l["prenomJoueur"])?> <?=strtolower($l["nomJoueur"])?><?php if (isset($l["surnomJoueur"])) echo " (".$l["surnomJoueur"].")"; ?></b>
             </span>
         </a>
         <div align="center"> </div></td>

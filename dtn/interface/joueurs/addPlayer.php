@@ -164,7 +164,7 @@ if (isset($_SESSION["HT"]) && isset($_REQUEST['listID']) ) {
     $arrayID=null;
     $player=null;
     $listID=str_replace(CHR(32),"",$_REQUEST['listID']);
-    $arrayID = split(";",$listID);
+    $arrayID = explode(";",$listID);
     for($i=0 ; $i<count($arrayID);$i++)
     {
       $joueurHT[$i]=getDataUnJoueurFromHT_usingPHT($arrayID[$i]);
@@ -200,7 +200,7 @@ if (isset($_SESSION["HT"]) && isset($_REQUEST['listID']) ) {
               /*Si le joueur existe sur HT*/
               if ($joueurHT[$i]["NATIVELEAGUENAME"]!="France") {
                 /* Si le joueur est étranger*/
-                $commentaireJ="est un joueur étranger";
+                $commentaireJ="est un joueur &eacute;tranger";
                 $lien="n/a";
               }
               else {
@@ -208,12 +208,12 @@ if (isset($_SESSION["HT"]) && isset($_REQUEST['listID']) ) {
                   $joueurDTN=getJoueurHt($joueurHT[$i]['idHattrickJoueur']);
                   if ($joueurDTN['idHattrickJoueur']==$joueurHT[$i]['idHattrickJoueur']) {
                     /*si le joueur existe déja dans la base*/
-                    $commentaireJ="existe déjà dans la base";
+                    $commentaireJ="existe d&eacute;j&agrave; dans la base";
                     $lien="<u><a href='fiche.php?htid=$arrayID[$i]' color='#0000FF' target='_NEW'>Voir</a></u>";
                   }
                   else {if ($joueurHT[$i]['transferListed']==0) { 
                         /*Si le joueur existe sur HT mais n'est pas en vente*/
-                        $commentaireJ="n'est pas à vendre";
+                        $commentaireJ="n'est pas &agrave; vendre";
                         $lien="<u><a href='addPlayer.php#".$arrayID[$i]."' color='#0000FF'>Saisir</a></u>";
                         $Nb=count($playerToAddManual);
                         $playerToAddManual[$Nb]=$joueurHT[$i];
@@ -228,7 +228,7 @@ if (isset($_SESSION["HT"]) && isset($_REQUEST['listID']) ) {
                           $lien="n/a";
                         }
                         else{
-                          $commentaireJ="Inséré dans la base DTN !!";
+                          $commentaireJ="Ins&eacute;r&eacute; dans la base DTN !!";
                           $lien="<u><a href='fiche.php?htid=$arrayID[$i]' color='#0000FF' target='_NEW'>Voir</a></u>";
                           $rejet=0;
                         }
@@ -253,7 +253,7 @@ if (isset($_SESSION["HT"]) && isset($_REQUEST['listID']) ) {
               <td width="1" bgcolor="#000000"><img src="../images/spacer.gif" width="1" height="1"></td>
               <td width="10%"> <?=$arrayID[$i]?></td>
               <td width="1" bgcolor="#000000"><img src="../images/spacer.gif" width="1" height="1"></td>
-              <td width="30%"><?=strtr($joueurHT[$i]['nomJoueur'],"'"," ")?></td>
+              <td width="30%"><?=strtr($joueurHT[$i]['prenomJoueur'],"'"," ")?> <?=strtr($joueurHT[$i]['nomJoueur'],"'"," ")?></td>
               <td width="1" bgcolor="#000000"><img src="../images/spacer.gif" width="1" height="1"></td>
               <td width="50%"><font color="<?=$FontColor?>"><?=$commentaireJ?></font></td>
               <td width="1" bgcolor="#000000"><img src="../images/spacer.gif" width="1" height="1"></td>

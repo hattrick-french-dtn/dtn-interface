@@ -409,6 +409,7 @@ $val2 = $val[6];
                       &nbsp;<a href ="javascript:fiche('<?=$lstJoueurs["idJoueur"]?>')" class='<?=$class?>'> 
                       <b>   <?=strtolower($lstJoueurs["nomJoueur"])?></b>
                    <?=strtolower($lstJoueurs["prenomJoueur"])?>
+				   <?php if (isset($lstJoueurs["surnomJoueur"])) echo " (".$lstJoueurs["surnomJoueur"].")"; ?>
                       </a>
                       <div align="center"> </div></td>
                     <td width="1" bgcolor="#000000" ><img src="../images/spacer.gif" width="1" height="1"></td>

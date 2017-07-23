@@ -215,7 +215,7 @@ $lstJ = $maBase->select($sql);
 		
 			<TR>
 				<TD ><BR>
-					<font color="#CC2233"><?=$j+1?>.</font> <A HREF="../joueurs/fiche.php?id=<?=$lstJ[$j]["idJoueur"]?>"><?=$lstJ[$j]["prenomJoueur"]?> <?=$lstJ[$j]["nomJoueur"]?> </A>&nbsp; 
+					<font color="#CC2233"><?=$j+1?>.</font> <A HREF="../joueurs/fiche.php?id=<?=$lstJ[$j]["idJoueur"]?>"><?=$lstJ[$j]["prenomJoueur"]?> <?=$lstJ[$j]["nomJoueur"]?><?php if (isset($lstJ[$j]["surnomJoueur"])) echo " (".$lstJ[$j]["surnomJoueur"].")"; ?> </A>&nbsp; 
 					  <?php if($lstJ[$j]["optionJoueur"]) echo "<font color=\"#CC22DD\">[<i>".$option[$lstJ[$j]["optionJoueur"]]["FR"]."</i>]</font>"?>
 				</TD>
 				<TD >

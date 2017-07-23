@@ -166,6 +166,9 @@ function scanid()
     a=a+'[b]';
     a=a+'<?=ucwords(strtolower($infJs[$i]["prenomJoueur"]))?> ';
     a=a+'<?=ucwords(strtolower($infJs[$i]["nomJoueur"]))?>';
+	<?php if (isset($infJs[$i]["surnomJoueur"])) { ?>
+    a=a+' (<?=ucwords($infJs[$i]["surnomJoueur"])?>)';
+	<?php } ?>
     a=a+' (<?=strtolower($infJs[$i]["idHattrickJoueur"])?>)';
     a=a+'[/b]'; 
   	a=a+' <?=$tabage[$i][0]?> ans et <?=$tabage[$i][1]?> jour';
