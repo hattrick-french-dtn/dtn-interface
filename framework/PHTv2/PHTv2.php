@@ -7,7 +7,6 @@
  * @version 2.21
  * @license http://www.php.net/license/3_0.txt
  */
- 
 
 /** */
 class CHPPConnection
@@ -17587,7 +17586,7 @@ class HTPlayer extends HTCommonSubscriber
 	{
 		if($this->isSkillsAvailable())
 		{
-			if(!isset($this->keeper) || $this->keeper === null)
+			if((!isset($this->keeper) || $this->keeper === null) && is_object($this->getXml()->getElementsByTagName('KeeperSkill')->item(0)))
 			{
 				$this->keeper = $this->getXml()->getElementsByTagName('KeeperSkill')->item(0)->nodeValue;
 			}
@@ -17605,7 +17604,7 @@ class HTPlayer extends HTCommonSubscriber
 	{
 		if($this->isSkillsAvailable())
 		{
-			if(!isset($this->playmaker) || $this->playmaker === null)
+			if((!isset($this->playmaker) || $this->playmaker === null) && is_object($this->getXml()->getElementsByTagName('PlaymakerSkill')->item(0)))
 			{
 				$this->playmaker = $this->getXml()->getElementsByTagName('PlaymakerSkill')->item(0)->nodeValue;
 			}
@@ -17623,7 +17622,7 @@ class HTPlayer extends HTCommonSubscriber
 	{
 		if($this->isSkillsAvailable())
 		{
-			if(!isset($this->scorer) || $this->scorer === null)
+			if((!isset($this->scorer) || $this->scorer === null) && is_object($this->getXml()->getElementsByTagName('ScorerSkill')->item(0)))
 			{
 				$this->scorer = $this->getXml()->getElementsByTagName('ScorerSkill')->item(0)->nodeValue;
 			}
@@ -17641,7 +17640,7 @@ class HTPlayer extends HTCommonSubscriber
 	{
 		if($this->isSkillsAvailable())
 		{
-			if(!isset($this->passing) || $this->passing === null)
+			if((!isset($this->passing) || $this->passing === null) && is_object($this->getXml()->getElementsByTagName('PassingSkill')->item(0)))
 			{
 				$this->passing = $this->getXml()->getElementsByTagName('PassingSkill')->item(0)->nodeValue;
 			}
@@ -17659,7 +17658,7 @@ class HTPlayer extends HTCommonSubscriber
 	{
 		if($this->isSkillsAvailable())
 		{
-			if(!isset($this->winger) || $this->winger === null)
+			if((!isset($this->winger) || $this->winger === null) && is_object($this->getXml()->getElementsByTagName('WingerSkill')->item(0)))
 			{
 				$this->winger = $this->getXml()->getElementsByTagName('WingerSkill')->item(0)->nodeValue;
 			}
@@ -17677,7 +17676,7 @@ class HTPlayer extends HTCommonSubscriber
 	{
 		if($this->isSkillsAvailable())
 		{
-			if(!isset($this->defender) || $this->defender === null)
+			if((!isset($this->defender) || $this->defender === null) && is_object($this->getXml()->getElementsByTagName('DefenderSkill')->item(0)))
 			{
 				$this->defender = $this->getXml()->getElementsByTagName('DefenderSkill')->item(0)->nodeValue;
 			}
@@ -17695,7 +17694,7 @@ class HTPlayer extends HTCommonSubscriber
 	{
 		if($this->isSkillsAvailable())
 		{
-			if(!isset($this->setPieces) || $this->setPieces === null)
+			if((!isset($this->setPieces) || $this->setPieces === null) && is_object($this->getXml()->getElementsByTagName('SetPiecesSkill')->item(0)))
 			{
 				$this->setPieces = $this->getXml()->getElementsByTagName('SetPiecesSkill')->item(0)->nodeValue;
 			}
