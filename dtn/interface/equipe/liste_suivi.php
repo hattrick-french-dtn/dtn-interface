@@ -1,5 +1,5 @@
 <?php 
-require("../includes/head.inc.php");
+require_once("../includes/head.inc.php");
 
 
 if(!$sesUser["idAdmin"])
@@ -40,7 +40,7 @@ switch($sesUser["idNiveauAcces"]){
 
 
 $sql = "select * from ht_joueurs where dtnSuiviJoueur_fk ='".$dtn."' ";
-$req = mysql_query($sql);
+$req = $conn->query($sql);
 
 
 ?><title>DTN</title>
@@ -50,8 +50,7 @@ $req = mysql_query($sql);
     <td height="55" ><div align="center">
         <table width="100%" border="0" cellspacing="0" cellpadding="0">
           <tr>
-            <td height="20" bgcolor="#000000"><div align="center"><font color="#FFFFFF">Liste
-                  de mes DTNs</font></div>
+            <td height="20" bgcolor="#000000"><div align="center"><font color="#FFFFFF">Liste de mes DTNs</font></div>
             </td>
           </tr>
           <tr>
@@ -73,7 +72,7 @@ $req = mysql_query($sql);
               </tr>
 			      
 			  <?php
-			 while($lstJoueur = mysql_fetch_array($req)){
+			 foreach($req as $lstJoueur){
 			  ?>
 			      
               <tr>
@@ -85,7 +84,7 @@ $req = mysql_query($sql);
                     <td width="1" height="1" bgcolor="#000000"><img src="../images/spacer.gif" width="1" height="1"></td>
                   </tr>
                   <tr>  
-                    <td>&nbsp;<a href = "fiche.php?dtn=<?=$lstJoueur["idJoueur"]?>">(<?=$lstJoueur["idHattrickJoueur"]?>)&nbsp;<?=$lstJoueur["nomJoueur"]?> <?=$lstJoueur["prenomJoueur"]?></a></td>
+                    <td>&nbsp;<a href = "fiche.php?dtn=<?=$lstJoueur["idJoueur"]?>">(<?=$lstJoueur["idHattrickJoueur"]?>)&nbsp;<?=$lstJoueur["prenomJoueur"]?> <?=$lstJoueur["nomJoueur"]?><?php if (isset($lstJoueur["surnomJoueur"])) echo " (".$lstJoueur["surnomJoueur"].")"; ?></a></td>
                     <td width="1" bgcolor="#000000"><img src="../images/spacer.gif" width="1" height="1"></td>
                     <td>                     <CENTER> <?=($lstJoueur["dateDerniereModifJoueur"])?>
                     </CENTER>             </td>

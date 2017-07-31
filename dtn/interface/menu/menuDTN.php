@@ -3,7 +3,7 @@
 $nomFicPhpCourant = explode("?",$_SERVER['REQUEST_URI']);
 $callbackUrl="http://".$_SERVER['HTTP_HOST'].$nomFicPhpCourant[0]."?mode=retour"; // Url de retour après authentification sur HT
 include($_SERVER['DOCUMENT_ROOT'].'/gestion_session_HT.php');
-include($_SERVER['DOCUMENT_ROOT'].'/language/fr.php');
+include_once($_SERVER['DOCUMENT_ROOT'].'/language/fr.php');
 $_SESSION['acces']="INTERFACE"; // sert à avoir un affichage personnalisé pour les composants utilisés dans le portail et l'interface
 
 if(!isset($_SESSION['sesUser']["idAdmin"]))

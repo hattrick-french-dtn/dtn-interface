@@ -6,7 +6,7 @@ require_once "../_config/CstGlobals.php"; // fonctions d'admin
 require_once "../fonctions/phpxml.php"; // XML to Tree converter
 require_once "../fonctions/AccesBase.php"; // fonction de connexion a la base
 require_once "../fonctions/AdminDtn.php"; // fonctions d'admin
-require("../includes/head.inc.php");
+require_once("../includes/head.inc.php");
 require("../includes/serviceMatchs.php");
 require_once("../CHPP/config.php");
 $maBase = initBD();
@@ -17,7 +17,7 @@ require("../includes/langue.inc.php");
 
 if(!$sesUser["idAdmin"])
 	{
-	header("location: index.php?ErrorMsg=Session Expiree");
+	header("location: ../index.php?ErrorMsg=Session Expiree");
 	}
 
 
@@ -398,7 +398,7 @@ $lstJ = $maBase->select($sql);
 			    <tr align=right>
 			    <td width=15% align=left>
 			     	&nbsp; <a href ="../joueurs/ficheDTN.php?id=<?=$lstJ[$j]["idJoueur"]?>" > 
-                      <b> <?=strtolower($lstJ[$j]["nomJoueur"])?> <?=strtolower($lstJ[$j]["prenomJoueur"])?></b> 
+                      <b> <?=strtolower($lstJ[$j]["prenomJoueur"])?> <?=strtolower($lstJ[$j]["nomJoueur"])?> </b> 
                       </a></td>
 			    <td width=5%  align=center><?=$lstJ[$j]["ageJoueur"]?></td>
 			    <td width=5%  align=center><?php 

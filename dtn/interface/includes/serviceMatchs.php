@@ -4,18 +4,19 @@
 // with playerid=$joueur_id
 
 function listMatchJoueur($joueur_id){
-  global $limitMatch;
-  $sql =  "SELECT *
+	global $conn;
+  	global $limitMatch;
+  	$sql =  "SELECT *
           FROM ht_perfs_individuelle where id_joueur = $joueur_id  ORDER BY date_match DESC ";
 
-  if($limitMatch != "") $sql .= $limitMatch;
- 
-  $result= mysql_query($sql);
-	while($row =  mysql_fetch_array($result)){
-	 $tabS[] = $row;
+  	if($limitMatch != "") $sql .= $limitMatch;
+
+  	$tabS = array();
+  	foreach ($conn->query($sql) as $row){
+	 	array_push($tabS, $row);
 	}
 
-  return $tabS;
+  	return $tabS;
 }
 
 // This function checkif a match exists in database for a specific week and a specific player  
@@ -37,13 +38,14 @@ function checkMatchJoueur($joueur_id,$season,$week,$maBase){
 // return array of 100 matchs from the match $lot-100 to $lot
 // @author gwedalou
 function getMatchByPacket($lot){
+	global $conn;
 	$lot2=$lot-100;
 
 	$sql =  "SELECT	* from ht_perfs_individuelle  ORDER BY date_match DESC LIMIT $lot2,100";
 	
-    $result= mysql_query($sql);
-	while($row =  mysql_fetch_array($result)){
-	$tabS[] = $row;
+	$tabS = array();
+	foreach($conn->query($sql) as $row){
+		array_push($tabS, $row);
 	}
 	return $tabS; 
 }
@@ -67,11 +69,11 @@ function getMatchByPacket($lot){
 // check if match is already include in database
 // MUSTA56 : NE PLUS S'EN SERVIR, UTILISER existMatchBaseDTN
 function isMatchRecorded($id_match,$idjoueur){
-	
+	global $conn;
 	$sql =  "SELECT	id_match from ht_perfs_individuelle  where id_match=$id_match and id_joueur=$idjoueur LIMIT 1";
 	
-    $result= mysql_query($sql);
-	if ($row =  mysql_fetch_array($result)){
+    $result= $conn->query($sql);
+	if ($row = $result->fetch()){
 		return true;
 	}
 	return false;
@@ -114,11 +116,11 @@ function insertMatchAutomatic($perf){
 // @author gwedalou
 
 function updateSeasonWeekMatch($matchid,$playerid,$season,$week){
-
+	global $conn;
 	$sql =  "update ht_perfs_individuelle  set season='$season',week='$week' where id_joueur='$playerid' and id_match='$matchid' LIMIT 1";
-  $result= mysql_query($sql);
+	$result= $conn->exec($sql);
 
-  return $result;
+	return $result;
 }
 
 
@@ -134,26 +136,28 @@ function updateSeasonWeekMatch($matchid,$playerid,$season,$week){
 /*           - dtn/interface/includes/serviceMatchs.php                                   */
 /******************************************************************************************/
 function getSeasonWeekOfMatch($unixTime){
+	global $conn;
 
-$sql = " SELECT
+	$sql = " SELECT
 		UNIX_TIMESTAMP('1997-05-31') as date0
 		FROM dual";
-$req=  mysql_query($sql);
-$res = mysql_fetch_array($req);
 
-$dateInitial = $res["date0"];
-$moisDebutSaison=date("m",$dateInitial);
-$jourDebutSaison=date("d",$dateInitial);
-$anneeDebutSaison=date("Y",$dateInitial);
-
-$difference = round(($unixTime - $dateInitial)/(24*60*60),0); //différence entre la date de la semaine 0(1) saison 1 et la date en paramètre
-$res["season"]=floor($difference/112);
-
-$datedebutsaison = mktime(0, 0, 0, $moisDebutSaison, $jourDebutSaison+(112*$res["season"]), $anneeDebutSaison);
-$difference = round(($unixTime - $datedebutsaison)/(24*60*60),0); //différence entre la date du début de saison de la date en paramètre et la date en paramètre
-$res["week"]=floor(1+$difference/7);
-
-return $res;
+	$req = $conn->query($sql);
+	$res = $req->fetch();
+	
+	$dateInitial = $res["date0"];
+	$moisDebutSaison=date("m",$dateInitial);
+	$jourDebutSaison=date("d",$dateInitial);
+	$anneeDebutSaison=date("Y",$dateInitial);
+	
+	$difference = round(($unixTime - $dateInitial)/(24*60*60),0); //différence entre la date de la semaine 0(1) saison 1 et la date en paramètre
+	$res["season"]=floor($difference/112);
+	
+	$datedebutsaison = mktime(0, 0, 0, $moisDebutSaison, $jourDebutSaison+(112*$res["season"]), $anneeDebutSaison);
+	$difference = round(($unixTime - $datedebutsaison)/(24*60*60),0); //différence entre la date du début de saison de la date en paramètre et la date en paramètre
+	$res["week"]=floor(1+$difference/7);
+	
+	return $res;
 	
 }
 
@@ -191,6 +195,7 @@ return $res;
 }
 */
 
+
 /******************************************************************************************/
 /* Objet : Renvoi les derniers matchs terminés de l'équipe à partir des données Hattrick  */
 /* Modifié le 11/05/2011 par Musta  - Création                                            */
@@ -211,7 +216,7 @@ function getDataDerniersMatchsTeam_usingPHT($teamid,$date_mini_match=null)
 
   //   iterate through match list to find appropriate game.
   foreach($lesMatchs as $match){
-    if (($match->getDate() >= $date_mini_match || $date_mini_match === null) && ($match->isTournament()==false)){
+    if (($match->getDate() >= $date_mini_match || $date_mini_match === null) && ($match->isTournament()==false)  && $match->getType() != 62){
       $matchToLoad[$i]["MATCHID"]=$match->getId();
       $matchToLoad[$i]["MATCHDATE"]=$match->getDate();
       $matchToLoad[$i]["MATCHTYPE"]=$match->getType();
@@ -239,26 +244,27 @@ function getDataDerniersMatchsTeam_usingPHT($teamid,$date_mini_match=null)
 /******************************************************************************************/
 function existMatchBaseDTN($matchid,$joueurid,$maBase=null)
 {
-  $sql =  "SELECT	count(id_match) as nbMatch
+	global $conn;
+	$sql =  "SELECT	count(id_match) as nbMatch
            FROM ht_perfs_individuelle 
            WHERE id_match = $matchid 
            AND id_joueur = $joueurid
            LIMIT 1";
 
-  if ($maBase!=null) {
-    $res = $maBase->select($sql);
-    $countMatch  = $res[0]['nbMatch'];
-  } else {
-   $req= mysql_query($sql) or die(mysql_error()."\n".$sql);
+	if ($maBase!=null) {
+		$res = $maBase->select($sql);
+		$countMatch  = $res['nbMatch'];
+	} else {
+		$req= $conn->query($sql);
     
-    if ($req!=false) {
-      $res = mysql_fetch_array ($req);
-      $countMatch = $res[0]['nbMatch'];
-    }
-  }
-  if ($countMatch==1) {return true;}
+		if ($req!=false) {
+			$res = $req->fetch();
+			$countMatch = $res['nbMatch'];
+		}
+	}
+	if ($countMatch==1) {return true;}
   
-  return false;
+	return false;
 }
 
 
@@ -340,17 +346,18 @@ function existMatchBaseDTN($matchid,$joueurid,$maBase=null)
 /******************************************************************************************/
 function get_perfs_individuelle_byID ($id_joueur=null,$id_match=null,$id_perfs_individuelle=null)
 {
-  require($_SERVER['DOCUMENT_ROOT'].'/dtn/interface/includes/nomTables.inc.php');
+	global $conn;
+	require($_SERVER['DOCUMENT_ROOT'].'/dtn/interface/includes/nomTables.inc.php');
   
-  // Si les paramètres d'entrée sont mal renseignés
-  if (  ($id_joueur===null && $id_match===null && $id_perfs_individuelle===null) ||
+	// Si les paramètres d'entrée sont mal renseignés
+	if (  ($id_joueur===null && $id_match===null && $id_perfs_individuelle===null) ||
         ($id_joueur!==null && $id_match===null && $id_perfs_individuelle===null) ||
         ($id_joueur===null && $id_match!==null && $id_perfs_individuelle===null) )
-  {
-    return false;
-  }
+	{
+		return false;
+	}
   
-  $sql = "SELECT
+	$sql = "SELECT
               season,
               week,
               id_joueur,
@@ -366,17 +373,16 @@ function get_perfs_individuelle_byID ($id_joueur=null,$id_match=null,$id_perfs_i
           FROM
               $tbl_perf";
 
-  if ($id_joueur!=null && $id_match!=null) {
-    $sql .= " WHERE id_joueur = $id_joueur
-              AND   id_match = $id_match";
-  } elseif ($id_perfs_individuelle!=null) {
-    $sql .= " WHERE id_perfs_individuelle = $id_perfs_individuelle";
-  }
+	if ($id_joueur!=null && $id_match!=null) {
+		$sql .= " WHERE id_joueur = $id_joueur AND id_match = $id_match";
+	} elseif ($id_perfs_individuelle!=null) {
+		$sql .= " WHERE id_perfs_individuelle = $id_perfs_individuelle";
+	}
 
-  $result = mysql_query($sql) or die(mysql_error()."\n".$sql);
-	$tabS = mysql_fetch_array($result);
+	$result = $conn->query($sql);
+	$tabS = $result->fetch();
 	
-	mysql_free_result($result);
+	$result = NULL;
 	return	$tabS;
 }
 
@@ -520,38 +526,36 @@ function getDataMatchJoueur($playerid,$teamid,$matchID=null)
 /******************************************************************************************/
 function update_perfs_individuelle($row_perf)
 {
-  require($_SERVER['DOCUMENT_ROOT'].'/dtn/interface/includes/nomTables.inc.php');
+	global $conn;
+	require($_SERVER['DOCUMENT_ROOT'].'/dtn/interface/includes/nomTables.inc.php');
 
-  $sql="UPDATE $tbl_perf SET ";
-  if (isset($row_perf["season"]))         {$sql.="season = ".$row_perf["season"].",";}
-  if (isset($row_perf["week"]))           {$sql.="week = ".$row_perf["week"].",";}
-  if (isset($row_perf["date_match"]))     {$sql.="date_match = '".$row_perf["date_match"]."',";}
-  if (isset($row_perf["id_club"]))        {$sql.="id_club = ".$row_perf["id_club"].",";}
-  if (isset($row_perf["id_role"]))        {$sql.="id_role = ".$row_perf["id_role"].",";}
-  if (isset($row_perf["id_position"]))    {$sql.="id_position = ".$row_perf["id_position"].",";}
-  if (isset($row_perf["id_behaviour"]))   {$sql.="id_behaviour = ".$row_perf["id_behaviour"].",";}
-  if (isset($row_perf["etoile"]))         {$sql.="etoile = ".$row_perf["etoile"].",";}
-  if (isset($row_perf["etoileFin"]))      {$sql.="etoileFin = ".$row_perf["etoileFin"].",";}
-  if (isset($row_perf["idTypeMatch_fk"])) {$sql.="idTypeMatch_fk = ".$row_perf["idTypeMatch_fk"].",";}
+	$sql="UPDATE $tbl_perf SET ";
+	if (isset($row_perf["season"]))         {$sql.="season = ".$row_perf["season"].",";}
+	if (isset($row_perf["week"]))           {$sql.="week = ".$row_perf["week"].",";}
+	if (isset($row_perf["date_match"]))     {$sql.="date_match = '".$row_perf["date_match"]."',";}
+	if (isset($row_perf["id_club"]))        {$sql.="id_club = ".$row_perf["id_club"].",";}
+	if (isset($row_perf["id_role"]))        {$sql.="id_role = ".$row_perf["id_role"].",";}
+	if (isset($row_perf["id_position"]))    {$sql.="id_position = ".$row_perf["id_position"].",";}
+	if (isset($row_perf["id_behaviour"]))   {$sql.="id_behaviour = ".$row_perf["id_behaviour"].",";}
+	if (isset($row_perf["etoile"]))         {$sql.="etoile = ".$row_perf["etoile"].",";}
+	if (isset($row_perf["etoileFin"]))      {$sql.="etoileFin = ".$row_perf["etoileFin"].",";}
+	if (isset($row_perf["idTypeMatch_fk"])) {$sql.="idTypeMatch_fk = ".$row_perf["idTypeMatch_fk"].",";}
   
-  $sql=substr($sql,0,strlen($sql)-1); // On enlève la dernière virgule
+	$sql=substr($sql,0,strlen($sql)-1); // On enlève la dernière virgule
 
-  if (isset($row_perf["id_perfs_individuelle"])) {
-    $sql.=" WHERE
-              id_perfs_individuelle  = ".$row_perf["id_perfs_individuelle"];
-  } elseif (isset($row_perf["id_joueur"]) && isset($row_perf["id_match"])) {
-    $sql.=" WHERE
-                id_joueur = ".$row_perf["id_joueur"]."
-            AND id_match  = ".$row_perf["id_match"];
-  } else return false;
-echo($sql);
-  $reqValid= mysql_query($sql) or die(mysql_error()."\n".$sql);
+	if (isset($row_perf["id_perfs_individuelle"])) {
+		$sql.=" WHERE id_perfs_individuelle  = ".$row_perf["id_perfs_individuelle"];
+	} elseif (isset($row_perf["id_joueur"]) && isset($row_perf["id_match"])) {
+		$sql.=" WHERE id_joueur = ".$row_perf["id_joueur"]." AND id_match  = ".$row_perf["id_match"];
+	} else return false;
+	//echo($sql);
+	$reqValid= $conn->exec($sql);
 
-  if (!$reqValid) {
-    return false;
-  } else {
-      return $row_perf["id_perfs_individuelle"];
-  }
+	if (!$reqValid) {
+		return false;
+	} else {
+		return $row_perf["id_perfs_individuelle"];
+	}
 }
 
 
@@ -567,18 +571,18 @@ echo($sql);
 /******************************************************************************************/
 function insert_perfs_individuelle($row_perf)
 {
-  //echo("<br /><br />row_perf=");print_r($row_perf);
-  require($_SERVER['DOCUMENT_ROOT'].'/dtn/interface/includes/nomTables.inc.php');
+	global $conn;
+	require($_SERVER['DOCUMENT_ROOT'].'/dtn/interface/includes/nomTables.inc.php');
 
-  if (!isset($row_perf['id_club']))       $row_perf['id_club']='NULL';
-  if (!isset($row_perf['id_role']))       $row_perf['id_role']='NULL';
-  if (!isset($row_perf['id_position']))   $row_perf['id_position']='NULL';
-  if (!isset($row_perf['id_behaviour']))  $row_perf['id_behaviour']='NULL';
-  
-  $rech_perf=get_perfs_individuelle_byID($row_perf['id_match'],$row_perf['id_joueur']);
+	if (!isset($row_perf['id_club']))       $row_perf['id_club']='NULL';
+	if (!isset($row_perf['id_role']))       $row_perf['id_role']='NULL';
+	if (!isset($row_perf['id_position']))   $row_perf['id_position']='NULL';
+	if (!isset($row_perf['id_behaviour']))  $row_perf['id_behaviour']='NULL';
 
-  if ($rech_perf==false) { /* la perf n'existe pas dans la base => on l'insère*/
-      $sql = "INSERT INTO $tbl_perf 
+	$rech_perf=get_perfs_individuelle_byID($row_perf['id_match'],$row_perf['id_joueur']);
+
+	if ($rech_perf==false) { /* la perf n'existe pas dans la base => on l'insère*/
+		$sql = "INSERT INTO $tbl_perf 
                 ( season,
                   week,
                   id_joueur,
@@ -606,22 +610,21 @@ function insert_perfs_individuelle($row_perf)
                   ".$row_perf['idTypeMatch_fk']."
                 )";
                  
-      $reqValid= mysql_query($sql) or die(mysql_error()."\n".$sql);
+		$reqValid= $conn->exec($sql);
       
-      if (!$reqValid) {
-        return false;
-      } else {
-        return mysql_insert_id();
-      }
+		if (!$reqValid) {
+			return false;
+		} else {
+			return $conn->lastInsertId();
+		}
 
-  } elseif (isset($row_perf['id_perfs_individuelle']) == 1){ /* la perf existe dans la base => on le met à jour */
-    $row_perf['id_perfs_individuelle'] = $rech_perf['id_perfs_individuelle'];
-    return update_perfs_individuelle($row_perf);
-  } else {
-    return false;
-  }
+	} elseif (isset($row_perf['id_perfs_individuelle']) == 1){ /* la perf existe dans la base => on le met à jour */
+		$row_perf['id_perfs_individuelle'] = $rech_perf['id_perfs_individuelle'];
+		return update_perfs_individuelle($row_perf);
+	} else {
+		return false;
+	}
 }
-
 
 
 /******************************************************************************************/
@@ -658,13 +661,13 @@ function insererMatchsJoueur($playerid,$teamid,$dateLastScanMatchJoueur=null)
           $perf['HTML'].="<tr><td colspan=7>&nbsp;</td>";
         }
 //echo('01');
-//        $role=get_role_byID($perf[$nbMatchsInsere]["id_role"]);
+        $role=get_role_byID($perf[$nbMatchsInsere]["id_role"]);
 //echo('toto');
 //        $behaviour=get_behaviour_byID($perf[$nbMatchsInsere]["id_behaviour"]);
 //echo('02');
         $perf['HTML'].="<td>".$perf[$nbMatchsInsere]['id_match']."</td>
                         <td align=center bgcolor=#fded84><b>".$perf[$nbMatchsInsere]['etoile']."/".$perf[$nbMatchsInsere]['etoileFin']."</b></td>
-                        <td>".$role["nom_role_abbrege"].' '.$behaviour["nom_behaviour"]."</td></tr>";
+                        <td>".$role['nom_role_abbrege']."</td></tr>";
 
         $perf[$nbMatchsInsere]['id_perfs_individuelle'] = insert_perfs_individuelle($perf[$nbMatchsInsere]);
         $nbMatchsInsere++;

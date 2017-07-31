@@ -1,11 +1,11 @@
 <?php 
-require("../includes/head.inc.php");
+require_once("../includes/head.inc.php");
 
 
 if(!$sesUser["idAdmin"])
-	{
+{
 	header("location: index.php?ErrorMsg=Session Expir�");
-	}
+}
 require("../includes/langue.inc.php");
 
 

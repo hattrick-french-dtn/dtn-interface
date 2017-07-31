@@ -1,13 +1,13 @@
 <?php
-require("../includes/head.inc.php");
+require_once("../includes/head.inc.php");
 
 
 
 
 if(!$sesUser["idAdmin"])
-	{
-	header("location: index.php?ErrorMsg=Session Expiree");
-	}
+{
+	header("location: ../index.php?ErrorMsg=Session Expiree");
+}
 
 
 if(!isset($lang)) $lang = "FR";
@@ -67,7 +67,7 @@ if ($infJ["loginAdminSuiveur"] == $sesUser["loginAdmin"]){
 $lienModif="on";					
 
 }						
-$val = array($infJ["scoreGardien"],$infJ["scoreDefense"],$infJ["scoreAilierDef"],$infJ["scoreAilierOff"],$infJ["scoreWtm"],$infJ["scoreMilieu"],$infJ["scoreMilieuOff"],$lstJoueur["scoreAttaquant"]);
+$val = array($infJ["scoreGardien"],$infJ["scoreDefense"],$infJ["scoreAilier"],$infJ["scoreAilierOff"],$infJ["scoreAilierVersMilieu"],$infJ["scoreMilieu"],$infJ["scoreMilieuOff"],$lstJoueur["scoreAttaquant"]);
 sort($val);
 $valMax =  round($val[7],2);
 $val2 = round($val[6],2);
@@ -78,7 +78,7 @@ $verifInternational = verifSelection($id);
 
 ?><html>
 <head>
-<title>Fiche <?=$infJ["nomJoueur"]?> <?=$infJ["prenomJoueur"]?></title>
+<title>Fiche <?=$infJ["prenomJoueur"]?> <?=$infJ["nomJoueur"]?></title>
 <script language="JavaScript" type="text/JavaScript">
 <!--
 
@@ -190,7 +190,7 @@ $idHT=$infJ['idHattrickJoueur'];
           		<td colspan="3">&nbsp;</td>
         	</tr>
         	<tr> 
-          	<td width="40%" align="left">&nbsp; <font color="#000099"><b><?=$infJ["idHattrickJoueur"]?>&nbsp;-&nbsp;<?=$infJ["nomJoueur"]?> <?=$infJ["prenomJoueur"]?>&nbsp;-&nbsp;<?php 
+          	<td width="40%" align="left">&nbsp; <font color="#000099"><b><?=$infJ["idHattrickJoueur"]?>&nbsp;-&nbsp;<?=<?=$infJ["prenomJoueur"]?> $infJ["nomJoueur"]?>&nbsp;-&nbsp;<?php 
 			$ageetjours = ageetjour($infJ["datenaiss"]);
 			$tabage = explode(" - ",$ageetjours);
 			echo $tabage[0];?>&nbsp;ans&nbsp;-&nbsp;<?=$tabage[1]?>&nbsp;jours<br>&nbsp; <?=round(($infJ["salary"]/10),2)?>&nbsp;€/semaine&nbsp;<a href="http://alltid.org/player/<?=$infJ["idHattrickJoueur"]?>" target="_blank"><img src="../images/ahstats.png" width="47" height="16" border="0" align="absmiddle"></a></b></font>          	</td>
@@ -326,8 +326,8 @@ $idHT=$infJ['idHattrickJoueur'];
 			
 			}
 $sql =  "select * from $tbl_caracteristiques where numCarac = ".$val;
-$req = mysql_query($sql);
-$res = mysql_fetch_array($req);
+$req = $conn->query($sql);
+$res = $req->fetch();
 		
 			
 			?><td width = 25%><b><?=$int?> :</B></td><td width = 25%>&nbsp;<?=$res["intituleCaracFR"]?> <?=$nbSemaineE?></td><?php	
@@ -412,11 +412,10 @@ $i++;
                 <td width=15%><div align="center"><b>Auteur</b></div></td>
               </tr>
                <?php
-		   $sql = "select * from $tbl_histomodif LEFT JOIN ht_admin ON idAdmin = idAdmin_fk where idJoueur_fk = $id order by dateHisto desc, heureHisto desc ";
+			$sql = "select * from $tbl_histomodif LEFT JOIN ht_admin ON idAdmin = idAdmin_fk where idJoueur_fk = $id order by dateHisto desc, heureHisto desc ";
 			$sql .= " limit 0,5";
 			
-			$req = mysql_query($sql);
-			while($l = mysql_fetch_array($req)){
+			foreach($conn->query($sql) as $l){
 		   
 		   
 		   ?>
@@ -443,9 +442,9 @@ $i++;
                 <td width=80%><div align="center"><b>Info club [<?=$infJ["nomClub"]?>]</b></div></td>
               </tr>
                <?php
-		   $sqlClubsHisto = "select * from ht_clubs_histo LEFT JOIN ht_clubs ON idClubHT=idClubHT_fk  where idClubHT=".$infJ["teamid"]." order by dateHisto desc, timeHisto desc LIMIT 0,5";
-			$req = mysql_query($sqlClubsHisto);
-			while($lHisto = mysql_fetch_array($req)){
+			$sqlClubsHisto = "select * from ht_clubs_histo LEFT JOIN ht_clubs ON idClubHT=idClubHT_fk  where idClubHT=".$infJ["teamid"]." order by dateHisto desc, timeHisto desc LIMIT 0,5";
+			$req = ;
+			foreach($conn->query($sqlClubsHisto) as $lHisto){
 		   
 		   
 		   ?>

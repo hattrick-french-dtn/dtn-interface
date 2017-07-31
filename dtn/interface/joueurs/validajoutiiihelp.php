@@ -1,14 +1,14 @@
 <?php
-require("../includes/head.inc.php");
+require_once("../includes/head.inc.php");
 
 
 
 
 if(!$sesUser["idAdmin"])
-	{
-	header("location: index.php?ErrorMsg=Session Expiree");
+{
+	header("location: ../index.php?ErrorMsg=Session Expiree");
 	exit();
-	}
+}
 
 
 if(!isset($lang)) $lang = "FR";
@@ -74,7 +74,7 @@ if ($infJ["loginAdminSuiveur"] == $sesUser["loginAdmin"]){
 $lienModif="on";					
 
 }						
-$val = array($infJ["scoreGardien"],$infJ["scoreDefense"],$infJ["scoreAilierDef"],$infJ["scoreAilierOff"],$infJ["scoreWtm"],$infJ["scoreMilieu"],$infJ["scoreMilieuOff"],$lstJoueur["scoreAttaquant"]);
+$val = array($infJ["scoreGardien"],$infJ["scoreDefense"],$infJ["scoreAilier"],$infJ["scoreAilierOff"],$infJ["scoreAilierVersMilieu"],$infJ["scoreMilieu"],$infJ["scoreMilieuOff"],$lstJoueur["scoreAttaquant"]);
 sort($val);
 $valMax =  round($val[7],2);
 $val2 = round($val[6],2);
@@ -84,14 +84,14 @@ $verifInternational = verifSelection($id);
 
 
 // ajout à iiihelp!
-                 $sql = "insert into ht_iiihelp_joueur values (0, ".$infJ["idHattrickJoueur"].", $id, NOW(), $ent_voulu, $map, '$comment', '0000-00-00', 0, '$catage')";
-                 $req=  mysql_query($sql);
+$sql = "insert into ht_iiihelp_joueur values (0, ".$infJ["idHattrickJoueur"].", $id, NOW(), $ent_voulu, $map, '$comment', '0000-00-00', 0, '$catage')";
+$req=  $conn->exec($sql);
 
 
 
 ?><html>
 <head>
-<title>Fiche <?=$infJ["nomJoueur"]?> <?=$infJ["prenomJoueur"]?></title>
+<title>Fiche <?=$infJ["prenomJoueur"]?> <?=$infJ["nomJoueur"]?></title>
 
 <script language="JavaScript" type="text/JavaScript">
 <!--
@@ -205,7 +205,7 @@ require("../menu/menuJoueur.php");
           		<td colspan="3">&nbsp;</td>
         	</tr>
         	<tr> 
-          	<td width="40%" align="left">&nbsp; <font color="#000099"><b><?=$infJ["idHattrickJoueur"]?>&nbsp;-&nbsp;<?=$infJ["nomJoueur"]?> <?=$infJ["prenomJoueur"]?>&nbsp;-&nbsp;<?php 
+          	<td width="40%" align="left">&nbsp; <font color="#000099"><b><?=$infJ["idHattrickJoueur"]?>&nbsp;-&nbsp;<?=$infJ["prenomJoueur"]?> <?=$infJ["nomJoueur"]?>&nbsp;-&nbsp;<?php 
 			$ageetjours = ageetjour($infJ["datenaiss"]);
 			$tabage = explode(" - ",$ageetjours);
 			echo $tabage[0];?>&nbsp;ans&nbsp;-&nbsp;<?=$tabage[1]?>&nbsp;jours<br>&nbsp; <?=round(($infJ["salary"]/10),2)?>&nbsp;€/semaine&nbsp;<a href="http://alltid.org/player/<?=$infJ["idHattrickJoueur"]?>" target="_blank"><img src="../images/ahstats.png" width="47" height="16" border="0" align="absmiddle"></a></b></font>          	</td>
@@ -295,19 +295,12 @@ require("../menu/menuJoueur.php");
 			
 			}
 $sql =  "select * from $tbl_caracteristiques where numCarac = ".$val;
-$req = mysql_query($sql);
-$res = mysql_fetch_array($req);
-		
-			
-			?><td width = 25%><b><?=$int?> :</B></td><td width = 25%>&nbsp;<?=$res["intituleCaracFR"]?> <?=$nbSemaineE?></td><?php	
-
-
-
-
-		  if($i % 2 == 0)  print("</tr><tr>");
-$i++;
-}
-
+$req = $conn->query($sql);
+$res = $req->fetch();
+		?><td width = 25%><b><?=$int?> :</B></td><td width = 25%>&nbsp;<?=$res["intituleCaracFR"]?> <?=$nbSemaineE?></td><?php	
+			if($i % 2 == 0)  print("</tr><tr>");
+				$i++;
+			}
 
 ?>
                     </tr>

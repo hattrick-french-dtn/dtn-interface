@@ -3,30 +3,30 @@
 // Mise a jour de l'historique :
 function listCarac($sens,$limit)
 {
-  $sql = "select * from ht_caracteristiques";
-  $sql .= " limit 0, $limit"; 
+	global $conn;
+	$tabS = array();
+	$sql = "select * from ht_caracteristiques";
+	$sql .= " limit 0, $limit"; 
 
-  $result = mysql_query($sql) or die(mysql_error()."\n".$sql);
-	while($row =  mysql_fetch_array($result)){
-	 $tabS[] = $row;
+	foreach($conn->query($sql) as $row){
+		array_push($tabS, $row);
 	}
 	
 	if($sens == "ASC") array_multisort($tabS,SORT_ASC); else array_multisort($tabS,SORT_DESC);
-	mysql_free_result($result);
 	return	$tabS;
 }
 
 
 function listTypeCarac()
 {
-  $sql = "select * from ht_typecarac";
-  $sql .= " order by idTypeCarac Asc"; 
+	global $conn;
+	$tabS = array();
+	$sql = "select * from ht_typecarac";
+	$sql .= " order by idTypeCarac Asc"; 
 
-  $result = mysql_query($sql) or die(mysql_error()."\n".$sql);
-	while($row =  mysql_fetch_array($result)){
-	 $tabS[] = $row;
+	foreach($conn->query($sql) as $row){
+		array_push($tabS, $row);
 	}
-	mysql_free_result($result);
 	return	$tabS;
 }
 
@@ -43,14 +43,14 @@ function listTypeCarac()
 /******************************************************************************/
 function listTypeCaracEntrainable()
 {
-  $sql = "SELECT * FROM ht_typecarac WHERE isEntrainable = 1 
+	global $conn;
+	$tabS = array();
+	$sql = "SELECT * FROM ht_typecarac WHERE isEntrainable = 1 
           ORDER BY tri_carac Asc"; 
 
-  $result = mysql_query($sql) or die(mysql_error()."\n".$sql);
-	while($row =  mysql_fetch_array($result)){
-	 $tabS[] = $row;
+	foreach($conn->query($sql) as $row){
+		array_push($tabS, $row);
 	}
-	mysql_free_result($result);
 	return	$tabS;
 }
 
@@ -68,24 +68,25 @@ function listTypeCaracEntrainable()
 /******************************************************************************/
 function get_Carac_byID($id,$liste=null)
 {
-  if (empty($liste)) {
+	global $conn;
+	if (empty($liste)) {
 
-    $sql = "SELECT * FROM ht_typecarac WHERE idTypeCarac = $id";
+		$sql = "SELECT * FROM ht_typecarac WHERE idTypeCarac = $id";
   
-    $result = mysql_query($sql) or die(mysql_error()."\n".$sql);
-    if (mysql_num_rows($result)==1) { $tabS = mysql_fetch_array($result); }
-    else { $tabS=false; }
-    mysql_free_result($result);
-    return	$tabS;
-  } else {
-    // On a la liste des rôles en paramètres
-    foreach($liste as $l){
-  		if($id == $l["idTypeCarac"]){
-  			return $l;
-  		}
-  	}
-  	return null;
-  }
+		$result = $conn->query($sql);
+		if ($result->rowCount()==1) { $tabS = $result->fetch(); }
+		else { $tabS=false; }
+		$result=NULL;
+		return	$tabS;
+	} else {
+		// On a la liste des rôles en paramètres
+		foreach($liste as $l){
+			if($id == $l["idTypeCarac"]){
+				return $l;
+			}
+		}
+		return null;
+	}
 }
 
 
@@ -102,13 +103,13 @@ function get_Carac_byID($id,$liste=null)
 /******************************************************************************/
 function list_behaviour()
 {
-  $sql = "SELECT * FROM ht_behaviour"; 
+	global $conn;
+	$tabS = array();
+	$sql = "SELECT * FROM ht_behaviour"; 
 
-  $result = mysql_query($sql) or die(mysql_error()."\n".$sql);
-  while($row =  mysql_fetch_array($result)){
-	 $tabS[] = $row;
+	foreach($conn->query($sql) as $row){
+		array_push($tabS, $row);
 	}
-	mysql_free_result($result);
 	return	$tabS;
 }
 
@@ -127,24 +128,25 @@ function list_behaviour()
 /******************************************************************************/
 function get_behaviour_byID($id,$liste=null)
 {
-  if (empty($liste)) {
+	global $conn;
+	if (empty($liste)) {
 
-    $sql = "SELECT * FROM ht_behaviour WHERE id_behaviour = $id";
+		$sql = "SELECT * FROM ht_behaviour WHERE id_behaviour = $id";
   
-    $result = mysql_query($sql) or die(mysql_error()."\n".$sql);
-    if (mysql_num_rows($result)==1) { $tabS = mysql_fetch_array($result); }
-    else { $tabS=false; }
-    mysql_free_result($result);
-    return	$tabS;
-  } else {
-    // On a la liste des rôles en paramètres
-    foreach($liste as $l){
-  		if($id == $l["id_behaviour"]){
-  			return $l;
-  		} 
-  	}
-  	return null;
-  }
+		$result = $conn->query($sql);
+		if ($result->rowCount()==1) { $tabS = $result->fetch(); }
+		else { $tabS=false; }
+		$result=NULL;
+		return	$tabS;
+	} else {
+		// On a la liste des rôles en paramètres
+		foreach($liste as $l){
+			if($id == $l["id_behaviour"]){
+				return $l;
+			} 
+		}
+		return null;
+	}
 }
 
 
@@ -160,13 +162,13 @@ function get_behaviour_byID($id,$liste=null)
 /******************************************************************************/
 function list_role()
 {
-  $sql = "SELECT * FROM ht_role"; 
+	global $conn;
+	$tabS = array();
+	$sql = "SELECT * FROM ht_role"; 
 
-  $result = mysql_query($sql) or die(mysql_error()."\n".$sql);
-  while($row =  mysql_fetch_array($result)){
-	 $tabS[] = $row;
+	foreach($conn->query($sql) as $row){
+		array_push($tabS, $row);
 	}
-	mysql_free_result($result);
 	return	$tabS;
 }
 
@@ -185,29 +187,25 @@ function list_role()
 /******************************************************************************/
 function get_role_byID($id,$liste=null)
 {
-//echo('titi-'.$liste.'-');
-  if (empty($liste)) {
-//echo('001');
-
-    $sql = "SELECT * FROM ht_role WHERE id_role = $id";
+	global $conn;
+	if (empty($liste)) {
+	
+		$sql = "SELECT * FROM ht_role WHERE id_role = $id";
   
-    $result = mysql_query($sql) or die(mysql_error()."\n".$sql);
-    if (mysql_num_rows($result)==1) { $tabS = mysql_fetch_array($result); }
-    else { $tabS=false; }
-    mysql_free_result($result);
-    return	$tabS;
-//echo('002');
-  } else {
-//echo('003');
-    // On a la liste des rôles en paramètres
-    foreach($liste as $l){
-  		if($id == $l["id_role"]){
-  			return $l;
-  		} 
-  	}
-//echo('004');
-  	return null;
-  }
+		$result = $conn->query($sql);
+		if ($result->rowCount()==1) { $tabS = $result->fetch(); }
+		else { $tabS=false; }
+		$result = NULL;
+		return	$tabS;
+	} else {
+		// On a la liste des rôles en paramètres
+		foreach($liste as $l){
+			if($id == $l["id_role"]){
+				return $l;
+			} 
+		}
+		return null;
+	}
 }
 
 
@@ -217,16 +215,15 @@ function get_role_byID($id,$liste=null)
 
 function listPoste()
 {
+	global $conn;
+	$tabS = array();
 
-  $sql = "SELECT * FROM ht_poste ORDER BY idPosition,idPoste ASC ";
+	$sql = "SELECT * FROM ht_poste ORDER BY idPosition,idPoste ASC ";
   
-  $result = mysql_query($sql) or die(mysql_error()."\n".$sql);
-	while($row =  mysql_fetch_array($result)){
-	 $tabS[] = $row;
+	foreach($conn->query($sql) as $row){
+		array_push($tabS, $row);
 	}
-  mysql_free_result($result);
 	return	$tabS;
-
 }
 
 
@@ -236,31 +233,30 @@ function listPoste()
 
 function listPosition()
 {
-
-  global $sesUser;
-  $sql = "SELECT * FROM ht_position WHERE idPosition!=0";
+	global $conn;
+	$tabS = array();
+	global $sesUser;
+	$sql = "SELECT * FROM ht_position WHERE idPosition!=0";
     
-  switch($sesUser["idNiveauAcces_fk"]){
-  		case "1":
+	switch($sesUser["idNiveauAcces_fk"]){
+  	case "1":
   		break;
-  		case "2":
+  	case "2":
   		if($sesUser["idPosition_fk"] != 0){
-  		$sql .= " AND idPosition = ".$sesUser["idPosition_fk"];
+			$sql .= " AND idPosition = ".$sesUser["idPosition_fk"];
   		}
   		break;
-  		case "3":
+  	case "3":
   		if($sesUser["idPosition_fk"] != 0){
-  		$sql .= " AND idPosition = ".$sesUser["idPosition_fk"];
+			$sql .= " AND idPosition = ".$sesUser["idPosition_fk"];
   		}
   		break;
-  }
-
-  $sql .= " ORDER BY idPosition ASC";
-  $result = mysql_query($sql) or die(mysql_error()."\n".$sql);
-	while($row =  mysql_fetch_array($result)){
-	 $tabS[] = $row;
 	}
-	mysql_free_result($result);
+
+	$sql .= " ORDER BY idPosition ASC";
+	foreach($conn->query($sql) as $row){
+		array_push($tabS, $row);
+	}
 	return	$tabS;
 
 }
@@ -270,16 +266,16 @@ function listPosition()
 
 function listAllPosition()
 {
+	global $conn;
+	$tabS = array();
 
-  global $sesUser;
-  $sql = "SELECT * FROM ht_position WHERE idPosition!=0";
+	global $sesUser;
+	$sql = "SELECT * FROM ht_position WHERE idPosition!=0";
     
-  $sql .= " ORDER BY idPosition ASC";
-  $result = mysql_query($sql) or die(mysql_error()."\n".$sql);
-	while($row =  mysql_fetch_array($result)){
-	 $tabS[] = $row;
+	$sql .= " ORDER BY idPosition ASC";
+	foreach($conn->query($sql) as $row){
+		array_push($tabS, $row);
 	}
-  mysql_free_result($result);
 	return	$tabS;
 
 }
@@ -288,12 +284,13 @@ function listAllPosition()
 
 function getPosition($id)
 {
+	global $conn;
+	$tabS = array();
 
-  $sql = "SELECT * FROM ht_position WHERE idPosition = '".$id."' ";
-  $result = mysql_query($sql) or die(mysql_error()."\n".$sql);
-	 
-	$tabS = mysql_fetch_array($result);
-	mysql_free_result($result);
+	$sql = "SELECT * FROM ht_position WHERE idPosition = '".$id."' ";
+	$res = $conn->query($sql);
+	$tabS = $res->fetch(PDO::FETCH_BOTH);
+
 	return	$tabS;
 
 }
@@ -301,46 +298,50 @@ function getPosition($id)
 
 function listAggres()
 {
+	global $conn;
+	$tabS = array();
+
 	$sql = "select * from ht_aggres  order by numAggres";
-	$result = mysql_query($sql) or die(mysql_error()."\n".$sql);
-	while($row =  mysql_fetch_array($result)){
-	 $tabS[] = $row;
+	foreach($conn->query($sql) as $row){
+		array_push($tabS, $row);
 	}
-	mysql_free_result($result);
 	return	$tabS;
 }
 
 
 function listCaractere()
 {
+	global $conn;
+	$tabS = array();
+
 	$sql = "select * from ht_caractere  order by numCaractere";
-  $result = mysql_query($sql) or die(mysql_error()."\n".$sql);
-	while($row =  mysql_fetch_array($result)){
-	$tabS[] = $row;
+	foreach($conn->query($sql) as $row){
+		array_push($tabS, $row);
 	}
-	mysql_free_result($result);
 	return	$tabS;
 }
 
 function listHonnetete()
 {
+	global $conn;
+	$tabS = array();
+
 	$sql = "select * from ht_honnetete  order by numHonnetete";
-	$result = mysql_query($sql) or die(mysql_error()."\n".$sql);
-	while($row =  mysql_fetch_array($result)){
-	 $tabS[] = $row;
+	foreach($conn->query($sql) as $row){
+		array_push($tabS, $row);
 	}
-  mysql_free_result($result);
 	return	$tabS;
 }
 
 function listLeadership()
 {
+	global $conn;
+	$tabS = array();
+
 	$sql = "select * from ht_leadership  order by numLeader";
-  $result = mysql_query($sql) or die(mysql_error()."\n".$sql);
-	while($row =  mysql_fetch_array($result)){
-	 $tabS[] = $row;
+	foreach($conn->query($sql) as $row){
+		array_push($tabS, $row);
 	}
-  mysql_free_result($result);
 	return	$tabS;
 }
 function afficheLesPlus($zeJoueur,$nomColonne)
@@ -361,6 +362,8 @@ function listPositionResume() {
 
 
 function listGrilleMinima() {
+	global $conn;
+	$tabS = array();
 
 	$sql = "select  ht_grille_minima.*,
                   ht_typecarac1.nomTypeCarac      as nomTypeCarac1,
@@ -381,27 +384,27 @@ function listGrilleMinima() {
           where ht_grille_minima.id_TypeCarac1=ht_typecarac1.idTypeCarac
           and ht_position.idPosition=ht_grille_minima.id_positionAssigne
           order by id_grille";
-	$result = mysql_query($sql) or die(mysql_error()."\n".$sql);
-	while($row =  mysql_fetch_array($result)){
-	$tabS[] = $row;
+
+	foreach($conn->query($sql) as $row){
+		array_push($tabS, $row);
 	}
-  mysql_free_result($result);
 	return	$tabS;
 }
 
 
 function listSeasonWeek() {
+	global $conn;
+	$tabS = array();
 
 	$sql = "SELECT  distinct concat('S',cast(season as char),'.W',if(week<10,concat('0',cast(week as char)),cast(week as char))) as seasonWeek
           FROM  ht_calendrier
           WHERE date_fin<adddate(CURRENT_DATE(), interval 7 day)
           AND   date_deb>(select min(date_match) from ht_perfs_individuelle)
           ORDER BY season DESC, week DESC";
-	$result = mysql_query($sql) or die(mysql_error()."\n".$sql);
-	while($row =  mysql_fetch_array($result)){
-	$tabS[] = $row;
+
+	foreach($conn->query($sql) as $row){
+		array_push($tabS, $row);
 	}
-  mysql_free_result($result);
 	return	$tabS;
 }
 
@@ -419,7 +422,10 @@ function listSeasonWeek() {
 /******************************************************************************/
 function listMatchsU20($season=null)
 {
-  $sql = "SELECT 
+	global $conn;
+	$tabS = array();
+
+	$sql = "SELECT 
              matchs.season,
              matchs.week,
              matchs.tour,
@@ -494,18 +500,16 @@ function listMatchsU20($season=null)
           WHERE DateJournee>=CURDATE() 
           AND   20-floor(datediff(DateJournee,CURDATE())/112) >= 15";
           
-  if ($season==null) {
-    $sql .= " AND season <= truncate((UNIX_TIMESTAMP(sysdate())-UNIX_TIMESTAMP('1997-05-31'))/86400/112,0)+6";
-  } else {
-    $sql .= " AND season <= $season+6";
-  }
-  $sql .= " ORDER BY DateJournee";
-
-  $result = mysql_query($sql) or die(mysql_error()."\n".$sql);
-	while($row =  mysql_fetch_array($result)){
-	 $tabS[] = $row;
+	if ($season==null) {
+		$sql .= " AND season <= truncate((UNIX_TIMESTAMP(sysdate())-UNIX_TIMESTAMP('1997-05-31'))/86400/112,0)+6";
+	} else {
+		$sql .= " AND season <= $season+6";
 	}
-	mysql_free_result($result);
+	$sql .= " ORDER BY DateJournee";
+
+	foreach($conn->query($sql) as $row){
+		array_push($tabS, $row);
+	}
 	return	$tabS;
 }
 

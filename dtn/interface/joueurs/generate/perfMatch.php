@@ -1,13 +1,13 @@
 <?php
-     ini_set('error_reporting', E_ERROR);
-require("../../includes/head.inc.php");
+ini_set('error_reporting', E_ERROR);
+require_once("../../includes/head.inc.php");
 
 
 $sql = "select * from $tbl_joueurs, $tbl_position where idJoueur = $id and ht_posteAssigne  = idPosition";
 $lstJoueur = construitListe($sql, $tbl_joueurs, $tbl_position);
 
 
-$titre="de ".$lstJoueur[0]["prenomJoueur"]." ".$lstJoueur[0]["nomJoueur"];
+$titre="de ".utf8_decode($lstJoueur[0]["prenomJoueur"])." ".utf8_decode($lstJoueur[0]["nomJoueur"]);
 //$sql =  'select * from '.$tbl_perf.', '.$tbl_caracteristiques.', '.$tbl_joueurs.' ' .
 $sql =  "select * from ".$tbl_perf.", ".$tbl_joueurs.
 		" where id_joueur = idHattrickJoueur " .
@@ -20,7 +20,7 @@ if(!isset($tri)) $tri = 10;
 $sql .= " limit 0,".$tri;
 
 
-$req = mysql_query($sql);
+$req = $conn->query($sql);
 
 
 $echelleDate[] = 0;
@@ -29,17 +29,12 @@ $valeurPerf[] =  0;
 $scorePerf[] = 0;
 
 
-while($lstPerf = mysql_fetch_array($req)){
-$echelleDate[] = substr($lstPerf["date_match"],0,10);
+foreach($req as $lstPerf){
+	$echelleDate[] = substr($lstPerf["date_match"],0,10);
 
-$formePerf[] =  $lstPerf["forme"];
-$valeurPerf[] =  $lstPerf["tsi"];
-$scorePerf[] =  $lstPerf["etoile"];
-
-
-
-
-
+	$formePerf[] =  $lstPerf["forme"];
+	$valeurPerf[] =  $lstPerf["tsi"];
+	$scorePerf[] =  $lstPerf["etoile"];
 
 }
 
@@ -51,8 +46,6 @@ require("../../graph/jpgraph_line.php");
 require("../../graph/jpgraph_bar.php");
 
 
-
-
 // A medium complex example of JpGraph
 // Note: You can create a graph in far fewwr lines of code if you are
 // willing to go with the defaults. This is an illustrative example of
@@ -60,18 +53,12 @@ require("../../graph/jpgraph_bar.php");
 
 
 
-
-
-
-
-
 // Create some datapoints 
-$steps=mysql_num_rows($req);
+$steps=$req->rowCount();
 for($i=1; $i<$steps; $i++) {
 	
-	
-	 $datay[]=$formePerf[$i];
-	 $datatsiy[]=$valeurPerf[$i];
+	$datay[]=$formePerf[$i];
+	$datatsiy[]=$valeurPerf[$i];
 	 
 	$databary[] = $scorePerf[$i];
 	$databarx[] = $echelleDate[$i];
@@ -84,11 +71,11 @@ $graph->SetShadow();
 
 
 // Use text X-scale so we can text labels on the X-axis
-$graph->SetScale("textlin");
+$graph->SetScale("textlin", 0, 0, $steps, 20);
 
 
 // Y2-axis is linear
-$graph->SetY2Scale("lin");
+$graph->SetY2Scale("lin", 0, 20);
 
 
 // Color the two Y-axis to make them easier to associate
@@ -111,7 +98,7 @@ $graph->img->SetMargin(40,140,40,80);
 
 // Slightly adjust the legend from it's default position in the
 // top right corner to middle right side
-$graph->legend->Pos(0.03,0.5,"right","center");
+$graph->legend->Pos(0.03,0.98,"right","center");
 
 
 // Display every 6:th tickmark

@@ -1,5 +1,5 @@
 <?php 
-require("../includes/head.inc.php");
+require_once("../includes/head.inc.php");
 require("../includes/serviceJoueur.php");
 require("../includes/serviceListesDiverses.php");
 require("../includes/serviceDTN.php");
@@ -244,7 +244,7 @@ break;
 			break;
 			}
 
- $val = array($l["scoreGardien"],$l["scoreDefense"],$l["scoreAilierDef"],$l["scoreAilierOff"],$l["scoreWtm"],$l["scoreMilieu"],$l["scoreMilieuOff"],$l["scoreAttaquant"]);
+ $val = array($l["scoreGardien"],$l["scoreDefense"],$l["scoreAilier"],$l["scoreAilierOff"],$l["scoreAilierVersMilieu"],$l["scoreMilieu"],$l["scoreMilieuOff"],$l["scoreAttaquant"]);
 sort($val);
 $valMax =  $val[7];
 $val2 = $val[6];
@@ -260,7 +260,7 @@ $val2 = $val[6];
 			 }
 			
 			  
-?><?=strtolower($l["nomJoueur"])?> <?=strtolower($l["prenomJoueur"])?>;<?=$l["idHattrickJoueur"]?>;<?=round(($mkday - $datemaj)/(60*60*24) )?>;<?php
+?><?=strtolower($l["prenomJoueur"])?> <?=strtolower($l["nomJoueur"])?>;<?=$l["idHattrickJoueur"]?>;<?=round(($mkday - $datemaj)/(60*60*24) )?>;<?php
 echo $l["dateSaisieJoueur"].";";
 echo $l["dateDerniereModifJoueur"].";";
 echo $infTraining["valeurEnCours"].";";

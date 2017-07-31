@@ -5,6 +5,8 @@ $urlsource = $nomFicPhpCourant[0]; // Utilisé pour setlang.php
 $callbackUrl="http://".$_SERVER['HTTP_HOST'].$nomFicPhpCourant[0]."?mode=retour"; // Url de retour après authentification sur HT
 //$file="members"; // Nom du fichier pour include
 
+require_once("dtn/interface/includes/head.inc.php");
+
 include("init.php");
 require("dtn/interface/includes/serviceJoueur.php");
 require("dtn/interface/includes/serviceMatchs.php");
@@ -45,21 +47,22 @@ if (isset($_SESSION['HT'])) {
     if (($_POST['entrainement_voulu1']!="99") && (!isset($_POST['age_Entrainement1']))) {$messageaff.="Vous devez s&eacute;lectionner au moins une cat&eacute;gorie d'&acirc;ge pour votre souhait n&deg;1.<br />"; $errForm='1';}
     if (($_POST['entrainement_voulu2']!="99") && (!isset($_POST['age_Entrainement2']))) {$messageaff.="Vous devez s&eacute;lectionner au moins une cat&eacute;gorie d'&acirc;ge pour votre souhait n&deg;2.<br />"; $errForm='1';}
     if ($_POST['entrainement_voulu2']=="99") {$_POST['age_Entrainement2']=array();}
-    $_POST['$commentaire']=ltrim($_POST['$commentaire']);
+	if (isset($_POST['$commentaire']))
+		$_POST['$commentaire']=ltrim($_POST['$commentaire']);
   
   } else { // Si le formulaire n'a pas été soumis
   
     
     // Recherche dans la base DTN des informations repreneurs
     $sql = get_iiihelp_repreneurSQL($row_club['idClubHT']);
-    $req = mysql_query($sql) or die(mysql_error()."\n".$sql);
+    $req = $conn->query($sql);
   
     // Si le formulaire n'a pas encore été soumis, on initialise les variables du formulaire
     $_POST['action']            = "";
     if(!$req){
         echo("ERROR REQUEST MYSQL. Please contact Staff Members!");
         exit;
-    } elseif (mysql_num_rows($req) == 0) { /* le repreneur n'existe pas dans la base => on initialise le formulaire */
+    } elseif ($req->rowCount() == 0) { /* le repreneur n'existe pas dans la base => on initialise le formulaire */
   
       $_POST['email']               ="";
       $_POST['commentaire']         ="";
@@ -67,8 +70,8 @@ if (isset($_SESSION['HT'])) {
       $_POST['entrainement_voulu2'] ="99";
       $_POST['age_Entrainement1']   =array();
       $_POST['age_Entrainement2']   =array();
-    } elseif(mysql_num_rows($req) == 1){ /* le repreneur existe dans la base => on alimente le formulaire avec ses données */
-      $dtn_iiihelp_repreneurSQL   = mysql_fetch_array ($req);
+    } elseif($req->rowCount() == 1){ /* le repreneur existe dans la base => on alimente le formulaire avec ses données */
+      $dtn_iiihelp_repreneurSQL   = $req->fetch(PDO::FETCH_ASSOC);
       //echo ("<br />");print_r($dtn_iiihelp_repreneurSQL);echo ("<br />");
       $_POST['email']               = $dtn_iiihelp_repreneurSQL['email'];
       $_POST['commentaire']         = $dtn_iiihelp_repreneurSQL['commentaire'];
@@ -84,58 +87,58 @@ if (isset($_SESSION['HT'])) {
   }
 
 
-  // Si le formulaire a été soumis et ne contient pas d'erreur, on essaie d'insérer le proprio dans la base de données repreneur
-  if (($action=="submit_iiihelp") && ($errForm=='0')){
+	// Si le formulaire a été soumis et ne contient pas d'erreur, on essaie d'insérer le proprio dans la base de données repreneur
+	if (isset($_POST['action']) && ($_POST['action']=="submit_iiihelp") && ($errForm=='0')){
   
-    // Initialisation des variables
-    $row_iiihelp_repreneur=array();
-    $row_clubs_histo=array();
-    
-    // Traitement des variables de formulaires
-  	$Lib_Age1=FormulaireLibelleAge($_POST['age_Entrainement1']);
+		// Initialisation des variables
+		$row_iiihelp_repreneur=array();
+		$row_clubs_histo=array();
+		
+		// Traitement des variables de formulaires
+		$Lib_Age1=FormulaireLibelleAge($_POST['age_Entrainement1']);
   
-  	if ($_POST['entrainement_voulu2']!="99") {
-      $Lib_Age2=FormulaireLibelleAge($_POST['age_Entrainement2']);
-    } else {
-      $_POST['entrainement_voulu2']=null;
-      $Lib_Age2=null;
-    }
+		if ($_POST['entrainement_voulu2']!="99") {
+			$Lib_Age2=FormulaireLibelleAge($_POST['age_Entrainement2']);
+		} else {
+			$_POST['entrainement_voulu2']=null;
+			$Lib_Age2=null;
+		}
   
-  	if ($row_club['niv_Entraineur'] < 7)
-  	{
-  		$etat = -1; // alert car entraineur non honorable
-  	}
-  	else if ($row_club['idPays_fk'] == "5")
-  		$etat = 1;
-  	else
-  		$etat = 0;
-  
-    
-    // Récupération des informations du club
-    $row_clubs_histo = getDataClubsHistoFromHT_usingPHT();
-    $row_clubs_histo['cree_par']=$row_club['nomUser'];
-    $row_clubs_histo['role_createur']='P';
-    $row_clubs_histo['Commentaire']="Inscription &agrave; &iexcl;&iexcl;&iexcl;help!";
-  
-    //insertion ou mise à jour du club
-    $idClub=insertionClub($row_club);
-    		
-    // Insertion HistoClub
-    $id_clubs_histo=insertHistoClub($row_clubs_histo);
-    
-    // Insertion Repreneur iiiHelp
-    $row_iiihelp_repreneur['idClubHT']            = $row_club['idClubHT'];
-    $row_iiihelp_repreneur['leagueLevel']         = $row_club['leagueLevel'];
-    $row_iiihelp_repreneur['email']               = $_POST['email'];
-    $row_iiihelp_repreneur['commentaire']         = $_POST['commentaire'];
-    $row_iiihelp_repreneur['etat']                = $etat;
-    $row_iiihelp_repreneur['entrainement_voulu1'] = $_POST['entrainement_voulu1'];
-    $row_iiihelp_repreneur['age_voulu1']          = $Lib_Age1;
-    $row_iiihelp_repreneur['entrainement_voulu2'] = $_POST['entrainement_voulu2'];
-    $row_iiihelp_repreneur['age_voulu2']          = $Lib_Age2;
+		if ($row_club['niv_Entraineur'] < 7)
+		{
+			$etat = -1; // alert car entraineur non honorable
+		}
+		else if ($row_club['idPays_fk'] == "5")
+			$etat = 1;
+		else
+			$etat = 0;
+	  
+		
+		// Récupération des informations du club
+		$row_clubs_histo = getDataClubsHistoFromHT_usingPHT();
+		$row_clubs_histo['cree_par']=$row_club['nomUser'];
+		$row_clubs_histo['role_createur']='P';
+		$row_clubs_histo['Commentaire']="Inscription &agrave; &iexcl;&iexcl;&iexcl;help!";
+	  
+		//insertion ou mise à jour du club
+		$idClub=insertionClub($row_club);
+				
+		// Insertion HistoClub
+		$id_clubs_histo=insertHistoClub($row_clubs_histo);
+		
+		// Insertion Repreneur iiiHelp
+		$row_iiihelp_repreneur['idClubHT']            = $row_club['idClubHT'];
+		$row_iiihelp_repreneur['leagueLevel']         = $row_club['leagueLevel'];
+		$row_iiihelp_repreneur['email']               = $_POST['email'];
+		$row_iiihelp_repreneur['commentaire']         = $_POST['commentaire'];
+		$row_iiihelp_repreneur['etat']                = $etat;
+		$row_iiihelp_repreneur['entrainement_voulu1'] = $_POST['entrainement_voulu1'];
+		$row_iiihelp_repreneur['age_voulu1']          = $Lib_Age1;
+		$row_iiihelp_repreneur['entrainement_voulu2'] = $_POST['entrainement_voulu2'];
+		$row_iiihelp_repreneur['age_voulu2']          = $Lib_Age2;
 
-    // Insertion HistoClub
-    $id_iiihelp_repreneur=insertionRepreneuriiiHelp($row_iiihelp_repreneur);
+		// Insertion HistoClub
+		$id_iiihelp_repreneur=insertionRepreneuriiiHelp($row_iiihelp_repreneur);
     
   
     /******************************************************************************/
@@ -145,7 +148,8 @@ if (isset($_SESSION['HT'])) {
     /******************************************************************************/
     ?>
     <p class="contenuJustifie">
-    <?php switch ($etat)
+    <?php
+	switch ($etat)
     {
     	case "1" :
     	case "0" :

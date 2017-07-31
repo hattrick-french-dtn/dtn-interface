@@ -15,8 +15,6 @@ require("../includes/connect.inc.php");
 require("../includes/serviceEntrainement.php");
 require("../includes/serviceEquipes.php");
 
-$conn = connect();
-
 // Dernier historique club
 $lastHistoClub=getLastHistoClub($_GET['idClubHT']);
 
@@ -60,13 +58,35 @@ $lstEntrainementPossible = listEntrainement();
     </td>
     </tr>
     <tr>
-    <td>Nombre d'adjoints :</td>
+    <td>Qualit&eacute; des adjoints [0 &agrave; 10] :</td>
     <td>
       <span id="sprytextfield3">
       <input name="adjoints" type="text" id="adjoints" size=2 value="<?=$lastHistoClub["adjoints"]?>">
       <span class="textfieldInvalidFormatMsg">Entrez uniquement des chiffres et des nombres non n&eacute;gatifs</span>
       <span class="textfieldMinValueMsg">Doit etre sup&eacute;rieure &agrave; 0</span>
       <span class="textfieldMaxValueMsg">Doit etre inf&eacute;rieure &agrave; 10</span>
+      </span>
+    </td>
+    </tr>
+    <tr>
+    <td>Qualit&eacute; du m&eacute;decins [0 &agrave; 5] :</td>
+    <td>
+      <span id="sprytextfield4">
+      <input name="medecin" type="text" id="medecins" size=2 value="<?=$lastHistoClub["medecin"]?>">
+      <span class="textfieldInvalidFormatMsg">Entrez uniquement des chiffres et des nombres non n&eacute;gatifs</span>
+      <span class="textfieldMinValueMsg">Doit etre sup&eacute;rieure &agrave; 0</span>
+      <span class="textfieldMaxValueMsg">Doit etre inf&eacute;rieure &agrave; 5</span>
+      </span>
+    </td>
+    </tr>
+    <tr>
+    <td>Qualit&eacute; du pr&eacute;pa phys [0 &agrave; 5] :</td>
+    <td>
+      <span id="sprytextfield5">
+      <input name="physio" type="text" id="physio" size=2 value="<?=$lastHistoClub["physio"]?>">
+      <span class="textfieldInvalidFormatMsg">Entrez uniquement des chiffres et des nombres non n&eacute;gatifs</span>
+      <span class="textfieldMinValueMsg">Doit etre sup&eacute;rieure &agrave; 0</span>
+      <span class="textfieldMaxValueMsg">Doit etre inf&eacute;rieure &agrave; 5</span>
       </span>
     </td>
     </tr>
@@ -80,11 +100,11 @@ $lstEntrainementPossible = listEntrainement();
   </form>
   
   <script type="text/javascript">
-  <!--
 	 var sprytextfield1= new Spry.Widget.ValidationTextField("sprytextfield1", "integer", {validateOn:["blur"],allowNegative:false,minValue:0,maxValue:100,isRequired:false});
 	 var sprytextfield2= new Spry.Widget.ValidationTextField("sprytextfield2", "integer", {validateOn:["blur"],allowNegative:false,minValue:5,maxValue:100,isRequired:false});
 	 var sprytextfield3= new Spry.Widget.ValidationTextField("sprytextfield3", "integer", {validateOn:["blur"],allowNegative:false,minValue:0,maxValue:10,isRequired:false});
-  //-->
+	 var sprytextfield4= new Spry.Widget.ValidationTextField("sprytextfield4", "integer", {validateOn:["blur"],allowNegative:false,minValue:0,maxValue:5,isRequired:false});
+	 var sprytextfield5= new Spry.Widget.ValidationTextField("sprytextfield5", "integer", {validateOn:["blur"],allowNegative:false,minValue:0,maxValue:5,isRequired:false});
   </script>
 </table>
 </body>

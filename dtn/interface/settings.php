@@ -1,47 +1,55 @@
 <?php 
-require("includes/head.inc.php");
+require_once("includes/head.inc.php");
 require("includes/serviceDTN.php");
 require("includes/serviceListesDiverses.php");
 
-
-
-
 switch($_SESSION['sesUser']["idNiveauAcces"]){
-		case "1":
+	case "1":
 		require("menu/menuAdmin.php");
 		require("menu/menuAdminGestion.php");
 		break;
 		
-		case "2":
+	case "2":
 		require("menu/menuSuperviseur.php");
 		require("menu/menuSuperviseurGestion.php");
 		break;
 
-
-
-
-		case "3":
+	case "3":
 		require("menu/menuDTN.php");
 		require("menu/menuDTNGestion.php");
 		break;
 		
-		case "4":
+	case "4":
 		require("menu/menuCoach.php");
 		require("menu/menuCoachGestion.php");
 		break;
 		
-		default;
+	default;
 		break;
 }
 
+$mod="";
+$modperso="";
+$affCoeff = 0;
+$affinfoPerso = 0;
+if (isset($_GET['affCoeff']))
+	$affCoeff = $_GET['affCoeff'];
+if (isset($_GET['affinfoPerso']))
+	$affinfoPerso = $_GET['affinfoPerso'];
+if (isset($_POST['mod']))
+	$mod=$_POST['mod'];
+if (isset($_POST['modperso']))
+	$modperso=$_POST['modperso'];
+
 $lstPos = listPosition();
-if(!isset($id_postes)) $id_postes = 1;?>
+if(!isset($id_postes)) $id_postes = 1;
+?>
 
 
 <head>
 <title>Document sans titre</title>
 <link href="css/ht.css" rel="stylesheet" type="text/css">
-<script language="JavaScript" src="../includes/javascript/navigation.js"></script>
+<script language="JavaScript" src="includes/javascript/navigation.js"></script>
 
 <script language="javascript">
 function chgPos(){
@@ -54,6 +62,9 @@ document.location = "settings.php?affCoeff=<?=$affCoeff?>&id_postes="+window.doc
 <body>
 <br />
 
+<?php
+if ($affinfoPerso == 1) {
+?>
 <div class="ContenuCentrer">
 <table width="50%"  border="0" align="center" cellpadding="0" cellspacing="0">
   <tr>
@@ -62,71 +73,60 @@ document.location = "settings.php?affCoeff=<?=$affCoeff?>&id_postes="+window.doc
   <tr>
     <td>
     <table width="100%"  border="0" cellspacing="0" cellpadding="0">
- 
-  
-  
+		<td>
+		<form name="form1" method="post" action="form.php">
+		<table class="grid">
+		  <tr>
+			<td>Login :</td>
+			<td><?=$_SESSION['sesUser']["loginAdmin"]?>
+				<input name="login" type="hidden" id="login" value="<?=$_SESSION['sesUser']["loginAdmin"]?>">   </td> 
+		  </tr>
+		  <tr>
+			<td>Mot de passe :</td>
+			<td> <input name="mdp" type="text" id="mdp" value="<?=$_SESSION['sesUser']["passAdmin"]?>"></td>
+		  </tr>
+		  <tr>
+			<td>Email :</td>
+			<td><input name="email" type="text" id="email" size="40" value="<?=$_SESSION['sesUser']["emailAdmin"]?>"></td>
+		  </tr>
+		   
+		  <tr>
+			<td>Pseudo et ID sur HT :</td>
+			<td><?php echo($_SESSION['sesUser']['club']['nomUser']." [".$_SESSION['sesUser']['idAdminHT']."]");?></td>
+		  </tr>
+		  
+		  <tr>
+			<td>Nom Equipe et ID sur HT :<br /><br /></td>
+			<td><?php echo($_SESSION['sesUser']['club']['nomClub']." [".$_SESSION['sesUser']['club']['idClubHT']."]");?><br /><br /></td>
+		  </tr>
 
-<td>
-<form name="form1" method="post" action="form.php">
-<table class="grid">
-  <tr>
-    <td>Login :</td>
-    <td><?=$_SESSION['sesUser']["loginAdmin"]?>
-        <input name="login" type="hidden" id="login" value="<?=$_SESSION['sesUser']["loginAdmin"]?>">   </td> 
-  </tr>
-  <tr>
-    <td>Mot de passe :</td>
-    <td> <input name="mdp" type="text" id="mdp" value="<?=$_SESSION['sesUser']["passAdmin"]?>"></td>
-  </tr>
-  <tr>
-    <td>Email :</td>
-    <td><input name="email" type="text" id="email" size="40" value="<?=$_SESSION['sesUser']["emailAdmin"]?>"></td>
-  </tr>
-   
-  <tr>
-    <td>Pseudo et ID sur HT :</td>
-    <td><?php echo($_SESSION['sesUser']['club']['nomUser']." [".$_SESSION['sesUser']['idAdminHT']."]");?></td>
-  </tr>
-  
-  <tr>
-    <td>Nom Equipe et ID sur HT :<br /><br /></td>
-    <td><?php echo($_SESSION['sesUser']['club']['nomClub']." [".$_SESSION['sesUser']['club']['idClubHT']."]");?><br /><br /></td>
-  </tr>
-
-  <tr>
-    <td colspan="2"><center>
-      <input type="submit" name="Submit" value="MODIFIER MON PROFIL" class="boutonGris">
-      <input name="mode" type="hidden" id="mode" value="chgInfoPerso">
-    </center></td>
-  </tr>
-</table>
-</form>
-</td>
-
-
-  </tr>
-  <tr>
-    <td>&nbsp;
-      <center>
+		  <tr>
+			<td colspan="2"><center>
+			  <input type="submit" name="Submit" value="MODIFIER MON PROFIL" class="boutonGris">
+			  <input name="mode" type="hidden" id="mode" value="chgInfoPerso">
+			</center></td>
+		  </tr>
+		</table>
+		</form>
+		</td>
+	  </tr>
+	  <tr>
+		<td>&nbsp;
+		<center>
         <font color="#FF0000">
 <?php if($mod=="ok") echo "Modifications correctements effectu&eacute;es";?>
 <?php if($modperso=="ok") echo "Modifications correctement effectu&eacute;es, vous devez vous d&eacute;connecter pour que les changements prennent effet";?>
-
-
-
-  </font>
-  </center>
-  </td>
+		</font>
+		</center>
+		</td>
+	  </tr>
+	</table>
   </tr>
-</table>
-
-</tr>
 </table>
 </div>
 
 <br />
 <br />
-
 
 <!-- FORMULAIRE AUTORISATION -->
 <div class="ContenuCentrer">
@@ -147,10 +147,11 @@ document.location = "settings.php?affCoeff=<?=$affCoeff?>&id_postes="+window.doc
   <br /> <br />
 </div>
 
-
-  <?php // Commentaire de Musta : Je ne pense pas que ça sert encore
-  if($affCoeff==1){
-  ?>
+<?php
+} 
+  
+if($affCoeff==1){
+?>
   
   <tr>
     <td>&nbsp;</td>

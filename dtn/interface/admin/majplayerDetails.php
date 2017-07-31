@@ -237,14 +237,14 @@ if (!isset($_SESSION['HT'])) {
          	}
       		// Date du jour
       		if ($_REQUEST['checkMatch']=="on") {
-            print " <p> CHECK MATCH :" .$_REQUEST['checkMatch']. " </p>";
+				print " <p> CHECK MATCH :" .$_REQUEST['checkMatch']. " </p>";
       		} else {
-            print " <p> CHECK MATCH : off </p>";
+				print " <p> CHECK MATCH : off </p>";
       		}
       		
-		      $todaySeason=getSeasonWeekOfMatch(mktime(0,0,0,date('m'), date('d'),date('Y')));
+		    $todaySeason=getSeasonWeekOfMatch(mktime(0,0,0,date('m'), date('d'),date('Y')));
 
-          // Extraction des joueurs
+			// Extraction des joueurs
       		$sql = "SELECT $tbl_joueurs.idHattrickJoueur
                   FROM $tbl_joueurs 
       		        WHERE 
@@ -252,31 +252,31 @@ if (!isset($_SESSION['HT'])) {
       		        AND $tbl_joueurs.affJoueur = '1' 
       		        ORDER BY idHattrickJoueur DESC,prenomJoueur,nomJoueur 
                   LIMIT ".$_GET['startingPlayer'].",".$_REQUEST['nbrePlayersMax'];
-          //penser a virer l'agejoueur pour la maj des ages
+			//penser a virer l'agejoueur pour la maj des ages
 
-          $req= mysql_query($sql) or die(mysql_error()."\n".$sql);
+			$req= $conn->query($sql);
           
-          if(!$req){
-              echo("Erreur lors de l'extraction des joueurs. Contactez un d&eacute;veloppeurs ou les administrateurs de la DTN.");
-              exit;
-          } elseif (mysql_num_rows($req) == 0) {
-            echo("Pas de joueur trouv&eacute;");
-          } else {
-            $i=0;
-            while($i<mysql_num_rows($req)) {
-              $listeJoueursDTN[$i] = mysql_fetch_array($req);
-              $i++;
-            }
-            mysql_free_result($req);
+			if(!$req){
+				echo("Erreur lors de l'extraction des joueurs. Contactez un d&eacute;veloppeurs ou les administrateurs de la DTN.");
+				exit;
+			} elseif ($req->rowCount() == 0) {
+				echo("Pas de joueur trouv&eacute;");
+			} else {
+				$i=0;
+				while($i<$req->rowCount()) {
+					$listeJoueursDTN[$i] = $req->fetch(PDO::FETCH_ASSOC);
+					$i++;
+				}
+				$req=NULL;
             
             // Création liste id joueur à scanner
             foreach($listeJoueursDTN as $joueur) {
-              $listeID[]=$joueur["idHattrickJoueur"];
+				$listeID[]=$joueur["idHattrickJoueur"];
             }
 
             $scanMatch=false;
             if (isset($_REQUEST['checkMatch']) && $_REQUEST['checkMatch']=="on") { 
-              $scanMatch=true; 
+				$scanMatch=true; 
             }
             
             // MAJ des joueurs avec chargement des matchs si case cochée

@@ -59,7 +59,7 @@ if (!isset ($_REQUEST['sens']))
 $sql = get_iiihelp_repreneur_clubs_SQL();
 if (isset($ent) && $ent!="Tous") {	$sql .="AND (entrainement_voulu1=$ent or entrainement_voulu2=$ent)";}
 $sql .= " ORDER BY etat ".$_REQUEST['sens'].",".$_REQUEST['ordre'];
-$req  = mysql_query($sql) or die(mysql_error()."\n".$sql);
+$req  = $conn->query($sql);
 
 // Liste des entrainements
 $liste_entrainement=listEntrainement();
@@ -75,28 +75,28 @@ $liste_entrainement=listEntrainement();
 /*      AFFICHAGE MENU                                                        */
 /******************************************************************************/
 switch($sesUser["idNiveauAcces"]){
-                case "1":
-                require("../menu/menuAdmin.php");
-                require("../menu/menuAdminGestion.php");
-                break;
+    case "1":
+		require("../menu/menuAdmin.php");
+		require("../menu/menuAdminGestion.php");
+		break;
 
-                case "2":
-                require("../menu/menuSuperviseur.php");
-                require("../menu/menuSuperviseurGestion.php");
-                break;
+	case "2":
+		require("../menu/menuSuperviseur.php");
+		require("../menu/menuSuperviseurGestion.php");
+		break;
 
-                case "3":
-                require("../menu/menuDTN.php");
-                require("../menu/menuDTNGestion.php");
-                break;
+	case "3":
+		require("../menu/menuDTN.php");
+		require("../menu/menuDTNGestion.php");
+		break;
 
-                case "4":
-                require("../menu/menuCoach.php");
-                require("../menu/menuCoachGestion.php");
-                break;
+	case "4":
+		require("../menu/menuCoach.php");
+		require("../menu/menuCoachGestion.php");
+		break;
 
-                default;
-                break;
+	default;
+		break;
 }
 
 
@@ -123,13 +123,13 @@ if (isset($msgErreur)) {?>
 <br />
 [<b>&nbsp;
 <a class="btn" href="?ent=Tous">Tous</a>&nbsp;|&nbsp;
-<a class="btn" href="?ent=10">Gardien</a>&nbsp;|&nbsp;
-<a class="btn" href="?ent=4">D&eacute;fense</a>&nbsp;|&nbsp;
-<a class="btn" href="?ent=6">Ailier</a>&nbsp;|&nbsp;
-<a class="btn" href="?ent=9">Construction</a>&nbsp;|&nbsp;
-<a class="btn" href="?ent=8">Passe</a>&nbsp;|&nbsp;
-<a class="btn" href="?ent=5">Buteur</a>&nbsp;|&nbsp;
-<a class="btn" href="?ent=3">Coup Franc</a>&nbsp;	
+<a class="btn" href="?ent=4">Gardien</a>&nbsp;|&nbsp;
+<a class="btn" href="?ent=6">D&eacute;fense</a>&nbsp;|&nbsp;
+<a class="btn" href="?ent=2">Ailier</a>&nbsp;|&nbsp;
+<a class="btn" href="?ent=1">Construction</a>&nbsp;|&nbsp;
+<a class="btn" href="?ent=5">Passe</a>&nbsp;|&nbsp;
+<a class="btn" href="?ent=3">Buteur</a>&nbsp;|&nbsp;
+<a class="btn" href="?ent=7">Coup Franc</a>&nbsp;	
 </b>]
 
 </center>
@@ -159,17 +159,17 @@ if (isset($msgErreur)) {?>
 <?php // Boucle sur les repreneurs
 $i=0;
 
-while ($res = mysql_fetch_object($req))
+foreach ($req as $res)
 {
   $i++;
-  $lastHistoClub=getLastHistoClub($res->idClubHT); // Dernière historique du club
-  if ($i==1) {$etat=$res->etat;}
-  if ( ($i==1) || ($etat != $res->etat) ) {?>
+  $lastHistoClub=getLastHistoClub($res['idClubHT']); // Dernière historique du club
+  if ($i==1) {$etat=$res['etat'];}
+  if ( ($i==1) || ($etat != $res['etat']) ) {?>
     <tr>
       <td ALIGN="center" bgcolor="#7878F0" colspan="14">
       <font color="#FFFFFF">
       <?php 
-      switch ($res->etat) {
+      switch ($res['etat']) {
         case 1 :
           echo ("Nouveau repreneurs :");
           break;
@@ -183,22 +183,22 @@ while ($res = mysql_fetch_object($req))
       </font></td>
     </tr>
     <?php
-    $etat = $res->etat; 
+    $etat = $res['etat']; 
   }?>
 
-  <tr <?php if ($i % 2 == 0) echo "bgcolor=#CCCCCC";  else echo "bgcolor=#FFFFFF";?> >
+  <tr <?php if ($i % 2 == 0) echo "bgcolor=#CCCCCC";  else echo "bgcolor=#FFFFFF";  ?> >
     <td>
-    <a href="<?=$url?>/clubs/fiche_club.php?idClubHT=<?=$res->idClubHT?>"><?=$res->idClubHT?>	- <?=$res->nomUser?>	- <?=$res->nomClub?></a>
+    <a href="<?=$url?>/clubs/fiche_club.php?idClubHT=<?=$res['idClubHT']?>"><?=$res['idClubHT']?>	- <?=$res['nomUser']?>	- <?=$res['nomClub']?></a>
   	</td>
     <td>
     <!-- ajout du drapeau plutôt que le nom du pays le 26/07/09 par jojoje86 -->
-    <img border="1" src="../../../images/flags/<?php echo $res->idPays_fk; ?>flag.gif" />
+    <img border="1" src="../../../images/flags/<?php echo $res['idPays_fk']; ?>flag.gif" />
     </td>
     <td align="center"><div align="center">
-    <?=$res->leagueLevel?>
+    <?=$res['leagueLevel']?>
     </div></td>
     <td align="center"><div align="center">
-      <?=$res->niv_Entraineur?>
+      <?=$res['niv_Entraineur']?>
     </div></td>
     <td align="center"><div align="center">
       <?=$lastHistoClub['intensite']?>
@@ -213,27 +213,29 @@ while ($res = mysql_fetch_object($req))
       <?=$lastHistoClub['adjoints']?>
     </div></td>
     <td><div align="left">
-      <?php $carac=get_Carac_byID($res->entrainement_voulu1);
+		<?php $carac=get_Carac_byID($res['entrainement_voulu1']);
             echo( $carac['nomTypeCarac'].
                   "-".
-                  str_replace("+21 ans","21 ans et +",$res->age_voulu1));?>
+                  str_replace("+21 ans","21 ans et +",$res['age_voulu1']));
+		?>
     </div></td>
     <td><div align="left">
-      <?php $carac=get_Carac_byID($res->entrainement_voulu2);
+      <?php $carac=get_Carac_byID($res['entrainement_voulu2']);
             echo( $carac['nomTypeCarac'].
                   "-".
-                  str_replace("+21 ans","21 ans et +",$res->age_voulu2));?>
+                  str_replace("+21 ans","21 ans et +",$res['age_voulu2']));
+		?>
     </div></td>
     <td>
     <div align="center"><div ID=Id_info style=position:absolute></div>
-  	<a href="#" onClick="javascript:f_message('<?=$res->nomUser?>', '<?=strtr(str_replace(CHR(13).CHR(10),"<br/>",$res->commentaire),"'"," ");?>', '<?=$res->email?>'); return false;">
-  	<?php 	if ($res->commentaire != "")
+  	<a href="#" onClick="javascript:f_message('<?=$res['nomUser']?>', '<?=strtr(str_replace(CHR(13).CHR(10),"<br/>",$res['commentaire']),"'"," ");?>', '<?=$res['email']?>'); return false;">
+  	<?php 	if ($res['commentaire'] != "")
   		{?>Lire<?php }
   			else
   			{?> @ <?php }?>
     </a></div></td>
     <td><?php
-  		switch ($res->etat)
+  		switch ($res['etat'])
       {
         case  -1 :
           echo("refus&eacute; par crit&egrave;re");
@@ -251,25 +253,25 @@ while ($res = mysql_fetch_object($req))
     ?></td>
     <td>
       <?php
-      switch($res->etat)
+      switch($res['etat'])
       {
       	case "-1":
       	case "-2":
-      		if ($res->niv_Entraineur > 6)
+      		if ($res['niv_Entraineur'] > 6)
       		{ 
-      		  ?><a href="?valid_proprio=<?=$res->id_iiihelp_repreneur?>">Valider</a><br /><?php
+      		  ?><a href="?valid_proprio=<?=$res['id_iiihelp_repreneur']?>">Valider</a><br /><?php
       		}
           break;
       	case "1": ?>
-          <a href="?valid_proprio=<?=$res->id_iiihelp_repreneur?>">Valider</a><br />
-          <a href="?refuse_proprio=<?=$res->id_iiihelp_repreneur?>">Rejeter</a><br /><?php
+          <a href="?valid_proprio=<?=$res['id_iiihelp_repreneur']?>">Valider</a><br />
+          <a href="?refuse_proprio=<?=$res['id_iiihelp_repreneur']?>">Rejeter</a><br /><?php
       	   break;
       	case "0":
       	case "2":
-          ?><a href="?refuse_proprio=<?=$res->id_iiihelp_repreneur?>">Rejeter</a><br /><?php
+          ?><a href="?refuse_proprio=<?=$res['id_iiihelp_repreneur']?>">Rejeter</a><br /><?php
           break;
     	}?>
-      <a href="?propriosupr=<?=$res->idClubHT?>">Supprimer</a>
+      <a href="?propriosupr=<?=$res['idClubHT']?>">Supprimer</a>
     </td>
   </tr>
 <?php } ?>

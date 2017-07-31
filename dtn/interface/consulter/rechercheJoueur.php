@@ -1,18 +1,18 @@
 <?php 
 session_cache_limiter('public');
-       error_reporting(E_ALL);
+error_reporting(E_ALL);
 
-        require_once "../_config/CstGlobals.php"; // fonctions d'admin
-        require_once "../fonctions/AccesBase.php"; // fonction de connexion a la base
-        require_once "../fonctions/AdminDtn.php"; // fonctions d'admin
-        require("../includes/head.inc.php");
-		require("../includes/serviceListesDiverses.php");
-		require("../includes/serviceMatchs.php");
+require_once "../_config/CstGlobals.php"; // fonctions d'admin
+require_once "../fonctions/AccesBase.php"; // fonction de connexion a la base
+require_once "../fonctions/AdminDtn.php"; // fonctions d'admin
+require_once("../includes/head.inc.php");
+require("../includes/serviceListesDiverses.php");
+require("../includes/serviceMatchs.php");
 
 if(!$sesUser["idAdmin"])
-	{
-	header("location: index.php?ErrorMsg=Session Expiree");
-	}
+{
+	header("location: ../index.php?ErrorMsg=Session Expiree");
+}
 if(!isset($ordre)) $ordre = "nomJoueur";
 if(!isset($sens)) $sens = "ASC";
 if(!isset($lang)) $lang = "FR";

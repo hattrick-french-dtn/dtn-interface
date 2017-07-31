@@ -1,5 +1,5 @@
 <?php
-require("../includes/head.inc.php");
+require_once("../includes/head.inc.php");
 require("../includes/serviceListesDiverses.php");
 require("../includes/serviceJoueur.php");
 require("../includes/serviceDTN.php");
@@ -13,31 +13,28 @@ if(!isset($_SESSION['sesUser']["idAdmin"]))
 }
 
 switch($sesUser["idNiveauAcces"]){
-		case "1":
-		require("../menu/menuAdmin.php");
-		require("../menu/menuSuperviseurConsulter.php");
-		break;
+case "1":
+	require("../menu/menuAdmin.php");
+	require("../menu/menuSuperviseurConsulter.php");
+	break;
 		
-		case "2":
-		require("../menu/menuSuperviseur.php");
-		require("../menu/menuSuperviseurConsulter.php");
-		break;
+case "2":
+	require("../menu/menuSuperviseur.php");
+	require("../menu/menuSuperviseurConsulter.php");
+	break;
 
-
-
-
-		case "3":
-		require("../menu/menuDTN.php");
-		require("../menu/menuDTNConsulter.php");
-		break;
+case "3":
+	require("../menu/menuDTN.php");
+	require("../menu/menuDTNConsulter.php");
+	break;
 		
-		case "4":
-		require("../menu/menuCoach.php");
-		require("../menu/menuCoachConsulter.php"); 
-		break;
+case "4":
+	require("../menu/menuCoach.php");
+	require("../menu/menuCoachConsulter.php"); 
+	break;
 		
-		default;
-		break;
+default;
+	break;
 }
 
 if(!isset($ordre)) $ordre = "nomJoueur";
@@ -72,18 +69,16 @@ document.location='<?=$url?>/joueurs/fiche.php?url='+url+'&id='+id
 .Style4 {color: #FF0000}
 -->
 </style>
-  <?php
-			  $huit = 60 * 60 * 24 * 8; //time_0
-			  $quinze = 60 * 60 * 24 * 15; //time_1
-			  $trente = 60 * 60 * 24 * 30; //time_2
-			  $twomonths = 60 * 60 * 24 * 60; //time_3
-			  $fourmonths = 60 * 60 * 24 * 120; //time_4
-			  
-			  // Date du jour
-			 $mkday = mktime(0,0,0,date('m'), date('d'),date('Y'));
+<?php
+$huit = 60 * 60 * 24 * 8; //time_0
+$quinze = 60 * 60 * 24 * 15; //time_1
+$trente = 60 * 60 * 24 * 30; //time_2
+$twomonths = 60 * 60 * 24 * 60; //time_3
+$fourmonths = 60 * 60 * 24 * 120; //time_4
+
+// Date du jour
+$mkday = mktime(0,0,0,date('m'), date('d'),date('Y'));
   
-
-
 $keeperColor = "";
 $defenseColor = "";
 $constructionColor = "";
@@ -91,59 +86,59 @@ $ailierColor = "";
 $passeColor = "";
 $buteurColor = "";  
   
-			switch($secteur){
-				case 0:
-				$keeperColor = "#BBEEBB";
-				$defenseColor = "#DDEEDD";
-				$param1="1";
-				$param3="noteGardien";
-				$secteurLabel="gK";
-				break;
-				case 1:
-				$defenseColor = "#BBEEBB";
-				$passeColor = "#DDEEDD";
-				$constructionColor = "#DDEEDD";
-				$param1="DEF";
-				$param3="noteDefense";
-				$secteurLabel="cD `normal";
-				break;
-				case 2:
-				$defenseColor = "#BBEEBB";
-				$ailierColor = "#DDEEDD";
-				$param1="DEF";
-				$param3="noteLateral";
-				$secteurLabel="wB";
-				break;
-				case 3:
-				$param1="3";
-				$param3="noteMilieu";
-				$constructionColor = "#BBEEBB";
-				$defenseColor = "#DDEEDD";
-				$passeColor = "#DDEEDD";
-				$secteurLabel="iM";
-				break;
-				case 4:
-				$constructionColor = "#DDEEDD";
-				$ailierColor = "#BBEEBB";
-				$passeColor = "#DDEEDD";
-				$param1="4";
-				$param3="noteAilier";
-				$secteurLabel="Wg";
-				break;
-				case 5:
-				$passeColor = "#DDEEDD";
-				$buteurColor = "#BBEEBB";
-				$ailierColor = "#DDEEDD";
-				$param1="5";
-				$param3="noteAttaquant";
-				$secteurLabel="Fw";
-				break;
-			}
+switch($secteur){
+case 0:
+	$keeperColor = "#BBEEBB";
+	$defenseColor = "#DDEEDD";
+	$param1="1";
+	$param3="noteGardien";
+	$secteurLabel="gK";
+	break;
+case 1:
+	$defenseColor = "#BBEEBB";
+	$passeColor = "#DDEEDD";
+	$constructionColor = "#DDEEDD";
+	$param1="DEF";
+	$param3="noteDefense";
+	$secteurLabel="cD `normal";
+	break;
+case 2:
+	$defenseColor = "#BBEEBB";
+	$ailierColor = "#DDEEDD";
+	$param1="DEF";
+	$param3="noteLateral";
+	$secteurLabel="wB";
+	break;
+case 3:
+	$param1="3";
+	$param3="noteMilieu";
+	$constructionColor = "#BBEEBB";
+	$defenseColor = "#DDEEDD";
+	$passeColor = "#DDEEDD";
+	$secteurLabel="iM";
+	break;
+case 4:
+	$constructionColor = "#DDEEDD";
+	$ailierColor = "#BBEEBB";
+	$passeColor = "#DDEEDD";
+	$param1="4";
+	$param3="noteAilier";
+	$secteurLabel="Wg";
+	break;
+case 5:
+	$passeColor = "#DDEEDD";
+	$buteurColor = "#BBEEBB";
+	$ailierColor = "#DDEEDD";
+	$param1="5";
+	$param3="noteAttaquant";
+	$secteurLabel="Fw";
+	break;
+}
 ?>
 
 
 <br>
-<form name="form_htwww" method="post" action="<?=$PHP_SELF?>?action=setnbplayers&secteur=<?=$secteur?>" >
+<form name="form_htwww" method="post" action="<?=$_SERVER['PHP_SELF']?>?action=setnbplayers&secteur=<?=$secteur?>" >
   <b><font color=red>[<a href="formulesPotentiels.php">Formules!</a>]</font></b><?php
 
 
@@ -157,7 +152,7 @@ if (isset($nb_players)){
 		}
 	
 }
-?>Nb players :<select name='nb_players' onchange='this.form.submit();'><?php
+?>&nbsp;&nbsp;&nbsp;&nbsp;Nb players :<select name='nb_players' onchange='this.form.submit();'><?php
 for ($i=5;$i<30;$i++){
 		$etat="";
 	if ($nb_players==$i){
@@ -351,7 +346,8 @@ $param2="$nb_players";
 <?php	
 				}
 ?>
-				<?=strtolower($l["nomJoueur"])?>&nbsp;<?=strtolower($l["prenomJoueur"])?>
+				<?=strtolower($l["prenomJoueur"])?>&nbsp;<?=strtolower($l["nomJoueur"])?>
+				<?php if (isset($l["surnomJoueur"])) echo " (".$l["surnomJoueur"].")"; ?>
 <?php
 				if 	( ($sesUser["idNiveauAcces"]==1 || $sesUser["idNiveauAcces"]==2 || $sesUser["idNiveauAcces"]==4) 
 					|| (($sesUser["idNiveauAcces"]==3)
@@ -360,13 +356,13 @@ $param2="$nb_players";
 				</a>
 <?php
 				} 
-				if($verifInternational != ""){?>&nbsp;<img src="../images/fr.gif" alt="<?=$verifInternational?>"><? 
+				if($verifInternational != ""){?>&nbsp;<img src="../images/fr.gif" alt="<?=$verifInternational?>"><?php
 				} 
 ?>
 				</td>
                 <td width="30"><div align="center"><font size="-2"><?=getEntrainementName($l["entrainement_id"],$lstTrain)?></font></div></td>
                 <td width="30"><div align="center"><font size="-2"><?=$scout["loginAdmin"]?></font></div></td>
-                <td width="40"><div align="right"><?=$infTraining["valeurEnCours"]?><img src="../images/spacer.gif" width="10" height="1"></div></td>
+                <td width="40"><div align="right"><?=$l["valeurEnCours"]?><img src="../images/spacer.gif" width="10" height="1"></div></td>
                 <td width="50" nowrap="nowrap"><div align="left"><?=$ageJourJoueur?></div></td>
                 <td width="20"> <div align="center"><?=$l["idExperience_fk"]?></div></td>
                 <td width="20"><div align="center"><?=$specabbrevs[$l["optionJoueur"]]?></div></td>

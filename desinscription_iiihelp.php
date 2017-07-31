@@ -13,8 +13,9 @@ if (!isset($good))	$good="";
 if ($id!="erreur")
 {
   $sqlsupression= "delete from ht_iiihelp_repreneur where id_iiihelp_repreneur=".$_REQUEST['id'];
-  $req=mysql_query($sqlsupression);
-  $good="good";
+  $req=$conn->exec($sqlsupression);
+  if ($req)
+	  $good="good";
 }
 
 if ($good=="good")

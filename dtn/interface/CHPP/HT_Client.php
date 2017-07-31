@@ -12,7 +12,7 @@ class HT_Client
 	
 	function HT_Client()
 	{
-		$this->HTClient = &new http( HTTP_V11, false);
+		$this->HTClient = new http( HTTP_V11, false);
 	}
 
 	function GetActivePage()
@@ -117,7 +117,7 @@ class HT_Client
 		$form = array('outputType' => 'XML', 'actionType' => 'view', 'matchID' => $matchid);
 		$code = $this->HTClient->post( '/Common/matchDetails.asp', $form, 'http://' . $this->HTClient->host . '/Common/matchDetails.asp' );
 		if ($code != HTTP_STATUS_OK) { return $code; }
-		return $this->HTClient->get_response_body(); // renvoie le fichier XML du match en param�tre
+		return $this->HTClient->get_response_body(); // renvoie le fichier XML du match en param?tre
 	}
 
 	function GetLastMatch($teamid)
@@ -125,40 +125,40 @@ class HT_Client
 		$form = array('outputType' => 'XML', 'actionType' => 'view', 'teamID' => $teamid);
 		$code = $this->HTClient->post( '/Common/matches.asp', $form, 'http://' . $this->HTClient->host . '/Common/matches.asp' );
 		if ($code != HTTP_STATUS_OK) { return $code; }
-		return $this->HTClient->get_response_body(); // renvoie le fichier XML du match en param�tre
+		return $this->HTClient->get_response_body(); // renvoie le fichier XML du match en param?tre
 	}
 	
-		function GetFullMatch($teamid, $dateFrom)
+	function GetFullMatch($teamid, $dateFrom)
 	{
 		$form = array('outputType' => 'XML', 'actionType' => 'view', 'teamID' => $teamid , 'FirstMatchDate' => $dateFrom ); 
 		$code = $this->HTClient->post( '/Common/matchesArchive.asp', $form, 'http://' . $this->HTClient->host . '/Common/matchesArchive.asp' );
 		if ($code != HTTP_STATUS_OK) { return $code; }
-		return $this->HTClient->get_response_body(); // renvoie le fichier XML du match en param�tre
+		return $this->HTClient->get_response_body(); // renvoie le fichier XML du match en param?tre
 	}
 	
 	
-		function getMatchDetails($matchId)
+	function getMatchDetails($matchId)
 	{
 		$form = array('outputType' => 'XML', 'actionType' => 'view', 'matchID' => $matchId);
 		$code = $this->HTClient->post( '/Common/matchDetails.asp', $form, 'http://' . $this->HTClient->host . '/Common/matchDetails.asp' );
 		if ($code != HTTP_STATUS_OK) { return $code; }
-		return $this->HTClient->get_response_body(); // renvoie le fichier XML du match en param�tre
+		return $this->HTClient->get_response_body(); // renvoie le fichier XML du match en param?tre
 	}
 	
-			function getMatchLineup($matchId,$teamID)
+	function getMatchLineup($matchId,$teamID)
 	{
 		$form = array('outputType' => 'XML', 'actionType' => 'view', 'matchID' => $matchId, 'teamID' => $teamID);
 		$code = $this->HTClient->post( '/Common/matchLineup.asp', $form, 'http://' . $this->HTClient->host . '/Common/matchLineup.asp' );
 		if ($code != HTTP_STATUS_OK) { return $code; }
-		return $this->HTClient->get_response_body(); // renvoie le fichier XML du match en param�tre
+		return $this->HTClient->get_response_body(); // renvoie le fichier XML du match en param?tre
 	}
 	
-				function listJoueurEquipe()
+	function listJoueurEquipe()
 	{
 		$form = array('outputType' => 'XML', 'actionType' => 'view');
 		$code = $this->HTClient->post( '/Common/players.asp', $form, 'http://' . $this->HTClient->host . '/Common/players.asp' );
 		if ($code != HTTP_STATUS_OK) { return $code; }
-		return $this->HTClient->get_response_body(); // renvoie le fichier XML du match en param�tre
+		return $this->HTClient->get_response_body(); // renvoie le fichier XML du match en param?tre
 	}
 	
 	function getTeamInfo()
@@ -166,7 +166,7 @@ class HT_Client
 		$form = array('outputType' => 'XML', 'actionType' => 'view');
 		$code = $this->HTClient->post( '/Common/teamDetails.asp', $form, 'http://' . $this->HTClient->host . '/Common/teamDetails.asp' );
 		if ($code != HTTP_STATUS_OK) { return $code; }
-		return $this->HTClient->get_response_body(); // renvoie le fichier XML du match en param�tre
+		return $this->HTClient->get_response_body(); // renvoie le fichier XML du match en param?tre
 	}
 
 	

@@ -1,18 +1,18 @@
 <?php 
-        require_once "../_config/CstGlobals.php"; // fonctions d'admin
-        require_once "../fonctions/AccesBase.php"; // fonction de connexion a la base
-        require_once "../fonctions/AdminDtn.php"; // fonctions d'admin
-        require("../includes/head.inc.php");
-        $maBase = initBD();
-        
-		require("../includes/serviceJoueur.php");
-		require("../includes/langue.inc.php");
-		require("../includes/serviceListesDiverses.php");
+require_once("../_config/CstGlobals.php"); // fonctions d'admin
+require_once("../fonctions/AccesBase.php"); // fonction de connexion a la base
+require_once("../fonctions/AdminDtn.php"); // fonctions d'admin
+require_once("../includes/head.inc.php");
+$maBase = initBD();
+
+require("../includes/serviceJoueur.php");
+require("../includes/langue.inc.php");
+require("../includes/serviceListesDiverses.php");
 		
 if(!$sesUser["idAdmin"])
-	{
-	header("location: index.php?ErrorMsg=Session Expiree");
-	}
+{
+	header("location: ../index.php?ErrorMsg=Session Expiree");
+}
 		
 ?>
 <link href="../css/ht2.css" rel="stylesheet" type="text/css">
@@ -23,23 +23,23 @@ $lstCarac = listCarac("ASC",23);
 $lstPos = listAllPosition();
 
 switch($sesUser["idNiveauAcces"]){
-		case "1":
+	case "1":
 		require("../menu/menuAdmin.php");
 		require("../menu/menuSuperviseurConsulter.php");
 		break;
 		
-		case "2":
+	case "2":
 		require("../menu/menuSuperviseur.php");
 		require("../menu/menuSuperviseurConsulter.php");
 		break;
 
 
-		case "3":
+	case "3":
 		require("../menu/menuDTN.php");
 		require("../menu/menuDTNConsulter.php");
 		break;
 
-		case "4":
+	case "4":
 		require("../menu/menuCoach.php");
 		require("../menu/menuCoachConsulter.php");
 		break;
@@ -131,7 +131,7 @@ if(isset($msg)) {?>
 </center>
 <p>
 <?php
-if($action == "verif"){
+if(isset($action) && $action == "verif"){
 
 	if($stylereq == "id"){
 		$sql = "SELECT idJoueur FROM ht_joueurs WHERE idHattrickJoueur = '".$id."' order by archiveJoueur ASC,nomJoueur";

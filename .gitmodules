@@ -1,0 +1,6 @@
+[submodule "framework/swiftmailer"]
+	path = framework/swiftmailer
+	url = https://github.com/swiftmailer/swiftmailer.git
+[submodule "framework/PHT"]
+	path = framework/PHTv3
+	url = https://github.com/jetwitaussi/PHT.git

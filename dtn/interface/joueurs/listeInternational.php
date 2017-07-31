@@ -1,11 +1,11 @@
 <?php 
-require("../includes/head.inc.php");
+require_once("../includes/head.inc.php");
 require("../includes/serviceJoueur.php");
 require("../includes/serviceDTN.php");
 if(!$sesUser["idAdmin"])
-	{
+{
 	header("location: index.php?ErrorMsg=Session Expire");
-	}
+}
 if(!isset($ordre)) $ordre = "nomJoueur";
 if(!isset($sens)) $sens = "ASC";
 if(!isset($lang)) $lang = "FR";
@@ -14,37 +14,26 @@ if(!isset($affPosition)) $affPosition = 0;
 $defautFiltre="";
 if ($masque=="on")   $defautFiltre = "CHECKED";
 	
-
 require("../includes/langue.inc.php");
 
-
-
 //
-
 $sql = "select * from $tbl_position";
 
 
 switch($sesUser["idNiveauAcces_fk"]){
-		case "1":
+	case "1":
 		break;
-		case "2":
+	case "2":
 		if($sesUser["idPosition_fk"] != 0){
-		$sql .= " where idPosition = ".$sesUser["idPosition_fk"];
+			$sql .= " where idPosition = ".$sesUser["idPosition_fk"];
 		}
 		break;
-		
-		
 }
 
 $lstPosition = construitListe($sql,$tbl_position);
-
 $sql = "select * from $tbl_position";
 
 $lstPosition2 = construitListe($sql,$tbl_position);
-
-
-
-
 $sql = "select * from $tbl_joueurs ";
 
 if(isset($affPosition) && $affPosition != 0) $sql .= " left join $tbl_position on ht_posteAssigne = idPosition where ht_posteAssigne = $affPosition ";
@@ -64,25 +53,25 @@ if ($sesUser["selection"]== "A"){
 }
 $sql .= " and affJoueur = 1  order by $ordre $sens";
 
-$reqJoueurs = mysql_query($sql);
+$reqJoueurs = $conn->query($sql);
 
 
 switch($affPosition){
 
-		case "1":
+	case "1":
 		//gK
 		$k = 1;
 		$keeperColor = "#999999";
 		break;
 		
-		case "2":
+	case "2":
 		// cD
 		$d = 1;
 		$defense = 1;
 		$defenseColor = "#999999";
 		break;
 		
-		case "3":
+	case "3":
 		// Wg
 		$construction = 1;
 		$constructionColor = "#CCCCCC";
@@ -98,7 +87,7 @@ switch($affPosition){
 		$wingwtm = 1;
 
 		break;
-		case "4":
+	case "4":
 		//IM
 		$m = 1;
 		$moff = 1;
@@ -110,7 +99,7 @@ switch($affPosition){
 		$passeColor = "#CCCCCC";
 		break;
 		
-		case "5":
+	case "5":
 		// Fw
 				
 		$att = 1;
@@ -120,7 +109,7 @@ switch($affPosition){
 		$buteurColor = "#999999";
 		break;
 	
-		default:
+	default:
 		$font = "<font color = black>";
 		$ffont = "</font>";
 		break;
@@ -128,24 +117,23 @@ switch($affPosition){
 }
 
 switch($sesUser["idNiveauAcces"]){
-		case "1":
+	case "1":
 		require("../menu/menuAdmin.php");
 		break;
 		
-		case "2":
+	case "2":
 		require("../menu/menuSuperviseur.php");
 		break;
 
-
-		case "3":
+	case "3":
 		require("../menu/menuDTN.php");
 		break;
 		
-		case "4":
+	case "4":
 		require("../menu/menuCoach.php");
 		break;
 		
-		default;
+	default;
 		break;
 }
 
@@ -482,13 +470,13 @@ if ($masque=="on"){
                   <td width="43" ><div align="center"><font color="#FFFFFF">Sel.</font></div></td>
             </tr>
                 
-				             <?php
-				$lst = 1;
+	<?php
+	$lst = 1;
 			 
-			while($lstJoueurs = mysql_fetch_array($reqJoueurs)){
+	foreach($reqJoueurs as $lstJoueurs){
 			
 			  
-			  $infTraining = getEntrainement($lstJoueurs["idJoueur"]);
+		$infTraining = getEntrainement($lstJoueurs["idJoueur"]);
 			  
 		switch($lst){
 			case 1:
@@ -500,48 +488,46 @@ if ($masque=="on"){
 			$bgcolor = "white";
 			$lst = 1;
 			break;
-			}
+		}
 			
 		
 
 
 
 
- $val = array($lstJoueurs["scoreGardien"],$lstJoueurs["scoreDefense"],$lstJoueurs["scoreAilierDef"],$lstJoueurs["scoreAilierOff"],$lstJoueurs["scoreWtm"],$lstJoueurs["scoreMilieu"],$lstJoueurs["scoreMilieuOff"],$lstJoueurs["scoreAttaquant"]);
-sort($val);
-$valMax =  $val[7];
-$val2 = $val[6];
+		$val = array($lstJoueurs["scoreGardien"],$lstJoueurs["scoreDefense"],$lstJoueurs["scoreAilier"],$lstJoueurs["scoreAilierOff"],$lstJoueurs["scoreAilierVersMilieu"],$lstJoueurs["scoreMilieu"],$lstJoueurs["scoreMilieuOff"],$lstJoueurs["scoreAttaquant"]);
+		sort($val);
+		$valMax =  $val[7];
+		$val2 = $val[6];
 			  
-			  $class = "#";
-			  $quinze = 60 * 60 * 24 * 15;
-			  $trente = 60 * 60 * 24 * 30;
-			 
-			 
-			 $date = explode("-",$lstJoueurs["dateDerniereModifJoueur"]);
-			 
-			 // Date de la dernier modif de ce joueur
-			  $mkJoueur =  mktime(0,0,0,$date[1],$date[2],$date[0]); 
-			  
-			  // Date du jour
-			 $mkDay = mktime(0,0,0,date('m'), date('d'),date('Y'));
-			 $d1 =  $mkDay - $quinze;
-			 $d2 =  $mkDay - $trente;
-			 
-			if($mkJoueur >  $d1) $class= "#"; 
-			else if( $mkJoueur > $d2 && $mkJoueur < $d1 ) $class = "style3";	
-			else if($mkJoueur < $d2) $class = "style4";
-			 
-			 
-			 if($settings["useit"] == 1){
-			 $lstJoueurs["scoreGardien"] = 5;
-			}
+		$class = "#";
+		$quinze = 60 * 60 * 24 * 15;
+		$trente = 60 * 60 * 24 * 30;
 
+
+		$date = explode("-",$lstJoueurs["dateDerniereModifJoueur"]);
+			 
+		// Date de la dernier modif de ce joueur
+		$mkJoueur =  mktime(0,0,0,$date[1],$date[2],$date[0]); 
+
+		// Date du jour
+		$mkDay = mktime(0,0,0,date('m'), date('d'),date('Y'));
+		$d1 =  $mkDay - $quinze;
+		$d2 =  $mkDay - $trente;
+
+		if($mkJoueur >  $d1) $class= "#"; 
+		else if($mkJoueur > $d2 && $mkJoueur < $d1 ) $class = "style3";	
+		else if($mkJoueur < $d2) $class = "style4";
 			 
 			 
-			  ?>
+//		if($settings["useit"] == 1){
+//			$lstJoueurs["scoreGardien"] = 5;
+//		}
+
+	?>
 	  <tr bgcolor = "<?=$bgcolor?>" align="right">  
                     <td align="left" >&nbsp;<a href ="<?=$url?>/joueurs/fiche.php?id=<?=$lstJoueurs["idJoueur"]?>" class=<?=$class?>>
-                    <span class=<?=$class?>><b><?=strtolower($lstJoueurs["nomJoueur"])?></b><?=strtolower($lstJoueurs["prenomJoueur"])?>
+                    <span class=<?=$class?>><b><?=strtolower($lstJoueurs["prenomJoueur"])?> <?=strtolower($lstJoueurs["nomJoueur"])?></b>
                     </span></a></td>
                     
                     <td >
@@ -611,12 +597,12 @@ $carac["defense"] = $lstJoueurs["idDefense"];
 $carac["xp"] = $lstJoueurs["idExperience_fk"];
 
 
-$semaine["construction"] = $lstJoueurs["nbSemaineConstruction"];
-$semaine["ailier"] = $lstJoueurs["nbSemaineAilier"];
-$semaine["buteur"] = $lstJoueurs["nbSemaineButeur"];
-$semaine["gardien"] = $lstJoueurs["nbSemaineGardien"];
-$semaine["passe"] = $lstJoueurs["nbSemainePasse"];
-$semaine["defense"] = $lstJoueurs["nbSemaineDefense"];
+$semaine["construction"] = $infTraining["nbSemaineConstruction"];
+$semaine["ailier"] = $infTraining["nbSemaineAilier"];
+$semaine["buteur"] = $infTraining["nbSemaineButeur"];
+$semaine["gardien"] = $infTraining["nbSemaineGardien"];
+$semaine["passe"] = $infTraining["nbSemainePasses"];
+$semaine["defense"] = $infTraining["nbSemaineDefense"];
 
 
 	switch($affPosition){

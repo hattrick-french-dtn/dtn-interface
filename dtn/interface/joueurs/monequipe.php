@@ -1,10 +1,10 @@
 <?php 
-require("../includes/head.inc.php");
+require_once("../includes/head.inc.php");
 require("../includes/serviceJoueur.php");
 
 if(!$sesUser["idAdmin"])
 	{
-	header("location: index.php?ErrorMsg=Session Expirï¿½");
+	header("location: index.php?ErrorMsg=Session Expirée");
 	}
 if(!isset($ordre)) $ordre = "nomJoueur";
 if(!isset($sens)) $sens = "ASC";
@@ -53,7 +53,7 @@ $sql .= " where ht_posteAssigne = 0";
 
 $sql .= " and affJoueur = 1   order by $ordre $sens";
 
-$reqJoueurs = mysql_query($sql);
+$reqJoueurs = $conn->query($sql);
 
 
 switch($affPosition){
@@ -148,22 +148,7 @@ switch($sesUser["idNiveauAcces"]){
 
 
 ?><title>Superviseur</title>
-<script language="JavaScript" type="text/JavaScript">
-<!--
-function MM_jumpMenu(targ,selObj,restore){ //v3.0
-  eval(targ+".location='"+selObj.options[selObj.selectedIndex].value+"'");
-  if (restore) selObj.selectedIndex=0;
-}
-//-->
-
-
-function init()
-{
-var scrollPos = "<?=$scrollPos?>";
-document.body.scrollTop = scrollPos;
-
-}//-->
-</script>
+<script language="JavaScript" src="menu_joueur.js"></script>
 <style type="text/css">
 <!--
 .Style1 {color: #FFFFFF}
@@ -184,22 +169,22 @@ $tri = "Tri croissant";
 break;
 
 case "DESC":
-$tri = "Tri dï¿½croissant";
+$tri = "Tri décroissant";
 break;
 }
 
 switch($ordre){
 
 case "nomJoueur":
-$intitule = "identitï¿½";
+$intitule = "identité";
 break;
 
 case "ageJoueur":
-$intitule = "ï¿½ge";
+$intitule = "Age";
 break;
 
 case "idExperience_fk":
-$intitule = "expï¿½rience";
+$intitule = "expérience";
 break;
 
 case "idLeader_fk":
@@ -207,20 +192,20 @@ $intitule = "leadership";
 break;
 
 case "idCaractere_fk":
-$intitule = "popularitï¿½";
+$intitule = "popularité";
 break;
 
 
 case "idAggre_fk":
-$intitule = "agrï¿½ssivitï¿½";
+$intitule = "agréssivité";
 break;
 
 case "idHonnetete_fk":
-$intitule = "honnï¿½tetï¿½";
+$intitule = "honnêteté";
 break;
 
 case "optionJoueur":
-$intitule = "spï¿½cialitï¿½";
+$intitule = "spécialité";
 break;
 
 
@@ -249,11 +234,11 @@ $intitule = "passe";
 break;
 
 case "idDefense":
-$intitule = "dï¿½fense";
+$intitule = "défense";
 break;
 
 case "idPA":
-$intitule = "coup de pieds arretï¿½";
+$intitule = "coup de pieds arreté";
 break;
 
 case "scoreGardien":
@@ -291,7 +276,7 @@ break;
             <tr> 
               <td width="28%" height="21"> <div align="center">Poste : 
                   <select name="menu1" onChange="MM_jumpMenu('parent',this,0)">
-			<option value = listeInternational.php?affPosition=0>Liste des non assignï¿½s</option>
+			<option value = listeInternational.php?affPosition=0>Liste des non assignés</option>
 			 
 			  <?php
 			  for($i=0;$i<count($lstPosition);$i++){
@@ -370,13 +355,12 @@ break;
                   </tr>
                 </table>
                  
-				             <?php
-				$lst = 1;
+<?php
+	$lst = 1;
 			 
-			while($lstJoueurs = mysql_fetch_array($reqJoueurs)){
+	foreach ($reqJoueurs as $lstJoueurs){
 			
-			  
-			  $infTraining = getEntrainement($lstJoueurs["idJoueur"]);
+		$infTraining = getEntrainement($lstJoueurs["idJoueur"]);
 			  
 		switch($lst){
 			case 1:
@@ -388,14 +372,11 @@ break;
 			$bgcolor = "white";
 			$lst = 1;
 			break;
-			}
+		}
 			
-		
 
 
-
-
- $val = array($lstJoueurs["scoreGardien"],$lstJoueurs["scoreDefense"],$lstJoueurs["scoreAilierDef"],$lstJoueurs["scoreAilierOff"],$lstJoueurs["scoreWtm"],$lstJoueurs["scoreMilieu"],$lstJoueurs["scoreMilieuOff"],$lstJoueurs["scoreAttaquant"]);
+$val = array($lstJoueurs["scoreGardien"],$lstJoueurs["scoreDefense"],$lstJoueurs["scoreAilier"],$lstJoueurs["scoreAilierOff"],$lstJoueurs["scoreAilierVersMilieu"],$lstJoueurs["scoreMilieu"],$lstJoueurs["scoreMilieuOff"],$lstJoueurs["scoreAttaquant"]);
 sort($val);
 $valMax =  $val[7];
 $val2 = $val[6];
@@ -428,6 +409,7 @@ $val2 = $val[6];
                       &nbsp;<a href ="javascript:fiche('<?=$lstJoueurs["idJoueur"]?>')" class='<?=$class?>'> 
                       <b>   <?=strtolower($lstJoueurs["nomJoueur"])?></b>
                    <?=strtolower($lstJoueurs["prenomJoueur"])?>
+				   <?php if (isset($lstJoueurs["surnomJoueur"])) echo " (".$lstJoueurs["surnomJoueur"].")"; ?>
                       </a>
                       <div align="center"> </div></td>
                     <td width="1" bgcolor="#000000" ><img src="../images/spacer.gif" width="1" height="1"></td>

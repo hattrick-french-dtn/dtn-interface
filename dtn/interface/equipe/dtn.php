@@ -1,11 +1,11 @@
 <?php 
-require("../includes/head.inc.php");
+require_once("../includes/head.inc.php");
 require("../includes/serviceListesDiverses.php");
 
 if(!$sesUser["idAdmin"])
-	{
+{
 	header("location: ../entry.php?ErrorMsg=Session Expiree");
-	}
+}
 
 
 ?>
@@ -13,35 +13,32 @@ if(!$sesUser["idAdmin"])
 <script language="JavaScript" src="../includes/javascript/navigation.js"></script>
 <?php
 switch($sesUser["idNiveauAcces"]){
-		case "1":
+	case "1":
 		require("../menu/menuAdmin.php");
 		require("../menu/menuAdminGestion.php");
 		break;
 		
-		case "2":
+	case "2":
 		require("../menu/menuSuperviseur.php");
 		require("../menu/menuSuperviseurGestion.php");
 		break;
 
-
-		case "3":
+	case "3":
 		require("../menu/menuDTN.php");
 		require("../menu/menuDTNGestion.php");
 		break;
 		
-		case "4":
+	case "4":
 		require("../menu/menuCoach.php");
 		break;
 		
-		default;
+	default;
 		break;
-
-
 }
 
 $sql = "select * from $tbl_niveauAcces where idNiveauAcces = 3";
-$req = mysql_query($sql);
-$lstNA = mysql_fetch_array($req);
+$req = $conn->query($sql);
+$lstNA = $req->fetch();
 
 
 $lstPosition = listPosition();
@@ -121,7 +118,7 @@ if(!isset($nbJoueurs)) $nbJoueurs ="false";
                   </tr>
               </table>
               <br><?php
-			  if($msg) echo "<h3><center><font color = red>".stripslashes($msg)."</font></center></h2>";
+			  if (isset($msg)) echo "<h3><center><font color = red>".stripslashes($msg)."</font></center></h2>";
 			  ?></td>	
           </tr>
         </table>
@@ -166,17 +163,16 @@ if(!isset($nbJoueurs)) $nbJoueurs ="false";
 			  $i=0;
 			  $sql = "select * from $tbl_admin  left join $tbl_position on idPosition = idPosition_fk where idNiveauAcces_fk = 3 ";
 			  $sql .= "order by $ordre $sens";
-			  $req =mysql_query($sql);
-			  while($l = mysql_fetch_array($req)){
-		
-		$nbjsuivis="?";
-		if ($nbJoueurs !="false"){ 	  	
-		if($l["affAdmin"] == 1){
- 			$sqlnb = "select count(*) from ht_joueurs where dtnSuiviJoueur_fk ='".$l["idAdmin"]."' ";
-			$nbjsuivis=current(mysql_fetch_array(mysql_query($sqlnb)));
-		}
-		}
-			if($i%2 == 0) $bgcolor = "E8E8E8"; else $bgcolor = "#FFFFFF";
+
+			  foreach($conn->query($sql) as $l){
+				$nbjsuivis="?";
+				if ($nbJoueurs !="false"){ 	  	
+					if($l["affAdmin"] == 1){
+						$sqlnb = "select count(*) from ht_joueurs where dtnSuiviJoueur_fk ='".$l["idAdmin"]."' ";
+						$nbjsuivis=current($conn->query($sqlnb)->fetch());
+					}
+				}
+				if($i%2 == 0) $bgcolor = "E8E8E8"; else $bgcolor = "#FFFFFF";
 			  ?>
 			  
                <tr bgcolor="<?=$bgcolor?>">
@@ -220,4 +216,3 @@ if($l["affAdmin"] == 1){
   </tr>
 </table>
 <p>&nbsp;</p>
-<?php  deconnect(); ?>

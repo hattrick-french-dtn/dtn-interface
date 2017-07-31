@@ -1,9 +1,9 @@
 <?php
-require_once "../includes/head.inc.php";
+require_once("../includes/head.inc.php");
 
 if ( (!isset($_SESSION['sesUser'])) || (empty($_SESSION['sesUser'])) )
 {
-  header("location: ../index.php?ErrorMsg=Session Expiree");
+	header("location: ../index.php?ErrorMsg=Session Expiree");
 }
 
 require_once "../_config/CstGlobals.php"; // fonctions d'admin
@@ -18,31 +18,28 @@ require("../includes/serviceJoueur.php");
 require("../includes/langue.inc.php");
 	
 switch($sesUser["idNiveauAcces"]){
-		case "1":
+	case "1":
 		require("../menu/menuAdmin.php");
 		require("../menu/menuSuperviseurConsulter.php");
 		break;
 		
-		case "2":
+	case "2":
 		require("../menu/menuSuperviseur.php");
 		require("../menu/menuSuperviseurConsulter.php");
 		break;
 
-
-		case "3":
+	case "3":
 		require("../menu/menuDTN.php");
 		require("../menu/menuDTNConsulter.php");
 		break;
 		
-		case "4":
+	case "4":
 		require("../menu/menuCoach.php");
 		require("../menu/menuCoachConsulter.php"); 
 		break;
 		
-		default;
+	default;
 		break;
-
-
 }
 
 $keeperColor = "#000000";
@@ -77,18 +74,18 @@ if(isset($_POST['action']) and $_POST['action'] == 'submitted') {
 
 
 switch($sesUser["idPosition_fk"])
-  {
-		case "1":
+{
+	case "1":
 		//gK
 		$keeperColor = "#BBBBEE";
 		break;
 		
-		case "2":
+	case "2":
 		// cD
 		$defenseColor = "#BBBBEE";
 		break;
 		
-		case "3":
+	case "3":
 		// Wg
 		$constructionColor = "#DDDDDD";
 		$ailierColor = "#BBBBEE";
@@ -103,7 +100,7 @@ switch($sesUser["idPosition_fk"])
 		$passeColor = "#DDDDDD";
 		break;
 		
-		case "5":
+	case "5":
 		// Fw
 		$passeColor = "#BBBBEE";
 		$buteurColor = "#BBBBEE";
@@ -113,7 +110,7 @@ switch($sesUser["idPosition_fk"])
 
 $lstPos = listAllPosition();
 $lstTypeCarac = listTypeCarac();
-$lstCarac = listCarac("ASC",23);
+$lstCarac = listCarac("ASC",30);
 $lstTrain=listEntrainement();
 
 function afficheTraining($lstTrain,$idTraining){
@@ -122,8 +119,8 @@ function afficheTraining($lstTrain,$idTraining){
 		return ;
 	}
 	foreach($lstTrain as $l){
-		if($idTraining == $l["entrainement_id"]){ 
-			echo $l["entrainement_nom"];
+		if($idTraining == $l["id_type_entrainement"]){ 
+			echo $l["libelle_type_entrainement"];
 			return;
 		}
 	}
@@ -416,7 +413,7 @@ if(count($lstJ)==0) {
 						<TD colspan=4><B>Motif Purge:&nbsp;
 						<?php if (empty($_SESSION['numServeurHT'])){?>
                   <?php if ($lstJ[$j]["isBot"]==1)      {?><font color="red">[BOT]</font><?php }?>&nbsp;
-                  <?php if ($lstJ[$j]["isBot"]==2 && $lstJ[$j]["ht_clubs.idUserHT"]==0) {?><font color="red">[Pas de manager humain]</font><?php }?>&nbsp;
+                  <?php if ($lstJ[$j]["isBot"]==2 && $lstJ[$j]["idUserHT"]==0) {?><font color="red">[Pas de manager humain]</font><?php }?>&nbsp;
                   <?php if ($lstJ[$j]["joueurActif"]==0){?><font color="red">[Disparu sur HT]</font><?php }?>
                 <font color="green"><i>D&eacute;finir num serveur HT pour activer les liens</i></font>
 						  <?php } else {

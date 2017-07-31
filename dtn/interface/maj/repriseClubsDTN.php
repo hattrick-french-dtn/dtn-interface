@@ -23,16 +23,12 @@
 
   // Extraction de la liste des DTN
   $sql = "SELECT idAdminHT FROM $tbl_admin WHERE idAdminHT IS NOT NULL AND idAdminHT != 0";
-  $result = mysql_query($sql) or die(mysql_error()."\n".$sql);
-  while($row =  mysql_fetch_array($result)){
+  $result = $conn->query($sql);
+  while($row =  $result->fetch()){
     $tabDTN[] = $row;
-    unset($row);
   }
-  mysql_free_result($result);   
+  $result=NULL;   
   unset($sql);
-  unset($result);
-
-
 
   // Initialisation variable boucle
   $nbClubs=count($tabDTN);

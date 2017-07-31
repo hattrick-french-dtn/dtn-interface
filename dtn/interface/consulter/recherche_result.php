@@ -1,15 +1,15 @@
 <?php 
-	  ini_set('memory_limit','64M');
-      error_reporting(E_ALL);
+ini_set('memory_limit','64M');
+error_reporting(E_ALL);
 
-        require_once "../_config/CstGlobals.php"; // fonctions d'admin
-        //require_once "../fonctions/HT_Client.php"; // Hattrick Client New (with Advanced HTTP Client)
-        require_once "../fonctions/phpxml.php"; // XML to Tree converter
-        require_once "../fonctions/AccesBase.php"; // fonction de connexion a la base
-        require_once "../fonctions/AdminDtn.php"; // fonctions d'admin
-        require("../includes/head.inc.php");
+require_once "../_config/CstGlobals.php"; // fonctions d'admin
+//require_once "../fonctions/HT_Client.php"; // Hattrick Client New (with Advanced HTTP Client)
+require_once "../fonctions/phpxml.php"; // XML to Tree converter
+require_once "../fonctions/AccesBase.php"; // fonction de connexion a la base
+require_once "../fonctions/AdminDtn.php"; // fonctions d'admin
+require("../includes/head.inc.php");
 
-        $maBase = initBD();
+$maBase = initBD();
         
         
 require("../includes/serviceListesDiverses.php");
@@ -18,9 +18,9 @@ require("../includes/serviceJoueur.php");
 require("../includes/langue.inc.php");
 
 if(!$sesUser["idAdmin"])
-	{
-	header("location: index.php?ErrorMsg=Session Expiree");
-	}
+{
+	header("location: ../index.php?ErrorMsg=Session Expiree");
+}
 
 if(isset($_POST['action']) and $_POST['action'] == 'submitted') {
   $ht_posteAssigne=$_POST['ht_posteAssigne'];
@@ -89,31 +89,28 @@ if(isset($_POST['action']) and $_POST['action'] == 'submitted') {
 }
 
 switch($sesUser["idNiveauAcces"]){
-		case "1":
+	case "1":
 		require("../menu/menuAdmin.php");
 		require("../menu/menuSuperviseurConsulter.php");
 		break;
 		
-		case "2":
+	case "2":
 		require("../menu/menuSuperviseur.php");
 		require("../menu/menuSuperviseurConsulter.php");
 		break;
 
-
-		case "3":
+	case "3":
 		require("../menu/menuDTN.php");
 		require("../menu/menuDTNConsulter.php");
 		break;
 		
-		case "4":
+	case "4":
 		require("../menu/menuCoach.php");
 		require("../menu/menuCoachConsulter.php"); 
 		break;
 		
-		default;
+	default;
 		break;
-
-
 }
 
 $keeperColor = "#000000";
@@ -311,7 +308,7 @@ switch($ordreDeTriNb){
 
 $lstPos = listAllPosition();
 $lstTypeCarac = listTypeCarac();
-$lstCarac = listCarac("ASC",23);
+$lstCarac = listCarac("ASC",30);
 $lstTrain=listEntrainement();
 
 
@@ -387,7 +384,7 @@ if ($maxAge!="" ){
 /***** Filtre sur la spécialité ****/
 if ($specialty!=-1 ){
 	$sql=$sql." AND optionJoueur=".$specialty;
-	?><li> Avec comme sp&eacute;cialit&eacute; :<font color="#CC22DD"><?=$option[$specialty]["FR"]?></font><?
+	?><li> Avec comme sp&eacute;cialit&eacute; :<font color="#CC22DD"><?=$option[$specialty]["FR"]?></font><?php
 } 
 if ($minValue!="" ||$maxValue!=""){ 
 ?><li><?php
@@ -535,7 +532,8 @@ if(count($lstJ)==0) {
 
     ?>
 				<?=$nbjoueur?>&nbsp;joueurs ont &eacute;t&eacute; trouv&eacute;s.&nbsp;<br> 
-    <?$nbPages=floor(($nbjoueur / 50)+1);
+    <?php
+	$nbPages=floor(($nbjoueur / 50)+1);
     
     if ($nbPages>1) {?>
 
@@ -618,7 +616,7 @@ if(count($lstJ)==0) {
                      &nbsp &nbsp &nbsp Export Fiche R&eacute;sum&eacute; des joueurs de la page :&nbsp;</td>              
               <td valign="middle">
                 <a href="../joueurs/ficherecupchoix.php?origine=<?php echo "selection"?>">
-                  <img border=1 src="../images/jst.bmp" title="Exporter le r&eacute;sultat affiché dans la page sous forme d'une fiche résumé globale"></a></td>
+                  <img border=1 src="../images/jst.bmp" title="Exporter le r&eacute;sultat affich&eacute; dans la page sous forme d'une fiche r&eacute;sum&eacute; globale"></a></td>
               
             </tr>
         </table> 				
@@ -637,80 +635,75 @@ if(count($lstJ)==0) {
                      &nbsp &nbsp &nbsp Export Fiche R&eacute;sum&eacute; des joueurs de la page :&nbsp;</td>              
               <td valign="middle">
                 <a href="../joueurs/ficherecupchoix.php?origine=<?php echo "selection"?>"
-                  <img border=1 src="../images/jst.bmp" title="Exporter le r&eacute;sultat affiché dans la page sous forme d'une fiche résumé globale"></a></td>              
+                  <img border=1 src="../images/jst.bmp" title="Exporter le r&eacute;sultat affich&eacute; dans la page sous forme d'une fiche r&eacute;sum&eacute; globale"></a></td>              
             </tr>
         </table> 				
  <?php       
         }
-        }
+    }
         
-		if(count($lstJ)>0) {
-			  $j=0;
-				$huit = 60 * 60 * 24 * 8; //time_0
-			  $quinze = 60 * 60 * 24 * 15; //time_1
-			  $trente = 60 * 60 * 24 * 30; //time_2
-			  $twomonths = 60 * 60 * 24 * 60; //time_3
-			  $fourmonths = 60 * 60 * 24 * 120; //time_4
+	if(count($lstJ)>0) {
+		$j=0;
+		$huit = 60 * 60 * 24 * 8; //time_0
+		$quinze = 60 * 60 * 24 * 15; //time_1
+		$trente = 60 * 60 * 24 * 30; //time_2
+		$twomonths = 60 * 60 * 24 * 60; //time_3
+		$fourmonths = 60 * 60 * 24 * 120; //time_4
 			  
-			  // Date du jour                                                                                            
-			 $mkday = mktime(0,0,0,date('m'), date('d'),date('Y'));
+		// Date du jour                                                                                            
+		$mkday = mktime(0,0,0,date('m'), date('d'),date('Y'));
 			
 			
-			while ($j<count($lstJ)){
-				$sqlscout="select loginAdmin FROM ht_joueurs, ht_admin  WHERE idHattrickJoueur = '".$lstJ[$j]["idHattrickJoueur"]."' AND dtnSuiviJoueur_fk=idAdmin ";
-				$scout=$maBase->select($sqlscout);
-				$dtnDuJoueur="<i>[personne &agrave; d&eacute;finir]</i>";
-				if (count($scout)>0){
-					$dtnDuJoueur=$scout[0]["loginAdmin"];
-				}
+		while ($j<count($lstJ)){
+			$sqlscout="select loginAdmin FROM ht_joueurs, ht_admin  WHERE idHattrickJoueur = '".$lstJ[$j]["idHattrickJoueur"]."' AND dtnSuiviJoueur_fk=idAdmin ";
+			$scout=$maBase->select($sqlscout);
+			$dtnDuJoueur="<i>[personne &agrave; d&eacute;finir]</i>";
+			if (count($scout)>0){
+				$dtnDuJoueur=$scout[0]["loginAdmin"];
+			}
 				
-			 $date = explode("-",$lstJ[$j]["dateDerniereModifJoueur"]);
-			 $mkJoueur =  mktime(0,0,0,$date[1],$date[2],$date[0]); 
-			 $datesaisie = explode("-",$lstJ[$j]["dateSaisieJoueur"]);
-			 $mkSaisieJoueur= mktime(0,0,0,$datesaisie[1],$datesaisie[2],$datesaisie[0]);
-			 if ($mkSaisieJoueur>$mkJoueur){
+			$date = explode("-",$lstJ[$j]["dateDerniereModifJoueur"]);
+			$mkJoueur =  mktime(0,0,0,$date[1],$date[2],$date[0]); 
+			$datesaisie = explode("-",$lstJ[$j]["dateSaisieJoueur"]);
+			$mkSaisieJoueur= mktime(0,0,0,$datesaisie[1],$datesaisie[2],$datesaisie[0]);
+			if ($mkSaisieJoueur>$mkJoueur){
 			 	$datemaj=$mkSaisieJoueur;
-			 }else{
+			}else{
 			 	$datemaj=$mkJoueur;
-			 }
+			}
 			
-			 $img_nb=0;
-			 if ($datemaj >$mkday -$huit){
+			$img_nb=0;
+			if ($datemaj >$mkday -$huit){
 			 	$img_nb=0;
 			 	$strtiming="moins de 8 jours";	
-			 }else if ($datemaj >$mkday -$quinze){
+			}else if ($datemaj >$mkday -$quinze){
 			 	$img_nb=1;
 			 	$strtiming="moins de 15 jours";
-			 }else if ($datemaj >$mkday -$trente){
+			}else if ($datemaj >$mkday -$trente){
 			 	$img_nb=2;
 			 	$strtiming="moins de 30 jours";
-			 	
-			 }else if ($datemaj >$mkday -$twomonths){
+			}else if ($datemaj >$mkday -$twomonths){
 			 	$img_nb=3;
 			 	$strtiming="moins de 2 mois";
-			 	
-			 }else if ($datemaj >$mkday -$fourmonths){
+			}else if ($datemaj >$mkday -$fourmonths){
 			 	$img_nb=4;
 			 	$strtiming="moins de 4 mois";
-			 
-			 }else{
-			 		$img_nb=5;
+			}else{
+				$img_nb=5;
 			 	$strtiming="plus que 4 mois";
-			 }
+			}
 			 
-			 // Date de la dernier modif de ce joueur
-			 $zealt=" Date dtn : ".$lstJ[$j]["dateDerniereModifJoueur"].
+			// Date de la dernier modif de ce joueur
+			$zealt=" Date dtn : ".$lstJ[$j]["dateDerniereModifJoueur"].
 					"<br> Date proprio : ".$lstJ[$j]["dateSaisieJoueur"].
 					"<br> [ Mis &agrave; jour il y a  ".round(($mkday - $datemaj)/(60*60*24) )." jours ]";
-			 				
-				
-				
+			
 ?>
 		
 			<TR>
 				<TD><BR>
 				  <?php if ($nbPages==1) {$numResu=$j+1;} else {$numResu=$j+$tbIndexDeb[$PageSelect];}?>
-					<font color="#CC2233"><?=$numResu?>.</font> <A HREF="../joueurs/fiche.php?id=<?=$lstJ[$j]["idJoueur"]?>"><?=$lstJ[$j]["prenomJoueur"]?> <?=$lstJ[$j]["nomJoueur"]?> </A>&nbsp; 
+					<font color="#CC2233"><?=$numResu?>.</font> <A HREF="../joueurs/fiche.php?id=<?=$lstJ[$j]["idJoueur"]?>"><?=$lstJ[$j]["prenomJoueur"]?> <?=$lstJ[$j]["nomJoueur"]?><?php if (isset($lstJ[$j]["surnomJoueur"])) echo " (".$lstJ[$j]["surnomJoueur"].")"; ?> </A>&nbsp; 
 					  <?php if($lstJ[$j]["optionJoueur"]) echo "<font color=\"#CC22DD\">[<i>".$option[$lstJ[$j]["optionJoueur"]]["FR"]."</i>]</font>"?>
 					  &nbsp;|&nbsp;Secteur : 
 					 <?php if ($lstJ[$j]["ht_posteAssigne"]!=0){?>

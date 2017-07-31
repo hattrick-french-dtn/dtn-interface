@@ -201,7 +201,7 @@ define("OBJECTIF_IIIHELP","Le but du projet iiihelp est tr&egrave;s simple: <str
 
 define("CRITERE_IIIHELP","Comme vous pouvez l'imaginer, nous avons des exigences  primordiales, comme le niveau de l'entra&icirc;neur (honorable|7) et le  nombre d'entra&icirc;neurs adjoints, mais le fondement le plus important est  votre volont&eacute; &agrave; aider la France-HT. Si vous pensez que ce projet vous  correspond, <strong>inscrivez-vous.</strong>");
 
-define("MODE_EMPLOI_IIIHELP","<b>Mode d'emploi :</b> L'adresse Mail servira à vous informer si un joueur r&eacute;pondant à vos demandes est en vente, si c'est le cas <strong>vous recevrez donc un mail</strong>.");
+define("MODE_EMPLOI_IIIHELP","<b>Mode d'emploi :</b> L'adresse Mail servira &agrave; vous informer si un joueur r&eacute;pondant &agrave; vos demandes est en vente, si c'est le cas <strong>vous recevrez donc un mail</strong>.");
 
 define("POUR_LES_IIIHELP","pour les");
 

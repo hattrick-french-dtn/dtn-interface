@@ -1,111 +1,88 @@
 <?php 
-require("../includes/head.inc.php");
+require_once("../includes/head.inc.php");
 require("../includes/serviceListesDiverses.php");
 require("../includes/serviceJoueur.php");
 
 
 if(!$sesUser["idAdmin"])
-	{
-	header("location: index.php?ErrorMsg=Session Expiree");
-	}
-
-
-
+{
+	header("location: ../index.php?ErrorMsg=Session Expiree");
+	exit();
+}
 
 ?>
 <link href="../css/ht.css" rel="stylesheet" type="text/css">
 <script language="JavaScript" src="../includes/javascript/navigation.js"></script>
 <?php
 switch($sesUser["idNiveauAcces"]){
-		case "1":
+	case "1":
 		require("../menu/menuAdmin.php");
 		require("../menu/menuSuperviseurConsulter.php");
-		
 		break;
 		
-		case "2":
+	case "2":
 		require("../menu/menuSuperviseur.php");
 		require("../menu/menuSuperviseurConsulter.php");
 		break;
 
-
-
-
-		case "3":
+	case "3":
 		require("../menu/menuDTN.php");
 		require("../menu/menuDTNConsulter.php");
 		break;
-
 		
-		case "4":
+	case "4":
 		require("../menu/menuCoach.php");
 		require("../menu/menuCoachConsulter.php");
 		break;
 		
-		default;
+	default;
 		break;
 }
 
 
-if($nb == "") $nb = "15";
-if($age == "") $age = "17";
+if(!isset($nb) || $nb == "") $nb = "15";
+if(!isset($age) || $age == "") $age = "17";
+if (!isset($masque)) $masque = 0;
 
-
-if($affPosition == "") {
+if(!isset($affPosition) || $affPosition == "") {
 	if (($sesUser["idPosition_fk"] == "") or ($sesUser["idPosition_fk"] == "0")){
-	$affPosition ="1";	
+		$affPosition ="1";	
 	}else{
-	$affPosition = $sesUser["idPosition_fk"] ;
+		$affPosition = $sesUser["idPosition_fk"] ;
 	}
 }
 
-
-
-
-
-
-
-
-
-
 switch($affPosition){
 case "1";
-$titre = "gardiens";
-$colonne = "scoreGardien";
-break;
-
+	$titre = "gardiens";
+	$colonne = "scoreGardien";
+	break;
 
 case "2";
-$titre = "defenseurs";
-$colonne = "scoreDefense";
-break;
-
+	$titre = "defenseurs";
+	$colonne = "scoreDefense";
+	break;
 
 case "4";
-$titre = "milieux";
-$colonne = "scoreMilieu";
-break;
-
+	$titre = "milieux";
+	$colonne = "scoreMilieu";
+	break;
 
 case "3";
-$titre = "ailiers";
-$colonne = "scoreAilierOff";
-break;
-
+	$titre = "ailiers";
+	$colonne = "scoreAilierOff";
+	break;
 
 case "5";
-$titre = "attaquants";
-$colonne = "scoreAttaquant";
-break;
-
+	$titre = "attaquants";
+	$colonne = "scoreAttaquant";
+	break;
 
 default;
-break;
-
-
+	break;
 }
-if($ordre == "") $ordre = $colonne;
-if($sens == "") $sens = "DESC";
+if(!isset($ordre) || $ordre == "") $ordre = $colonne;
+if(!isset($sens) || $sens == "") $sens = "DESC";
 
 
 switch($ordre){
@@ -119,13 +96,7 @@ $tri = $colonne;
 break;
 }
 
-
-
-
 $lstPos = listAllPosition();
-
-
-
 
 ?><title>Top liste</title>
 <style type="text/css">
@@ -149,8 +120,8 @@ $lstPos = listAllPosition();
       <td width="153"><select name="affPosition">
 	  <?php
 	  foreach($lstPos as $l){
-	  if($l["idPosition"] == $affPosition) $etat = "selected"; else $etat ="";
-	  echo "<option value = '".$l["idPosition"]."' ".$etat.">".$l["intitulePosition"]."</option>";
+		if($l["idPosition"] == $affPosition) $etat = "selected"; else $etat ="";
+		echo "<option value = '".$l["idPosition"]."' ".$etat.">".$l["intitulePosition"]."</option>";
 	  }
 	  ?>
       </select></td>
@@ -200,23 +171,21 @@ $lstPos = listAllPosition();
 		 floor((datediff(CURRENT_DATE,'1970-01-01')-(574729200/86400)-datenaiss)/112) = '".$age."' AND
 		 ht_posteAssigne  = '".$affPosition."'
 		 ";
-		 $sql .= "ORDER BY ".$ordre." ".$sens."";
-		 $sql .= " LIMIT 0,$nb";
+		$sql .= "ORDER BY ".$ordre." ".$sens."";
+		$sql .= " LIMIT 0,$nb";
 		 
-			  $huit = 60 * 60 * 24 * 8; //time_0
-			  $quinze = 60 * 60 * 24 * 15; //time_1
-			  $trente = 60 * 60 * 24 * 30; //time_2
-			  $twomonths = 60 * 60 * 24 * 60; //time_3
-			  $fourmonths = 60 * 60 * 24 * 120; //time_4
+		$huit = 60 * 60 * 24 * 8; //time_0
+		$quinze = 60 * 60 * 24 * 15; //time_1
+		$trente = 60 * 60 * 24 * 30; //time_2
+		$twomonths = 60 * 60 * 24 * 60; //time_3
+		$fourmonths = 60 * 60 * 24 * 120; //time_4
 			  
-			  // Date du jour
-			 $mkday = mktime(0,0,0,date('m'), date('d'),date('Y'));
-			 
-		 $req = mysql_query($sql);
+		// Date du jour
+		$mkday = mktime(0,0,0,date('m'), date('d'),date('Y'));
+
+		foreach($conn->query($sql) as $lst){
 		 
-		 while($lst = mysql_fetch_array($req)){
-		 
-		 $verifInternational = verifSelection($lst["idJoueur"]);
+			$verifInternational = verifSelection($lst["idJoueur"]);
 		 
 		 	 $date = explode("-",$lst["dateDerniereModifJoueur"]);
 			 
@@ -254,8 +223,8 @@ $lstPos = listAllPosition();
 			 }
 			 
 			 // Date de la dernier modif de ce joueur
-			 $d1 =  $mkDay - $quinze;
-			 $d2 =  $mkDay - $trente;
+			 $d1 =  $mkday - $quinze;
+			 $d2 =  $mkday - $trente;
 			 $zealt=" Date dtn : ".$lst["dateDerniereModifJoueur"].
 					"<br> Date proprio : ".$lst["dateSaisieJoueur"].
 					"<br> [ Mis &agrave; jour il y a  ".round(($mkday - $datemaj)/(60*60*24) )." jours ]";
@@ -267,8 +236,8 @@ $lstPos = listAllPosition();
         <td  nowrap>&nbsp;
     <img src="../images/time_<?=$img_nb?>.gif" onmouseover="return escape('<?=$zealt?>')" >&nbsp;        
     <a href ="<?=$url?>/joueurs/fiche.php?id=<?=$lst["idJoueur"]?>" class="bred1">
-
-      <?=strtolower($lst["nomJoueur"])?><?=strtolower($lst["prenomJoueur"])?>
+	    <?=strtolower($lst["prenomJoueur"])?> <?=strtolower($lst["nomJoueur"])?>
+		<?php if (isset($infJ["surnomJoueur"])) echo " (".$infJ["surnomJoueur"].")"; ?>
     </a>
         
         
@@ -292,16 +261,9 @@ $lstPos = listAllPosition();
         <td colspan="12"><div align="center"><img src="../images/spacer.gif" width="1" height="1"></div>          </td>
         </tr><?php } ?>
 
-
-
-
-
-
     </table></td>
   </tr>
 </table>
-
-
 
 
 <br>

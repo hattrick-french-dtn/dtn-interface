@@ -1,12 +1,12 @@
 <?php 
-require("../includes/head.inc.php");
+require_once("../includes/head.inc.php");
 require("../includes/serviceListesDiverses.php");
 require("../includes/serviceDTN.php");
 
 if(!$sesUser["idAdmin"])
-	{
+{
 	header("location: ../entry.php?ErrorMsg=Session Expiree");
-	}
+}
 
 
 ?>
@@ -69,12 +69,11 @@ $infDTN = getDTN($idAdmin);
                   <td height="20"><select name="idNiveauAcces_fk" >
 				  <?php
 				$sql = "select * from $tbl_niveauAcces WHERE idNiveauAcces != 1";
-				$req = mysql_query($sql);
 				
 				
-				while($lstNA = mysql_fetch_array($req)){
-				  if($lstNA["idNiveauAcces"] == $infDTN["idNiveauAcces_fk"]) $etat = "selected"; else $etat = "";
-				  echo "<option value = ".$lstNA["idNiveauAcces"]." $etat>".$lstNA["IntituleNiveauAcces"]."</option>";
+				foreach($conn->query($sql) as $lstNA){
+					if($lstNA["idNiveauAcces"] == $infDTN["idNiveauAcces_fk"]) $etat = "selected"; else $etat = "";
+					echo "<option value = ".$lstNA["idNiveauAcces"]." $etat>".$lstNA["IntituleNiveauAcces"]."</option>";
 				
 				}
 				  
@@ -90,10 +89,10 @@ $infDTN = getDTN($idAdmin);
 				  <?php
 				foreach($lstPosition as $l){  
 								  
-				  if($l["idPosition"] == $infDTN["idPosition_fk"]) $etat = "selected"; else $etat = "";
-				  echo "<option value = ".$l["idPosition"]." $etat>".$l["intitulePosition"]."</option>";
+					if($l["idPosition"] == $infDTN["idPosition_fk"]) $etat = "selected"; else $etat = "";
+					echo "<option value = ".$l["idPosition"]." $etat>".$l["intitulePosition"]."</option>";
 				  
-				  }
+				}
 				  ?>
 				  
                   </select></td>
@@ -112,7 +111,7 @@ $infDTN = getDTN($idAdmin);
                   </tr>
               </table>
               <br><?php
-			  if($msg) echo "<center><font color = red>".stripslashes($msg)."</font></center>";
+			  if (isset($msg)) echo "<center><font color = red>".stripslashes($msg)."</font></center>";
 			  ?></td>
           </tr>
         </table>

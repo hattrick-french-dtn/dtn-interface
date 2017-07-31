@@ -1,35 +1,35 @@
 <?php 
-          error_reporting(E_ALL);
-        require_once "../_config/CstGlobals.php"; // fonctions d'admin
-        require_once "../fonctions/AccesBase.php"; // fonction de connexion � la base
-        require_once "../fonctions/AdminDtn.php"; // fonctions d'admin
-        require_once("../includes/head.inc.php");
-        $maBase = initBD();
+error_reporting(E_ALL);
+require_once "../_config/CstGlobals.php"; // fonctions d'admin
+require_once "../fonctions/AccesBase.php"; // fonction de connexion � la base
+require_once "../fonctions/AdminDtn.php"; // fonctions d'admin
+require_once("../includes/head.inc.php");
+$maBase = initBD();
 if(!$sesUser["idAdmin"])
-	{
+{
 	header("location: ../index.php?ErrorMsg=Session Expiree");
-	}
+}
 
 
 switch($sesUser["idNiveauAcces"]){
-		case "1":
+	case "1":
 		require("../menu/menuAdmin.php");
 		break;
 		
-		case "2":
+	case "2":
 		require("../menu/menuSuperviseur.php");
 		break;
 
 
-		case "3":
+	case "3":
 		require("../menu/menuDTN.php");
 		break;
 		
-		case "4":
+	case "4":
 		require("../menu/menuCoach.php");
 		break;
 		
-		default;
+	default;
 		break;
 }
  require ("../menu/menuMaListe.php"); 
@@ -69,24 +69,25 @@ document.location='<?=$url?>/joueurs/ficheDTN.php?url='+url+'&id='+id
 </table>
 <?php
 }?>
-    <?php
+<?php
       
-		   $sqlClubs = "select teamid from ht_joueurs where dtnSuiviJoueur_fk ='".$sesUser["idAdmin"]."' ";
-		   $listeClubs = $maBase->select($sqlClubs);
-		   $j=0;
-		   $listeTeamid ="";
-			while ($j<count($listeClubs)){
+	$sqlClubs = "select teamid from ht_joueurs where dtnSuiviJoueur_fk ='".$sesUser["idAdmin"]."' ";
+	$listeClubs = $maBase->select($sqlClubs);
+	$j=0;
+	$listeTeamid ="";
+		 
+	while ($j<count($listeClubs)){
 			 
-			 if ($j+1>=count($listeClubs) ){
+		if ($j+1>=count($listeClubs) ){
 			$listeTeamid = $listeTeamid ."'".$listeClubs[$j][0]."'";
-			 }else{
-			 	$listeTeamid = $listeTeamid ."'".$listeClubs[$j][0]."',";
-			 }
-				$j=$j+1;
-			}
+		}else{
+		 	$listeTeamid = $listeTeamid ."'".$listeClubs[$j][0]."',";
+		}
+			$j=$j+1;
+		}
 		   
-		   if ($j!=0){
-		   ?>
+		if ($j!=0){
+	?>
 
 <p>
 Derni&egrave;res infos club :
@@ -166,8 +167,8 @@ if ($bgcol=="#F4F4FF"){
 }
 ?>
                 <tr bgcolor="<?=$bgcol?>">
-                <td> &nbsp;<a href ="<?=$url?>/joueurs/ficheDTN.php?id=<?=$l["idJoueur"]?>" ><b><?=strtolower($l["nomJoueur"])?>
-                      <?=strtolower($l["prenomJoueur"])?></b>
+                <td> &nbsp;<a href ="<?=$url?>/joueurs/ficheDTN.php?id=<?=$l["idJoueur"]?>" ><b><?=strtolower($l["prenomJoueur"])?> <?=strtolower($l["nomJoueur"])?>
+                      </b>
                       </a></td>
                 <td> <div align="center"><?=dateToHTML($l["dateHisto"])?>&nbsp;<?=$l["heureHisto"]?></div></td>
                 <td > <div align="left">&nbsp;<?=$l["intituleHisto"]?></div></td>

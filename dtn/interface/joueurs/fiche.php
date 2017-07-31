@@ -1,5 +1,5 @@
 <?php
-require("../includes/head.inc.php");
+require_once("../includes/head.inc.php");
 require("../includes/serviceEntrainement.php");
 require("../includes/serviceJoueur.php");
 require("../includes/serviceMatchs.php");
@@ -8,12 +8,14 @@ require("../CHPP/config.php");
 require("../includes/serviceListesDiverses.php");
 
 if(!$_SESSION['sesUser']["idAdmin"])
-  {
-  header("location: index.php?ErrorMsg=Session Expiree");
-  exit();
-  }
+{
+	header("location: ../index.php?ErrorMsg=Session Expiree");
+	exit();
+}
 
 $lang = "FR";
+
+global $msg;
 
 if (isset($htid))
 {
@@ -99,13 +101,13 @@ $ordreDeTri=" ORDER BY CAL.week DESC,M.date_match DESC";
 $limitSql=" LIMIT 0,10";
 
 $sqlHJ=$sqlreel.$sql.$ordreDeTri.$limitSql;
-$reqHJ = mysql_query($sqlHJ) or die(mysql_error()."\n".$sqlHJ);
+$reqHJ = $conn->query($sqlHJ);
 
 ?>
 
 <html>
 <head>
-<title>Fiche <?=$joueurDTN["nomJoueur"]?> <?=$joueurDTN["prenomJoueur"]?></title>
+<title>Fiche <?=$joueurDTN["prenomJoueur"]?> <?=$joueurDTN["nomJoueur"]?></title>
 
 <script language="JavaScript" type="text/JavaScript">
 function AlertNumServeurHT()
@@ -228,10 +230,10 @@ if ($datemaj >$mkday -$huit){
               <td colspan="3">&nbsp;</td>
             </tr>
             <tr> 
-              <td width="40%" align="left">&nbsp; <font color="#000099"><b><?=$joueurDTN["idHattrickJoueur"]?>&nbsp;-&nbsp;<?=$joueurDTN["nomJoueur"]?> <?=$joueurDTN["prenomJoueur"]?>&nbsp;-&nbsp;<?php 
+              <td width="40%" align="left">&nbsp; <font color="#000099"><b><?=$joueurDTN["idHattrickJoueur"]?>&nbsp;-&nbsp;<?=$joueurDTN["prenomJoueur"]?> <?=$joueurDTN["nomJoueur"]?><?php if (isset($joueurDTN["surnomJoueur"])) echo " (".$joueurDTN["surnomJoueur"].")"; ?>&nbsp;-&nbsp;<?php 
               $ageetjours = ageetjour($joueurDTN["datenaiss"]);
               $tabage = explode(" - ",$ageetjours);
-              echo $tabage[0];?>&nbsp;ans&nbsp;-&nbsp;<?=$tabage[1]?>&nbsp;jours<br>&nbsp; <?=round(($joueurDTN["salary"]/10),2)?>&nbsp;€/semaine&nbsp;
+              echo $tabage[0];?>&nbsp;ans&nbsp;-&nbsp;<?=$tabage[1]?>&nbsp;jours<br>&nbsp; <?=round(($joueurDTN["salary"]/10),2)?>&nbsp;&euro;/semaine&nbsp;
               <a href="http://alltid.org/player/<?=$joueurDTN["idHattrickJoueur"]?>" target="_blank"><img src="../images/ahstats.png" width="47" height="16" border="0" align="absmiddle"></a>
               <a href="../outils/ExportCsv.php?ordre=<?=$ordre?>&sens=<?=$sens?>&lang=<?=$lang?>&masque=<?=$masque?>&affPosition=<?=$affPosition?>&typeExport=unjoueur&idPlayer=<?=$joueurDTN["idHattrickJoueur"]?>"><img border=1 width="16" height="16" align="absmiddle" src="../images/icone-excel.jpg"></a></b></font>            
               </td>
@@ -296,16 +298,13 @@ if ($datemaj >$mkday -$huit){
                     } else {
                       $sql = "select * from $tbl_admin where idPosition_fk = ".$joueurDTN["ht_posteAssigne"]." AND affAdmin = 1 ";
                     }
-                    $req = mysql_query($sql);
-                    while($lst = mysql_fetch_array($req)){
-                    $lstDtn[] = $lst;
-                    }
-                    foreach($lstDtn as $lstDtn){
-                      echo "<option value = ".$lstDtn["idAdmin"]." $etat >".$lstDtn["loginAdmin"]."";
-                      if($total[$lstDtn["idAdmin"]] != 0){
-                         echo " (".$total[$lstDtn["idAdmin"]].")";
-                      }
-                      "</option>";
+                    $req = $conn->query($sql);
+                    foreach($req as $lst){
+						echo "<option value = ".$lst["idAdmin"]." $etat >".$lst["loginAdmin"]."";
+						if($total[$lst["idAdmin"]] != 0){
+							echo " (".$total[$lst["idAdmin"]].")";
+						}
+						echo "</option>";
                     }
                     ?>
                     </select>
@@ -440,8 +439,8 @@ if ($datemaj >$mkday -$huit){
               }
               
               $sql =  "select * from $tbl_caracteristiques where numCarac = ".$val;
-              $req = mysql_query($sql);
-              $res = mysql_fetch_array($req);?>
+              $req = $conn->query($sql);
+              $res = $req->fetch(); ?>
                 
                   
               <tr <?php if ($i % 2 == 0) {?>bgcolor="#EEEEEE"<?php }?>>
@@ -482,7 +481,7 @@ if ($datemaj >$mkday -$huit){
             <tr bgcolor="#85A275"> 
               <td width=10%><div align="center" style="font-size: 9pt;color: white"><b>Date</b></div></td>
               <td width=10%><div align="center" style="font-size: 9pt;color: white"><b>Heure</b></div></td>
-              <td width=65%><div align="center" style="font-size: 9pt;color: white"><b>Info joueur [<?=strtolower($joueurDTN["nomJoueur"])?> <?=strtolower($joueurDTN["prenomJoueur"])?>]</b></div></td>
+              <td width=65%><div align="center" style="font-size: 9pt;color: white"><b>Info joueur [<?=strtolower($joueurDTN["prenomJoueur"])?> <?=strtolower($joueurDTN["nomJoueur"])?>]</b></div></td>
               <td width=15%><div align="center" style="font-size: 9pt;color: white"><b>Auteur</b></div></td>
             </tr>
           
@@ -517,9 +516,8 @@ if ($datemaj >$mkday -$huit){
                       ORDER BY all_histo.dateHisto desc, all_histo.heureHisto desc 
                       LIMIT 0,5";
         
-              $req = mysql_query($sql) or die(mysql_error()."\n".$sql) ;
               $i=1;
-              while($l = mysql_fetch_array($req)){?>
+              foreach($conn->query($sql) as $l) { ?>
                 <tr <?php if ($i % 2 == 0) {?>bgcolor="#EEEEEE"<?php } else {?>bgcolor="#FFFFFF"<?php }?>>
                   <td><div align="center"><?=dateToHTML($l["dateHisto"])?></div></td>
                   <td><div align="center"><?=$l["heureHisto"]?></div></td>
@@ -559,7 +557,7 @@ if ($datemaj >$mkday -$huit){
             </tr>          
             <?php $j=0;
             
-            while ($lstHJ=mysql_fetch_array($reqHJ)){?>
+            foreach($reqHJ as $lstHJ){?>
             <tr <?php if ($j % 2 == 0) {?>bgcolor="#EEEEEE"<?php } else {?>bgcolor="white"<?php }?>>
               <td align="left"><?=$lstHJ["season"].'.'.$lstHJ["week"]?></td>
               <td align="center"><?=$lstHJ["forme"]?></td>
@@ -642,9 +640,8 @@ if ($datemaj >$mkday -$huit){
                                 ORDER BY ht_clubs_histo.date_histo desc 
                                 LIMIT 0,10";
       
-            $req = mysql_query($sqlClubsHisto) or die(mysql_error()."\n".$sqlClubsHisto);
             $i=1;
-            while($lHisto = mysql_fetch_array($req)){
+            foreach($conn->query($sqlClubsHisto) as $lHisto){
               if ($lHisto["role_createur"]=="D") {$lHisto["createur"]='[DTN]';}
               else if ($lHisto["role_createur"]=="P") {$lHisto["createur"]='[Proprio]';}
               $lHisto["createur"].=$lHisto["cree_par"];?>

@@ -5,7 +5,7 @@
 // some of the capabilities of JpGraph.
 
 
-require("../../includes/head.inc.php");
+require_once("../../includes/head.inc.php");
 require("../../CHPP/config.php");
 
 $sql =" SELECT * , count( id_match ) AS nbPerf, AVG( etoile ) AS perfMoyenne ".
@@ -19,14 +19,11 @@ $sql =" SELECT * , count( id_match ) AS nbPerf, AVG( etoile ) AS perfMoyenne ".
 	"ORDER BY nbPerf DESC "; 
 
 
-$req = mysql_query($sql);
 
-while($lstPerf = mysql_fetch_array($req)){
-$data[] = $lstPerf["nbPerf"];
+foreach($conn->query($sql) as $lstPerf){
+	$data[] = $lstPerf["nbPerf"];
 
-
-$legend[] = $lstPerf["nom_position_match"]. " (".round($lstPerf["perfMoyenne"],2)."* sur ".$lstPerf["nbPerf"]." match(s))";
-
+	$legend[] = $lstPerf["nom_position_match"]. " (".round($lstPerf["perfMoyenne"],2)."* sur ".$lstPerf["nbPerf"]." match(s))";
 }
 
 require("../../graph/jpgraph.php");

@@ -1,5 +1,5 @@
 <?php 
-require("../includes/head.inc.php");
+require_once("../includes/head.inc.php");
 require("../includes/langue.inc.php");
 require("../includes/serviceListesDiverses.php");
 
@@ -12,9 +12,9 @@ $buteurColor = "#FFFFFF";
 
 
 if(!$sesUser["idAdmin"])
-	{
+{
 	header("location: index.php?ErrorMsg=Session Expire");
-	}
+}
 	
 if(!isset($ordre)) $ordre = "nomJoueur";
 if(!isset($sens)) $sens = "ASC";
@@ -36,13 +36,12 @@ $mkday = mktime(0,0,0,date('m'), date('d'),date('Y'));
 
 
 $sql = "SELECT count( * ) as sum , dtnSuiviJoueur_fk
-FROM ht_joueurs
-where dtnSuiviJoueur_fk != 0
-GROUP BY dtnSuiviJoueur_fk";
-$req = mysql_query($sql);
-while($count = mysql_fetch_array($req))
+	FROM ht_joueurs
+	where dtnSuiviJoueur_fk != 0
+	GROUP BY dtnSuiviJoueur_fk";
+foreach($conn->query($sql) as $count)
 {
-$total[$count["dtnSuiviJoueur_fk"]] = $count["sum"];
+	$total[$count["dtnSuiviJoueur_fk"]] = $count["sum"];
 }
 
 $sql = "select * from $tbl_position";
@@ -79,9 +78,9 @@ switch($sesUser["idNiveauAcces_fk"]){
 
 $sql .= " AND affAdmin = 1 ";
 
-$req = mysql_query($sql);
-while($lst = mysql_fetch_array($req)){
-$lstDtn[] = $lst;
+$lstDtn = array();
+foreach($conn->query($sql) as $lst){
+	array_push($lstDtn, $lst);
 }
 
 
@@ -107,29 +106,28 @@ if($masque == 1) $sql.= " and dtnSuiviJoueur_fk = 0";
 
 $sql .= " order by $ordre $sens";
 
-$req = mysql_query($sql);
-
-while($lst = mysql_fetch_array($req)){
-$lstJoueurs[] = $lst;
+$lstJoueurs = array();
+foreach($conn->query($sql) as $lst){
+	array_push($lstJoueurs, $lst);
 }
 
 
 switch($affPosition){
 
-		case "1":
+	case "1":
 		//gK
 		$k = 1;
 		$keeperColor = "#9999FF";
 		break;
 		
-		case "2":
+	case "2":
 		// cD
 		$d = 1;
 		$defense = 1;
 		$defenseColor = "#9999FF";
 		break;
 		
-		case "3":
+	case "3":
 		// Wg
 		$construction = 1;
 		$constructionColor = "#CCCCCC";
@@ -145,7 +143,8 @@ switch($affPosition){
 		$wingwtm = 1;
 
 		break;
-		case "4":
+	
+	case "4":
 		//IM
 		$m = 1;
 		$moff = 1;
@@ -157,7 +156,7 @@ switch($affPosition){
 		$passeColor = "#CCCCCC";
 		break;
 		
-		case "5":
+	case "5":
 		// Fw
 			
 		$att = 1;
@@ -167,7 +166,7 @@ switch($affPosition){
 		$buteurColor = "#9999FF";
 		break;
 	
-		default:
+	default:
 		$font = "<font color = black>";
 		$$font = "</font>";
 		break;
@@ -185,27 +184,26 @@ $tri = "Tri decroissant";
 break;
 }
 switch($sesUser["idNiveauAcces"]){
-		case "1":
+	case "1":
 		require("../menu/menuAdmin.php");
 		require("../menu/menuAdminGestion.php");
 		break;
 		
-		case "2":
+	case "2":
 		require("../menu/menuSuperviseur.php");
 		require("../menu/menuSuperviseurGestion.php");
 		break;
 
-
-		case "3":
+	case "3":
 		require("../menu/menuDTN.php");
 		require("../menu/menuDTNGestion.php");
 		break;
 		
-		case "4":
+	case "4":
 		require("../menu/menuCoach.php");
 		break;
 		
-		default;
+	default;
 		break;
 
 
@@ -213,22 +211,7 @@ switch($sesUser["idNiveauAcces"]){
 
 ?>
 <script language="JavaScript" src="../includes/javascript/navigation.js"></script>
-<script language="JavaScript" type="text/JavaScript">
-<!--
-function MM_jumpMenu(targ,selObj,restore){ //v3.0
-  eval(targ+".location='"+selObj.options[selObj.selectedIndex].value+"'");
-  if (restore) selObj.selectedIndex=0;
-}
-//-->
-
-
-function init()
-{
-var scrollPos = "<?=$scrollPos?>";
-document.body.scrollTop = scrollPos;
-
-}//-->
-</script>
+<script language="JavaScript" src="menu_joueur.js"></script>
 <style type="text/css">
 <!--
 .Style1 {color: #FFFFFF}
@@ -378,7 +361,7 @@ document.body.scrollTop = scrollPos;
                 <?php
 			  foreach($lstJoueurs as $l){
 
- $val = array($l["scoreGardien"],$l["scoreDefense"],$l["scoreAilierDef"],$l["scoreAilierOff"],$l["scoreWtm"],$l["scoreMilieu"],$l["scoreMilieuOff"],$l["scoreAttaquant"]);
+ $val = array($l["scoreGardien"],$l["scoreDefense"],$l["scoreAilier"],$l["scoreAilierOff"],$l["scoreAilierVersMilieu"],$l["scoreMilieu"],$l["scoreMilieuOff"],$l["scoreAttaquant"]);
 sort($val);
 $valMax =  $val[7];
 $val2 = $val[6];
@@ -429,7 +412,9 @@ $val2 = $val[6];
 			  ?>
                 <tr bgcolor="#FFFFFF" align="right"> 
                     <td align="left" nowrap>&nbsp;<img src="../images/time_<?=$img_nb?>.gif" onMouseOver="return escape('<?=$zealt?>')" >&nbsp;<a href ="<?=$url?>/joueurs/fiche.php?id=<?=$l["idJoueur"]?>" class=bred1>
-                    <b><?=strtolower($l["nomJoueur"])?></b>&nbsp;<?=strtolower($l["prenomJoueur"])?></a>
+                    <b><?=strtolower($l["prenomJoueur"])?> <?=strtolower($l["nomJoueur"])?>
+					<?php if (isset($l["surnomJoueur"])) echo " (".$l["surnomJoueur"].")"; ?>
+					</b></a>
                     
                     </td>
                     
@@ -603,24 +588,19 @@ $val2 = $val[6];
       <td width="256"> <div align="right"> 
           <select name="idDtn" id="select">
             <?php
-			  foreach($lstDtn as $lstDtn){
-			  echo "<option value = ".$lstDtn["idAdmin"]." $etat >".$lstDtn["loginAdmin"]."";
+			foreach($lstDtn as $lstDtn){
+				echo "<option value = ".$lstDtn["idAdmin"]." $etat >".$lstDtn["loginAdmin"]."";
+				if (array_key_exists($lstDtn["idAdmin"], $total)) {
+					if($total[$lstDtn["idAdmin"]] != 0){
+			  			echo " (".$total[$lstDtn["idAdmin"]].")";
+			  		}
+				}
 			  
+				"</option>";
+			}
 			  
-			  
-			  if($total[$lstDtn["idAdmin"]] != 0){
-			  
-			  echo " (".$total[$lstDtn["idAdmin"]].")";
-			  
-			  }
-			  
-			  
-			  "</option>";
-			  }
-			  
-			  
-			  ?>
-          <option value="309">Paros59</option>
+			?>
+<!--          <option value="309">Paros59</option>-->
           </select>
           <input type="submit" name="Submit" value="Assigner">
         </div></td>

@@ -1,8 +1,8 @@
 <?php
-		ini_set("include_path", $DOCUMENT_ROOT . "/dtn/interface/fonctions" . PATH_SEPARATOR . ini_get("include_path"));
-        require_once "../fonctions/phpxml.php"; // XML to Tree converter
-        require_once "../fonctions/HTML/Table.php"; // fcontions pour faire des tables HTML
-        
+//ini_set("include_path", $DOCUMENT_ROOT . "/dtn/interface/fonctions" . PATH_SEPARATOR . ini_get("include_path"));
+require_once "../fonctions/phpxml.php"; // XML to Tree converter
+require_once "../fonctions/HTML/Table.php"; // fcontions pour faire des tables HTML
+
 
 
 function majPays($maBase,$HTCli) {
@@ -50,51 +50,42 @@ function majPays($maBase,$HTCli) {
 	// vérification et mise à jour dans la base de données
 	for ($leagueid=0 ; $leagueid<$numberofleagues; $leagueid++) {
 
-
-								
 		// regarde si le pays est déjà existant
 		$maRequete="select * from ht_pays where idPays=".$pays[$leagueid][0];
 		$retour = $maBase->select($maRequete);
 		if(count($retour)>0) { // si le pays est bien présent on fait un update
-				$pays[$leagueid][3]="modif";
-				$maRequete="UPDATE ht_pays set nomPays ='".addslashes($pays[$leagueid][1])."', "
-							." nomAnglais = '".addslashes($pays[$leagueid][2])."' "
-							." WHERE idPays=".$pays[$leagueid][0] ;
+			$pays[$leagueid][3]="modif";
+			$maRequete="UPDATE ht_pays set nomPays ='".addslashes($pays[$leagueid][1])."', "
+						." nomAnglais = '".addslashes($pays[$leagueid][2])."' "
+						." WHERE idPays=".$pays[$leagueid][0] ;
 //				echo "<br/>";
 //				echo $maRequete;
 //				echo "<br/>";						
-							
-				$retour = $maBase->update($maRequete);
-				if(count($retour)>0) {
-					$pays[$leagueid][4]="ok";										
-				} else {
-					$pays[$leagueid][4]="erreur";
-				}										
+						
+			$retour = $maBase->update($maRequete);
+			if(count($retour)>0) {
+				$pays[$leagueid][4]="ok";										
+			} else {
+				$pays[$leagueid][4]="erreur";
+			}										
 		} else { // si le pays n'est pas présent, on fait un insert
-				$pays[$leagueid][3]="rajout";
-				$maRequete="INSERT INTO ht_pays ( idPays, nomPays, nomAnglais ) "
-							." VALUES ( '".$pays[$leagueid][0]."' , '".addslashes($pays[$leagueid][1])."','".addslashes($pays[$leagueid][2])."' )" ;
+			$pays[$leagueid][3]="rajout";
+			$maRequete="INSERT INTO ht_pays ( idPays, nomPays, nomAnglais ) "
+						." VALUES ( '".$pays[$leagueid][0]."' , '".addslashes($pays[$leagueid][1])."','".addslashes($pays[$leagueid][2])."' )" ;
 //				echo "<br/>";
 //				echo $maRequete;
 //				echo "<br/>";						
-							
-				$retour = $maBase->insert($maRequete);
-				if(count($retour)>0) {
-					$pays[$leagueid][4]="ok";					
-				} else {
-					$pays[$leagueid][4]="erreur";
-				}										
+						
+			$retour = $maBase->insert($maRequete);
+			if(count($retour)>0) {
+				$pays[$leagueid][4]="ok";					
+			} else {
+				$pays[$leagueid][4]="erreur";
+			}										
 		}
-		
-					
-					
-
-
 	}
-	
-	
+
 	// affichage résultat
-	
 	echo "<center/><h3>";
 	echo "Nombre total de pays : ".$numberofleagues;
 	echo "</h3></center>";

@@ -1,26 +1,19 @@
 <?php 
-require("../includes/head.inc.php");
+require_once("../includes/head.inc.php");
 require("../includes/serviceEquipes.php");
 require("../includes/serviceListesDiverses.php");
 
 
 if(!$sesUser["idAdmin"])
-	{
+{
 	header("location: index.php?ErrorMsg=Session Expir�");
-	}
+}
 if(!isset($ordre)) $ordre = "nomJoueur";
 if(!isset($sens)) $sens = "ASC";
 if(!isset($lang)) $lang = "FR";
 
 
 require("../includes/langue.inc.php");
-
-
-
-
-
-
-
 
 
 
@@ -79,10 +72,6 @@ break;
 
 
 }
-
-
-$lstClubs = listClubs();
-
 
 ?>
 <link href="../css/ht.css" rel="stylesheet" type="text/css">
@@ -168,14 +157,10 @@ document.body.scrollTop = scrollPos;
                   <td width="1" bgcolor="#000000"><div align="center"><strong><img src="../images/spacer.gif" width="1" height="1"></strong></div></td>
                   <td width="132"><div align="center"><strong>Archiver</strong></div></td>
                 </tr>
-                <?php
-				
-				$lst = 1;
-			$reqJ = mysql_query($sqlJ);
-			while($lstJoueurs = mysql_fetch_array($reqJ)){
-
-
-
+		<?php
+		
+		$lst = 1;
+		foreach($conn->query($sqlJ) as $lstJoueurs){
 
 			switch($lst){
 			case 1:
@@ -199,9 +184,7 @@ document.body.scrollTop = scrollPos;
                 </tr>
                 <tr bgcolor="<?=$bgcolor?>"> 
                   <td>&nbsp; 
-                    <?=$lstJoueurs["nomJoueur"]?>
-    <?=$lstJoueurs["prenomJoueur"]?>
-
+                    <?=$lstJoueurs["prenomJoueur"]?> <?=$lstJoueurs["nomJoueur"]?>
                   </td>
                   <td width="1" bgcolor="#000000"><img src="../images/spacer.gif" width="1" height="1"></td>
                   <td onClick="javascript:fiche('<?=$lstJoueurs["idJoueur"]?>')"><div align="center"><a href="javascript:fiche('<?=$lstJoueurs["idJoueur"]?>');"><img src="../images/carre-rouge.gif" width="10" height="10" border="0"></a></div></td>

@@ -32,39 +32,44 @@ if (!isset($_SESSION['horsConnexion'])) {
   // Si l'utilisateur a cliqué sur ouvrir une session HT
   if (isset($_REQUEST['mode'])) {
   
+    /******************************************************************************/
+    /******************************************************************************/
+    /*      CONNEXION HT                                                          */
+    /******************************************************************************/
+    /******************************************************************************/
     if ($_REQUEST['mode']=='redirectionHT') {
   
-      if (isset($_REQUEST['connexion_permanente']) && $_REQUEST['connexion_permanente']==1) {
-        $callbackUrl .= "&connexion_permanente=1";
-      } else {
-        $callbackUrl .= "&connexion_permanente=0";
-      }
+		if (isset($_REQUEST['connexion_permanente']) && $_REQUEST['connexion_permanente']==1) {
+			$callbackUrl .= "&connexion_permanente=1";
+		} else {
+			$callbackUrl .= "&connexion_permanente=0";
+		}
     
-      /*
-      You must supply your chpp crendentials and a callback url.
-      User will be redirected to this url after login
-      You can add your own parameters to this url if you need,
-      they will be kept on user redirection
-      */
-      try
-      {
-        $HT = new CHPPConnection(CONSUMERKEY,CONSUMERSECRET,$callbackUrl);
-        $url = $HT->getAuthorizeUrl();
-      }
-      catch(HTError $e)
-      {
-        echo $e->getMessage();
-      }
-      /*
-      Be sure to store $HT in session before redirect user
-      to Hattrick chpp login page
-      */
-      $_SESSION['HT'] = $HT;
-      /*
-      Redirect user to Hattrick for login
-      or put a link with this url on your site
-      */
-      header('Location: '.$url); 
+		/*
+		You must supply your chpp crendentials and a callback url.
+		User will be redirected to this url after login
+		You can add your own parameters to this url if you need,
+		they will be kept on user redirection
+		*/
+		try
+		{
+			$HT = new CHPPConnection(CONSUMERKEY,CONSUMERSECRET,$callbackUrl);
+			$url = $HT->getAuthorizeUrl();
+		}
+		catch(HTError $e)
+		{
+			echo $e->getMessage();
+		}
+		/*
+		Be sure to store $HT in session before redirect user
+		to Hattrick chpp login page
+		*/
+		$_SESSION['HT'] = $HT;
+		/*
+		Redirect user to Hattrick for login
+		or put a link with this url on your site
+		*/
+		header('Location: '.$url); 
 			exit();
     }
     
@@ -86,20 +91,23 @@ if (!isset($_SESSION['horsConnexion'])) {
         You can save user token and token secret and/or request xml files
         */
 		$userId = $_SESSION['HT']->getClub()->getUserId();
-		$teamNb = $_SESSION['HT']->getNumberOfTeams($userId);
-		for ($tsidx=$teamNb; $tsidx >= 0; $tsidx--) {
-			// On commence par le 2e club s'il y a pour faire la maj
-			$team2 = $_SESSION['HT']->getSecondaryTeam($userId, $tsidx);
-			if ($team2 != null)
-			{
-				$clubHT = getDataClubFromHT_usingPHT($team2->getTeamId());
-				$clubHT['userToken'] = $_SESSION['HT']->getOauthToken();
-				$clubHT['userTokenSecret'] = $_SESSION['HT']->getOauthTokenSecret();
+		$team = $_SESSION['HT']->getInternationalTeam($userId);
+		if ($team) {
+			$clubHT = getDataClubFromHT_usingPHT($team->getTeamId(), $userId);
+			$clubHT['userToken'] = $_SESSION['HT']->getOauthToken();
+			$clubHT['userTokenSecret'] = $_SESSION['HT']->getOauthTokenSecret();
+			$majClub=insertionClub($clubHT); // Insertion ou Maj des tokens dans la bdd DTN
+		}
 
-				$majClub=insertionClub($clubHT); // Insertion ou Maj des tokens dans la bdd DTN
-			}        
-        }
-        $clubHT = getDataClubFromHT_usingPHT($_SESSION['HT']->getTeam()->getTeamId()); // On récupère sur HT les informations sur le club connecté
+		$team = $_SESSION['HT']->getSecondaryTeam($userId);
+		if ($team) {
+			$clubHT = getDataClubFromHT_usingPHT($team->getTeamId(), $userId);
+			$clubHT['userToken'] = $_SESSION['HT']->getOauthToken();
+			$clubHT['userTokenSecret'] = $_SESSION['HT']->getOauthTokenSecret();
+			$majClub=insertionClub($clubHT); // Insertion ou Maj des tokens dans la bdd DTN
+		}
+
+        $clubHT = getDataClubFromHT_usingPHT($_SESSION['HT']->getPrimaryTeam($userId)->getTeamId(), $userId); // On récupère sur HT les informations sur le club connecté
         $clubHT['userToken'] = $_SESSION['HT']->getOauthToken();
         $clubHT['userTokenSecret'] = $_SESSION['HT']->getOauthTokenSecret();
   

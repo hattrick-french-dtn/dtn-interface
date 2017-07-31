@@ -1,19 +1,20 @@
 <?php
-require("../includes/head.inc.php");
+require_once("../includes/head.inc.php");
 require("../includes/serviceJoueur.php");
 
 if(!$sesUser["idAdmin"])
 {
-	header("location: index.php?ErrorMsg=Session Expiree");
+	header("location: ../index.php?ErrorMsg=Session Expiree");
 }
 
 if(!isset($lang)) $lang = "FR";
+global $from;
 
 require("../includes/langue.inc.php");
 
 $sql = "select * from $tbl_config where nomConfig = \"rapport\"";
-$req = mysql_query($sql);
-$lstRapport = mysql_fetch_array($req);
+$req = $conn->query($sql);
+$lstRapport = $req->fetch();
 $valeurConfig = $lstRapport["valeurConfig"];
 
 if (isset($htid))
@@ -51,8 +52,8 @@ switch($sesUser["idNiveauAcces"]){
 
 }
 
-$sql = mysql_query("select * from $tbl_histomodif where idJoueur_fk = $idJoueur ");
-$numMaxHisto = mysql_num_rows($sql);
+$sql = $conn->query("select * from $tbl_histomodif where idJoueur_fk = $idJoueur ");
+$numMaxHisto = $sql->rowCount();
 
 
 function ht_stripos($string,$word)
@@ -133,7 +134,7 @@ require("../menu/menuJoueur.php");
           <td colspan="3">&nbsp;</td>
         </tr>
         <tr> 
-          <td width="50%" align="left">&nbsp; <font color="#000099"><b><?=$infJ["idHattrickJoueur"]?>&nbsp;-&nbsp;<?=$infJ["nomJoueur"]?> <?=$infJ["prenomJoueur"]?>&nbsp;-&nbsp;<?=$infJ["ageJoueur"]?>&nbsp;ans&nbsp;-&nbsp;<?=$infJ["intitulePosition"]?></b></font></td>
+          <td width="50%" align="left">&nbsp; <font color="#000099"><b><?=$infJ["idHattrickJoueur"]?>&nbsp;-&nbsp;<?=$infJ["prenomJoueur"]?> <?=$infJ["nomJoueur"]?><?php if (isset($infJ["surnomJoueur"])) echo " (".$infJ["surnomJoueur"].")"; ?>&nbsp;-&nbsp;<?=$infJ["ageJoueur"]?>&nbsp;ans&nbsp;-&nbsp;<?=$infJ["intitulePosition"]?></b></font></td>
           <td width="20%" align="left"><b>Club Actuel : </b><?=$infJ["nomClub"]?></td>
           <td width="30%" align="left">&nbsp;</td>
         </tr>
@@ -170,8 +171,7 @@ require("../menu/menuJoueur.php");
 		   $sql = "select * from $tbl_histomodif LEFT JOIN ht_admin ON idAdmin = idAdmin_fk where idJoueur_fk = $idJoueur order by dateHisto desc, heureHisto desc ";
 			$sql .= " limit $numEnr, $nbParPage";
 			
-			$req = mysql_query($sql);
-			while($l = mysql_fetch_array($req)){
+			foreach($conn->query($sql) as $l){
 		   
 		   
 		   ?>

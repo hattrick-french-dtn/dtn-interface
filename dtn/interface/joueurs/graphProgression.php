@@ -1,9 +1,10 @@
 <?php
-require("../includes/head.inc.php");
+require_once("../includes/head.inc.php");
+require("../includes/serviceJoueur.php");
 if(!$sesUser["idAdmin"])
-	{
-	header("location: index.php?ErrorMsg=Session Expiree");
-	}
+{
+	header("location: ../index.php?ErrorMsg=Session Expiree");
+}
 
 if(!isset($lang)) $lang = "FR";
 if(!isset($graph)) $graph = "perfMatch";
@@ -71,35 +72,28 @@ $lstMatchs = construitListe($sql,$tbl_caracteristiques,$tbl_joueurs,$tbl_perf);
 <title>Fiche joueur</title>
 
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-<script language="JavaScript" type="text/JavaScript">
-<!--
-function MM_jumpMenu(targ,selObj,restore){ //v3.0
-  eval(targ+".location='"+selObj.options[selObj.selectedIndex].value+"'");
-  if (restore) selObj.selectedIndex=0;
-}
-//-->
-</script>
-</head>
+<script language="JavaScript" src="menu_joueur.js"></script>
 <script language="JavaScript" src="../includes/javascript/navigation.js"></script>
+</head>
 <?php
 switch($sesUser["idNiveauAcces"]){
-		case "1":
+	case "1":
 		require("../menu/menuAdmin.php");
 		break;
 		
-		case "2":
+	case "2":
 		require("../menu/menuSuperviseur.php");
 		break;
 
-		case "3":
+	case "3":
 		require("../menu/menuDTN.php");
 		break;
 		
-		case "4":
+	case "4":
 		require("../menu/menuCoach.php");
 		break;
 		
-		default;
+	default;
 		break;
 }
 
@@ -121,8 +115,12 @@ require("../menu/menuJoueur.php");
              <tr> 
           <td colspan="3">&nbsp;</td>
         </tr>
-        <tr> 
-          <td width="50%" align="left">&nbsp; <font color="#000099"><b><?=$lstJoueur[0]["idHattrickJoueur"]?>&nbsp;-&nbsp;<?=$lstJoueur[0]["nomJoueur"]?> <?=$lstJoueur[0]["prenomJoueur"]?>&nbsp;-&nbsp;<?=$lstJoueur[0]["ageJoueur"]?>&nbsp;ans&nbsp;-&nbsp;<?=$lstJoueur[0]["intitulePosition"]?></b></font></td>
+        <tr>
+		<?php
+			$ageetjours = ageetjour($lstJoueur[0]["datenaiss"]);
+            $tabage = explode(" - ",$ageetjours);
+		?>
+          <td width="50%" align="left">&nbsp; <font color="#000099"><b><?=$lstJoueur[0]["idHattrickJoueur"]?>&nbsp;-&nbsp;<?=$lstJoueur[0]["prenomJoueur"]?> <?=$lstJoueur[0]["nomJoueur"]?>&nbsp;-&nbsp;<?=$tabage[0]?>&nbsp;ans&nbsp;-&nbsp;<?=$lstJoueur[0]["intitulePosition"]?></b></font></td>
           <td width="20%" align="left"><b>Club Actuel : </b><?=$lstClubActuel[0]["nomClub"]?></td>
                   <td width="30%" align="left">&nbsp;</td>
         

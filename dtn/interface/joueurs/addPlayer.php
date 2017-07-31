@@ -1,5 +1,5 @@
 <?php
-require("../includes/head.inc.php");
+require_once("../includes/head.inc.php");
 require("../includes/serviceEquipes.php");
 require("../includes/serviceListesDiverses.php");
 require("../includes/serviceJoueur.php");
@@ -9,33 +9,33 @@ require("../includes/langue.inc.php");
 
 if(!$sesUser["idAdmin"])
 {
-  header("location: index.php?ErrorMsg=Session Expire");
+	header("location: index.php?ErrorMsg=Session Expire");
 }
 
 
 switch($sesUser["idNiveauAcces"]){
-		case "1":
-		require("../menu/menuAdmin.php");
-		require("../menu/menuSuperviseurConsulter.php");
-		break;
-		
-		case "2":
-		require("../menu/menuSuperviseur.php");
-		require("../menu/menuSuperviseurConsulter.php");
-		break;
+case "1":
+	require("../menu/menuAdmin.php");
+	require("../menu/menuSuperviseurConsulter.php");
+	break;
+	
+case "2":
+	require("../menu/menuSuperviseur.php");
+	require("../menu/menuSuperviseurConsulter.php");
+	break;
 
-		case "3":
-		require("../menu/menuDTN.php");
-		require("../menu/menuDTNConsulter.php");
-		break;
-		
-		case "4":
-		require("../menu/menuCoach.php");
-		require("../menu/menuCoachSubmit.php");
-		break;
-		
-		default;
-		break;
+case "3":
+	require("../menu/menuDTN.php");
+	require("../menu/menuDTNConsulter.php");
+	break;
+	
+case "4":
+	require("../menu/menuCoach.php");
+	require("../menu/menuCoachSubmit.php");
+	break;
+	
+default;
+	break;
 }
 
 
@@ -55,46 +55,7 @@ if (isset($_SESSION['listID']) && !isset($_REQUEST['listID']) )  {
 <link href="../css/ht.css" rel="stylesheet" type="text/css">
 <script language="JavaScript" src="../includes/javascript/navigation.js"></script>
 <title>Superviseur</title>
-<script language="JavaScript" type="text/JavaScript">
-<!--
-<!--
-
-
-//-->
-
-
-function init()
-{
-var scrollPos = "<?=$scrollPos?>";
-document.body.scrollTop = scrollPos;
-}
-
-
-// Fonction générant une alerte si un des champs du formulaire d'ajout transfert n'est pas renseigné
-function testChamp1(){
-	
-if (document.form1.htlogin.value == "" || document.form1.htseccode.value == "") {
-    alert("Vous devez saisir votre login et password HT");
-    return false;
-}
-else return true;
-}
-
-
-
-// Fonction générant une alerte si un des champs du formulaire d'ajout transfert n'est pas renseigné
-function testListId(){
-	
-if (document.form1.listID.value == "" ) {
-    alert("Vous devez saisir les identifiants Hattrick des joueurs à ajouter dans la base");
-    return false;
-}
-else return true;
-}
-
-</script>
-
-
+<script language="JavaScript" src="menu_joueur.js"></script>
 
 <body onLoad = "init();">
 
@@ -158,18 +119,18 @@ else return true;
   <tr>
   <td> 
     <br /> 
-    2 - Entrez la liste des IDs de joueurs actuellement sur le marché des transfert que vous souhaitez ajouter dans la base :<br>
+    2 - Entrez la liste des IDs de joueurs actuellement sur le march&eacute; des transfert que vous souhaitez ajouter dans la base :<br>
     <br />
   </td>
   </tr>
   <tr>
   <td class="ContenuCentrer">
-    <textarea name="listID" id="listID" style="font-size:7pt;font-family:Arial" cols=150 rows=6 <?php if (!isset($_SESSION['HT'])) {?> DISABLED <?php }?> ><?php echo ($_SESSION['listID']);?></textarea>
+    <textarea name="listID" id="listID" style="font-size:7pt;font-family:Arial" cols=150 rows=6 <?php if (!isset($_SESSION['HT'])) {?> DISABLED <?php }?> ><?php if (isset($_SESSION['listID'])) echo ($_SESSION['listID']);?></textarea>
   </td>
   </tr>
   <tr>
   <td>
-    <i>Remarque : Chaque ID de joueur doit être séparé par un ";"</i>
+    <i>Remarque : Chaque ID de joueur doit &ecirc;tre s&eacute;par&eacute; par un ";"</i>
   </td>
   </tr> 
   <tr> 
@@ -203,7 +164,7 @@ if (isset($_SESSION["HT"]) && isset($_REQUEST['listID']) ) {
     $arrayID=null;
     $player=null;
     $listID=str_replace(CHR(32),"",$_REQUEST['listID']);
-    $arrayID = split(";",$listID);
+    $arrayID = explode(";",$listID);
     for($i=0 ; $i<count($arrayID);$i++)
     {
       $joueurHT[$i]=getDataUnJoueurFromHT_usingPHT($arrayID[$i]);
@@ -239,7 +200,7 @@ if (isset($_SESSION["HT"]) && isset($_REQUEST['listID']) ) {
               /*Si le joueur existe sur HT*/
               if ($joueurHT[$i]["NATIVELEAGUENAME"]!="France") {
                 /* Si le joueur est étranger*/
-                $commentaireJ="est un joueur étranger";
+                $commentaireJ="est un joueur &eacute;tranger";
                 $lien="n/a";
               }
               else {
@@ -247,12 +208,12 @@ if (isset($_SESSION["HT"]) && isset($_REQUEST['listID']) ) {
                   $joueurDTN=getJoueurHt($joueurHT[$i]['idHattrickJoueur']);
                   if ($joueurDTN['idHattrickJoueur']==$joueurHT[$i]['idHattrickJoueur']) {
                     /*si le joueur existe déja dans la base*/
-                    $commentaireJ="existe déjà dans la base";
+                    $commentaireJ="existe d&eacute;j&agrave; dans la base";
                     $lien="<u><a href='fiche.php?htid=$arrayID[$i]' color='#0000FF' target='_NEW'>Voir</a></u>";
                   }
                   else {if ($joueurHT[$i]['transferListed']==0) { 
                         /*Si le joueur existe sur HT mais n'est pas en vente*/
-                        $commentaireJ="n'est pas à vendre";
+                        $commentaireJ="n'est pas &agrave; vendre";
                         $lien="<u><a href='addPlayer.php#".$arrayID[$i]."' color='#0000FF'>Saisir</a></u>";
                         $Nb=count($playerToAddManual);
                         $playerToAddManual[$Nb]=$joueurHT[$i];
@@ -267,7 +228,7 @@ if (isset($_SESSION["HT"]) && isset($_REQUEST['listID']) ) {
                           $lien="n/a";
                         }
                         else{
-                          $commentaireJ="Inséré dans la base DTN !!";
+                          $commentaireJ="Ins&eacute;r&eacute; dans la base DTN !!";
                           $lien="<u><a href='fiche.php?htid=$arrayID[$i]' color='#0000FF' target='_NEW'>Voir</a></u>";
                           $rejet=0;
                         }
@@ -292,7 +253,7 @@ if (isset($_SESSION["HT"]) && isset($_REQUEST['listID']) ) {
               <td width="1" bgcolor="#000000"><img src="../images/spacer.gif" width="1" height="1"></td>
               <td width="10%"> <?=$arrayID[$i]?></td>
               <td width="1" bgcolor="#000000"><img src="../images/spacer.gif" width="1" height="1"></td>
-              <td width="30%"><?=strtr($joueurHT[$i]['nomJoueur'],"'"," ")?></td>
+              <td width="30%"><?=strtr($joueurHT[$i]['prenomJoueur'],"'"," ")?> <?=strtr($joueurHT[$i]['nomJoueur'],"'"," ")?></td>
               <td width="1" bgcolor="#000000"><img src="../images/spacer.gif" width="1" height="1"></td>
               <td width="50%"><font color="<?=$FontColor?>"><?=$commentaireJ?></font></td>
               <td width="1" bgcolor="#000000"><img src="../images/spacer.gif" width="1" height="1"></td>
@@ -379,7 +340,7 @@ if (isset($playerToAddManual)) {
       <td height ="20" ><div align="center">
             <table width="100%" border="0" cellspacing="0" cellpadding="0">
               <tr> 
-                <td height="20" bgcolor="#00CC00"> <div align="center"><font color="#FFFFFF"><a name="<?=$playerToAddManual[$j]["idHattrickJoueur"]?>"><?=$playerToAddManual[$j]["idHattrickJoueur"]." - ".$playerToAddManual[$j]["nomJoueur"]?></a></font></div></td>
+                <td height="20" bgcolor="#00CC00"> <div align="center"><font color="#FFFFFF"><a name="<?=$playerToAddManual[$j]["idHattrickJoueur"]?>"><?=$playerToAddManual[$j]["idHattrickJoueur"]." - ".$playerToAddManual[$j]["prenomJoueur"]." ".$playerToAddManual[$j]["nomJoueur"]?></a></font></div></td>
               </tr>
               <tr> 
                 <td height="1" colspan="3" bgcolor="#000000"><img src="../images/spacer.gif" width="1" height="1"></td>
@@ -402,7 +363,7 @@ if (isset($playerToAddManual)) {
                     </tr>
                     <tr> 
                       <td height="20"><div align="left">&nbsp;Nom :</div></td>                      
-                      <td height="20"><?=$playerToAddManual[$j]["nomJoueur"]?></td>
+                      <td height="20"><?=$playerToAddManual[$j]["prenomJoueur"]?> <?=$playerToAddManual[$j]["nomJoueur"]?></td>
                     </tr>
                     <tr> 
                       <td height="20"><div align="left">&nbsp;Age</div></td>

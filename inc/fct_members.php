@@ -7,7 +7,7 @@ Correspond à un chiffre entre 1 et 5, si possible ajouter des catégories pour le
 */
 function afficheMembres( $id_position, $intitule_position, $libelle_position ) {
 
-   connect();
+   global $conn;
    //Les conditions des requêtes sont différentes s'il s'agit d'un affichage des DTN d'un secteur ou s'il s'agit du reste du staff DTN#/DTN~...
    if( $id_position != 0 ) $req_position = " AND idPosition_fk = ".$id_position; //utilisé pour les DTN secteurs
    else $req_position = " AND ((idNiveauAcces = 1 OR idNiveauAcces = 4) OR (idNiveauAcces = 2 AND idPosition_fk = 0))"; //utilisé pour les DTN#
@@ -20,12 +20,12 @@ function afficheMembres( $id_position, $intitule_position, $libelle_position ) {
               AND ht_admin.affAdmin = 1 ".$req_position."
             ORDER BY idNiveauAcces_fk ASC, loginAdmin  ASC";
 
-   $sql = mysql_query($req);
+   $sql = $conn->query($req);
    
    $out = "<table border='0' width='730' cellpadding='0' cellspacing='0'>";
    $i = 0;
    
-   while( $rst = mysql_fetch_object($sql) ) {
+   foreach($sql as $rst) ) {
    
       // En tete de tableau avec le nom du poste
       if( $i == 0 )
@@ -40,51 +40,51 @@ function afficheMembres( $id_position, $intitule_position, $libelle_position ) {
          $i = 1;
       }
    
-      $out .= "<tr><td height='15' colspan='2'><div align='left' class='style40'>".$rst->loginAdmin."</div></td>
-            <td><div align='left' class='style40'>".$rst->IntituleNiveauAcces."</div></td>";
+      $out .= "<tr><td height='15' colspan='2'><div align='left' class='style40'>".$rst['loginAdmin']."</div></td>
+            <td><div align='left' class='style40'>".$rst['IntituleNiveauAcces']."</div></td>";
       
       /*
     //Certains ID de club affichent 0
-      if( $rst->idClubHT != 0 )      
-         $out .= "<td><div align='center' class='style40'>".$rst->idClubHT."</div></td>";
+      if( $rst['idClubHT'] != 0 )      
+         $out .= "<td><div align='center' class='style40'>".$rst['idClubHT']."</div></td>";
       else
          $out .= "<td>&nbsp;</td>";
     */
     
     //Id Hattrick du User conservé dans idAdminHT de la table ht_admin
-      if( $rst->idAdminHT != null )   //si non renseigné alors doit être null et pas 0 sinon possibilité d'erreur liée à la non-unicité   
-         $out .= "<td><div align='left' class='style40'>".$rst->idAdminHT."</div></td>";
+      if( $rst['idAdminHT'] != null )   //si non renseigné alors doit être null et pas 0 sinon possibilité d'erreur liée à la non-unicité   
+         $out .= "<td><div align='left' class='style40'>".$rst['idAdminHT']."</div></td>";
       else
          $out .= "<td>&nbsp;</td>";
     
       //Nom du Club par Fireproofed
-    if( $rst->nomClub != null )      
-         $out .= "<td><div align='left' class='style40'>".$rst->nomClub."</div></td>";
+    if( $rst['nomClub'] != null )      
+         $out .= "<td><div align='left' class='style40'>".$rst['nomClub']."</div></td>";
       else
          $out .= "<td>&nbsp;</td>";
 
       /*
     //idUserHT par Fireproofed
-    if( $rst->idUserHT != 0 )      
-         $out .= "<td><div align='center' class='style40'>".$rst->idUserHT."</div></td>";
+    if( $rst['idUserHT != 0 )      
+         $out .= "<td><div align='center' class='style40'>".$rst['idUserHT']."</div></td>";
       else
          $out .= "<td>&nbsp;</td>";
 
       //Nom du User par Fireproofed
-    if( $rst->nomUser != null )      
-         $out .= "<td><div align='center' class='style40'>".$rst->nomUser."</div></td>";
+    if( $rst['nomUser'] != null )      
+         $out .= "<td><div align='center' class='style40'>".$rst['nomUser']."</div></td>";
       else
          $out .= "<td>&nbsp;</td>";
       */
       
-      if( $rst->idPays != null )
-         $out .= "<td><div align='center'><img alt='".$rst->nomPays."' border='1' src='http://".$_SERVER["HTTP_HOST"]."/images/flags/"
-            .$rst->idPays."flag.gif' /></div></td></tr>";
+      if( $rst['idPays'] != null )
+         $out .= "<td><div align='center'><img alt='".$rst['nomPays']."' border='1' src='http://".$_SERVER["HTTP_HOST"]."/images/flags/"
+            .$rst['idPays']."flag.gif' /></div></td></tr>";
       else
          $out .= "<td>&nbsp;</td></tr>";
       
    }
-   deconnect();
+
    return( $out."</table>" );
 }
 ?>

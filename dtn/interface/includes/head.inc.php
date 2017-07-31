@@ -1,34 +1,19 @@
 <?php
 
 $monServeur=$_SERVER["DOCUMENT_ROOT"];
+global $sesUser;
 
 // Initialisation des variables suivant environnement
-if ($_SERVER["HTTP_HOST"] == "www.ht-fff.org")
-{
-	$cheminComplet = $monServeur."/dtn/interface/";
-	$url = "http://".$_SERVER["HTTP_HOST"]."/dtn/interface";
-	$db_c = "dtn_utf8";
-}
-else if ($_SERVER["HTTP_HOST"] == "dev.ht-fff.org")
-{
-	$cheminComplet = $monServeur."/dtn/interface/";
-	$url = "http://".$_SERVER["HTTP_HOST"]."/dtn/interface";
-	$db_c = "ht_dtn";
-}
-else
-{
-	$cheminComplet = $monServeur."/dtn/interface/";
-	$url = "http://".$_SERVER["HTTP_HOST"]."/dtn/interface"; 
-	$db_c = "dtn_htfff";
-}
+$cheminComplet = $monServeur."/dtn/interface/";
+$url = "http://".$_SERVER["HTTP_HOST"]."/dtn/interface"; 
+$db_c = "dtn_htfff";
 
-
-require($cheminComplet."includes/connect.inc.php");
-require($cheminComplet."includes/nomTables.inc.php");
-$conn = connect();
-require($cheminComplet."/includes/fonctions.php");
-require($cheminComplet."/fonctions/HT_Client.php");
-include($monServeur."/framework/PHT/PHT.php");
+require($_SERVER["DOCUMENT_ROOT"]."/dtn/interface/includes/connect.inc.php");
+require($_SERVER["DOCUMENT_ROOT"]."/dtn/interface/includes/nomTables.inc.php");
+require_once($_SERVER["DOCUMENT_ROOT"]."/dtn/interface/includes/fonctions.php");
+require_once($_SERVER["DOCUMENT_ROOT"]."/dtn/interface/fonctions/HT_Client.php");
+//include_once($monServeur."/framework/PHTv3/PHT/autoload.php");
+include_once($_SERVER["DOCUMENT_ROOT"]."/framework/PHTv2/PHTv2.php");
 
 // Variables de session
 session_start();

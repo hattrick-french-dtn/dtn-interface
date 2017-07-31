@@ -1,11 +1,11 @@
 <?php 
-require("../includes/head.inc.php");
+require_once("../includes/head.inc.php");
 require("../includes/serviceListesDiverses.php");
 
 if(!$sesUser["idAdmin"])
-	{
+{
 	header("location: index.php?ErrorMsg=Session Expir�");
-	}
+}
 if(!isset($ordre)) $ordre = "nomJoueur";
 if(!isset($sens)) $sens = "ASC";
 if(!isset($lang)) $lang = "FR";
@@ -15,25 +15,24 @@ if(!isset($affPosition)) $affPosition = 0;
 require("../includes/langue.inc.php");
 
 switch($sesUser["idNiveauAcces"]){
-		case "1":
+	case "1":
 		require("../menu/menuAdmin.php");
 		break;
 		
-		case "2":
+	case "2":
 		require("../menu/menuSuperviseur.php");
 		break;
 
-		case "3":
+	case "3":
 		require("../menu/menuDTN.php");
 		break;
 		
-		case "4":
+	case "4":
 		require("../menu/menuCoach.php");
 		break;
 		
-		default;
+	default;
 		break;
-
 
 }
 
@@ -67,17 +66,17 @@ switch($sesUser["idNiveauAcces"]){
 <?php
     $sql = "SELECT * FROM $tbl_admin A, ht_position P ";
     $sql = $sql ."WHERE A.idPosition_fk = P.idPosition AND A.idNiveauAcces_fk=2 AND A.affAdmin=1 AND A.idPosition_fk != 8 ORDER BY A.idPosition_fk";  	 
-	  $result= mysql_query($sql) or die("Erreur : ".$sql);;
+	$result= $conn->query($sql);
 	  
-		while($lst = mysql_fetch_array($result)){
+	while($lst = $result->fetch()){
 			
 		?>
 		<li>[<?=$lst["intitulePosition"]?>] : <?=$lst["loginAdmin"]?> / <?=$lst["emailAdmin"]?> 
 	  <?php
-	  }
+	}
 
 
-	mysql_free_result($result);
+	$result = NULL;
 
 	  ?>
 </ul>
@@ -89,18 +88,18 @@ switch($sesUser["idNiveauAcces"]){
 <li>Un administrateur<br>
 <ul>
 <?php
-		$sql = "SELECT * FROM $tbl_admin WHERE idNiveauAcces_fk=1 and affAdmin=1 ORDER BY loginAdmin";
-	  $result= mysql_query($sql) or die("Erreur : ".$sql);;
+	$sql = "SELECT * FROM $tbl_admin WHERE idNiveauAcces_fk=1 and affAdmin=1 ORDER BY loginAdmin";
+	$result= $conn->query($sql);
 	  
-		while($lst = mysql_fetch_array($result)){
+	while($lst = $result->fetch()){
 			
 		?>
 		<li><?=$lst["loginAdmin"]?> / <?=$lst["emailAdmin"]?> 
 	  <?php
-	  }
+	 }
 
 
-	mysql_free_result($result);
+	$result = NULL;
 
 	  ?>
 </ul>
@@ -112,18 +111,18 @@ switch($sesUser["idNiveauAcces"]){
 <li>Un s&eacute;lectionneur<br>
 <ul>
 <?php
-		$sql = "SELECT * FROM $tbl_admin A, ht_coach C WHERE A.loginAdmin=C.loginAdmin AND C.affCoach=1 ORDER BY C.loginAdmin";
-	  $result= mysql_query($sql) or die("Erreur : ".$sql);;
+	$sql = "SELECT * FROM $tbl_admin A, ht_coach C WHERE A.loginAdmin=C.loginAdmin AND C.affCoach=1 ORDER BY C.loginAdmin";
+	$result= $conn->query($sql);
 	  
-		while($lst = mysql_fetch_array($result)){
+	while($lst = $result->fetch()){
 			
 		?>
 		<li>[<?=$lst["selection"]?>] : <?=$lst["loginCoach"]?> / <?=$lst["emailCoach"]?> 
 	  <?php
-	  }
+	}
 
 
-	mysql_free_result($result);
+	$result = NULL;
 
 	  ?>
 </ul>
@@ -147,4 +146,3 @@ switch($sesUser["idNiveauAcces"]){
 
 </body>
 </html>
->>>>

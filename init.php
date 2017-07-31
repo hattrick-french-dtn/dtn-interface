@@ -1,8 +1,8 @@
 <?php
 
-include ($_SERVER["DOCUMENT_ROOT"]."/dtn/interface/includes/head.inc.php");
+include_once ($_SERVER["DOCUMENT_ROOT"]."/dtn/interface/includes/head.inc.php");
 $_SESSION['acces']="PORTAIL"; // sert à avoir un affichage personnalisé pour les composants utilisés dans le portail et l'interface Doit être positionné avec gestion_session
-include ($_SERVER["DOCUMENT_ROOT"]."/gestion_session_HT.php");
+require_once ($_SERVER["DOCUMENT_ROOT"]."/gestion_session_HT.php");
 
 
 /******************************************************************************/

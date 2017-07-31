@@ -5,7 +5,7 @@ require_once "../_config/CstGlobals.php"; // fonctions d'admin
 require_once "../fonctions/phpxml.php"; // XML to Tree converter
 require_once "../fonctions/AccesBase.php"; // fonction de connexion a la base
 require_once "../fonctions/AdminDtn.php"; // fonctions d'admin
-require("../includes/head.inc.php");
+require_once("../includes/head.inc.php");
 require("../includes/serviceListesDiverses.php");
 require("../includes/serviceEntrainement.php");
 require("../includes/serviceJoueur.php");
@@ -15,9 +15,9 @@ $maBase = initBD();
 
 
 if(!$sesUser["idAdmin"])
-	{
-	header("location: index.php?ErrorMsg=Session Expiree");
-	}
+{
+	header("location: ../index.php?ErrorMsg=Session Expiree");
+}
 
 
 
@@ -215,7 +215,7 @@ $lstJ = $maBase->select($sql);
 		
 			<TR>
 				<TD ><BR>
-					<font color="#CC2233"><?=$j+1?>.</font> <A HREF="../joueurs/fiche.php?id=<?=$lstJ[$j]["idJoueur"]?>"><?=$lstJ[$j]["prenomJoueur"]?> <?=$lstJ[$j]["nomJoueur"]?> </A>&nbsp; 
+					<font color="#CC2233"><?=$j+1?>.</font> <A HREF="../joueurs/fiche.php?id=<?=$lstJ[$j]["idJoueur"]?>"><?=$lstJ[$j]["prenomJoueur"]?> <?=$lstJ[$j]["nomJoueur"]?><?php if (isset($lstJ[$j]["surnomJoueur"])) echo " (".$lstJ[$j]["surnomJoueur"].")"; ?> </A>&nbsp; 
 					  <?php if($lstJ[$j]["optionJoueur"]) echo "<font color=\"#CC22DD\">[<i>".$option[$lstJ[$j]["optionJoueur"]]["FR"]."</i>]</font>"?>
 				</TD>
 				<TD >
@@ -310,9 +310,8 @@ $lstJ = $maBase->select($sql);
                                 WHERE ht_clubs_histo.idClubHT=".$idClubHT." 
                                 ORDER BY ht_clubs_histo.date_histo desc ";
       
-            $req = mysql_query($sqlClubsHisto) or die(mysql_error()."\n".$sqlClubsHisto);
             $i=1;
-            while($lHisto = mysql_fetch_array($req)){
+            foreach($conn->query($sqlClubsHisto) as $lHisto){
               $lHisto["createur"]="";
               if ($lHisto["role_createur"]=="D") {$lHisto["createur"]='[DTN]';}
               else if ($lHisto["role_createur"]=="P") {$lHisto["createur"]='[Proprio]';}

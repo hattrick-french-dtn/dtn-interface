@@ -1,10 +1,10 @@
 <?php
-require("../includes/head.inc.php");
+require_once("../includes/head.inc.php");
 require("../includes/serviceJoueur.php");
 require("../includes/serviceEquipes.php");
 require("../includes/serviceDTN.php");
-require("../includes/langue.inc.php");
-require("../../../language/fr.php");
+require_once("../includes/langue.inc.php");
+require_once("../../../language/fr.php");
 require("../includes/serviceMatchs.php");
 require_once "../_config/CstGlobals.php"; 
 
@@ -206,7 +206,7 @@ if (isset($resuScan) && $resuScan!=false && !empty($resuScan)) {
       		
           <tr>
           <td width=5% nowrap valign="top">
-            <font size="2" face="Century Gothic">&nbsp;<b>-&nbsp;<?=$joueurDTN["nomJoueur"]?></b></font>
+            <font size="2" face="Century Gothic">&nbsp;<b>-&nbsp;<?=$joueurDTN["prenomJoueur"]?> <?=$joueurDTN["nomJoueur"]?></b></font>
           </td>
           <td align="left" width=95% nowrap valign="top">
             <font size="2" face="Century Gothic">

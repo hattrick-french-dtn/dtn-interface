@@ -2,20 +2,20 @@
         // Affiche toutes les erreurs
 //        error_reporting(E_ALL);
 
-        require("../includes/head.inc.php");
-        require_once "../_config/CstGlobals.php"; // fonctions d'admin
-        require_once "../fonctions/HT_Client.php"; // Hattrick Client New (with Advanced HTTP Client)
-        require_once "../fonctions/phpxml.php"; // XML to Tree converter
-        require_once "../fonctions/AccesBase.php"; // fonction de connexion � la base
-        require_once "../fonctions/AdminDtn.php"; // fonctions d'admin
-        require_once "maj_pays.php"; // fonctions de mise � jour pays
+require_once("../includes/head.inc.php");
+require_once "../_config/CstGlobals.php"; // fonctions d'admin
+require_once "../fonctions/HT_Client.php"; // Hattrick Client New (with Advanced HTTP Client)
+require_once "../fonctions/phpxml.php"; // XML to Tree converter
+require_once "../fonctions/AccesBase.php"; // fonction de connexion � la base
+require_once "../fonctions/AdminDtn.php"; // fonctions d'admin
+require_once "maj_pays.php"; // fonctions de mise � jour pays
 
-        $maBase = initBD();
+$maBase = initBD();
 
 /*if(!$sesUser["idAdmin"])
-        {
-        header("location: index.php?ErrorMsg=Session Expire");
-        }
+{
+    header("location: index.php?ErrorMsg=Session Expire");
+}
 */
 
 
@@ -25,27 +25,27 @@
 <script language="JavaScript" src="../includes/javascript/navigation.js"></script>
 <?php
 switch($sesUser["idNiveauAcces"]){
-                case "1":
-                require("../menu/menuAdmin.php");
-                require("../menu/menuSuperviseurConsulter.php");
-                break;
+	case "1":
+		require("../menu/menuAdmin.php");
+		require("../menu/menuSuperviseurConsulter.php");
+		break;
 
-                case "2":
-                require("../menu/menuSuperviseur.php");
-                require("../menu/menuSuperviseurConsulter.php");
-                break;
+	case "2":
+		require("../menu/menuSuperviseur.php");
+		require("../menu/menuSuperviseurConsulter.php");
+		break;
 
-                case "3":
-                require("../menu/menuDTN.php");
-                require("../menu/menuDTNConsulter.php");
-                break;
+	case "3":
+		require("../menu/menuDTN.php");
+		require("../menu/menuDTNConsulter.php");
+		break;
 
-                case "4":
-                require("../menu/menuCoach.php");
-                break;
+	case "4":
+		require("../menu/menuCoach.php");
+		break;
 
-                default;
-                break;
+	default;
+		break;
 }
 
 ?>
@@ -86,18 +86,18 @@ switch($sesUser["idNiveauAcces"]){
                                         <br>
 <div><?php
 
-                // param�tres
+            // param�tres
 			if (isset($_POST['ht_user'])) {
-	                $ht_user=$_POST['ht_user'];
-	                $ht_password=$_POST['ht_password'];
-	                $HTCli= &new HT_Client();
-	                if ($HTCli->Login($ht_user, $ht_password)) {
-						echo "maj";
-	                        majPays($maBase,$HTCli);
-	                } else {
-	                        printErr("<center>Erreur de connexion � HT</center>");
-	                }
-                }
+				$ht_user=$_POST['ht_user'];
+				$ht_password=$_POST['ht_password'];
+				$HTCli= new HT_Client();
+				if ($HTCli->Login($ht_user, $ht_password)) {
+					echo "maj";
+						majPays($maBase,$HTCli);
+				} else {
+						printErr("<center>Erreur de connexion � HT</center>");
+				}
+			}
 ?>
 </div>
 </td>

@@ -1,11 +1,11 @@
 <?php 
-require("../includes/head.inc.php");
+require_once("../includes/head.inc.php");
 require("../includes/serviceDTN.php");
 require("../includes/serviceJoueur.php");
 
 if(!$sesUser["idAdmin"])
 {
-header("location: index.php?ErrorMsg=Session Expiree");
+	header("location: ../index.php?ErrorMsg=Session Expiree");
 }
 ?>
 
@@ -53,7 +53,7 @@ $_SESSION['ListeFicheResume']=$lstJoueur;
 <br />
 &nbsp;&nbsp;&nbsp;Export Fiche R&eacute;sum&eacute; des joueurs de la page :&nbsp;&nbsp;             
 <a href="../joueurs/ficherecupchoix.php?origine=<?php echo "selection"?>">
-<img border=1 src="../images/jst.bmp" title="Exporter le r&eacute;sultat affiché dans la page sous forme d'une fiche résumé globale"></a>
+<img border=1 src="../images/jst.bmp" title="Exporter le r&eacute;sultat affich&eacute; dans la page sous forme d'une fiche r&eacute;sum&eacute; globale"></a>
 <br />
 <br />
 <table width="1000" border="1" align="center" cellpadding="0" cellspacing="0" bordercolor="#000000">
@@ -121,35 +121,43 @@ $_SESSION['ListeFicheResume']=$lstJoueur;
 					"<br /> Date proprio : ".$lstJoueur[$j]["dateSaisieJoueur"].
 					"<br /> [ Mis &agrave; jour il y a  ".round(($mkday - $datemaj)/(60*60*24) )." jours ]";?>
 
-          <?php
-          $intensite="-";
-          $endurance="-";
-          $adjoints="-";
-          $medecin="-";
-          $physio="-";
-          $libelle_type_entrainement="-";
-          
-          $sql2 = "select * from $tbl_clubs_histo A left join $tbl_type_entrainement2 on idEntrainement = id_type_entrainement where idClubHT = ".$lstJoueur[$j]["idClubHT"]." order by date_histo desc";
-          $req2 = mysql_query($sql2);
-          $ligne = mysql_fetch_assoc($req2);
-          extract($ligne);
+    <?php
+		$intensite="-";
+		$endurance="-";
+		$adjoints="-";
+		$medecin="-";
+		$physio="-";
+		$libelle_type_entrainement="-";
+		$niv_Entraineur="-";
+		
+		if (isset($lstJoueur[$j]["idClubHT"])) {
+			$sql2 = "select * from $tbl_clubs_histo A left join $tbl_type_entrainement2 on idEntrainement = id_type_entrainement where idClubHT = ".$lstJoueur[$j]["idClubHT"]." order by date_histo desc";
+			$req2 = $conn->query($sql2);
+			$ligne = $req2->fetch(PDO::FETCH_ASSOC);
+			if ($ligne) extract($ligne);
         
-          $sql3 = "select * from $tbl_clubs where idClubHT = ".$lstJoueur[$j]["idClubHT"];
-          $req3 = mysql_query($sql3);
-          $ligne3 = mysql_fetch_assoc($req3);
-          extract($ligne3);
-          ?>
+			$sql3 = "select * from $tbl_clubs where idClubHT = ".$lstJoueur[$j]["idClubHT"];
+			$req3 = $conn->query($sql3);
+			$ligne3 = $req3->fetch(PDO::FETCH_ASSOC);
+			if ($ligne3) extract($ligne3);
+		}
+    ?>
 
-
-			      
           <tr bgcolor="<?=$bgcolor?>">
             <td>
             <?php if (existAutorisationClub($lstJoueur[$j]["idClubHT"],null)==false) {?>
               <img height="12" src="../images/non_autorise.JPG" title="Ce club n'a pas autoris&eacute; la DTN &agrave; acc&eacute;der &agrave; ses donn&eacute;es">
             <?php } else {?>
               <img height="12" src="../images/Autorise.PNG" title="Ce club a autoris&eacute; la DTN &agrave; acc&eacute;der &agrave; ses donn&eacute;es">
-            <?php }?>
+            <?php }
+				if (isset($lstJoueur[$j]["idClubHT"])) {
+			?>
             &nbsp;<a href ="../clubs/fiche_club.php?idClubHT=<?=$lstJoueur[$j]["idClubHT"]?>">(<?php echo($lstJoueur[$j]["idClubHT"]);?>)&nbsp;<?php echo($lstJoueur[$j]["nomClub"]);?></a>
+			<?php
+				} else { 
+					echo($lstJoueur[$j]["nomClub"]);
+				}
+			?>
             </td>
             <td width="20"> <div align="center"><?=$libelle_type_entrainement?></div></td>
             <td width="20"> <div align="center"><?=$intensite?></div></td>
@@ -158,7 +166,7 @@ $_SESSION['ListeFicheResume']=$lstJoueur;
             <td width="20"> <div align="center"><?=$adjoints?></div></td>
             <td width="20"> <div align="center"><?=$medecin?></div></td>
             <td width="20"> <div align="center"><?=$physio?></div></td>
-            <td>&nbsp;(<?php echo($lstJoueur[$j]["idHattrickJoueur"]);?>)&nbsp;<?php echo($lstJoueur[$j]["nomJoueur"]." ".$lstJoueur[$j]["prenomJoueur"]);?>
+            <td>&nbsp;(<?php echo($lstJoueur[$j]["idHattrickJoueur"]);?>)&nbsp;<?php echo ($lstJoueur[$j]["prenomJoueur"]." ".$lstJoueur[$j]["nomJoueur"]);?><?php if (isset($l["surnomJoueur"])) echo " (".$l["surnomJoueur"].")"; ?>
                 &nbsp;<img src="../images/time_<?=$img_nb?>.gif" onmouseover="return escape('<?=$zealt?>')" ></td>
             <td><?=$lstJoueur[$j]["ageJoueur"]." - ".$lstJoueur[$j]["jourJoueur"]?></td>
             <td><CENTER> <?=($lstJoueur[$j]["dateDerniereModifJoueur"])?></CENTER></td>
