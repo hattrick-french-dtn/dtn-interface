@@ -339,7 +339,7 @@ foreach ($conn->query($sql) as $l) {
 	$libelle_type_entrainement="-";
   
 	$sql2 = "select * from $tbl_clubs_histo A left join $tbl_type_entrainement2 on idEntrainement = id_type_entrainement where idClubHT = ".$l["teamid"]." order by date_histo desc";
-	error_log($sql2);
+	//error_log($sql2);
 	$req2 = $conn->query($sql2);
 	$ligne = $req2->fetch(PDO::FETCH_ASSOC);
 	if (is_array($ligne))
