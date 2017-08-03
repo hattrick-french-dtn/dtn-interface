@@ -203,9 +203,11 @@ case "ajoutJoueur":
 	   
 		// Insertion du club s'il n'existe pas
 		$idJoueur=ajoutJoueur($sesUser["loginAdmin"],"D",$player,$joueurDTN,$poste);
-	  
 		$_SESSION['listID']=$_POST["listID"];
-		$_SESSION['msgAddPlayer']="$idHattrickJoueur => joueur ajoute";
+		if ($idJoueur !== false)
+			$_SESSION['msgAddPlayer']="$idHattrickJoueur => joueur ajoute";
+		else
+			$_SESSION['msgAddPlayer']="$idHattrickJoueur => joueur non ajoute";
 
 		header("location: joueurs/addPlayer.php");
 	}
