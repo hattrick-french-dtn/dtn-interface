@@ -244,6 +244,10 @@ if (isset($_SESSION["HT"]) && isset($_REQUEST['listID']) ) {
             // Si joueur accepté
             $FontColor="#006600";
             $idJoueur=ajoutJoueur($_SESSION["sesUser"]["loginAdmin"],"D",$joueurHT[$i],$joueurDTN,$poste[$i]);
+			if ($idJoueur === FALSE) {
+				$commentaireJ="Erreur lors de l'insertion";
+				$lien = "n/a";
+			}
           }
           unset($joueurDTN);
           ?>
@@ -298,7 +302,7 @@ if (isset($playerToAddManual)) {
   }
 
   // Expérience, Endurance
-  for($i=0;$i<=count($lstCaractJ);$i++)
+  for($i=0;$i<count($lstCaractJ);$i++)
   {
    if ($playerToAddManual[$j]["idExperience_fk"]==$lstCaractJ[$i]["numCarac"]) $Player_xp=$lstCaractJ[$i]["numCarac"]." - ".$lstCaractJ[$i]["intituleCaracFR"]."|".$lstCaractJ[$i]["intituleCaracUK"];
    if ($playerToAddManual[$j]["idEndurance"]==$lstCaractJ[$i]["numCarac"]) $Player_endurance=$lstCaractJ[$i]["numCarac"]." - ".$lstCaractJ[$i]["intituleCaracFR"]."|".$lstCaractJ[$i]["intituleCaracUK"];
@@ -384,7 +388,7 @@ if (isset($playerToAddManual)) {
                     </tr>
                     <tr> 
                       <td height="20"><div align="left">&nbsp;Salaire :</div></td>                      
-                      <td height="20"><?=round(($playerToAddManual[$j]["salary"]/10),2)." €/semaine" ?></td>
+                      <td height="20"><?=round(($playerToAddManual[$j]["salary"]/10),2)." &euro;/semaine" ?></td>
                     </tr>
                   </table>
                   

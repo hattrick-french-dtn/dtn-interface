@@ -1520,16 +1520,16 @@ function ajoutJoueur($ht_user,$role_user,$joueurHT,$joueurDTN,$posteAssigne) {
 	global $conn;
 
 	require($_SERVER['DOCUMENT_ROOT'].'/dtn/interface/includes/nomTables.inc.php');
-  
-  if ($role_user=='P') {$lib_role='Proprietaire';} 
-  elseif ($role_user=='D') {$lib_role='DTN';} 
-  elseif ($role_user=='S') {$lib_role='S&eacute;lectionneur';}
-  else {$lib_role='???';}
 
-  if ($joueurDTN['idHattrickJoueur']==$joueurHT['idHattrickJoueur']) {
-    // le joueur existe dans la base DTN => on le met à jour
-    return majJoueur($ht_user,$role_user,$joueurHT,$joueurDTN);
-  } elseif (!$joueurDTN) {
+	if ($role_user=='P') {$lib_role='Proprietaire';} 
+	elseif ($role_user=='D') {$lib_role='DTN';} 
+	elseif ($role_user=='S') {$lib_role='S&eacute;lectionneur';}
+	else {$lib_role='???';}
+
+	if ($joueurDTN['idHattrickJoueur']==$joueurHT['idHattrickJoueur']) {
+		// le joueur existe dans la base DTN => on le met à jour
+		return majJoueur($ht_user,$role_user,$joueurHT,$joueurDTN);
+	} elseif (!$joueurDTN) {
     //******* INSERT dans la table HT_JOUEURS *******//
     // le joueur n'existe pas dans la base DTN => on l'insère
     
@@ -1599,12 +1599,14 @@ function ajoutJoueur($ht_user,$role_user,$joueurHT,$joueurDTN,$posteAssigne) {
     $sql .= " scoreAttaquant,";
     $sql .= " scoreAttaquantDef,";
     $sql .= " scoreAttaquantVersAile,";
-    $sql .= " salary";
+    $sql .= " salary,";
+    $sql .= " commentaire,";
+    $sql .= " jourJoueur";
     $sql .= ") VALUES (";
     $sql .= " '".$joueurHT['nomJoueur']."'";
-    $sql .= " '".$joueurHT['prenomJoueur']."'";
+    $sql .= ",'".$joueurHT['prenomJoueur']."'";
 	if (isset($joueurHT['surnomJoueur'])) {
-		$sql .= " '".$joueurHT['surnomJoueur']."'";
+		$sql .= ",'".$joueurHT['surnomJoueur']."'";
 	}
     $sql .= ",'".$joueurHT['idAggre_fk']."'";
     $sql .= ",'".$joueurHT['idLeader_fk']."'";
@@ -1641,12 +1643,12 @@ function ajoutJoueur($ht_user,$role_user,$joueurHT,$joueurDTN,$posteAssigne) {
     $sql .= ",'".$joueurNote["score"]["attaquantDef"]."'";
     $sql .= ",'".$joueurNote["score"]["attaquantVersAile"]."'";
     $sql .= ",'".$joueurHT['salary']."'";
-    $sql .= " ) ";
+    $sql .= ",'',0 ) ";
      
     $reqValid= $conn->exec($sql);
     
-    if (!$reqValid) {
-      return false;
+    if ($reqValid === FALSE || $reqValid == 0) {
+		return false;
     } else {
       $resu['idJoueur']=$conn->lastInsertId();
     }
@@ -1659,7 +1661,7 @@ function ajoutJoueur($ht_user,$role_user,$joueurHT,$joueurDTN,$posteAssigne) {
 
     $reqValid= $conn->exec($sql);
 
-    if (!$reqValid) {
+    if ($reqValid === FALSE || $reqValid == 0) {
       return false;
     } else {
       $resu['idEntrainement']=$conn->lastInsertId();
