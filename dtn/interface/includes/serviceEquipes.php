@@ -164,7 +164,8 @@ function getClubSQL($idClubHT=null,$idUserHT=null,$ht_session=null){
 /********************************************************************************************/
 function getClubHREF($idClubHT, $nomClub=null)
 {
-	$lien = '<a href="http://'.$cheminComplet.'/clubs/fiche_club.php?idClubHT='.$idClubHT.'">'.$idClubHT;
+	global $cheminComplet;
+	$lien = '<a href="http://'.$_SERVER["HTTP_HOST"].'/dtn/interface/clubs/fiche_club.php?idClubHT='.$idClubHT.'">'.$idClubHT;
 	if ($nomClub != null) {$lien .= '-'.$nomClub;}
 	$lien .= '</a>';
 	return $lien;
@@ -315,6 +316,7 @@ function insertionClub($club){
 
 	$sql = getClubSQL($club['idClubHT'], $club['idUserHT']);
 	$req = $conn->query($sql);
+
 	if(!$req){
 		return false;
 	} elseif ($req->rowCount() == 0) { /* le club n'existe pas dans la base => on l'insère*/

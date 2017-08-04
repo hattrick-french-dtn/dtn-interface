@@ -2315,6 +2315,9 @@ function getDataJoueurHisto($joueurHT,$actualSeason=null) {
 			$coef=1;
 		}
 	}
+	if ($coef < 1) {
+		$coef = 1;
+	}
   
 	if ($actualSeason==null) {
 		$actualSeason=getSeasonWeekOfMatch(mktime(date('H'),date('i'),date('s'),date('m'),date('d'),date('Y')));
