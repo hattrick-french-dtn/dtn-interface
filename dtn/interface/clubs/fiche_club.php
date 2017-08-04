@@ -160,7 +160,7 @@ $lstJ = $maBase->select($sql);
 		<TR bgcolor="#ffffdd">
 
 				<TD align="center">
-        <b>Club : </b><span class="breadvar"><B><?=$nomClub?> ( <?=$idClubHT?> ) <img src="../images/time_<?=$img_nb?>.gif"></B></span> (Dernière connexion il y a <?=$nbjour?> jours)
+        <b>Club : </b><span class="breadvar"><B><?=$nomClub?> ( <?=$idClubHT?> ) <img src="../images/time_<?=$img_nb?>.gif"></B></span> (Derni&egrave;re connexion il y a <?=$nbjour?> jours)
         <?php if (existAutorisationClub($idClubHT,null)==false) {?>
 			<img src="../images/non_autorise.JPG" title="Ce club n'a pas autoris&eacute; la DTN &agrave; acc&eacute;der &agrave; ses donn&eacute;es">
         <?php } else {?>
@@ -280,13 +280,13 @@ $lstJ = $maBase->select($sql);
           <table width="100%" style="border:1px solid #C5C7C7" align="center" cellpadding="0" cellspacing="1" rules=COLS>
             <tr bgcolor="#85A275">
               <td width=12%><div align="center" style="font-size: 9pt;color: white"><b>Date</b></div></td>
-              <td width=10%><div align="center" style="font-size: 9pt;color: white"><b>Créé par</b></div></td>
+              <td width=10%><div align="center" style="font-size: 9pt;color: white"><b>Cr&eacute;&eacute; par</b></div></td>
               <td width=8%><div align="center" style="font-size: 9pt;color: white"><b>Entrainement</b></div></td>
               <td width=7%><div align="center" style="font-size: 9pt;color: white"><b>Intensit&eacute;</b></div></td>
               <td width=5%><div align="center" style="font-size: 9pt;color: white"><b>Endu</b></div></td>
               <td width=5%><div align="center" style="font-size: 9pt;color: white"><b>Adj.</b></div></td>
               <td width=5%><div align="center" style="font-size: 9pt;color: white"><b>Medecin</b></div></td>
-              <td width=5%><div align="center" style="font-size: 9pt;color: white"><b>Prepa. phys.</b></div></td>
+              <td width=5%><div align="center" style="font-size: 9pt;color: white"><b>Pr&eacute;pa. phys.</b></div></td>
               <td width=43%><div align="center" style="font-size: 9pt;color: white"><b>Info club [<?=$nomClub?>]</b></div></td>
             </tr>
             <?php $sqlClubsHisto = " SELECT DATE_FORMAT(ht_clubs_histo.date_histo,'%d/%m/%Y %H:%i:%s') AS date_histo,

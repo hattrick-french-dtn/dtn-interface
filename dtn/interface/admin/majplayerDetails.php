@@ -86,10 +86,10 @@ if (!isset($_SESSION['HT'])) {
 	$mseason=$todaySeason["season"];
 	$mweek=$todaySeason["week"];
 	$compteur=0;
-	?>
+?>
   <br />
 	 <b>Semaine : <?=$mweek?></b> d&eacute;j&agrave; : <?=checkNumberMatch($mseason,$mweek,$maBase)?> matchs en base.<br />
-	<?php
+<?php
 	$nbg=checkNumberMatchPoste($mseason,$mweek,$maBase,1);
 	$nbd=checkNumberMatchPoste($mseason,$mweek,$maBase,2);
 	$nba=checkNumberMatchPoste($mseason,$mweek,$maBase,3);
@@ -117,23 +117,12 @@ if (!isset($_SESSION['HT'])) {
 		$pctf=($nbf*100)/$nbtf;
 	}
 	
-	?>
-	 Gardiens <?=$nbg?> sur <?=$nbtg?>  -> <?php
-	  printf ("%.2f", $pctg); 
-	 ?> % <br />
-	 Defenseurs <?=$nbd?> sur <?=$nbtd?> -> <?php
-	  printf ("%.2f", $pctd); 
-	 ?> % <br />
-	 Ailiers <?=$nba?> sur <?=$nbta?> -> <?php
-	  printf ("%.2f", $pcta); 
-	 ?> % <br />
-	 Milieux <?=$nbm?> sur <?=$nbtm?> -> <?php
-	  printf ("%.2f", $pctm); 
-	 ?> % <br />
-	 Attaquants <?=$nbf?> sur <?=$nbtf?>  -> <?php
-	  printf ("%.2f", $pctf); 
-	 ?> % <br />
-
+?>
+	 Gardiens <?=$nbg?> sur <?=$nbtg?>  -> <?php  printf ("%.2f", $pctg); ?> % <br />
+	 Defenseurs <?=$nbd?> sur <?=$nbtd?> -> <?php printf ("%.2f", $pctd); ?> % <br />
+	 Ailiers <?=$nba?> sur <?=$nbta?> -> <?php    printf ("%.2f", $pcta); ?> % <br />
+	 Milieux <?=$nbm?> sur <?=$nbtm?> -> <?php    printf ("%.2f", $pctm); ?> % <br />
+	 Attaquants <?=$nbf?> sur <?=$nbtf?>  -> <?php printf ("%.2f", $pctf); ?> % <br />
 <hr />
 <br />
 
@@ -142,12 +131,12 @@ if (!isset($_SESSION['HT'])) {
   <br />
   Vous devez etre connect&eacute; &agrave; Hattrick.&nbsp;&nbsp;
   <br />
-
-  <?php if ( isset($_SESSION['HT']) ) {?>
+<?php
+if ( isset($_SESSION['HT']) ) { ?>
     
     Votre compte DTN est li&eacute; &agrave; votre compte Hattrick : <?php echo($_SESSION['nomUser']." [".$_SESSION['idUserHT']."]"); ?>
     
-  <?php } else {?>
+<?php } else {?>
     
     <form name="formConnexionHT" method="get" action="">
       <input name="mode" type="hidden" value="redirectionHT">
@@ -157,7 +146,7 @@ if (!isset($_SESSION['HT'])) {
   <?php }?>
   <br /> 
 </div>
-<?
+<?php
 } else {
   ?><p>
   <center>  
@@ -303,10 +292,10 @@ if (!isset($_SESSION['HT'])) {
             
             for ($j=0;$j<count($resUpdateJoueur);$j++) {
 
-              echo($resUpdateJoueur[$j]['HTML']);
+				echo($resUpdateJoueur[$j]['HTML']);
 
             	
-            	if ($j%11==0 && $j>0){?>
+            	if ($j%20==0 && $j>0){?>
             		</table><br />.
             		<table class="cadre" width="97%">
             		<tr class="activ">
