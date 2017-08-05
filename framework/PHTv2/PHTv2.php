@@ -610,7 +610,7 @@ class CHPPConnection
 		}
 		if(!isset($this->club[$teamId]) || $this->club[$teamId] === null)
 		{
-			$url = $this->buildUrl(array('file'=>'club', 'version'=>'1.4', 'teamId'=>$teamId));
+			$url = $this->buildUrl(array('file'=>'club', 'version'=>'1.5', 'teamId'=>$teamId));
 			$this->club[$teamId] = new HTClub($this->fetchUrl($url));
 		}
 		return $this->club[$teamId];
@@ -656,6 +656,29 @@ class CHPPConnection
 			$url = $this->buildUrl($params);
 
 			$this->teams[$id] = new HTTeam($this->fetchUrl($url), $id);
+		}
+		if ($id) {
+			// $f = fopen('/home/bruno/debug/team'.$id.'.xml','wt');
+			// fwrite($f, $this->teams[$id]->getXml(false));
+			// fclose($f);
+			$doc = new DOMDocument('1.0', 'UTF-8');
+			$doc->loadXml($this->teams[$id]->getXml(false));
+
+			$teams = $doc->getElementsByTagName('Team');
+			for($t=0; $t<$teams->length; $t++)
+			{
+				$txml = new DOMDocument('1.0', 'UTF-8');
+				$txml->appendChild($txml->importNode($teams->item($t), true));
+				$teamId = $txml->getElementsByTagName('TeamID')->item(0)->nodeValue;
+				if ($teamId == $id) {
+					continue;
+				}
+				$doc->getElementsByTagName('Teams')->item(0)->removeChild($teams->item($t));
+			}
+			$this->teams[$id] = new HTTeam($doc->saveXML());
+			// $f = fopen('/home/bruno/debug/team'.$id.'_parsed.xml','wt');
+			// fwrite($f, $this->teams[$id]->getXml(false));
+			// fclose($f);
 		}
 		return $this->teams[$id];
 	}
