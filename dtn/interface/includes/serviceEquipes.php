@@ -112,8 +112,10 @@ function getClubID($idClub,$idUser=null)
 	elseif ($idUser!==null) {$sql .= "WHERE idUserHT = $idUser";}
 	elseif ($idClub===null && $idUser===null) {return $tabS;}
 
+	//print($sql.'<br/>');
 	$res = $conn->query($sql);
 	$tabS = $res->fetch(PDO::FETCH_ASSOC);
+	//print_r($tabS);print('<br/>');
 	
 	return	$tabS;
 }
@@ -245,54 +247,52 @@ function existAutorisationClub($idClubHT,$idUserHT=null)
 /******************************************************************************/
 function getDataClubFromHT_usingPHT($idClubHT=null, $idUserHT=null){
 
-  $row_club=array();
+	$row_club=array();
 
-  try
-  {
-    if ($idClubHT === null && $idUserHT === null) {
-      $team = $_SESSION['HT']->getTeam();
-    } elseif ($idClubHT != null) {
-      $team = $_SESSION['HT']->getTeam($idClubHT);
-    } elseif ($idUserHT != null) {
-      $team = $_SESSION['HT']->getTeamByUserId($idUserHT);
-    }
+	try
+	{
+		if ($idClubHT === null && $idUserHT === null) {
+			$team = $_SESSION['HT']->getTeam();
+		} elseif ($idClubHT != null) {
+			$team = $_SESSION['HT']->getTeam($idClubHT);
+		} elseif ($idUserHT != null) {
+			$team = $_SESSION['HT']->getTeamByUserId($idUserHT);
+		}
 
-    $_SESSION['HT']->clearTeam(); // On vide le cache de l'objet
+		$_SESSION['HT']->clearTeam(); // On vide le cache de l'objet
     
-    $row_club["idClubHT"] = $team->getTeamId();
-    $row_club["idUserHT"] = $team->getUserId();   
-    if (($row_club["idUserHT"] == "0") || ($row_club["idClubHT"]===null)) {
-      $row_club['isBot']=2; // Pas de manager Humain ou Pas de club
-    } else {
-      if ($team->isBot()==false) {$row_club['isBot']=0;} // équipe active non botifiée
-      if ($team->isBot()==true)  {$row_club['isBot']=1;} // équipe botifiée
-    }
+		$row_club["idClubHT"] = $team->getTeamId();
+		$row_club["idUserHT"] = $team->getUserId();
+		if (($row_club["idUserHT"] == "0") || ($row_club["idClubHT"]===null)) {
+			$row_club['isBot']=2; // Pas de manager Humain ou Pas de club
+		} else {
+			if ($team->isBot()==false) {$row_club['isBot']=0;} // équipe active non botifiée
+			if ($team->isBot()==true)  {$row_club['isBot']=1;} // équipe botifiée
+		}
 
-    if ( ($row_club['isBot']==0) || ($row_club['isBot']==1) ) {
-      $row_club["nomClub"]              = stripslashes(htmlspecialchars(strtolower(str_replace("'"," ",$team->getTeamName()))));
-      $row_club["nomUser"]              = stripslashes(htmlspecialchars(strtolower(str_replace("'"," ",$team->getLoginName()))));
-      $row_club["idPays_fk"]            = $team->getLeagueId();
-      $row_club["niv_Entraineur"]       = $_SESSION['HT']->getPlayer($team->getTrainerId())->getTrainerSkill();
-      $_SESSION['HT']->clearPlayer($team->getTrainerId());
-      $row_club["date_last_connexion"]  = substr($team->getLastLoginDate(), 0, -9);
-      
-      // Données pour iiihelp
-      $row_club["leagueLevel"] = $team->getLeagueLevel();
-    }
+		if ( ($row_club['isBot']==0) || ($row_club['isBot']==1) ) {
+			$row_club["nomClub"]              = stripslashes(htmlspecialchars(strtolower(str_replace("'"," ",$team->getTeamName()))));
+			$row_club["nomUser"]              = stripslashes(htmlspecialchars(strtolower(str_replace("'"," ",$team->getLoginName()))));
+			$row_club["idPays_fk"]            = $team->getLeagueId();
+			$row_club["niv_Entraineur"]       = $_SESSION['HT']->getPlayer($team->getTrainerId())->getTrainerSkill();
+			$_SESSION['HT']->clearPlayer($team->getTrainerId());
+			$row_club["date_last_connexion"]  = substr($team->getLastLoginDate(), 0, -9);
 
-    // Désallocation variables
-    unset($team);
+			// Données pour iiihelp
+			$row_club["leagueLevel"] = $team->getLeagueLevel();
+		}
 
-  	return $row_club;
-  }
-  catch(HTError $e)
-  {
-    echo $e->getMessage();
-    return false;
-  } 
+		// Désallocation variables
+		unset($team);
+
+		return $row_club;
+	}
+	catch(HTError $e)
+	{
+		echo $e->getMessage();
+		return false;
+	}
 }
-
-
 
 
 /******************************************************************************/
@@ -884,12 +884,12 @@ function majClub($idClubHT=null,$idUserHT=null,$clubDTN=null)
 	if ($idClubHT === null && $idUserHT === null) {
 		return false;
 	}
-  
+
 	// Infos du club dans base DTN 
 	if ($clubDTN === null) {
 		$clubDTN = getClubID($idClubHT,$idUserHT);
 	}
-   
+	
 	// récupération des données du club sur HT
 	$clubHT=getDataClubFromHT_usingPHT($idClubHT,$idUserHT);
 

@@ -2560,9 +2560,7 @@ function scanListeJoueurs($listeIDJoueur,$utilisateur,$role,$faireMAJ=true,$char
 			}
       
 		} elseif ($faireMAJ==true) {
-    
 			$joueurHT=getDataUnJoueurFromHT_usingPHT($IDJoueur);
-//echo($joueurHT["idHattrickJoueur"]);            
 			if ($joueurHT != false) {
 				if ($joueurHT['caracVisible']==true) {
 					$poste=validateMinimaPlayer($joueurHT,$todaySeason); // Est-ce que le joueur vérifie les minimas ?
@@ -2620,6 +2618,7 @@ function scanListeJoueurs($listeIDJoueur,$utilisateur,$role,$faireMAJ=true,$char
 		$liste_clubs=array_unique($liste_clubs); // Suppression des doublons
 
 		foreach ($liste_clubs as $club) {
+			//print('call maj club: '.$club.'<br/>');
 			$resuC[$club]['club']=majClub($club);
 			$resuC[$club]['clubHisto']=majClubHisto($club,$utilisateur,$role);
 		}
