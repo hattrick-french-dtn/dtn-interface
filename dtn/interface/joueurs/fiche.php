@@ -280,7 +280,7 @@ if ($datemaj >$mkday -$huit){
               
               // ####################### Si Joueur Non suivi et archivé ####################### 
               else if($joueurDTN["archiveJoueur"] == 1){
-                 ?><font color="#FF0000"><strong>Ce joueur est archive&nbsp;</strong></font><?php
+                 ?><font color="#FF0000"><strong>Ce joueur est archiv&eacute;&nbsp;</strong></font><?php
                  
               // ####################### Si Joueur Non suivi et non archivé #######################
               }else {
@@ -345,7 +345,7 @@ if ($datemaj >$mkday -$huit){
           if ( ($joueurDTN["archiveJoueur"] != 1) && (($_SESSION['sesUser']["idNiveauAcces_fk"] ==2 && $_SESSION['sesUser']["idPosition_fk"]==$joueurDTN["ht_posteAssigne"]) || ($_SESSION['sesUser']["idNiveauAcces_fk"] ==1)) )  {?>
             [ <a href="../form.php?mode=archiveJoueur&id=<?=$joueurDTN["idJoueur"]?>">Archiver ce joueur </a>]
           <?php } else  if ( ($joueurDTN["archiveJoueur"] == 1) && (($_SESSION['sesUser']["idNiveauAcces_fk"] ==2 && $_SESSION['sesUser']["idPosition_fk"]==$joueurDTN["ht_posteAssigne"]) || ($_SESSION['sesUser']["idNiveauAcces_fk"] ==1)) )  {?>
-            [ <a href="../form.php?mode=desarchiveJoueur&id=<?=$joueurDTN["idJoueur"]?>">Desarchiver ce joueur </a>]        
+            [ <a href="../form.php?mode=desarchiveJoueur&id=<?=$joueurDTN["idJoueur"]?>">D&eacute;sarchiver ce joueur </a>]        
           <?php }
           if($_SESSION['sesUser']["idNiveauAcces"] == 1 ){?>
             [ <a href="javascript:checkSuppression()">Supprimer ce joueur </a>]               

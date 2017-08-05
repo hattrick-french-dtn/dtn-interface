@@ -63,7 +63,7 @@ if(!isset($nbJoueurs)) $nbJoueurs ="false";
             <td height="1" bgcolor="#000000"><img src="../images/spacer.gif" width="1" height="1"></td>
           </tr>
           <tr>
-            <td><br>              <table width="50%" border="0" align="center" cellpadding="0" cellspacing="0">
+            <td><br><table width="50%" border="0" align="center" cellpadding="0" cellspacing="0">
                 <tr>
                   <td height="20">Login</td>
                   <td height="20"><input name="loginAdmin" type="text" id="loginAdmin"></td>
