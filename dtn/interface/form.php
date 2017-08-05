@@ -102,15 +102,15 @@ case "ajoutAdmin":
 	$sql = "select * from $tbl_admin where loginAdmin = \"$loginAdmin\" or emailAdmin = \"$emailAdmin\" ";
 	$req = $conn->query($sql);
 
-
 	if($req->rowCount() > 0){
-		if ($req["idNiveauAcces_fk"] == $idNiveauAcces_fk) {
+		$row = $req->fetch(PDO::FETCH_ASSOC);
+		if ($row["idNiveauAcces_fk"] == $idNiveauAcces_fk && $row["affAdmin"]) {
 			header("location: equipe/$from.php?msg=!! Erreur. Cette administrateur existe deja !!");
 			break;
 		}
 
-		$conn->exec("UPDATE ht_admin SET   loginAdmin = '".$loginAdmin."', passAdmin  ='".$passAdmin."',idAdminHT= '".$idAdminHT."' ,
-											 emailAdmin  = '".$emailAdmin."' ,idNiveauAcces_fk = '".$idNiveauAcces_fk."'  ,  idPosition_fk  = '".$idPosition_fk."' WHERE idAdmin = '".$idAdmin."'");
+		$conn->exec("UPDATE ht_admin SET loginAdmin = '".$loginAdmin."', passAdmin  ='".$passAdmin."',idAdminHT= '".$idAdminHT."' ,
+					emailAdmin  = '".$emailAdmin."' ,idNiveauAcces_fk = '".$idNiveauAcces_fk."'  ,  idPosition_fk  = '".$idPosition_fk."', affAdmin=1 WHERE idAdmin = '".$row["idAdmin"]."'");
 
 		header("location: equipe/$from.php?msg=L administrateur a bien ete modifie");
 	}
