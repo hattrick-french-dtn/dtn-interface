@@ -2,13 +2,13 @@
 // Variable paramétrage de la page
 $_SESSION['acces']="INTERFACE"; // sert à avoir un affichage personnalisé pour les composants utilisés dans le portail et l'interface
 $nomFicPhpCourant = explode("?",$_SERVER['REQUEST_URI']);
-$callbackUrl="http://".$_SERVER['HTTP_HOST'].$nomFicPhpCourant[0]."?mode=retour"; // Url de retour après authentification sur HT
+$callbackUrl="https://".$_SERVER['HTTP_HOST'].$nomFicPhpCourant[0]."?mode=retour"; // Url de retour après authentification sur HT
 include($_SERVER['DOCUMENT_ROOT'].'/gestion_session_HT.php');
 include_once($_SERVER['DOCUMENT_ROOT'].'/language/fr.php');
 
 if(!isset($_SESSION['sesUser']["idAdmin"]))
 {
-	header("location: http://".$_SERVER['SERVER_NAME']."/dtn/interface/index.php?ErrorMsg=Session Expire");
+	header("location: https://".$_SERVER['SERVER_NAME']."/dtn/interface/index.php?ErrorMsg=Session Expire");
 }
 ?>
 
