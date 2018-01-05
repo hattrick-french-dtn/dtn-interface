@@ -21,7 +21,7 @@ function convertToHtml ($string)
 
   $string = ereg_replace ("\n", "<br>", htmlentities ($string));
   $string =
-    ereg_replace ("(http://[a-zA-Z0-9./_\?%=\-]+)",
+    ereg_replace ("(https://[a-zA-Z0-9./_\?%=\-]+)",
                   "<a href=\"\\1\" target=\"_blank\">\\1</a>", $string);
   // email :
   //      $string = ereg_replace ('[_a-zA-z0-9\-]+(\.[_a-zA-z0-9\-]+)*\@'.'[_a-zA-z0-9\-]+(\.[a-zA-z]{1,3})+', '<a href="mailto:\\0">\\0</a>', $string);

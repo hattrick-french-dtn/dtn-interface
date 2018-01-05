@@ -178,10 +178,10 @@ foreach ($conn->query($sql) as $res2)
 	$listmail = $res2['email']; 
 				
 	$desinscription = "<br /><br /><br />
-Pour vous d&eacute;sincrire de iiihelp : <a href='http://".$_SERVER['SERVER_NAME']."/desinscription_iiihelp.php?id=".$res2['id_iiihelp_repreneur']."'>Cliquez ici</a>";
+Pour vous d&eacute;sincrire de iiihelp : <a href='https://".$_SERVER['SERVER_NAME']."/desinscription_iiihelp.php?id=".$res2['id_iiihelp_repreneur']."'>Cliquez ici</a>";
 
 	$modifinscription = "<br />
-Pour modifier votre inscription iiihelp : <a href='http://".$_SERVER['SERVER_NAME']."/fff_help.php'>Cliquez ici</a>";
+Pour modifier votre inscription iiihelp : <a href='https://".$_SERVER['SERVER_NAME']."/fff_help.php'>Cliquez ici</a>";
 
 	if(mail($listmail, "DTN Hattrick : vente de joueur", $messagemail.$desinscription.$modifinscription, $headers)) 
 	{

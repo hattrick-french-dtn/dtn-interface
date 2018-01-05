@@ -12,7 +12,7 @@ require("../includes/langue.inc.php");
 
 if(!$_SESSION['sesUser']["idAdmin"])
 {
-	header("location: http://".$_SERVER['SERVER_NAME']."/dtn/interface/index.php?ErrorMsg=Session Expire");
+	header("location: https://".$_SERVER['SERVER_NAME']."/dtn/interface/index.php?ErrorMsg=Session Expire");
 }
 
 if(!isset($ordre)) $ordre = "nomJoueur";

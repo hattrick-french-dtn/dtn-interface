@@ -10,7 +10,7 @@ require_once "../_config/CstGlobals.php";
 
 if(!isset($_SESSION['sesUser']["idAdmin"]))
 {
-	header("location: http://".$_SERVER['SERVER_NAME']."/dtn/interface/index.php?ErrorMsg=Session Expire");
+	header("location: https://".$_SERVER['SERVER_NAME']."/dtn/interface/index.php?ErrorMsg=Session Expire");
 }
 
 // Menu
@@ -230,7 +230,7 @@ if (isset($resuScan) && $resuScan!=false && !empty($resuScan)) {
         <?php
         } else {
           echo '<br />Joueur inexistant en base et en dessous des minimas - ID = '.$resuScan[$i]["idHattrickJoueur"].
-          ' <a href="http://'.$_SERVER["HTTP_HOST"].'/dtn/interface/joueurs/addPlayer.php?listID='.$resuScan[$i]["idHattrickJoueur"].'">Cliquez ici pour forcer l\'ajout du joueur dans la base</a>';
+          ' <a href="https://'.$_SERVER["HTTP_HOST"].'/dtn/interface/joueurs/addPlayer.php?listID='.$resuScan[$i]["idHattrickJoueur"].'">Cliquez ici pour forcer l\'ajout du joueur dans la base</a>';
         }
         
       }// Fin boucle joueurs ?>

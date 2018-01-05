@@ -167,7 +167,7 @@ function getClubSQL($idClubHT=null,$idUserHT=null,$ht_session=null){
 function getClubHREF($idClubHT, $nomClub=null)
 {
 	global $cheminComplet;
-	$lien = '<a href="http://'.$_SERVER["HTTP_HOST"].'/dtn/interface/clubs/fiche_club.php?idClubHT='.$idClubHT.'">'.$idClubHT;
+	$lien = '<a href="https://'.$_SERVER["HTTP_HOST"].'/dtn/interface/clubs/fiche_club.php?idClubHT='.$idClubHT.'">'.$idClubHT;
 	if ($nomClub != null) {$lien .= '-'.$nomClub;}
 	$lien .= '</a>';
 	return $lien;

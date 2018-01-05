@@ -9,7 +9,7 @@ require("../includes/serviceEntrainement.php");
 
 if(!isset($_SESSION['sesUser']["idAdmin"]))
 {
-	header("location: http://".$_SERVER['SERVER_NAME']."/dtn/interface/index.php?ErrorMsg=Session Expire");
+	header("location: https://".$_SERVER['SERVER_NAME']."/dtn/interface/index.php?ErrorMsg=Session Expire");
 }
 	
 
