@@ -2,6 +2,10 @@
 
 Repo for the Hattrick French Scout team applications
 
+## Version 2.2.1
+### Features
++ add HTMS point
+
 ## Version 2.2
 ### Features
 + port to PHP5
