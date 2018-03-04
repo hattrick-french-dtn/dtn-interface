@@ -7,6 +7,7 @@ require("../includes/langue.inc.php");
 require("../includes/serviceListesDiverses.php");
 require("../includes/serviceJoueurTeam.php");
 require("../includes/nomTables.inc.php");
+require("../includes/htmsPoint.php");
 
 global $mode;
 global $sesUser;
@@ -68,10 +69,12 @@ $lstCaracJoueur = array($endurance["$lang"]=>$joueurDTN["idEndurance"],
             );	
 
 
-if($mode == "transfere") $lstClub = listClubs();	
-
-$lstCaractJ = listCarac('ASC',22);
+if($mode == "transfere") $lstClub = listClubs();
+//print_r($lstCaracJoueur);
+$lstCaractJ = listCarac('ASC',23);
 		
+$htms = htmspoint($tabage[0], $tabage[1], $joueurDTN["idGardien"], $joueurDTN["idDefense"], $joueurDTN["idConstruction"], $joueurDTN["idAilier"], $joueurDTN["idPasse"], $joueurDTN["idButeur"], $joueurDTN["idPA"]);
+//print_r($htms);
 
 ?><html><head><title> Fiche DTN <?=$joueurDTN["prenomJoueur"]?> <?=$joueurDTN["nomJoueur"]?></title>
 
@@ -165,9 +168,8 @@ if(isset($msg)) {?>
           <td colspan="3">&nbsp;</td>
           </tr>
           <tr> 
-          <td align="left" width="50%">&nbsp;<font color="#000099"> <?=strtolower($joueurDTN["idHattrickJoueur"])?>&nbsp;-&nbsp;<?=strtolower($joueurDTN["prenomJoueur"])?>&nbsp;<?=strtolower($joueurDTN["nomJoueur"])?><?php if (isset($joueurDTN["surnomJoueur"])) echo " (".$joueurDTN["surnomJoueur"].")"; ?>&nbsp;-&nbsp;
-          <?=$tabage[0];?>&nbsp;ans&nbsp;-&nbsp;<?=$tabage[1]?>&nbsp;jours<br>&nbsp;
-          <?=round(($joueurDTN["salary"]/10),2)?>&nbsp;&euro;/semaine&nbsp;-&nbsp;<?=$joueurDTN["intitulePosition"]?> 
+          <td align="left" width="50%">&nbsp;<font color="#000099"> Info: <?=strtolower($joueurDTN["idHattrickJoueur"])?>&nbsp;-&nbsp;<?=strtolower($joueurDTN["prenomJoueur"])?>&nbsp;<?=strtolower($joueurDTN["nomJoueur"])?><?php if (isset($joueurDTN["surnomJoueur"])) echo " (".$joueurDTN["surnomJoueur"].")"; ?>&nbsp;-&nbsp;
+          <?=$tabage[0];?>&nbsp;ans&nbsp;-&nbsp;<?=$tabage[1]?>&nbsp;jours<br>&nbsp; Salaire: <?=round(($joueurDTN["salary"]/10),2)?>&nbsp;&euro;/semaine&nbsp;-&nbsp;<?=$joueurDTN["intitulePosition"]?> 
 		      <b><a href="http://alltid.org/player/<?=$joueurDTN["idHattrickJoueur"]?>" target="_blank"><img src="../images/ahstats.png" width="47" height="16" border="0" align="absmiddle"></a>
 		      <a href="../outils/ExportCsv.php?ordre=<?=$ordre?>&sens=<?=$sens?>&lang=<?=$lang?>&masque=<?=$masque?>&affPosition=<?=$affPosition?>&typeExport=unjoueur&idPlayer=<?=$joueurDTN["idHattrickJoueur"]?>"><img border=1 width="16" height="16" align="absmiddle" src="../images/icone-excel.jpg"></a></b></font>      
      			
@@ -192,6 +194,11 @@ if(isset($msg)) {?>
       		    alt="ht">HT-mail</a>
         </td>
         </tr>
+		<tr>
+		<td align="left" width="50%">&nbsp;<font color="#000099"> HTMS: <?=$htms["value"]?> (<?=$htms["potential"]?>)</font>
+		</td>
+		<td align="left" width="50%">&nbsp;</td>
+		</tr>
       </table>
       <table width="100%" border="0" cellpadding="0" cellspacing="0">
         <tr> 
