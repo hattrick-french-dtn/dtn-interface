@@ -2,6 +2,10 @@
 
 Repo for the Hattrick French Scout team applications
 
+## Version 2.2.4
+### Features
++ add HTMS point to TOP for forum and Fiche consultation
+
 ## Version 2.2.3
 ### Bugfix
 + redirection when session expire to a valid page
