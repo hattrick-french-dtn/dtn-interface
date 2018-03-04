@@ -15,6 +15,7 @@ require("../includes/serviceEntrainement.php");
 require("../includes/serviceJoueur.php");
 require("../includes/langue.inc.php");
 require("../includes/serviceListesDiverses.php");
+require("../includes/htmsPoint.php");
 
 if (isset($origine) && $origine=="unique") //appel provient de la fiche d'un joueur
 {
@@ -423,7 +424,7 @@ function scanid()
       b=b+'/E';
       c=c+' / <?=$infJs[$i]["idEndurance"]?>';    
       }
-      
+
       
     b=b+') ';
     
@@ -436,6 +437,14 @@ function scanid()
     //Rajouter la spé. si il y en a une
     if ('<?=$infJs[$i]["optionJoueur"]?>'!=0) c=c+' / '+'[i]<?=$option[$infJs[$i]["optionJoueur"]]["FR"]?>[/i]';
     
+    if ((document.forms.form2.parasup[9].checked)) {
+      //choix=HTMS
+<?php
+	$htms = htmspoint($tabage[$i][0], $tabage[$i][1], $infJs[$i]["idGardien"], $infJs[$i]["idDefense"], $infJs[$i]["idConstruction"], $infJs[$i]["idAilier"], $infJs[$i]["idPasse"], $infJs[$i]["idButeur"], $infJs[$i]["idPA"]);
+?>
+      c=c+' / HTMS <?=$htms["value"]?> (<?=$htms["potential"]?>)';
+    }
+
     //Rajouter la date de dernière modification
     c=c+' / Dern. Modif : <?=$dermod[$i]?>';
     
@@ -604,6 +613,11 @@ if ($origine=="unique") require("../menu/menuJoueur.php");
               <td><input name="parasup" type="Checkbox" onClick="choixcompl();" value="cf">CF<br></td>
               <td><input name="parasup" type="Checkbox" onClick="choixcompl();" value="en">Endurance<br></td>
               <td><input name="parasup" type="Checkbox" onClick="choixcompl();" value="dtn">DTN<br></td>
+            </tr>                
+            <tr>
+              <td><input name="parasup" type="Checkbox" onClick="choixcompl();" value="htms">HTMS<br></td>
+              <td></td>
+              <td></td>
             </tr>                
           </table>
         </form>
