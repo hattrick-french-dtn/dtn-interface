@@ -4,3 +4,9 @@
 [submodule "framework/PHT"]
 	path = framework/PHTv3
 	url = https://github.com/jetwitaussi/PHT.git
+[submodule "framework/PHTMailer"]
+	path = framework/PHTMailer
+	url = https://github.com/PHPMailer/PHPMailer.git
+[submodule "framework/html2text"]
+	path = framework/html2text
+	url = https://github.com/soundasleep/html2text.git

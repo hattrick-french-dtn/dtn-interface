@@ -2,6 +2,10 @@
 
 Repo for the Hattrick French Scout team applications
 
+## Version 2.2.2
+### Bugfix
++ iihelp send message using gmail account
+
 ## Version 2.2.1
 ### Features
 + add HTMS point

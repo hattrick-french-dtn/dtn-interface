@@ -1,6 +1,7 @@
 <?php
 // Affiche toutes les erreurs
 error_reporting(E_ALL);
+set_time_limit(120);
 
 require_once "../_config/CstGlobals.php"; // fonctions d'admin
 //require_once "../fonctions/HT_Client.php"; // Hattrick Client New (with Advanced HTTP Client)
@@ -14,7 +15,16 @@ require_once ("../includes/serviceiihelp.php");
 
 require_once ("../includes/langue.inc.php"); // 23/01/2010 jojoje86 besoin pour la spécialité
 
-$headers ='from:contact@ht-fff.org'."\n";
+require($_SERVER["DOCUMENT_ROOT"]."/framework/PHTMailer/src/Exception.php");
+require($_SERVER["DOCUMENT_ROOT"]."/framework/PHTMailer/src/PHPMailer.php");
+require($_SERVER["DOCUMENT_ROOT"]."/framework/PHTMailer/src/SMTP.php");
+require($_SERVER["DOCUMENT_ROOT"]."/framework/html2text/html2text.php");
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
+
+$headers ='from:htfffdtn@gmail.com'."\n";
 $headers .='Content-Type: text/html; charset="iso-8859-1"'."\n";
 $headers .='Content-Transfer-Encoding: 8bit'; 
 $i=0;
@@ -157,32 +167,67 @@ Commentaire : ".stripslashes($commentaire);
 
 $listmail = "";
 $sql  = get_iiihelp_repreneur_clubs_SQL();
-$sql .= " AND etat = 0 
-          AND (
-                (entrainement_voulu1 in ($res['entrainement_souhaite'],-1) AND age_voulu1='Tous')
-            OR  (entrainement_voulu2 in ($res['entrainement_souhaite'],-1) AND age_voulu2='Tous')";
+$sql .= " AND etat = 0 ";
+$sql .= " AND ( (entrainement_voulu1 in (".$res['entrainement_souhaite'].",-1) AND age_voulu1='Tous')";
+$sql .= "   OR  (entrainement_voulu2 in (".$res['entrainement_souhaite'].",-1) AND age_voulu2='Tous')";
 if ($res['cat_age']=="+21 ans")
 {
-  	$sql .= " OR (entrainement_voulu1 in ($res['entrainement_souhaite'],-1) AND age_voulu1='+21 ans')";
-  	$sql .= " OR (entrainement_voulu2 in ($res['entrainement_souhaite'],-1) AND age_voulu2='+21 ans')";
+  	$sql .= " OR (entrainement_voulu1 in (".$res['entrainement_souhaite'].",-1) AND age_voulu1='+21 ans')";
+  	$sql .= " OR (entrainement_voulu2 in (".$res['entrainement_souhaite'].",-1) AND age_voulu2='+21 ans')";
 }
 if ($res['cat_age']=="17-20 ans")
 {
-  	$sql .= " OR (entrainement_voulu1 in ($res['entrainement_souhaite'],-1) AND age_voulu1='17-20 ans')";
-  	$sql .= " OR (entrainement_voulu2 in ($res['entrainement_souhaite'],-1) AND age_voulu2='17-20 ans')";
+  	$sql .= " OR (entrainement_voulu1 in (".$res['entrainement_souhaite'].",-1) AND age_voulu1='17-20 ans')";
+  	$sql .= " OR (entrainement_voulu2 in (".$res['entrainement_souhaite'].",-1) AND age_voulu2='17-20 ans')";
 }
 $sql .= ") ORDER BY idClubHT";
 
+//print($sql."<br/>");
+$erreur="good";
 foreach ($conn->query($sql) as $res2)
 {
 	$listmail = $res2['email']; 
 				
-	$desinscription = "<br /><br /><br />
-Pour vous d&eacute;sincrire de iiihelp : <a href='https://".$_SERVER['SERVER_NAME']."/desinscription_iiihelp.php?id=".$res2['id_iiihelp_repreneur']."'>Cliquez ici</a>";
+	$desinscription = "<br /><br /><br />Pour vous d&eacute;sincrire de iiihelp : <a href='".$_SERVER['HTTP_ORIGIN']."/desinscription_iiihelp.php?id=".$res2['id_iiihelp_repreneur']."'>Cliquez ici</a>";
 
-	$modifinscription = "<br />
-Pour modifier votre inscription iiihelp : <a href='https://".$_SERVER['SERVER_NAME']."/fff_help.php'>Cliquez ici</a>";
+	$modifinscription = "<br />Pour modifier votre inscription iiihelp : <a href='".$_SERVER['HTTP_ORIGIN']."/fff_help.php'>Cliquez ici</a>";
+/*
+	while (list($var,$value) = each ($_SERVER)) {
+      echo "$var => $value <br />";
+    }
+*/
+	$mail = new PHPMailer;
+	$mail->SMTPDebug = 0;
+	$mail->isSMTP();
+	$mail->Host = 'smtp.gmail.com';
+	$mail->SMTPAuth = true;
+	$mail->Username = 'htfffdtn@gmail.com';
+	$mail->Password = 'ht!fff_2k15';
+	$mail->SMTPSecure = 'tls';
+	$mail->Port = 587;
+	
+	//Recipients
+	$mail->setFrom('htfffdtn@gmail.com', 'Hattrick DTN France iihelp');
+	$mail->addAddress($listmail);     // Add a recipient
+	$mail->addReplyTo('htfffdtn@gmail.com', 'Hattrick DTN France iihelp');
 
+	//Content
+	$mail->isHTML(true);                                  // Set email format to HTML
+	$mail->Subject = 'DTN Hattrick : vente de joueur '.$res['nomJoueur'].' ('.$id_HT.')';
+	$mail->Body    = $messagemail.$desinscription.$modifinscription;
+	$mail->AltBody = convert_html_to_text($messagemail.$desinscription.$modifinscription);
+	
+	//print($mail->AltBody."<br/>");
+
+	if ($mail->send()) {
+		//echo 'Message has been sent<br/>';
+	}
+	else {
+		$erreur=$mail->ErrorInfo;
+	}
+	$i=$i+1;
+
+/*
 	if(mail($listmail, "DTN Hattrick : vente de joueur", $messagemail.$desinscription.$modifinscription, $headers)) 
 	{
 		$erreur="good";
@@ -192,6 +237,7 @@ Pour modifier votre inscription iiihelp : <a href='https://".$_SERVER['SERVER_NA
 	{
 		$erreur="Echec sur un ou plusieurs envois";
 	}
+*/
 //echo $listmail;
 /*mail("g.fayollecoinde@free.fr", "DTN Hattrick : vente de joueur", utf8_decode($messagemail), "from:contact@ht-fff.org");
 mail("pouin23@hotmail.com", "DTN Hattrick : vente de joueur", utf8_decode($messagemail), "from:contact@ht-fff.org");*/
