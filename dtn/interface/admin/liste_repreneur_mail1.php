@@ -147,15 +147,16 @@ switch($sesUser["idNiveauAcces"]){
   	$sql .= " OR (entrainement_voulu2 in ($res->entrainement_souhaite,-1) AND age_voulu2='17-20 ans')";
 	}
 	$sql .= ") ORDER BY idClubHT";
-	while ($conn->query($sql) as $restest)
-	{
-	
+	$result = $conn->query($sql);
+	while ($restest = $result->fetch()) {
 ?>
     <tr>
       <td><?=$restest['nomClub']?></td>
       <td><?=$restest['nomUser']?></td>
     </tr>
-<?php } ?>
+<?php
+	}
+?>
   </table>
  <br> 
   <input type="radio" name="type" id="type" value=1>Vente prochaine
