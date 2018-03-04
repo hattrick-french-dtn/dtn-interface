@@ -4,7 +4,7 @@ require("../includes/serviceListesDiverses.php");
 
 if(!$sesUser["idAdmin"])
 {
-	header("location: entry.php?ErrorMsg=Session Expir�");
+	header("location: ../index.php?ErrorMsg=Session Expir�");
 }
 
 
