@@ -6,6 +6,7 @@ require("../includes/serviceMatchs.php");
 require("../includes/langue.inc.php");
 require("../CHPP/config.php");
 require("../includes/serviceListesDiverses.php");
+require("../includes/htmsPoint.php");
 
 if(!$_SESSION['sesUser']["idAdmin"])
 {
@@ -49,6 +50,11 @@ $lstRole=list_role();
 
 // Récupération de l'entrainement subit par le joueur
 $nom_entrainement=getEntrainementName($joueurDTN["entrainement_id"],listEntrainement());
+
+// Variable d'age
+$ageetjours = ageetjour($joueurDTN["datenaiss"]);
+$tabage = explode(" - ",$ageetjours);
+$htms = htmspoint($tabage[0], $tabage[1], $joueurDTN["idGardien"], $joueurDTN["idDefense"], $joueurDTN["idConstruction"], $joueurDTN["idAilier"], $joueurDTN["idPasse"], $joueurDTN["idButeur"], $joueurDTN["idPA"]);
 
 
 // Extraction des données Historique Joueur
@@ -230,12 +236,12 @@ if ($datemaj >$mkday -$huit){
               <td colspan="3">&nbsp;</td>
             </tr>
             <tr> 
-              <td width="40%" align="left">&nbsp; <font color="#000099"><b><?=$joueurDTN["idHattrickJoueur"]?>&nbsp;-&nbsp;<?=$joueurDTN["prenomJoueur"]?> <?=$joueurDTN["nomJoueur"]?><?php if (isset($joueurDTN["surnomJoueur"])) echo " (".$joueurDTN["surnomJoueur"].")"; ?>&nbsp;-&nbsp;<?php 
-              $ageetjours = ageetjour($joueurDTN["datenaiss"]);
-              $tabage = explode(" - ",$ageetjours);
-              echo $tabage[0];?>&nbsp;ans&nbsp;-&nbsp;<?=$tabage[1]?>&nbsp;jours<br>&nbsp; <?=round(($joueurDTN["salary"]/10),2)?>&nbsp;&euro;/semaine&nbsp;
+              <td width="40%" align="left">&nbsp; <font color="#000099"><b>Info: <?=$joueurDTN["idHattrickJoueur"]?>&nbsp;-&nbsp;<?=$joueurDTN["prenomJoueur"]?> <?=$joueurDTN["nomJoueur"]?><?php if (isset($joueurDTN["surnomJoueur"])) echo " (".$joueurDTN["surnomJoueur"].")"; ?>&nbsp;-&nbsp;<?php 
+              echo $tabage[0];?>&nbsp;ans&nbsp;-&nbsp;<?=$tabage[1]?>&nbsp;jours<br>&nbsp; Salaire: <?=round(($joueurDTN["salary"]/10),2)?>&nbsp;&euro;/semaine&nbsp;
               <a href="http://alltid.org/player/<?=$joueurDTN["idHattrickJoueur"]?>" target="_blank"><img src="../images/ahstats.png" width="47" height="16" border="0" align="absmiddle"></a>
-              <a href="../outils/ExportCsv.php?ordre=<?=$ordre?>&sens=<?=$sens?>&lang=<?=$lang?>&masque=<?=$masque?>&affPosition=<?=$affPosition?>&typeExport=unjoueur&idPlayer=<?=$joueurDTN["idHattrickJoueur"]?>"><img border=1 width="16" height="16" align="absmiddle" src="../images/icone-excel.jpg"></a></b></font>            
+              <a href="../outils/ExportCsv.php?ordre=<?=$ordre?>&sens=<?=$sens?>&lang=<?=$lang?>&masque=<?=$masque?>&affPosition=<?=$affPosition?>&typeExport=unjoueur&idPlayer=<?=$joueurDTN["idHattrickJoueur"]?>"><img border=1 width="16" height="16" align="absmiddle" src="../images/icone-excel.jpg"></a>
+			  <br/>&nbsp; HTMS: <?=$htms["value"]?> (<?=$htms["potential"]?>)
+			  </b></font>
               </td>
 
               <td width="25%" align="center">
