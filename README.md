@@ -2,6 +2,10 @@
 
 Repo for the Hattrick French Scout team applications
 
+## Version 2.2.3
+### Bugfix
++ redirection when session expire to a valid page
+
 ## Version 2.2.2
 ### Bugfix
 + iihelp send message using gmail account
