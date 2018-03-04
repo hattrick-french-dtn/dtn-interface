@@ -8,7 +8,7 @@ require_once "../_config/CstGlobals.php";
 
 if(!$sesUser["idAdmin"])
 {
-	header("location: ../entry.php?ErrorMsg=Session Expiree");
+	header("location: ../index.php?ErrorMsg=Session Expiree");
 }
 
 
