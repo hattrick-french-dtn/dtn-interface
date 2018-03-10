@@ -16,6 +16,7 @@ require("../includes/serviceListesDiverses.php");
 require("../includes/serviceEntrainement.php");
 require("../includes/serviceJoueur.php");
 require("../includes/langue.inc.php");
+require("../includes/htmsPoint.php");
 
 if(!$sesUser["idAdmin"])
 {
@@ -538,7 +539,7 @@ if(count($lstJ)==0) {
     if ($nbPages>1) {?>
 
 				<FORM ACTION="recherche_result.php" METHOD="POST">
-				 Afficher résultats : <SELECT name="PagesResu">  
+				 Afficher r&eacute;sultats : <SELECT name="PagesResu">  
 
       <?php
       $k=1;
@@ -712,7 +713,7 @@ if(count($lstJ)==0) {
 					  	<b><font color="#3C9478">aucun<font></b>
 					  	<?php } ?>
 				</TD>
-				<TD align=right><BR>
+				<TD align="right"><BR>
 				Entra&icirc;nement Actuel : [ <?=getEntrainementName($lstJ[$j]["entrainement_id"],$lstTrain); ?>  ]
 				&nbsp;|&nbsp;
 				Entraineur : <?=$lstJ[$j]["Lib_Niv_entrainement"]?>
@@ -726,10 +727,8 @@ if(count($lstJ)==0) {
 					<B>Age:&nbsp; </B><?=$lstJ[$j]["ageJoueur"]?> ans <?=$lstJ[$j]["jourJoueur"]?> jours / <b>XP</b> : <?=$lstCarac[$lstJ[$j]["idExperience_fk"]]["intituleCaracFR"]?> / <b>TDC</b> : <?=$lstCarac[$lstJ[$j]["idLeader_fk"]]["intituleCaracFR"]?><BR>
 					<B>TSI :&nbsp; </B> <?=$lstJ[$j]["valeurEnCours"]?> / <b>id</b> : ( <?=$lstJ[$j]["idHattrickJoueur"]?> )<BR>					
 					<B>Salaire :&nbsp; </B> <?=round(($lstJ[$j]["salary"]/10),2)?> ( <?=$lstJ[$j]["salaireDeBase"]/10?> ) <BR>					
-					<B>Mis &agrave; jour : &nbsp; </B>&nbsp;<img src="../images/time_<?=$img_nb?>.gif" onMouseOver="return escape('<?=$zealt?>')" > 
-					<BR>
 				</TD>
-				<TD VALIGN="top">								
+				<TD VALIGN="top">
 					<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="0">
 					<TR>
 						<TD width=25% ><B>Endurance:&nbsp; </B></TD><TD width=25% ><?=$lstCarac[$lstJ[$j]["idEndurance"]]["intituleCaracFR"]?></TD>
@@ -752,7 +751,18 @@ if(count($lstJ)==0) {
 					</TR>
 					</TABLE>
 				</TD>
+			</TR>
+			<TR>
+				<TD VALIGN="top">
+					<B>Mis &agrave; jour : &nbsp; </B>&nbsp;<img src="../images/time_<?=$img_nb?>.gif" onMouseOver="return escape('<?=$zealt?>')" > 
+				</TD>
+				<TD ALIGN="right">
+<?php
+				$htms = htmspoint($lstJ[$j]["ageJoueur"], $lstJ[$j]["jourJoueur"], $lstJ[$j]["idGardien"], $lstJ[$j]["idDefense"], $lstJ[$j]["idConstruction"], $lstJ[$j]["idAilier"], $lstJ[$j]["idPasse"], $lstJ[$j]["idButeur"], $lstJ[$j]["idPA"]);
 
+?>
+					HTMS <?=$htms["value"]?> (<?=$htms["potential"]?>)
+				</TD>
 			</TR>
 <?php
 				$j=$j+1;
