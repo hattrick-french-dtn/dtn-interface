@@ -7,6 +7,8 @@ Repo for the Hattrick French Scout team applications
 + Fiche consultation, allow to display htms
     + only choosen caracteristics
 	+ choosen caracteristics and training weeks
++ Add default HTMS to recherche_result.php
++ Add default HTMS to ExportCsv.php
 
 ## Version 2.2.4
 ### Features
