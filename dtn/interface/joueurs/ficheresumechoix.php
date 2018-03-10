@@ -62,6 +62,7 @@ if ($infJs[1]['entrainement_type']=='') $infJs[1]['entrainement_type']='non rens
 <head>
 <title>Fiche <?=$infJs[0]["prenomJoueur"]?> <?=$infJs[0]["nomJoueur"]?></title>
 <script src="../../../SpryAssets/SpryValidationSelect.js" type="text/javascript"></script>
+<script src="../includes/htms_point.js" type="text/javascript"></script>
 <link href="../../../SpryAssets/SpryValidationSelect.css" rel="stylesheet" type="text/css">
 
 
@@ -179,6 +180,8 @@ function scanid()
     //modification sur toutes les fiches pour l'ajout du CF par jojoje86 le 21/07/09
     //détermination du choix de l'utilisateur : on regarde le type de résumé choisi par bouton radio
     //Fireproofed le 28/01/2011
+	// keeper, defending, playmaking, winger, passing, scoring, setpieces
+	var active = [false, false, false, false, false, false, false];
     
     if (document.forms.form1.typeresume[0].checked) {	
       //choix=GK
@@ -190,7 +193,9 @@ function scanid()
       if ('<?=$infJs[$i]["entrainement_id"]?>'==4) c=c+'[b][i]';
       c=c+'<?=$infJs[$i]["idDefense"]?>+<?=$infJs[$i]["nbSemaineDefense"]?>';
       if ('<?=$infJs[$i]["entrainement_id"]?>'==4) c=c+'[/i][/b]';
-      }
+	  active[0] = true;
+	  active[1] = true;
+    }
   
     if (document.forms.form1.typeresume[1].checked) {
       //choix=CD
@@ -210,7 +215,11 @@ function scanid()
       if ('<?=$infJs[$i]["entrainement_id"]?>'==6) c=c+'[b][i]';
       c=c+'<?=$infJs[$i]["idAilier"]?>+<?=$infJs[$i]["nbSemaineAilier"]?>';
       if ('<?=$infJs[$i]["entrainement_id"]?>'==6) c=c+'[/i][/b]'; 
-      }
+	  active[1] = true;
+	  active[2] = true;
+	  active[3] = true;
+	  active[4] = true;
+    }
   
     if (document.forms.form1.typeresume[2].checked) {
       //choix=CDoff
@@ -226,7 +235,10 @@ function scanid()
   		if ('<?=$infJs[$i]["entrainement_id"]?>'==8) c=c+'[b][i]';
       c=c+'<?=$infJs[$i]["idPasse"]?>+<?=$infJs[$i]["nbSemainePasses"]?>';
       if ('<?=$infJs[$i]["entrainement_id"]?>'==8) c=c+'[/i][/b]'; 
-      }
+	  active[1] = true;
+	  active[2] = true;
+	  active[4] = true;
+    }
     
     if (document.forms.form1.typeresume[3].checked) {
       //choix=WB
@@ -246,7 +258,11 @@ function scanid()
       if ('<?=$infJs[$i]["entrainement_id"]?>'==9) c=c+'[b][i]';
       c=c+'<?=$infJs[$i]["idConstruction"]?>+<?=$infJs[$i]["nbSemaineConstruction"]?>';
       if ('<?=$infJs[$i]["entrainement_id"]?>'==9) c=c+'[/i][/b]';
-      }
+	  active[1] = true;
+	  active[2] = true;
+	  active[3] = true;
+	  active[4] = true;
+    }
   
     if (document.forms.form1.typeresume[4].checked) {
       //choix=WG
@@ -266,7 +282,11 @@ function scanid()
       if ('<?=$infJs[$i]["entrainement_id"]?>'==4) c=c+'[b][i]';
       c=c+'<?=$infJs[$i]["idDefense"]?>+<?=$infJs[$i]["nbSemaineDefense"]?>';
       if ('<?=$infJs[$i]["entrainement_id"]?>'==4) c=c+'[/i][/b]';
-      }
+	  active[1] = true;
+	  active[2] = true;
+	  active[3] = true;
+	  active[4] = true;
+    }
       
     if (document.forms.form1.typeresume[5].checked) {
       //choix=WGpm
@@ -282,7 +302,10 @@ function scanid()
       if ('<?=$infJs[$i]["entrainement_id"]?>'==8) c=c+'[b][i]';
       c=c+'<?=$infJs[$i]["idPasse"]?>+<?=$infJs[$i]["nbSemainePasses"]?>';
       if ('<?=$infJs[$i]["entrainement_id"]?>'==8) c=c+'[/i][/b]';
-      }
+	  active[2] = true;
+	  active[3] = true;
+	  active[4] = true;
+    }
     
     if (document.forms.form1.typeresume[6].checked) {
       //choix=IM
@@ -299,7 +322,10 @@ function scanid()
       if ('<?=$infJs[$i]["entrainement_id"]?>'==4) c=c+'[b][i]';
       c=c+'<?=$infJs[$i]["idDefense"]?>+<?=$infJs[$i]["nbSemaineDefense"]?>';
       if ('<?=$infJs[$i]["entrainement_id"]?>'==4) c=c+'[/i][/b]';
-      }
+	  active[1] = true;
+	  active[2] = true;
+	  active[4] = true;
+    }
   
     if (document.forms.form1.typeresume[7].checked) {
       //choix=FW
@@ -315,7 +341,10 @@ function scanid()
       if ('<?=$infJs[$i]["entrainement_id"]?>'==6) c=c+'[b][i]';
       c=c+'<?=$infJs[$i]["idAilier"]?>+<?=$infJs[$i]["nbSemaineAilier"]?>';
       if ('<?=$infJs[$i]["entrainement_id"]?>'==6) c=c+'[/i][/b]';
-      }
+	  active[5] = true;
+	  active[4] = true;
+	  active[3] = true;
+    }
   
     if (document.forms.form1.typeresume[8].checked) {
       //choix=FWtw
@@ -331,7 +360,10 @@ function scanid()
       if ('<?=$infJs[$i]["entrainement_id"]?>'==8) c=c+'[b][i]';
       c=c+'<?=$infJs[$i]["idPasse"]?>+<?=$infJs[$i]["nbSemainePasses"]?>';
       if ('<?=$infJs[$i]["entrainement_id"]?>'==8) c=c+'[/i][/b]';
-      }
+	  active[5] = true;
+	  active[4] = true;
+	  active[3] = true;
+    }
   
     if (document.forms.form1.typeresume[9].checked) {
       //choix=FWdef
@@ -351,7 +383,11 @@ function scanid()
       if ('<?=$infJs[$i]["entrainement_id"]?>'==6) c=c+'[b][i]';
       c=c+'<?=$infJs[$i]["idAilier"]?>+<?=$infJs[$i]["nbSemaineAilier"]?>';
       if ('<?=$infJs[$i]["entrainement_id"]?>'==6) c=c+'[/i][/b]';
-      }
+	  active[5] = true;
+	  active[4] = true;
+	  active[3] = true;
+	  active[2] = true;
+    }
   
     //on regarde si des paramètres supplémentaires doivent être ajoutés à la fiche
     //avec test pour éviter les redondances
@@ -363,7 +399,8 @@ function scanid()
       if ('<?=$infJs[$i]["entrainement_id"]?>'==10) c=c+'[b][i]';
       c=c+'<?=$infJs[$i]["idGardien"]?>+<?=$infJs[$i]["nbSemaineGardien"]?>';
       if ('<?=$infJs[$i]["entrainement_id"]?>'==10) c=c+'[/i][/b]';
-      }
+	  active[0] = true;
+    }
   
     if ((document.forms.form2.parasup[1].checked)&&(b.indexOf('D')==-1)) {
       //choix=Défense
@@ -372,7 +409,8 @@ function scanid()
       if ('<?=$infJs[$i]["entrainement_id"]?>'==4) c=c+'[b][i]';
       c=c+'<?=$infJs[$i]["idDefense"]?>+<?=$infJs[$i]["nbSemaineDefense"]?>';
       if ('<?=$infJs[$i]["entrainement_id"]?>'==4) c=c+'[/i][/b]';
-      }
+	  active[1] = true;
+    }
   
     if ((document.forms.form2.parasup[2].checked)&&(b.indexOf('C')==-1)) {
       //choix=Construction
@@ -381,7 +419,8 @@ function scanid()
       if ('<?=$infJs[$i]["entrainement_id"]?>'==9) c=c+'[b][i]';
       c=c+'<?=$infJs[$i]["idConstruction"]?>+<?=$infJs[$i]["nbSemaineConstruction"]?>';
       if ('<?=$infJs[$i]["entrainement_id"]?>'==9) c=c+'[/i][/b]';
-      }
+	  active[2] = true;
+    }
   
     if ((document.forms.form2.parasup[3].checked)&&(b.indexOf('A')==-1)) {
       //choix=Ailier
@@ -390,7 +429,8 @@ function scanid()
       if ('<?=$infJs[$i]["entrainement_id"]?>'==6) c=c+'[b][i]';
       c=c+'<?=$infJs[$i]["idAilier"]?>+<?=$infJs[$i]["nbSemaineAilier"]?>';
       if ('<?=$infJs[$i]["entrainement_id"]?>'==6) c=c+'[/i][/b]';
-      }
+	  active[3] = true;
+    }
   
     if ((document.forms.form2.parasup[4].checked)&&(b.indexOf('P')==-1)) {
       //choix=Passe
@@ -399,7 +439,8 @@ function scanid()
       if ('<?=$infJs[$i]["entrainement_id"]?>'==8) c=c+'[b][i]';
       c=c+'<?=$infJs[$i]["idPasse"]?>+<?=$infJs[$i]["nbSemainePasses"]?>';
       if ('<?=$infJs[$i]["entrainement_id"]?>'==8) c=c+'[/i][/b]';
-      }
+	  active[4] = true;
+    }
   
     if ((document.forms.form2.parasup[5].checked)&&(b.indexOf('B')==-1)) {
       //choix=Buteur
@@ -408,7 +449,8 @@ function scanid()
       if ('<?=$infJs[$i]["entrainement_id"]?>'==5) c=c+'[b][i]';
       c=c+'<?=$infJs[$i]["idButeur"]?>+<?=$infJs[$i]["nbSemaineButeur"]?>';
       if ('<?=$infJs[$i]["entrainement_id"]?>'==5) c=c+'[/i][/b]';
-      }
+	  active[5] = true;
+    }
   
     if ((document.forms.form2.parasup[6].checked)||(document.forms.form1.typeresume[0].checked)) {
       //choix=CF : case à cocher CF ou choix de type de résumé = GK
@@ -417,32 +459,48 @@ function scanid()
       if ('<?=$infJs[$i]["entrainement_id"]?>'==3) c=c+'[b][i]';
       c=c+'<?=$infJs[$i]["idPA"]?>';
       if ('<?=$infJs[$i]["entrainement_id"]?>'==3) c=c+'[/i][/b]';
-      }
+	  active[6] = true;
+    }
   
     if ((document.forms.form2.parasup[7].checked)&&(b.indexOf('E')==-1)) {
       //choix=Endurance
       b=b+'/E';
       c=c+' / <?=$infJs[$i]["idEndurance"]?>';    
-      }
+    }
 
-      
     b=b+') ';
-    
+
     //Rajouter l'XP
     c=c+' / Xp <?=$infJs[$i]["idExperience_fk"]?>';
-    
+
     //Rajouter le TDC si honorable
     if ('<?=$infJs[$i]["idLeader_fk"]?>'==7) c=c+' / [b]TDC 7[/b]';
-    
+
     //Rajouter la spé. si il y en a une
     if ('<?=$infJs[$i]["optionJoueur"]?>'!=0) c=c+' / '+'[i]<?=$option[$infJs[$i]["optionJoueur"]]["FR"]?>[/i]';
-    
+
+	var htmss = htmspoint(<?=$tabage[$i][0]?>, <?=$tabage[$i][1]?>,
+		active[0]?<?=$infJs[$i]["idGardien"]?>:0, <?=$infJs[$i]["nbSemaineGardien"]?>,
+		active[1]?<?=$infJs[$i]["idDefense"]?>:0, <?=$infJs[$i]["nbSemaineDefense"]?>,
+		active[2]?<?=$infJs[$i]["idConstruction"]?>:0, <?=$infJs[$i]["nbSemaineConstruction"]?>,
+		active[3]?<?=$infJs[$i]["idAilier"]?>:0, <?=$infJs[$i]["nbSemaineAilier"]?>,
+		active[4]?<?=$infJs[$i]["idPasse"]?>:0, <?=$infJs[$i]["nbSemainePasses"]?>,
+		active[5]?<?=$infJs[$i]["idButeur"]?>:0, <?=$infJs[$i]["nbSemaineButeur"]?>,
+		active[6]?<?=$infJs[$i]["idPA"]?>:0);
     if ((document.forms.form2.parasup[9].checked)) {
       //choix=HTMS
 <?php
 	$htms = htmspoint($tabage[$i][0], $tabage[$i][1], $infJs[$i]["idGardien"], $infJs[$i]["idDefense"], $infJs[$i]["idConstruction"], $infJs[$i]["idAilier"], $infJs[$i]["idPasse"], $infJs[$i]["idButeur"], $infJs[$i]["idPA"]);
 ?>
-      c=c+' / HTMS <?=$htms["value"]?> (<?=$htms["potential"]?>)';
+      c=c+' / HTMS foxtrick <?=$htms["value"]?> (<?=$htms["potential"]?>)';
+    }
+    if ((document.forms.form2.parasup[10].checked)) {
+      //choix=HTMS brut
+      c=c+' / HTMS caracs ' + htmss[0] + ' ('+ htmss[1]+')';
+	}
+    if ((document.forms.form2.parasup[11].checked)) {
+      //choix=HTMS net
+	  c=c+' / HTMS caracs et semaines ' + htmss[2] + ' ('+ htmss[3] +')';
     }
 
     //Rajouter la date de dernière modification
@@ -616,8 +674,8 @@ if ($origine=="unique") require("../menu/menuJoueur.php");
             </tr>                
             <tr>
               <td><input name="parasup" type="Checkbox" onClick="choixcompl();" value="htms">HTMS<br></td>
-              <td></td>
-              <td></td>
+              <td><input name="parasup" type="Checkbox" onClick="choixcompl();" value="htmsbrut">HTMS des caract&eacute;ristiques<br></td>
+              <td><input name="parasup" type="Checkbox" onClick="choixcompl();" value="htmsnet">HTMS avec les semaines<br></td>
             </tr>                
           </table>
         </form>
