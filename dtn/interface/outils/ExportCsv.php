@@ -3,6 +3,7 @@ require_once ("../includes/head.inc.php");
 require ("../includes/serviceListesDiverses.php");
 require ("../includes/serviceJoueur.php");
 require ("../includes/serviceEntrainement.php");
+require("../includes/htmsPoint.php");
 
 if (!$sesUser["idAdmin"]) {
 	header("location: ../index.php?ErrorMsg=Session Expiree");
@@ -121,6 +122,7 @@ switch ($sesUser["idPosition_fk"]) {
 ?> gK;cD;iM;Wg off;Fw<?php
 		break;
 }
+?>HTMS<?php
 echo "\n";
 
 //correction bug age joueurs par jojoje86 le 20/07/09
@@ -147,6 +149,7 @@ foreach ($conn->query($sql) as $l) {
 	}else{
 		$datemaj=$mkJoueur;
 	}
+	$htms = htmspoint($l["AgeAn"], $l["AgeJour"], $l["idGardien"], $l["idDefense"], $l["idConstruction"], $l["idAilier"], $l["idPasse"], $l["idButeur"], $l["idPA"]);
 
 ?><?=strtolower($l["prenomJoueur"])?> <?=strtolower($l["nomJoueur"])?>;<?php
 	echo $l["idHattrickJoueur"].";";
@@ -207,6 +210,7 @@ foreach ($conn->query($sql) as $l) {
 			echo $l["scoreAttaquant"].";";
 			break;
 	}
+	echo $htms["value"].";".$htms["potential"].";";
 	echo "\n";
 }
 
