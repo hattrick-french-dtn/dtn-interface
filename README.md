@@ -2,6 +2,12 @@
 
 Repo for the Hattrick French Scout team applications
 
+## Version 2.2.5
+### Enhancement
++ Fiche consultation, allow to display htms
+    + only choosen caracteristics
+	+ choosen caracteristics and training weeks
+
 ## Version 2.2.4
 ### Features
 + add HTMS point to TOP for forum and Fiche consultation
