@@ -132,9 +132,9 @@ switch($infJ["idPosition"]){
 <script language="JavaScript" type="text/JavaScript">
 function copy2Clipboard(obj)
 {
-      var textRange = document.body.createTextRange();
-      textRange.moveToElementText(obj);
-      textRange.execCommand("Copy");
+	var textRange = document.body.createTextRange();
+	textRange.moveToElementText(obj);
+	textRange.execCommand("Copy");
 }
 </script>
 </head>
@@ -167,35 +167,34 @@ require("../menu/menuJoueur.php");
 
 ?>
 
-<p>
-  
-  <SPAN ID=textespan>
-    
+<p style="border: 1px solid black;padding: 10px 10px 10px 10px">
+  <span id="textespan" >
     <b>[b]
-    <?=strtolower($infJ["prenomJoueur"])?> <?=strtolower($infJ["nomJoueur"])?> <?php if (isset($infJ["surnomJoueur"])) echo " (".$infJ["surnomJoueur"].")"; ?>
-    (
+    <?=ucwords(strtolower($infJ["prenomJoueur"]))?> <?=ucwords(strtolower($infJ["nomJoueur"]))?> <?php if (isset($infJ["surnomJoueur"])) echo " (".$infJ["surnomJoueur"].")"; ?>
+    ([url=https://www.hattrick.org/goto.ashx?path=/Club/Players/Player.aspx?playerId=<?=strtolower($infJ["idHattrickJoueur"])?>]
     <?=strtolower($infJ["idHattrickJoueur"])?>
+	[/url]
     ) 
     <?php 
       $tabage = ageetjour($infJ["datenaiss"], 2);
       echo $tabage['ageJoueur'];?>&nbsp;ans&nbsp;-&nbsp;<?=$tabage['jourJoueur']
     ?> 
     jours[/b]</b><br>
-    Proprietaire :  
+    Propri&eacute;taire :  
     <?=$infJ["nomClub"]?> 
     (
-    <?=$nomPays[0]?>
+    <?=utf8_decode($nomPays[0])?>
     )<br/>
     [color=darkred]> Derni&egrave;re &eacute;dition:
     <?=dateToHTML($infJ["dateDerniereModifJoueur"])?>
     [/color]<br/>
     [color=red]> Derni&egrave;re mise &agrave; jour par le proprietaire: (
     <?=dateToHTML($infJ["dateSaisieJoueur"])?> 
-    )[/color]<br/>
+    )[/color]<br/><br/>
     TSI: 
     <?=$infJ["valeurEnCours"]?>
-    <br>
-  </span><SPAN>Salaire : 
+    <br/>
+  Salaire : 
   <?=round(($infJ["salary"]/10),2)?>
   &euro;/semaine (
   <?=round(($infJ["salaireDeBase"]/10),2)?>
@@ -205,94 +204,44 @@ require("../menu/menuJoueur.php");
   <?=$option[$infJ["optionJoueur"]]["FR"]?>
   [/b]</b>
   <?php } ?>
-  Xp : 
-  <?=$lstCaractJ[$infJ["idExperience_fk"]]["intituleCaracFR"]?>
   <br/>
-  
-  
-  
-  
-  
-  Endurance : 
-  <?=$lstCaractJ[$infJ["idEndurance"]]["intituleCaracFR"]?> 
-  ( 
-  <?=$infJ["idEndurance"]?> 
-  )<br/>
+  Xp : <?=$lstCaractJ[$infJ["idExperience_fk"]]["intituleCaracFR"]?><br/>
+  Endurance : <?=$lstCaractJ[$infJ["idEndurance"]]["intituleCaracFR"]?> ( <?=$infJ["idEndurance"]?> )<br/><br/>
   <?php if($construction == 1) {?>
-  Construction : 
-  <?=$lstCaractJ[$infJ["idConstruction"]]["intituleCaracFR"]?>
-  </i> ( 
-  <?=$infJ["idConstruction"]?> 
-  ) + 
-  <?=$infJ["nbSemaineConstruction"]?>
-  <br/>
+  Construction : <?=$lstCaractJ[$infJ["idConstruction"]]["intituleCaracFR"]?> ( <?=$infJ["idConstruction"]?> ) + <?=$infJ["nbSemaineConstruction"]?> <br/>
   <?php } ?>
   <?php if($ailier == 1) {?>
-  Ailier : 
-  <?=$lstCaractJ[$infJ["idAilier"]]["intituleCaracFR"]?>
-  </i> ( 
-  <?=$infJ["idAilier"]?> 
-  ) + 
-  <?=$infJ["nbSemaineAilier"]?>
-  <br/>
+  Ailier : <?=$lstCaractJ[$infJ["idAilier"]]["intituleCaracFR"]?> ( <?=$infJ["idAilier"]?> ) + <?=$infJ["nbSemaineAilier"]?> <br/>
   <?php } ?>
   <?php if($buteur == 1) {?>
-  Buteur : 
-  <?=$lstCaractJ[$infJ["idButeur"]]["intituleCaracFR"]?>
-  </i> ( 
-  <?=$infJ["idButeur"]?> 
-  ) + 
-  <?=$infJ["nbSemaineButeur"]?>
-  <br/>
+  Buteur : <?=$lstCaractJ[$infJ["idButeur"]]["intituleCaracFR"]?> ( <?=$infJ["idButeur"]?> ) + <?=$infJ["nbSemaineButeur"]?> <br/>
   <?php } ?>
   <?php if($k == 1) {?>
-  Gardien : 
-  <?=$lstCaractJ[$infJ["idGardien"]]["intituleCaracFR"]?>
-  </i> ( 
-  <?=$infJ["idGardien"]?> 
-  ) + 
-  <?=$infJ["nbSemaineGardien"]?>
-  <br/>
+  Gardien : <?=$lstCaractJ[$infJ["idGardien"]]["intituleCaracFR"]?> ( <?=$infJ["idGardien"]?> ) + <?=$infJ["nbSemaineGardien"]?> <br/>
   <?php } ?>
   <?php if($passe == 1) {?>
-  Passe : 
-  <?=$lstCaractJ[$infJ["idPasse"]]["intituleCaracFR"]?>
-  </i> ( 
-  <?=$infJ["idPasse"]?> 
-  ) + 
-  <?=$infJ["nbSemainePasses"]?>
-  <br/>
+  Passe : <?=$lstCaractJ[$infJ["idPasse"]]["intituleCaracFR"]?> ( <?=$infJ["idPasse"]?> ) + <?=$infJ["nbSemainePasses"]?> <br/>
   <?php } ?>
   <?php if($defense == 1) {?>
-  Defense : 
-  <?=$lstCaractJ[$infJ["idDefense"]]["intituleCaracFR"]?>
-  </i> ( 
-  <?=$infJ["idDefense"]?> 
-  ) + 
-  <?=$infJ["nbSemaineDefense"]?>
-  <br/>
+  Defense : <?=$lstCaractJ[$infJ["idDefense"]]["intituleCaracFR"]?> ( <?=$infJ["idDefense"]?> ) + <?=$infJ["nbSemaineDefense"]?> <br/>
   <?php } ?>
-  Coup de pied : 
-  <?=$lstCaractJ[$infJ["idPA"]]["intituleCaracFR"]?>
-  </i> ( 
-  <?=$infJ["idPA"]?> 
-  ) <br/>
-  
+  Coup de pied : <?=$lstCaractJ[$infJ["idPA"]]["intituleCaracFR"]?> ( <?=$infJ["idPA"]?> ) <br/>
   <br/>
   [u]Entrainement et commentaires[/u]: 
   <?php if(!isset($infJ["finFormation"]) || $infJ["finFormation"] == "") $infJ["finFormation"] = "Inconnu";?>
   <?=$infJ["finFormation"]?>
   <br/>
-  </span></p>
+  </span>
+  </p>
 <p>
 <p>
 <p>
 
 
-<A HREF=# style=\"text-decoration:none\" onClick=\"copy2Clipboard(document.getElementById('textespan'));return(false)\">Copier cette fiche dans le presse-papier en un click(sous Internet Explorer)</A>
+<A HREF=# style="text-decoration:none" onClick="copy2Clipboard(document.getElementById('textespan'));return(false)">Copier cette fiche dans le presse-papier en un click(sous Internet Explorer)</A>
 <!--// ajout du retour vers la fiche DTN du joueur par jojoje86 le 21/07/09-->
 <br><br>
-<A HREF=# style=\"text-decoration:none\" onClick="javascript:history.go(-1);">Retour</A>
+<A HREF=# style="text-decoration:none" onClick="javascript:history.go(-1);">Retour</A>
 </body>
 </html>
 

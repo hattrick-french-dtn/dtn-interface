@@ -171,7 +171,7 @@ function scanid()
 	<?php if (isset($infJs[$i]["surnomJoueur"])) { ?>
     a=a+' (<?=ucwords($infJs[$i]["surnomJoueur"])?>)';
 	<?php } ?>
-    a=a+' (<?=strtolower($infJs[$i]["idHattrickJoueur"])?>)';
+    a=a+' ([url=https://www.hattrick.org/goto.ashx?path=/Club/Players/Player.aspx?playerId=<?=strtolower($infJs[$i]["idHattrickJoueur"])?>]<?=strtolower($infJs[$i]["idHattrickJoueur"])?>[/url])';
     a=a+'[/b]'; 
   	a=a+' <?=$tabage[$i][0]?> ans et <?=$tabage[$i][1]?> jour';
   	if ('<?=$tabage[$i][1]?>'>1) a=a+'s';
