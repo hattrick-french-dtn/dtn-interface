@@ -2,6 +2,13 @@
 
 Repo for the Hattrick French Scout team applications
 
+## Version 2.2.6
+### Enhancement
++ fiche resume, append the link to hattrick player page
++ fiche forum
+    + append the link to hattrick player page 
+	+ add some decoration to ease selection of the text
+
 ## Version 2.2.5
 ### Enhancement
 + Fiche consultation, allow to display htms
