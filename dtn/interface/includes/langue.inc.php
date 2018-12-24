@@ -48,7 +48,9 @@ $option[2]["FR"] = "Rapide";
 $option[3]["FR"] = "Costaud";
 $option[4]["FR"] = "Imprevisible";
 $option[5]["FR"] = "Joueur_de_tete";
-$option[6]["FR"] = "Guerison acceleree";
+$option[6]["FR"] = "Resistant";
+$option[7]["FR"] = "";
+$option[8]["FR"] = "Chef d'orchestre";
 
 $specabbrevs[0] = "-";
 $specabbrevs[1] = "T";
@@ -56,6 +58,9 @@ $specabbrevs[2] = "R";
 $specabbrevs[3] = "C";
 $specabbrevs[4] = "I";
 $specabbrevs[5] = "J";
+$specabbrevs[6] = "";
+$specabbrevs[7] = "";
+$specabbrevs[8] = "S";
 
 $option[0]["UK"] = "None";
 $option[1]["UK"] = "Technical";
@@ -64,6 +69,8 @@ $option[3]["UK"] = "Powerful";
 $option[4]["UK"] = "Unpredictable";
 $option[5]["UK"] = "Head";
 $option[6]["UK"] = "Regainer";
+$option[7]["FR"] = "";
+$option[8]["FR"] = "Support";
 
 
 $clubInfo["FR"] = "informations";
