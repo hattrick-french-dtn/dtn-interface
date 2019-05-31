@@ -170,7 +170,7 @@ function insertDB ($table)
 	global $dbName;
 	if(!isset($nb))  $nb=0;
 
-	$dbName = "dtn_htfff";
+	$dbName = $_SERVER["DTNHTFFF_DATABASE"];
 
 	// Recuperation des champs qui concerne la table passe en argument.
 	$arg = func_get_arg (0);
