@@ -6,7 +6,7 @@ global $sesUser;
 // Initialisation des variables suivant environnement
 $cheminComplet = $monServeur."/dtn/interface/";
 $url = "https://".$_SERVER["HTTP_HOST"]."/dtn/interface"; 
-$db_c = "dtn_htfff";
+$db_c = $_SERVER["DTNHTFFF_DATABASE"];
 
 require($_SERVER["DOCUMENT_ROOT"]."/dtn/interface/includes/connect.inc.php");
 require($_SERVER["DOCUMENT_ROOT"]."/dtn/interface/includes/nomTables.inc.php");

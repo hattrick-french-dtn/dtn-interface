@@ -24,9 +24,9 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
 
-$headers ='from:htfffdtn@gmail.com'."\n";
+$headers ='from:'.$_SERVER["DTNHTFFF_EMAIL"]."\n";
 $headers .='Content-Type: text/html; charset="iso-8859-1"'."\n";
-$headers .='Content-Transfer-Encoding: 8bit'; 
+$headers .='Content-Transfer-Encoding: 8bit';
 $i=0;
 $erreur="Personne pour cet entrainement";
 $maBase = initBD();
@@ -39,14 +39,14 @@ if(!$sesUser["idAdmin"])
     header("location: ../index.php?ErrorMsg=Session_Expire");
     exit();
 }
-				 
+
 $AgeAnneeSQL=getCalculAgeAnneeSQL();
 $AgeJourSQL=getCalculAgeJourSQL();		
-		
+
 $sql = "select *,ht_joueurs.optionJoueur as specialite,ht_iiihelp_joueur.commentaire as comment,".$AgeAnneeSQL." as AgeAn,".$AgeJourSQL." as AgeJour from ht_iiihelp_joueur, ht_joueurs, ht_clubs, ht_pays where ht_iiihelp_joueur.id_dtn = ht_joueurs.idJoueur and ht_iiihelp_joueur.id_HT = $id_HT and ht_iiihelp_joueur.id_HT = ht_joueurs.idHattrickJoueur and ht_iiihelp_joueur.entrainement_souhaite = $training and ht_joueurs.teamid = ht_clubs.idClubHT and ht_pays.idPays=ht_clubs.idPays_fk";
-$req=  $conn->query($sql);
+$req =  $conn->query($sql);
 $res = $req->fetch();
- 
+
 $carac=get_Carac_byID($res['entrainement_souhaite']);
 
 $sql3 = "select intituleCaracFR from ht_caracteristiques where numCarac=".$res['idEndurance'];
@@ -71,19 +71,19 @@ $xp = $req3->fetch(PDO::FETCH_OBJ);
 
 $sql3 = "select intituleCaracFR from ht_caracteristiques where idCarac=".$res['idLeader_fk'];
 $req3 = $conn->query($sql3);
-$tdc = $req3->fetch(PDO::FETCH_OBJ);	
+$tdc = $req3->fetch(PDO::FETCH_OBJ);
 
 $sql3 = "select intituleCaracFR from ht_caracteristiques where idCarac=".$res['idGardien'];
 $req3 = $conn->query($sql3);
-$gb = $req3->fetch(PDO::FETCH_OBJ);		
+$gb = $req3->fetch(PDO::FETCH_OBJ);
 
 $sql3 = "select intituleCaracFR from ht_caracteristiques where idCarac=".$res['idDefense'];
 $req3 = $conn->query($sql3);
-$def = $req3->fetch(PDO::FETCH_OBJ);	
+$def = $req3->fetch(PDO::FETCH_OBJ);
 
 $sql3 = "select intituleCaracFR from ht_caracteristiques where idCarac=".$res['idConstruction'];
 $req3 = $conn->query($sql3);
-$const = $req3->fetch(PDO::FETCH_OBJ);				
+$const = $req3->fetch(PDO::FETCH_OBJ);
 
 $sql3 = "select intituleCaracFR from ht_caracteristiques where idCarac=".$res['idAilier'];
 $req3 = $conn->query($sql3);
@@ -112,7 +112,7 @@ if ($res['cat_age']=="17-20 ans")
 	$type_age="17-20 ans";
 }
 
-$messagemail = "Bonjour,<br><br> 
+$messagemail = "Bonjour,<br><br>
 
 Vous recevez ce message suite &agrave; votre inscription &agrave; iiihelp pour un entrainement <b>".$carac['nomTypeCarac']."</b> pour des joueurs de <b>".$type_age."</b>.<br><br>
 
@@ -172,13 +172,13 @@ $sql .= " AND ( (entrainement_voulu1 in (".$res['entrainement_souhaite'].",-1) A
 $sql .= "   OR  (entrainement_voulu2 in (".$res['entrainement_souhaite'].",-1) AND age_voulu2='Tous')";
 if ($res['cat_age']=="+21 ans")
 {
-  	$sql .= " OR (entrainement_voulu1 in (".$res['entrainement_souhaite'].",-1) AND age_voulu1='+21 ans')";
-  	$sql .= " OR (entrainement_voulu2 in (".$res['entrainement_souhaite'].",-1) AND age_voulu2='+21 ans')";
+ 	$sql .= " OR (entrainement_voulu1 in (".$res['entrainement_souhaite'].",-1) AND age_voulu1='+21 ans')";
+ 	$sql .= " OR (entrainement_voulu2 in (".$res['entrainement_souhaite'].",-1) AND age_voulu2='+21 ans')";
 }
 if ($res['cat_age']=="17-20 ans")
 {
-  	$sql .= " OR (entrainement_voulu1 in (".$res['entrainement_souhaite'].",-1) AND age_voulu1='17-20 ans')";
-  	$sql .= " OR (entrainement_voulu2 in (".$res['entrainement_souhaite'].",-1) AND age_voulu2='17-20 ans')";
+ 	$sql .= " OR (entrainement_voulu1 in (".$res['entrainement_souhaite'].",-1) AND age_voulu1='17-20 ans')";
+ 	$sql .= " OR (entrainement_voulu2 in (".$res['entrainement_souhaite'].",-1) AND age_voulu2='17-20 ans')";
 }
 $sql .= ") ORDER BY idClubHT";
 
@@ -186,8 +186,8 @@ $sql .= ") ORDER BY idClubHT";
 $erreur="good";
 foreach ($conn->query($sql) as $res2)
 {
-	$listmail = $res2['email']; 
-				
+	$listmail = $res2['email'];
+
 	$desinscription = "<br /><br /><br />Pour vous d&eacute;sincrire de iiihelp : <a href='".$_SERVER['HTTP_ORIGIN']."/desinscription_iiihelp.php?id=".$res2['id_iiihelp_repreneur']."'>Cliquez ici</a>";
 
 	$modifinscription = "<br />Pour modifier votre inscription iiihelp : <a href='".$_SERVER['HTTP_ORIGIN']."/fff_help.php'>Cliquez ici</a>";
@@ -201,15 +201,15 @@ foreach ($conn->query($sql) as $res2)
 	$mail->isSMTP();
 	$mail->Host = 'smtp.gmail.com';
 	$mail->SMTPAuth = true;
-	$mail->Username = 'htfffdtn@gmail.com';
-	$mail->Password = 'ht!fff_2k15';
+	$mail->Username = $_SERVER["DTNHTFFF_EMAIL"];
+	$mail->Password = $_SERVER["DTNHTFFF_PWD"];
 	$mail->SMTPSecure = 'tls';
 	$mail->Port = 587;
-	
+
 	//Recipients
-	$mail->setFrom('htfffdtn@gmail.com', 'Hattrick DTN France iihelp');
+	$mail->setFrom($_SERVER["DTNHTFFF_EMAIL"], 'Hattrick DTN France iihelp');
 	$mail->addAddress($listmail);     // Add a recipient
-	$mail->addReplyTo('htfffdtn@gmail.com', 'Hattrick DTN France iihelp');
+	$mail->addReplyTo($_SERVER["DTNHTFFF_EMAIL"], 'Hattrick DTN France iihelp');
 
 	//Content
 	$mail->isHTML(true);                                  // Set email format to HTML
@@ -256,7 +256,7 @@ else
 Erreur, <?=$erreur?>, pr&eacute;venir les DTN~<br>
 <?php }?>
 <A HREF=# style=\"text-decoration:none\" onClick="javascript:history.go(-2);">Retour</A>
-<?php 
+<?php
 // header("location:liste_joueur_iiihelp.php");
 exit();
 ?>
