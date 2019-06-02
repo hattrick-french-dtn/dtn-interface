@@ -69,7 +69,7 @@ if (isset($_SESSION['listID']) && !isset($_REQUEST['listID']) )  {
   </td>
   </tr>
   <tr>
-  <!-- Entête tableau pour l'ajout des joueurs sur le marché des transferts -->
+  <!-- EntÃªte tableau pour l'ajout des joueurs sur le marchÃ© des transferts -->
   <td height="20" class="EnteteContenu">
     Ajouter un ou plusieurs joueurs
   </td>
@@ -199,7 +199,7 @@ if (isset($_SESSION["HT"]) && isset($_REQUEST['listID']) ) {
           else {
               /*Si le joueur existe sur HT*/
               if ($joueurHT[$i]["NATIVELEAGUENAME"]!="France") {
-                /* Si le joueur est étranger*/
+                /* Si le joueur est Ã©tranger*/
                 $commentaireJ="est un joueur &eacute;tranger";
                 $lien="n/a";
               }
@@ -207,7 +207,7 @@ if (isset($_SESSION["HT"]) && isset($_REQUEST['listID']) ) {
                   /*Si le joueur existe sur HT et est en vente*/
                   $joueurDTN=getJoueurHt($joueurHT[$i]['idHattrickJoueur']);
                   if ($joueurDTN['idHattrickJoueur']==$joueurHT[$i]['idHattrickJoueur']) {
-                    /*si le joueur existe déja dans la base*/
+                    /*si le joueur existe dÃ©ja dans la base*/
                     $commentaireJ="existe d&eacute;j&agrave; dans la base";
                     $lien="<u><a href='fiche.php?htid=$arrayID[$i]' color='#0000FF' target='_NEW'>Voir</a></u>";
                   }
@@ -218,15 +218,6 @@ if (isset($_SESSION["HT"]) && isset($_REQUEST['listID']) ) {
                         $Nb=count($playerToAddManual);
                         $playerToAddManual[$Nb]=$joueurHT[$i];
                       }
-                      else {
-                        $todaySeason=getSeasonWeekOfMatch(mktime(0,0,0,date('m'), date('d'),date('Y')));
-                        $poste[$i]=validateMinimaPlayer($joueurHT[$i],$todaySeason);
-                        if ($poste[$i]==-2) {$poste[$i]=0;}
-                        if ($poste[$i]==-1) {
-                          /*si le joueur est en dessous des minimas*/
-                          $commentaireJ="est en-dessous des minimas";
-                          $lien="n/a";
-                        }
                         else{
                           $commentaireJ="Ins&eacute;r&eacute; dans la base DTN !!";
                           $lien="<u><a href='fiche.php?htid=$arrayID[$i]' color='#0000FF' target='_NEW'>Voir</a></u>";
@@ -238,10 +229,10 @@ if (isset($_SESSION["HT"]) && isset($_REQUEST['listID']) ) {
               }
           }
           if ($rejet==1) {
-            // Si joueur rejeté
+            // Si joueur rejetÃ©
             $FontColor="#FF0000";
           } else {
-            // Si joueur accepté
+            // Si joueur acceptÃ©
             $FontColor="#006600";
             $idJoueur=ajoutJoueur($_SESSION["sesUser"]["loginAdmin"],"D",$joueurHT[$i],$joueurDTN,$poste[$i]);
 			if ($idJoueur === FALSE) {
@@ -283,7 +274,7 @@ if (isset($_SESSION["HT"]) && isset($_REQUEST['listID']) ) {
 /*********************************************************/
 
 if (isset($playerToAddManual)) {
-  // Récupération des listes de valeurs de chaque carac (Emplacement des fonctions : includes/ServiceListesDiverses)
+  // RÃ©cupÃ©ration des listes de valeurs de chaque carac (Emplacement des fonctions : includes/ServiceListesDiverses)
   $lstAgg = listAggres();
   $lstCarac = listCaractere();
   $lstHon = listHonnetete();
@@ -292,28 +283,28 @@ if (isset($playerToAddManual)) {
   
   for($j=0;$j<count($playerToAddManual);$j++)
   {
-  // Récupération des données club sur HT
+  // RÃ©cupÃ©ration des donnÃ©es club sur HT
   $clubHT=getDataClubFromHT_usingPHT($playerToAddManual[$j]['teamid']);
 
-  // Agréabilité
+  // AgrÃ©abilitÃ©
   foreach($lstCarac as $l)
   {
    if ($playerToAddManual[$j]["idCaractere_fk"]==$l["numCaractere"]) $Player_agree=$l["numCaractere"]." - ".$l["intituleCaractereFR"]."|".$l["intituleCaractereUK"];
   }
 
-  // Expérience, Endurance
+  // ExpÃ©rience, Endurance
   for($i=0;$i<count($lstCaractJ);$i++)
   {
    if ($playerToAddManual[$j]["idExperience_fk"]==$lstCaractJ[$i]["numCarac"]) $Player_xp=$lstCaractJ[$i]["numCarac"]." - ".$lstCaractJ[$i]["intituleCaracFR"]."|".$lstCaractJ[$i]["intituleCaracUK"];
    if ($playerToAddManual[$j]["idEndurance"]==$lstCaractJ[$i]["numCarac"]) $Player_endurance=$lstCaractJ[$i]["numCarac"]." - ".$lstCaractJ[$i]["intituleCaracFR"]."|".$lstCaractJ[$i]["intituleCaracUK"];
   }
   
-  // Agressivité
+  // AgressivitÃ©
   foreach($lstAgg as $l){
    if ($playerToAddManual[$j]["idAggre_fk"]==$l["numAggres"]) $Player_aggress=$l["numAggres"]." - ".$l["intituleAggresFR"]."|".$l["intituleAggresUK"];
   }
   
-  // Tempérament de chef, Forme
+  // TempÃ©rament de chef, Forme
   foreach($lstLeader as $l)
   {
    if ($playerToAddManual[$j]["idLeader_fk"]==$l["numLeader"]) $Player_tdc=$l["numLeader"]." - ".$l["intituleLeaderFR"]."|".$l["intituleLeaderUK"];
@@ -326,7 +317,7 @@ if (isset($playerToAddManual)) {
    if ($playerToAddManual[$j]["idHonnetete_fk"]==$lstHon[$i]["numHonnetete"]) $Player_hon=$lstHon[$i]["numHonnetete"]." - ".$lstHon[$i]["intituleHonneteteFR"]."|".$lstHon[$i]["intituleHonneteteUK"];
   }
   
-  //Spécialité
+  //SpÃ©cialitÃ©
   for($i=0;$i<count($option);$i++){
    if ($playerToAddManual[$j]["optionJoueur"]==$i) $Player_speciality=$i." - ".$option[$i]["FR"]."|".$option[$i]["UK"];
   }
