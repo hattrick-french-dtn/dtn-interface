@@ -6,7 +6,7 @@ require_once("dtn/interface/includes/serviceJoueur.php");
 require_once "dtn/interface/_config/CstGlobals.php"; 
 
 
-ini_set('max_execution_time',360); // 360 secondes = 6 minutes -> ‡ la main on se met un timeout de 6 minutes
+ini_set('max_execution_time',360); // 360 secondes = 6 minutes -> √† la main on se met un timeout de 6 minutes
 error_reporting (E_ALL);
 
 
@@ -21,7 +21,7 @@ $_SESSION['commentaire'] = "";
 $_SESSION['idClubComment'] = "";
 $_SESSION['ajoutCommentaire'] = "";
 
-// Si le proprio a ajoutÈ un commentaire non null
+// Si le proprio a ajout√© un commentaire non null
 if ((isset($_POST['ht_comment']) && isset($_POST['idClubHT'])))  
 {
   $_SESSION['commentaire'] = $_POST['ht_comment'];
@@ -42,10 +42,10 @@ $scan_code=0;
 $userId = $_SESSION['HT']->getClub()->getUserId();
 $team = $_SESSION['HT']->getInternationalTeam($userId);
 if ($team != NULL) {
-	// RÈcupÈration de la liste des joueurs
+	// R√©cup√©ration de la liste des joueurs
 	$list_joueur_HT = getDataMesJoueursFromHT_usingPHT($team->getTeamId());
 	if ((isset($_SESSION['newVisit']) && $_SESSION['newVisit']==1))  
-	{ // On met ‡ jour les informations clubs et les informations joueurs 
+	{ // On met √† jour les informations clubs et les informations joueurs 
 		if ($list_joueur_HT==false) 
 		{
 			$scan_code=-1;
@@ -53,7 +53,7 @@ if ($team != NULL) {
 		}
 		else
 		{
-			// Insertion ou mise ‡ jour 
+			// Insertion ou mise √† jour 
 			if (count($list_joueur_HT)>0)
 			{
 				foreach($list_joueur_HT as $joueur)
@@ -61,19 +61,19 @@ if ($team != NULL) {
 					$listeID[]=$joueur["idHattrickJoueur"];
 				}
 				$listeID=array_unique($listeID); // Suppression des doublons
-				// Insertion ou mise ‡ jour des joueurs
+				// Insertion ou mise √† jour des joueurs
 				$resuScan=scanListeJoueurs($listeID, $_SESSION['nomUser'], 'P');
 				$scan_code=count($resuScan);
 			} 
 			else
 			{
-				$scan_code=-2; // pas de franÁais
+				$scan_code=-2; // pas de fran√ßais
 			}
 		}
 	} 
 	else 
 	{
-		// Scan des joueurs sans mise ‡ jour
+		// Scan des joueurs sans mise √† jour
 		$resuScan=scanListeJoueurs($listeID, $_SESSION['nomUser'], 'P', false, false);
 		$scan_code=count($resuScan);
 	}
@@ -83,10 +83,10 @@ if ($team != NULL) {
 $listeID = null;
 $team = $_SESSION['HT']->getSecondaryTeam($userId);
 if ($team != NULL) {
-	// RÈcupÈration de la liste des joueurs
+	// R√©cup√©ration de la liste des joueurs
 	$list_joueur_HT = getDataMesJoueursFromHT_usingPHT($team->getTeamId());
 	if ((isset($_SESSION['newVisit']) && $_SESSION['newVisit']==1))  
-	{ // On met ‡ jour les informations clubs et les informations joueurs 
+	{ // On met √† jour les informations clubs et les informations joueurs 
 		if ($list_joueur_HT==false) 
 		{
 			$scan_code=-1;
@@ -94,7 +94,7 @@ if ($team != NULL) {
 		}
 		else
 		{
-			// Insertion ou mise ‡ jour 
+			// Insertion ou mise √† jour 
 			if (count($list_joueur_HT)>0)
 			{
 				foreach($list_joueur_HT as $joueur)
@@ -102,19 +102,19 @@ if ($team != NULL) {
 					$listeID[]=$joueur["idHattrickJoueur"];
 				}
 				$listeID=array_unique($listeID); // Suppression des doublons
-				// Insertion ou mise ‡ jour des joueurs
+				// Insertion ou mise √† jour des joueurs
 				$resuScan=scanListeJoueurs($listeID, $_SESSION['nomUser'], 'P');
 				$scan_code=count($resuScan);
 			} 
 			else
 			{
-				$scan_code=-2; // pas de franÁais
+				$scan_code=-2; // pas de fran√ßais
 			}
 		}
 	} 
 	else 
 	{
-		// Scan des joueurs sans mise ‡ jour
+		// Scan des joueurs sans mise √† jour
 		$resuScan=scanListeJoueurs($listeID, $_SESSION['nomUser'], 'P', false, false);
 		$scan_code=count($resuScan);
 	}
@@ -124,10 +124,10 @@ if ($team != NULL) {
 $listeID = null;
 $team = $_SESSION['HT']->getPrimaryTeam($userId);
 if ($team != NULL) {
-	// RÈcupÈration de la liste des joueurs
+	// R√©cup√©ration de la liste des joueurs
 	$list_joueur_HT = getDataMesJoueursFromHT_usingPHT($team->getTeamId());
 	if ((isset($_SESSION['newVisit']) && $_SESSION['newVisit']==1))  
-	{ // On met ‡ jour les informations clubs et les informations joueurs 
+	{ // On met √† jour les informations clubs et les informations joueurs 
 		if ($list_joueur_HT==false) 
 		{
 			$scan_code=-1;
@@ -135,7 +135,7 @@ if ($team != NULL) {
 		}
 		else
 		{
-			// Insertion ou mise ‡ jour 
+			// Insertion ou mise √† jour 
 			if (count($list_joueur_HT)>0)
 			{
 				foreach($list_joueur_HT as $joueur)
@@ -143,19 +143,19 @@ if ($team != NULL) {
 					$listeID[]=$joueur["idHattrickJoueur"];
 				}
 				$listeID=array_unique($listeID); // Suppression des doublons
-				// Insertion ou mise ‡ jour des joueurs
+				// Insertion ou mise √† jour des joueurs
 				$resuScan=scanListeJoueurs($listeID, $_SESSION['nomUser'], 'P');
 				$scan_code=count($resuScan);
 			} 
 			else
 			{
-				$scan_code=-2; // pas de franÁais
+				$scan_code=-2; // pas de fran√ßais
 			}
 		}
 	} 
 	else 
 	{
-		// Scan des joueurs sans mise ‡ jour
+		// Scan des joueurs sans mise √† jour
 		$resuScan=scanListeJoueurs($listeID, $_SESSION['nomUser'], 'P', false, false);
 		$scan_code=count($resuScan);
 	}
@@ -211,11 +211,11 @@ foreach($teams as $te) {
 				}
 				if ($resuScan[$i]["poste"]<=0){
 					if ($_SESSION['lang']=="en"){
-					?>[This player does not satisfy our requirements.]<?php
+					?>[Scan OK.]<?php
 					}else if ($_SESSION['lang']=="de"){
 					?>[Dieser Spieler entspricht nicht unseren Anforderungen.]<?php
 					}else{
-					?>[Joueur en dessous de nos minimas.]<?php
+					?>[Le joueur a bien √©t√© scann√©.]<?php
 					}
 				}
 ?>
