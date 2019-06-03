@@ -218,15 +218,6 @@ if (isset($_SESSION["HT"]) && isset($_REQUEST['listID']) ) {
                         $Nb=count($playerToAddManual);
                         $playerToAddManual[$Nb]=$joueurHT[$i];
                       }
-                      else {
-                        $todaySeason=getSeasonWeekOfMatch(mktime(0,0,0,date('m'), date('d'),date('Y')));
-                        $poste[$i]=validateMinimaPlayer($joueurHT[$i],$todaySeason);
-                        if ($poste[$i]==-2) {$poste[$i]=0;}
-                        if ($poste[$i]==-1) {
-                          /*si le joueur est en dessous des minimas*/
-                          $commentaireJ="est en-dessous des minimas";
-                          $lien="n/a";
-                        }
                         else{
                           $commentaireJ="Ins&eacute;r&eacute; dans la base DTN !!";
                           $lien="<u><a href='fiche.php?htid=$arrayID[$i]' color='#0000FF' target='_NEW'>Voir</a></u>";
