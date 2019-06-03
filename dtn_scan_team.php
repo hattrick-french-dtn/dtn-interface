@@ -211,11 +211,11 @@ foreach($teams as $te) {
 				}
 				if ($resuScan[$i]["poste"]<=0){
 					if ($_SESSION['lang']=="en"){
-					?>[This player does not satisfy our requirements.]<?php
+					?>[Scan OK.]<?php
 					}else if ($_SESSION['lang']=="de"){
-					?>[Dieser Spieler entspricht nicht unseren Anforderungen.]<?php
+					?>[Scan OK.]<?php
 					}else{
-					?>[Joueur en dessous de nos minimas.]<?php
+					?>[Le joueur a bien été scanné.]<?php
 					}
 				}
 ?>
