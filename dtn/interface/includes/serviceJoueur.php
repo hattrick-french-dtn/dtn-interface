@@ -1,4 +1,5 @@
 <?php
+require($_SERVER['DOCUMENT_ROOT'].'/dtn/interface/includes/htmsPoint.php');
 if (!function_exists('serviceJoueur')) {
 function serviceJoueur() {
 	return 0;
@@ -237,12 +238,12 @@ function getJoueurHt($joueur_id)
 
 
 /******************************************************************************/
-/* Objet : Requête SQL pour obtenir liste des joueurs archivés                */
-/* Modifié le 12/11/2012 par Musta - Ajout paramètres limite                  */
+/* Objet : RequÃªte SQL pour obtenir liste des joueurs archivÃ©s                */
+/* ModifiÃ© le 12/11/2012 par Musta - Ajout paramÃ¨tres limite                  */
 /******************************************************************************/
-/* Sortie : $sql = Requête SQL                                                */
+/* Sortie : $sql = RequÃªte SQL                                                */
 /******************************************************************************/
-/* Appelé par les scripts :                                                   */
+/* AppelÃ© par les scripts :                                                   */
 /* - ./dtn/interface/includes/serviceJoueurs.php (fct getListeJoueursArchives)*/
 /******************************************************************************/
 function getListeJoueursArchivesSQL($limitDeb=null,$limitFin=null){
@@ -263,12 +264,12 @@ function getListeJoueursArchivesSQL($limitDeb=null,$limitFin=null){
 
 
 /******************************************************************************/
-/* Objet : Extraction de la liste des joueurs Archivés                        */
-/* Modifié le 12/11/2012 par Musta - Ajout paramètres limite                  */
+/* Objet : Extraction de la liste des joueurs ArchivÃ©s                        */
+/* ModifiÃ© le 12/11/2012 par Musta - Ajout paramÃ¨tres limite                  */
 /******************************************************************************/
-/* Sortie : $tabS = Tableau des joueurs archivés extrait de la base DTN       */
+/* Sortie : $tabS = Tableau des joueurs archivÃ©s extrait de la base DTN       */
 /******************************************************************************/
-/* Appelé par les scripts :                                                   */
+/* AppelÃ© par les scripts :                                                   */
 /* - ./dtn/interface/maj/majJoeursArchives.php                                */
 /******************************************************************************/
 function getListeJoueursArchives($limitDeb=null,$limitFin=null)
@@ -289,13 +290,13 @@ function getListeJoueursArchives($limitDeb=null,$limitFin=null)
 
 
 /******************************************************************************/
-/* Objet : Requête SQL pour obtenir liste des joueurs d'un DTN                */
-/* Modifié le 24/11/2011 par Musta56 - Création Fonction                      */
+/* Objet : RequÃªte SQL pour obtenir liste des joueurs d'un DTN                */
+/* ModifiÃ© le 24/11/2011 par Musta56 - CrÃ©ation Fonction                      */
 /******************************************************************************/
-/* Entrée : $id_dtn = Identifiant du dtn dans table ht_admin                  */
-/* Sortie : $sql = Requête SQL                                                */
+/* EntrÃ©e : $id_dtn = Identifiant du dtn dans table ht_admin                  */
+/* Sortie : $sql = RequÃªte SQL                                                */
 /******************************************************************************/
-/* Appelé par les scripts :                                                   */
+/* AppelÃ© par les scripts :                                                   */
 /* - ./dtn/interface/includes/serviceJoueur.php (fonction getJoueurByDTN)     */
 /******************************************************************************/
 function getJoueurByDTNSQL($id_dtn){
@@ -306,12 +307,12 @@ function getJoueurByDTNSQL($id_dtn){
 
 /******************************************************************************/
 /* Objet : Liste des joueurs d'un DTN                                         */
-/* Modifié le 24/11/2011 par Musta56 - Création Fonction                      */
+/* ModifiÃ© le 24/11/2011 par Musta56 - CrÃ©ation Fonction                      */
 /******************************************************************************/
-/* Entrée : $id_dtn = Identifiant du dtn dans table ht_admin                  */
-/* Sortie : $tabS = tableau résultat                                          */
+/* EntrÃ©e : $id_dtn = Identifiant du dtn dans table ht_admin                  */
+/* Sortie : $tabS = tableau rÃ©sultat                                          */
 /******************************************************************************/
-/* Appelé par les scripts :                                                   */
+/* AppelÃ© par les scripts :                                                   */
 /* - ./dtn/interface/joueurs/liste_suivi.php                                  */
 /******************************************************************************/
 function getJoueurByDTN($id_dtn)
@@ -331,14 +332,14 @@ function getJoueurByDTN($id_dtn)
 
 /******************************************************************************/
 /* Objet : Liste des joueurs d'un club                                        */
-/* Modifié le 05/05/2011 par Musta56 - Création Fonction                      */
-/* Modifié le 05/05/2011 par Musta56 - Ajout param $tous                      */
+/* ModifiÃ© le 05/05/2011 par Musta56 - CrÃ©ation Fonction                      */
+/* ModifiÃ© le 05/05/2011 par Musta56 - Ajout param $tous                      */
 /******************************************************************************/
-/* Entrée : $idClubHT = Identifiant Hattrick du club                          */
-/* Entrée : $tous = si false uniquement les non archivés si true alors tous   */
+/* EntrÃ©e : $idClubHT = Identifiant Hattrick du club                          */
+/* EntrÃ©e : $tous = si false uniquement les non archivÃ©s si true alors tous   */
 /* Sortie : $tabS = Tableau d'information joueurs, false si aucun joueur      */
 /******************************************************************************/
-/* Appelé par les scripts :                                                   */
+/* AppelÃ© par les scripts :                                                   */
 /*           - ./dtn_scan_team.php                                            */
 /******************************************************************************/
 function getJoueurs_by_idClubHT($idClubHT, $tous=false)
@@ -1048,16 +1049,16 @@ function checkCarac($player,$carac,$level){
 
 /******************************************************************************/
 /* Objet : Validation des minimas lors de la soumission externe d un joueur   */
-/* Modifié le 05/05/2011 par Musta56 - Utilisation de la fonction ageetjour   */
-/* Modifié le 11/12/2011 par Musta56 - Suppr. param maBase. modif exec requete*/
+/* ModifiÃ© le 05/05/2011 par Musta56 - Utilisation de la fonction ageetjour   */
+/* ModifiÃ© le 11/12/2011 par Musta56 - Suppr. param maBase. modif exec requete*/
 /******************************************************************************/
-/* Entrée : $player = données chpp joueur                                     */
-/* Entrée : $todaySeason = numéro saison et semaine (NE SERT PLUS)            */
-/* Sortie : $result = numéro du poste ou                                      
+/* EntrÃ©e : $player = donnÃ©es chpp joueur                                     */
+/* EntrÃ©e : $todaySeason = numÃ©ro saison et semaine (NE SERT PLUS)            */
+/* Sortie : $result = numÃ©ro du poste ou                                      
                       -1 en dessous des minimas ou 
-                      -2 (incohérence détectée ou 2 multicarac => aucun poste)*/
+                      -2 (incohÃ©rence dÃ©tectÃ©e ou 2 multicarac => aucun poste)*/
 /******************************************************************************/
-/* Appelé par les scripts :                                                   */
+/* AppelÃ© par les scripts :                                                   */
 /*           - ./dtn/interface/includes/serviceJoueur.php                     */
 /*           - ./dtn/interface/joueur/addPlayer.php                           */
 /*           - ./form.php cas ajoutJoueur                                     */
@@ -1067,50 +1068,30 @@ function validateMinimaPlayer($player,$todaySeason)
 	require($_SERVER['DOCUMENT_ROOT'].'/dtn/interface/includes/nomTables.inc.php');
 	global $conn;
 
-  $age=ageetjour($player["datenaiss"],"2");
-  $week = floor($age["jourJoueur"]/7);
-  
-  if ($age["ageJoueur"]<23){
-    $sql = "SELECT * FROM $tbl_requirements WHERE week = '$week' and age= '".$age["ageJoueur"]."' ";
-  }else {
-    $sql = "SELECT * FROM $tbl_requirements WHERE week = '15' and age= '22' ";
-  }
-  //echo("<br /> player=".$player['nomJoueur']."-".$age["ageJoueur"]." ans ".$age["jourJoueur"]." jours-".$sql);
-
-  $reqValid = $conn->query($sql);
-  
-  if (!$reqValid) {
-    return -1;
-  } else {
-    if($reqValid->rowCount() == 0){
-      //** ATTENTION! dans ce cas, les joueurs sont tous acceptes, soit la semaine n'est pas valide (>16 ou negative)
-      return -2;
-    } elseif ($reqValid->rowCount() > 0) {
-      $i=0;
-      while($i<$reqValid->rowCount()) {
-        $lstReq[$i] = $reqValid->fetch();
-        $i++;
-      }
-  	}
-    $reqValid=NULL;
-  }
-  
-  $result=-1;
-  for ($j=0;$j<count($lstReq);$j++){
-    $requirement=$lstReq[$j];
-    if (checkCarac(  $player,$requirement["carac_1"],$requirement["level_1"]) ){
-      if (checkCarac(  $player,$requirement["carac_2"],$requirement["level_2"])){
-        if($result==-1){
-          $result=$requirement["position_id"];
-        }else{
-          return -2; // 2 caracs sont bonnes pas de categorie.
-        }
-        
-      } 
-    }
-  }
-
-  return $result;
+	$ageetjours = ageetjour($player["datenaiss"]);
+	$tabage = explode(" - ",$ageetjours);
+	$htms = htmspoint($tabage[0], $tabage[1], $player["idGardien"], $player["idDefense"], $player["idConstruction"], $player["idAilier"], $player["idPasse"], $player["idButeur"], $player["idPA"]);
+	if ($tabage[0]<28) {
+		if (($player["idGardien"] >5 && $htms["potential"] >1750) || ($player["idGardien"] <5 && $htms["potential"] >1950)) {
+			$reqValid = true;
+		} else {
+			$reqValid = false;
+		}
+	} else {
+		if (($player["idGardien"] >5 && $htms["value"] >1800) || ($player["idGardien"] <5 && $htms["value"] >2000)) {
+			$reqValid = true;
+		} else {
+			$reqValid = false;
+		}
+	}  
+	if (!$reqValid) {
+		return -1;
+	} else {
+		//** ATTENTION! dans ce cas, les joueurs sont tous acceptes, soit la semaine n'est pas valide (>16 ou negative)
+		return -2;
+	}
+	
+	return $result;
 }
 
 
@@ -1164,15 +1145,15 @@ function majCaracJoueur($joueur){
 
 
 /******************************************************************************/
-/* Objet : Suppression des données d'un joueur                                */
-/* Modifié le 04/03/2011 par Musta56 - Ajout purge ht_clubs_histo_joueurs     */
-/* Modifié le 21/12/2011 par Musta56 - correction bug purge ht_joueurs_histo  */
+/* Objet : Suppression des donnÃ©es d'un joueur                                */
+/* ModifiÃ© le 04/03/2011 par Musta56 - Ajout purge ht_clubs_histo_joueurs     */
+/* ModifiÃ© le 21/12/2011 par Musta56 - correction bug purge ht_joueurs_histo  */
 /*           ht_perfs_individuelle + ht_clubs_histo_joueurs                   */
 /******************************************************************************/
-/* Entrée : $joueurDTN = tableau de type table ht_joueurs avec info joueur    */
+/* EntrÃ©e : $joueurDTN = tableau de type table ht_joueurs avec info joueur    */
 /* Sortie : rien                                                              */
 /******************************************************************************/
-/* Appelé par les scripts :                                                   */
+/* AppelÃ© par les scripts :                                                   */
 /*           - form.php                                                       */
 /******************************************************************************/
 function delJoueur($joueurDTN)
@@ -1219,12 +1200,12 @@ function delJoueur($joueurDTN)
 
 /********************************************************************************************/
 /* Objet : MAJ e la date de dernier scan d'un joueur                                        */
-/* Modifié le ??/??/???? par Musta56 - Création fonction                                    */
+/* ModifiÃ© le ??/??/???? par Musta56 - CrÃ©ation fonction                                    */
 /********************************************************************************************/
-/* Entrée : $idHTJoueur = identifiant hattrick du joueur                                    */
+/* EntrÃ©e : $idHTJoueur = identifiant hattrick du joueur                                    */
 /* Sortie : $idHTJoueur = identifiant ht joueur si ok sinon false                           */
 /********************************************************************************************/
-/* Appelé par les scripts :                                                                 */
+/* AppelÃ© par les scripts :                                                                 */
 /*           - dtn/interface/includes/serviceJoueur.php (fonction scanlisteJoueur)          */
 /********************************************************************************************/
 function updateDateScanMatchJoueur($idHTJoueur)
@@ -1246,17 +1227,17 @@ function updateDateScanMatchJoueur($idHTJoueur)
 }
 
 /********************************************************************************************/
-/* Objet : Récupération des données d'un joueur (fichier CHPP PlayerDetail)                 */
-/* Modifié le 15/06/2010 par Musta56 - Création fonction                                    */
-/* Modifié le 09/03/2011 par Musta56 - Si joueur joue un match alors on mets blessure null  */
-/* Modifié le 15/03/2011 par Musta56 - Utilisation de PHT                                   */
-/* Modifié le 12/10/2012 par Musta56 - Libération mémoire avec unset                        */
-/* Modifié le 12/10/2012 par Musta56 - Ajout IsAbroad                                       */
+/* Objet : RÃ©cupÃ©ration des donnÃ©es d'un joueur (fichier CHPP PlayerDetail)                 */
+/* ModifiÃ© le 15/06/2010 par Musta56 - CrÃ©ation fonction                                    */
+/* ModifiÃ© le 09/03/2011 par Musta56 - Si joueur joue un match alors on mets blessure null  */
+/* ModifiÃ© le 15/03/2011 par Musta56 - Utilisation de PHT                                   */
+/* ModifiÃ© le 12/10/2012 par Musta56 - LibÃ©ration mÃ©moire avec unset                        */
+/* ModifiÃ© le 12/10/2012 par Musta56 - Ajout IsAbroad                                       */
 /********************************************************************************************/
-/* Entrée : $idJoueurHT = identifiant hattrick du joueur                                    */
+/* EntrÃ©e : $idJoueurHT = identifiant hattrick du joueur                                    */
 /* Sortie : $row_joueur = tableau de type table ht_joueurs avec info joueur                 */
 /********************************************************************************************/
-/* Appelé par les scripts :                                                                 */
+/* AppelÃ© par les scripts :                                                                 */
 /*           - ./dtn/interface/maliste/miseajour.php                                        */
 /*           - ./dtn/interface/admin/majplayerDetails.php                                   */
 /*           - ./dtn_scan_team                                                              */
@@ -1270,14 +1251,14 @@ function getDataUnJoueurFromHT_usingPHT($idJoueurHT){
 
   try {
   
-    // On recherche dans la base dtn si le proprio du joueur nous a autoriser à utiliser son accès CHPP et si c'est accès est toujours valide, on l'utilisera
+    // On recherche dans la base dtn si le proprio du joueur nous a autoriser Ã  utiliser son accÃ¨s CHPP et si c'est accÃ¨s est toujours valide, on l'utilisera
     $ht_session=existAutorisationClub($_SESSION['HT']->getPlayer($idJoueurHT)->getTeamId());
     
     if ($ht_session == false && isset($_SESSION['HT'])) {
 		$ht_session = $_SESSION['HT'];
     }
 
-    // On récupére sur HT les informations du joueur
+    // On rÃ©cupÃ©re sur HT les informations du joueur
     $player = $ht_session->getPlayer($idJoueurHT);
     
     $row_joueur['idHattrickJoueur'] = $player->getId();
@@ -1333,12 +1314,12 @@ function getDataUnJoueurFromHT_usingPHT($idJoueurHT){
         $row_joueur['idDefense']        = $player->getDefender();
         $row_joueur['idPA']             = $player->getSetPieces();
     }
-    // informations non stockées en base mais utilisées par les scripts
+    // informations non stockÃ©es en base mais utilisÃ©es par les scripts
     $row_joueur['AGE']              = $player->getAge();
     $row_joueur['AGEDAYS']          = $player->getDays();
     $row_joueur['NATIVELEAGUENAME'] = $player->getNativeLeagueName();
 
-    // Libération de la mémoire
+    // LibÃ©ration de la mÃ©moire
     unset($ht_session);
     unset($player);
     unset($jouractuel);
@@ -1361,16 +1342,16 @@ function getDataUnJoueurFromHT_usingPHT($idJoueurHT){
 }
 
 /********************************************************************************************/
-/* Objet : Récup. des données des joueurs d'1 équipe (fichier CHPP Players)                 */
-/* Modifié le 15/06/2010 par Musta56 - Création fonction                                    */
-/* Modifié le 09/03/2011 par Musta56 - Si joueur joue un match alors on mets blessure null  */
-/* Modifié le 15/03/2011 par Musta56 - Utilisation de PHT                                   */
-/* Modifié le 12/10/2012 par Musta56 - Ajout IsAbroad                                       */
+/* Objet : RÃ©cup. des donnÃ©es des joueurs d'1 Ã©quipe (fichier CHPP Players)                 */
+/* ModifiÃ© le 15/06/2010 par Musta56 - CrÃ©ation fonction                                    */
+/* ModifiÃ© le 09/03/2011 par Musta56 - Si joueur joue un match alors on mets blessure null  */
+/* ModifiÃ© le 15/03/2011 par Musta56 - Utilisation de PHT                                   */
+/* ModifiÃ© le 12/10/2012 par Musta56 - Ajout IsAbroad                                       */
 /********************************************************************************************/
-/* Entrée : Rien                                                                            */
+/* EntrÃ©e : Rien                                                                            */
 /* Sortie : $row_joueur = tableau de type table ht_joueurs avec info joueurs                */
 /********************************************************************************************/
-/* Appelé par les scripts :                                                                 */
+/* AppelÃ© par les scripts :                                                                 */
 /*           - ./dtn_scan_team.php                                                          */
 /********************************************************************************************/
 function getDataMesJoueursFromHT_usingPHT($teamID){
@@ -1431,7 +1412,7 @@ function getDataMesJoueursFromHT_usingPHT($teamID){
         $row_joueur[$i]['idPA']             = $player->getSetPieces();
         $row_joueur[$i]['caracVisible']     = true;
         
-        // informations non stockées en base mais utilisées par les scripts
+        // informations non stockÃ©es en base mais utilisÃ©es par les scripts
         $row_joueur[$i]['AGE']      = $player->getAge();
         $row_joueur[$i]['AGEDAYS']  = $player->getDays();
         $row_joueur[$i]['nomUser']  = stripslashes(htmlspecialchars(utf8_decode(strtolower(str_replace("'"," ",$_SESSION['HT']->getTeam()->getLoginName())))));
@@ -1457,16 +1438,16 @@ function getDataMesJoueursFromHT_usingPHT($teamID){
 
 
 /******************************************************************************/
-/* Objet : Récup. des données des joueurs d'1 équipe nationnale (fichiers CHPP*/
+/* Objet : RÃ©cup. des donnÃ©es des joueurs d'1 Ã©quipe nationnale (fichiers CHPP*/
 /*         nationalplayers et PlayerDetail)                                   */
-/* Modifié le 30/05/2011 par Musta56 - Création fonction                      */
-/* Modifié le 19/12/2011 par Musta56 - On retourne juste un tableau des ids HT*/
-/*        des joueurs de la sélection                                         */
+/* ModifiÃ© le 30/05/2011 par Musta56 - CrÃ©ation fonction                      */
+/* ModifiÃ© le 19/12/2011 par Musta56 - On retourne juste un tableau des ids HT*/
+/*        des joueurs de la sÃ©lection                                         */
 /******************************************************************************/
-/* Entrée : $idNT = Identifiant de la NT                                      */
+/* EntrÃ©e : $idNT = Identifiant de la NT                                      */
 /* Sortie : $row_joueur = tableau de type table ht_joueurs avec id joueurs    */
 /******************************************************************************/
-/* Appelé par les scripts :                                                   */
+/* AppelÃ© par les scripts :                                                   */
 /*           - ./national_team/coach_dtn_submitting.php                       */
 /******************************************************************************/
 function getDataJoueursSelectionsFromHT_usingPHT($idNT){
@@ -1475,10 +1456,10 @@ function getDataJoueursSelectionsFromHT_usingPHT($idNT){
 
   try {
 
-    // On récupère sur HT les joueurs en NT
+    // On rÃ©cupÃ¨re sur HT les joueurs en NT
     $players = $_SESSION['HT']->getNationalPlayers($idNT);
     
-    // On libère l'espace mémoire
+    // On libÃ¨re l'espace mÃ©moire
     $_SESSION['HT']->clearNationalPlayers($idNT);
 
     for ($i=1;$i<=$players->getNumberPlayers();$i++) {
@@ -1498,19 +1479,19 @@ function getDataJoueursSelectionsFromHT_usingPHT($idNT){
 
 /******************************************************************************/
 /* Objet : Ajout d'un joueur                                                  */
-/* Modifié le 17/06/2010 par Musta56 - Création fonction                      */
-/* Modifié le 22/11/2011 par Musta56 - utilisation majClub et param majClub   */
-/* Modifié le 10/12/2011 par Musta56 - suppression appel majClub, param maBase*/
+/* ModifiÃ© le 17/06/2010 par Musta56 - CrÃ©ation fonction                      */
+/* ModifiÃ© le 22/11/2011 par Musta56 - utilisation majClub et param majClub   */
+/* ModifiÃ© le 10/12/2011 par Musta56 - suppression appel majClub, param maBase*/
 /*         Ajout param joueurDTN                                              */
 /******************************************************************************/
-/* Entrée : $maBase = instance d'objet de connexion à la base dtn             */
-/* Entrée : $ht_user = nom du manager (DTN ou proprio) connecté               */
-/* Entrée : $role_user = role du manager connecté : DTN (D) ou proprio (P)    */
-/* Entrée : $joueurHT = tableau joueur                                        */
-/* Entrée : $majClub = maj Club ? (1 oui)                                     */
+/* EntrÃ©e : $maBase = instance d'objet de connexion Ã  la base dtn             */
+/* EntrÃ©e : $ht_user = nom du manager (DTN ou proprio) connectÃ©               */
+/* EntrÃ©e : $role_user = role du manager connectÃ© : DTN (D) ou proprio (P)    */
+/* EntrÃ©e : $joueurHT = tableau joueur                                        */
+/* EntrÃ©e : $majClub = maj Club ? (1 oui)                                     */
 /* Sortie : $posteAssigne = Poste d'assignation du joueur                     */
 /******************************************************************************/
-/* Appelé par les scripts :                                                   */
+/* AppelÃ© par les scripts :                                                   */
 /* - .dtn/interface/form.php (case ajoutJoueur)                               */
 /* - ./dtn/interface/includes/serviceJoueur.php (fonction scanListeJoueurs)   */
 /* - ..\joueurs\addPlayer.php                                                 */
@@ -1527,11 +1508,11 @@ function ajoutJoueur($ht_user,$role_user,$joueurHT,$joueurDTN,$posteAssigne) {
 	else {$lib_role='???';}
 
 	if ($joueurDTN['idHattrickJoueur']==$joueurHT['idHattrickJoueur']) {
-		// le joueur existe dans la base DTN => on le met à jour
+		// le joueur existe dans la base DTN => on le met Ã  jour
 		return majJoueur($ht_user,$role_user,$joueurHT,$joueurDTN);
 	} elseif (!$joueurDTN) {
     //******* INSERT dans la table HT_JOUEURS *******//
-    // le joueur n'existe pas dans la base DTN => on l'insère
+    // le joueur n'existe pas dans la base DTN => on l'insÃ¨re
     
     // Tableau pour calcul des notes
     $joueurNote["idEndurance"] = $joueurHT["idEndurance"] ;
@@ -1721,7 +1702,7 @@ function ajoutJoueur($ht_user,$role_user,$joueurHT,$joueurDTN,$posteAssigne) {
     
     
     //******* INSERT dans la table HT_JOUEURS_HISTO *******//
-    // Numéro de saison et semaine à la date du jour
+    // NumÃ©ro de saison et semaine Ã  la date du jour
     $actualSeason=getSeasonWeekOfMatch(mktime(date('H'),date('i'),date('s'),date('m'),date('d'),date('Y')));
     $existHJ = existHistoJoueur($joueurHT["idHattrickJoueur"],$actualSeason["season"],$actualSeason["week"]);
 
@@ -1729,7 +1710,7 @@ function ajoutJoueur($ht_user,$role_user,$joueurHT,$joueurDTN,$posteAssigne) {
       $resu['joueurs_histo']=$update_joueurs_histo=getDataJoueurHisto($joueurHT,$actualSeason);
       $resu['joueurs_histo']['id_joueur_histo'] = insertJoueurHisto($update_joueurs_histo);
     } else {
-      //Sinon, on remet à jour uniquement si le joueur est en vente
+      //Sinon, on remet Ã  jour uniquement si le joueur est en vente
       if (($existHJ['transferListed']==0) && ($joueurHT['transferListed']==1)) {
           $update_joueurs_histo['transferListed']=$joueurHT['transferListed'];
           $update_joueurs_histo['id_joueur_histo']=$existHJ['id_joueur_histo'];
@@ -1750,14 +1731,14 @@ function ajoutJoueur($ht_user,$role_user,$joueurHT,$joueurDTN,$posteAssigne) {
 
 
 /******************************************************************************/
-/* Objet : Update d'un joueur dans la base de données dtn                     */
-/* Modifié le 17/06/2010 par Musta56 - Création fonction                      */
+/* Objet : Update d'un joueur dans la base de donnÃ©es dtn                     */
+/* ModifiÃ© le 17/06/2010 par Musta56 - CrÃ©ation fonction                      */
 /******************************************************************************/
-/* Entrée : $joueur = tableau joueur (uniquement les données à mettre à jour) */
+/* EntrÃ©e : $joueur = tableau joueur (uniquement les donnÃ©es Ã  mettre Ã  jour) */
 /* Sortie : $joueur["idJoueur"] = identifiant du joueur dans bdd dtn          */
-/*          ou false = si échec de l'update                                   */
+/*          ou false = si Ã©chec de l'update                                   */
 /******************************************************************************/
-/* Appelé par les scripts :                                                   */
+/* AppelÃ© par les scripts :                                                   */
 /*           - ./dtn/interface/includes/serviceJoueur.php                     */
 /******************************************************************************/
 function updateJoueur($joueur) {
@@ -1830,14 +1811,14 @@ function updateJoueur($joueur) {
 
 
 /******************************************************************************/
-/* Objet : Update de l'entrainement d'un joueur dans la base de données dtn   */
-/* Modifié le 05/11/2010 par Musta56 - Création fonction                      */
+/* Objet : Update de l'entrainement d'un joueur dans la base de donnÃ©es dtn   */
+/* ModifiÃ© le 05/11/2010 par Musta56 - CrÃ©ation fonction                      */
 /******************************************************************************/
-/* Entrée : $entrainement = tableau entrainement(uniquement les données à maj)*/
+/* EntrÃ©e : $entrainement = tableau entrainement(uniquement les donnÃ©es Ã  maj)*/
 /* Sortie : $entrainement["idEntrainement"] = ident entrainement dans bdd dtn */
-/*          ou false = si échec de l'update                                   */
+/*          ou false = si Ã©chec de l'update                                   */
 /******************************************************************************/
-/* Appelé par les scripts :                                                   */
+/* AppelÃ© par les scripts :                                                   */
 /*           - ./dtn/interface/includes/serviceJoueur.php                     */
 /******************************************************************************/
 function updateEntrainement($entrainement) {
@@ -1869,23 +1850,23 @@ function updateEntrainement($entrainement) {
 
 
 /******************************************************************************/
-/* Objet : Mise à jour d'un joueur                                            */
-/* Modifié le 17/06/2010 par Musta56 - Création fonction                      */
-/* Modifié le 04/03/2011 par Musta56 - Ajout booleen est_maj en sortie        */
-/* Modifié le 13/05/2011 par Musta56 - Suppression affichage du prénom        */
-/* Modifié le 22/11/2011 par Musta56 - Utilisation majClub et suppression     */
-/*                                     paramètre $clubHT                      */
-/* Modifié le 22/11/2011 par Musta56 - Suppression appel majClub              */
-/* Modifié le 10/12/2011 par Musta56 - Suppression param maBase et ajout param*/
+/* Objet : Mise Ã  jour d'un joueur                                            */
+/* ModifiÃ© le 17/06/2010 par Musta56 - CrÃ©ation fonction                      */
+/* ModifiÃ© le 04/03/2011 par Musta56 - Ajout booleen est_maj en sortie        */
+/* ModifiÃ© le 13/05/2011 par Musta56 - Suppression affichage du prÃ©nom        */
+/* ModifiÃ© le 22/11/2011 par Musta56 - Utilisation majClub et suppression     */
+/*                                     paramÃ¨tre $clubHT                      */
+/* ModifiÃ© le 22/11/2011 par Musta56 - Suppression appel majClub              */
+/* ModifiÃ© le 10/12/2011 par Musta56 - Suppression param maBase et ajout param*/
 /*         joueurDTN                                                          */
 /******************************************************************************/
-/* Entrée : $ht_user = nom du manager (DTN ou proprio) connecté               */
-/* Entrée : $role_user = role du manager connecté : DTN (D) ou proprio (P)    */
-/* Entrée : $joueurHT = tableau joueur (données provenant de HT)              */
-/* Entrée : $joueurDTN = tableau joueur (données provenant de DTN)            */
+/* EntrÃ©e : $ht_user = nom du manager (DTN ou proprio) connectÃ©               */
+/* EntrÃ©e : $role_user = role du manager connectÃ© : DTN (D) ou proprio (P)    */
+/* EntrÃ©e : $joueurHT = tableau joueur (donnÃ©es provenant de HT)              */
+/* EntrÃ©e : $joueurDTN = tableau joueur (donnÃ©es provenant de DTN)            */
 /* Sortie : $posteAssigne = Poste d'assignation du joueur                     */
 /******************************************************************************/
-/* Appelé par les scripts :                                                   */
+/* AppelÃ© par les scripts :                                                   */
 /* - ./dtn/interface/includes/serviceJoueur.php (fonction scanListeJoueurs)   */
 /* - ..\maj\majJoueursArchives.php                                            */
 /******************************************************************************/
@@ -1911,7 +1892,7 @@ function majJoueur($ht_user,$role_user,$joueurHT,$joueurDTN){
 		// le joueur n'existe pas dans la base dtn
 		return false;
 	} else {
-		// le joueur existe dans la base DTN => on le met à jour
+		// le joueur existe dans la base DTN => on le met Ã  jour
   
 		// Appel script externes
 		include_once($_SERVER['DOCUMENT_ROOT'].'/dtn/interface/CHPP/config.php');
@@ -2145,12 +2126,12 @@ function majJoueur($ht_user,$role_user,$joueurHT,$joueurDTN){
 			}
 
 			//******* BLESSE ?? *******//
-			// Peut ne pas être défini si le joueur joue un match
+			// Peut ne pas Ãªtre dÃ©fini si le joueur joue un match
 			if (isset($joueurHT['blessure']) && $joueurHT['blessure']!=-1 && $joueurHT['blessure']!=null){
 				$resMAJ['HTML'].='<font color=red><b>Joueur bless&eacute;(+'.$joueurHT['blessure'].')!</b></font><br>';
 			}
 		  
-			//*** Si carac du joueur mis à jour alors on recalcul les notes ***//  
+			//*** Si carac du joueur mis Ã  jour alors on recalcul les notes ***//  
 			if ($recalcul_note) {
 				  
 				if (isset($joueurHT["idEndurance"]))    {$joueurNote["idEndurance"]    = $joueurHT["idEndurance"] ;}    else {$joueurNote["idEndurance"]    = $joueurDTN["idEndurance"] ;}
@@ -2183,7 +2164,7 @@ function majJoueur($ht_user,$role_user,$joueurHT,$joueurDTN){
 				$maj = majCaracJoueur($joueurNote);
 			}
 
-			//*** Si entrainement mis à jour ***//
+			//*** Si entrainement mis Ã  jour ***//
 			if (isset($update_joueur_entrainement)) {
 				$update_joueur_entrainement['idJoueur_fk']=$joueurDTN["idJoueur"];
 				$update_joueur_entrainement['idJoueur_fk_updated']=updateEntrainement($update_joueur_entrainement);
@@ -2219,7 +2200,7 @@ function majJoueur($ht_user,$role_user,$joueurHT,$joueurDTN){
     unset($update_joueur);
 
     //******* INSERT dans la table HT_JOUEURS_HISTO *******//
-    // Numéro de saison et semaine à la date du jour
+    // NumÃ©ro de saison et semaine Ã  la date du jour
     $actualSeason=getSeasonWeekOfMatch(mktime(date('H'),date('i'),date('s'),date('m'),date('d'),date('Y')));
     $existHJ = existHistoJoueur($joueurDTN["idHattrickJoueur"],$actualSeason["season"],$actualSeason["week"]);
 
@@ -2228,7 +2209,7 @@ function majJoueur($ht_user,$role_user,$joueurHT,$joueurDTN){
 		$resMAJ['joueurs_histo']['id_joueur_histo'] = insertJoueurHisto($update_joueurs_histo);
     } else {
       //echo("<br />nom=".$joueurDTN["nomJoueur"]."|old=".$existHJ[0]['transferListed']."|new=".$joueurHT['transferListed']);
-      //Sinon, on remet à jour uniquement si le joueur est en vente
+      //Sinon, on remet Ã  jour uniquement si le joueur est en vente
 		if (($existHJ['transferListed']==0) && ($joueurHT['transferListed']==1)) {
 			$resMAJ["transferListed"]=$update_joueurs_histo["transferListed"]=$joueurHT["transferListed"];
 			$update_joueurs_histo['id_joueur_histo']=$existHJ['id_joueur_histo'];
@@ -2272,17 +2253,17 @@ function majJoueur($ht_user,$role_user,$joueurHT,$joueurDTN){
 
 
 /******************************************************************************/
-/* Objet : Récupération des données joueur historique                         */
-/* Modifié le 24/06/2010 par Musta56 - Création fonction                      */
-/* Modifié le 10/12/2011 par Musta56 - Suppression param maBase               */
-/* Modifié le 12/10/2012 par Musta56 - ajout unset + isAbroad                 */
+/* Objet : RÃ©cupÃ©ration des donnÃ©es joueur historique                         */
+/* ModifiÃ© le 24/06/2010 par Musta56 - CrÃ©ation fonction                      */
+/* ModifiÃ© le 10/12/2011 par Musta56 - Suppression param maBase               */
+/* ModifiÃ© le 12/10/2012 par Musta56 - ajout unset + isAbroad                 */
 /******************************************************************************/
-/* Entrée : $clubHT = Données club provenant de HT                            */
-/* Entrée : $joueurHT = Données joueur provenant de HT                        */
-/* Entrée : $actualSeason (facultatif) = Numéro de saison et semaine actuelle */
-/* Sortie : $data_joueurs_histo = tableau de données Joueur Historique        */
+/* EntrÃ©e : $clubHT = DonnÃ©es club provenant de HT                            */
+/* EntrÃ©e : $joueurHT = DonnÃ©es joueur provenant de HT                        */
+/* EntrÃ©e : $actualSeason (facultatif) = NumÃ©ro de saison et semaine actuelle */
+/* Sortie : $data_joueurs_histo = tableau de donnÃ©es Joueur Historique        */
 /******************************************************************************/
-/* Appelé par les scripts :                                                   */
+/* AppelÃ© par les scripts :                                                   */
 /*           - ./dtn/interface/includes/serviceJoueur.php                     */
 /******************************************************************************/
 function getDataJoueurHisto($joueurHT,$actualSeason=null) {
@@ -2291,7 +2272,7 @@ function getDataJoueurHisto($joueurHT,$actualSeason=null) {
 	require($_SERVER['DOCUMENT_ROOT'].'/dtn/interface/includes/nomTables.inc.php');
 	$coef=1;
 	if (isset($joueurHT['teamid'])) {
-		// Coefficient à utiliser pour le calcul du salaire hors charges
+		// Coefficient Ã  utiliser pour le calcul du salaire hors charges
 		$sql="SELECT 
               P.coefSalary as coefSalary
           FROM 
@@ -2342,15 +2323,15 @@ function getDataJoueurHisto($joueurHT,$actualSeason=null) {
 }
 
 /******************************************************************************/
-/* Objet : Update d'un historique joueur dans la base de données dtn          */
-/* Modifié le 17/06/2010 par Musta56 - Création fonction                      */
+/* Objet : Update d'un historique joueur dans la base de donnÃ©es dtn          */
+/* ModifiÃ© le 17/06/2010 par Musta56 - CrÃ©ation fonction                      */
 /******************************************************************************/
-/* Entrée : $row_joueurs_histo=tableau historique joueur (uniquement les      */
-/*                            données à mettre à jour)                        */
+/* EntrÃ©e : $row_joueurs_histo=tableau historique joueur (uniquement les      */
+/*                            donnÃ©es Ã  mettre Ã  jour)                        */
 /* Sortie : $row_joueurs_histo["id_joueur_histo"]=id joueur histo dans bdd dtn*/
-/*          ou false = si échec de l'update                                   */
+/*          ou false = si Ã©chec de l'update                                   */
 /******************************************************************************/
-/* Appelé par les scripts :                                                   */
+/* AppelÃ© par les scripts :                                                   */
 /*           - ./dtn/interface/includes/serviceJoueur.php                     */
 /******************************************************************************/
 function updateJoueurHisto($row_joueurs_histo) {
@@ -2386,14 +2367,14 @@ function updateJoueurHisto($row_joueurs_histo) {
 
 
 /******************************************************************************/
-/* Objet : Insertion d'un historique joueur dans la base de données dtn       */
-/* Modifié le 24/06/2010 par Musta56 - Création fonction                      */
+/* Objet : Insertion d'un historique joueur dans la base de donnÃ©es dtn       */
+/* ModifiÃ© le 24/06/2010 par Musta56 - CrÃ©ation fonction                      */
 /******************************************************************************/
-/* Entrée : $row_joueurs_histo=tableau historique joueur                      */
+/* EntrÃ©e : $row_joueurs_histo=tableau historique joueur                      */
 /* Sortie : $row_joueurs_histo["id_joueur_histo"]=id joueur histo dans bdd dtn*/
-/*          ou false = si échec de l'insert                                   */
+/*          ou false = si Ã©chec de l'insert                                   */
 /******************************************************************************/
-/* Appelé par les scripts :                                                   */
+/* AppelÃ© par les scripts :                                                   */
 /*           - ./dtn/interface/includes/serviceJoueur.php                     */
 /******************************************************************************/
 function insertJoueurHisto($row_joueurs_histo){
@@ -2445,16 +2426,16 @@ function insertJoueurHisto($row_joueurs_histo){
 
 
 /******************************************************************************/
-/* Objet : Existence d'un historique joueur dans la base de données dtn       */
-/* Modifié le ??/??/???? par Musta56 - Création fonction                      */
-/* Modifié le 10/12/2011 par Musta56 - Suppresion param maBase                */
+/* Objet : Existence d'un historique joueur dans la base de donnÃ©es dtn       */
+/* ModifiÃ© le ??/??/???? par Musta56 - CrÃ©ation fonction                      */
+/* ModifiÃ© le 10/12/2011 par Musta56 - Suppresion param maBase                */
 /******************************************************************************/
-/* Entrée : $idHTjoueur = identifiant hattrick du joueur                      */
-/* Entrée : $season = Numéro de saison                                        */
-/* Entrée : $week = Numéro de semaine                                         */
-/* Sortie : $result = résultat de la requete ou false si aucun résultat       */
+/* EntrÃ©e : $idHTjoueur = identifiant hattrick du joueur                      */
+/* EntrÃ©e : $season = NumÃ©ro de saison                                        */
+/* EntrÃ©e : $week = NumÃ©ro de semaine                                         */
+/* Sortie : $result = rÃ©sultat de la requete ou false si aucun rÃ©sultat       */
 /******************************************************************************/
-/* Appelé par les scripts :                                                   */
+/* AppelÃ© par les scripts :                                                   */
 /*           - ./includes/serviceJoueur.php                                   */
 /******************************************************************************/
 function existHistoJoueur($idHTjoueur,$season,$week){
@@ -2480,13 +2461,13 @@ function existHistoJoueur($idHTjoueur,$season,$week){
 
 /******************************************************************************/
 /* Objet : Marquer un joueur comme disparu de HT                              */
-/* Modifié le 09/03/2011 par Musta56 - Création fonction                      */
-/* Modifié le 12/11/2012 par Musta56 - Ajout d'une ligne dans histo_modif     */
+/* ModifiÃ© le 09/03/2011 par Musta56 - CrÃ©ation fonction                      */
+/* ModifiÃ© le 12/11/2012 par Musta56 - Ajout d'une ligne dans histo_modif     */
 /******************************************************************************/
-/* Entrée : $joueurDTN = tableau joueur (données provenant de DTN)            */
+/* EntrÃ©e : $joueurDTN = tableau joueur (donnÃ©es provenant de DTN)            */
 /* Sortie : $posteAssigne = Poste d'assignation du joueur                     */
 /******************************************************************************/
-/* Appelé par les scripts :                                                   */
+/* AppelÃ© par les scripts :                                                   */
 /* - dtn/interface/includes/serviceJoueurs.php (getDataUnJoueurFromHT_usingPHT*/
 /******************************************************************************/
 function marqueJoueurDisparuHT($joueurDTN){
@@ -2521,21 +2502,21 @@ function marqueJoueurDisparuHT($joueurDTN){
 }
 
 /******************************************************************************/
-/* Objet : Scan un ensemble de joueurs - insertion ou maj des joueurs français*/
-/* Modifié le 18/03/2010 par Musta56 - Récupération % endu, intensité, ... etc*/
-/* Modifié le 15/03/2011 par Musta56 - Déplacé dans serviceJoueurs            */
-/* Modifié le 05/05/2011 par Musta56 - Ajout paramètre faire MAJ              */
-/* Modifié le 10/12/2011 par Musta56 - Script générique car devient point     */
-/*         entrée unique pour maj joueur - Suppression paramètre $maBase      */
+/* Objet : Scan un ensemble de joueurs - insertion ou maj des joueurs franÃ§ais*/
+/* ModifiÃ© le 18/03/2010 par Musta56 - RÃ©cupÃ©ration % endu, intensitÃ©, ... etc*/
+/* ModifiÃ© le 15/03/2011 par Musta56 - DÃ©placÃ© dans serviceJoueurs            */
+/* ModifiÃ© le 05/05/2011 par Musta56 - Ajout paramÃ¨tre faire MAJ              */
+/* ModifiÃ© le 10/12/2011 par Musta56 - Script gÃ©nÃ©rique car devient point     */
+/*         entrÃ©e unique pour maj joueur - Suppression paramÃ¨tre $maBase      */
 /******************************************************************************/
-/* Entrée : - $listeIDJoueur = tableau avec liste identifiant joueur Hattrick */
-/*          - $utilisateur = user HT connecté                                 */
-/*          - $role = role du user connecté : proprietaire(P), DTN (D)        */
-/*          - $faireMAJ = booleen indiquant si une maj des joueurs doit être  */
-/*                        faite dans la base de données DTN                   */
-/* Sortie : - $resuJ = tableau des joueurs insérés ou maj                     */
+/* EntrÃ©e : - $listeIDJoueur = tableau avec liste identifiant joueur Hattrick */
+/*          - $utilisateur = user HT connectÃ©                                 */
+/*          - $role = role du user connectÃ© : proprietaire(P), DTN (D)        */
+/*          - $faireMAJ = booleen indiquant si une maj des joueurs doit Ãªtre  */
+/*                        faite dans la base de donnÃ©es DTN                   */
+/* Sortie : - $resuJ = tableau des joueurs insÃ©rÃ©s ou maj                     */
 /******************************************************************************/
-/* Appelé par les scripts :                                                   */
+/* AppelÃ© par les scripts :                                                   */
 /*           - ./natianal_team/coach_dtn_submitting.php                       */
 /*           - ./dtn_scan_team.php                                            */
 /*           - ./dtn/interface/maliste/miseajour.php                          */
@@ -2555,7 +2536,7 @@ function scanListeJoueurs($listeIDJoueur,$utilisateur,$role,$faireMAJ=true,$char
 		if ($faireMAJ==false) {
 
 			if ($joueurDTN != false) { // joueur existe dans base DTN
-				$resuJ[$j]['poste']=validateMinimaPlayer($joueurDTN,$todaySeason); // Est-ce que le joueur vérifie les minimas ?
+				$resuJ[$j]['poste']=validateMinimaPlayer($joueurDTN,$todaySeason); // Est-ce que le joueur vÃ©rifie les minimas ?
 				$resuJ[$j]['idJoueur']=$joueurDTN['idJoueur'];
 			}
       
@@ -2563,18 +2544,18 @@ function scanListeJoueurs($listeIDJoueur,$utilisateur,$role,$faireMAJ=true,$char
 			$joueurHT=getDataUnJoueurFromHT_usingPHT($IDJoueur);
 			if ($joueurHT != false) {
 				if ($joueurHT['caracVisible']==true) {
-					$poste=validateMinimaPlayer($joueurHT,$todaySeason); // Est-ce que le joueur vérifie les minimas ?
+					$poste=validateMinimaPlayer($joueurHT,$todaySeason); // Est-ce que le joueur vÃ©rifie les minimas ?
 				} else {
-					$poste=-2; // Tous les joueurs sont acceptés si on ne connait pas les caracs. Ne devrait arriver que lors d'une soumission par un dtn
+					$poste=-2; // Tous les joueurs sont acceptÃ©s si on ne connait pas les caracs. Ne devrait arriver que lors d'une soumission par un dtn
 				}
 
 				if ($joueurDTN != false) { // joueur existe dans base DTN
-					$resuJ[$j]=majJoueur($utilisateur,$role,$joueurHT,$joueurDTN); // Joueur mis à jour si déjà existant en base. Sinon, on ne fait rien. 
+					$resuJ[$j]=majJoueur($utilisateur,$role,$joueurHT,$joueurDTN); // Joueur mis Ã  jour si dÃ©jÃ  existant en base. Sinon, on ne fait rien. 
 
 				} else { /* Joueur inexistant dans base DTN */
 					$trouveDTN=false;
         
-					if ($poste == -2){ // multi ou incohérence détectée => aucun poste assigné
+					if ($poste == -2){ // multi ou incohÃ©rence dÃ©tectÃ©e => aucun poste assignÃ©
 						$resuJ[$j]=ajoutJoueur($utilisateur,$role,$joueurHT,$joueurDTN,0);
 					} elseif ($poste != -1) {
 						$resuJ[$j]=ajoutJoueur($utilisateur,$role,$joueurHT,$joueurDTN,$poste);
@@ -2583,13 +2564,13 @@ function scanListeJoueurs($listeIDJoueur,$utilisateur,$role,$faireMAJ=true,$char
         
 				$resuJ[$j]['poste']=$poste;
       
-			} else { // Joueur inexistant sur HT ou connexion plantée
+			} else { // Joueur inexistant sur HT ou connexion plantÃ©e
 				$trouveHT=false;
 				$resuJ[$j]['HTML']='<tr><td colspan=10><br /><font color=orange>Joueur introuvable ou connexion ht termin&eacute;e : '.$IDJoueur.'</font></td></tr>';
 			}
 
 		} else {
-			echo("Valeur paramètre faire MAJ incorrecte");
+			echo("Valeur paramÃ¨tre faire MAJ incorrecte");
 			exit;
 		}
 
@@ -2623,7 +2604,7 @@ function scanListeJoueurs($listeIDJoueur,$utilisateur,$role,$faireMAJ=true,$char
 			$resuC[$club]['clubHisto']=majClubHisto($club,$utilisateur,$role);
 		}
 		$resulen = count($resuJ);
-		// Concaténation de l'affichage HTML & récupération des identifiants maj Club et histo club
+		// ConcatÃ©nation de l'affichage HTML & rÃ©cupÃ©ration des identifiants maj Club et histo club
 		for ($j=0;$j<$resulen;$j++) {
 			if (isset($resuJ[$j]['idJoueur']) && $resuJ[$j]['idJoueur'] > 0) { // Il y a eu maj ou ajout du joueur
 				if (isset($resuC[$resuJ[$j]['teamid']]['club']['idClub'])) $resuJ[$j]['idClub']=$resuC[$resuJ[$j]['teamid']]['club']['idClub'];
