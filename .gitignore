@@ -1,3 +1,7 @@
+/dtn/interface/_config/CstGlobals.php
+/dtn/interface/includes/connect.inc.php
+/dtn/interface/includes/fonctions.php
+/dtn/interface/includes/head.inc.php
 .project
 .buildpath
 /log/*
