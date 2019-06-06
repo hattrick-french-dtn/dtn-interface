@@ -1068,31 +1068,30 @@ function validateMinimaPlayer($player,$todaySeason)
 	require($_SERVER['DOCUMENT_ROOT'].'/dtn/interface/includes/nomTables.inc.php');
 	global $conn;
 
-  $ageetjours = ageetjour($player["datenaiss"]);
-  $tabage = explode(" - ",$ageetjours);
-  $htms = htmspoint($tabage[0], $tabage[1], $player["idGardien"], $player["idDefense"], $player["idConstruction"], $player["idAilier"], $player["idPasse"], $player["idButeur"], $player["idPA"]);
-  if ($tabage[0]<28) {
-	  if ($player["idGardien"] >=5 && $htms["potential"] >1750 || $player["idGardien"] <5 && $htms["potential"] >1950) {
-		  $reqValid = true;
-	  } else {
-	      $reqValid = false;
-	  }
-  } else {
-	if ($player["idGardien"] >=5 && $htms["value"] >1800 || $player["idGardien"] <5 && $htms["value"] >2000) {
-		$reqValid = true;
+	$ageetjours = ageetjour($player["datenaiss"]);
+	$tabage = explode(" - ",$ageetjours);
+	$htms = htmspoint($tabage[0], $tabage[1], $player["idGardien"], $player["idDefense"], $player["idConstruction"], $player["idAilier"], $player["idPasse"], $player["idButeur"], $player["idPA"]);
+	if ($tabage[0]<28) {
+		if ($player["idGardien"] >5 && $htms["potential"] >1750) || ($player["idGardien"] <5 && $htms["potential"] >1950) {
+			$reqValid = true;
+		} else {
+			$reqValid = false;
+		}
 	} else {
-	    $reqValid = false;
+		if ($player["idGardien"] >5 && $htms["value"] >1800) || ($player["idGardien"] <5 && $htms["value"] >2000) {
+			$reqValid = true;
+		} else {
+			$reqValid = false;
+		}
+	}  
+	if (!$reqValid) {
+		return -1;
+	} else {
+		//** ATTENTION! dans ce cas, les joueurs sont tous acceptes, soit la semaine n'est pas valide (>16 ou negative)
+		return -2;
 	}
-  }  
-  
-  if (!$reqValid) {
-    return -1;
-  } else {
-      //** ATTENTION! dans ce cas, les joueurs sont tous acceptes, soit la semaine n'est pas valide (>16 ou negative)
-      return -2;
-  }
-
-  return $result;
+	
+	return $result;
 }
 
 
