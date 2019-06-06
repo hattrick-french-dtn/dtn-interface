@@ -215,7 +215,7 @@ foreach($teams as $te) {
 					}else if ($_SESSION['lang']=="de"){
 					?>[Scan OK.]<?php
 					}else{
-					?>[Le joueur a bien été scanné.]<?php
+					?>[Le joueur a bien &eacute;t&eacute; scann&eacute;.]<?php
 					}
 				}
 ?>
