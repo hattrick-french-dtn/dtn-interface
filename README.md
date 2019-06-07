@@ -3,7 +3,8 @@
 Repo for the Hattrick French Scout team applications
 
 ## A lire avant de travailler sur le code
-+ [Info de travail](https://github.com/hattrick-french-dtn/dtn-interface/wiki/HowToWork) pour toutes les informations sur comment gérer ses branches et la base de données en local
++ [Info de travail](https://github.com/hattrick-french-dtn/dtn-interface/wiki/HowToWork) pour toutes les informations sur comment gérer ses branches
++ [Configuration de son environnement](https://github.com/hattrick-french-dtn/dtn-interface/wiki/ConfigLocalEnv) pour toutes les informations sur comment configurer la base de données en local
 
 ## Version 2.2.6
 ### Enhancement
