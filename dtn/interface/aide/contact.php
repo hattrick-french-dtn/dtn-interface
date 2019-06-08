@@ -40,109 +40,60 @@ switch($sesUser["idNiveauAcces"]){
 
 
 
-?><title>Aide</title>
+?><title>Liens</title>
 <body >
 <br>
 <br>
 
-
-
-<center><h3>Contacts</h3></center>
-<b>J'ai besoin d'aide, &agrave; qui m'adresser?</b>
+<center><h3>Liens pratiques</h3></center>
 <p>
 
 <ul>
-<li>le forum de ht-fff :
-<a href="http://www.ht-fff.org/dtn/forum/">http://www.ht-fff.org/dtn/forum/</a><br>
+<li><a href="http://www.htfff.free.fr/dtn/forum/index.php">Forum de la DTN</a><br>
 <br>
-<li>l'outil de gestion de bug :
-<a href="http://www.ht-fff.org/bug/">http://www.ht-fff.org/bug/</a><br>
-
-
-<!-------------------------------------            DTN+                      -->
+<li><a href="https://github.com/hattrick-french-dtn/dtn-interface/issues">Signaler un bug, demander une am&eacute;lioration</a><br>
 <br>
-<li>Votre DTN+<br>
-<ul>
+<li><a href="http://www.htfff.free.fr/dtn/forum/viewtopic.php?f=15&t=9307">Organigramme de la DTN</a><br>
+<br>
+<li><a href="https://www.hattrick.org/goto.ashx?path=/Forum/Read.aspx?t=17238176&n=1&v=0">Sujet Recherche Entra&icirc;neurs sur HT</a><br>
+<br>
+<li><a href="http://www.htfff.free.fr/dtn/forum/viewtopic.php?f=15&t=7725">Le manuel non-officiel de HT</a><br>
+<br>
+<li><a href="http://www.htfff.free.fr/dtn/forum/viewtopic.php?f=33&t=11667">Les cibles U20</a><br>
+<br>
+<li><a href="http://www.htfff.free.fr/dtn/forum/viewtopic.php?f=33&t=10229">Lees cibles A</a><br>
+<br>
+<?php 
+switch($sesUser["idNiveauAcces"]){
+    /* case 1 = Admin DTN si besoin */
+
+	case "2": /* DTN+ */
+?>
+<li><a href="http://www.htfff.free.fr/dtn/forum/viewtopic.php?f=13&t=7827">Le manuel du parfait DTN+</a><br>
+<br>
 <?php
-    $sql = "SELECT * FROM $tbl_admin A, ht_position P ";
-    $sql = $sql ."WHERE A.idPosition_fk = P.idPosition AND A.idNiveauAcces_fk=2 AND A.affAdmin=1 AND A.idPosition_fk != 8 ORDER BY A.idPosition_fk";  	 
-	$result= $conn->query($sql);
-	  
-	while($lst = $result->fetch()){
-			
-		?>
-		<li>[<?=$lst["intitulePosition"]?>] : <?=$lst["loginAdmin"]?> / <?=$lst["emailAdmin"]?> 
-	  <?php
-	}
+		break;
 
-
-	$result = NULL;
-
-	  ?>
-</ul>
-<!----------------------------------------------------------------------------->
-
-
-<!-------------------------------------            Admin                     -->
+	case "3": /* DTN */
+?>
+<li><a href="http://www.htfff.free.fr/dtn/forum/viewtopic.php?f=15&t=7725">Le manuel du parfait DTN</a><br>
 <br>
-<li>Un administrateur<br>
-<ul>
 <?php
-	$sql = "SELECT * FROM $tbl_admin WHERE idNiveauAcces_fk=1 and affAdmin=1 ORDER BY loginAdmin";
-	$result= $conn->query($sql);
-	  
-	while($lst = $result->fetch()){
-			
-		?>
-		<li><?=$lst["loginAdmin"]?> / <?=$lst["emailAdmin"]?> 
-	  <?php
-	 }
-
-
-	$result = NULL;
-
-	  ?>
-</ul>
-<!----------------------------------------------------------------------------->
-
-
-<!-------------------------------------            Sélectionneur             -->
+		break;
+		
+	case "4": /* Coach */
+?>
+<li><a href="http://s64-65.leforum.eu/f6-Les-outils.htm">Les outils</a><br>
 <br>
-<li>Un s&eacute;lectionneur<br>
-<ul>
+<li><a href="http://www.htfff.free.fr/dtn/forum/viewtopic.php?f=3&t=9551">Mettre à jour la BDD en tant que s&eacute;lectionneur</a><br>
+<br>
 <?php
-	$sql = "SELECT * FROM $tbl_admin A, ht_coach C WHERE A.loginAdmin=C.loginAdmin AND C.affCoach=1 ORDER BY C.loginAdmin";
-	$result= $conn->query($sql);
-	  
-	while($lst = $result->fetch()){
-			
-		?>
-		<li>[<?=$lst["selection"]?>] : <?=$lst["loginCoach"]?> / <?=$lst["emailCoach"]?> 
-	  <?php
-	}
-
-
-	$result = NULL;
-
-	  ?>
+		break;
+		
+	default;
+		break;
+}
+?>
 </ul>
-<!----------------------------------------------------------------------------->
-
-
- </ul>
-
-
-<b>Codifications </b><p>
-
-25 Jul 2005 : modification des sp&eacute;cialit&eacute;s. <br>
-<ul>
-<li>0 = "Aucune" / "-"
-<li>1 = "Technique" / "T"
-<li>2 = "Rapide" / "R"
-<li>3 = "Costaud" / "C"
-<li>4 = "Imprevisible" / "I"
-<li>5 = "Joueur de t&ecirc;te" / "J"
-</ul>
-
 </body>
 </html>
