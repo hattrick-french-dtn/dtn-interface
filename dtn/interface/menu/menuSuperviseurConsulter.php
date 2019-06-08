@@ -16,7 +16,7 @@
 	&nbsp;
 	<?php if ($sesUser["idPosition_fk"]!=0) { ?>
 		<A class="smliensorange" href="<?=$url?>/joueurs/checkPlayer.php"  >Modifier joueur</a>&nbsp;|
-        &nbsp;<A class="smliensorange" href="<?=$url?>/admin/index.php" >Administration</a>&nbsp;|&nbsp;
+        &nbsp;<A class="smliensorange" href="<?=$url?>/admin/index.php" >M&agrave;J Secteur</a>&nbsp;|&nbsp;
 	<?php }?>
 	&nbsp;<A class="smliensorange" href="<?=$url?>/clubs/liste_clubs.php">Clubs</a>&nbsp;|
     &nbsp;<A class="smliensorange" href="<?=$url?>/consulter/rapportMatchs.php">Rapports Matchs</a>&nbsp;|&nbsp;
