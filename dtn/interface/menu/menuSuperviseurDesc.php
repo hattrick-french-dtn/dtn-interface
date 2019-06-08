@@ -47,7 +47,7 @@ En tant que superviseur DTN+, vous pouvez acc&eacute;der aux diff&eacute;rentes 
 <li>retrouver les joueurs que je surveille
 </ul>
 </p><?php } ?>
-<span class="breadvar">Via le lien <a href="<?=$url?>/aide/contact.php">"Aide"</a></span> : <br>
+<span class="breadvar">Via le lien <a href="<?=$url?>/aide/contact.php">"Liens utiles"</a></span> : <br>
 <ul>
 <li>retrouver les liens / contacts /aides utiles...
 </ul>
