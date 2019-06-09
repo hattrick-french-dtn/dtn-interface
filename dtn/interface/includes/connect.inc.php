@@ -10,6 +10,7 @@
  fastcgi_param DTNHTFFF_PORT <value>;
  fastcgi_param DTNHTFFF_DATABASE <value>;
  fastcgi_param DTNHTFFF_EMAIL <value>;
+ fastcgi_param DTNHTFFF_PROTOCOL <https|http>;
 
  Apapche:
  SetEnv DTNHTFFF_USER <value>
@@ -18,6 +19,7 @@
  SetEnv DTNHTFFF_PORT <value>
  SetEnv DTNHTFFF_DATABASE <value>
  SetEnv DTNHTFFF_EMAIL <value>
+ SetEnv DTNHTFFF_PROTOCOL <https|http>
 
 */
 	$hosturl = 'mysql:host='.$_SERVER["DTNHTFFF_HOST"].';port='.$_SERVER["DTNHTFFF_PORT"].';charset=utf8;dbname='.$_SERVER["DTNHTFFF_DATABASE"];
