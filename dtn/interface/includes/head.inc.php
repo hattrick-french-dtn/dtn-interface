@@ -5,7 +5,7 @@ global $sesUser;
 
 // Initialisation des variables suivant environnement
 $cheminComplet = $monServeur."/dtn/interface/";
-$url = "https://".$_SERVER["HTTP_HOST"]."/dtn/interface"; 
+$url = $_SERVER["DTNHTFFF_PROTOCOL"]."://".$_SERVER["HTTP_HOST"]."/dtn/interface"; 
 $db_c = $_SERVER["DTNHTFFF_DATABASE"];
 
 require($_SERVER["DOCUMENT_ROOT"]."/dtn/interface/includes/connect.inc.php");
@@ -35,7 +35,7 @@ foreach ($_SESSION as $k=>$v) {
 }
 
 // Contrôle authentification
-$url_courante="https://".$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'];
+$url_courante=$_SERVER["DTNHTFFF_PROTOCOL"]."://".$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'];
 $pos = strpos($url_courante, "dtn/interface");
 
 if ($pos !== false) { //l'url courante contient dtn/interface
