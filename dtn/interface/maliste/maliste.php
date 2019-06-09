@@ -3,7 +3,6 @@ require_once ("../includes/head.inc.php");
 require ("../includes/serviceListesDiverses.php");
 require ("../includes/serviceJoueur.php");
 
-
 if (!$sesUser["idAdmin"]) {
 	header("location: ../index.php?ErrorMsg=Session Expiree");
 }
@@ -183,7 +182,10 @@ document.body.scrollTop = scrollPos;
                     <td style="cursor:default;" onClick="chgTri('nomJoueur','<?=$sens?>','<?=$masque?>','<?=$affPosition?>')"><font color="#FFFFFF">&nbsp;Identit&eacute; <i class="fa fa-sort-amount-asc"></i></font></td>
                     <td width="120" style="cursor:default;" onClick="chgTri('teamid','<?=$sens?>','<?=$masque?>','<?=$affPosition?>')" ><font color="#FFFFFF">&nbsp;Club <i class="fa fa-sort-amount-asc"></i></font></td>
                     <td width="70" ><font color="#FFFFFF">&nbsp;Maj DTN</font></td>
-                    <td width="70" style="cursor:default;" onClick="chgTri('dateSaisieJoueur','<?=$sens?>','<?=$masque?>','<?=$affPosition?>')"><font color="#FFFFFF">&nbsp;Maj Proprio <i class="fa fa-sort-amount-asc"></i></font></td>
+                    <td width="70" ><font color="#FFFFFF">&nbsp;Valeur HTMS</font></td>
+                    <td width="70" ><font color="#FFFFFF">&nbsp;Potentiel HTMS</font></td>
+<!--                <td width="70" style="cursor:default;" onClick="chgTri('TODO (valeur htms)','<?=$sens?>','<?=$masque?>','<?=$affPosition?>')"><font color="#FFFFFF">&nbsp;Valeur HTMS <i class="fa fa-sort-amount-asc"></i></font></td>
+                    <td width="70" style="cursor:default;" onClick="chgTri('TODO (potentiel htms)','<?=$sens?>','<?=$masque?>','<?=$affPosition?>')"><font color="#FFFFFF">&nbsp;Potentiel HTMS <i class="fa fa-sort-amount-asc"></i></font></td> -->
                     <td width="25" style="cursor:default;" onClick="chgTri('datenaiss','<?=$sens?>','<?=$masque?>','<?=$affPosition?>')"> 
                       <div align="center"><font color="#FFFFFF">Age<i class="fa fa-sort-amount-asc"></i></font></div></td>
                     
@@ -325,12 +327,12 @@ $listID="";
 
 foreach ($conn->query($sql) as $l) {
 
-	$intensite="-";
-	$endurance="-";
-	$adjoints="-";
-	$medecin="-";
-	$physio="-";
-	$libelle_type_entrainement="-";
+    $intensite="-";
+    $endurance="-";
+    $adjoints="-";
+    $medecin="-";
+    $physio="-";
+    $libelle_type_entrainement="-";
   
 	$sql2 = "select * from $tbl_clubs_histo A left join $tbl_type_entrainement2 on idEntrainement = id_type_entrainement where idClubHT = ".$l["teamid"]." order by date_histo desc";
 	//error_log($sql2);
@@ -358,7 +360,7 @@ foreach ($conn->query($sql) as $l) {
 	}else{
 		$datemaj=$mkJoueur;
 	}
-			
+
 	$img_nb=0;
 	if ($datemaj >$mkday -$huit){
 		$img_nb=0;
@@ -387,7 +389,11 @@ foreach ($conn->query($sql) as $l) {
 	$zealt=" Date dtn : ".$infJ["dateDerniereModifJoueur"].
 					"<br> Date proprio : ".$infJ["dateSaisieJoueur"].
 					"<br> [ Mis &agrave; jour il y a  ".round(($mkday - $datemaj)/(60*60*24) )." jours ]";
-
+    
+    // HTMS du joueur    
+    $ageetjours = ageetjour($infJ["datenaiss"]);
+	$tabage = explode(" - ",$ageetjours);
+	$htms = htmspoint($tabage[0], $tabage[1], $infJ["idGardien"], $infJ["idDefense"], $infJ["idConstruction"], $infJ["idAilier"], $infJ["idPasse"], $infJ["idButeur"], $infJ["idPA"]);
 
 	global $class;
 ?>
@@ -410,7 +416,8 @@ foreach ($conn->query($sql) as $l) {
                     
                     <td width="120" nowrap align="center"><?=$ligne3['nomClub']?></td>
                     <td width="55" nowrap align="center"><?=$date[2]?>/<?=$date[1]?>/<?=$date[0]?></td>
-                    <td width="55" nowrap align="center"><?=$datesaisie[2]?>/<?=$datesaisie[1]?>/<?=$datesaisie[0]?></td>
+                    <td width="55" nowrap align="center"><?=$htms["value"]?></td>
+                    <td width="55" nowrap align="center"><?=$htms["potential"]?></td>
                     <td nowrap><div align="left"><?=$l["AgeAn"]."-".$l["AgeJour"]?></div></td>
                     <td width="20"> <div align="center"><?=$libelle_type_entrainement?></div></td>
                     <td width="20"> <div align="center"><?=$intensite?></div></td>
