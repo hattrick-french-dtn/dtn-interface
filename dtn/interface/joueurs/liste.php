@@ -197,6 +197,14 @@ $intitule = "endurance";
 break;
 
 
+case "idGardien":
+$intitule = "gardien";
+break;
+
+case "idDefense":
+$intitule = "defense";
+break;
+
 case "idConstruction":
 $intitule = "construction";
 break;
@@ -204,32 +212,26 @@ break;
 case "idAilier":
 $intitule = "ailier";
 break;
-case "idButeur":
-$intitule = "buteur";
-break;
-
-case "idGardien":
-$intitule = "gardien";
-break;
 
 case "idPasse":
 $intitule = "passe";
 break;
 
-case "idDefense":
-$intitule = "defense";
+case "idButeur":
+$intitule = "buteur";
 break;
 
 case "idPA":
-$intitule = "coup de pieds arrete";
+$intitule = "coup franc";
 break;
+
 
 case "scoreGardien":
 $intitule = "score Gardien";
 break;
 
 case "scoreDefense":
-$intitule = "score Gardien";
+$intitule = "score defense";
 break;
 case "scoreAilierOff":
 $intitule = "score ailier offensif";
@@ -297,7 +299,7 @@ break;
                   <td width="22" onClick="chgTri('idExperience_fk','<?=$sens?>','<?=$masque?>','<?=$affPosition?>')">
                     <div align="center"><font color="#FFFFFF">Xp</font></div></td>
                   <td width="24" onClick="chgTri('idLeader_fk','<?=$sens?>','<?=$masque?>','<?=$affPosition?>')">
-                    <div align="center"><font color="#FFFFFF">Ld</font></div></td>
+                    <div align="center"><font color="#FFFFFF">TDC</font></div></td>
                   <td width="30" onClick="chgTri('idCaractere_fk','<?=$sens?>','<?=$masque?>','<?=$affPosition?>')">
                     <div align="center"><font color="#FFFFFF">Pop</font></div></td>
                   <td width="29" onClick="chgTri('idAggre_fk','<?=$sens?>','<?=$masque?>','<?=$affPosition?>')">
@@ -307,28 +309,28 @@ break;
                   <td width="32"  onClick="chgTri('optionJoueur','<?=$sens?>','<?=$masque?>','<?=$affPosition?>')">
                     <div align="center"><font color="#FFFFFF">Sp&eacute;</font></div></td>
                   <td width="31"onClick="chgTri('idEndurance','<?=$sens?>','<?=$masque?>','<?=$affPosition?>')" witdth = "20">
-                    <div align="center"><font color="#FFFFFF">Sta</font></div></td>
-                  <td width="30" height="17"onClick="chgTri('idConstruction','<?=$sens?>','<?=$masque?>','<?=$affPosition?>')" witdth = "20">
-                    <div align="center"><font color="#FFFFFF">Pla</font></div></td>
-                  <td width="37"onClick="chgTri('idAilier','<?=$sens?>','<?=$masque?>','<?=$affPosition?>')" witdth = "20">
-                    <div align="center"><font color="#FFFFFF">Wn</font></div></td>
-                  <td width="33"onClick="chgTri('idButeur','<?=$sens?>','<?=$masque?>','<?=$affPosition?>')" witdth = "20">
-                    <div align="center"><font color="#FFFFFF">Sco</font></div></td>
+                    <div align="center"><font color="#FFFFFF">E</font></div></td>
                   <td width="30"onClick="chgTri('idGardien','<?=$sens?>','<?=$masque?>','<?=$affPosition?>')" witdth = "20">
-                    <div align="center"><font color="#FFFFFF">Kee</font></div></td>
-                  <td width="30" witdth = "20" onClick="chgTri('idPasse','<?=$sens?>','<?=$masque?>','<?=$affPosition?>')">
-                    <div align="center"><font color="#FFFFFF">Pas</font></div></td>
+                    <div align="center"><font color="#FFFFFF">G</font></div></td>
                   <td width="29" witdth = "20" onClick="chgTri('idDefense','<?=$sens?>','<?=$masque?>','<?=$affPosition?>')">
-                    <div align="center"><font color="#FFFFFF">Def</font></div></td>
+                    <div align="center"><font color="#FFFFFF">D</font></div></td>
+                  <td width="30" height="17"onClick="chgTri('idConstruction','<?=$sens?>','<?=$masque?>','<?=$affPosition?>')" witdth = "20">
+                    <div align="center"><font color="#FFFFFF">C</font></div></td>
+                  <td width="37"onClick="chgTri('idAilier','<?=$sens?>','<?=$masque?>','<?=$affPosition?>')" witdth = "20">
+                    <div align="center"><font color="#FFFFFF">A</font></div></td>
+                  <td width="30" witdth = "20" onClick="chgTri('idPasse','<?=$sens?>','<?=$masque?>','<?=$affPosition?>')">
+                    <div align="center"><font color="#FFFFFF">P</font></div></td>
+                  <td width="33"onClick="chgTri('idButeur','<?=$sens?>','<?=$masque?>','<?=$affPosition?>')" witdth = "20">
+                    <div align="center"><font color="#FFFFFF">B</font></div></td>
                   <td width="29" witdth = "20" onClick="chgTri('idPA','<?=$sens?>','<?=$masque?>','<?=$affPosition?>')">
-                    <div align="center"><font color="#FFFFFF">Set</font></div></td>
-                  <td width="44" witdth = "20" onClick="chgTri('scoreGardien','<?=$sens?>','<?=$masque?>','<?=$affPosition?>')">
-				  
-                    <div align="center"><font color="#FFFFFF">K</font></div>
-					</td>
+                    <div align="center"><font color="#FFFFFF">CF</font></div></td>
+                    
+                  <td width="44" witdth = "20" onClick="chgTri('scoreGardien','<?=$sens?>','<?=$masque?>','<?=$affPosition?>')">	  
+                    <div align="center"><font color="#FFFFFF">K</font></div></td>
                   <td width="43" height="17"onClick="chgTri('scoreDefense','<?=$sens?>','<?=$masque?>','<?=$affPosition?>')" witdth = "20">
                     <div align="center"><font color="#FFFFFF">D</font></div></td>
-                  <td width="39"onClick="chgTri('scoreAilierOff','<?=$sens?>','<?=$masque?>','<?=$affPosition?>')" witdth = "20"><div align="center"><font color="#FFFFFF">W</font></div></td>
+                  <td width="39"onClick="chgTri('scoreAilierOff','<?=$sens?>','<?=$masque?>','<?=$affPosition?>')" witdth = "20">
+                    <div align="center"><font color="#FFFFFF">W</font></div></td>
                   <td width="37"onClick="chgTri('scoreMilieu','<?=$sens?>','<?=$masque?>','<?=$affPosition?>')" witdth = "20">
                     <div align="center"><font color="#FFFFFF">M</font></div></td>
                   <td width="36" onClick="chgTri('scoreAttaquant','<?=$sens?>','<?=$masque?>','<?=$affPosition?>')" witdth = "20">
@@ -465,6 +467,16 @@ break;
                       </div></td>
                     <td width="1" rowspan="6" bgcolor="#000000"> <div align="center"><img src="../images/spacer.gif" width="1" height="1"> 
                         <img src="../images/spacer.gif" width="1" height="1"></div></td>
+                    <td width="30" witdth = "20"<?php if ($k==1) echo "bgcolor = $keeperColor";?>> <div align="center"> 
+                        <?=$l["idGardien"]?>
+                      </div></td>
+                    <td width="1" rowspan="6" bgcolor="#000000"> <div align="center"><img src="../images/spacer.gif" width="1" height="1"> 
+                        <img src="../images/spacer.gif" width="1" height="1"></div></td>
+                    <td width="30" witdth = "20" <?php if ($defense==1) echo "bgcolor = $defenseColor";?>> <div align="center"> 
+                        <?=$l["idDefense"]?>
+                      </div></td>
+                    <td width="1" rowspan="6" bgcolor="#000000"> <div align="center"><img src="../images/spacer.gif" width="1" height="1"> 
+                        <img src="../images/spacer.gif" width="1" height="1"></div></td>
                     <td width="30" height="17" witdth = "20" <?php if ($construction==1) echo "bgcolor = $constructionColor";?>> <div align="center"> 
                         <?=$l["idConstruction"]?>
                       </div></td>
@@ -475,23 +487,13 @@ break;
                       </div></td>
                     <td width="1" rowspan="6" bgcolor="#000000"> <div align="center"><img src="../images/spacer.gif" width="1" height="1">
                         <img src="../images/spacer.gif" width="1" height="1"></div></td>
-                    <td width="30" witdth = "20"<?php if ($buteur==1) echo "bgcolor = $buteurColor";?>> <div align="center"> 
-                        <?=$l["idButeur"]?>
-                      </div></td>
-                    <td width="1" rowspan="6" bgcolor="#000000"> <div align="center"><img src="../images/spacer.gif" width="1" height="1"> 
-                        <img src="../images/spacer.gif" width="1" height="1"></div></td>
-                    <td width="30" witdth = "20"<?php if ($k==1) echo "bgcolor = $keeperColor";?>> <div align="center"> 
-                        <?=$l["idGardien"]?>
-                      </div></td>
-                    <td width="1" rowspan="6" bgcolor="#000000"> <div align="center"><img src="../images/spacer.gif" width="1" height="1">
-                        <img src="../images/spacer.gif" width="1" height="1"></div></td>
                     <td width="30" witdth = "20" <?php if ($passe==1) echo "bgcolor = $passeColor";?>> <div align="center"> 
                         <?=$l["idPasse"]?>
                       </div></td>
-                    <td width="1" rowspan="6" bgcolor="#000000"> <div align="center"><img src="../images/spacer.gif" width="1" height="1"> 
+                    <td width="1" rowspan="6" bgcolor="#000000"> <div align="center"><img src="../images/spacer.gif" width="1" height="1">
                         <img src="../images/spacer.gif" width="1" height="1"></div></td>
-                    <td width="30" witdth = "20" <?php if ($defense==1) echo "bgcolor = $defenseColor";?>> <div align="center"> 
-                        <?=$l["idDefense"]?>
+                    <td width="30" witdth = "20"<?php if ($buteur==1) echo "bgcolor = $buteurColor";?>> <div align="center"> 
+                        <?=$l["idButeur"]?>
                       </div></td>
                     <td width="1" rowspan="6" bgcolor="#000000"> <div align="center"><img src="../images/spacer.gif" width="1" height="1">
                         <img src="../images/spacer.gif" width="1" height="1"></div></td>
