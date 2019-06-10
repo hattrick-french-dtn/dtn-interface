@@ -180,19 +180,19 @@ document.body.scrollTop = scrollPos;
               <table width="100%" border="0" cellspacing="1" cellpadding="0" bgcolor="#000000">
                   <tr bgcolor="#000000" > 
                     <td style="cursor:default;" onClick="chgTri('nomJoueur','<?=$sens?>','<?=$masque?>','<?=$affPosition?>')"><font color="#FFFFFF">&nbsp;Identit&eacute; <i class="fa fa-sort-amount-asc"></i></font></td>
-                    <td width="120" style="cursor:default;" onClick="chgTri('teamid','<?=$sens?>','<?=$masque?>','<?=$affPosition?>')" ><font color="#FFFFFF">&nbsp;Club <i class="fa fa-sort-amount-asc"></i></font></td>
-                    <td width="70" ><font color="#FFFFFF">&nbsp;Maj DTN</font></td>
+                    <td width="150" style="cursor:default;" onClick="chgTri('teamid','<?=$sens?>','<?=$masque?>','<?=$affPosition?>')" ><font color="#FFFFFF">&nbsp;Club <i class="fa fa-sort-amount-asc"></i></font></td>
+                    <td width="80" ><font color="#FFFFFF">&nbsp;Maj DTN</font></td>
                     <td width="70" ><font color="#FFFFFF">&nbsp;Valeur HTMS</font></td>
                     <td width="70" ><font color="#FFFFFF">&nbsp;Potentiel HTMS</font></td>
 <!--                <td width="70" style="cursor:default;" onClick="chgTri('TODO (valeur htms)','<?=$sens?>','<?=$masque?>','<?=$affPosition?>')"><font color="#FFFFFF">&nbsp;Valeur HTMS <i class="fa fa-sort-amount-asc"></i></font></td>
                     <td width="70" style="cursor:default;" onClick="chgTri('TODO (potentiel htms)','<?=$sens?>','<?=$masque?>','<?=$affPosition?>')"><font color="#FFFFFF">&nbsp;Potentiel HTMS <i class="fa fa-sort-amount-asc"></i></font></td> -->
-                    <td width="25" style="cursor:default;" onClick="chgTri('datenaiss','<?=$sens?>','<?=$masque?>','<?=$affPosition?>')"> 
+                    <td width="60" style="cursor:default;" onClick="chgTri('datenaiss','<?=$sens?>','<?=$masque?>','<?=$affPosition?>')"> 
                       <div align="center"><font color="#FFFFFF">Age<i class="fa fa-sort-amount-asc"></i></font></div></td>
                     
-                    <td width="26"> 
+                    <td width="100"> 
                       <div align="center"><font color="#FFFFFF">Entrainement</font></div></td>
                     
-                    <td width="26"> 
+                    <td width="30"> 
                       <div align="center"><font color="#FFFFFF">Int.</font></div></td>
                     
                     <td width="26"> 
@@ -223,25 +223,25 @@ document.body.scrollTop = scrollPos;
                     <td width="30" style="cursor:default;" onClick="chgTri('idEndurance','<?=$sens?>','<?=$masque?>','<?=$affPosition?>')"> 
                       <div align="center"><font color="#FFFFFF">E<i class="fa fa-sort-amount-asc"></i></font></div></td>
                     
-                    <td width="38" style="cursor:default;" onClick="chgTri('idGardien','<?=$sens?>','<?=$masque?>','<?=$affPosition?>')"> 
+                    <td width="60" style="cursor:default;" onClick="chgTri('idGardien','<?=$sens?>','<?=$masque?>','<?=$affPosition?>')"> 
                       <div align="center"><font color="#FFFFFF">G<i class="fa fa-sort-amount-asc"></i></font></div></td>
 
-                    <td width="38" style="cursor:default;" onClick="chgTri('idDefense','<?=$sens?>','<?=$masque?>','<?=$affPosition?>')"> 
+                    <td width="60" style="cursor:default;" onClick="chgTri('idDefense','<?=$sens?>','<?=$masque?>','<?=$affPosition?>')"> 
                       <div align="center"><font color="#FFFFFF">D<i class="fa fa-sort-amount-asc"></i></font></div></td>
 
-                    <td width="38" style="cursor:default;" onClick="chgTri('idConstruction','<?=$sens?>','<?=$masque?>','<?=$affPosition?>')"> 
+                    <td width="60" style="cursor:default;" onClick="chgTri('idConstruction','<?=$sens?>','<?=$masque?>','<?=$affPosition?>')"> 
                       <div align="center"><font color="#FFFFFF">C<i class="fa fa-sort-amount-asc"></i></font></div></td>
                     
-                    <td width="38" style="cursor:default;" onClick="chgTri('idAilier','<?=$sens?>','<?=$masque?>','<?=$affPosition?>')"> 
+                    <td width="60" style="cursor:default;" onClick="chgTri('idAilier','<?=$sens?>','<?=$masque?>','<?=$affPosition?>')"> 
                       <div align="center"><font color="#FFFFFF">A<i class="fa fa-sort-amount-asc"></i></font></div></td>
                     
-                    <td width="38" style="cursor:default;" onClick="chgTri('idPasse','<?=$sens?>','<?=$masque?>','<?=$affPosition?>')"> 
+                    <td width="60" style="cursor:default;" onClick="chgTri('idPasse','<?=$sens?>','<?=$masque?>','<?=$affPosition?>')"> 
                       <div align="center"><font color="#FFFFFF">P<i class="fa fa-sort-amount-asc"></i></font></div></td>
 
-                    <td width="38" style="cursor:default;" onClick="chgTri('idButeur','<?=$sens?>','<?=$masque?>','<?=$affPosition?>')"> 
+                    <td width="60" style="cursor:default;" onClick="chgTri('idButeur','<?=$sens?>','<?=$masque?>','<?=$affPosition?>')"> 
                       <div align="center"><font color="#FFFFFF">B<i class="fa fa-sort-amount-asc"></i></font></div></td>
                     
-                    <td width="30" style="cursor:default;" onClick="chgTri('idPA','<?=$sens?>','<?=$masque?>','<?=$affPosition?>')"> 
+                    <td width="40" style="cursor:default;" onClick="chgTri('idPA','<?=$sens?>','<?=$masque?>','<?=$affPosition?>')"> 
                       <div align="center"><font color="#FFFFFF">CF<i class="fa fa-sort-amount-asc"></i></font></div></td>
 					<td width="3" bgcolor="#FFFFDD"> 
                       &nbsp;</td>
@@ -418,7 +418,7 @@ foreach ($conn->query($sql) as $l) {
                     <td width="55" nowrap align="center"><?=$date[2]?>/<?=$date[1]?>/<?=$date[0]?></td>
                     <td width="55" nowrap align="center"><?=$htms["value"]?></td>
                     <td width="55" nowrap align="center"><?=$htms["potential"]?></td>
-                    <td nowrap><div align="left"><?=$l["AgeAn"]."-".$l["AgeJour"]?></div></td>
+                    <td nowrap><div align="center"><?=$l["AgeAn"]."-".$l["AgeJour"]?></div></td>
                     <td width="20"> <div align="center"><?=$libelle_type_entrainement?></div></td>
                     <td width="20"> <div align="center"><?=$intensite?></div></td>
                     <td width="20"> <div align="center"><?=$endurance?></div></td>
@@ -430,13 +430,13 @@ foreach ($conn->query($sql) as $l) {
                     <td width="26"> <div align="center"><?=$l["idLeader_fk"]?></div></td>
                     <td width="30"> <div align="center"><?=$specabbrevs[$l["optionJoueur"]]?></div></td>
                     <td width="30" bgcolor="#CCCCCC" witdth = "20"> <div align="center"><?=$l["idEndurance"]?></div></td>
-                    <td width="30" witdth = "20"<?php if ($k==1) echo "bgcolor = $keeperColor";?>><div align="center"><?=$l["idGardien"]?> <?php afficheLesPlus($infJ,"nbSemaineGardien"); ?></div></td>
-                    <td width="30" witdth = "20" <?php if ($defense==1) echo "bgcolor = $defenseColor";?>><div align="center"><?=$l["idDefense"]?> <?php afficheLesPlus($infJ,"nbSemaineDefense"); ?></div></td>
-                    <td width="30" height="17" witdth = "20" <?php if ($construction==1) echo "bgcolor = $constructionColor";?>><div align="center"><?=$l["idConstruction"]?> <?php afficheLesPlus($infJ,"nbSemaineConstruction"); ?></div></td>
-                    <td width="30" witdth = "20"<?php if ($ailier==1) echo "bgcolor = $ailierColor";?>><div align="center"><?=$l["idAilier"]?> <?php afficheLesPlus($infJ,"nbSemaineAilier"); ?></div></td>
-                    <td width="30" witdth = "20" <?php if ($passe==1) echo "bgcolor = $passeColor";?>><div align="center"><?=$l["idPasse"]?> <?php afficheLesPlus($infJ,"nbSemainePasses"); ?></div></td>
-                    <td width="30" witdth = "20"<?php if ($buteur==1) echo "bgcolor = $buteurColor";?>><div align="center"><?=$l["idButeur"]?> <?php afficheLesPlus($infJ,"nbSemaineButeur"); ?></div></td>
-                    <td width="30" witdth = "20"> <div align="center"><?=$l["idPA"]?></div></td>
+                    <td width="30" <?php if ($k==1) echo "bgcolor = $keeperColor";?>><div align="center"><?=$l["idGardien"]?> <?php afficheLesPlus($infJ,"nbSemaineGardien"); ?></div></td>
+                    <td width="30" <?php if ($defense==1) echo "bgcolor = $defenseColor";?>><div align="center"><?=$l["idDefense"]?> <?php afficheLesPlus($infJ,"nbSemaineDefense"); ?></div></td>
+                    <td width="30" <?php if ($construction==1) echo "bgcolor = $constructionColor";?>><div align="center"><?=$l["idConstruction"]?> <?php afficheLesPlus($infJ,"nbSemaineConstruction"); ?></div></td>
+                    <td width="30" <?php if ($ailier==1) echo "bgcolor = $ailierColor";?>><div align="center"><?=$l["idAilier"]?> <?php afficheLesPlus($infJ,"nbSemaineAilier"); ?></div></td>
+                    <td width="30" <?php if ($passe==1) echo "bgcolor = $passeColor";?>><div align="center"><?=$l["idPasse"]?> <?php afficheLesPlus($infJ,"nbSemainePasses"); ?></div></td>
+                    <td width="30" <?php if ($buteur==1) echo "bgcolor = $buteurColor";?>><div align="center"><?=$l["idButeur"]?> <?php afficheLesPlus($infJ,"nbSemaineButeur"); ?></div></td>
+                    <td width="30" > <div align="center"><?=$l["idPA"]?></div></td>
                   <td width="3" bgcolor="#FFFFDD"> 
                       &nbsp;</td>
 
