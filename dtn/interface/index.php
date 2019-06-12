@@ -207,7 +207,7 @@ if (isset($_POST['nomForm']) && $_POST['nomForm']=='formConnexion') {
 
 <font size="-1">
 <p>
-En cas de probl&egrave;me ou demande : <a href="/bug/main_page.php">Utilisez Mantis</a>
+En cas de probl&egrave;me ou demande : <a href="https://github.com/hattrick-french-dtn/dtn-interface/issues">Utilisez Github</a>
 </p>
 </font>
 </body>
