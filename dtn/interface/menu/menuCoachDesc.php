@@ -23,7 +23,7 @@ En tant que S&eacute;lectionneur, vous pouvez acc&eacute;der aux diff&eacute;ren
 <li>Retrouver les joueurs en s&eacute;lection 
 </ul>
 </p>
-<span class="breadvar">Via le lien <a href="<?=$url?>/aide/contact.php">"Aide"</a></span> : <br>
+<span class="breadvar">Via le lien <a href="<?=$url?>/aide/contact.php">"Liens utiles"</a></span> : <br>
 <ul>
 <li>retrouver les liens / contacts /aides utiles...
 </ul>
