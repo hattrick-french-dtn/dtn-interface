@@ -6,7 +6,6 @@ require("../includes/serviceMatchs.php");
 require("../includes/langue.inc.php");
 require("../CHPP/config.php");
 require("../includes/serviceListesDiverses.php");
-require("../includes/htmsPoint.php");
 
 if(!$_SESSION['sesUser']["idAdmin"])
 {
