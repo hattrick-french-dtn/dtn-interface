@@ -15,7 +15,6 @@ require("../includes/serviceEntrainement.php");
 require("../includes/serviceJoueur.php");
 require("../includes/langue.inc.php");
 require("../includes/serviceListesDiverses.php");
-require("../includes/htmsPoint.php");
 
 if (isset($origine) && $origine=="unique") //appel provient de la fiche d'un joueur
 {
