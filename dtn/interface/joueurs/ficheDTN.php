@@ -7,7 +7,6 @@ require("../includes/langue.inc.php");
 require("../includes/serviceListesDiverses.php");
 require("../includes/serviceJoueurTeam.php");
 require("../includes/nomTables.inc.php");
-require("../includes/htmsPoint.php");
 
 global $mode;
 global $sesUser;
