@@ -16,7 +16,6 @@ require("../includes/serviceListesDiverses.php");
 require("../includes/serviceEntrainement.php");
 require("../includes/serviceJoueur.php");
 require("../includes/langue.inc.php");
-require("../includes/htmsPoint.php");
 
 if(!$sesUser["idAdmin"])
 {
