@@ -225,7 +225,7 @@ require("../menu/menuJoueur.php");
   <?php if($defense == 1) {?>
   Defense : <?=$lstCaractJ[$infJ["idDefense"]]["intituleCaracFR"]?> ( <?=$infJ["idDefense"]?> ) + <?=$infJ["nbSemaineDefense"]?> <br/>
   <?php } ?>
-  Coup de pied : <?=$lstCaractJ[$infJ["idPA"]]["intituleCaracFR"]?> ( <?=$infJ["idPA"]?> ) <br/>
+  Coup Franc : <?=$lstCaractJ[$infJ["idPA"]]["intituleCaracFR"]?> ( <?=$infJ["idPA"]?> ) <br/>
   <br/>
   [u]Entrainement et commentaires[/u]: 
   <?php if(!isset($infJ["finFormation"]) || $infJ["finFormation"] == "") $infJ["finFormation"] = "Inconnu";?>
