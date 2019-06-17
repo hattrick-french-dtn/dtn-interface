@@ -223,7 +223,7 @@ require("../menu/menuJoueur.php");
   Passe : <?=$lstCaractJ[$infJ["idPasse"]]["intituleCaracFR"]?> ( <?=$infJ["idPasse"]?> ) + <?=$infJ["nbSemainePasses"]?> <br/>
   <?php } ?>
   <?php if($defense == 1) {?>
-  Defense : <?=$lstCaractJ[$infJ["idDefense"]]["intituleCaracFR"]?> ( <?=$infJ["idDefense"]?> ) + <?=$infJ["nbSemaineDefense"]?> <br/>
+  D&eacute;fense : <?=$lstCaractJ[$infJ["idDefense"]]["intituleCaracFR"]?> ( <?=$infJ["idDefense"]?> ) + <?=$infJ["nbSemaineDefense"]?> <br/>
   <?php } ?>
   Coup Franc : <?=$lstCaractJ[$infJ["idPA"]]["intituleCaracFR"]?> ( <?=$infJ["idPA"]?> ) <br/>
   <br/>
