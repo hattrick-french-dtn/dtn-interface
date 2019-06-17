@@ -251,7 +251,7 @@ break;
 
 <center><h3><?=$tri?> par <?=$intitule?></h3></center>
 
-<br>  <table width="980" border="1" align="center" cellpadding="0" cellspacing="0" bordercolor="#000000">
+<br>  <table width="1280" border="1" align="center" cellpadding="0" cellspacing="0" bordercolor="#000000">
     <tr> 
       <td height="20" ><div align="center"> 
           <table width="100%" border="0" cellspacing="0" cellpadding="0">
@@ -331,6 +331,8 @@ break;
                     <div align="center"><font color="#FFFFFF">F</font></div></td>
                   <td width="40">                   
                     <div align="center"><font color="#FFFFFF">Pos</font></div></td>
+                  <td width="80">                   
+                    <div align="center"><font color="#FFFFFF">Entra&icirc;nement</font></div></td>
                   </tr>
               </table>
                 
@@ -407,19 +409,42 @@ break;
             $ageetjours = ageetjour($l["datenaiss"]);
             $tabage = explode(" - ",$ageetjours);
             $htms = htmspoint($tabage[0], $tabage[1], $l["idGardien"], $l["idDefense"], $l["idConstruction"], $l["idAilier"], $l["idPasse"], $l["idButeur"], $l["idPA"]); 			  	
-			  
+			
+            // Entraînement du joueur
+            $libelle_type_entrainement="-";
+            $sql2 = "select * from $tbl_clubs_histo A left join $tbl_type_entrainement2 on idEntrainement = id_type_entrainement where idClubHT = ".$l["teamid"]." order by date_histo desc";
+            $req2 = $conn->query($sql2);
+            $ligne = $req2->fetch(PDO::FETCH_ASSOC);
+            if (is_array($ligne))
+            extract($ligne);
+            
+            // ID club HT
+          	$sql3 = "select * from $tbl_clubs where idClubHT = ".$l["teamid"];
+            $req3 = $conn->query($sql3);
+            $ligne2 = $req3->fetch(PDO::FETCH_ASSOC);
+            if (is_array($ligne2))
+            extract($ligne2);
 	?>
 
 				               
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
 				  <tr bgcolor = "<?=$bgcolor?>">
-				  <td align="left" width="200" nowrap>&nbsp;<img src="../images/time_<?=$img_nb?>.gif" onMouseOver="return escape('<?=$zealt?>')" >&nbsp;
-                    <a href ="<?=$url?>/joueurs/fiche.php?id=<?=$l["idJoueur"]?>" class="bred1"> 
-                      <b>
+
+                      <td align="left" width="200" nowrap>&nbsp;<img src="../images/time_<?=$img_nb?>.gif" onmouseover="return escape('<?=$zealt?>')" >&nbsp;
+                    <?php if (existAutorisationClub($idClubHT,null)==false) {?>
+                      <img height="12" src="../images/non_autorise.JPG" title="Ce club n'a pas autoris&eacute; la DTN &agrave; acc&eacute;der &agrave; ses donn&eacute;es">
+                    <?php } else {?>
+                      <img height="12" src="../images/Autorise.PNG" title="Ce club a autoris&eacute; la DTN &agrave; acc&eacute;der &agrave; ses donn&eacute;es">
+                    <?php }?>
+                    
+                    <a href ="<?=$url?>/joueurs/ficheDTN.php?id=<?=$l["idJoueur"]?>" class="bred1"> 
+                      <b> 
                       <?=strtolower($l["prenomJoueur"])?> <?=strtolower($l["nomJoueur"])?>
-                      </b>
-                      </a>
-                      </td>
+					  <?php if (isset($l["surnomJoueur"])) echo " (".$l["surnomJoueur"].")"; ?>
+                      </b> 
+                      </a> 
+                      
+                    </td>
                         
                     
                     <td width="1" bgcolor="#000000" ><img src="../images/spacer.gif" width="1" height="1"></td>
@@ -748,6 +773,9 @@ $semaine["defense"] = $infTraining["nbSemaineDefense"];
 			}
 	?>
                       </div></td>
+                      <td width="1" rowspan="6" bgcolor="#000000"> <div align="center"><img src="../images/spacer.gif" width="1" height="1"></div>
+                      <img src="../images/spacer.gif" width="1" height="1"> <div align="center"><img src="../images/spacer.gif" width="1" height="1"></div></td>
+                      <td width="80" ><div align="center"><?php echo $libelle_type_entrainement;?></div></td>
                   </tr>
 				 
 				 
@@ -771,7 +799,7 @@ $semaine["defense"] = $infTraining["nbSemaineDefense"];
   <?php
   if($affPosition == "" || $affPosition == 0){
   ?>
-  <table width="980" border="0" align="center" cellpadding="0" cellspacing="0">
+  <table width="1280" border="0" align="center" cellpadding="0" cellspacing="0">
     <tr> 
       <td width="819"><div align="right">
           <input name="mode" type="hidden" id="mode" value="assigneJoueur">
