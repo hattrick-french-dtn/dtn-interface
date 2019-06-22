@@ -132,6 +132,8 @@ jours</TD>
 							<Option VALUE="3" >Costaud</OPTION>
 							<Option VALUE="4" >Impr&eacute;visible</OPTION>
 							<Option VALUE="5" >Joueur de t&ecirc;te</OPTION>
+                            <Option VALUE="6" >R&eacute;sistant</OPTION>
+                            <Option VALUE="8" >Chef d'Orchestre</OPTION>
 							</Select>						</TD>
 					</TR>
 					<TR>
