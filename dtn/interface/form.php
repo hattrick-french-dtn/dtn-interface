@@ -795,8 +795,7 @@ case "addNiveau":
 			$updatedate_modif_effectif="on";
 			break;
 		case "7":
-			$nomNiveau=" Coup de pied ";
-			//MAJ CF par jojoje86 le 18/01/10-->
+			$nomNiveau=" Coup Franc ";
 			$updatedate_modif_effectif="on";
 			break;   
 		case "8":
