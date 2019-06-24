@@ -1,6 +1,7 @@
 <?php 
 require_once("../includes/head.inc.php");
 require("../includes/serviceJoueur.php");
+require("../includes/serviceMatchs.php");
 require("../includes/serviceListesDiverses.php");
 require("../includes/serviceDTN.php");
 if(!$sesUser["idAdmin"])
@@ -414,19 +415,27 @@ break;
             $libelle_type_entrainement="-";
             $sql2 = "select * from $tbl_clubs_histo A left join $tbl_type_entrainement2 on idEntrainement = id_type_entrainement where idClubHT = ".$l["teamid"]." order by date_histo desc";
             $req2 = $conn->query($sql2);
-            $ligne = $req2->fetch(PDO::FETCH_ASSOC);
-            if (is_array($ligne))
-            extract($ligne);
+            $ligne2 = $req2->fetch(PDO::FETCH_ASSOC);
+            if (is_array($ligne2))
+            extract($ligne2);
             
             // ID club HT
           	$sql3 = "select * from $tbl_clubs where idClubHT = ".$l["teamid"];
             $req3 = $conn->query($sql3);
-            $ligne2 = $req3->fetch(PDO::FETCH_ASSOC);
-            if (is_array($ligne2))
-            extract($ligne2);
-	?>
+            $ligne3 = $req3->fetch(PDO::FETCH_ASSOC);
+            if (is_array($ligne3))
+            extract($ligne3);
+            
+            // Extraction statut du joueur à la dernière MàJ (en vente ou non)
+            $sql= "SELECT transferListed FROM $tbl_joueurs_histo
+                   WHERE id_joueur_fk=".$l["idHattrickJoueur"]." 
+                   ORDER BY date_histo DESC LIMIT 1";
+            $req = $conn->query($sql);
+            $ligne = $req->fetch(PDO::FETCH_ASSOC);
+            if (is_array($ligne))
+            extract($ligne);
+?>
 
-				               
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
 				  <tr bgcolor = "<?=$bgcolor?>">
 
@@ -436,7 +445,7 @@ break;
                     <?php } else {?>
                       <img height="12" src="../images/Autorise.PNG" title="Ce club a autoris&eacute; la DTN &agrave; acc&eacute;der &agrave; ses donn&eacute;es">
                     <?php }?>
-                    
+                    <?php if ($transferListed==1) {?><img src="../images/enVente.JPG" title="Plac&eacute; sur la liste des transferts"><?php }?>
                     <a href ="<?=$url?>/joueurs/ficheDTN.php?id=<?=$l["idJoueur"]?>" class="bred1"> 
                       <b> 
                       <?=strtolower($l["prenomJoueur"])?> <?=strtolower($l["nomJoueur"])?>
