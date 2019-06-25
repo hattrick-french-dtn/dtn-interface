@@ -59,61 +59,7 @@ if($mode == "transfere") $lstClub = listClubs();
 
 $lstEntrainementPossible = listEntrainement();
 $lstCaractJ = listCarac('ASC',23);
-    
- 
- 
 
-switch($infJ["idPosition"]){
-
-    case "1":
-      //gK
-      $k = 1;
-      $defense = 1;
-      break;
-    
-    case "2":
-      // cD
-      $d = 1;
-      $ailier = 1;
-      $defense = 1;
-      $passe = 1;
-      $construction = 1;
-      break;
-    
-    case "3":
-      // Wg
-      $construction = 1;
-      $ailier = 1;
-      $defense = 1;
-      $passe = 1;
-      $wing = 1;
-      $wingoff = 1;
-      $wingwtm = 1;
-      break;
-
-    case "4":
-      //IM
-      $m = 1;
-      $moff = 1;
-      $construction = 1;
-      $defense = 1;
-      $passe = 1;
-	  //ajout de buteur et ailier par jojoje86 le 21/07/09
-	  $ailier = 1;
-	  $buteur = 1;
-      break;
-    
-    case "5":
-      // Fw
-      $ailier = 1;
-      $passe = 1;
-      $buteur = 1;
-      $construction = 1;
-      break;
-  
-    default:
-      break;
-}
   $sql = "SELECT idPays_fk from ht_clubs,ht_joueurs   where   idJoueur = '".$infJ["idJoueur"]."' and  ht_joueurs.teamid = ht_clubs.idClubHT ";
   $result= $conn->query($sql);
   $idPaysFK = $result->fetch();
@@ -169,67 +115,50 @@ require("../menu/menuJoueur.php");
 
 <p style="border: 1px solid black;padding: 10px 10px 10px 10px">
   <span id="textespan" >
-    <b>[b]
-    <?=ucwords(strtolower($infJ["prenomJoueur"]))?> <?=ucwords(strtolower($infJ["nomJoueur"]))?> <?php if (isset($infJ["surnomJoueur"])) echo " (".$infJ["surnomJoueur"].")"; ?>
-    ([url=https://www.hattrick.org/goto.ashx?path=/Club/Players/Player.aspx?playerId=<?=strtolower($infJ["idHattrickJoueur"])?>]
-    <?=strtolower($infJ["idHattrickJoueur"])?>
-	[/url]
-    ) 
+    [b]<?=ucwords($infJ["prenomJoueur"])?> <?php if (isset($infJ["surnomJoueur"])) echo " (".$infJ["surnomJoueur"].")"; ?> <?=ucwords($infJ["nomJoueur"])?>
+    ([url=https://www.hattrick.org/goto.ashx?path=/Club/Players/Player.aspx?playerId=<?=strtolower($infJ["idHattrickJoueur"])?>]<?=strtolower($infJ["idHattrickJoueur"])?>[/url]) 
+    <br/>
     <?php 
       $tabage = ageetjour($infJ["datenaiss"], 2);
       echo $tabage['ageJoueur'];?>&nbsp;ans&nbsp;-&nbsp;<?=$tabage['jourJoueur']
     ?> 
-    jours[/b]</b><br>
+    jours[/b]<br/>
+  Un gars <?=$infJ["intituleCaractereFR"]?> qui est <?=$infJ["intituleAggresFR"]?> et <?=$infJ["intituleHonneteteFR"]?>.<br/>
+  Poss&egrave;de un niveau d'exp&eacute;rience <?=$lstCaractJ[$infJ["idExperience_fk"]]["intituleCaracFR"]?> (<?=$infJ["idExperience_fk"]?>) et un temp&eacute;rament de chef <?=$infJ["intituleLeaderFR"]?> (<?=$infJ["idLeader_fk"]?>)<br/><br/>
     Propri&eacute;taire :  
     <?=$infJ["nomClub"]?> 
-    (
-    <?=utf8_decode($nomPays[0])?>
-    )<br/>
-    [color=darkred]> Derni&egrave;re &eacute;dition:
-    <?=dateToHTML($infJ["dateDerniereModifJoueur"])?>
-    [/color]<br/>
-    [color=red]> Derni&egrave;re mise &agrave; jour par le proprietaire: (
-    <?=dateToHTML($infJ["dateSaisieJoueur"])?> 
-    )[/color]<br/><br/>
+    (<?=utf8_decode($nomPays[0])?>)<br/><br/>
     TSI: 
     <?=$infJ["valeurEnCours"]?>
     <br/>
   Salaire : 
   <?=round(($infJ["salary"]/10),2)?>
-  &euro;/semaine (
-  <?=round(($infJ["salaireDeBase"]/10),2)?>
-  &euro; en France)<br/>
+  &euro;/semaine (<?=round(($infJ["salaireDeBase"]/10),2)?>&euro; en France)<br/>
   <?php  if( $infJ["optionJoueur"] != 0){?>
-  <b>[b]
-  <?=$option[$infJ["optionJoueur"]]["FR"]?>
-  [/b]</b>
-  <?php } ?>
-  <br/>
-  Xp : <?=$lstCaractJ[$infJ["idExperience_fk"]]["intituleCaracFR"]?><br/>
-  Endurance : <?=$lstCaractJ[$infJ["idEndurance"]]["intituleCaracFR"]?> ( <?=$infJ["idEndurance"]?> )<br/><br/>
-  <?php if($construction == 1) {?>
-  Construction : <?=$lstCaractJ[$infJ["idConstruction"]]["intituleCaracFR"]?> ( <?=$infJ["idConstruction"]?> ) + <?=$infJ["nbSemaineConstruction"]?> <br/>
-  <?php } ?>
-  <?php if($ailier == 1) {?>
-  Ailier : <?=$lstCaractJ[$infJ["idAilier"]]["intituleCaracFR"]?> ( <?=$infJ["idAilier"]?> ) + <?=$infJ["nbSemaineAilier"]?> <br/>
-  <?php } ?>
-  <?php if($buteur == 1) {?>
-  Buteur : <?=$lstCaractJ[$infJ["idButeur"]]["intituleCaracFR"]?> ( <?=$infJ["idButeur"]?> ) + <?=$infJ["nbSemaineButeur"]?> <br/>
-  <?php } ?>
-  <?php if($k == 1) {?>
-  Gardien : <?=$lstCaractJ[$infJ["idGardien"]]["intituleCaracFR"]?> ( <?=$infJ["idGardien"]?> ) + <?=$infJ["nbSemaineGardien"]?> <br/>
-  <?php } ?>
-  <?php if($passe == 1) {?>
-  Passe : <?=$lstCaractJ[$infJ["idPasse"]]["intituleCaracFR"]?> ( <?=$infJ["idPasse"]?> ) + <?=$infJ["nbSemainePasses"]?> <br/>
-  <?php } ?>
-  <?php if($defense == 1) {?>
-  D&eacute;fense : <?=$lstCaractJ[$infJ["idDefense"]]["intituleCaracFR"]?> ( <?=$infJ["idDefense"]?> ) + <?=$infJ["nbSemaineDefense"]?> <br/>
-  <?php } ?>
-  Coup Franc : <?=$lstCaractJ[$infJ["idPA"]]["intituleCaracFR"]?> ( <?=$infJ["idPA"]?> ) <br/>
+  [b]<?=$option[$infJ["optionJoueur"]]["FR"]?>[/b]
+  <?php } ?><br/>
+  Endurance : <?=$lstCaractJ[$infJ["idEndurance"]]["intituleCaracFR"]?> (<?=$infJ["idEndurance"]?>)<br/>
+<?php    // HTMS du joueur    
+        $ageetjours = ageetjour($infJ["datenaiss"]);
+        $tabage = explode(" - ",$ageetjours);
+        $htms = htmspoint($tabage[0], $tabage[1], $infJ["idGardien"], $infJ["idDefense"], $infJ["idConstruction"], $infJ["idAilier"], $infJ["idPasse"], $infJ["idButeur"], $infJ["idPA"]); ?>
+    [b]HTMS : <?php echo $htms["value"]." (".$htms["potential"].")[/b]"; ?><br/><br/>
+
+  Gardien : <?=$lstCaractJ[$infJ["idGardien"]]["intituleCaracFR"]?> (<?=$infJ["idGardien"]?>) + <?=$infJ["nbSemaineGardien"]?> <br/>
+
+  D&eacute;fense : <?=$lstCaractJ[$infJ["idDefense"]]["intituleCaracFR"]?> (<?=$infJ["idDefense"]?>) + <?=$infJ["nbSemaineDefense"]?> <br/>
+
+  Construction : <?=$lstCaractJ[$infJ["idConstruction"]]["intituleCaracFR"]?> (<?=$infJ["idConstruction"]?>) + <?=$infJ["nbSemaineConstruction"]?> <br/>
+
+  Ailier : <?=$lstCaractJ[$infJ["idAilier"]]["intituleCaracFR"]?> (<?=$infJ["idAilier"]?>) + <?=$infJ["nbSemaineAilier"]?> <br/>
+
+  Passe : <?=$lstCaractJ[$infJ["idPasse"]]["intituleCaracFR"]?> (<?=$infJ["idPasse"]?>) + <?=$infJ["nbSemainePasses"]?> <br/>
+
+  Buteur : <?=$lstCaractJ[$infJ["idButeur"]]["intituleCaracFR"]?> (<?=$infJ["idButeur"]?>) + <?=$infJ["nbSemaineButeur"]?> <br/>
+
+  Coup Franc : <?=$lstCaractJ[$infJ["idPA"]]["intituleCaracFR"]?> (<?=$infJ["idPA"]?>) <br/>
   <br/>
   [u]Entrainement et commentaires[/u]: 
-  <?php if(!isset($infJ["finFormation"]) || $infJ["finFormation"] == "") $infJ["finFormation"] = "Inconnu";?>
-  <?=$infJ["finFormation"]?>
   <br/>
   </span>
   </p>
@@ -238,7 +167,7 @@ require("../menu/menuJoueur.php");
 <p>
 
 
-<A HREF=# style="text-decoration:none" onClick="copy2Clipboard(document.getElementById('textespan'));return(false)">Copier cette fiche dans le presse-papier en un click(sous Internet Explorer)</A>
+<A HREF=# style="text-decoration:none" onClick="copy2Clipboard(document.getElementById('textespan'));return(false)">Copier cette fiche dans le presse-papier en un clic</A>
 <!--// ajout du retour vers la fiche DTN du joueur par jojoje86 le 21/07/09-->
 <br><br>
 <A HREF=# style="text-decoration:none" onClick="javascript:history.go(-1);">Retour</A>
