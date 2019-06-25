@@ -1,21 +1,18 @@
 <?php
 require_once("../includes/head.inc.php");
-
 if(!$sesUser["idAdmin"])
 {
 	header("location: ../index.php?ErrorMsg=Session Expiree");
 	exit();
 }
-
 if(!isset($lang)) $lang = "FR";
 if($lang == "fr") $lang = "FR";
 if($lang == "en") $lang = "EN";
-
 require("../includes/serviceEntrainement.php");
 require("../includes/serviceJoueur.php");
 require("../includes/langue.inc.php");
 require("../includes/serviceListesDiverses.php");
-
+require_once("../includes/htmsPoint.php");
 if (isset($origine) && $origine=="unique") //appel provient de la fiche d'un joueur
 {
 	if (isset($htid))
@@ -29,34 +26,29 @@ if (isset($origine) && $origine=="unique") //appel provient de la fiche d'un jou
 else  //appel provient de ficherecupchoix.php
 {
 	$origine = "";
-	$tlistID = explode(";",$listID);  //extraire les différents id
+	$tlistID = explode(";",$listID);  //extraire les diffÃ©rents id
 	for($i=0;$i<count($tlistID);$i++)
     {
-		$infJs[$i+1] = getJoueurHt($tlistID[$i]); //reconstruit un tableau contenant toutes les données des joueurs sélectionnés
+		$infJs[$i+1] = getJoueurHt($tlistID[$i]); //reconstruit un tableau contenant toutes les donnÃ©es des joueurs sÃ©lectionnÃ©s
     }
 }
-
 $infJs[0]=$infJs[1];
 if ($origine!="unique")
 {
 	$infJs[0]['nomJoueur']="R&eacute;sum&eacute; Multijoueurs";
-	$infJs[0]['prenomJoueur']=""; //au cas où !!!
+	$infJs[0]['prenomJoueur']=""; //au cas oÃ¹ !!!
 }
   
 $infJ = $infJs[0];
-
 	
-//Recherche le libellé du type d'entrainement
+//Recherche le libellÃ© du type d'entrainement
 //Fireproofed le 28/01/2011
 $sql="SELECT libelle_type_entrainement FROM ht_type_entrainement WHERE id_type_entrainement = '".$infJs[1]['entrainement_id']."' ";
 $req = $conn->query($sql);
 $result=$req->fetch();
 $req=NULL;
-
 $infJs[1]['entrainement_type']=$result['libelle_type_entrainement'];
-if ($infJs[1]['entrainement_type']=='') $infJs[1]['entrainement_type']='non renseigné';
-
-
+if ($infJs[1]['entrainement_type']=='') $infJs[1]['entrainement_type']='non renseignÃ©';
 ?><html>
 <head>
 <title>Fiche <?=$infJs[0]["prenomJoueur"]?> <?=$infJs[0]["nomJoueur"]?></title>
@@ -66,28 +58,22 @@ if ($infJs[1]['entrainement_type']=='') $infJs[1]['entrainement_type']='non rens
 
 
 <style type="text/css">
-
-
 <!--
 .Style1 {color: #FF0000}
 -->
 </style>
-
-
 </head>
-
 <body>
-
 <?php
-	//prépare les variables HTML pour utilisation dans fonction JAVASCRIPT majtext()
+	//prÃ©pare les variables HTML pour utilisation dans fonction JAVASCRIPT majtext()
 	//Fireproofed 28/01/2011 et 30/04/2011
 	$infJs[0]=$infJs[1];
-  //âge du joueur
+  //Ã¢ge du joueur
 	for  ($k=1;$k<count($infJs);$k++)
 	{
     $ageetjours = ageetjour($infJs[$k]["datenaiss"]);
   	$tabage[$k] = explode(" - ",$ageetjours);
-    //calcul du nombre de jours depuis la dernière modification
+    //calcul du nombre de jours depuis la derniÃ¨re modification
     $datemaj = explode("-",$infJs[$k]["date_modif_effectif"]);
     $jdatemaj = mktime(0,0,0,$datemaj[1],$datemaj[2],$datemaj[0]);
     $jdateauj = mktime(0,0,0,date("m"),date("d"),date("Y"));
@@ -95,13 +81,11 @@ if ($infJs[1]['entrainement_type']=='') $infJs[1]['entrainement_type']='non rens
     $dermod[$k]=$i." jour";
     if ($i>1) $dermod[$k]=$dermod[$k]."s";
     $dermod[$k]=$dermod[$k].' ['.date("d/m/Y",mktime(0,0,0,$datemaj[1],$datemaj[2],$datemaj[0])).']';
-    //calcul de l'âge du joueur en jours pour situation par rapport à la CDM
+    //calcul de l'Ã¢ge du joueur en jours pour situation par rapport Ã  la CDM
   	$jourj0 = ($sesUser["dateSemaine0"]+3600-574729200)/3600/24;
    	$jourjoueur[$k] = $jourj0 - $infJs[$k]["datenaiss"];
     }
 ?>
-
-
   
 <script type="text/javascript">
 function choixcompl()
@@ -109,7 +93,6 @@ function choixcompl()
   if (document.forms.form3.fires.value!='') scanid();
   }
 </script>
-
 <script type="text/javascript">
 function scanid()
   {
@@ -119,7 +102,7 @@ function scanid()
   	for ($i=1;$i<count($infJs);$i++)
   	{
   ?>
-    //met à jour en temps réel le textarea
+    //met Ã  jour en temps rÃ©el le textarea
     //Fireproofed le 28/01/2011
     
     // ajout du niveau de l'entraineur par jojoje86 le 21/07/09-->
@@ -177,7 +160,7 @@ function scanid()
   	a=a+' ';
   
     //modification sur toutes les fiches pour l'ajout du CF par jojoje86 le 21/07/09
-    //détermination du choix de l'utilisateur : on regarde le type de résumé choisi par bouton radio
+    //dÃ©termination du choix de l'utilisateur : on regarde le type de rÃ©sumÃ© choisi par bouton radio
     //Fireproofed le 28/01/2011
 	// keeper, defending, playmaking, winger, passing, scoring, setpieces
 	var active = [false, false, false, false, false, false, false];
@@ -197,74 +180,52 @@ function scanid()
     }
   
     if (document.forms.form1.typeresume[1].checked) {
-      //choix=CD
-      b='(D/P/C/A';
+      //choix=DL
+      b='(D/A/C/P';
       if ('<?=$infJs[$i]["entrainement_id"]?>'==4) c='[b][i]';
       c=c+'<?=$infJs[$i]["idDefense"]?>+<?=$infJs[$i]["nbSemaineDefense"]?>';
       if ('<?=$infJs[$i]["entrainement_id"]?>'==4) c=c+'[/i][/b]';
       c=c+' / '; 
-      if ('<?=$infJs[$i]["entrainement_id"]?>'==8) c=c+'[b][i]';
-      c=c+'<?=$infJs[$i]["idPasse"]?>+<?=$infJs[$i]["nbSemainePasses"]?>';
-      if ('<?=$infJs[$i]["entrainement_id"]?>'==8) c=c+'[/i][/b]';
-      c=c+' / '; 
-      if ('<?=$infJs[$i]["entrainement_id"]?>'==9) c=c+'[b][i]';
-      c=c+'<?=$infJs[$i]["idConstruction"]?>+<?=$infJs[$i]["nbSemaineConstruction"]?>';
-      if ('<?=$infJs[$i]["entrainement_id"]?>'==9) c=c+'[/i][/b]';
-      c=c+' / '; 
       if ('<?=$infJs[$i]["entrainement_id"]?>'==6) c=c+'[b][i]';
       c=c+'<?=$infJs[$i]["idAilier"]?>+<?=$infJs[$i]["nbSemaineAilier"]?>';
-      if ('<?=$infJs[$i]["entrainement_id"]?>'==6) c=c+'[/i][/b]'; 
-	  active[1] = true;
+      if ('<?=$infJs[$i]["entrainement_id"]?>'==6) c=c+'[/i][/b]';
+	  c=c+' / '; 
+	  if ('<?=$infJs[$i]["entrainement_id"]?>'==9) c=c+'[b][i]';
+      c=c+'<?=$infJs[$i]["idConstruction"]?>+<?=$infJs[$i]["nbSemaineConstruction"]?>';
+      if ('<?=$infJs[$i]["entrainement_id"]?>'==9) c=c+'[/i][/b]';
+      c=c+' / ';
+	  if ('<?=$infJs[$i]["entrainement_id"]?>'==8) c=c+'[b][i]';
+      c=c+'<?=$infJs[$i]["idPasse"]?>+<?=$infJs[$i]["nbSemainePasses"]?>';
+      if ('<?=$infJs[$i]["entrainement_id"]?>'==8) c=c+'[/i][/b]';
+         
 	  active[2] = true;
-	  active[3] = true;
 	  active[4] = true;
+	  active[1] = true;
+	  active[3] = true;
+	  
     }
   
     if (document.forms.form1.typeresume[2].checked) {
-      //choix=CDoff
-      b='(C/D/P';
-      if ('<?=$infJs[$i]["entrainement_id"]?>'==9) c='[b][i]';
-      c=c+'<?=$infJs[$i]["idConstruction"]?>+<?=$infJs[$i]["nbSemaineConstruction"]?>';
-      if ('<?=$infJs[$i]["entrainement_id"]?>'==9) c=c+'[/i][/b]';
-      c=c+' / '; 
-  		if ('<?=$infJs[$i]["entrainement_id"]?>'==4) c=c+'[b][i]';
+      //choix=DC
+      b='(D/C/P';
+      if ('<?=$infJs[$i]["entrainement_id"]?>'==4) c='[b][i]';
       c=c+'<?=$infJs[$i]["idDefense"]?>+<?=$infJs[$i]["nbSemaineDefense"]?>';
       if ('<?=$infJs[$i]["entrainement_id"]?>'==4) c=c+'[/i][/b]';
+	  c=c+' / '; 
+	  if ('<?=$infJs[$i]["entrainement_id"]?>'==9) c=c+'[b][i]';
+	  c=c+'<?=$infJs[$i]["idConstruction"]?>+<?=$infJs[$i]["nbSemaineConstruction"]?>';
+      if ('<?=$infJs[$i]["entrainement_id"]?>'==9) c=c+'[/i][/b]';
       c=c+' / '; 
-  		if ('<?=$infJs[$i]["entrainement_id"]?>'==8) c=c+'[b][i]';
+  	  if ('<?=$infJs[$i]["entrainement_id"]?>'==8) c=c+'[b][i]';
       c=c+'<?=$infJs[$i]["idPasse"]?>+<?=$infJs[$i]["nbSemainePasses"]?>';
       if ('<?=$infJs[$i]["entrainement_id"]?>'==8) c=c+'[/i][/b]'; 
-	  active[1] = true;
 	  active[2] = true;
-	  active[4] = true;
-    }
-    
-    if (document.forms.form1.typeresume[3].checked) {
-      //choix=WB
-      b='(A/D/P/C';
-      if ('<?=$infJs[$i]["entrainement_id"]?>'==6) c='[b][i]';
-      c=c+'<?=$infJs[$i]["idAilier"]?>+<?=$infJs[$i]["nbSemaineAilier"]?>';
-      if ('<?=$infJs[$i]["entrainement_id"]?>'==6) c=c+'[/i][/b]';
-      c=c+' / '; 
-      if ('<?=$infJs[$i]["entrainement_id"]?>'==4) c=c+'[b][i]';
-      c=c+'<?=$infJs[$i]["idDefense"]?>+<?=$infJs[$i]["nbSemaineDefense"]?>';
-      if ('<?=$infJs[$i]["entrainement_id"]?>'==4) c=c+'[/i][/b]';
-      c=c+' / ';
-      if ('<?=$infJs[$i]["entrainement_id"]?>'==8) c=c+'[b][i]';
-      c=c+'<?=$infJs[$i]["idPasse"]?>+<?=$infJs[$i]["nbSemainePasses"]?>';
-      if ('<?=$infJs[$i]["entrainement_id"]?>'==8) c=c+'[/i][/b]';
-      c=c+' / '; 
-      if ('<?=$infJs[$i]["entrainement_id"]?>'==9) c=c+'[b][i]';
-      c=c+'<?=$infJs[$i]["idConstruction"]?>+<?=$infJs[$i]["nbSemaineConstruction"]?>';
-      if ('<?=$infJs[$i]["entrainement_id"]?>'==9) c=c+'[/i][/b]';
 	  active[1] = true;
-	  active[2] = true;
-	  active[3] = true;
 	  active[4] = true;
     }
   
-    if (document.forms.form1.typeresume[4].checked) {
-      //choix=WG
+    if (document.forms.form1.typeresume[3].checked) {
+      //choix=Ailier complet
       b='(A/P/C/D';
       if ('<?=$infJs[$i]["entrainement_id"]?>'==6) c='[b][i]';
       c=c+'<?=$infJs[$i]["idAilier"]?>+<?=$infJs[$i]["nbSemaineAilier"]?>';
@@ -287,30 +248,59 @@ function scanid()
 	  active[4] = true;
     }
       
-    if (document.forms.form1.typeresume[5].checked) {
-      //choix=WGpm
-      b='(A/C/P';
+    if (document.forms.form1.typeresume[4].checked) {
+      //choix=Ailier SE
+      b='(A/P/C/D/B';
       if ('<?=$infJs[$i]["entrainement_id"]?>'==6) c='[b][i]';
       c=c+'<?=$infJs[$i]["idAilier"]?>+<?=$infJs[$i]["nbSemaineAilier"]?>';
       if ('<?=$infJs[$i]["entrainement_id"]?>'==6) c=c+'[/i][/b]';
       c=c+' / '; 
+      if ('<?=$infJs[$i]["entrainement_id"]?>'==8) c=c+'[b][i]';
+      c=c+'<?=$infJs[$i]["idPasse"]?>+<?=$infJs[$i]["nbSemainePasses"]?>';
+      if ('<?=$infJs[$i]["entrainement_id"]?>'==8) c=c+'[/i][/b]';     
+	  c=c+' / '; 
       if ('<?=$infJs[$i]["entrainement_id"]?>'==9) c=c+'[b][i]';
       c=c+'<?=$infJs[$i]["idConstruction"]?>+<?=$infJs[$i]["nbSemaineConstruction"]?>';
       if ('<?=$infJs[$i]["entrainement_id"]?>'==9) c=c+'[/i][/b]';
       c=c+' / '; 
-      if ('<?=$infJs[$i]["entrainement_id"]?>'==8) c=c+'[b][i]';
-      c=c+'<?=$infJs[$i]["idPasse"]?>+<?=$infJs[$i]["nbSemainePasses"]?>';
-      if ('<?=$infJs[$i]["entrainement_id"]?>'==8) c=c+'[/i][/b]';
-	  active[2] = true;
+      if ('<?=$infJs[$i]["entrainement_id"]?>'==4) c=c+'[b][i]';
+      c=c+'<?=$infJs[$i]["idDefense"]?>+<?=$infJs[$i]["nbSemaineDefense"]?>';
+      if ('<?=$infJs[$i]["entrainement_id"]?>'==4) c=c+'[/i][/b]';
+      c=c+' / ';
+	  if ('<?=$infJs[$i]["entrainement_id"]?>'==5) c='[b][i]';
+      c=c+'<?=$infJs[$i]["idButeur"]?>+<?=$infJs[$i]["nbSemaineButeur"]?>';
+      if ('<?=$infJs[$i]["entrainement_id"]?>'==5) c=c+'[/i][/b]';
 	  active[3] = true;
 	  active[4] = true;
+	  active[1] = true;
+	  active[2] = true;
+	  active[5] = true;
     }
     
+	 if (document.forms.form1.typeresume[5].checked) {
+     //choix=Mdef
+      b='(C/D/P';
+      if ('<?=$infJs[$i]["entrainement_id"]?>'==9) c='[b][i]';
+      c=c+'<?=$infJs[$i]["idConstruction"]?>+<?=$infJs[$i]["nbSemaineConstruction"]?>';
+      if ('<?=$infJs[$i]["entrainement_id"]?>'==9) c=c+'[/i][/b]';
+      c=c+' / '; 
+  		if ('<?=$infJs[$i]["entrainement_id"]?>'==4) c=c+'[b][i]';
+      c=c+'<?=$infJs[$i]["idDefense"]?>+<?=$infJs[$i]["nbSemaineDefense"]?>';
+      if ('<?=$infJs[$i]["entrainement_id"]?>'==4) c=c+'[/i][/b]';
+      c=c+' / '; 
+  		if ('<?=$infJs[$i]["entrainement_id"]?>'==8) c=c+'[b][i]';
+      c=c+'<?=$infJs[$i]["idPasse"]?>+<?=$infJs[$i]["nbSemainePasses"]?>';
+      if ('<?=$infJs[$i]["entrainement_id"]?>'==8) c=c+'[/i][/b]'; 
+	  active[1] = true;
+	  active[2] = true;
+	  active[4] = true;
+    }
+	
     if (document.forms.form1.typeresume[6].checked) {
-      //choix=IM
-      b='(E/C/P/D';
-      c='<?=$infJs[$i]["idEndurance"]?> / ';
-      if ('<?=$infJs[$i]["entrainement_id"]?>'==9) c=c+'[b][i]';
+      //choix=milieu complet
+      b='(C/P/D/B';
+      //c='<?=$infJs[$i]["idEndurance"]?> / ';
+      if ('<?=$infJs[$i]["entrainement_id"]?>'==9) c='[b][i]';
       c=c+'<?=$infJs[$i]["idConstruction"]?>+<?=$infJs[$i]["nbSemaineConstruction"]?>';
       if ('<?=$infJs[$i]["entrainement_id"]?>'==9) c=c+'[/i][/b]';
       c=c+' / '; 
@@ -321,51 +311,66 @@ function scanid()
       if ('<?=$infJs[$i]["entrainement_id"]?>'==4) c=c+'[b][i]';
       c=c+'<?=$infJs[$i]["idDefense"]?>+<?=$infJs[$i]["nbSemaineDefense"]?>';
       if ('<?=$infJs[$i]["entrainement_id"]?>'==4) c=c+'[/i][/b]';
+	  c=c+' / ';
+	  if ('<?=$infJs[$i]["entrainement_id"]?>'==5) c='[b][i]';
+      c=c+'<?=$infJs[$i]["idButeur"]?>+<?=$infJs[$i]["nbSemaineButeur"]?>';
+      if ('<?=$infJs[$i]["entrainement_id"]?>'==5) c=c+'[/i][/b]';
 	  active[1] = true;
 	  active[2] = true;
 	  active[4] = true;
+	  active[5] = true;
     }
-  
-    if (document.forms.form1.typeresume[7].checked) {
-      //choix=FW
-      b='(B/P/A';
-      if ('<?=$infJs[$i]["entrainement_id"]?>'==5) c='[b][i]';
-      c=c+'<?=$infJs[$i]["idButeur"]?>+<?=$infJs[$i]["nbSemaineButeur"]?>';
-      if ('<?=$infJs[$i]["entrainement_id"]?>'==5) c=c+'[/i][/b]';
-      c=c+' / '; 
-      if ('<?=$infJs[$i]["entrainement_id"]?>'==8) c=c+'[b][i]';
-      c=c+'<?=$infJs[$i]["idPasse"]?>+<?=$infJs[$i]["nbSemainePasses"]?>';
-      if ('<?=$infJs[$i]["entrainement_id"]?>'==8) c=c+'[/i][/b]';
+	
+	if (document.forms.form1.typeresume[7].checked) {
+      //choix=Mva
+      b='(C/A/D/P';
+      if ('<?=$infJs[$i]["entrainement_id"]?>'==9) c='[b][i]';
+      c=c+'<?=$infJs[$i]["idConstruction"]?>+<?=$infJs[$i]["nbSemaineConstruction"]?>';
+      if ('<?=$infJs[$i]["entrainement_id"]?>'==9) c=c+'[/i][/b]';
       c=c+' / '; 
       if ('<?=$infJs[$i]["entrainement_id"]?>'==6) c=c+'[b][i]';
       c=c+'<?=$infJs[$i]["idAilier"]?>+<?=$infJs[$i]["nbSemaineAilier"]?>';
       if ('<?=$infJs[$i]["entrainement_id"]?>'==6) c=c+'[/i][/b]';
-	  active[5] = true;
-	  active[4] = true;
+	  c=c+' / '; 
+      if ('<?=$infJs[$i]["entrainement_id"]?>'==4) c=c+'[b][i]';
+      c=c+'<?=$infJs[$i]["idDefense"]?>+<?=$infJs[$i]["nbSemaineDefense"]?>';
+      if ('<?=$infJs[$i]["entrainement_id"]?>'==4) c=c+'[/i][/b]';
+	  c=c+' / '; 
+      if ('<?=$infJs[$i]["entrainement_id"]?>'==8) c=c+'[b][i]';
+      c=c+'<?=$infJs[$i]["idPasse"]?>+<?=$infJs[$i]["nbSemainePasses"]?>';
+      if ('<?=$infJs[$i]["entrainement_id"]?>'==8) c=c+'[/i][/b]';
+      active[1] = true;
 	  active[3] = true;
+	  active[4] = true;
+	  active[2] = true;
     }
   
     if (document.forms.form1.typeresume[8].checked) {
-      //choix=FWtw
-      b='(B/A/P';
+      //choix=ATT
+      b='(B/P/A/C';
       if ('<?=$infJs[$i]["entrainement_id"]?>'==5) c='[b][i]';
       c=c+'<?=$infJs[$i]["idButeur"]?>+<?=$infJs[$i]["nbSemaineButeur"]?>';
       if ('<?=$infJs[$i]["entrainement_id"]?>'==5) c=c+'[/i][/b]';
       c=c+' / '; 
-      if ('<?=$infJs[$i]["entrainement_id"]?>'==6) c=c+'[b][i]';
-      c=c+'<?=$infJs[$i]["idAilier"]?>+<?=$infJs[$i]["nbSemaineAilier"]?>';
-      if ('<?=$infJs[$i]["entrainement_id"]?>'==6) c=c+'[/i][/b]';
-      c=c+' / '; 
       if ('<?=$infJs[$i]["entrainement_id"]?>'==8) c=c+'[b][i]';
       c=c+'<?=$infJs[$i]["idPasse"]?>+<?=$infJs[$i]["nbSemainePasses"]?>';
       if ('<?=$infJs[$i]["entrainement_id"]?>'==8) c=c+'[/i][/b]';
+      c=c+' / '; 
+      if ('<?=$infJs[$i]["entrainement_id"]?>'==6) c=c+'[b][i]';
+      c=c+'<?=$infJs[$i]["idAilier"]?>+<?=$infJs[$i]["nbSemaineAilier"]?>';
+      if ('<?=$infJs[$i]["entrainement_id"]?>'==6) c=c+'[/i][/b]';
+	  c=c+' / '; 
+      if ('<?=$infJs[$i]["entrainement_id"]?>'==9) c=c+'[b][i]';
+      c=c+'<?=$infJs[$i]["idConstruction"]?>+<?=$infJs[$i]["nbSemaineConstruction"]?>';
+      if ('<?=$infJs[$i]["entrainement_id"]?>'==9) c=c+'[/i][/b]';
 	  active[5] = true;
 	  active[4] = true;
 	  active[3] = true;
+	  active[2] = true;
     }
-  
+   
     if (document.forms.form1.typeresume[9].checked) {
-      //choix=FWdef
+      //choix=Att def
       b='(C/P/B/A';
       if ('<?=$infJs[$i]["entrainement_id"]?>'==9) c='[b][i]';
       c=c+'<?=$infJs[$i]["idConstruction"]?>+<?=$infJs[$i]["nbSemaineConstruction"]?>';
@@ -388,8 +393,26 @@ function scanid()
 	  active[2] = true;
     }
   
-    //on regarde si des paramètres supplémentaires doivent être ajoutés à la fiche
-    //avec test pour éviter les redondances
+    if (document.forms.form1.typeresume[10].checked) {
+		//choix=TDL Le CF est chargé dans les paramètres supplémentaires
+		b='(D/C/B/CF';
+		if ('<?=$infJs[$i]["entrainement_id"]?>'==4) c='[b][i]';
+		c=c+'<?=$infJs[$i]["idDefense"]?>+<?=$infJs[$i]["nbSemaineDefense"]?>';
+		if ('<?=$infJs[$i]["entrainement_id"]?>'==4) c=c+'[/i][/b]';
+		c=c+' / ';  
+		if ('<?=$infJs[$i]["entrainement_id"]?>'==9) c=c+'[b][i]';
+		c=c+'<?=$infJs[$i]["idConstruction"]?>+<?=$infJs[$i]["nbSemaineConstruction"]?>';
+		if ('<?=$infJs[$i]["entrainement_id"]?>'==9) c=c+'[/i][/b]';
+		c=c+' / '; 
+		if ('<?=$infJs[$i]["entrainement_id"]?>'==5) c=c+'[b][i]';
+		c=c+'<?=$infJs[$i]["idButeur"]?>+<?=$infJs[$i]["nbSemaineButeur"]?>';
+		if ('<?=$infJs[$i]["entrainement_id"]?>'==5) c=c+'[/i][/b]';
+		active[4] = true;
+		active[1] = true;
+		active[5] = true;
+    }
+    //on regarde si des paramÃ¨tres supplÃ©mentaires doivent Ãªtre ajoutÃ©s Ã  la fiche
+    //avec test pour Ã©viter les redondances
     //Fireproofed le 28/01/2011
     if ((document.forms.form2.parasup[0].checked)&&(b.indexOf('G')==-1)) {
       //choix=GK
@@ -402,7 +425,7 @@ function scanid()
     }
   
     if ((document.forms.form2.parasup[1].checked)&&(b.indexOf('D')==-1)) {
-      //choix=Défense
+      //choix=DÃ©fense
       b=b+'/D';
       c=c+' / ';
       if ('<?=$infJs[$i]["entrainement_id"]?>'==4) c=c+'[b][i]';
@@ -452,7 +475,7 @@ function scanid()
     }
   
     if ((document.forms.form2.parasup[6].checked)||(document.forms.form1.typeresume[0].checked)) {
-      //choix=CF : case à cocher CF ou choix de type de résumé = GK
+      //choix=CF : case Ã  cocher CF ou choix de type de rÃ©sumÃ© = GK
       b=b+'/CF';
       c=c+' / ';
       if ('<?=$infJs[$i]["entrainement_id"]?>'==3) c=c+'[b][i]';
@@ -466,18 +489,13 @@ function scanid()
       b=b+'/E';
       c=c+' / <?=$infJs[$i]["idEndurance"]?>';    
     }
-
     b=b+') ';
-
     //Rajouter l'XP
     c=c+' / Xp <?=$infJs[$i]["idExperience_fk"]?>';
-
     //Rajouter le TDC si honorable
     if ('<?=$infJs[$i]["idLeader_fk"]?>'==7) c=c+' / [b]TDC 7[/b]';
-
-    //Rajouter la spé. si il y en a une
+    //Rajouter la spÃ©. si il y en a une
     if ('<?=$infJs[$i]["optionJoueur"]?>'!=0) c=c+' / '+'[i]<?=$option[$infJs[$i]["optionJoueur"]]["FR"]?>[/i]';
-
 	var htmss = htmspoint(<?=$tabage[$i][0]?>, <?=$tabage[$i][1]?>,
 		active[0]?<?=$infJs[$i]["idGardien"]?>:0, <?=$infJs[$i]["nbSemaineGardien"]?>,
 		active[1]?<?=$infJs[$i]["idDefense"]?>:0, <?=$infJs[$i]["nbSemaineDefense"]?>,
@@ -501,8 +519,7 @@ function scanid()
       //choix=HTMS net
 	  c=c+' / HTMS caracs et semaines ' + htmss[2] + ' ('+ htmss[3] +')';
     }
-
-    //Rajouter la date de dernière modification
+    //Rajouter la date de derniÃ¨re modification
     c=c+' / Dern. Modif : <?=$dermod[$i]?>';
     
     //Rajouter le nom du DTN en charge du joueur
@@ -516,18 +533,16 @@ function scanid()
     //On rajoute [/color] si besoin = si couleur=true
     if (couleur=='1') c=c+'[/color]';
   
-    //On concatène
+    //On concatÃ¨ne
     totalta=totalta+a+b+c;
     if ('<?=$origine?>'!='unique') totalta=totalta+'\n';
   <?php
     }
   ?>
-  //et on affiche dans le textarea quand la boucle for est terminée
+  //et on affiche dans le textarea quand la boucle for est terminÃ©e
   document.forms.form3.fires.value=totalta;
   }
 </script>
-
-
 <script language="Javascript"> 
 function copy2Clipboard(obj)
   {
@@ -536,8 +551,6 @@ function copy2Clipboard(obj)
       textRange.execCommand("Copy");
   }
 </script>
-
-
 <?php
 global $sesUser;
 if ($origine=="unique") {
@@ -549,7 +562,6 @@ if ($origine=="unique") {
 	case "2":
 		require("../menu/menuSuperviseur.php");
 		break;
-
 	case "3":
 		require("../menu/menuDTN.php");
 		break;
@@ -573,7 +585,6 @@ if ($origine=="unique") {
 			require("../menu/menuSuperviseur.php");
 			require("../menu/menuSuperviseurConsulter.php");
 			break;
-
 		case "3":
 			require("../menu/menuDTN.php");
 			require("../menu/menuDTNConsulter.php");
@@ -588,23 +599,17 @@ if ($origine=="unique") {
 			break;
 	}
 }
-
 $idClubHT=$infJs[1]['teamid'];
 $idHT=$infJs[1]['idHattrickJoueur'];
 $lstPos = listPositionResume();
 $lstSect = listAllPosition();
 $listID = $idHT;
-
 $pos=$lstSect[$infJs[1]['ht_posteAssigne']-1]["descriptifPosition"];
 if ($pos=="") $pos="aucun";
-
 $dtnsuivi="aucun";
 if ($infJs[1]["dtnSuiviJoueur_fk"]!=0) $dtnsuivi=$infJs[1]["loginAdminSuiveur"];    
-
 if ($origine=="unique") require("../menu/menuJoueur.php");
-
 ?>
-
 <table width="99%" border="1" cellspacing="0" cellpadding="0">
     <tr>
     <?php
@@ -632,26 +637,26 @@ if ($origine=="unique") require("../menu/menuJoueur.php");
             <tr><td colspan="3" align="center">Choisissez le type de r&eacute;sum&eacute; souhait&eacute; :<br><br></td></tr>
             <tr>
               <td width="33%"><input name="typeresume" type="Radio" onClick="scanid();" Value="GK">GK (G/D/CF)<br></td>
-              <td width="33%"><input name="typeresume" type="Radio" onClick="scanid();" Value="CD">CD (D/P/C/A)<br></td>
-              <td width="33%"><input name="typeresume" type="Radio" onClick="scanid();" Value="CDoff">CDoff (C/D/P)<br></td>
+              <td width="33%"><input name="typeresume" type="Radio" onClick="scanid();" Value="DL">CD (D/A/C/P)<br></td>
+              <td width="33%"><input name="typeresume" type="Radio" onClick="scanid();" Value="DC">DC(D/C/P)<br></td>
             </tr>
             <tr>
-              <td><input name="typeresume" type="Radio" onClick="scanid();" Value="Wb">Wb (A/D/P/C)<br></td>
-              <td><input name="typeresume" type="Radio" onClick="scanid();" Value="Wg">Wg (A/P/C/D)<br></td>
-              <td><input name="typeresume" type="Radio" onClick="scanid();" Value="Wgpm">Wgpm (A/C/P)<br></td>
+              <td><input name="typeresume" type="Radio" onClick="scanid();" Value="Acomplet">Ailier complet (A/P/C/D)<br></td>
+              <td><input name="typeresume" type="Radio" onClick="scanid();" Value="Ailier">Ailier SE (A/P/C/D/B)<br></td>
+              <td><input name="typeresume" type="Radio" onClick="scanid();" Value="Mdef">Mdef (C/D/P)<br></td>
             </tr>
             <tr>
-              <td><input name="typeresume" type="Radio" onClick="scanid();" Value="IM">IM (C/P/D)<br></td>
-              <td><input name="typeresume" type="Radio" onClick="scanid();" Value="Fw">Fw (B/P/A)<br></td>
-              <td><input name="typeresume" type="Radio" onClick="scanid();" Value="Fwtw">Fwtw (B/A/P)<br></td>
+              <td><input name="typeresume" type="Radio" onClick="scanid();" Value="IM">Milieu complet (C/P/D/B)<br></td>
+			  <td><input name="typeresume" type="Radio" onClick="scanid();" Value="IM">Mva (C/A/D/P)<br></td>
+              <td><input name="typeresume" type="Radio" onClick="scanid();" Value="Fwtw">Att (B/P/A/C)<br></td>
             </tr>
             <tr>
-              <td><input name="typeresume" type="Radio" onClick="scanid();" Value="Fwdef">Fwdef (C/P/B/A)<br></td>
+              <td><input name="typeresume" type="Radio" onClick="scanid();" Value="Fwdef">Att Def (C/P/B/A)<br></td>
+			  <td><input name="typeresume" type="Radio" onClick="scanid();" Value="Fwdef">TDL (D/C/B/CF)<br></td>
             </tr>
           </table>
         </form>
       </td>
-
       <td width="50%" align="left" valign="top">
         <form name="form2" method="get">
           <table width="100%" border="0" cellpadding="0" cellspacing="0">
@@ -667,12 +672,12 @@ if ($origine=="unique") require("../menu/menuJoueur.php");
               <td><input name="parasup" type="Checkbox" onClick="choixcompl();" value="bu">Buteur<br></td>
             </tr>
             <tr>
-              <td><input name="parasup" type="Checkbox" onClick="choixcompl();" value="cf">CF<br></td>
-              <td><input name="parasup" type="Checkbox" onClick="choixcompl();" value="en">Endurance<br></td>
+              <td><input name="parasup" type="Checkbox" onClick="choixcompl();" value="cf">Coup-franc<br></td>
+              <td><input name="parasup" type="Checkbox" checked onClick="choixcompl();" value="en">Endurance<br></td>
               <td><input name="parasup" type="Checkbox" onClick="choixcompl();" value="dtn">DTN<br></td>
             </tr>                
             <tr>
-              <td><input name="parasup" type="Checkbox" onClick="choixcompl();" value="htms">HTMS<br></td>
+              <td><input name="parasup" type="Checkbox" checked onClick="choixcompl();" value="htms">HTMS<br> </td>
               <td><input name="parasup" type="Checkbox" onClick="choixcompl();" value="htmsbrut">HTMS des caract&eacute;ristiques<br></td>
               <td><input name="parasup" type="Checkbox" onClick="choixcompl();" value="htmsnet">HTMS avec les semaines<br></td>
             </tr>                
@@ -685,13 +690,11 @@ if ($origine=="unique") require("../menu/menuJoueur.php");
       <td border="0" colspan="2" bgcolor="#000000"><img src="../images/spacer.gif" width="1" height="1"></td>
     </tr>    	    
 </table>
-
 &nbsp;<br>
-
   
 <!--********************************************************************
-Mise en place pour affichage de la fiche en temps réel selon modif.
-Nécessite une mise en fonction du calcul de la chaine de sortie
+Mise en place pour affichage de la fiche en temps rÃ©el selon modif.
+NÃ©cessite une mise en fonction du calcul de la chaine de sortie
 Fireproofed le 28/01/2011
 *********************************************************************-->
       
@@ -715,27 +718,27 @@ Fireproofed le 28/01/2011
       </td>
     </tr>
 </table>
-
-
-
 <script type="text/javascript">
 //ajuste la hauteur du textarea
 if ('<?=count($infJ)?>'<21) document.forms.form3.fires.rows='<?=count($infJ)-1?>';
-//si le joueur est géré par un secteur, alors sélectionne un type de résumé adéquat
-//et appelle une première fois la fonction majtext()
+//si le joueur est gÃ©rÃ© par un secteur, alors sÃ©lectionne un type de rÃ©sumÃ© adÃ©quat
+//et appelle une premiÃ¨re fois la fonction majtext()
 var i='<?=$infJs[1]['ht_posteAssigne']?>';
 var j='0';
 if (i>'5') i='0';
 if ((i=='1') || (i=='2')) j=i-'1';
-if (i=='3') j='4';
+if (i=='3') j='3';
 if (i=='4') j='6';
 if (i=='5') j='7';
 if (i>'0') document.forms.form1.typeresume[j].click();
+
+// Si le joueur a plus de 27ans, il faut cocher la case CF
+//if ($tabage[$i][0]>27) document.forms.form2.parasup[6].checked = true;
+// Si le joueur a 19-20ans ou plus de 27ans alors il faut cocher l'endurance
+//if ($tabage[$i][0] == 19 || $tabage[$i][0] == 20 || $tabage[$i][0] > 27)  document.forms.form2.parasup[7].checked = true;
+
 </script>
-
-
 <A HREF=# style=\"text-decoration:none\" onClick=\"copy2Clipboard(document.getElementById('textespan'));return(false)\">Copier cette fiche dans le presse-papier en un click (sous Internet Explorer)</A>
-
 <div align="center"><a href="javascript:history.go(-1);">Retour</a></div>
 <script type="text/javascript">
 var spryselect1 = new Spry.Widget.ValidationSelect("spryselect1", {validateOn:["change"]});
@@ -743,4 +746,3 @@ var spryselect1 = new Spry.Widget.ValidationSelect("spryselect1", {validateOn:["
     </body>
 </html>
 <?php  deconnect(); ?>
-
