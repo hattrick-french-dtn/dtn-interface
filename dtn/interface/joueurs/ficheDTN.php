@@ -3,6 +3,7 @@ require_once("../includes/head.inc.php");
 require("../includes/serviceEntrainement.php");
 require("../includes/serviceJoueur.php");
 require("../includes/serviceEquipes.php");
+require("../includes/serviceMatchs.php");
 require("../includes/langue.inc.php");
 require("../includes/serviceListesDiverses.php");
 require("../includes/serviceJoueurTeam.php");
@@ -437,6 +438,56 @@ if(isset($msg)) {?>
                     LIMIT 0,5";
     
           $i=1;
+  
+$actualSeason=getSeasonWeekOfMatch(mktime(date('H'),date('i'),date('s'),date('m'),date('d'),date('Y')));
+if (!isset($saison)){$saison=$actualSeason['season'];}  
+          $sqlreel = "SELECT  
+              CAL.season,
+              CAL.week,
+              HJ.*,
+              M.*";
+          $sql2= " FROM 
+          (($tbl_joueurs as J CROSS JOIN $tbl_calendrier as CAL 
+          LEFT JOIN 
+            ( SELECT  
+                HISTO.id_joueur_fk,
+                HISTO.date_histo,
+                HISTO.forme,
+                HISTO.tsi,
+                HISTO.xp,
+                HISTO.blessure,
+                HISTO.salaire,
+                HISTO.transferListed,
+                HISTO.week as weekHJ
+              FROM $tbl_joueurs_histo as HISTO
+              WHERE HISTO.season=$saison
+            ) as HJ ON (J.idHattrickJoueur = HJ.id_joueur_fk AND HJ.weekHJ=CAL.week) ) 
+          LEFT JOIN
+            ( SELECT
+                PERF.id_joueur,
+                PERF.id_match,
+                DATE_FORMAT(PERF.date_match,'%d/%m/%Y') as date_match,
+                PERF.date_match as date_match_age,
+                PERF.week  as weekM,
+                PERF.id_club,
+                PERF.id_role,
+                PERF.id_position,
+                PERF.id_behaviour,
+                concat(PERF.etoile,'/',PERF.etoileFin) etoiles,
+                PERF.idTypeMatch_fk
+              FROM $tbl_perf as PERF
+              WHERE PERF.season=$saison
+            ) as M ON (J.idHattrickJoueur = M.id_joueur AND M.weekM=CAL.week) )
+        WHERE CAL.season=$saison
+        AND CAL.date_deb < DATE_ADD(CURDATE(), INTERVAL 1 DAY)
+        AND J.idJoueur=$id";
+
+$ordreDeTri=" ORDER BY CAL.week DESC,M.date_match DESC";
+$limitSql=" LIMIT 0,10";
+
+$sqlHJ=$sqlreel.$sql2.$ordreDeTri.$limitSql;
+$reqHJ = $conn->query($sqlHJ);
+
           foreach($conn->query($sql) as $l) { ?>
           <tr <?php if ($i % 2 == 0) {?>bgcolor="#EEEEEE"<?php } else {?>bgcolor="#FFFFFF"<?php }?>>
             <td><div align="left"><?=dateToHTML($l["dateHisto"]).' '.$l["heureHisto"]?></div></td>
@@ -460,6 +511,66 @@ if(isset($msg)) {?>
         </table>
         <br>
         <br>
+
+<table width="98%" style="border:1px solid #C5C7C7" align="center" cellpadding="0" cellspacing="0" bgcolor="white" rules=COLS>
+            <tr bgcolor="#DCC061" align="center">
+              <td>Semaine</td>
+              <td>Forme</td>
+              <td>TSI</td>
+              <td>Salaire</td>
+              <td>XP</td>
+              <td>Blessure</td>
+              <td>En vente?</td>
+              <td colspan=2>Match</td>
+              <td>Etoiles</td>
+              <td>Poste</td>
+            </tr>          
+            <?php $j=0;
+            
+            foreach($reqHJ as $lstHJ){?>
+            <tr <?php if ($j % 2 == 0) {?>bgcolor="#EEEEEE"<?php } else {?>bgcolor="white"<?php }?>>
+              <td align="left"><?=$lstHJ["season"].'.'.$lstHJ["week"]?></td>
+              <td align="center"><?=$lstHJ["forme"]?></td>
+              <td><?=$lstHJ["tsi"]?></td>
+              <td><?=$lstHJ["salaire"]?></td>
+              <td align="center"><?=$lstHJ["xp"]?></td>
+              <td>
+              <?php if ($lstHJ["blessure"]==null) {?>&nbsp;<?php }
+                else {if ($lstHJ["blessure"]==0) {?><img src="../images/pansement.JPG" title="Pansement"><?php }
+                      else {if ($lstHJ["blessure"]>0) {?><img src="../images/blessure.JPG" title="<?=$lstHJ["blessure"]?> semaine(s)"><?=$lstHJ["blessure"]?>
+                <?php }}}?>
+              </td>
+              <td>
+              <?php if ($lstHJ["transferListed"]==1) {?><img src="../images/enVente.JPG" title="Plac&eacute; sur la liste des transferts"><?php }?>
+              </td>
+              <?php if ($lstHJ["date_match"]!=null){?>
+                <td><?=$lstHJ["date_match"]?></td>
+                
+                <td><?=$abbrTypeMatch[$lstHJ["idTypeMatch_fk"]]?></td>
+                <td align=center bgcolor=#fded84><b><?=$lstHJ["etoiles"]?></b></td>
+                <td><?php $role=get_role_byID($lstHJ["id_role"],$lstRole);
+                          $behaviour=get_behaviour_byID($lstHJ["id_behaviour"],$lstBehaviour);
+                          echo($role["nom_role_abbrege"].' '.$behaviour["nom_behaviour"]);?>
+                </td>
+                
+              <?php } else {?>
+                <td colspan=4><font color=orange><i>Pas de match trouv&eacute;</i></font></td>
+              <?php }?>
+            </tr>
+            <?php $j++;
+            }?>
+            <tr bgcolor="#FFFFFF" style="border:1px solid #C5C7C7">
+            <td colspan=11>
+            <div align="left" valign="middle" style="padding:0.5em;">
+            <img src="../images/triangle1.JPG"  border="0" align="absmiddle">
+            <a href="<?=$url?>/joueurs/rapportDetaille.php?htid=<?=$idHT?>" class="Mauve">Afficher tout</a>
+            <img src="../images/triangle2.JPG"  border="0" align="absmiddle">
+            </div>
+            </td>
+            </tr>
+          </table>
+         <br>
+         <br>
 
         <table width="98%" style="border:1px solid #C5C7C7" align="center" cellpadding="0" cellspacing="1" rules=COLS>
           <tr bgcolor="#85A275">
@@ -552,7 +663,6 @@ if(isset($msg)) {?>
       </tr>
       </td>
     </tr>
-                
 
     <!-- debut valeur par poste-->
     <tr> 
