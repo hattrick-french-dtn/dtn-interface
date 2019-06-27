@@ -729,7 +729,7 @@ if (i>'5') i='0';
 if ((i=='1') || (i=='2')) j=i-'1';
 if (i=='3') j='3';
 if (i=='4') j='6';
-if (i=='5') j='7';
+if (i=='5') j='8';
 if (i>'0') document.forms.form1.typeresume[j].click();
 
 // Si le joueur a plus de 27ans, il faut cocher la case CF
