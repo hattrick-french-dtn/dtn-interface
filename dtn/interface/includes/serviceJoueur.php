@@ -1088,7 +1088,7 @@ function validateMinimaPlayer($player,$todaySeason)
 	} else {
 		// Pour les 17-20ans
 		// Pour les joueurs de champs, ne prendre que les joueurs minimum à htms 2050 sans spé et htms 2000 avec spé.
-		if (($player["idGardien"] >5 && $htms["potential"] >1750) || ($player["idGardien"] <5 && ($htms["potential"] >=2050 && $player.getSpecialty() ==0) || $htms["potential"] >=2000 && $player.getSpecialty() !=0 )) {
+		if (($player["idGardien"] >5 && $htms["potential"] >1750) || ($player["idGardien"] <5 && ($htms["potential"] >=2050 && $player["optionJoueur"] =="0") || $htms["potential"] >=2000 && $player["optionJoueur"] !="0" )) {
 				$reqValid = true;
 		} else {
 			$reqValid = false;
