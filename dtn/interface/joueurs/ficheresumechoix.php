@@ -725,11 +725,12 @@ if ('<?=count($infJ)?>'<21) document.forms.form3.fires.rows='<?=count($infJ)-1?>
 //et appelle une première fois la fonction majtext()
 var i='<?=$infJs[1]['ht_posteAssigne']?>';
 var j='0';
-if (i>'5') i='0';
+if (i>'7') i='0';
 if ((i=='1') || (i=='2')) j=i-'1';
 if (i=='3') j='3';
 if (i=='4') j='6';
-if (i=='5') j='7';
+if (i=='5') j='8';
+if (i=='7') j='10';
 if (i>'0') document.forms.form1.typeresume[j].click();
 
 // Si le joueur a plus de 27ans, il faut cocher la case CF
