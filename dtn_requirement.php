@@ -21,24 +21,14 @@ switch($_SESSION['lang']) {
 	$titre = "ht-fff.org| DTN| U20&amp;A | requirements.";
 	break;
 }
-$rqr_u20 = afficheRequirements( "U20", $_SESSION['lang'] );
-$rqr_a = afficheRequirements( "A", $_SESSION['lang']);
-
 ?>
 
 <table width="100%" border="0" cellspacing="0" cellpadding="5" >
-    <tr>
-      <td rowspan="3" width="10">&nbsp;</td>
-    </tr>
-    <tr><td>
-      <div align="center"><img src="./img/U20.PNG"><br><br></div>
-      <?php echo( $rqr_u20 ); ?>
-    </td></tr>
-	 <tr><td>
-    <br><hr>
+
       <div align="center"><img src="./img/A.PNG"><br><br></div>
-      <?php echo( $rqr_a ); ?>
-    </td></tr>
+
+<p> Les minimas sont mis à jour régulièrement par la DTN. Ils fonctionnent à partir des potentiels HTMS de vos joueurs. En cas de doute, n'hésitez pas à contacter la DTN pour en savoir plus. </p>
+
 </table>	 
 
 <?php
