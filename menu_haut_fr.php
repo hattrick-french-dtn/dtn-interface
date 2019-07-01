@@ -45,7 +45,7 @@
       <li<?php if ($nomFicPhpCourant[0]=="/index.php") {?> class="active"<?php }?>><a href="index.php" class="info"> Proposer <span>Soumettez votre &eacute;quipe afin que nous puissions d&eacute;tecter les meilleurs potentiels</span></a></li>
       <li<?php if ($nomFicPhpCourant[0]=="/dtn_u20age.php") {?> class="active"<?php }?>><a href="dtn_u20age.php" class="info"> U20|Age maxi <span>D&eacute;terminez le dernier match que peuvent disputer vos joueurs en U20</span></a></li>
       <li<?php if ($nomFicPhpCourant[0]=="/dtn_requirement.php") {?> class="active"<?php }?>><a href="dtn_requirement.php" class="info"> Pr&eacute;-requis <span>Niveau minimum requis pour entrer dans la base de la DTN</span></a></li>
-      <li<?php if ($nomFicPhpCourant[0]=="/fff_help.php") {?> class="active"<?php }?>><a href="fff_help.php" class="info"> &iexcl;&iexcl;&iexcl;help! <span>Inscrivez-vous afin de recevoir par mail les potentiels fran&ccedil;ais plac&eacute;s sur le march&eacute; des transferts</span></a></li>
+      <li<?php if ($nomFicPhpCourant[0]=="/fff_help.php") {?> class="active"<?php }?>><a href="fff_help.php" class="info"> Recherche Entraineurs <span>Inscrivez-vous afin de recevoir des propositions de reprise de potentiels internationaux</span></a></li>
       <li<?php if ($nomFicPhpCourant[0]=="/contact.php" || $nomFicPhpCourant[0]=="/dtn_members.php" || $nomFicPhpCourant[0]=="/fff_federation.php") {?> class="active"<?php }?>><a href="contact.php" class="sous_menu"> Contact </a>
         <ul>
           <li><a href="mailto:dtn@ht-fff.org" class="info"> Mail <span>Contactez nous par mail</span></a></li>

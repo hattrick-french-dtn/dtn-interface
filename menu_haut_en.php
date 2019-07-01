@@ -46,7 +46,7 @@
       <li<?php if ($nomFicPhpCourant[0]=="/index.php") {?> class="active"<?php }?>><a href="index.php" class="info"> Submitting <span>Submit your team to detect interesting french player</span></a></li>
       <li<?php if ($nomFicPhpCourant[0]=="/dtn_u20age.php") {?> class="active"<?php }?>><a href="dtn_u20age.php" class="info"> U20|Age maxi <span>Calculate last match of your player for U20 team</span></a></li>
       <li<?php if ($nomFicPhpCourant[0]=="/dtn_requirement.php") {?> class="active"<?php }?>><a href="dtn_requirement.php" class="info"> Requirements <span>Requirements to enter in french database tracking </span></a></li>
-      <li<?php if ($nomFicPhpCourant[0]=="/fff_help.php") {?> class="active"<?php }?>><a href="fff_help.php" class="info"> &iexcl;&iexcl;&iexcl;help! <span>Receive by email the french interesting player detected in transfer market</span></a></li>
+      <li<?php if ($nomFicPhpCourant[0]=="/fff_help.php") {?> class="active"<?php }?>><a href="fff_help.php" class="info"> Trainers Wanted <span>Receive by htmail the french interesting player detected in transfer market</span></a></li>
       <li<?php if ($nomFicPhpCourant[0]=="/contact.php" || $nomFicPhpCourant[0]=="/dtn_members.php" || $nomFicPhpCourant[0]=="/fff_federation.php") {?> class="active"<?php }?>><a href="contact.php" class="sous_menu"> Contact </a>
         <ul>
           <li><a href="mailto:dtn@ht-fff.org" class="info"> Mail <span>Send mail</span></a></li>
