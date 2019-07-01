@@ -56,7 +56,7 @@ $_SESSION['ListeFicheResume']=$lstJoueur;
 <img border=1 src="../images/jst.bmp" title="Exporter le r&eacute;sultat affich&eacute; dans la page sous forme d'une fiche r&eacute;sum&eacute; globale"></a>
 <br />
 <br />
-<table width="1000" border="1" align="center" cellpadding="0" cellspacing="0" bordercolor="#000000">
+<table width="1200" border="1" align="center" cellpadding="0" cellspacing="0" bordercolor="#000000">
   <tr>
   <td height="55" ><div align="center">
     <table width="100%" border="0" cellspacing="1" cellpadding="0" bgcolor="#000000">
@@ -68,7 +68,9 @@ $_SESSION['ListeFicheResume']=$lstJoueur;
         <table width="100%" border="0" cellspacing="1" cellpadding="0" bgcolor=lightgrey>
         <tr>
           <td width="300"><div align="left"><strong> &nbsp;(id) Club</strong></div></td>
-          <td width="26"><div align="left"><strong>Entrainement</strong></div></td>
+          <td width="100"><div align="left"><strong>Valeur HTMS</strong></div></td>
+          <td width="100"><div align="left"><strong>Potentiel HTMS</strong></div></td>
+          <td width="100"><div align="left"><strong>Entrainement</strong></div></td>
           <td width="26"><div align="left"><strong>Int</strong></div></td>
           <td width="26"><div align="left"><strong>End</strong></div></td>
           <td width="26"><div align="left"><strong>Entr.</strong></div></td>
@@ -76,7 +78,7 @@ $_SESSION['ListeFicheResume']=$lstJoueur;
           <td width="26"><div align="left"><strong>Doc</strong></div></td>
           <td width="26"><div align="left"><strong>PP</strong></div></td>
           <td width="300"><div align="left"><strong> &nbsp;(id) Joueur</strong></div></td>
-          <td width="50" ><div align="left"><strong> &nbsp;Age</strong></div></td>
+          <td width="60" ><div align="left"><strong> &nbsp;Age</strong></div></td>
           <td width="150"><div align="center"><strong>&nbsp;Derni&egrave;re mise &agrave; jour DTN</strong></div></td>
           <td><div align="center"><strong><CENTER>Voir la fiche</CENTER> </strong></div></td>
         </tr>
@@ -133,13 +135,27 @@ $_SESSION['ListeFicheResume']=$lstJoueur;
 		if (isset($lstJoueur[$j]["idClubHT"])) {
 			$sql2 = "select * from $tbl_clubs_histo A left join $tbl_type_entrainement2 on idEntrainement = id_type_entrainement where idClubHT = ".$lstJoueur[$j]["idClubHT"]." order by date_histo desc";
 			$req2 = $conn->query($sql2);
-			$ligne = $req2->fetch(PDO::FETCH_ASSOC);
-			if ($ligne) extract($ligne);
+			$ligne2 = $req2->fetch(PDO::FETCH_ASSOC);
+			if ($ligne2) extract($ligne2);
         
 			$sql3 = "select * from $tbl_clubs where idClubHT = ".$lstJoueur[$j]["idClubHT"];
 			$req3 = $conn->query($sql3);
 			$ligne3 = $req3->fetch(PDO::FETCH_ASSOC);
 			if ($ligne3) extract($ligne3);
+            
+            // Extraction statut du joueur à la dernière MàJ (en vente ou non)
+            $sql= "SELECT transferListed FROM $tbl_joueurs_histo
+                   WHERE id_joueur_fk=".$lstJoueur[$j]["idHattrickJoueur"]." 
+                   ORDER BY date_histo DESC LIMIT 1";
+            $req = $conn->query($sql);
+            $ligne = $req->fetch(PDO::FETCH_ASSOC);
+            if (is_array($ligne))
+            extract($ligne);
+            
+            // HTMS du joueur    
+            $ageetjours = ageetjour($lstJoueur[$j]["datenaiss"]);
+            $tabage = explode(" - ",$ageetjours);
+            $htms = htmspoint($tabage[0], $tabage[1], $lstJoueur[$j]["idGardien"], $lstJoueur[$j]["idDefense"], $lstJoueur[$j]["idConstruction"], $lstJoueur[$j]["idAilier"], $lstJoueur[$j]["idPasse"], $lstJoueur[$j]["idButeur"], $lstJoueur[$j]["idPA"]);
 		}
     ?>
 
@@ -149,6 +165,7 @@ $_SESSION['ListeFicheResume']=$lstJoueur;
               <img height="12" src="../images/non_autorise.JPG" title="Ce club n'a pas autoris&eacute; la DTN &agrave; acc&eacute;der &agrave; ses donn&eacute;es">
             <?php } else {?>
               <img height="12" src="../images/Autorise.PNG" title="Ce club a autoris&eacute; la DTN &agrave; acc&eacute;der &agrave; ses donn&eacute;es">
+            <?php if ($transferListed==1) {?><img src="../images/enVente.JPG" title="Plac&eacute; sur la liste des transferts"><?php }?>
             <?php }
 				if (isset($lstJoueur[$j]["idClubHT"])) {
 			?>
@@ -159,6 +176,8 @@ $_SESSION['ListeFicheResume']=$lstJoueur;
 				}
 			?>
             </td>
+            <td width="20"> <div align="center"><?=$htms["value"]?></div></td>
+            <td width="20"> <div align="center"><?=$htms["potential"]?></div></td>
             <td width="20"> <div align="center"><?=$libelle_type_entrainement?></div></td>
             <td width="20"> <div align="center"><?=$intensite?></div></td>
             <td width="20"> <div align="center"><?=$endurance?></div></td>
