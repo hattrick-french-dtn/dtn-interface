@@ -637,21 +637,21 @@ if ($origine=="unique") require("../menu/menuJoueur.php");
             <tr><td colspan="3" align="center">Choisissez le type de r&eacute;sum&eacute; souhait&eacute; :<br><br></td></tr>
             <tr>
               <td width="33%"><input name="typeresume" type="Radio" onClick="scanid();" Value="GK">GK (G/D/CF)<br></td>
-              <td width="33%"><input name="typeresume" type="Radio" onClick="scanid();" Value="DL">CD (D/A/C/P)<br></td>
-              <td width="33%"><input name="typeresume" type="Radio" onClick="scanid();" Value="DC">DC(D/C/P)<br></td>
+              <td width="33%"><input name="typeresume" type="Radio" onClick="scanid();" Value="DL">DL (D/A/C/P)<br></td>
+              <td width="33%"><input name="typeresume" type="Radio" onClick="scanid();" Value="DC">DC (D/C/P)<br></td>
             </tr>
             <tr>
               <td><input name="typeresume" type="Radio" onClick="scanid();" Value="Acomplet">Ailier complet (A/P/C/D)<br></td>
               <td><input name="typeresume" type="Radio" onClick="scanid();" Value="Ailier">Ailier SE (A/P/C/D/B)<br></td>
-              <td><input name="typeresume" type="Radio" onClick="scanid();" Value="Mdef">Mdef (C/D/P)<br></td>
+              <td><input name="typeresume" type="Radio" onClick="scanid();" Value="Mdef">Milieu D&eacute;f (C/D/P)<br></td>
             </tr>
             <tr>
-              <td><input name="typeresume" type="Radio" onClick="scanid();" Value="IM">Milieu complet (C/P/D/B)<br></td>
-			  <td><input name="typeresume" type="Radio" onClick="scanid();" Value="IM">Mva (C/A/D/P)<br></td>
+              <td><input name="typeresume" type="Radio" onClick="scanid();" Value="IM">Milieu &Eacute;qui/Off (C/P/D/B)<br></td>
+			  <td><input name="typeresume" type="Radio" onClick="scanid();" Value="IM">MvA (C/A/D/P)<br></td>
               <td><input name="typeresume" type="Radio" onClick="scanid();" Value="Fwtw">Att (B/P/A/C)<br></td>
             </tr>
             <tr>
-              <td><input name="typeresume" type="Radio" onClick="scanid();" Value="Fwdef">Att Def (C/P/B/A)<br></td>
+              <td><input name="typeresume" type="Radio" onClick="scanid();" Value="Fwdef">Att D&eacute;f (C/P/B/A)<br></td>
 			  <td><input name="typeresume" type="Radio" onClick="scanid();" Value="Fwdef">TDL (D/C/B/CF)<br></td>
             </tr>
           </table>
