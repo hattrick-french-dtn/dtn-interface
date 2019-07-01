@@ -3,6 +3,7 @@
 <tr><td align="left" nospan>[gestion]  <br>        
 <A class="smliensorange" href="<?=$url?>/equipe/superviseur.php">DTN +</a>&nbsp;|
 	&nbsp;<A class="smliensorange" href="<?=$url?>/equipe/dtn.php">DTN</a>&nbsp;|
+    &nbsp;<A class="smliensorange" href="<?=$url?>/equipe/selectionneur.php">S&eacute;lectionneur</a>&nbsp;|
 	&nbsp;<A class="smliensorange" href="<?=$url?>/joueurs/liste.php" alt="Liste">Joueurs avec poste ind&eacute;fini</a>&nbsp;|
 	&nbsp;<A class="smliensorange" href="<?=$url?>/joueurs/attribution.php" alt="Attributions">Attributions</a>&nbsp;|
 	&nbsp;<A class="smliensorange" href="<?=$url?>/settings.php?affinfoPerso=1" alt="configuration">Mon Profil</a>&nbsp;|
