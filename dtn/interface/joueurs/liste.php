@@ -14,7 +14,6 @@ if(!isset($lang)) $lang = "FR";
 if(!isset($masque)) $masque = 0;
 if(!isset($affPosition)) $affPosition = 0;
 if(!isset($affArchive))  $affArchive = 0;
-if(!isset($useFormule)) $useFormule = 0;
 if (!is_numeric($affPosition))
 	$affPosition = substr($affPosition, 0, 1);
 
@@ -177,27 +176,10 @@ break;
               <td width="28%" height="21"> <div align="center">Poste : 
                   <select name="menu1" onChange="MM_jumpMenu('parent',this,0)">
 					<option value = liste.php?affPosition=0>Liste des non assignes</option>
-			 
-			<?php
-			  for($i=0;$i<count($lstPosition);$i++){
-				if($affPosition == $lstPosition[$i]["idPosition"]) $etat = "selected"; else $etat = "";
-				echo "<option value = liste.php?useFormule=".$useFormule."&affPosition=".$lstPosition[$i]["idPosition"]." $etat >".$lstPosition[$i]["intitulePosition"]."</option>";
-			  
-			  }
-			  
-			  
-			  ?>
-			  
                   </select>
                 </div></td>
               <td width="50%"><div align="center"><font color="#000000">Liste 
                   des joueurs</font></div></td>
-              <td width="22%">
-			  <?php if($useFormule == 1) $etat = "checked"; else $etat = "";?>
-			  <input name="useFormule" type="checkbox" id="useFormule" value="1" onClick="chgFormule(<?=$affPosition?>)" <?=$etat?>>
-			  
-			  
-              Utiliser mes formules </td>
             </tr>
             <tr> 
               <td height="1" colspan="3" bgcolor="#000000"><img src="../images/spacer.gif" width="1" height="1"></td>
@@ -237,10 +219,13 @@ break;
                   <td width="30" witdth = "20" onClick="chgTri('idPA','<?=$sens?>','<?=$masque?>','<?=$affPosition?>')">
                     <div align="center"><font color="#FFFFFF">CF</font></div></td>
                     
+                  
+                  <td width="70">                   
+                    <div align="center"><font color="#FFFFFF">Entra&icirc;nement</font></div></td>
+                  <td width="90">                   
+                    <div align="center"><font color="#FFFFFF">Dernier Match</font></div></td>
                   <td width="40">                   
                     <div align="center"><font color="#FFFFFF">Pos</font></div></td>
-                  <td width="80">                   
-                    <div align="center"><font color="#FFFFFF">Entra&icirc;nement</font></div></td>
                   </tr>
               </table>
                 
@@ -341,6 +326,19 @@ break;
             $ligne = $req->fetch(PDO::FETCH_ASSOC);
             if (is_array($ligne))
             extract($ligne);
+            
+            // Extraction rôle joueur au dernier match
+            $id_role="0";
+            $date_match="";
+            $sql4= "SELECT * FROM $tbl_perf
+                   WHERE id_joueur=".$l["idHattrickJoueur"]." 
+                   ORDER BY date_match DESC LIMIT 1";
+            $req4 = $conn->query($sql4);
+            $ligne4 = $req4->fetch(PDO::FETCH_ASSOC);
+            if (is_array($ligne4))
+            extract($ligne4);
+            $role=get_role_byID($id_role,null);
+            $datedumatch=substr($date_match, 0, 10);
 ?>
 
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
@@ -432,9 +430,15 @@ break;
                     <td width="30" witdth = "20"> <div align="center"> 
                         <?=$l["idPA"]?>
                       </div></td>
+                    
+                    <td width="1" rowspan="6" bgcolor="#000000"> <div align="center"><img src="../images/spacer.gif" width="1" height="1"></div>
+                    <img src="../images/spacer.gif" width="1" height="1"> <div align="center"><img src="../images/spacer.gif" width="1" height="1"></div></td>
+                    <td width="70" ><div align="center"><?php echo $libelle_type_entrainement;?></div></td>
+                    <td width="1" rowspan="6" bgcolor="#000000"> <div align="center"><img src="../images/spacer.gif" width="1" height="1"></div>
+                    <img src="../images/spacer.gif" width="1" height="1"> <div align="center"><img src="../images/spacer.gif" width="1" height="1"></div></td>
+                    <td width="90" ><div align="center"><?php echo $datedumatch." (".$role["nom_role_abbrege"].")";?></div></td>
                     <td width="2" rowspan="6" bgcolor="#000000"><img src="../images/spacer.gif" width="1" height="1"></td>
                     <td width="40" witdth = "20"> <div align="center"> 
-
                         <?php
 					
 
@@ -471,9 +475,7 @@ break;
 			}
 	?>
                       </div></td>
-                      <td width="1" rowspan="6" bgcolor="#000000"> <div align="center"><img src="../images/spacer.gif" width="1" height="1"></div>
-                      <img src="../images/spacer.gif" width="1" height="1"> <div align="center"><img src="../images/spacer.gif" width="1" height="1"></div></td>
-                      <td width="80" ><div align="center"><?php echo $libelle_type_entrainement;?></div></td>
+                      
                   </tr>
 				 
 				 
