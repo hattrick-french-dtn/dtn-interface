@@ -32,69 +32,8 @@ $mkday = mktime(0,0,0,date('m'), date('d'),date('Y'));
 
 $lstPosition = listPosition();
 $lstJoueurs = listJoueur($affArchive, $affPosition);
-$d = 0;
-$wing=0;
-$wingoff = 0;
-$wingwtm = 0;
-$m=0;
-$moff=0;
-$att=0;
-$k=0;
 $font = "<font color = black>";
 $ffont = "</font>";
-switch($affPosition){
-
-	case "1":
-		//gK
-		$k = 1;
-		$keeperColor = "#9999CC";
-		break;
-		
-	case "2":
-		// cD
-		$d = 1;
-		$defense = 1;
-		$defenseColor = "#9999CC";
-		break;
-		
-	case "3":
-		// Wg
-		$construction = 1;
-		$constructionColor = "#CCCCCC";
-		$ailier = 1;
-		$ailierColor = "#9999CC";
-		$defense = 1;
-		$defenseColor = "#CCCCCC";
-		$passe = 1;
-		$passeColor = "#CCCCCC";
-		
-		$wing = 1;
-		$wingoff = 1;
-		$wingwtm = 1;
-		break;
-
-	case "4":
-		//IM
-		$m = 1;
-		$moff = 1;
-		$construction = 1;
-		$constructionColor = "#9999CC";
-		$defense = 1;
-		$defenseColor = "#CCCCCC";
-		$passe = 1;
-		$passeColor = "#CCCCCC";
-		break;
-		
-	case "5":
-		// Fw
-		$att = 1;
-		$passe = 1;
-		$passeColor = "#999999";
-		$buteur = 1;
-		$buteurColor = "#9999CC";
-		break;
-			
-}
 
 ?>
 <link href="../css/ht2.css" rel="stylesheet" type="text/css">
@@ -222,33 +161,11 @@ case "idPA":
 $intitule = "coup franc";
 break;
 
-
-case "scoreGardien":
-$intitule = "score Gardien";
 break;
-
-case "scoreDefense":
-$intitule = "score defense";
-break;
-case "scoreAilierOff":
-$intitule = "score ailier offensif";
-break;
-
-case "scoreMilieu":
-$intitule = "score milieu";
-break;
-case "scoreAttaquant":
-$intitule = "score attaquant";
-break;
-
-
-
-
-
 }
 ?>
 
-<b>Nouveau :</b> <a href="listeExportCsv.php?ordre=<?=$ordre?>&sens=<?=$sens?>&lang=<?=$lang?>&masque=<?=$masque?>&affPosition=<?=$affPosition?>">Sauvez cette page en CSV pour la consulter sous Excel!</a> 
+<a href="listeExportCsv.php?ordre=<?=$ordre?>&sens=<?=$sens?>&lang=<?=$lang?>&masque=<?=$masque?>&affPosition=<?=$affPosition?>">Sauvez cette page en CSV pour la consulter sous Excel!</a> 
 
 <center><h3><?=$tri?> par <?=$intitule?></h3></center>
 
@@ -320,16 +237,6 @@ break;
                   <td width="30" witdth = "20" onClick="chgTri('idPA','<?=$sens?>','<?=$masque?>','<?=$affPosition?>')">
                     <div align="center"><font color="#FFFFFF">CF</font></div></td>
                     
-                  <td width="40" witdth = "20" onClick="chgTri('scoreGardien','<?=$sens?>','<?=$masque?>','<?=$affPosition?>')">	  
-                    <div align="center"><font color="#FFFFFF">K</font></div></td>
-                  <td width="40" height="17"onClick="chgTri('scoreDefense','<?=$sens?>','<?=$masque?>','<?=$affPosition?>')" witdth = "20">
-                    <div align="center"><font color="#FFFFFF">D</font></div></td>
-                  <td width="40"onClick="chgTri('scoreAilierOff','<?=$sens?>','<?=$masque?>','<?=$affPosition?>')" witdth = "20">
-                    <div align="center"><font color="#FFFFFF">W</font></div></td>
-                  <td width="40"onClick="chgTri('scoreMilieu','<?=$sens?>','<?=$masque?>','<?=$affPosition?>')" witdth = "20">
-                    <div align="center"><font color="#FFFFFF">M</font></div></td>
-                  <td width="40" onClick="chgTri('scoreAttaquant','<?=$sens?>','<?=$masque?>','<?=$affPosition?>')" witdth = "20">
-                    <div align="center"><font color="#FFFFFF">F</font></div></td>
                   <td width="40">                   
                     <div align="center"><font color="#FFFFFF">Pos</font></div></td>
                   <td width="80">                   
@@ -527,225 +434,7 @@ break;
                       </div></td>
                     <td width="2" rowspan="6" bgcolor="#000000"><img src="../images/spacer.gif" width="1" height="1"></td>
                     <td width="40" witdth = "20"> <div align="center"> 
-    <?php
-		if($k == 1)
-		{
-			echo "<font color = #000099><b>";
-		}
-		else
-			echo "<font color = gray>";
 
-
-				   
-				   
-$carac["endurance"] = $l["idEndurance"];
-$carac["construction"] = $l["idConstruction"];
-$carac["ailier"] = $l["idAilier"];
-$carac["buteur"] = $l["idButeur"];
-$carac["gardien"] = $l["idGardien"];
-$carac["passe"] = $l["idPasse"];
-$carac["defense"] = $l["idDefense"];
-$carac["xp"] = $l["idExperience_fk"];
-
-
-$semaine["construction"] = $infTraining["nbSemaineConstruction"];
-$semaine["ailier"] = $infTraining["nbSemaineAilier"];
-$semaine["buteur"] = $infTraining["nbSemaineButeur"];
-$semaine["gardien"] = $infTraining["nbSemaineGardien"];
-$semaine["passe"] = $infTraining["nbSemainePasses"];
-$semaine["defense"] = $infTraining["nbSemaineDefense"];
-
-			$coeff = getCoeffSelectionneur(1);
-			if($useFormule == 1 && $coeff["useit"] == 1){
-					
-				$score = calculNoteDynamique($carac,$semaine,$coeff);
-				echo $score;
-			} else{
-				   
-				echo $l["scoreGardien"];
-				echo $ffont;
-			}
-
-
-	?>
-					  
-				</div></td>
-                    <td width="1" rowspan="6" bgcolor="#000000"> <div align="center"><img src="../images/spacer.gif" width="1" height="1"></div>
-						<img src="../images/spacer.gif" width="1" height="1"> <div align="center"><img src="../images/spacer.gif" width="1" height="1"></div></td>
-                    <td width="40" height="17" witdth = "20"> <div align="center"> 
-                    <?php
-						if($d == 1)
-							echo "<font color = #000099><b>";
-						else
-							echo "<font color = gray>";
-					
-					
-$carac["endurance"] = $l["idEndurance"];
-$carac["construction"] = $l["idConstruction"];
-$carac["ailier"] = $l["idAilier"];
-$carac["buteur"] = $l["idButeur"];
-$carac["gardien"] = $l["idGardien"];
-$carac["passe"] = $l["idPasse"];
-$carac["defense"] = $l["idDefense"];
-$carac["xp"] = $l["idExperience_fk"];
-
-
-$semaine["construction"] = $infTraining["nbSemaineConstruction"];
-$semaine["ailier"] = $infTraining["nbSemaineAilier"];
-$semaine["buteur"] = $infTraining["nbSemaineButeur"];
-$semaine["gardien"] = $infTraining["nbSemaineGardien"];
-$semaine["passe"] = $infTraining["nbSemainePasses"];
-$semaine["defense"] = $infTraining["nbSemaineDefense"];
-
-			  $coeff = getCoeffSelectionneur(2);
-				if($useFormule == 1 && $coeff["useit"] == 1){
-					
-					$score = calculNoteDynamique($carac,$semaine,$coeff);
-				echo $score;
-				   } else{
-				   
-					echo $l["scoreDefense"];
-					echo $ffont;
-				}
-
-					  ?>
-                      </div></td>
-
-                    <td width="1" rowspan="6" bgcolor="#000000"> <div align="center"><img src="../images/spacer.gif" width="1" height="1"> 
-                      </div>
-                      <div align="center"></div></td>
-                    <td width="40" witdth = "20"> <div align="center"> 
-						  
-												                      <?php
-					  
-				if($wingoff == 1)
-					echo "<font color = #000099><b>";
-				else
-					echo "<font color = gray>";
-					 
-$carac["endurance"] = $l["idEndurance"];
-$carac["construction"] = $l["idConstruction"];
-$carac["ailier"] = $l["idAilier"];
-$carac["buteur"] = $l["idButeur"];
-$carac["gardien"] = $l["idGardien"];
-$carac["passe"] = $l["idPasse"];
-$carac["defense"] = $l["idDefense"];
-$carac["xp"] = $l["idExperience_fk"];
-
-
-$semaine["construction"] = $infTraining["nbSemaineConstruction"];
-$semaine["ailier"] = $infTraining["nbSemaineAilier"];
-$semaine["buteur"] = $infTraining["nbSemaineButeur"];
-$semaine["gardien"] = $infTraining["nbSemaineGardien"];
-$semaine["passe"] = $infTraining["nbSemainePasses"];
-$semaine["defense"] = $infTraining["nbSemaineDefense"];
-
-			  $coeff = getCoeffSelectionneur(3);
-				if($useFormule == 1 && $coeff["useit"] == 1){
-					
-					$score = calculNoteDynamique($carac,$semaine,$coeff);
-				echo $score;
-				   } else{
-				   
-					echo $l["scoreAilierOff"];
-					echo $ffont;
-				}
-
-					  ?>
-                      </div>
-					  
-                    <td width="1" rowspan="6" bgcolor="#000000"> <div align="center"><img src="../images/spacer.gif" width="1" height="1"></div>
-                      <img src="../images/spacer.gif" width="1" height="1"> <div align="center"><img src="../images/spacer.gif" width="1" height="1"></div></td>
-                    <td width="40" witdth = "20"> <div align="center"> 
-											
-																				                      <?php
-					  if($m == 1)
-					 {
-					echo "<font color = #000099><b>";
-					 }
-					  else
-					echo "<font color = gray>";
-				   
-$carac["endurance"] = $l["idEndurance"];
-$carac["construction"] = $l["idConstruction"];
-$carac["ailier"] = $l["idAilier"];
-$carac["buteur"] = $l["idButeur"];
-$carac["gardien"] = $l["idGardien"];
-$carac["passe"] = $l["idPasse"];
-$carac["defense"] = $l["idDefense"];
-$carac["xp"] = $l["idExperience_fk"];
-
-
-$semaine["construction"] = $infTraining["nbSemaineConstruction"];
-$semaine["ailier"] = $infTraining["nbSemaineAilier"];
-$semaine["buteur"] = $infTraining["nbSemaineButeur"];
-$semaine["gardien"] = $infTraining["nbSemaineGardien"];
-$semaine["passe"] = $infTraining["nbSemainePasses"];
-$semaine["defense"] = $infTraining["nbSemaineDefense"];
-
-			  $coeff = getCoeffSelectionneur(4);
-				if($useFormule == 1 && $coeff["useit"] == 1){
-					
-					$score = calculNoteDynamique($carac,$semaine,$coeff);
-				echo $score;
-				   } else{
-				   
-					echo $l["scoreMilieu"];
-					echo $ffont;
-				}
-
-					  ?>     
-                      </div></td>
-
-                    <td width="1" rowspan="6" bgcolor="#000000"> <div align="center"><img src="../images/spacer.gif" width="1" height="1"></div>
-                      <img src="../images/spacer.gif" width="1" height="1"> <div align="center"><img src="../images/spacer.gif" width="1" height="1"></div></td>
-                    <td width="40" witdth = "20"> <div align="center"> 
-						
-																					
-																				                      <?php
-					  
-				   
-					  if($att == 1)
-					 {
-					echo "<font color = #000099><b>";
-					 }
-					  else
-					echo "<font color = gray>";
-					 
-$carac["endurance"] = $l["idEndurance"];
-$carac["construction"] = $l["idConstruction"];
-$carac["ailier"] = $l["idAilier"];
-$carac["buteur"] = $l["idButeur"];
-$carac["gardien"] = $l["idGardien"];
-$carac["passe"] = $l["idPasse"];
-$carac["defense"] = $l["idDefense"];
-$carac["xp"] = $l["idExperience_fk"];
-
-
-$semaine["construction"] = $infTraining["nbSemaineConstruction"];
-$semaine["ailier"] = $infTraining["nbSemaineAilier"];
-$semaine["buteur"] = $infTraining["nbSemaineButeur"];
-$semaine["gardien"] = $infTraining["nbSemaineGardien"];
-$semaine["passe"] = $infTraining["nbSemainePasses"];
-$semaine["defense"] = $infTraining["nbSemaineDefense"];
-
-			  $coeff = getCoeffSelectionneur(5);
-				if($useFormule == 1 && $coeff["useit"] == 1){
-					
-					$score = calculNoteDynamique($carac,$semaine,$coeff);
-				echo $score;
-				   } else{
-				   
-					echo $l["scoreAttaquant"];
-					echo $ffont;
-				}
-
-					  ?>     
-
-                      </div></td>
-                    <td width="1" rowspan="6" bgcolor="#000000"> <div align="center"><img src="../images/spacer.gif" width="1" height="1"></div>
-                      <img src="../images/spacer.gif" width="1" height="1"> <div align="center"><img src="../images/spacer.gif" width="1" height="1"></div></td>
-                    <td width="40" witdth = "20"> <div align="center"> 
                         <?php
 					
 
