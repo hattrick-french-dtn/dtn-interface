@@ -2063,10 +2063,14 @@ function majJoueur($ht_user,$role_user,$joueurHT,$joueurDTN){
 					$update_joueur['idGardien']=$joueurHT['idGardien'];
 					$resMAJ['HTML'].=' Gardien: '.$joueurDTN["idGardien"].'-&gt; '.$joueurHT['idGardien'].'<br>' ;
 					$histoModifMsg .=' Gardien: '.$joueurDTN['idGardien'].' -> '.$joueurHT['idGardien'];
+                    if ($joueurDTN['idGardien']>$joueurHT['idGardien']) {
+					$update_joueur_entrainement['nbSemaineGardien']=99;
+                    } else {
+                    $update_joueur_entrainement['nbSemaineGardien']=0;
+                    }
 					$joueurDTN["idGardien"]=$joueurHT['idGardien'];
 					$recalcul_note=true;
 					$update_joueur['date_modif_effectif']=date('Y-m-d');
-					$update_joueur_entrainement['nbSemaineGardien']=0;
 				}  
 		
 				//******* CONSTRUCTION *******//
@@ -2074,10 +2078,14 @@ function majJoueur($ht_user,$role_user,$joueurHT,$joueurDTN){
 					$update_joueur['idConstruction']=$joueurHT['idConstruction'];
 					$resMAJ['HTML'].=' Constru.: '.$joueurDTN["idConstruction"].'-&gt; '.$joueurHT['idConstruction'].'<br>' ;
 					$histoModifMsg .=' Construction: '.$joueurDTN['idConstruction'].' -> '.$joueurHT['idConstruction'];
-					$joueurDTN["idConstruction"]=$joueurHT['idConstruction'];
+					if ($joueurDTN['idConstruction']>$joueurHT['idConstruction']) {
+					$update_joueur_entrainement['nbSemaineConstruction']=99;
+                    } else {
+                    $update_joueur_entrainement['nbSemaineConstruction']=0;
+                    }
+                    $joueurDTN["idConstruction"]=$joueurHT['idConstruction'];
 					$recalcul_note=true;
 					$update_joueur['date_modif_effectif']=date('Y-m-d');
-					$update_joueur_entrainement['nbSemaineConstruction']=0;
 				}
 	  
 				//******* PASSE *******//
@@ -2085,10 +2093,14 @@ function majJoueur($ht_user,$role_user,$joueurHT,$joueurDTN){
 					$update_joueur['idPasse']=$joueurHT['idPasse'];
 					$resMAJ['HTML'].=' Passe: '.$joueurDTN["idPasse"].'-&gt; '.$joueurHT['idPasse'].'<br>' ;
 					$histoModifMsg .=' Passe: '.$joueurDTN['idPasse'].' -> '.$joueurHT['idPasse'];
+                    if ($joueurDTN['idPasse']>$joueurHT['idPasse']) {
+					$update_joueur_entrainement['nbSemainePasses']=99;
+                    } else {
+                    $update_joueur_entrainement['nbSemainePasses']=0;
+                    }
 					$joueurDTN["idPasse"]=$joueurHT['idPasse'];
 					$recalcul_note=true;
 					$update_joueur['date_modif_effectif']=date('Y-m-d');
-					$update_joueur_entrainement['nbSemainePasses']=0;
 				}
 	  
 				//******* AILIER *******//
@@ -2096,10 +2108,14 @@ function majJoueur($ht_user,$role_user,$joueurHT,$joueurDTN){
 					$update_joueur['idAilier']=$joueurHT['idAilier'];
 					$resMAJ['HTML'].=' Ailier: '.$joueurDTN["idAilier"].'-&gt; '.$joueurHT['idAilier'].'<br>' ;
 					$histoModifMsg .=' Ailier: '.$joueurDTN['idAilier'].' -> '.$joueurHT['idAilier'];
+                    if ($joueurDTN['idAilier']>$joueurHT['idAilier']) {
+					$update_joueur_entrainement['nbSemaineAilier']=99;
+                    } else {
+                    $update_joueur_entrainement['nbSemaineAilier']=0;
+                    }
 					$joueurDTN["idAilier"]=$joueurHT['idAilier'];
 					$recalcul_note=true;
 					$update_joueur['date_modif_effectif']=date('Y-m-d');
-					$update_joueur_entrainement['nbSemaineAilier']=0;
 				}
 	  
 				//******* DEFENSE *******//
@@ -2107,10 +2123,14 @@ function majJoueur($ht_user,$role_user,$joueurHT,$joueurDTN){
 					$update_joueur['idDefense']=$joueurHT['idDefense'];
 					$resMAJ['HTML'].=' Def.: '.$joueurDTN["idDefense"].'-&gt; '.$joueurHT['idDefense'].'<br>' ;
 					$histoModifMsg .=' Defense: '.$joueurDTN['idDefense'].' -> '.$joueurHT['idDefense'];
+                    if ($joueurDTN['idDefense']>$joueurHT['idDefense']) {
+					$update_joueur_entrainement['nbSemaineDefense']=99;
+                    } else {
+                    $update_joueur_entrainement['nbSemaineDefense']=0;
+                    }
 					$joueurDTN["idDefense"]=$joueurHT['idDefense'];
 					$recalcul_note=true;
 					$update_joueur['date_modif_effectif']=date('Y-m-d');
-					$update_joueur_entrainement['nbSemaineDefense']=0;
 				}
 	  
 				//******* BUTEUR *******//
@@ -2118,10 +2138,14 @@ function majJoueur($ht_user,$role_user,$joueurHT,$joueurDTN){
 					$update_joueur['idButeur']=$joueurHT['idButeur'];
 					$resMAJ['HTML'].=' Buteur: '.$joueurDTN["idButeur"].'-&gt; '.$joueurHT['idButeur'].'<br>' ;
 					$histoModifMsg .=' Buteur: '.$joueurDTN['idButeur'].' -> '.$joueurHT['idButeur'];
+                    if ($joueurDTN['idButeur']>$joueurHT['idButeur']) {
+					$update_joueur_entrainement['nbSemaineButeur']=99;
+                    } else {
+                    $update_joueur_entrainement['nbSemaineButeur']=0;
+                    }
 					$joueurDTN["idButeur"]=$joueurHT['idButeur'];
 					$recalcul_note=true;
 					$update_joueur['date_modif_effectif']=date('Y-m-d');
-					$update_joueur_entrainement['nbSemaineButeur']=0;
 				}
 	  
 				//******* CF *******//
