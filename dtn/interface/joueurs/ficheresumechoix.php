@@ -495,7 +495,7 @@ function scanid()
     //Rajouter le TDC si honorable
     if ('<?=$infJs[$i]["idLeader_fk"]?>'==7) c=c+' / [b]TDC 7[/b]';
     //Rajouter la spé. si il y en a une
-    if ('<?=$infJs[$i]["optionJoueur"]?>'!=0) c=c+' / '+'[i]<?=$option[$infJs[$i]["optionJoueur"]]["FR"]?>[/i]';
+    if ('<?=$infJs[$i]["optionJoueur"]?>'!=0) c=c+' / '+'[b]<?=$coloredspecabbrevs[$infJs[$i]["optionJoueur"]]?>[/b]';
 	var htmss = htmspoint(<?=$tabage[$i][0]?>, <?=$tabage[$i][1]?>,
 		active[0]?<?=$infJs[$i]["idGardien"]?>:0, <?=$infJs[$i]["nbSemaineGardien"]?>,
 		active[1]?<?=$infJs[$i]["idDefense"]?>:0, <?=$infJs[$i]["nbSemaineDefense"]?>,

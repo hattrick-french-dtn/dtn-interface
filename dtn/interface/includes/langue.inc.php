@@ -62,6 +62,16 @@ $specabbrevs[6] = "Res";
 $specabbrevs[7] = "";
 $specabbrevs[8] = "ChO";
 
+$coloredspecabbrevs[0] = "-";
+$coloredspecabbrevs[1] = "[color=#9900ff]Tec[/color]";
+$coloredspecabbrevs[2] = "[color=#0000ff]Rap[/color]";
+$coloredspecabbrevs[3] = "[color=#f1c232]Cos[/color]";
+$coloredspecabbrevs[4] = "[color=#00ff00]Imp[/color]";
+$coloredspecabbrevs[5] = "[color=#ff0000]JdT[/color]";
+$coloredspecabbrevs[6] = "Res";
+$coloredspecabbrevs[7] = "";
+$coloredspecabbrevs[8] = "ChO";
+
 $option[0]["UK"] = "None";
 $option[1]["UK"] = "Technical";
 $option[2]["UK"] = "Quick";
