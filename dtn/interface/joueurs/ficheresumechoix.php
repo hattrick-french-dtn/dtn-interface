@@ -149,10 +149,10 @@ function scanid()
     
     a=a+'[b]';
     a=a+'<?=$infJs[$i]["prenomJoueur"]?> ';
-    a=a+'<?=$infJs[$i]["nomJoueur"]?>';
-	<?php if (isset($infJs[$i]["surnomJoueur"])) { ?>
-    a=a+' (<?=$infJs[$i]["surnomJoueur"]?>)';
+    <?php if (isset($infJs[$i]["surnomJoueur"])) { ?>
+    a=a+'"<?=$infJs[$i]["surnomJoueur"]?>" ';
 	<?php } ?>
+    a=a+'<?=$infJs[$i]["nomJoueur"]?>';
     a=a+' ([url=https://www.hattrick.org/goto.ashx?path=/Club/Players/Player.aspx?playerId=<?=strtolower($infJs[$i]["idHattrickJoueur"])?>]<?=strtolower($infJs[$i]["idHattrickJoueur"])?>[/url])';
     a=a+'[/b]'; 
   	a=a+' <?=$tabage[$i][0]?> ans et <?=$tabage[$i][1]?> jour';
