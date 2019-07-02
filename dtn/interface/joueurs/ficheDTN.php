@@ -192,6 +192,10 @@ if(isset($msg)) {?>
       			&nbsp;<a href="#" onClick='AlertNumServeurHT();'
       		<?php } ?>
       		    alt="ht">HT-mail</a>
+                <form method="post" action="../maliste/miseajourunique.php">
+                <input type="hidden" name="joueur" value= <?=$joueurDTN["idHattrickJoueur"]?> />
+                <input type="submit" value="Mettre &agrave; jour sur Hattrick" />
+                </form>
         </td>
         </tr>
 		<tr>
