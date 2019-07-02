@@ -758,39 +758,63 @@ case "addNiveau":
 		switch($idTypeCarac){
 		case "1";
 			$nomNiveau=" Construction ";
+            if ($niveauInitial < $niveau) {
 			$sql = "update $tbl_entrainement set nbSemaineConstruction  = 0 where idJoueur_fk = $idJoueur";
+            } else {
+            $sql = "update $tbl_entrainement set nbSemaineConstruction  = 99 where idJoueur_fk = $idJoueur";
+            }
 			$req=$conn->exec($sql);
 			$updatedate_modif_effectif="on";
 			break;
 	  
 		case "2";
 			$nomNiveau=" Ailier ";
+            if ($niveauInitial < $niveau) {
 			$sql = "update $tbl_entrainement set nbSemaineAilier  = 0 where idJoueur_fk = $idJoueur";
+            } else {
+            $sql = "update $tbl_entrainement set nbSemaineAilier  = 99 where idJoueur_fk = $idJoueur";
+            }
 			$req=$conn->exec($sql);
 			$updatedate_modif_effectif="on";
 			break;
 	  
 		case "3";
 			$nomNiveau=" Buteur ";
+            if ($niveauInitial < $niveau) {
 			$sql = "update $tbl_entrainement set nbSemaineButeur  = 0 where idJoueur_fk = $idJoueur";
+            } else {
+            $sql = "update $tbl_entrainement set nbSemaineButeur  = 99 where idJoueur_fk = $idJoueur";
+            }
 			$req=$conn->exec($sql);
 			$updatedate_modif_effectif="on";
 			break;
 		case "4";
 			$nomNiveau=" Gardien ";
+            if ($niveauInitial < $niveau) {
 			$sql = "update $tbl_entrainement set nbSemaineGardien  = 0 where idJoueur_fk = $idJoueur";
+            } else {
+            $sql = "update $tbl_entrainement set nbSemaineGardien  = 99 where idJoueur_fk = $idJoueur";
+            }
 			$req=$conn->exec($sql);
 			$updatedate_modif_effectif="on";
 			break;
 		case "5";
 			$nomNiveau=" Passe ";
+            if ($niveauInitial < $niveau) {
 			$sql = "update $tbl_entrainement set nbSemainePasses  = 0 where idJoueur_fk = $idJoueur";
+            } else {
+            $sql = "update $tbl_entrainement set nbSemainePasses  = 99 where idJoueur_fk = $idJoueur";
+            }
 			$req=$conn->exec($sql);
 			$updatedate_modif_effectif="on";
 			break;
 		case "6";
 			$nomNiveau=" Defense ";
+            if ($niveauInitial < $niveau) {
 			$sql = "update $tbl_entrainement set nbSemaineDefense  = 0 where idJoueur_fk = $idJoueur";
+            } else {
+            $sql = "update $tbl_entrainement set nbSemaineDefense  = 99 where idJoueur_fk = $idJoueur";
+            }
 			$req=$conn->exec($sql);
 			$updatedate_modif_effectif="on";
 			break;
