@@ -150,7 +150,7 @@ foreach ($conn->query($sql) as $l) {
 	}
 	$htms = htmspoint($l["AgeAn"], $l["AgeJour"], $l["idGardien"], $l["idDefense"], $l["idConstruction"], $l["idAilier"], $l["idPasse"], $l["idButeur"], $l["idPA"]);
 
-?><?=strtolower($l["prenomJoueur"])?> <?=strtolower($l["nomJoueur"])?>;<?php
+?><?=utf8_decode($l["prenomJoueur"])?> <?=utf8_decode($l["nomJoueur"])?>;<?php
 	echo $l["idHattrickJoueur"].";";
 	echo $l["dateDerniereModifJoueur"].";";
 	echo $l["dateSaisieJoueur"].";";
@@ -172,9 +172,9 @@ foreach ($conn->query($sql) as $l) {
 	echo  $l["idPA"].";";
 
 	echo $infJ["niv_Entraineur"].";";
-	$nom_entrainement=getEntrainementName($infJ["entrainement_id"],$listEntrainement);
+	$nom_entrainement=utf8_decode(getEntrainementName($infJ["entrainement_id"],$listEntrainement));
 	echo $nom_entrainement.";";
-	if ($infJ["dtnSuiviJoueur_fk"] != 0)	{echo $infJ["loginAdminSuiveur"].";";}
+	if ($infJ["dtnSuiviJoueur_fk"] != 0)	{echo utf8_decode($infJ["loginAdminSuiveur"]).";";}
 	else echo ";";
 
 	switch ($sesUser["idPosition_fk"]) {
