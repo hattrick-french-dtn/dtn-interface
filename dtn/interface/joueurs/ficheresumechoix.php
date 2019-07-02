@@ -148,10 +148,10 @@ function scanid()
     if ('<?=$infJs[$i]["niv_Entraineur"]?>'==8) a=a+' :D ';
     
     a=a+'[b]';
-    a=a+'<?=ucwords(strtolower($infJs[$i]["prenomJoueur"]))?> ';
-    a=a+'<?=ucwords(strtolower($infJs[$i]["nomJoueur"]))?>';
+    a=a+'<?=$infJs[$i]["prenomJoueur"]?> ';
+    a=a+'<?=$infJs[$i]["nomJoueur"]?>';
 	<?php if (isset($infJs[$i]["surnomJoueur"])) { ?>
-    a=a+' (<?=ucwords($infJs[$i]["surnomJoueur"])?>)';
+    a=a+' (<?=$infJs[$i]["surnomJoueur"]?>)';
 	<?php } ?>
     a=a+' ([url=https://www.hattrick.org/goto.ashx?path=/Club/Players/Player.aspx?playerId=<?=strtolower($infJs[$i]["idHattrickJoueur"])?>]<?=strtolower($infJs[$i]["idHattrickJoueur"])?>[/url])';
     a=a+'[/b]'; 
