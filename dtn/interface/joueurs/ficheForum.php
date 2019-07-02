@@ -115,7 +115,7 @@ require("../menu/menuJoueur.php");
 
 <p style="border: 1px solid black;padding: 10px 10px 10px 10px">
   <span id="textespan" >
-    [b]<?=ucwords($infJ["prenomJoueur"])?> <?php if (isset($infJ["surnomJoueur"])) echo " (".$infJ["surnomJoueur"].")"; ?> <?=ucwords($infJ["nomJoueur"])?>
+    [b]<?=$infJ["prenomJoueur"]?> <?php if (isset($infJ["surnomJoueur"])) echo ' "'.$infJ["surnomJoueur"].'"'; ?> <?=$infJ["nomJoueur"]?>
     ([url=https://www.hattrick.org/goto.ashx?path=/Club/Players/Player.aspx?playerId=<?=strtolower($infJ["idHattrickJoueur"])?>]<?=strtolower($infJ["idHattrickJoueur"])?>[/url]) 
     <br/>
     <?php 
