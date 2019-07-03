@@ -1097,7 +1097,7 @@ function validateMinimaPlayer($player,$todaySeason)
 	
 	if (!$reqValid) {
 		$result=-1;
-		for ($j=0;$j<count($lstReq);$j++){
+		for ($j=0;$j<count($lstReq);$j++){ 
 			$requirement=$lstReq[$j];
 			if (checkCarac(  $player,$requirement["carac_1"],$requirement["level_1"]) ){
 				if (checkCarac(  $player,$requirement["carac_2"],$requirement["level_2"])){
