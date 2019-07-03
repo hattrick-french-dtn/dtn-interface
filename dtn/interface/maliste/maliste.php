@@ -346,6 +346,15 @@ foreach ($conn->query($sql) as $l) {
 	$ligne3 = $req3->fetch(PDO::FETCH_ASSOC);
 	extract($ligne3);
 
+// Extraction statut du joueur à la dernière MàJ (en vente ou non)
+            $sql4= "SELECT transferListed FROM $tbl_joueurs_histo
+                   WHERE id_joueur_fk=".$l["idHattrickJoueur"]." 
+                   ORDER BY date_histo DESC LIMIT 1";
+            $req4 = $conn->query($sql4);
+            $ligne4 = $req4->fetch(PDO::FETCH_ASSOC);
+            if (is_array($ligne4))
+            extract($ligne4);
+
 	$infJ = getJoueur($l["idJoueur"]);
 	
 	$listID.=$infJ["idHattrickJoueur"].";";
@@ -404,7 +413,7 @@ foreach ($conn->query($sql) as $l) {
                     <?php } else {?>
                       <img height="12" src="../images/Autorise.PNG" title="Ce club a autoris&eacute; la DTN &agrave; acc&eacute;der &agrave; ses donn&eacute;es">
                     <?php }?>
-                    
+                    <?php if ($transferListed==1) {?><img src="../images/enVente.JPG" title="Plac&eacute; sur la liste des transferts"><?php }?>
                     <a href ="<?=$url?>/joueurs/ficheDTN.php?id=<?=$l["idJoueur"]?>" class=<?=$class?>> 
                       <b> 
                       <?=strtolower($l["prenomJoueur"])?> <?=strtolower($l["nomJoueur"])?>
