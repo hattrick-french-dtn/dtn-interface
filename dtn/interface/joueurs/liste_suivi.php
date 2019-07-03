@@ -165,7 +165,7 @@ $_SESSION['ListeFicheResume']=$lstJoueur;
               <img height="12" src="../images/non_autorise.JPG" title="Ce club n'a pas autoris&eacute; la DTN &agrave; acc&eacute;der &agrave; ses donn&eacute;es">
             <?php } else {?>
               <img height="12" src="../images/Autorise.PNG" title="Ce club a autoris&eacute; la DTN &agrave; acc&eacute;der &agrave; ses donn&eacute;es">
-            <?php if ($transferListed==1) {?><img src="../images/enVente.JPG" title="Plac&eacute; sur la liste des transferts"><?php }?>
+            <?php if ($transferListed==1) {?><img height="12" src="../images/enVente.JPG" title="Plac&eacute; sur la liste des transferts"><?php }?>
             <?php }
 				if (isset($lstJoueur[$j]["idClubHT"])) {
 			?>
