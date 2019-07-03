@@ -64,7 +64,7 @@ function checkNumberMatch($season,$week,$maBase){
 
 function checkNumberPoste($maBase,$poste){
 
-  $sql =  "select	count(1) from ht_joueurs where ht_posteAssigne ='$poste' and archiveJoueur='0' and joueurActif='1' ";
+  $sql =  "select	count(1) from ht_joueurs where ht_posteAssigne ='$poste' or ht_posteAssigne ='0' and archiveJoueur='0' and joueurActif='1' ";
 
  	$resPlayers= $maBase->select($sql);
 	$countPlayers  = $resPlayers[0][0];
@@ -249,7 +249,9 @@ if ( isset($_SESSION['HT']) ) { ?>
       		$sql = "SELECT $tbl_joueurs.idHattrickJoueur
                   FROM $tbl_joueurs 
       		        WHERE 
-                      $tbl_joueurs.ht_posteAssigne = '".$_REQUEST['ht_posteAssigne']."' 
+                        $tbl_joueurs.ht_posteAssigne = '".$_REQUEST['ht_posteAssigne']."'
+                    OR
+                        $tbl_joueurs.ht_posteAssigne = '0'
       		        AND $tbl_joueurs.affJoueur = '1' 
                     AND $SqlAgeJoueur < '21'
                     ORDER BY idHattrickJoueur DESC,prenomJoueur,nomJoueur 
@@ -258,7 +260,9 @@ if ( isset($_SESSION['HT']) ) { ?>
             $sql = "SELECT $tbl_joueurs.idHattrickJoueur
                   FROM $tbl_joueurs 
       		        WHERE 
-                      $tbl_joueurs.ht_posteAssigne = '".$_REQUEST['ht_posteAssigne']."' 
+                      $tbl_joueurs.ht_posteAssigne = '".$_REQUEST['ht_posteAssigne']."'
+                    OR
+                        $tbl_joueurs.ht_posteAssigne = '0'
       		        AND $tbl_joueurs.affJoueur = '1' 
                     AND $SqlAgeJoueur >= '21'
                     ORDER BY idHattrickJoueur DESC,prenomJoueur,nomJoueur 
@@ -267,7 +271,9 @@ if ( isset($_SESSION['HT']) ) { ?>
             $sql = "SELECT $tbl_joueurs.idHattrickJoueur
                   FROM $tbl_joueurs 
       		        WHERE 
-                      $tbl_joueurs.ht_posteAssigne = '".$_REQUEST['ht_posteAssigne']."' 
+                      $tbl_joueurs.ht_posteAssigne = '".$_REQUEST['ht_posteAssigne']."'
+                    OR
+                        $tbl_joueurs.ht_posteAssigne = '0'
       		        AND $tbl_joueurs.affJoueur = '1' 
                     AND $SqlAgeJoueur BETWEEN '19' AND '20'
                     ORDER BY idHattrickJoueur DESC,prenomJoueur,nomJoueur 
@@ -276,7 +282,9 @@ if ( isset($_SESSION['HT']) ) { ?>
             $sql = "SELECT $tbl_joueurs.idHattrickJoueur
                   FROM $tbl_joueurs 
       		        WHERE 
-                      $tbl_joueurs.ht_posteAssigne = '".$_REQUEST['ht_posteAssigne']."' 
+                      $tbl_joueurs.ht_posteAssigne = '".$_REQUEST['ht_posteAssigne']."'
+                    OR
+                        $tbl_joueurs.ht_posteAssigne = '0'
       		        AND $tbl_joueurs.affJoueur = '1' 
                     AND $SqlAgeJoueur >= '27'
                     ORDER BY idHattrickJoueur DESC,prenomJoueur,nomJoueur 
@@ -285,7 +293,9 @@ if ( isset($_SESSION['HT']) ) { ?>
             $sql = "SELECT $tbl_joueurs.idHattrickJoueur
                   FROM $tbl_joueurs 
       		        WHERE 
-                      $tbl_joueurs.ht_posteAssigne = '".$_REQUEST['ht_posteAssigne']."' 
+                      $tbl_joueurs.ht_posteAssigne = '".$_REQUEST['ht_posteAssigne']."'
+                    OR
+                        $tbl_joueurs.ht_posteAssigne = '0'
       		        AND $tbl_joueurs.affJoueur = '1' 
                     ORDER BY idHattrickJoueur DESC,prenomJoueur,nomJoueur 
                   LIMIT ".$_GET['startingPlayer'].",".$_REQUEST['nbrePlayersMax'];
