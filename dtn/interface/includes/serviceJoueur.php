@@ -1096,7 +1096,19 @@ function validateMinimaPlayer($player,$todaySeason)
 	}
 	
 	if (!$reqValid) {
-		return -1;
+		$result=-1;
+		for ($j=0;$j<count($lstReq);$j++){
+			$requirement=$lstReq[$j];
+			if (checkCarac(  $player,$requirement["carac_1"],$requirement["level_1"]) ){
+				if (checkCarac(  $player,$requirement["carac_2"],$requirement["level_2"])){
+					if($result==-1){
+						$result=$requirement["position_id"];
+					}else{
+						return -2; // 2 caracs sont bonnes pas de categorie.
+					}
+				} 
+			}
+		}
 	} else {
 		//** ATTENTION! dans ce cas, les joueurs sont tous acceptes, soit la semaine n'est pas valide (>16 ou negative)
 		return -2;
