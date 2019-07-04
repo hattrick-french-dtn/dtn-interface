@@ -138,8 +138,13 @@ document.body.scrollTop = scrollPos;
 
 <?php
 if (isset($_SESSION['HT'])) {
+    if (isset($_POST["dtn"]) && $_POST["dtn"]!=$_SESSION['sesUser']["idAdmin"]) { // Si un DTN+ veut faire la màj d'un de ses DTNs
+        $idDTN = $_POST["dtn"];
+    } else {
+        $idDTN = $_SESSION['sesUser']["idAdmin"];
+    }
 
-  $listeJoueursDTN=getJoueurByDTN($_SESSION['sesUser']["idAdmin"]);
+  $listeJoueursDTN=getJoueurByDTN($idDTN);
 
   if(!$listeJoueursDTN){
       echo("Erreur lors de l'extraction des joueurs. Contactez un d&eacute;veloppeurs ou les administrateurs de la DTN.");
@@ -154,7 +159,7 @@ if (isset($_SESSION['HT'])) {
 
   // MAJ des joueurs avec chargement des matchs
   unset($resUpdateJoueur);
-  $resUpdateJoueur=scanListeJoueurs($listeID,$_SESSION['sesUser']["loginAdmin"],"D",true,true);
+  $resUpdateJoueur=scanListeJoueurs($listeID,$idDTN,"D",true,true);
   ?>
   
 
