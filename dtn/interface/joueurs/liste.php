@@ -350,7 +350,7 @@ break;
                     <?php } else {?>
                       <img height="12" src="../images/Autorise.PNG" title="Ce club a autoris&eacute; la DTN &agrave; acc&eacute;der &agrave; ses donn&eacute;es">
                     <?php }?>
-                    <?php if ($transferListed==1) {?><img src="../images/enVente.JPG" title="Plac&eacute; sur la liste des transferts"><?php }?>
+                    <?php if ($transferListed==1) {?><img height="12" src="../images/enVente.JPG" title="Plac&eacute; sur la liste des transferts"><?php }?>
                     <a href ="<?=$url?>/joueurs/ficheDTN.php?id=<?=$l["idJoueur"]?>" class="bred1"> 
                       <b> 
                       <?=strtolower($l["prenomJoueur"])?> <?=strtolower($l["nomJoueur"])?>
