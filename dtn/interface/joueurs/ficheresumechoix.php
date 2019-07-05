@@ -110,53 +110,58 @@ function scanid()
     var a='';
     var b='';
     var c='';
+    var d='';
+    var e='';
     var couleur='0';
     
-  	if ('<?=$sesUser["saison"]?>' % 2 == 0) {
+    if ('<?=$infJs[$i]["niv_Entraineur"]?>'<7) e=e+' :evil: ';
+    if ('<?=$infJs[$i]["niv_Entraineur"]?>'==7) e=e+' :arrow: ';
+    if ('<?=$infJs[$i]["niv_Entraineur"]?>'==8) e=e+' :D ';
+    
+    e=e+'[b]';
+    e=e+'<?=$infJs[$i]["prenomJoueur"]?> ';
+    <?php if (isset($infJs[$i]["surnomJoueur"])) { ?>
+    e=e+'"<?=$infJs[$i]["surnomJoueur"]?>" ';
+	<?php } ?>
+    e=e+'<?=$infJs[$i]["nomJoueur"]?>';
+    e=e+' ([url=https://www.hattrick.org/goto.ashx?path=/Club/Players/Player.aspx?playerId=<?=strtolower($infJs[$i]["idHattrickJoueur"])?>]<?=strtolower($infJs[$i]["idHattrickJoueur"])?>[/url])';
+    e=e+'[/b]'; 
+    
+    if ('<?=$sesUser["saison"]?>' % 2 == 0) {
   	// saison paire CDM
   		if ('<?=$jourjoueur[$i]?>' > 2067) {
   			if ('<?=$jourjoueur[$i]?>' < 2129)
-  				a= '[color=blue]';
+  				d= '[color=blue]';
   			else if ('<?=$jourjoueur[$i]?>' < 2178)
-  				a= '[color=red]';
+  				d= '[color=red]';
   			else if ('<?=$jourjoueur[$i]?>' < 2292)
-  				a= '[color=green]';
+  				d= '[color=green]';
   			else if ('<?=$jourjoueur[$i]?>' < 2239)
-  				a= '[color=green]';
+  				d= '[color=green]';
   			else if ('<?=$jourjoueur[$i]?>' < 2255)
-  				a= '[color=orange]';
+  				d= '[color=orange]';
   			else if ('<?=$jourjoueur[$i]?>' < 2290)
-  				a= '[color=violet]';
+  				d= '[color=violet]';
   		}
   	}
   	else {
   		if ('<?=$jourjoueur[$i]?>' < 2127)
-  			a= '[color=green]';
+  			d= '[color=green]';
   		else if ('<?=$jourjoueur[$i]?>' < 2143)
-  			a= '[color=orange]';
+  			d= '[color=orange]';
   		else if ('<?=$jourjoueur[$i]?>' < 2178)
-  			a= '[color=violet]';
+  			d= '[color=violet]';
   		else if ('<?=$jourjoueur[$i]?>' < 2241)
-  			a= '[color=blue]';
+  			d= '[color=blue]';
   		else if ('<?=$jourjoueur[$i]?>' < 2290)
-  			a= '[color=red]';
+  			d= '[color=red]';
   	}
-  	if (a!='') couleur='1';
-  
-    if ('<?=$infJs[$i]["niv_Entraineur"]?>'<7) a=a+' :evil: ';
-    if ('<?=$infJs[$i]["niv_Entraineur"]?>'==7) a=a+' :arrow: ';
-    if ('<?=$infJs[$i]["niv_Entraineur"]?>'==8) a=a+' :D ';
+  	if (d!='') couleur='1';
     
-    a=a+'[b]';
-    a=a+'<?=$infJs[$i]["prenomJoueur"]?> ';
-    <?php if (isset($infJs[$i]["surnomJoueur"])) { ?>
-    a=a+'"<?=$infJs[$i]["surnomJoueur"]?>" ';
-	<?php } ?>
-    a=a+'<?=$infJs[$i]["nomJoueur"]?>';
-    a=a+' ([url=https://www.hattrick.org/goto.ashx?path=/Club/Players/Player.aspx?playerId=<?=strtolower($infJs[$i]["idHattrickJoueur"])?>]<?=strtolower($infJs[$i]["idHattrickJoueur"])?>[/url])';
-    a=a+'[/b]'; 
   	a=a+' <?=$tabage[$i][0]?> ans et <?=$tabage[$i][1]?> jour';
   	if ('<?=$tabage[$i][1]?>'>1) a=a+'s';
+    //On rajoute [/color] si besoin = si couleur=true
+    if (couleur=='1') a=a+'[/color]';
   	a=a+' ';
   
     //modification sur toutes les fiches pour l'ajout du CF par jojoje86 le 21/07/09
@@ -530,11 +535,8 @@ function scanid()
       else c=c+' / Non suivi';
     }
     
-    //On rajoute [/color] si besoin = si couleur=true
-    if (couleur=='1') c=c+'[/color]';
-  
     //On concatène
-    totalta=totalta+a+b+c;
+    totalta=totalta+e+d+a+b+c;
     if ('<?=$origine?>'!='unique') totalta=totalta+'\n';
   <?php
     }
