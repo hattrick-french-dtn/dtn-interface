@@ -126,6 +126,16 @@ to be part of the DTN. This was a no-brainer, especially since we have some memb
           <td width="2%"><div align="right"><span class="style40"><strong><span class="style17">Fw</span></strong></span></div></td>
           <td width="27%"><div align="left">[<strong><a href="https://www.hattrick.org/goto.ashx?path=/Club/Manager/?userId=2777249">flam_</a></strong>]</div></td>
         </tr>
+        <tr>
+          <td width="8%"><div align="right"><span class="style40"><strong><span class="style17">A/NT|</span></strong></span></div></td>
+          <td width="13%"><div align="right"><span class="style40"><strong>Long Shots</strong>|</span></div></td>
+          <td width="18%"><div align="right"><span class="style40">Tiros lejanos|</span></div></td>
+          <td width="14%"><div align="right"><span class="style40">Tir de loin|</span></div></td>
+          <td width="10%"><div align="right"><span class="style40">Tiri da fuori|</span></div></td>
+          <td width="16%"><div align="right"><span class="style40">Weitschusse|</span></div></td>
+          <td width="2%"><div align="right"><span class="style40"><strong><span class="style17">TdL</span></strong></span></div></td>
+          <td width="27%"><div align="left">[<strong><a href="https://www.hattrick.org/goto.ashx?path=/Club/Manager/?userId=13418869">abrincate</a></strong>]</div></td>
+        </tr>
       </table>
 	 </td></tr>
 	 <tr><td>&nbsp;</td></tr>
