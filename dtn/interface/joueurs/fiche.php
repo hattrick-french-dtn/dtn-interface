@@ -12,6 +12,14 @@ if(!$_SESSION['sesUser']["idAdmin"])
 	header("location: ../index.php?ErrorMsg=Session Expiree");
 	exit();
 }
+// header pour debug variables fiche
+	header("Content-type: text/csv");
+if (!isset ($ordre)) 	$ordre = "idHattrickJoueur";
+if (!isset ($sens)) 	$sens = "ASC";
+if (!isset ($lang)) $lang = "FR";
+if (!isset ($masque)) 	$masque = 0;
+if (!isset ($affPosition)) 	$affPosition = 0;
+if (!isset ($typeExport)) $typeExport = "maliste";
 
 $lang = "FR";
 
