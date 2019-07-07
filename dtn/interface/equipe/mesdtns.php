@@ -145,7 +145,7 @@ $mkday = mktime(0,0,0,date('m'), date('d'),date('Y'));
                     <td width="1" bgcolor="#000000"><img src="../images/spacer.gif" width="1" height="1"></td>
                     <td><div align="center"><?=$nbjsuivis?></td>
                     <td width="1" bgcolor="#000000"><strong><img src="../images/spacer.gif" width="1" height="1"></strong></td>
-                    <td><div align="center"><?=$lstSuperviseur["idAdminHT"]?></td>
+					<td><div align="center"><a href="https://www.hattrick.org/goto.ashx?path=/Club/Manager/?userId=<?=$lstSuperviseur["idAdminHT"]?>&browseIds="><?=$lstSuperviseur["idAdminHT"]?></a></td>
                     <td width="1" bgcolor="#000000"><strong><img src="../images/spacer.gif" width="1" height="1"></strong></td>
                 </tr>
 			      
