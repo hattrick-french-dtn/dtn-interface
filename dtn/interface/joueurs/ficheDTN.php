@@ -581,6 +581,8 @@ $reqHJ = $conn->query($sqlHJ);
             <td width=12%><div align="center" style="font-size: 9pt;color: white"><b>Date</b></div></td>
             <td width=10%><div align="center" style="font-size: 9pt;color: white"><b>Cr&eacute;&eacute; par</b></div></td>
             <td width=8%><div align="center" style="font-size: 9pt;color: white"><b>Entrainement</b></div></td>
+            <!-- ajout niveau entraineur -->
+            <td width=5%><div align="center" style="font-size: 9pt;color: white"><b>Entraineur</b></div></td>
             <td width=7%><div align="center" style="font-size: 9pt;color: white"><b>Intensit&eacute;</b></div></td>
             <td width=5%><div align="center" style="font-size: 9pt;color: white"><b>Endu</b></div></td>
             <td width=5%><div align="center" style="font-size: 9pt;color: white"><b>Adj.</b></div></td>
@@ -588,11 +590,13 @@ $reqHJ = $conn->query($sqlHJ);
             <td width=5%><div align="center" style="font-size: 9pt;color: white"><b>Prepa. phys.</b></div></td>
             <td width=43%><div align="center" style="font-size: 9pt;color: white"><b>Info club [<?=$joueurDTN["nomClub"]?>]</b></div></td>
           </tr>
+            <!-- ajout niveau entraineur (ligne 599) -->
           <?php
 		  $sqlClubsHisto = " SELECT DATE_FORMAT(ht_clubs_histo.date_histo,'%d/%m/%Y %H:%i:%s') AS date_histo,
                                       ht_clubs_histo.role_createur,
                                       ht_clubs_histo.cree_par,
                                       ht_type_entrainement.libelle_type_entrainement AS CaracEntraine,
+                                      ht_clubs.niv_Entraineur,
                                       ht_clubs_histo.intensite,
                                       ht_clubs_histo.endurance,
                                       ht_clubs_histo.adjoints,
@@ -621,6 +625,8 @@ $reqHJ = $conn->query($sqlHJ);
               <td > <div align="left"><?=$lHisto["date_histo"]?></div></td>
               <td > <div align="left"><?=$lHisto["createur"]?></div></td>
               <td > <div align="left"><?=$lHisto["CaracEntraine"]?></div></td>
+              <!-- ajout niveau entraineur -->
+              <td > <div align="center"><?=$lHisto["niv_Entraineur"]?></div></td>
               <td > <div align="center"><?=$lHisto["intensite"]?></div></td>
               <td > <div align="center"><?=$lHisto["endurance"]?></div></td>
               <td > <div align="center"><?=$lHisto["adjoints"]?></div></td>
