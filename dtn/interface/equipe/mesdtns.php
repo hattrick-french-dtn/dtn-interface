@@ -82,7 +82,7 @@ $mkday = mktime(0,0,0,date('m'), date('d'),date('Y'));
                     <td width="1" bgcolor="#000000"><strong><img src="../images/spacer.gif" width="1" height="1"></strong></td>
                     <td><div align="center"><strong><CENTER>Nb joueurs suivis</CENTER> </strong></div></td>
                     <td width="1" bgcolor="#000000"><strong><img src="../images/spacer.gif" width="1" height="1"></strong></td>
-					<td><div align="center"><strong><CENTER>Mail</CENTER> </strong></div></td>
+					<td><div align="center"><strong><CENTER>ID User Hattrick</CENTER> </strong></div></td>
                     <td width="1" bgcolor="#000000"><strong><img src="../images/spacer.gif" width="1" height="1"></strong></td>
                     
               </tr>
@@ -145,12 +145,12 @@ $mkday = mktime(0,0,0,date('m'), date('d'),date('Y'));
                     <td width="1" bgcolor="#000000"><img src="../images/spacer.gif" width="1" height="1"></td>
                     <td><div align="center"><?=$nbjsuivis?></td>
                     <td width="1" bgcolor="#000000"><strong><img src="../images/spacer.gif" width="1" height="1"></strong></td>
-					          <td><div align="left"><?=$lstSuperviseur["emailAdmin"]?></td>
+                    <td><div align="center"><?=$lstSuperviseur["idAdminHT"]?></td>
                     <td width="1" bgcolor="#000000"><strong><img src="../images/spacer.gif" width="1" height="1"></strong></td>
                 </tr>
 			      
 			  <?php
-			  $lesmails.=$lstSuperviseur["emailAdmin"]."; ";
+			  $lesmails.=$lstSuperviseur["loginAdmin"]."; ";
 			  $j++;
 			  }
 			  ?>
@@ -166,7 +166,7 @@ $mkday = mktime(0,0,0,date('m'), date('d'),date('Y'));
 </table>
 <br>
 <div align="center">
-Tous les mails :<br>
+Tous les DTNs :<br>
 <font face="arial" size="8"><textarea READONLY name="touslesmails" style="font-size:8pt;font-family:Arial" rows="3" cols="132"><?=$lesmails?></textarea></font>
 </div>
 <br>
