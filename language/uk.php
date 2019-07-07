@@ -182,5 +182,5 @@ define("FORUM","On our forum");
 
 define("HT_MAIL","By HT-Mail : List of french scout");
 
-define("CONF_HT","On HT Forum of federation &quot; French scouting group & more... &quot;");
+define("CONF_HT","On HT Forum of DTN &quot; https://www.ht-dtnfff.fr/ &quot;");
 ?>
