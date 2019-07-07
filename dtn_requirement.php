@@ -12,13 +12,13 @@ require("inc/fct_requirements.php");
 
 switch($_SESSION['lang']) {
 	case "fr" :
-	$titre = "ht-fff.org| DTN| U20&amp;A | pr&eacute;-requis.";
+	$titre = "https://www.ht-dtnfff.fr/| DTN| U20&amp;A | pr&eacute;-requis.";
 	break;
 	case "de" :
-	$titre = "ht-fff.org| DTN| U20&amp;A | requirements.";
+	$titre = "https://www.ht-dtnfff.fr/| DTN| U20&amp;A | requirements.";
 	break;
 	default :
-	$titre = "ht-fff.org| DTN| U20&amp;A | requirements.";
+	$titre = "https://www.ht-dtnfff.fr/| DTN| U20&amp;A | requirements.";
 	break;
 }
 ?>
