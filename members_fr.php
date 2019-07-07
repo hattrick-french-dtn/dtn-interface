@@ -42,11 +42,7 @@ d'autant que nous avions quelques utilisateurs expatri&eacute;s. <br/><br/>
         <tr>
           <td width="8%"><div align="right"><span class="style40"><strong><span class="style17">U-20|</span></strong></span></div></td>
           <td width="13%"><div align="right"><span class="style40"><strong>innerMidfielders</strong>|</span></div></td>
-<<<<<<< HEAD
-          <td width="20%"><div align="right"><span class="style40">medios campista|</span></div></td>
-=======
           <td width="20"><div align="right"><span class="style40">medios campista|</span></div></td>
->>>>>>> correction mineure largeur colonne pour noms espagnols
           <td width="14%"><div align="right"><span class="style40">milieux|</span></div></td>
           <td width="10%"><div align="right"><span class="style40">centrocampisti|</span></div></td>
           <td width="16%"><div align="right"><span class="style40">Mittelfeldspieler|</span></div></td>
