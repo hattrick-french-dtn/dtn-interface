@@ -54,21 +54,22 @@ Quels sont les gains et  les risques si je le fais jouer ?</a><br />
 	          La DTN, Direction Technique Nationale, est une organisation  b&eacute;n&eacute;vole ayant pour but de rep&eacute;rer, suivre, et
 	        accompagner les joueurs susceptibles (au sens tr&egrave;s large)  d'int&eacute;grer les s&eacute;lections nationales fran&ccedil;aises U20
 	        (joueurs de 17 &agrave; 20 ans, mais plus g&eacute;n&eacute;ralement de 19 et 20 ans)  et A (joueurs ayant 21 ans et plus, mais leur
-	        int&eacute;gration se fait rarement avant 23 ans) &agrave; hattrick. Ceci permet  d&rsquo;aider les diff&eacute;rents s&eacute;lectionneurs dans
+	        int&eacute;gration se fait rarement avant 28 ans) &agrave; hattrick. Ceci permet  d&rsquo;aider les diff&eacute;rents s&eacute;lectionneurs dans
 	        leurs choix, quels qu&rsquo;ils soient, au sein d&rsquo;un vivier de joueurs  potentiels le plus pr&eacute;cis et le plus &eacute;largi possible.<br />
 	        <br />	        
 	        <b><a name="1b" id="1b"></a>Quel  est son r&ocirc;le ?</b><br />
-	        Le r&ocirc;le de la DTN est de pr&eacute;senter aux s&eacute;lectionneurs, mais  &eacute;galement aux joueurs de hattrick int&eacute;ress&eacute;s, un
+	        Le r&ocirc;le de la DTN est de pr&eacute;senter aux s&eacute;lectionneurs, mais  &eacute;galement aux joueurs de Hattrick int&eacute;ress&eacute;s, un
 	        bilan en temps r&eacute;el des joueurs les plus performants du vivier  fran&ccedil;ais, dans la meilleure mesure du possible.
 	        Elle tend &eacute;galement &agrave; orienter les managers vers l'achat, mais  surtout l'entra&icirc;nement de joueurs fran&ccedil;ais.<br />
 	        <br />	        
 	        <b><a name="1c" id="1c"></a>Combien  de personnes en font partie ?</b><br />
-	        Il y a environ 75 membres, appel&eacute;s DTNs, affect&eacute;s aux cinq  secteurs de la DTN :<br />
+	        Il y a environ 65 membres, appel&eacute;s DTNs, affect&eacute;s aux six  secteurs de la DTN :<br />
 	        &#8226; DTN [gardiens]<br />
 	        &#8226; DTN [d&eacute;fenseurs]<br />
 	        &#8226; DTN [milieux]<br />
 	        &#8226; DTN [ailiers]<br />
 	        &#8226; DTN [attaquants]<br />
+	        &#8226; DTN [Tir de loin]<br />
 	        La Direction Technique Nationale compte aussi parmi ses rangs, des  d&eacute;veloppeurs (rarement appel&eacute;s DTN~),
 	        des traducteurs (permanents ou temporaires suivant les &eacute;volutions,  besoins et disponibilit&eacute;s), et des conseillers
 	        avec notamment la plupart des anciens s&eacute;lectionneurs (ceux qui  l&rsquo;ont accept&eacute;).<br />
@@ -77,7 +78,7 @@ Quels sont les gains et  les risques si je le fais jouer ?</a><br />
 	        Chaque DTN est affect&eacute; &agrave; un des secteurs pr&eacute;c&eacute;demment cit&eacute;s,  suivant ses souhaits et les besoins du moment.
 	        <br />
 	        <br />
-	        Chacun de ces domaines est chapeaut&eacute; par deux voire trois  responsables (appel&eacute;s DTN+), qui &eacute;changent
+	        Chacun de ces domaines est chapeaut&eacute; par un voire deux  responsables (appel&eacute;s DTN+), qui &eacute;changent
 	        avec les DTN de leur secteur, attribuent les diff&eacute;rents joueurs &agrave;  suivre, les purgent quand ceux-ci sont jug&eacute;s trop
 	        en retard, et discutent avec les s&eacute;lectionneurs, ainsi qu&rsquo;avec la  communaut&eacute; hattrick.
 	        <br />
@@ -90,8 +91,8 @@ Quels sont les gains et  les risques si je le fais jouer ?</a><br />
 	        <br />
 	        <br />
 	        Les d&eacute;veloppeurs sont des programmeurs, b&eacute;n&eacute;voles, qui ont par le  pass&eacute; cr&eacute;&eacute; l&rsquo;interface (qui g&egrave;re
-	        l&rsquo;interaction de tous les intervenants sur la base de donn&eacute;es) et  la vitrine de l&rsquo;organisation (le site
-	        http://www.ht-fff.org/). Ils participent grandement au bon  fonctionnement de la DTN en entretenant et en
+	        l&rsquo;interaction de tous les intervenants sur la base de donn&eacute;es) et  la vitrine de l&rsquo;organisation (le
+	        <a href="https://www.ht-dtnfff.fr/"><strong>site de la DTN</strong></a>). Ils participent grandement au bon  fonctionnement de la DTN en entretenant et en
 	        am&eacute;liorant au jour le jour les outils indispensables et  n&eacute;cessaires.
 	        <br />
 	        <br />
@@ -105,7 +106,7 @@ Quels sont les gains et  les risques si je le fais jouer ?</a><br />
 	        <hr align="JUSTIFY" />
 	        <b><a name="2" id="2"></a><span class="style172">2| Le suivi des joueurs.</span></b><br />            
 	        <b><a name="2a" id="2a"></a>Comment  ajouter son joueur &agrave; la base de donn&eacute;es de la DTN ?</b><br />
-	        C'est extr&ecirc;mement simple, il vous suffit d'aller sur la page http://www.ht-fff.org/  et  taper votre alias-HT (votre nom d&rsquo;utilisateur sur hattrick) ainsi que votre
+	        C'est extr&ecirc;mement simple, il vous suffit d'aller sur la page http://www.ht-fff.org/  et  taper votre alias-HT (votre nom d&rsquo;utilisateur sur Hattrick) ainsi que votre
 	        code de s&eacute;curit&eacute; dans les champs pr&eacute;vus &agrave; cet effet ; le code de  s&eacute;curit&eacute; n&rsquo;est pas le mot de passe, et ne
 	        donne qu&rsquo;un acc&egrave;s en lecture, il est &agrave; d&eacute;finir dans &lsquo;mon  hattrick&rsquo;, onglet &lsquo;pr&eacute;f&eacute;rences&rsquo;, menu &lsquo;code de
 	        s&eacute;curit&eacute;&rsquo;.<br />
@@ -118,8 +119,8 @@ Quels sont les gains et  les risques si je le fais jouer ?</a><br />
 	        <b><a name="2b" id="2b"></a>Qu'est-ce  qu'un joueur &quot;rep&eacute;r&eacute;&quot; ?</b><br />
 	        Un joueur &quot;rep&eacute;r&eacute;&quot; est un joueur dont le potentiel peut  int&eacute;resser une des s&eacute;lections nationales fran&ccedil;aises, et qui
 	        est d&eacute;tect&eacute; par la DTN.<br />
-	        En g&eacute;n&eacute;ral, il s'agit d'un joueur en vente, ou mis en &eacute;vidence sur  le sujet de la conf&eacute;rence France [17 ans
-	        passable et +]. Mais cela peut &eacute;galement &ecirc;tre un joueur d&eacute;tect&eacute;  via des sites tel &lsquo;Alltid Hattrick&rsquo;
+	        En g&eacute;n&eacute;ral, il s'agit d'un joueur en vente, ou mis en &eacute;vidence sur  le sujet du forum France [[Senior/YP] Jeunes promus ]. 
+	        Mais cela peut &eacute;galement &ecirc;tre un joueur d&eacute;tect&eacute;  via des sites tel &lsquo;Alltid Hattrick&rsquo;
 	        (http://alltid.org/) pour ne citer que celui ci.<br />
 	        Le propri&eacute;taire est alors contact&eacute; par un membre de la DTN, qui  lui demandera d'inscrire le joueur dans la base
 	        de donn&eacute;es (pour fiabiliser et faciliter sa visibilit&eacute; pour le  s&eacute;lectionneur et son staff), et des questions lui seront
@@ -144,7 +145,7 @@ Quels sont les gains et  les risques si je le fais jouer ?</a><br />
 	        qu&rsquo;en soit la cause, son DTN le propose g&eacute;n&eacute;ralement &agrave; la &laquo; purge  &raquo;. A chaque fin de mois, le sujet de purge
 	        est analys&eacute; et trait&eacute;, et si jamais le joueur n&rsquo;a plus aucun  int&eacute;r&ecirc;t pour les s&eacute;lections il est purg&eacute; ; cela signifie qu'il
 	        est archiv&eacute; dans la base de donn&eacute;es, n&rsquo;est plus mis &agrave; jour, et par  cons&eacute;quent n'appara&icirc;t plus dans les
-	        classements (http://www.ht-fff.org/dtn_tops.php). Ceci a pour  but d'all&eacute;ger la base de donn&eacute;es, et de mettre
+	        classements. Ceci a pour  but d'all&eacute;ger la base de donn&eacute;es, et de mettre
 	        un terme &agrave; un travail d&eacute;sormais inutile.<br />
 	        Un joueur peut perdre de son int&eacute;r&ecirc;t pour diverses raisons :  disparition pure et simple (licenciement, botification
 	        du propri&eacute;taire), fin de l'entra&icirc;nement (pour cause de vente  souvent en lien avec des consid&eacute;rations salariales,
@@ -152,7 +153,7 @@ Quels sont les gains et  les risques si je le fais jouer ?</a><br />
 	        <br />	                  
 	        <b><a name="2e" id="2e"></a>Combien  de joueurs se trouvent dans la base de donn&eacute;es ?</b><br />            
 	        <b>Quelle  est leur r&eacute;partition par &acirc;ge ?</b><br />
-	        La base de donn&eacute;es contient approximativement 3000 joueurs (sans  compter les archives).<br />
+	        La base de donn&eacute;es contient approximativement 2200 joueurs (sans  compter les archives).<br />
 	        La r&eacute;partition par &acirc;ge est difficile &agrave; donner pr&eacute;cis&eacute;ment, mais en  voici une estimation :<br />
 	        &#8226; 17 ans: 35%<br />
 	        &#8226; 18 ans: 25%<br />
@@ -227,11 +228,7 @@ Quels sont les gains et  les risques si je le fais jouer ?</a><br />
             <br />	        
 	          <b><br />
 	          <a name="3e" id="3e"></a> Une  blessure peut elle ruiner d&eacute;finitivement l'espoir de voir mon jeune en &eacute;quipe  U20 ?</b><br />
-	          Oui, et c'est d&rsquo;ailleurs pour cela qu&rsquo;une tr&eacute;sorerie cons&eacute;quente  est primordiale, afin de pouvoir engager
-	          ponctuellement beaucoup plus que dix m&eacute;decins si besoin, et si le  s&eacute;lectionneur en &eacute;met le souhait.<br />
-	          Cela permet de soigner la blessure dans des d&eacute;lais  exceptionnellement courts, id&eacute;alement en une seule
-	          semaine au maximum afin de ne pas faire perdre au joueur de  cruciales semaines d'entra&icirc;nement.<br />	        
-	          <div align="right"><em><font color="#7B00C6">&laquo; Mets ton pansement et &agrave; l'entra&icirc;nement ! Feignant ! &raquo;</font></em></div>
+	          Oui, et c'est d&rsquo;ailleurs pour cela qu'il est recommand&eacute; d'engager un m&eacute;decin de niveau 5 (4 minimum), ce afin de réduire le risque de blessure.<br />
 	          <b><br />
 	          <a name="3f" id="3f"></a>	        Un  potentiel U20 doit-il jouer en Coupe ?</b><br />
 	          C&rsquo;est excessivement recommand&eacute; ; le joueur y gagne bien plus  d'exp&eacute;rience qu'en championnat, et c&rsquo;est
@@ -255,7 +252,7 @@ Quels sont les gains et  les risques si je le fais jouer ?</a><br />
 	        Oui.<br />
 	        Il y a pour commencer le cas rare et particulier des joueurs aux  profils atypiques qui n&rsquo;ont que parfois la
 	        chance de vivre les joies de la s&eacute;lection U20. Ensuite, viennent  les situations malheureusement trop communes
-	        des joueurs ayant connu la s&eacute;lection U20 mais tout autant des  probl&egrave;mes entre leurs 21 ans et leurs 24 ans (&acirc;ge
+	        des joueurs ayant connu la s&eacute;lection U20 mais tout autant des  probl&egrave;mes entre leurs 21 ans et leurs 28 ans (&acirc;ge
 	        courant d&rsquo;int&eacute;gration aux A). Parmi ces p&eacute;rip&eacute;ties, on peut en  citer plusieurs :<br />
 &#8226;&nbsp;le joueur a  encha&icirc;n&eacute; les longues blessures ;<br />
 &#8226;&nbsp;le joueur a &eacute;t&eacute;  revendu &agrave; un manager avec un entra&icirc;neur d&rsquo;un niveau trop bas ;<br />
@@ -494,7 +491,7 @@ proc&eacute;dure d'inscription ; notez que les d&eacute;lais et les besoins sont
 	        <b><a name="5b" id="5b"></a>Comment  aider &agrave; am&eacute;liorer cette FAQ ?</b><br />
 	        N&rsquo;h&eacute;sitez pas &agrave; demander davantage de d&eacute;tails sur des points qui  vous paraissent encore obscurs ou &agrave;
 	        proposer d&rsquo;autres th&egrave;mes qui vous semblent int&eacute;ressants &agrave;  &eacute;claircir, en utilisant la partie d&rsquo;expression libre,
-	        ouverte &agrave; tous, sur le forum de la DTN (http://www.ht-fff.org/dtn/forum/viewforum.php?f=16).<br />
+	        ouverte &agrave; tous, sur le <a href="http://www.htfff.free.fr/dtn/forum/viewforum.php?f=16"><strong>forum de la DTN</strong></a>.<br />
 	        Tout avis est bon &agrave; prendre. </div>
 	        </div>
 	        <p align="justify"><b>&nbsp;</b></p>
