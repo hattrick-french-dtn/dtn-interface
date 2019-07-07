@@ -107,7 +107,7 @@ require("../menu/menuJoueur.php");
           Votre Commentaire :
           <input name="mode" type="hidden" id="mode" value="updateComment">
           <input name="idJoueur_fk" type="hidden" id="idJoueur_fk" value="<?=$id?>">
-          <textarea name="joueurComment" id="joueurComment" style="font-size:7pt;font-family:Arial" cols=220 rows=10><?php echo $infJ["commentaire"]?></textarea>
+          <textarea name="joueurComment" id="joueurComment" style="font-size:8pt;font-family:Arial" cols=220 rows=20><?php echo $infJ["commentaire"]?></textarea>
           <font size="-1"><input type="submit" name="Submit" value="Enregistrer"></font>
         </form>
 
