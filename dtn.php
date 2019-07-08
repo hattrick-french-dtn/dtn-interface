@@ -24,7 +24,7 @@ dont notamment le nombre de semaines d'entra&icirc;nement depuis la derni&egrave
 &agrave; la formation planifi&eacute;e par le manager, en passant par la pr&eacute;vision d'arr&ecirc;t de 
 l'entra&icirc;nement ou de vente du joueur concern&eacute;.
 </p><p class="style40" align="justify">
-Comme cela se comprend rapidement, le r&ocirc;le central d'un membre de la direction technique national, 
+Comme cela se comprend rapidement, le r&ocirc;le central d'un membre de la direction technique nationale, 
 au-del&agrave; du simple surveillant, est celui d'un v&eacute;ritable communicant. 
 <b>Les relations avec les propri&eacute;taires des meilleurs potentiels et internationaux fran&ccedil;ais 
 sont absolument essentielles!</b>

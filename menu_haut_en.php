@@ -52,7 +52,7 @@
           <li><a href="mailto:dtn@ht-fff.org" class="info"> Mail <span>Send mail</span></a></li>
           <li><a href="http://www.htfff.free.fr/dtn/forum"> Forum </a></li>
           <li><a href="dtn_members.php" class="info"> Members <span>List of scout</span></a></li>
-          <li><a href="fff_federation.php"> Federation </a></li>
+          <li><a href="fff_federation.php"> Scouting system </a></li>
         </ul>
       </li>
       <li<?php if ($nomFicPhpCourant[0]=="/links.php") {?> class="active"<?php }?>><a href="links.php"> Liens </a></li>

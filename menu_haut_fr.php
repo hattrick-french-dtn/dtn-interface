@@ -51,7 +51,7 @@
           <li><a href="mailto:dtn@ht-fff.org" class="info"> Mail <span>Contactez nous par mail</span></a></li>
           <li><a href="http://www.htfff.free.fr/dtn/forum"> Forum </a></li>
           <li><a href="dtn_members.php" class="info"> Membres <span>Liste des membres de la DTN</span></a></li>
-          <li><a href="fff_federation.php"> F&eacute;d&eacute;ration </a></li>
+          <li><a href="fff_federation.php"> DTN </a></li>
         </ul>
       </li>
       <li<?php if ($nomFicPhpCourant[0]=="/links.php") {?> class="active"<?php }?>><a href="links.php"> Liens </a></li>

@@ -52,7 +52,7 @@
           <li><a href="mailto:dtn@ht-fff.org" class="info"> Mail <span>Kontaktiert uns per Mail</span></a></li>
           <li><a href="http://www.htfff.free.fr/dtn/forum"> Forum </a></li>
           <li><a href="dtn_members.php" class="info"> Mitglieder <span>Liste der Mitglieder der französischen Scoutabteilung</span></a></li>
-          <li><a href="fff_federation.php"> F&ouml;deration </a></li>
+          <li><a href="fff_federation.php"> Scouting </a></li>
         </ul>
       </li>
       <li<?php if ($nomFicPhpCourant[0]=="/links.php") {?> class="active"<?php }?>><a href="links.php"> Links </a></li>
