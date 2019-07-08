@@ -317,7 +317,7 @@ function scanid()
       c=c+'<?=$infJs[$i]["idDefense"]?>+<?=$infJs[$i]["nbSemaineDefense"]?>';
       if ('<?=$infJs[$i]["entrainement_id"]?>'==4) c=c+'[/i][/b]';
 	  c=c+' / ';
-	  if ('<?=$infJs[$i]["entrainement_id"]?>'==5) c='[b][i]';
+	  if ('<?=$infJs[$i]["entrainement_id"]?>'==5) c=c+'[b][i]';
       c=c+'<?=$infJs[$i]["idButeur"]?>+<?=$infJs[$i]["nbSemaineButeur"]?>';
       if ('<?=$infJs[$i]["entrainement_id"]?>'==5) c=c+'[/i][/b]';
 	  active[1] = true;
