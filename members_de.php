@@ -127,7 +127,7 @@ dass die Ansprechpartner auch wirklich der Gruppe angeh&ouml;ren. Die Entscheidu
         <tr>
           <td width="8%"><div align="right"><span class="style40"><strong><span class="style17">A/NT|</span></strong></span></div></td>
           <td width="13%"><div align="right"><span class="style40"><strong>Long Shots</strong>|</span></div></td>
-          <td width="18%"><div align="right"><span class="style40">Tiros lejanos|</span></div></td>
+          <td width="20%"><div align="right"><span class="style40">Tiros lejanos|</span></div></td>
           <td width="14%"><div align="right"><span class="style40">Tir de loin|</span></div></td>
           <td width="10%"><div align="right"><span class="style40">Tiri da fuori|</span></div></td>
           <td width="16%"><div align="right"><span class="style40">Weitschusse|</span></div></td>
