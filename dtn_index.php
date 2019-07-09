@@ -8,15 +8,15 @@
 	}
 	$urlsource="dtn_index.php";
 	if($lang=="fr"){
-		$titre = "ht-fff.org| DTN| direction technique nationale.";
+		$titre = "https://www.ht-dtnfff.fr/| DTN| direction technique nationale.";
   		include("menu_haut.php");
 		include("dtn.php");
   	}else if ($lang=="de") {
-		$titre = "ht-fff.org| DTN| french scouting group.";
+		$titre = "https://www.ht-dtnfff.fr/| DTN| french scouting group.";
   		include("menu_haut_de.php"); 
 		include("dtn_de.php"); 
 	}else {
-		$titre = "ht-fff.org| DTN| french scouting group.";
+		$titre = "https://www.ht-dtnfff.fr/| DTN| french scouting group.";
   		include("menu_haut_uk.php"); 
 		include("dtn_en.php"); 
 		

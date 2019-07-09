@@ -272,5 +272,5 @@ define("FORUM","Sur notre forum");
 
 define("HT_MAIL","Par HT-Mail : Liste des membres de la DTN");
 
-define("CONF_HT","Sur le forum HT de la F&eacute;d&eacute;ration &quot; French scouting group & more... &quot;");
+define("CONF_HT","Sur le forum HT de la DTN &quot; https://www.ht-dtnfff.fr/ &quot;");
 ?>

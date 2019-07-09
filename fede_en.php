@@ -5,21 +5,18 @@
 				<td class="style40" align="left"><br />
 			
 			<div align="justify">
-All you can see right here was originated from an hattrick-based alliance.<br/><br/>
+All you can see right here was originated from the creation of the first French Hattrick scouting system.<br/><br/>
 
-<strong>F&eacute;d&eacute;ration Fran&ccedil;aise de Formation</strong> [allianceID=1572]<br/>
-<strong>Official Acronym :</strong> ht-fff.org<br/>
-<strong>Chief Officer :</strong> _shunti_ [teamID=298943]<br/>
-<strong>Founding date :</strong> 2002/08/17<br/>
-<strong>Homepage :</strong> <a href="http://www.ht-fff.org/"><u>http://www.ht-fff.org/</u></a><br/>
-<strong>Members :</strong> 191 members [2009/07/31]<br/>
-<strong>Languages :</strong> french<br/><br/>
+<strong><u>Entity</u> : Direction Technique Nationale Fran&ccedil;aise de Hattrick</strong><br/>
+<strong><u>Official Acronym</u> :</strong> DTN<br/>
+<strong><u>Founding date</u> :</strong> 2002/08/17<br/>
+<strong><u>Home Page</u> :</strong> <a href="https://www.ht-dtnfff.fr/"><u>https://www.ht-dtnfff.fr/</u></a><br/>
+<strong><u>Members</u> :</strong> 65 members [2019/07/06]<br/>
+<strong><u>Languages</u> :</strong> french<br/><br/>
 
-If you're french-speaking and willing to train french players to infinity and beyond, be sure you'll be warmly welcomed.<br/><br/>
+If you're willing to buy french players and train them for U-20 and NT French teams, be sure you'll be warmly welcomed.<br/><br/>
 
-To suggest a player or others questions, visit on hattrick, the public DTN forum. <br/>
-<strong>Forum &gt;&gt; French scouting group & more... </strong>	[post=13181722.1]<br/>
-<strong>Langues :</strong> fran&ccedil;ais<br/><br/>			
+To suggest a player or others questions, please scan your player in our Home Page. <br/>
 			</div>
 
       <br /><br />

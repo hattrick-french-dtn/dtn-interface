@@ -5,21 +5,21 @@
 				<td class="style40" align="left"><br />
 				
 					<div align="justify">
-Tout ce que vous pouvez voir ici a pour point de départ une fédération intra-hattrick.<br/><br/>
+Tout ce que vous pouvez voir ici a pour point de d&eacute;part la cr&eacute;ation de la Direction Technique Nationale Fran&ccedil;aise de Hattrick (DTN).<br/><br/>
 
-<strong>F&eacute;d&eacute;ration Fran&ccedil;aise de Formation</strong> [allianceID=1572]<br/>
-<strong>Sigle Officiel :</strong> ht-fff.org<br/>
-<strong>Chef Officier :</strong> _shunti_ [teamID=298943]<br/>
-<strong>Date de cr&eacute;ation :</strong> 2002/08/17<br/>
-<strong>Page Web :</strong> <a href="http://www.ht-fff.org/"><u>http://www.ht-fff.org/</u></a><br/>
-<strong>Membres :</strong> 191 membres [2009/07/31]<br/>
-<strong>Langues :</strong> fran&ccedil;ais<br/><br/>
+<strong><u>Entit&eacute;</u> : Direction Technique Nationale Fran&ccedil;aise de Hattrick</strong><br/>
+<strong><u>Sigle Officiel</u></u> :</strong> DTN<br/>
+<strong><u>Date de cr&eacute;ation</u> :</strong> 2002/08/17<br/>
+<strong><u>Page Web</u> :</strong> <a href="https://www.ht-dtnfff.fr/"><u>https://www.ht-dtnfff.fr/</u></a><br/>
+<strong><u>Membres</u> :</strong> 65 membres [2019/07/06]<br/>
+<strong><u>Langues</u> :</strong> fran&ccedil;ais<br/><br/>
 
-Si vous &ecirc;tes francophone et que vous d&eacute;sirez former des joueurs fran&ccedil;ais vers l'infini et au-del&agrave;, 
-soyez certain que nous nous ferons un plaisir de vous accueillir.<br/><br/>
+Si vous &ecirc;tes francophone (et non d&eacute;j&agrave; impliqu&eacute;(e) dans une autre &eacute;quipe nationale) et que vous d&eacute;sirez suivre des joueurs fran&ccedil;ais, 
+soyez certain que nous nous ferons un plaisir de vous accueillir. Cela sera &eacute;galement le cas si vous souhaitez acheter des joueurs fran&ccedil;ais en vue de les entrainer pour les &eacute;quipes U-20 ou A fran&ccedil;aises.<br/><br/>
 
-Pour proposer un joueur, proposer votre candidature &agrave; la DTN ou toutes autres questions, rendez-vous sur hattrick sur le forum public de la DTN.<br/> 
-<strong>Forum &gt;&gt; French scouting group & more... </strong>	[post=13181722.1]<br/>
+Pour proposer un joueur et voir s'il a un potentiel pour int&eacute;grer les &eacute;quipes U-20 ou A, veuillez scanner votre &eacute;quipe sur la page web mentionn&eacute;e pr&eacute;c&eacute;demment.
+<br><br>Pour proposer votre candidature &agrave; la DTN ou toutes autres questions, rendez-vous sur hattrick sur le forum France.<br/> 
+<strong>Sujet : <a href=""https://www.hattrick.org/goto.ashx?path=/Forum/Read.aspx?t=17244326&n=1&v=0"><u>La DTN recrute</u></a><br/>
 <strong>Langues :</strong> fran&ccedil;ais<br/><br/>
 				</div>
 

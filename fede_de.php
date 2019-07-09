@@ -5,23 +5,19 @@
 				<td class="style40" align="left"><br />
 				
 					<div align="justify">
-Alles was Sie hier sehen k&ouml;nnt hat eine Hattrick Föderation als Ausgangspunkt.<br/><br/>
+Alles, dass Sie hier sehen komm von die Errichtung des erste franz&ouml;sische Hattrick scouting System<br/><br/>
 
-<strong>F&eacute;d&eacute;ration Fran&ccedil;aise de Formation</strong> [allianceID=1572]<br/>
-<strong>Offizieles Markenzeichen :</strong> ht-fff.org<br/>
-<strong>Chef Offizier :</strong> _shunti_ [teamID=298943]<br/>
-<strong>Gr&uuml;ndungsdatum :</strong> 2002/08/17<br/>
-<strong>Webseite :</strong> <a href="http://www.ht-fff.org/"><u>http://www.ht-fff.org/</u></a><br/>
-<strong>Mitglieder :</strong> 191 Hattrickspieler [2009/07/31]<br/>
-<strong>Sprachen :</strong> franz&ouml;sich<br/><br/>
+<strong><u>Verbund</u> : Direction Technique Nationale Fran&ccedil;aise de Hattrick</strong><br/>
+<strong><u>Offizieles Markenzeichen</u> :</strong> DTN<br/>
+<strong><u>Gr&uuml;ndungsdatum</u> :</strong> 2002/08/17<br/>
+<strong><u>Webseite</u> :</strong> <a href="https://www.ht-dtnfff.fr/"><u>https://www.ht-dtnfff.fr/</u></a><br/>
+<strong><u>Mitglieder</u> :</strong> 65 Hattrickspieler [2019/07/31]<br/>
+<strong><u>Sprachen</u> :</strong> franz&ouml;sich<br/><br/>
 
-Sind sie franz&ouml;sischsprachig? Wollen Sie Franz&ouml;sische Spieler bis ins unendliche und noch weiter trainieren? 
-Seien Sie sicher, dass wir uns eine Freude machen werden, Sie zu unseren Mitgliedern zu z&auml;hlen.
+Wenn Sie will franz&ouml;sische Spieler kaufen und für die U20- oder NT-Nationalmannschaft, wird Sie herzlich willkommen.
 <br/><br/>
 
-Fals Sie ein Spieler, Ihre Bewerbung vorschlagen wollen, oder wenn Sie eine Frage haben, sind Sie gerne im &ouml;ffentlichen HT-Forum der DTN wilkommen.<br/> 
-<strong>Forum &gt;&gt; French scouting group & more... </strong>	[post=13181722.1]<br/>
-<strong>Sprachen :</strong> franz&ouml;sisch<br/><br/>
+Um ein Spieler vorzuschlagen, und für andere Frage, bitte scan Ihren Spieler in unsere Hauptseite ein.<br/>
 				</div>
 
 
