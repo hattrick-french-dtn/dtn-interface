@@ -198,11 +198,6 @@
           <td width="370" bgcolor="#CCCCCC"><div align="center" class="style40"><strong>&nbsp;</strong></div></td>
         </tr>
 		<tr><td colspan="3"><div align="justify" class="style40">
-			<a href="http://alltid.org/" target="_blank"><u><strong>alltid.org</strong></u></a><br>
-			There are good chances this site overtakes its predecessor; 
-			weird_ed [teamID=65179] offers us outstanding quality work with this world covering site.<br>
-		<br></div></td></tr>
-		<tr><td colspan="3"><div align="justify" class="style40">
 			<a href="http://www.francestats.fr/" target="_blank"><u><strong>francestats.fr</strong></u></a><br>
 			Alf115 [teamID=47201] and maitre_fOO [teamID=177622] has developed this esthetic and efficient site, 
 			covering all french divisions... It notably includes the French national cup and the end of season do or die qualification matches.<br>

@@ -289,7 +289,7 @@ $s_view_state_enum_string         = '10:publik,50:privat';
 
 $s_priority_enum_string           = '10:ingen,20:låg,30:normal,40:hög,50:bråttom,60:omedelbart';
 $s_severity_enum_string           = '10:funktion,20:trivial,30:text,40:tweak,50:mindre,60:allvarlig,70:krash,80:blockerare';
-$s_reproducibility_enum_string    = '10:alltid,30:ibland,50:slumpvis,70:har ej testat,90:kan inte göra om,100:ingen';
+//$s_reproducibility_enum_string    = '10:alltid,30:ibland,50:slumpvis,70:har ej testat,90:kan inte göra om,100:ingen';
 $s_status_enum_string             = '10:nytt,20:återkoppling,30:godkänt,40:bekräftat,50:tilldelat,80:löst,90:stängt';
 $s_resolution_enum_string         = '10:öppen,20:fixat,30:återöppnat,40:kan inte göra om,50:kan inte fixa,60:kopia av annan,70:inte en bugg,80:bordlagt,90:kommer inte fixa';
 $s_projection_enum_string         = '10:ingen,30:tweak,50:mindre fix,70:omfattande omkodning,90:omdesign';

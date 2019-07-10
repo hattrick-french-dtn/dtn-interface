@@ -38,8 +38,9 @@ if ($TypeMenu <= 2) { ?>
 	&nbsp;<A class="smliensorange" href="<?=$url?>/clubs/fiche_club.php?idClubHT=<?=$idClubHT?>" alt="Club">Club</a>&nbsp;|
 <?php } ?>
 	&nbsp;<A class="smliensorange" href="<?=$url?>/joueurs/ficheForum.php?htid=<?=$idHT?>" alt="forum">Fiche Forum</a>&nbsp;|
-	&nbsp;<a class="smliensorange" href="<?=$url?>/joueurs/ficheresumechoix.php?htid=<?=$idHT?>&origine=<?php echo "unique"?>" alt="resume">Fiche R&eacute;sum&eacute;</a>&nbsp;
-<?php if ($TypeMenu <= 2) { ?>
+	&nbsp;<a class="smliensorange" href="<?=$url?>/joueurs/ficheresumechoix.php?htid=<?=$idHT?>&origine=<?php echo "unique"?>" alt="resume">Fiche R&eacute;sum&eacute;</a>&nbsp;|
+	&nbsp;<a class="smliensorange" href="<?=$url?>/joueurs/ficheslackchoix.php?htid=<?=$idHT?>&origine=<?php echo "unique"?>" alt="resume">Fiche Slack</a>&nbsp;
+    <?php if ($TypeMenu <= 2) { ?>
   | &nbsp;<A class="smliensorange" href="<?=$url?>/joueurs/rapportDetaille.php?htid=<?=$idHT?>" alt="etoiles">Matchs</a>&nbsp;|
     &nbsp;<A class="smliensorange" href="<?=$url?>/joueurs/commentaires.php?htid=<?=$idHT?>" alt="commentaires">Commentaires / Notes</a>
 <?php }
