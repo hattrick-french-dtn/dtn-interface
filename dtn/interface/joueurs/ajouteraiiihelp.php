@@ -207,6 +207,7 @@ require("../menu/menuJoueur.php");
           	<td width="40%" align="left">&nbsp; <font color="#000099"><b><?=$infJ["idHattrickJoueur"]?>&nbsp;-&nbsp;<?=$infJ["nomJoueur"]?> <?=$infJ["prenomJoueur"]?>&nbsp;-&nbsp;<?php 
 			$ageetjours = ageetjour($infJ["datenaiss"]);
 			$tabage = explode(" - ",$ageetjours);
+			echo $tabage[0];?>&nbsp;ans&nbsp;-&nbsp;<?=$tabage[1]?>&nbsp;jours<br>&nbsp; <?=round(($infJ["salary"]/10),2)?>&nbsp;?/semaine&nbsp;
 			</b></font> </td>
 //2019-07-07 suppression référence alltid
           	<td width="20%" align="left"><b>Club : </b><a href="<?=$url?>/clubs/fiche_club.php?idClubHT=<?=$infJ["teamid"]?>"><?=$infJ["nomClub"]?></a></td>
