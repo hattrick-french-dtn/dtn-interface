@@ -238,7 +238,6 @@ if ($datemaj >$mkday -$huit){
               <td width="40%" align="left">&nbsp; <font color="#000099"><b>Info: <?=$joueurDTN["idHattrickJoueur"]?>&nbsp;-&nbsp;<?=$joueurDTN["prenomJoueur"]?> <?=$joueurDTN["nomJoueur"]?><?php if (isset($joueurDTN["surnomJoueur"])) echo " (".$joueurDTN["surnomJoueur"].")"; ?>&nbsp;-&nbsp;<?php 
               echo $tabage[0];?>&nbsp;ans&nbsp;-&nbsp;<?=$tabage[1]?>&nbsp;jours<br>&nbsp; Salaire: <?=round(($joueurDTN["salary"]/10),2)?>&nbsp;&euro;/semaine&nbsp;
               <a href="http://alltid.org/player/<?=$joueurDTN["idHattrickJoueur"]?>" target="_blank"><img src="../images/ahstats.png" width="47" height="16" border="0" align="absmiddle"></a>
-              <a href="../outils/ExportCsv.php?ordre=<?=$ordre?>&sens=<?=$sens?>&lang=<?=$lang?>&masque=<?=$masque?>&affPosition=<?=$affPosition?>&typeExport=unjoueur&idPlayer=<?=$joueurDTN["idHattrickJoueur"]?>"><img border=1 width="16" height="16" align="absmiddle" src="../images/icone-excel.jpg"></a>
 			  <br/>&nbsp; HTMS: <?=$htms["value"]?> (<?=$htms["potential"]?>)
 			  </b></font>
               </td>
