@@ -202,11 +202,6 @@
           <td width="370" bgcolor="#CCCCCC"><div align="center" class="style40"><strong>&nbsp;</strong></div></td>
         </tr>
 		<tr><td colspan="3"><div align="justify" class="style40">
-			<a href="http://alltid.org/" target="_blank"><u><strong>alltid.org</strong></u></a><br>
-			Il y a de grandes chances que ce site de statistiques prennent l’ascendant sur son a&icirc;n&eacute;; 
-			weird_ed [teamID=65179] nous a gratifi&eacute; d’un travail fantastique couvrant la plan&egrave;te-HT dans son ensemble. <br>
-		<br></div></td></tr>
-		<tr><td colspan="3"><div align="justify" class="style40">
 			<a href="http://www.francestats.fr/" target="_blank"><u><strong>francestats.fr</strong></u></a><br>
 			Alf115 [teamID=47201] et maitre_fOO [teamID=177622] ont d&eacute;velopp&eacute; un esth&eacute;tique et efficace FranceStats-HT, 
 			couvrant de la plus haute &agrave; la plus basse division fran&ccedil;aise... 
