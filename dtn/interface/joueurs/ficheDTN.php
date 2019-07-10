@@ -170,8 +170,7 @@ if(isset($msg)) {?>
           <tr> 
           <td align="left" width="50%">&nbsp;<font color="#000099"> Info: <?=strtolower($joueurDTN["idHattrickJoueur"])?>&nbsp;-&nbsp;<?=strtolower($joueurDTN["prenomJoueur"])?>&nbsp;<?=strtolower($joueurDTN["nomJoueur"])?><?php if (isset($joueurDTN["surnomJoueur"])) echo " (".$joueurDTN["surnomJoueur"].")"; ?>&nbsp;-&nbsp;
           <?=$tabage[0];?>&nbsp;ans&nbsp;-&nbsp;<?=$tabage[1]?>&nbsp;jours<br>&nbsp; Salaire: <?=round(($joueurDTN["salary"]/10),2)?>&nbsp;&euro;/semaine&nbsp;-&nbsp;<?=$joueurDTN["intitulePosition"]?> 
-		      <b><a href="http://alltid.org/player/<?=$joueurDTN["idHattrickJoueur"]?>" target="_blank"><img src="../images/ahstats.png" width="47" height="16" border="0" align="absmiddle"></a>
-		      </b></font>      
+		  </font>      
      			
 	       </td>
 	       <td width="20%" align="left" colspan="2">
