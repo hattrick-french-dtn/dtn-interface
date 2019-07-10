@@ -109,9 +109,8 @@ Quels sont les gains et  les risques si je le fais jouer ?</a><br />
 	        <b><a name="2b" id="2b"></a>Qu'est-ce  qu'un joueur &quot;rep&eacute;r&eacute;&quot; ?</b><br />
 	        Un joueur &quot;rep&eacute;r&eacute;&quot; est un joueur dont le potentiel peut  int&eacute;resser une des s&eacute;lections nationales fran&ccedil;aises, et qui
 	        est d&eacute;tect&eacute; par la DTN.<br />
-	        En g&eacute;n&eacute;ral, il s'agit d'un joueur en vente, ou mis en &eacute;vidence sur  le sujet du forum France [[Senior/YP] Jeunes promus]. 
-	        Mais cela peut &eacute;galement &ecirc;tre un joueur d&eacute;tect&eacute;  via des sites tel &lsquo;Alltid Hattrick&rsquo;
-	        (http://alltid.org/) pour ne citer que celui ci.<br />
+	        En g&eacute;n&eacute;ral, il s'agit d'un joueur en vente, ou mis en &eacute;vidence sur  le sujet de la conf&eacute;rence France [17 ans
+	        passable et +]. Mais cela peut &eacute;galement &ecirc;tre un joueur d&eacute;tect&eacute;  via d'autres moyens..<br />
 	        Le propri&eacute;taire est alors contact&eacute; par un membre de la DTN, qui  lui demandera d'inscrire le joueur dans la base
 	        de donn&eacute;es (pour fiabiliser et faciliter sa visibilit&eacute; pour le  s&eacute;lectionneur et son staff), et des questions lui seront
 	        pos&eacute;es sur son entra&icirc;nement &agrave; court et moyen terme.<br />

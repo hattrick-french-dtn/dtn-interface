@@ -170,8 +170,8 @@ if(isset($msg)) {?>
           <tr> 
           <td align="left" width="50%">&nbsp;<font color="#000099"> Info: <?=strtolower($joueurDTN["idHattrickJoueur"])?>&nbsp;-&nbsp;<?=strtolower($joueurDTN["prenomJoueur"])?>&nbsp;<?=strtolower($joueurDTN["nomJoueur"])?><?php if (isset($joueurDTN["surnomJoueur"])) echo " (".$joueurDTN["surnomJoueur"].")"; ?>&nbsp;-&nbsp;
           <?=$tabage[0];?>&nbsp;ans&nbsp;-&nbsp;<?=$tabage[1]?>&nbsp;jours<br>&nbsp; Salaire: <?=number_format(round(($joueurDTN["salary"]/10),2),"0"," "," ")?>&nbsp;&euro;/semaine&nbsp;-&nbsp;<?=$joueurDTN["intitulePosition"]?> 
-		      <b><a href="http://alltid.org/player/<?=$joueurDTN["idHattrickJoueur"]?>" target="_blank"><img src="../images/ahstats.png" width="47" height="16" border="0" align="absmiddle"></a>
-		      <a href="../outils/ExportCsv.php?ordre=<?=$ordre?>&sens=<?=$sens?>&lang=<?=$lang?>&masque=<?=$masque?>&affPosition=<?=$affPosition?>&typeExport=unjoueur&idPlayer=<?=$joueurDTN["idHattrickJoueur"]?>"><img border=1 width="16" height="16" align="absmiddle" src="../images/icone-excel.jpg"></a></b></font>      
+          </font>      
+
      			
   <?php // iiihelp!
           if($sesUser["idNiveauAcces"] == 2 ||  $sesUser["idNiveauAcces"] == 1)
@@ -229,14 +229,6 @@ if(isset($msg)) {?>
             <td width="25%" height="15"> <div align="left"><?=$joueurDTN["numHonnetete"]?> (<?=$joueurDTN["intituleHonneteteFR"]?>)</div></td>
             <td width="25%" height="15"> <div align="left"><font color="#000099">Exp&eacute;rience</font></div></td>
             <td width="12%" height="15"> <div align="left"><?=$joueurDTN["idExperience_fk"]?> (<?=$joueurDTN["nomXP_fr"];?>)</div></td>
-            <td width="13%">
-              <div align="center">
-				      <a href="javascript:majNiveau('idExperience_fk','<?=$joueurDTN["idExperience_fk"]?>','<?=$joueurDTN["idExperience_fk"]+1?>','<?=$id?>')" class="Vert">+ 1</a><?php
-              if($sesUser["idNiveauAcces"] == 1 || ( $sesUser["idNiveauAcces"] == 2 && $sesUser["idPosition_fk"] == $joueurDTN["ht_posteAssigne"])){
-                ?>&nbsp;|&nbsp;<a href="javascript:majNiveau2('idExperience_fk','<?=$joueurDTN["idExperience_fk"]?>','<?=$joueurDTN["idExperience_fk"]-1?>','<?=$id?>')" class="Rouge">- 1</a>
-		          <?php }?>
-					   </div>
-            </td>
             </tr>
             <!--Ajout TSI par Musta le 24/09/2008-->
             <tr>
@@ -278,11 +270,6 @@ if(isset($msg)) {?>
                 unset($nomColNbSem);
 
                 switch($int){
-                  case "endurance":
-                  $nbSemaineE = "";
-                  $nomColCarac = 'idEndurance';
-                  break;
-
                   case "construction":
                   $nbSemaineE = '(+'.$joueurDTN["nbSemaineConstruction"].')';
                   $nomColCarac = 'idConstruction';

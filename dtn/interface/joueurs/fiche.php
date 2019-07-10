@@ -47,7 +47,7 @@ $verifInternational = verifSelection($id);
 $lstBehaviour=list_behaviour();
 $lstRole=list_role();
 
-// Récupération de l'entrainement subit par le joueur
+// RÃ©cupÃ©ration de l'entrainement subit par le joueur
 $nom_entrainement=getEntrainementName($joueurDTN["entrainement_id"],listEntrainement());
 
 // Variable d'age
@@ -56,7 +56,7 @@ $tabage = explode(" - ",$ageetjours);
 $htms = htmspoint($tabage[0], $tabage[1], $joueurDTN["idGardien"], $joueurDTN["idDefense"], $joueurDTN["idConstruction"], $joueurDTN["idAilier"], $joueurDTN["idPasse"], $joueurDTN["idButeur"], $joueurDTN["idPA"]);
 
 
-// Extraction des données Historique Joueur
+// Extraction des donnÃ©es Historique Joueur
 $actualSeason=getSeasonWeekOfMatch(mktime(date('H'),date('i'),date('s'),date('m'),date('d'),date('Y')));
 if (!isset($saison)){$saison=$actualSeason['season'];}
 
@@ -193,7 +193,7 @@ $fourmonths = 60 * 60 * 24 * 50; //time_4
 // Date du jour
 $mkday = mktime(0,0,0,date('m'), date('d'),date('Y'));
 
-// Date de la dernière connexion du club 
+// Date de la derniÃ¨re connexion du club 
 $date = explode("-",$joueurDTN['date_last_connexion']);
 $datemaj =  mktime(0,0,0,$date[1],$date[2],$date[0]);
 
@@ -237,7 +237,6 @@ if ($datemaj >$mkday -$huit){
             <tr> 
               <td width="40%" align="left">&nbsp; <font color="#000099"><b>Info: <?=$joueurDTN["idHattrickJoueur"]?>&nbsp;-&nbsp;<?=$joueurDTN["prenomJoueur"]?> <?=$joueurDTN["nomJoueur"]?><?php if (isset($joueurDTN["surnomJoueur"])) echo " (".$joueurDTN["surnomJoueur"].")"; ?>&nbsp;-&nbsp;<?php 
               echo $tabage[0];?>&nbsp;ans&nbsp;-&nbsp;<?=$tabage[1]?>&nbsp;jours<br>&nbsp; Salaire: <?=number_format(round(($joueurDTN["salary"]/10),2),"0"," "," ")?>&nbsp;&euro;/semaine&nbsp;
-              <a href="http://alltid.org/player/<?=$joueurDTN["idHattrickJoueur"]?>" target="_blank"><img src="../images/ahstats.png" width="47" height="16" border="0" align="absmiddle"></a>
               <a href="../outils/ExportCsv.php?ordre=<?=$ordre?>&sens=<?=$sens?>&lang=<?=$lang?>&masque=<?=$masque?>&affPosition=<?=$affPosition?>&typeExport=unjoueur&idPlayer=<?=$joueurDTN["idHattrickJoueur"]?>"><img border=1 width="16" height="16" align="absmiddle" src="../images/icone-excel.jpg"></a>
 			  <br/>&nbsp; HTMS: <?=$htms["value"]?> (<?=$htms["potential"]?>)
 			  </b></font>
@@ -283,11 +282,11 @@ if ($datemaj >$mkday -$huit){
               &nbsp;</strong></font><?php     
               }
               
-              // ####################### Si Joueur Non suivi et archivé ####################### 
+              // ####################### Si Joueur Non suivi et archivÃ© ####################### 
               else if($joueurDTN["archiveJoueur"] == 1){
                  ?><font color="#FF0000"><strong>Ce joueur est archiv&eacute;&nbsp;</strong></font><?php
                  
-              // ####################### Si Joueur Non suivi et non archivé #######################
+              // ####################### Si Joueur Non suivi et non archivÃ© #######################
               }else {
                 ?><font color="#FF0000"><strong>Ce joueur n'est pas suivi ! &nbsp; </strong></font><?php
                 if(($_SESSION['sesUser']["idNiveauAcces"]==2 && ($_SESSION['sesUser']["idPosition_fk"]==$joueurDTN["ht_posteAssigne"]  ||  $_SESSION['sesUser']["idPosition_fk"] == 0) ) ||  $_SESSION['sesUser']["idNiveauAcces"] == 1)
@@ -755,7 +754,7 @@ if ($datemaj >$mkday -$huit){
     </tr>
     <tr>
       <td><img src="../images/time_0.gif"></td>
-      <td>Derni&egrave;re connexion récente </td>
+      <td>Derni&egrave;re connexion rÃ©cente </td>
       <td width="1" bgcolor="#000000"></td>
       <td>&nbsp;<img src="../images/time_3.gif"></td>
       <td>Derni&egrave;re connexion il y a + de 30 jours </td>

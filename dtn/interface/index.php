@@ -150,7 +150,7 @@ if (isset($_POST['nomForm']) && $_POST['nomForm']=='formConnexion') {
     <td>
       <tr>
         <td width="700" height="26" >
-        <div align="center"> DTN - <i>Interface d'administration.</i><br /> Identifiez vous</div>
+        <div align="center"> DTN - <i>Interface d'administration</i><br /> Identifiez-vous</div>
         <hr />
         <br />
         </td>
@@ -160,13 +160,13 @@ if (isset($_POST['nomForm']) && $_POST['nomForm']=='formConnexion') {
         <td>
         <table width="50%" class="ContenuCentrer">
           <tr>
-            <td width="51%">Login</td>
+            <td width="51%">Nom d'utilisateur</td>
             <td width="49%">
               <input name="login" type="text" id="login" <?php if (isset($_POST['login'])) {?>value="<?php echo($_POST['login']);?>"<?php }?>>
             </td>
           </tr>
           <tr>
-            <td>Password</td>
+            <td>Mot de passe</td>
             <td>
               <input name="password" type="password" id="password" <?php if (isset($_POST['password'])) {?>value="<?php echo($_POST['password']);?>"<?php }?>>
             </td>

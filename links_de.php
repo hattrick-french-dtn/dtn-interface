@@ -189,10 +189,6 @@
           <td width="370" bgcolor="#CCCCCC"><div align="center" class="style40"><strong>&nbsp;</strong></div></td>
         </tr>
 		<tr><td colspan="3"><div align="justify" class="style40">
-			<a href="http://alltid.org/" target="_blank"><u><strong>alltid.org</strong></u></a><br>
-			Es besteht eine grosse Wahrscheinlichgheit, dass diese Webseite &Uuml;berhand auf ihren Vorg&auml;nger nimmt ; weird_ed [teamID=65179] hat uns mit einer grossartigen Arbeit beschert, die die ganze HT Welt deckt. <br>
-		<br></div></td></tr>
-		<tr><td colspan="3"><div align="justify" class="style40">
 			<a href="http://www.francestats.fr/" target="_blank"><u><strong>francestats.fr</strong></u></a><br>
 			Alf115 [teamID=47201] und ma&icirc;tre_fOO [teamID=177622] haben eine &auml;sthetische und wirksame Internetseite entwickelt, die von der h&ouml;chsten bis zur niedrigsten Liga reicht... inklusive der spannenden Coupe de France und den nervenraubenden Relegationsspielen. <br>
 		<br></div></td></tr>

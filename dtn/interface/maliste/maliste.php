@@ -158,7 +158,7 @@ document.body.scrollTop = scrollPos;
       <!-- Fireproofed le 05/11/2010 -->
       
       <td valign="middle">
-             &nbsp &nbsp &nbsp Export Fiche R&eacute;sum&eacute; :&nbsp;</td>              
+             &nbsp &nbsp &nbsp Export Fiche R&eacute;sum&eacute; / Fiche Slack :&nbsp;</td>              
       <td valign="middle">
         <a href="../joueurs/ficherecupchoix.php?origine=<?php echo "maliste"?>">
           <img border=1 src="../images/jst.bmp" title="Exporter la liste des joueurs sous forme d'une fiche r&eacute;sum&eacute; globale"></a></td>
