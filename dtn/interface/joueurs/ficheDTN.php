@@ -170,13 +170,8 @@ if(isset($msg)) {?>
           <tr> 
           <td align="left" width="50%">&nbsp;<font color="#000099"> Info: <?=strtolower($joueurDTN["idHattrickJoueur"])?>&nbsp;-&nbsp;<?=strtolower($joueurDTN["prenomJoueur"])?>&nbsp;<?=strtolower($joueurDTN["nomJoueur"])?><?php if (isset($joueurDTN["surnomJoueur"])) echo " (".$joueurDTN["surnomJoueur"].")"; ?>&nbsp;-&nbsp;
           <?=$tabage[0];?>&nbsp;ans&nbsp;-&nbsp;<?=$tabage[1]?>&nbsp;jours<br>&nbsp; Salaire: <?=round(($joueurDTN["salary"]/10),2)?>&nbsp;&euro;/semaine&nbsp;-&nbsp;<?=$joueurDTN["intitulePosition"]?> 
-		      <b><a href="../outils/ExportCsv.php?ordre=<?=$ordre?>&sens=<?=$sens?>&lang=<?=$lang?>&masque=<?=$masque?>&affPosition=<?=$affPosition?>&typeExport=unjoueur&idPlayer=<?=$joueurDTN["idHattrickJoueur"]?>"><img border=1 width="16" height="16" align="absmiddle" src="../images/icone-excel.jpg"></a></b></font>      
+		      </font>
      			
-  <?php // iiihelp!
-          if($sesUser["idNiveauAcces"] == 2 ||  $sesUser["idNiveauAcces"] == 1)
-          {
-          		?>&nbsp;&nbsp;<a href="ajouteraiiihelp.php?id=<?=$id?>">Vente pr&eacute;vu -&gt; iiihelp!</a><?php
-          }?> 
 	       </td>
 	       <td width="20%" align="left" colspan="2">
          <b>Club Actuel : </b><a href="<?=$url?>/clubs/fiche_club.php?idClubHT=<?=$joueurDTN["teamid"]?>"><?php if ($joueurDTN["isBot"]!=0) {?><b><font color="red">[BOT]</b></font><?php }?><?=$joueurDTN["nomClub"]?></a> <img src="../images/time_<?=$img_nb?>.gif" title="Derni&egrave;re connexion du propri&eacute;taire sur HT, il y a <?=($mkday-$datemaj)/(60*60*24)?> jour(s)">
@@ -218,7 +213,7 @@ if(isset($msg)) {?>
             <td width="13%" height="15">&nbsp;</td>
             </tr>
             <tr> 
-            <td width="25%" height="15"><font color="#000099">Aggressivit&eacute;</font></td>
+            <td width="25%" height="15"><font color="#000099">Agressivit&eacute;</font></td>
             <td width="25%" height="15"> <div align="left"><?=$joueurDTN["numAggres"]?> (<?=$joueurDTN["intituleAggresFR"]?>)</div></td>
             <td width="25%" height="15"> <div align="left"><font color="#000099"></font></div></td>
             <td width="25%" height="15" colspan="2"> <div align="center"></div></td>
