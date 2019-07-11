@@ -34,11 +34,16 @@ switch($sesUser["idNiveauAcces"]){
 }
  require ("../menu/menuMaListe.php"); 
 
-
+    if (isset($_POST["dtn"]) && $_POST["dtn"]!=$sesUser["idAdmin"]) { // Si un DTN+ veut vérifier les dernières modifs
+        $idDTN = $_POST["dtn"];
+    } else {
+        $idDTN = $sesUser["idAdmin"];
+    }
+ 
 $sql = "select count(1) from ( $tbl_histomodif )" .
 		" LEFT JOIN ht_admin hta ON hta.idAdmin = idAdmin_fk " .
 		" LEFT JOIN ht_joueurs htj ON idjoueur_fk = htj.idJoueur " .
-		"where  dtnSuiviJoueur_fk ='".$sesUser["idAdmin"]."'  ";
+		"where  dtnSuiviJoueur_fk ='".$idDTN."'  ";
 
 $resp = $maBase->select($sql);
 $numMaxHisto=$resp[0][0];
@@ -71,7 +76,7 @@ document.location='<?=$url?>/joueurs/ficheDTN.php?url='+url+'&id='+id
 }?>
 <?php
       
-	$sqlClubs = "select teamid from ht_joueurs where dtnSuiviJoueur_fk ='".$sesUser["idAdmin"]."' ";
+	$sqlClubs = "select teamid from ht_joueurs where dtnSuiviJoueur_fk ='".$idDTN."' ";
 	$listeClubs = $maBase->select($sqlClubs);
 	$j=0;
 	$listeTeamid ="";
@@ -151,7 +156,7 @@ $prev = $numEnr-$nbParPage;
    $sql = "select dateHisto,heureHisto,intituleHisto,loginAdmin,nomJoueur,prenomJoueur,idJoueur from ($tbl_histomodif, $tbl_joueurs) " .
    " LEFT JOIN ht_admin hta ON hta.idAdmin = idAdmin_fk " .
    " where  idJoueur_fk = idJoueur ".
-   " and dtnSuiviJoueur_fk ='".$sesUser["idAdmin"]."'  order by dateHisto desc, heureHisto desc ";
+   " and dtnSuiviJoueur_fk ='".$idDTN."'  order by dateHisto desc, heureHisto desc ";
    $sql .= " limit $numEnr, $nbParPage";
    $listeHistoMsg = $maBase->select($sql);
 	$j=0;
