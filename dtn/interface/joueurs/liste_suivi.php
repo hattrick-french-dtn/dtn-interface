@@ -61,12 +61,18 @@ $_SESSION['ListeFicheResume']=$lstJoueur;
   <td height="55" ><div align="center">
     <table width="100%" border="0" cellspacing="1" cellpadding="0" bgcolor="#000000">
       <tr>
-      <td height="20" bgcolor="#000000"><div align="center"><font color="#FFFFFF">Liste des joueurs suivi par <?=$infAdmin["loginAdmin"]?></font>
-      <form method="post" action="../maliste/miseajour.php">
+      <td height="20" bgcolor="#000000"><div align="center"><font color="#FFFFFF">Liste des joueurs suivi par <?=$infAdmin["loginAdmin"]?></font></div></td>
+      </tr>
+	  <tr><td height="20" bgcolor="#000000"><div align="center"><font color="#FFFFFF">
+	  <form method="post" action="../maliste/miseajour.php">
       <input type="hidden" name="dtn" value= <?=$_GET['dtn']?> />
       <input type="submit" value="Mettre &agrave; jour la liste sur Hattrick" />
+                </form>
+      <form method="post" action="../maliste/dernieresmodifs.php">
+      <input type="hidden" name="dtn" value= <?=$_GET['dtn']?> />
+      <input type="submit" value="Derni&egrave;res modifications" />
                 </form></div></td>
-      </tr>
+	  </tr>
       <tr>
       <td><div align="center">
         <table width="100%" border="0" cellspacing="1" cellpadding="0" bgcolor=lightgrey>
