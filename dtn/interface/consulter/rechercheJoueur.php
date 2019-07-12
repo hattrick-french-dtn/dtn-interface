@@ -81,6 +81,8 @@ $lstPos = listAllPosition();
 								<OPTION VALUE="4">Milieu de terrain</OPTION>
 								<OPTION VALUE="3">Ailier</OPTION>
 								<OPTION VALUE="5">Attaquant</OPTION>
+								<OPTION VALUE="6 ">Sans secteur</OPTION>
+								<OPTION VALUE="7 ">Tirs de loin</OPTION>
 						</SELECT>
 						</TD>
 					  </TR>
