@@ -449,6 +449,10 @@ if ($datemaj >$mkday -$huit){
                 case "passe":
                 $nbSemaineE = '(+'.$joueurDTN["nbSemainePasses"].')';
                 break;
+              
+                case "coup franc":
+                $nbSemaineE = '(+'.$joueurDTN["nbSemaineCoupFranc"].')';
+                break;
             
                 default:
                 $nbSemaineE ="";

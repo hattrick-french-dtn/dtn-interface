@@ -396,7 +396,7 @@ $param2="$nb_players";
                     <?=$l["idDefense"]?><?php afficheLesPlus($l,"nbSemaineDefense"); ?> 
                       </div></td>
                     <td > <div align="center"> 
-                    <?=$l["idPA"]?> 
+                    <?=$l["idPA"]?><?php afficheLesPlus($l,"nbSemaineCoupFranc"); ?>  
                       </div></td>
                     <td > <div align="center"> 
                     <?=$note?> 

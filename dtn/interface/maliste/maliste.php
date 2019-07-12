@@ -445,7 +445,7 @@ foreach ($conn->query($sql) as $l) {
                     <td width="30" <?php if ($ailier==1) echo "bgcolor = $ailierColor";?>><div align="center"><?=$l["idAilier"]?> <?php afficheLesPlus($infJ,"nbSemaineAilier"); ?></div></td>
                     <td width="30" <?php if ($passe==1) echo "bgcolor = $passeColor";?>><div align="center"><?=$l["idPasse"]?> <?php afficheLesPlus($infJ,"nbSemainePasses"); ?></div></td>
                     <td width="30" <?php if ($buteur==1) echo "bgcolor = $buteurColor";?>><div align="center"><?=$l["idButeur"]?> <?php afficheLesPlus($infJ,"nbSemaineButeur"); ?></div></td>
-                    <td width="30" > <div align="center"><?=$l["idPA"]?></div></td>
+                    <td width="30" > <div align="center"><?=$l["idPA"]?><?php afficheLesPlus($infJ,"nbSemaineCoupFranc"); ?></div></td>
                   <td width="3" bgcolor="#FFFFDD"> 
                       &nbsp;</td>
 

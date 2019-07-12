@@ -100,7 +100,7 @@ switch ($sens) {
 		$tri = "Tri decroissant";
 		break;
 }
-?>NomJoueur;idHattrick;Date Maj DTN;Date Maj Proprio;last maj(jours);age;jours;xp;leader;spe;endu;construction;+;ailier;+;buteur;+;gardien;+;passe;+;defenseur;+;coup francs;entraineur;entrainement;DTN;note<?php
+?>NomJoueur;idHattrick;Date Maj DTN;Date Maj Proprio;last maj(jours);age;jours;xp;leader;spe;endu;construction;+;ailier;+;buteur;+;gardien;+;passe;+;defenseur;+;coup francs;+;entraineur;entrainement;DTN;note<?php
 switch ($sesUser["idPosition_fk"]) {
 	case "1" : //gK
 ?> gardien;<?php
@@ -169,7 +169,7 @@ foreach ($conn->query($sql) as $l) {
 	echo  $l["idGardien"].";".$infJ["nbSemaineGardien"].";";
 	echo  $l["idPasse"].";".$infJ["nbSemainePasses"].";"; 
 	echo  $l["idDefense"].";".$infJ["nbSemaineDefense"].";";
-	echo  $l["idPA"].";";
+	echo  $l["idPA"].";".$infJ["nbSemaineCoupFranc"].";";
 
 	echo $infJ["niv_Entraineur"].";";
 	$nom_entrainement=utf8_decode(getEntrainementName($infJ["entrainement_id"],$listEntrainement));

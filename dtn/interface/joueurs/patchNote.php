@@ -52,6 +52,7 @@ foreach($conn->query($sql) as $lst){
 	$semaine["defense"] = $infJoueur["nbSemaineDefense"];
 	$semaine["buteur"] = $infJoueur["nbSemaineButeur"];
 	$semaine["ailier"] = $infJoueur["nbSemaineAilier"] ;
+	$semaine["coupfranc"] = $infTraining["nbSemaineCoupFranc"];
 
 	$valeur  = $infJoueur["valeurEnCours"];
 	$fin = $infJoueur["finFormation"];

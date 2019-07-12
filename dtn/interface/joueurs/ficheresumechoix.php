@@ -484,7 +484,7 @@ function scanid()
       b=b+'/CF';
       c=c+' / ';
       if ('<?=$infJs[$i]["entrainement_id"]?>'==3) c=c+'[b][i]';
-      c=c+'<?=$infJs[$i]["idPA"]?>';
+      c=c+'<?=$infJs[$i]["idPA"]?>+<?=$infJs[$i]["nbSemaineCoupFranc"]?>';
       if ('<?=$infJs[$i]["entrainement_id"]?>'==3) c=c+'[/i][/b]';
 	  active[6] = true;
     }
@@ -510,7 +510,7 @@ function scanid()
 		active[3]?<?=$infJs[$i]["idAilier"]?>:0, <?=$infJs[$i]["nbSemaineAilier"]?>,
 		active[4]?<?=$infJs[$i]["idPasse"]?>:0, <?=$infJs[$i]["nbSemainePasses"]?>,
 		active[5]?<?=$infJs[$i]["idButeur"]?>:0, <?=$infJs[$i]["nbSemaineButeur"]?>,
-		active[6]?<?=$infJs[$i]["idPA"]?>:0);
+		active[6]?<?=$infJs[$i]["idPA"]?>:0), <?=$infJs[$i]["nbSemaineCoupFranc"]?>;
     if ((document.forms.form2.parasup[9].checked)) {
       //choix=HTMS
 <?php

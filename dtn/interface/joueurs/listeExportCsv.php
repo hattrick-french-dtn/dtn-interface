@@ -300,6 +300,7 @@ $semaine["buteur"] = $infTraining["nbSemaineButeur"];
 $semaine["gardien"] = $infTraining["nbSemaineGardien"];
 $semaine["passe"] = $infTraining["nbSemainePasse"];
 $semaine["defense"] = $infTraining["nbSemaineDefense"];
+$semaine["coupfranc"] = $infTraining["nbSemaineCoupFranc"];
 
 			  $coeff = getCoeffSelectionneur(1);
 				if($useFormule == 1 && $coeff["useit"] == 1){
@@ -328,6 +329,7 @@ $semaine["buteur"] = $infTraining["nbSemaineButeur"];
 $semaine["gardien"] = $infTraining["nbSemaineGardien"];
 $semaine["passe"] = $infTraining["nbSemainePasse"];
 $semaine["defense"] = $infTraining["nbSemaineDefense"];
+$semaine["coupfranc"] = $infTraining["nbSemaineCoupFranc"];
 
 			  $coeff = getCoeffSelectionneur(2);
 				if($useFormule == 1 && $coeff["useit"] == 1){
@@ -356,6 +358,7 @@ $semaine["buteur"] = $infTraining["nbSemaineButeur"];
 $semaine["gardien"] = $infTraining["nbSemaineGardien"];
 $semaine["passe"] = $infTraining["nbSemainePasse"];
 $semaine["defense"] = $infTraining["nbSemaineDefense"];
+$semaine["coupfranc"] = $infTraining["nbSemaineCoupFranc"];
 
 			  $coeff = getCoeffSelectionneur(3);
 				if($useFormule == 1 && $coeff["useit"] == 1){
@@ -384,6 +387,7 @@ $semaine["buteur"] = $infTraining["nbSemaineButeur"];
 $semaine["gardien"] = $infTraining["nbSemaineGardien"];
 $semaine["passe"] = $infTraining["nbSemainePasse"];
 $semaine["defense"] = $infTraining["nbSemaineDefense"];
+$semaine["coupfranc"] = $infTraining["nbSemaineCoupFranc"];
 
 			  $coeff = getCoeffSelectionneur(4);
 				if($useFormule == 1 && $coeff["useit"] == 1){
@@ -412,6 +416,7 @@ $semaine["buteur"] = $infTraining["nbSemaineButeur"];
 $semaine["gardien"] = $infTraining["nbSemaineGardien"];
 $semaine["passe"] = $infTraining["nbSemainePasse"];
 $semaine["defense"] = $infTraining["nbSemaineDefense"];
+$semaine["coupfranc"] = $infTraining["nbSemaineCoupFranc"];
 
 			  $coeff = getCoeffSelectionneur(5);
 				if($useFormule == 1 && $coeff["useit"] == 1){

@@ -479,7 +479,7 @@ for ($lstnb=16;$lstnb<27;$lstnb++ ){
                     <?=$l["idDefense"]?><?php afficheLesPlus($l,"nbSemaineDefense"); ?> 
                       </div></td>
                     <td > <div align="center"> 
-                    <?=$l["idPA"]?> 
+                    <?=$l["idPA"]?> <?php afficheLesPlus($l,"nbSemaineCoupFranc"); ?>
                       </div></td>
 
 

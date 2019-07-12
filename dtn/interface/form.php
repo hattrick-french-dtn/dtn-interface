@@ -820,6 +820,12 @@ case "addNiveau":
 			break;
 		case "7":
 			$nomNiveau=" Coup Franc ";
+			if ($niveauInitial < $niveau) {
+			$sql = "update $tbl_entrainement set nbSemaineCoupFranc  = 0 where idJoueur_fk = $idJoueur";
+            } else {
+            $sql = "update $tbl_entrainement set nbSemaineCoupFranc  = 99 where idJoueur_fk = $idJoueur";
+            }
+			$req=$conn->exec($sql);
 			$updatedate_modif_effectif="on";
 			break;   
 		case "8":
@@ -906,7 +912,12 @@ case "updateTraining":
 		$updatedate_modif_effectif="on";
 	}
 	if($infJoueur["nbSemaineDefense"]!= $_POST["nbSemaineDefense"]){
-		$msg  = $msg." Modif semaines defense (".$infJoueur["nbSemaineDefense"]." ->+".$_POST["nbSemaineDefense"].")  ";
+		$msg  = $msg." Modif semaines d&eacute;fense (".$infJoueur["nbSemaineDefense"]." ->+".$_POST["nbSemaineDefense"].")  ";
+		$updateDateDerniereModiff="on";	
+		$updatedate_modif_effectif="on";
+	}
+	if($infJoueur["nbSemaineCoupFranc"]!= $_POST["nbSemaineCoupFranc"]){
+		$msg  = $msg." Modif semaines coup franc (".$infJoueur["nbSemaineCoupFranc"]." ->+".$_POST["nbSemaineCoupFranc"].")  ";
 		$updateDateDerniereModiff="on";	
 		$updatedate_modif_effectif="on";
 	}
@@ -918,6 +929,7 @@ case "updateTraining":
          nbSemaineGardien = \"".$_POST["nbSemaineGardien"]."\",
          nbSemainePasses = \"".$_POST["nbSemainePasses"]."\",
          nbSemaineDefense = \"".$_POST["nbSemaineDefense"]."\"
+         nbSemaineCoupFranc = \"".$_POST["nbSemaineCoupFranc"]."\"
          WHERE idJoueur_fk = ".$_POST["idJoueur_fk"]."");
     $req = $conn->exec($sql);
 

@@ -218,7 +218,7 @@ $idHT=$infJ['idHattrickJoueur'];
         }else{ 
        		?><?=$infJ["loginAdminSuiveur"]?><?php }?>&nbsp;</strong></font><?php 		
 		}else if($infJ["archiveJoueur"] == 1){
-			 ?><font color="#FF0000"><strong>Ce joueur est archive&nbsp;</strong></font><?php
+			 ?><font color="#FF0000"><strong>Ce joueur est archiv&eacute;&nbsp;</strong></font><?php
 		}else {
 		  ?><font color="#FF0000"><strong>Ce joueur n'est pas suivi !&nbsp;</strong></font><?php
 		 }
@@ -321,6 +321,10 @@ $idHT=$infJ['idHattrickJoueur'];
 		
 			case "passe":
 			$nbSemaineE = '(+'.$infJ["nbSemainePasses"].')';
+			break;
+			
+			case "coup franc":
+			$nbSemaineE = '(+'.$infJ["nbSemaineCoupFranc"].')';
 			break;
 	
 			default:

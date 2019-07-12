@@ -156,7 +156,7 @@ require("../menu/menuJoueur.php");
 
   Buteur : <?=$lstCaractJ[$infJ["idButeur"]]["intituleCaracFR"]?> (<?=$infJ["idButeur"]?>) + <?=$infJ["nbSemaineButeur"]?> <br/>
 
-  Coup Franc : <?=$lstCaractJ[$infJ["idPA"]]["intituleCaracFR"]?> (<?=$infJ["idPA"]?>) <br/>
+  Coup Franc : <?=$lstCaractJ[$infJ["idPA"]]["intituleCaracFR"]?> (<?=$infJ["idPA"]?>) + <?=$infJ["nbSemaineCoupFranc"]?><br/>
   <br/>
   [u]Entrainement et commentaires[/u]: 
   <br/>

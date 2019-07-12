@@ -301,8 +301,9 @@ if(isset($msg)) {?>
                   break;
 
                   case "coup franc":
-                  $nbSemaineE = "";
+                  $nbSemaineE = '(+'.$joueurDTN["nbSemaineCoupFranc"].')';
                   $nomColCarac = 'idPA';
+				  $nomColNbSem = 'nbSemaineCoupFranc';
                   break;
 
                   default:

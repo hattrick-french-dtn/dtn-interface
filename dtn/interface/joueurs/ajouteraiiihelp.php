@@ -288,6 +288,10 @@ require("../menu/menuJoueur.php");
 			case "passe":
 			$nbSemaineE = '(+'.$infJ["nbSemainePasses"].')';
 			break;
+		
+			case "coup franc":
+			$nbSemaineE = '(+'.$infJ["nbSemaineCoupFranc"].')';
+			break;
 	
 			default:
 			$nbSemaineE ="";
