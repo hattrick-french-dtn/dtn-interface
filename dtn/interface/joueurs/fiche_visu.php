@@ -90,7 +90,7 @@ $verifInternational = verifSelection($id);
 function checkSuppression()
 {
 	if( <?=$infJ["idJoueur"]?>== "" ||isNaN(<?=$infJ["idJoueur"]?>)){
-		alert('erreur lors de la suppression... Avertir l\'equipe technique merci.');
+		alert('erreur lors de la suppression... Avertir l\'&eacute;quipe technique merci.');
 	}
 
 
@@ -264,14 +264,14 @@ $idHT=$infJ['idHattrickJoueur'];
                   <?=$infJ["intituleLeaderFR"]?>
                   temp&eacute;rament de chef</td>
                                   <td colspan="2"><div align="center"><span class="Style1">
-                    <?php if($msg == "archive") echo "Joueur correctement archive";?>
-                    <?php if($msg == "desarchive") echo "Joueur correctement desarchive";?>
+                    <?php if($msg == "archive") echo "Joueur correctement archiv&eacute;";?>
+                    <?php if($msg == "desarchive") echo "Joueur correctement desarchiv&eacute;";?>
 </span></div></td>
                   
               </tr>
               <tr> 
                 <td colspan="4"> 
-                  <?php if($infJ["optionJoueur"]) echo "<font color=\"#CC22DD\"><i>Specialite : ".$option[$infJ["optionJoueur"]]["FR"]."</i></font>"?>
+                  <?php if($infJ["optionJoueur"]) echo "<font color=\"#CC22DD\"><i>Specialit&eacute; : ".$option[$infJ["optionJoueur"]]["FR"]."</i></font>"?>
                 </td>
               </tr>
               <tr> 
