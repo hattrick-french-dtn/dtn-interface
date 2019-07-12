@@ -169,8 +169,8 @@ if(isset($msg)) {?>
           </tr>
           <tr> 
           <td align="left" width="50%">&nbsp;<font color="#000099"> Info: <?=strtolower($joueurDTN["idHattrickJoueur"])?>&nbsp;-&nbsp;<?=strtolower($joueurDTN["prenomJoueur"])?>&nbsp;<?=strtolower($joueurDTN["nomJoueur"])?><?php if (isset($joueurDTN["surnomJoueur"])) echo " (".$joueurDTN["surnomJoueur"].")"; ?>&nbsp;-&nbsp;
-          <?=$tabage[0];?>&nbsp;ans&nbsp;-&nbsp;<?=$tabage[1]?>&nbsp;jours<br>&nbsp; Salaire: <?=round(($joueurDTN["salary"]/10),2)?>&nbsp;&euro;/semaine&nbsp;-&nbsp;<?=$joueurDTN["intitulePosition"]?> 
-		      </font>
+          <?=$tabage[0];?>&nbsp;ans&nbsp;-&nbsp;<?=$tabage[1]?>&nbsp;jours<br>&nbsp; Salaire: <?=number_format(round(($joueurDTN["salary"]/10),2),"0"," "," ")?>&nbsp;&euro;/semaine&nbsp;-&nbsp;<?=$joueurDTN["intitulePosition"]?> 
+          </font>
      			
 	       </td>
 	       <td width="20%" align="left" colspan="2">
@@ -227,7 +227,7 @@ if(isset($msg)) {?>
             <!--Ajout TSI par Musta le 24/09/2008-->
             <tr>
             <td width="25%" height="15"><font color="#000099">TSI</font></td>
-            <td width="25%" height="15"> <div align="left"> <?=$joueurDTN["valeurEnCours"]?> </div></td>
+            <td width="25%" height="15"> <div align="left"> <?=number_format($joueurDTN["valeurEnCours"], "0"," ", " ")?> </div></td>
             </tr>
           </table>
         </td>
