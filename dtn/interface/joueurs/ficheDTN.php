@@ -321,9 +321,10 @@ if(isset($msg)) {?>
                 <td>&nbsp;<?='['.$res["numCarac"].'] '.$res["intituleCaracFR"]?> <?=$nbSemaineE?></td>
                 <td>
                   <?php if (isset($nomColCarac)) {?>
-                    <a href="javascript:majNiveau('<?=$nomColCarac?>','<?=$joueurDTN[$nomColCarac]?>','<?=$joueurDTN[$nomColCarac]+1?>','<?=$id?>')" class="Vert">+ 1</a><?php
+                    <?php
                     if($sesUser["idNiveauAcces"] == 1 || ( $sesUser["idNiveauAcces"] == 2 && $sesUser["idPosition_fk"] == $joueurDTN["ht_posteAssigne"])){?>
                       &nbsp;|&nbsp;
+                      <a href="javascript:majNiveau('<?=$nomColCarac?>','<?=$joueurDTN[$nomColCarac]?>','<?=$joueurDTN[$nomColCarac]+1?>','<?=$id?>')" class="Vert">+ 1</a>
                       <a href="javascript:majNiveau2('<?=$nomColCarac?>','<?=$joueurDTN[$nomColCarac]?>','<?=$joueurDTN[$nomColCarac]-1?>','<?=$id?>')" class="Rouge">- 1</a>
   		              <?php }
                   }?>
