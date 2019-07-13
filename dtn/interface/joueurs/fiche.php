@@ -344,7 +344,7 @@ if ($datemaj >$mkday -$huit){
           <div align="right"><?php 
           if ( ($joueurDTN["archiveJoueur"] != 1) && (($_SESSION['sesUser']["idNiveauAcces_fk"] ==2 && $_SESSION['sesUser']["idPosition_fk"]==$joueurDTN["ht_posteAssigne"]) || ($_SESSION['sesUser']["idNiveauAcces_fk"] ==1)) )  {?>
             [ <a href="../form.php?mode=archiveJoueur&id=<?=$joueurDTN["idJoueur"]?>">Archiver ce joueur </a>]
-          <?php } else  if ( ($joueurDTN["archiveJoueur"] == 1) && (($_SESSION['sesUser']["idNiveauAcces_fk"] ==2 && $_SESSION['sesUser']["idPosition_fk"]==$joueurDTN["ht_posteAssigne"]) || ($_SESSION['sesUser']["idNiveauAcces_fk"] ==1)) )  {?>
+          <?php } else  if ( ($joueurDTN["archiveJoueur"] == 1) && (($_SESSION['sesUser']["idNiveauAcces_fk"] ==2 && $_SESSION['sesUser']["idPosition_fk"]==$joueurDTN["ht_posteAssigne"]) || ($_SESSION['sesUser']["idNiveauAcces_fk"] ==2 && $joueurDTN["ht_posteAssigne"]==0) || ($_SESSION['sesUser']["idNiveauAcces_fk"] ==1)) )  {?>
             [ <a href="../form.php?mode=desarchiveJoueur&id=<?=$joueurDTN["idJoueur"]?>">D&eacute;sarchiver ce joueur </a>]        
           <?php }
           if($_SESSION['sesUser']["idNiveauAcces"] == 1 ){?>
@@ -382,15 +382,15 @@ if ($datemaj >$mkday -$huit){
           </td>
           <td><div align="center">
             <span class="Style1">
-            <?php if($msg == "archive") echo "Joueur correctement archive";?>
-            <?php if($msg == "desarchive") echo "Joueur correctement desarchive";?>
+            <?php if($msg == "archive") echo "Joueur correctement archiv&eacute;";?>
+            <?php if($msg == "desarchive") echo "Joueur correctement desarchiv&eacute;";?>
             </span></div>
           </td>     
         </tr>
       
         <tr> 
           <td colspan="3"> 
-            <?php if($joueurDTN["optionJoueur"]) echo "<font color=\"#CC22DD\"><i>Specialite : ".$option[$joueurDTN["optionJoueur"]]["FR"]."</i></font><br />"?>
+            <?php if($joueurDTN["optionJoueur"]) echo "<font color=\"#CC22DD\"><i>Specialit&eacute; : ".$option[$joueurDTN["optionJoueur"]]["FR"]."</i></font><br />"?>
             <br />
           </td>
         </tr>
