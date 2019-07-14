@@ -130,22 +130,36 @@ function checkSuppression()
   }
 
 
-  if (confirm('Voulez vous VRAIMENT supprimer ce joueur "<?=$joueurDTN["idHattrickJoueur"]?>"?')){
+  if (confirm('Voulez vous VRAIMENT supprimer ce joueur "<?=$joueurDTN["idHattrickJoueur"]?>" ?')){
     document.location="../form.php?mode=supprJoueur&id=<?=$joueurDTN["idJoueur"]?>";
   }
 }
 
+function checkArchivageSansSecteur()
+{
+  if( <?=$joueurDTN["ht_posteAssigne"]?>== 0){
+    alert('Vous ne pouvez pas archiver ce joueur car il est sans secteur défini.');
+  }
+  else {
+    document.location= "../form.php?mode=archiveJoueur&id=<?=$joueurDTN["idJoueur"]?>";
+  }
+  
+}
 
 function submitSupprimeDTN()
 {
-  if (confirm('Voulez vous VRAIMENT retirer ce joueur de son DTN?')){
+  if (confirm('Voulez vous VRAIMENT retirer ce joueur de son DTN ?')){
     document.formSupprimeDTN.submit();
   }
 }
 function submitSupprimeSecteur()
 {
-  if (confirm('Voulez vous VRAIMENT retirer ce joueur de son Secteur de jeu?')){
-    document.formSupprimeSecteur.submit();
+  if( <?=$joueurDTN["archiveJoueur"]?>== 1){
+    alert('Vous ne pouvez pas retirer ce joueur de son secteur car il est archivé.');
+  }
+  else {
+	  if (confirm('Voulez vous VRAIMENT retirer ce joueur de son Secteur de jeu ?')){
+  }
   }
 }
 
@@ -343,7 +357,7 @@ if ($datemaj >$mkday -$huit){
           <td>
           <div align="right"><?php 
           if ( ($joueurDTN["archiveJoueur"] != 1) && (($_SESSION['sesUser']["idNiveauAcces_fk"] ==2 && $_SESSION['sesUser']["idPosition_fk"]==$joueurDTN["ht_posteAssigne"]) || ($_SESSION['sesUser']["idNiveauAcces_fk"] ==1)) )  {?>
-            [ <a href="../form.php?mode=archiveJoueur&id=<?=$joueurDTN["idJoueur"]?>">Archiver ce joueur </a>]
+            [ <a href="javascript:checkArchivageSansSecteur()">Archiver ce joueur </a>]
           <?php } else  if ( ($joueurDTN["archiveJoueur"] == 1) && (($_SESSION['sesUser']["idNiveauAcces_fk"] ==2 && $_SESSION['sesUser']["idPosition_fk"]==$joueurDTN["ht_posteAssigne"]) || ($_SESSION['sesUser']["idNiveauAcces_fk"] ==2 && $joueurDTN["ht_posteAssigne"]==0) || ($_SESSION['sesUser']["idNiveauAcces_fk"] ==1)) )  {?>
             [ <a href="../form.php?mode=desarchiveJoueur&id=<?=$joueurDTN["idJoueur"]?>">D&eacute;sarchiver ce joueur </a>]        
           <?php }
