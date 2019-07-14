@@ -130,22 +130,36 @@ function checkSuppression()
   }
 
 
-  if (confirm('Voulez vous VRAIMENT supprimer ce joueur "<?=$joueurDTN["idHattrickJoueur"]?>"?')){
+  if (confirm('Voulez vous VRAIMENT supprimer ce joueur "<?=$joueurDTN["idHattrickJoueur"]?>" ?')){
     document.location="../form.php?mode=supprJoueur&id=<?=$joueurDTN["idJoueur"]?>";
   }
 }
 
+function checkArchivageSansSecteur()
+{
+  if( <?=$joueurDTN["ht_posteAssigne"]?>== 0){
+    alert('Vous ne pouvez pas archiver ce joueur car il est sans secteur défini.');
+  }
+  else {
+    document.location= "../form.php?mode=archiveJoueur&id=<?=$joueurDTN["idJoueur"]?>";
+  }
+  
+}
 
 function submitSupprimeDTN()
 {
-  if (confirm('Voulez vous VRAIMENT retirer ce joueur de son DTN?')){
+  if (confirm('Voulez vous VRAIMENT retirer ce joueur de son DTN ?')){
     document.formSupprimeDTN.submit();
   }
 }
 function submitSupprimeSecteur()
 {
-  if (confirm('Voulez vous VRAIMENT retirer ce joueur de son Secteur de jeu?')){
-    document.formSupprimeSecteur.submit();
+  if( <?=$joueurDTN["archiveJoueur"]?>== 1){
+    alert('Vous ne pouvez pas retirer ce joueur de son secteur car il est archivé.');
+  }
+  else {
+	  if (confirm('Voulez vous VRAIMENT retirer ce joueur de son Secteur de jeu ?')){
+  }
   }
 }
 
@@ -237,6 +251,7 @@ if ($datemaj >$mkday -$huit){
             <tr> 
               <td width="40%" align="left">&nbsp; <font color="#000099"><b>Info: <?=$joueurDTN["idHattrickJoueur"]?>&nbsp;-&nbsp;<?=$joueurDTN["prenomJoueur"]?> <?=$joueurDTN["nomJoueur"]?><?php if (isset($joueurDTN["surnomJoueur"])) echo " (".$joueurDTN["surnomJoueur"].")"; ?>&nbsp;-&nbsp;<?php 
               echo $tabage[0];?>&nbsp;ans&nbsp;-&nbsp;<?=$tabage[1]?>&nbsp;jours<br>&nbsp; Salaire: <?=number_format(round(($joueurDTN["salary"]/10),2),"0"," "," ")?>&nbsp;&euro;/semaine&nbsp;
+              <br/>&nbsp; HTMS: <?=$htms["value"]?> (<?=$htms["potential"]?>)
               </b></font></td>
               <td width="25%" align="center">
               <b>Club : </b><a href="<?=$url?>/clubs/fiche_club.php?idClubHT=<?=$joueurDTN["teamid"]?>"><?php if ($joueurDTN["isBot"]!=0) {echo '<b><font color="red">[BOT]</b></font>';}?><?=$joueurDTN["nomClub"]?></a> <img src="../images/time_<?=$img_nb?>.gif" title="Derni&egrave;re connexion du propri&eacute;taire sur HT, il y a <?=($mkday-$datemaj)/(60*60*24)?> jour(s)">
@@ -343,7 +358,7 @@ if ($datemaj >$mkday -$huit){
           <td>
           <div align="right"><?php 
           if ( ($joueurDTN["archiveJoueur"] != 1) && (($_SESSION['sesUser']["idNiveauAcces_fk"] ==2 && $_SESSION['sesUser']["idPosition_fk"]==$joueurDTN["ht_posteAssigne"]) || ($_SESSION['sesUser']["idNiveauAcces_fk"] ==1)) )  {?>
-            [ <a href="../form.php?mode=archiveJoueur&id=<?=$joueurDTN["idJoueur"]?>">Archiver ce joueur </a>]
+            [ <a href="javascript:checkArchivageSansSecteur()">Archiver ce joueur </a>]
           <?php } else  if ( ($joueurDTN["archiveJoueur"] == 1) && (($_SESSION['sesUser']["idNiveauAcces_fk"] ==2 && $_SESSION['sesUser']["idPosition_fk"]==$joueurDTN["ht_posteAssigne"]) || ($_SESSION['sesUser']["idNiveauAcces_fk"] ==2 && $joueurDTN["ht_posteAssigne"]==0) || ($_SESSION['sesUser']["idNiveauAcces_fk"] ==1)) )  {?>
             [ <a href="../form.php?mode=desarchiveJoueur&id=<?=$joueurDTN["idJoueur"]?>">D&eacute;sarchiver ce joueur </a>]        
           <?php }
