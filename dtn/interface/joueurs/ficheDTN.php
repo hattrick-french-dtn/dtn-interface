@@ -322,7 +322,7 @@ if(isset($msg)) {?>
                 <td>
                   <?php if (isset($nomColCarac)) {?>
                     <?php
-                    if($sesUser["idNiveauAcces"] == 1 || ( $sesUser["idNiveauAcces"] == 2 && $sesUser["idPosition_fk"] == $joueurDTN["ht_posteAssigne"])){?>
+                    if($sesUser["idNiveauAcces"] == 1 || ($sesUser["idNiveauAcces"] == 2 && $sesUser["idPosition_fk"] == $joueurDTN["ht_posteAssigne"]) || ($sesUser["idNiveauAcces"] == 3 && $sesUser["idPosition_fk"] == $joueurDTN["ht_posteAssigne"] && (existAutorisationClub($idClubHT,null)==false))){?>
                       &nbsp;|&nbsp;
                       <a href="javascript:majNiveau('<?=$nomColCarac?>','<?=$joueurDTN[$nomColCarac]?>','<?=$joueurDTN[$nomColCarac]+1?>','<?=$id?>')" class="Vert">+ 1</a>
                       <a href="javascript:majNiveau2('<?=$nomColCarac?>','<?=$joueurDTN[$nomColCarac]?>','<?=$joueurDTN[$nomColCarac]-1?>','<?=$id?>')" class="Rouge">- 1</a>
