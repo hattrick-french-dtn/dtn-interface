@@ -110,7 +110,7 @@ if (isset($_SESSION['listID']) && !isset($_REQUEST['listID']) )  {
     <form name="form1" method="post" action="" onSubmit="return testListId()">  
     <tr>
     <td height ="20" >
-      <img src="../images/greenball.jpg"> 1 - Votre session hattrick est active! 
+      <img src="../images/greenball.jpg"> 1 - Votre session hattrick est active ! 
     </td>
     </tr>
               
@@ -119,7 +119,7 @@ if (isset($_SESSION['listID']) && !isset($_REQUEST['listID']) )  {
   <tr>
   <td> 
     <br /> 
-    2 - Entrez la liste des IDs de joueurs actuellement sur le march&eacute; des transfert que vous souhaitez ajouter dans la base :<br>
+    2 - Entrez la liste des IDs de joueurs actuellement sur le march&eacute; des transferts que vous souhaitez ajouter dans la base :<br>
     <br />
   </td>
   </tr>

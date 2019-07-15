@@ -98,7 +98,7 @@ break;
 switch($ordre){
 
 case "nomJoueur":
-$intitule = "identite";
+$intitule = "identit&eacute;";
 break;
 
 case "ageJoueur":
@@ -106,11 +106,11 @@ $intitule = "age";
 break;
 
 case "idExperience_fk":
-$intitule = "experience";
+$intitule = "exp&eacute;rience";
 break;
 
 case "idLeader_fk":
-$intitule = "leadership";
+$intitule = "temp&eacute;rament de chef";
 break;
 
 case "htms.value":
@@ -123,7 +123,7 @@ break;
 
 
 case "optionJoueur":
-$intitule = "specialite";
+$intitule = "specialit&eacute;";
 break;
 
 
@@ -137,7 +137,7 @@ $intitule = "gardien";
 break;
 
 case "idDefense":
-$intitule = "defense";
+$intitule = "d&eacute;fense";
 break;
 
 case "idConstruction":
@@ -164,7 +164,7 @@ break;
 }
 ?>
 
-<a href="listeExportCsv.php?ordre=<?=$ordre?>&sens=<?=$sens?>&lang=<?=$lang?>&masque=<?=$masque?>&affPosition=<?=$affPosition?>">Sauvez cette page en CSV pour la consulter sous Excel!</a> 
+<a href="listeExportCsv.php?ordre=<?=$ordre?>&sens=<?=$sens?>&lang=<?=$lang?>&masque=<?=$masque?>&affPosition=<?=$affPosition?>">Sauvez cette page en CSV pour la consulter sous Excel !</a> 
 
 <center><h3><?=$tri?> par <?=$intitule?></h3></center>
 
@@ -175,7 +175,7 @@ break;
             <tr> 
               <td width="28%" height="21"> <div align="center">Poste : 
                   <select name="menu1" onChange="MM_jumpMenu('parent',this,0)">
-					<option value = liste.php?affPosition=0>Liste des non assignes</option>
+					<option value = liste.php?affPosition=0>Liste des non assign&eacute;s</option>
                   </select>
                 </div></td>
               <td width="50%"><div align="center"><font color="#000000">Liste 

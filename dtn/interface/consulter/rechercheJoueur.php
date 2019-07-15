@@ -69,7 +69,7 @@ $lstPos = listAllPosition();
 
 					<FORM ACTION="recherche_result.php" METHOD="GET">
 
-					<DIV CLASS=rub1>Recherche dans la base de donn&eacute;es DTN France.</DIV><BR>
+					<DIV CLASS=rub1><b>Recherche dans la base de donn&eacute;es DTN France :</b></DIV><BR>
 					<TABLE BORDER="0" CELLPADDING="2" CELLSPACING="0" WIDTH="355">
 					<TR>
 						<TD VALIGN="top" colspan=2>
@@ -92,7 +92,7 @@ $lstPos = listAllPosition();
 					<BR>					
 					<TABLE BORDER="0" CELLPADDING="4" CELLSPACING="0">
 				  <TR>
-						<TD COLSPAN="1" VALIGN="middle"><B>Age:&nbsp; </B></TD>
+						<TD COLSPAN="1" VALIGN="middle"><B>Age :&nbsp; </B></TD>
 			  <TD COLSPAN="1" VALIGN="top">
 
 							Mini 
@@ -115,7 +115,7 @@ jours</TD>
 							 Maxi <INPUT TYPE="text" NAME="maxValue" VALUE="" SIZE="10" MAXLENGTH="10">						</TD>
 					</TR>
 					<TR>
-					  <TD COLSPAN="1" VALIGN="middle"><strong>Salaire</strong></TD>
+					  <TD COLSPAN="1" VALIGN="middle"><strong>Salaire :</strong></TD>
 					  <td colspan="1" valign="top"> Mini
 					    <input type="text" name="minSalaire" value="" size="8" maxlength="10" id="minSalaire" />
                       </td>
@@ -124,7 +124,7 @@ jours</TD>
                       </td>
 					</TR>
 					<TR>
-						<TD COLSPAN="1" VALIGN="middle"><B>Sp&eacute;cialit&eacute;:&nbsp; </B></TD>
+						<TD COLSPAN="1" VALIGN="middle"><B>Sp&eacute;cialit&eacute; :&nbsp; </B></TD>
 						<TD COLSPAN="2" VALIGN="top">
 							<Select NAME="specialty">
 							<Option VALUE="-1" SELECTED>-- Toutes --</OPTION>
@@ -139,7 +139,7 @@ jours</TD>
 							</Select>						</TD>
 					</TR>
 					<TR>
-						<TD COLSPAN="3" VALIGN="middle"><B>Crit&egrave;res de comp&eacute;tences</B></TD>
+						<TD COLSPAN="3" VALIGN="middle"><B>Crit&egrave;res de comp&eacute;tences :</B></TD>
 					</TR>
 					<TR>
 						<TD COLSPAN="3" VALIGN="top">
@@ -157,8 +157,8 @@ jours</TD>
 							<OPTION VALUE="2">Ailier</OPTION>
 							<OPTION VALUE="6">D&eacute;fense</OPTION>
 							<OPTION VALUE="3">Buteur</OPTION>
-							<OPTION VALUE="7">Coups francs</OPTION>
-							<OPTION VALUE="8">Experience</OPTION>
+							<OPTION VALUE="7">Coup franc</OPTION>
+							<OPTION VALUE="8">Exp&eacute;rience</OPTION>
 							<OPTION VALUE="10">Temp&eacute;rament de chef</OPTION>
 						</SELECT>							  </td>
 							  <td valign="top">						
@@ -167,7 +167,7 @@ jours</TD>
 	
 							<OPTION VALUE="0">inexistant</OPTION>
 	
-							<OPTION VALUE="1">catastroph</OPTION>
+							<OPTION VALUE="1">catastrophique</OPTION>
 	
 							<OPTION VALUE="2">mauvais</OPTION>
 	
@@ -185,11 +185,11 @@ jours</TD>
 
 							<OPTION VALUE="9">formidable</OPTION>
 	
-							<OPTION VALUE="10">impression</OPTION>
+							<OPTION VALUE="10">impressionnant</OPTION>
 	
 							<OPTION VALUE="11">brillant</OPTION>
 	
-							<OPTION VALUE="12">inoubliabl</OPTION>
+							<OPTION VALUE="12">inoubliable</OPTION>
 	
 							<OPTION VALUE="13">l&eacute;gendaire</OPTION>
 	
@@ -197,7 +197,7 @@ jours</TD>
 	
 							<OPTION VALUE="15">titanesque</OPTION>
 	
-							<OPTION VALUE="16">extra-terr</OPTION>
+							<OPTION VALUE="16">extraterrestre</OPTION>
 	
 							<OPTION VALUE="17">mythique</OPTION>
 	
@@ -213,7 +213,7 @@ jours</TD>
 	
 							<OPTION VALUE="0">inexistant</OPTION>
 	
-							<OPTION VALUE="1">catastroph</OPTION>
+							<OPTION VALUE="1">catastrophique</OPTION>
 	
 							<OPTION VALUE="2">mauvais</OPTION>
 	
@@ -228,14 +228,14 @@ jours</TD>
 							<OPTION VALUE="7">honorable</OPTION>
 	
 							<OPTION VALUE="8">excellent</OPTION>
-	
+
 							<OPTION VALUE="9">formidable</OPTION>
 	
-							<OPTION VALUE="10">impression</OPTION>
+							<OPTION VALUE="10">impressionnant</OPTION>
 	
 							<OPTION VALUE="11">brillant</OPTION>
 	
-							<OPTION VALUE="12">inoubliabl</OPTION>
+							<OPTION VALUE="12">inoubliable</OPTION>
 	
 							<OPTION VALUE="13">l&eacute;gendaire</OPTION>
 	
@@ -243,7 +243,7 @@ jours</TD>
 	
 							<OPTION VALUE="15">titanesque</OPTION>
 	
-							<OPTION VALUE="16">extra-terr</OPTION>
+							<OPTION VALUE="16">extraterrestre</OPTION>
 	
 							<OPTION VALUE="17">mythique</OPTION>
 	
@@ -271,8 +271,8 @@ jours</TD>
 							<OPTION VALUE="2">Ailier</OPTION>
 							<OPTION VALUE="6">D&eacute;fense</OPTION>
 							<OPTION VALUE="3">Buteur</OPTION>
-							<OPTION VALUE="7">Coups francs</OPTION>
-							<OPTION VALUE="8">Experience</OPTION>
+							<OPTION VALUE="7">Coup franc</OPTION>
+							<OPTION VALUE="8">Exp&eacute;rience</OPTION>
 							<OPTION VALUE="10">Temp&eacute;rament de chef</OPTION>
 						</SELECT>							  </td>
 							  <td valign="top">							
@@ -281,7 +281,7 @@ jours</TD>
 	
 							<OPTION VALUE="0">inexistant</OPTION>
 	
-							<OPTION VALUE="1">catastroph</OPTION>
+							<OPTION VALUE="1">catastrophique</OPTION>
 	
 							<OPTION VALUE="2">mauvais</OPTION>
 	
@@ -296,14 +296,14 @@ jours</TD>
 							<OPTION VALUE="7">honorable</OPTION>
 	
 							<OPTION VALUE="8">excellent</OPTION>
-	
+
 							<OPTION VALUE="9">formidable</OPTION>
 	
-							<OPTION VALUE="10">impression</OPTION>
+							<OPTION VALUE="10">impressionnant</OPTION>
 	
 							<OPTION VALUE="11">brillant</OPTION>
 	
-							<OPTION VALUE="12">inoubliabl</OPTION>
+							<OPTION VALUE="12">inoubliable</OPTION>
 	
 							<OPTION VALUE="13">l&eacute;gendaire</OPTION>
 	
@@ -311,7 +311,7 @@ jours</TD>
 	
 							<OPTION VALUE="15">titanesque</OPTION>
 	
-							<OPTION VALUE="16">extra-terr</OPTION>
+							<OPTION VALUE="16">extraterrestre</OPTION>
 	
 							<OPTION VALUE="17">mythique</OPTION>
 	
@@ -327,7 +327,7 @@ jours</TD>
 	
 							<OPTION VALUE="0">inexistant</OPTION>
 	
-							<OPTION VALUE="1">catastroph</OPTION>
+							<OPTION VALUE="1">catastrophique</OPTION>
 	
 							<OPTION VALUE="2">mauvais</OPTION>
 	
@@ -342,14 +342,14 @@ jours</TD>
 							<OPTION VALUE="7">honorable</OPTION>
 	
 							<OPTION VALUE="8">excellent</OPTION>
-	
+
 							<OPTION VALUE="9">formidable</OPTION>
 	
-							<OPTION VALUE="10">impression</OPTION>
+							<OPTION VALUE="10">impressionnant</OPTION>
 	
 							<OPTION VALUE="11">brillant</OPTION>
 	
-							<OPTION VALUE="12">inoubliabl</OPTION>
+							<OPTION VALUE="12">inoubliable</OPTION>
 	
 							<OPTION VALUE="13">l&eacute;gendaire</OPTION>
 	
@@ -357,7 +357,7 @@ jours</TD>
 	
 							<OPTION VALUE="15">titanesque</OPTION>
 	
-							<OPTION VALUE="16">extra-terr</OPTION>
+							<OPTION VALUE="16">extraterrestre</OPTION>
 	
 							<OPTION VALUE="17">mythique</OPTION>
 	
@@ -386,8 +386,8 @@ jours</TD>
 							<OPTION VALUE="2">Ailier</OPTION>
 							<OPTION VALUE="6">D&eacute;fense</OPTION>
 							<OPTION VALUE="3">Buteur</OPTION>
-							<OPTION VALUE="7">Coups francs</OPTION>
-							<OPTION VALUE="8">Experience</OPTION>
+							<OPTION VALUE="7">Coup franc</OPTION>
+							<OPTION VALUE="8">Exp&eacute;rience</OPTION>
 							<OPTION VALUE="10">Temp&eacute;rament de chef</OPTION>
 						</SELECT>							  </td>
 							  <td valign="top">								
@@ -396,7 +396,7 @@ jours</TD>
 	
 							<OPTION VALUE="0">inexistant</OPTION>
 	
-							<OPTION VALUE="1">catastroph</OPTION>
+							<OPTION VALUE="1">catastrophique</OPTION>
 	
 							<OPTION VALUE="2">mauvais</OPTION>
 	
@@ -411,14 +411,14 @@ jours</TD>
 							<OPTION VALUE="7">honorable</OPTION>
 	
 							<OPTION VALUE="8">excellent</OPTION>
-	
+
 							<OPTION VALUE="9">formidable</OPTION>
 	
-							<OPTION VALUE="10">impression</OPTION>
+							<OPTION VALUE="10">impressionnant</OPTION>
 	
 							<OPTION VALUE="11">brillant</OPTION>
 	
-							<OPTION VALUE="12">inoubliabl</OPTION>
+							<OPTION VALUE="12">inoubliable</OPTION>
 	
 							<OPTION VALUE="13">l&eacute;gendaire</OPTION>
 	
@@ -426,7 +426,7 @@ jours</TD>
 	
 							<OPTION VALUE="15">titanesque</OPTION>
 	
-							<OPTION VALUE="16">extra-terr</OPTION>
+							<OPTION VALUE="16">extraterrestre</OPTION>
 	
 							<OPTION VALUE="17">mythique</OPTION>
 	
@@ -442,7 +442,7 @@ jours</TD>
 	
 							<OPTION VALUE="0">inexistant</OPTION>
 	
-							<OPTION VALUE="1">catastroph</OPTION>
+							<OPTION VALUE="1">catastrophique</OPTION>
 	
 							<OPTION VALUE="2">mauvais</OPTION>
 	
@@ -457,14 +457,14 @@ jours</TD>
 							<OPTION VALUE="7">honorable</OPTION>
 	
 							<OPTION VALUE="8">excellent</OPTION>
-	
+
 							<OPTION VALUE="9">formidable</OPTION>
 	
-							<OPTION VALUE="10">impression</OPTION>
+							<OPTION VALUE="10">impressionnant</OPTION>
 	
 							<OPTION VALUE="11">brillant</OPTION>
 	
-							<OPTION VALUE="12">inoubliabl</OPTION>
+							<OPTION VALUE="12">inoubliable</OPTION>
 	
 							<OPTION VALUE="13">l&eacute;gendaire</OPTION>
 	
@@ -472,7 +472,7 @@ jours</TD>
 	
 							<OPTION VALUE="15">titanesque</OPTION>
 	
-							<OPTION VALUE="16">extra-terr</OPTION>
+							<OPTION VALUE="16">extraterrestre</OPTION>
 	
 							<OPTION VALUE="17">mythique</OPTION>
 	
@@ -501,8 +501,8 @@ jours</TD>
 							<OPTION VALUE="2">Ailier</OPTION>
 							<OPTION VALUE="6">D&eacute;fense</OPTION>
 							<OPTION VALUE="3">Buteur</OPTION>
-							<OPTION VALUE="7">Coups francs</OPTION>
-							<OPTION VALUE="8">Experience</OPTION>
+							<OPTION VALUE="7">Coup franc</OPTION>
+							<OPTION VALUE="8">Exp&eacute;rience</OPTION>
 							<OPTION VALUE="10">Temp&eacute;rament de chef</OPTION>
 						</SELECT>							  </td>
 							  <td valign="top">		
@@ -511,7 +511,7 @@ jours</TD>
 	
 							<OPTION VALUE="0">inexistant</OPTION>
 	
-							<OPTION VALUE="1">catastroph</OPTION>
+							<OPTION VALUE="1">catastrophique</OPTION>
 	
 							<OPTION VALUE="2">mauvais</OPTION>
 	
@@ -526,14 +526,14 @@ jours</TD>
 							<OPTION VALUE="7">honorable</OPTION>
 	
 							<OPTION VALUE="8">excellent</OPTION>
-	
+
 							<OPTION VALUE="9">formidable</OPTION>
 	
-							<OPTION VALUE="10">impression</OPTION>
+							<OPTION VALUE="10">impressionnant</OPTION>
 	
 							<OPTION VALUE="11">brillant</OPTION>
 	
-							<OPTION VALUE="12">inoubliabl</OPTION>
+							<OPTION VALUE="12">inoubliable</OPTION>
 	
 							<OPTION VALUE="13">l&eacute;gendaire</OPTION>
 	
@@ -541,7 +541,7 @@ jours</TD>
 	
 							<OPTION VALUE="15">titanesque</OPTION>
 	
-							<OPTION VALUE="16">extra-terr</OPTION>
+							<OPTION VALUE="16">extraterrestre</OPTION>
 	
 							<OPTION VALUE="17">mythique</OPTION>
 	
@@ -557,7 +557,7 @@ jours</TD>
 	
 							<OPTION VALUE="0">inexistant</OPTION>
 	
-							<OPTION VALUE="1">catastroph</OPTION>
+							<OPTION VALUE="1">catastrophique</OPTION>
 	
 							<OPTION VALUE="2">mauvais</OPTION>
 	
@@ -572,14 +572,14 @@ jours</TD>
 							<OPTION VALUE="7">honorable</OPTION>
 	
 							<OPTION VALUE="8">excellent</OPTION>
-	
+
 							<OPTION VALUE="9">formidable</OPTION>
 	
-							<OPTION VALUE="10">impression</OPTION>
+							<OPTION VALUE="10">impressionnant</OPTION>
 	
 							<OPTION VALUE="11">brillant</OPTION>
 	
-							<OPTION VALUE="12">inoubliabl</OPTION>
+							<OPTION VALUE="12">inoubliable</OPTION>
 	
 							<OPTION VALUE="13">l&eacute;gendaire</OPTION>
 	
@@ -587,7 +587,7 @@ jours</TD>
 	
 							<OPTION VALUE="15">titanesque</OPTION>
 	
-							<OPTION VALUE="16">extra-terr</OPTION>
+							<OPTION VALUE="16">extraterrestre</OPTION>
 	
 							<OPTION VALUE="17">mythique</OPTION>
 	
@@ -603,7 +603,7 @@ jours</TD>
 					<TR>
 						<TD COLSPAN="2" VALIGN="top">
 						<BR>
-						<INPUT TYPE="radio" NAME="joueurArchive" VALUE="0" CHECKED>Cacher les joueurs archiv&eacute;s.<BR>
+						<INPUT TYPE="radio" NAME="joueurArchive" VALUE="0" CHECKED>Cacher les joueurs archiv&eacute;s<BR>
 						<INPUT TYPE="radio" NAME="joueurArchive" VALUE="1" >Seulement dans les joueurs archiv&eacute;s<BR>
 					</TR>
           <TR>
@@ -692,7 +692,7 @@ jours</TD>
 
 						<SELECT NAME="formeMin" SIZE=1>
 							<OPTION VALUE="-1" SELECTED>---Forme mini indiff&eacute;rente---</OPTION>
-							<OPTION VALUE="1">catastroph</OPTION>
+							<OPTION VALUE="1">catastrophique</OPTION>
 							<OPTION VALUE="2">mauvais</OPTION>
 							<OPTION VALUE="3">m&eacute;diocre</OPTION>
 							<OPTION VALUE="4">faible</OPTION>
@@ -704,7 +704,7 @@ jours</TD>
 
 						<SELECT NAME="formeMax" SIZE=1>
 							<OPTION VALUE="-1" SELECTED>---Forme maxi indiff&eacute;rente---</OPTION>
-							<OPTION VALUE="1">catastroph</OPTION>
+							<OPTION VALUE="1">catastrophique</OPTION>
 							<OPTION VALUE="2">mauvais</OPTION>
 							<OPTION VALUE="3">m&eacute;diocre</OPTION>
 							<OPTION VALUE="4">faible</OPTION>
@@ -716,7 +716,7 @@ jours</TD>
 						</td>
 					</tr>
 					<TR>
-						<TD  VALIGN="middle"><B>Age:&nbsp; </B>
+						<TD  VALIGN="middle"><B>Age :&nbsp; </B>
 						 &nbsp; &nbsp; &nbsp;</td><td>
 
 							Mini <INPUT TYPE="text" NAME="minAge" VALUE="" SIZE="3" MAXLENGTH="3"> ans
@@ -731,6 +731,8 @@ jours</TD>
 							<Option VALUE="3" >Costaud</OPTION>
 							<Option VALUE="4" >Impr&eacute;visible</OPTION>
 							<Option VALUE="5" >Joueur de t&ecirc;te</OPTION>
+                            <Option VALUE="6" >R&eacute;sistant</OPTION>
+                            <Option VALUE="8" >Chef d'Orchestre</OPTION>
 							
 							</Select>
 							 								

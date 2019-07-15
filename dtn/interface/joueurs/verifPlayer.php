@@ -258,7 +258,7 @@ if(isset($action) && $action == "verif"){
 	}
 }else{
 	?>
-	        <input type="button" name="Submit2" value="Back" onClick="javascript:history.go(-1)"></div>
+	        <input type="button" name="Submit2" value="Retour" onClick="javascript:history.go(-1)"></div>
 	
 	<?php
 }

@@ -225,7 +225,7 @@ if (isset($nb_players)){
 			$nb_players=7;
 	}
 }
-?>&nbsp;&nbsp;&nbsp;&nbsp;Nb players :<select name='nb_players' onchange='this.form.submit();'><?php
+?>&nbsp;&nbsp;&nbsp;&nbsp;Nb joueurs :<select name='nb_players' onchange='this.form.submit();'><?php
 for ($i=5;$i<30;$i++){
 	$etat="";
 	if ($nb_players==$i){
@@ -269,7 +269,7 @@ $param2="$nb_players";
           <table width="100%" border="0" cellspacing="0" cellpadding="0">
             <tr bgcolor="#000000"> 
                   <td width="127"><font color="#FFFFFF">&nbsp;Identit&eacute;</font></td>
-                  <td width="30"  align="center"><font color="#FFFFFF" >Training</font></td>
+                  <td width="30"  align="center"><font color="#FFFFFF" >Entrainement</font></td>
                   <td width="30"><div align="center"><font color="#FFFFFF">DTN</font></div></td>
                   <td width="40"><div align="center"><font color="#FFFFFF">TSI</font></div></td>
                   <td width="50"><div align="center"><font color="#FFFFFF">Age</font></div></td>

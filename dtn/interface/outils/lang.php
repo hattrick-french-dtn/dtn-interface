@@ -8,7 +8,7 @@ $fr["Scoring"] = "Buteur";
 $fr["Keeper"] = "Gardien";
 $fr["Passing"] = "Passe";
 $fr["Defending"] = "Défense";
-$fr["Set Pieces"] = "Coups francs";
+$fr["Set Pieces"] = "Coup franc";
 
 $carac_fr["divin"] = "divine";
 $carac_fr["utopique"] = "utopian";

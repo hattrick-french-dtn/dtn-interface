@@ -104,7 +104,7 @@
     $nbAlertes=0;
     if ( (isset($alertes1)) && ($alertes1[0]['NbJoueurNonAssigne']>0) ) {
           $nbAlertes++;
-          $msgAlerte[$i]=$alertes1[0]['NbJoueurNonAssigne']." joueurs ne sont assign&eacute; &agrave; aucun secteur";
+          $msgAlerte[$i]=$alertes1[0]['NbJoueurNonAssigne']." joueurs ne sont assign&eacute;s &agrave; aucun secteur";
           $lienAlerte[$i]="joueurs/liste.php";
           $msgLienAlerte[$i]="Voir les joueurs non assign&eacute;s";
           $i++;
