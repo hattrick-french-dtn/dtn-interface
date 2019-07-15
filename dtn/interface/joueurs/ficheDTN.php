@@ -179,7 +179,8 @@ if(isset($msg)) {?>
             <img height="16" src="../images/non_autorise.JPG" title="Ce club n'a pas autoris&eacute; la DTN &agrave; acc&eacute;der &agrave; ses donn&eacute;es">
           <?php } else { ?>
             <img height="16" src="../images/Autorise.PNG" title="Ce club a autoris&eacute; la DTN &agrave; acc&eacute;der &agrave; ses donn&eacute;es">
-          <?php } ?>
+          <?php }
+          ?><a href="https://hattrickportal.pro/Tracker/Player.aspx?playerID=<?=$joueurDTN["idHattrickJoueur"]?>" target="_blank"><img src="../images/htportal.png" width="16" title="Voir le joueur sur HT Portal"></a>
       		<?php if (!empty($_SESSION['numServeurHT'])){?>
       			&nbsp;<a href="http://www<?=$_SESSION['numServeurHT']?>.hattrick.org/Club/?TeamID=<?=$idClubHT?>&SendMessage=true" target="_NEW"
       		<?php } else { ?>
@@ -191,10 +192,7 @@ if(isset($msg)) {?>
                 <input type="submit" value="Mettre &agrave; jour sur Hattrick" />
                 </form>
         </td>
-		<td>
-		<b><a href="https://hattrickportal.pro/Tracker/Player.aspx?playerID=<?=$joueurDTN["idHattrickJoueur"]?>" target="_blank"><img src="../images/htportal.png" width="100" height="20" border="0" align="absmiddle"></a></b>
-		</td>
-        </tr>
+		</tr>
 		<tr>
 		<td align="left" width="50%">&nbsp;<font color="#000099"> HTMS: <?=$htms["value"]?> (<?=$htms["potential"]?>)</font>
 		</td>
