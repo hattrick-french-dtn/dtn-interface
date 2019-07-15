@@ -251,7 +251,7 @@ if ($datemaj >$mkday -$huit){
             <tr> 
               <td width="40%" align="left">&nbsp; <font color="#000099"><b>Info: <?=$joueurDTN["idHattrickJoueur"]?>&nbsp;-&nbsp;<?=$joueurDTN["prenomJoueur"]?> <?=$joueurDTN["nomJoueur"]?><?php if (isset($joueurDTN["surnomJoueur"])) echo " (".$joueurDTN["surnomJoueur"].")"; ?>&nbsp;-&nbsp;<?php 
               echo $tabage[0];?>&nbsp;ans&nbsp;-&nbsp;<?=$tabage[1]?>&nbsp;jours<br>&nbsp; Salaire: <?=number_format(round(($joueurDTN["salary"]/10),2),"0"," "," ")?>&nbsp;&euro;/semaine&nbsp;
-              <br/>&nbsp; HTMS: <?=$htms["value"]?> (<?=$htms["potential"]?>)
+			  <br/>&nbsp; HTMS: <?=$htms["value"]?> (<?=$htms["potential"]?>)
               </b></font></td>
               <td width="25%" align="center">
               <b>Club : </b><a href="<?=$url?>/clubs/fiche_club.php?idClubHT=<?=$joueurDTN["teamid"]?>"><?php if ($joueurDTN["isBot"]!=0) {echo '<b><font color="red">[BOT]</b></font>';}?><?=$joueurDTN["nomClub"]?></a> <img src="../images/time_<?=$img_nb?>.gif" title="Derni&egrave;re connexion du propri&eacute;taire sur HT, il y a <?=($mkday-$datemaj)/(60*60*24)?> jour(s)">
@@ -267,6 +267,9 @@ if ($datemaj >$mkday -$huit){
                   &nbsp;<a href="#" onClick='AlertNumServeurHT();'
                 <?php }?>
                 alt="ht">HT-mail</a>
+              </td>
+              <td>
+              <b><a href="https://hattrickportal.pro/Tracker/Player.aspx?playerID=<?=$joueurDTN["idHattrickJoueur"]?>" target="_blank"><img src="../images/htportal.png" width="100" height="20" border="0" align="absmiddle"></a></b>
               </td>
     
               <td  width="35%" nowrap align="right">

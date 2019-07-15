@@ -170,7 +170,7 @@ if(isset($msg)) {?>
           <tr> 
           <td align="left" width="50%">&nbsp;<font color="#000099"> Info: <?=strtolower($joueurDTN["idHattrickJoueur"])?>&nbsp;-&nbsp;<?=strtolower($joueurDTN["prenomJoueur"])?>&nbsp;<?=strtolower($joueurDTN["nomJoueur"])?><?php if (isset($joueurDTN["surnomJoueur"])) echo " (".$joueurDTN["surnomJoueur"].")"; ?>&nbsp;-&nbsp;
           <?=$tabage[0];?>&nbsp;ans&nbsp;-&nbsp;<?=$tabage[1]?>&nbsp;jours<br>&nbsp; Salaire: <?=number_format(round(($joueurDTN["salary"]/10),2),"0"," "," ")?>&nbsp;&euro;/semaine&nbsp;-&nbsp;<?=$joueurDTN["intitulePosition"]?> 
-          </font>
+           </font>
      			
 	       </td>
 	       <td width="20%" align="left" colspan="2">
@@ -191,6 +191,9 @@ if(isset($msg)) {?>
                 <input type="submit" value="Mettre &agrave; jour sur Hattrick" />
                 </form>
         </td>
+		<td>
+		<b><a href="https://hattrickportal.pro/Tracker/Player.aspx?playerID=<?=$joueurDTN["idHattrickJoueur"]?>" target="_blank"><img src="../images/htportal.png" width="100" height="20" border="0" align="absmiddle"></a></b>
+		</td>
         </tr>
 		<tr>
 		<td align="left" width="50%">&nbsp;<font color="#000099"> HTMS: <?=$htms["value"]?> (<?=$htms["potential"]?>)</font>
@@ -208,7 +211,7 @@ if(isset($msg)) {?>
             <tr> 
             <td width="25%" height="15"><font color="#000099">Popularit&eacute;</font></td>
             <td width="25%" height="15"> <div align="left"><?=$joueurDTN["numCaractere"]?> (<?=$joueurDTN["intituleCaractereFR"]?>)</div></td>
-            <td width="25%" height="15"> <div align="left"><font color="#000099">Leadership</font></div></td>
+            <td width="25%" height="15"> <div align="left"><font color="#000099">Temp&eacute;rament de chef</font></div></td>
             <td width="12%" height="15"> <div align="left"><?=$joueurDTN["numLeader"]?> (<?=$joueurDTN["intituleLeaderFR"]?>)</div></td>
             <td width="13%" height="15">&nbsp;</td>
             </tr>
