@@ -159,6 +159,7 @@ function submitSupprimeSecteur()
   }
   else {
 	  if (confirm('Voulez vous VRAIMENT retirer ce joueur de son Secteur de jeu ?')){
+      document.formSupprimeSecteur.submit();
   }
   }
 }
