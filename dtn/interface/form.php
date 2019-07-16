@@ -90,7 +90,7 @@ case "reactivAdmin":
 
 case "modifAdmin";
 
-	$sql = $conn->exec("UPDATE ht_admin SET   loginAdmin = '".$loginAdmin."', passAdmin  ='".$passAdmin."',idAdminHT= '".$idAdminHT."' ,
+	$sql = $conn->exec("UPDATE ht_admin SET   loginAdmin = '".$loginAdmin."', passAdmin  ='".sha1($passAdmin)."',idAdminHT= '".$idAdminHT."' ,
                                          emailAdmin  = '".$emailAdmin."' ,idNiveauAcces_fk = '".$idNiveauAcces_fk."'  ,  idPosition_fk  = '".$idPosition_fk."' WHERE idAdmin = '".$idAdmin."'");
 
 	header("location: equipe/$from.php?msg=L administrateur a bien ete modifie");
@@ -109,7 +109,7 @@ case "ajoutAdmin":
 			break;
 		}
 
-		$conn->exec("UPDATE ht_admin SET loginAdmin = '".$loginAdmin."', passAdmin  ='".$passAdmin."',idAdminHT= '".$idAdminHT."' ,
+		$conn->exec("UPDATE ht_admin SET loginAdmin = '".$loginAdmin."', passAdmin  ='".sha1($passAdmin)."',idAdminHT= '".$idAdminHT."' ,
 					emailAdmin  = '".$emailAdmin."' ,idNiveauAcces_fk = '".$idNiveauAcces_fk."'  ,  idPosition_fk  = '".$idPosition_fk."', affAdmin=1 WHERE idAdmin = '".$row["idAdmin"]."'");
 
 		header("location: equipe/$from.php?msg=L administrateur a bien ete modifie");
@@ -117,7 +117,7 @@ case "ajoutAdmin":
 	else{
 
 		$sql = "INSERT INTO ht_admin (loginAdmin, passAdmin, idAdminHT, emailAdmin, idNiveauAcces_fk , idPosition_fk, affAdmin)";
-		$sql .= "VALUES                          ('$loginAdmin', '$passAdmin', '$idAdminHT', '$emailAdmin', $idNiveauAcces_fk, '$idPosition_fk', 1)";
+		$sql .= "VALUES                          ('$loginAdmin', '".sha1($passAdmin)."', '$idAdminHT', '$emailAdmin', $idNiveauAcces_fk, '$idPosition_fk', 1)";
 		$req = $conn->exec($sql);
 
 		header("location: equipe/$from.php?msg=Administrateur bien ajoute a la liste");
