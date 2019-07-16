@@ -718,7 +718,7 @@ case "coeffSelectionneur":
 
 case "chgInfoPerso":
 
-	$sql = "UPDATE ht_admin SET loginAdmin = '".$login."', passAdmin = '".$mdp."', emailAdmin = '".$email."' WHERE idAdmin = '".$sesUser["idAdmin"]."'";
+	$sql = "UPDATE ht_admin SET loginAdmin = '".$login."', passAdmin = '".sha1($mdp)."', emailAdmin = '".$email."' WHERE idAdmin = '".$sesUser["idAdmin"]."'";
 	$req = $conn->exec($sql);
 
 	header("location: settings.php?modperso=ok&affinfoPerso=1");

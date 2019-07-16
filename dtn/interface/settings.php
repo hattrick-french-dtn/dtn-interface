@@ -83,7 +83,7 @@ if ($affinfoPerso == 1) {
 		  </tr>
 		  <tr>
 			<td>Mot de passe :</td>
-			<td> <input name="mdp" type="text" id="mdp" value="<?=$_SESSION['sesUser']["passAdmin"]?>"></td>
+			<td> <input name="mdp" type="text" id="mdp" ></td>
 		  </tr>
 		  <tr>
 			<td>Email :</td>
