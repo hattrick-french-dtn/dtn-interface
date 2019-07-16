@@ -15,24 +15,24 @@ En tant que DTN, vous pouvez acc&eacute;der aux diff&eacute;rentes rubriques sui
 
 <span class="breadvar">Via le menu <a href="<?=$url?>/joueurs/toplist.php">"Base de donn&eacute;es"</a></span> : <br>
 <ul>
-<li>retrouver les Listes des tops 
+<li>Retrouver les Listes des tops 
 <li>Ajouter un joueur
 <li>Tester l'existence d'un joueur dans la base 
-<li>Consulter/modifier/ajouter les listes de Clubs de la base
+<li>Consulter / modifier / ajouter les listes de Clubs de la base
 </ul>
 </p>
 
 </p>
 <span class="breadvar">Via le menu <a href="<?=$url?>/consulter/messagesMaListe.php">"Messages Proprios"</a></span> : <br>
 <ul>
-<li>consulter les messages des propri&eacute;taires de joueurs que j'ai en suivi
-<li>consulter les messages des propri&eacute;taires de joueurs assign&eacute;s &agrave; mon secteur
+<li>Consulter les messages des propri&eacute;taires de joueurs que j'ai en suivi
+<li>Consulter les messages des propri&eacute;taires de joueurs assign&eacute;s &agrave; mon secteur
 </ul>
 </p>
 
 <span class="breadvar">Via le lien <a href="<?=$url?>/maliste/maliste.php">"Ma liste"</a></span> : <br>
 <ul>
-<li>Retrouver/modifier les joueurs que je dois surveiller 
+<li>Retrouver / modifier les joueurs que je dois surveiller 
 </ul>
 </p>
 <span class="breadvar">Via le lien <a href="<?=$url?>/aide/contact.php">"Liens utiles"</a></span> : <br>

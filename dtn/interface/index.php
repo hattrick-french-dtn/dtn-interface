@@ -56,7 +56,7 @@ if (isset($_POST['nomForm']) && $_POST['nomForm']=='formConnexion') {
 		echo('Erreur : Prenez contact avec les d&eacute;veloppeurs ou les administrateurs de la DTN');
 		exit;
     } elseif ($req->rowCount() != 1) {
-		$erreurAuthentification="Le login et/ou le password saisis sont inconnus.";
+		$erreurAuthentification="Le nom d'utilisateur et/ou le mot de passe saisis sont inconnus.";
     } else {
     
 	// Le Login et le password existe dans la base

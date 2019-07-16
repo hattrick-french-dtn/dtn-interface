@@ -730,23 +730,23 @@ if(count($lstJ)==0) {
 				<TD VALIGN="top">
 					<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="0">
 					<TR>
-						<TD width=25% ><B>Endurance:&nbsp; </B></TD><TD width=25% ><?=$lstCarac[$lstJ[$j]["idEndurance"]]["intituleCaracFR"]?></TD>
-						<TD width=25% ><B>&nbsp; &nbsp; Gardien:&nbsp;</B></TD> <TD bgcolor="<?=$keeperColor?>" width=25% ><?=$lstCarac[$lstJ[$j]["idGardien"]]["intituleCaracFR"]?><?php afficheLesPlus($lstJ[$j],"nbSemaineGardien"); ?></TD>
+						<TD width=25% ><B>Endurance :&nbsp; </B></TD><TD width=25% ><?=$lstCarac[$lstJ[$j]["idEndurance"]]["intituleCaracFR"]?></TD>
+						<TD width=25% ><B>&nbsp; &nbsp; Gardien :&nbsp;</B></TD> <TD bgcolor="<?=$keeperColor?>" width=25% ><?=$lstCarac[$lstJ[$j]["idGardien"]]["intituleCaracFR"]?><?php afficheLesPlus($lstJ[$j],"nbSemaineGardien"); ?></TD>
 
 					</TR>
 					<TR>
-						<TD><B>Construction:&nbsp; </B></TD><TD bgcolor="<?=$constructionColor?>"><?=$lstCarac[$lstJ[$j]["idConstruction"]]["intituleCaracFR"]?><?php afficheLesPlus($lstJ[$j],"nbSemaineConstruction"); ?></TD>
-						<TD><B>&nbsp; &nbsp; Passe:&nbsp; </B></TD><TD bgcolor="<?=$passeColor?>"><?=$lstCarac[$lstJ[$j]["idPasse"]]["intituleCaracFR"]?><?php afficheLesPlus($lstJ[$j],"nbSemainePasses"); ?></TD>
+						<TD><B>Construction :&nbsp; </B></TD><TD bgcolor="<?=$constructionColor?>"><?=$lstCarac[$lstJ[$j]["idConstruction"]]["intituleCaracFR"]?><?php afficheLesPlus($lstJ[$j],"nbSemaineConstruction"); ?></TD>
+						<TD><B>&nbsp; &nbsp; Passe :&nbsp; </B></TD><TD bgcolor="<?=$passeColor?>"><?=$lstCarac[$lstJ[$j]["idPasse"]]["intituleCaracFR"]?><?php afficheLesPlus($lstJ[$j],"nbSemainePasses"); ?></TD>
 					</TR>
 
 					<TR>
-						<TD><B>Ailier: &nbsp;</B></TD> <TD bgcolor="<?=$ailierColor?>"><?=$lstCarac[$lstJ[$j]["idAilier"]]["intituleCaracFR"]?><?php afficheLesPlus($lstJ[$j],"nbSemaineAilier"); ?></TD>
-						<TD><B>&nbsp; &nbsp; D&eacute;fense:&nbsp; </B></TD><TD bgColor="<?=$defenseColor?>"><?=$lstCarac[$lstJ[$j]["idDefense"]]["intituleCaracFR"]?><?php afficheLesPlus($lstJ[$j],"nbSemaineDefense"); ?></TD>
+						<TD><B>Ailier : &nbsp;</B></TD> <TD bgcolor="<?=$ailierColor?>"><?=$lstCarac[$lstJ[$j]["idAilier"]]["intituleCaracFR"]?><?php afficheLesPlus($lstJ[$j],"nbSemaineAilier"); ?></TD>
+						<TD><B>&nbsp; &nbsp; D&eacute;fense :&nbsp; </B></TD><TD bgColor="<?=$defenseColor?>"><?=$lstCarac[$lstJ[$j]["idDefense"]]["intituleCaracFR"]?><?php afficheLesPlus($lstJ[$j],"nbSemaineDefense"); ?></TD>
 					</TR>
 					<TR>
 
-						<TD><B>Buteur:&nbsp; </B></TD><TD bgcolor="<?=$buteurColor?>"><?=$lstCarac[$lstJ[$j]["idButeur"]]["intituleCaracFR"]?><?php afficheLesPlus($lstJ[$j],"nbSemaineButeur"); ?></TD>
-						<TD><B>&nbsp; &nbsp; Coups francs:&nbsp; </B></TD><TD><?=$lstCarac[$lstJ[$j]["idPA"]]["intituleCaracFR"]?></TD>
+						<TD><B>Buteur :&nbsp; </B></TD><TD bgcolor="<?=$buteurColor?>"><?=$lstCarac[$lstJ[$j]["idButeur"]]["intituleCaracFR"]?><?php afficheLesPlus($lstJ[$j],"nbSemaineButeur"); ?></TD>
+						<TD><B>&nbsp; &nbsp; Coup franc :&nbsp; </B></TD><TD><?=$lstCarac[$lstJ[$j]["idPA"]]["intituleCaracFR"]?></TD>
 					</TR>
 					</TABLE>
 				</TD>
@@ -776,7 +776,7 @@ if(count($lstJ)==0) {
 <?php
 		if(count($lstJ)==0) {
 ?>
-	Pas de joueurs correspondent.
+	Aucun joueur correspondant.
 
 <?php			
 		}else{

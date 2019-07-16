@@ -10,12 +10,12 @@ En tant que S&eacute;lectionneur, vous pouvez acc&eacute;der aux diff&eacute;ren
 
 <span class="breadvar">Via le menu <a href="<?=$url?>/joueurs/listeInternational.php">"Joueurs"</a></span> : <br>
 <ul>
-<li>Consulter / int&eacute;grer desjoueurs &agrave; la s&eacute;lection.
+<li>Consulter / int&eacute;grer desjoueurs &agrave; la s&eacute;lection
 </ul>
 
 <span class="breadvar">Via le menu <a href="<?=$url?>/joueurs/toplist.php">"Top Liste"</a></span> : <br>
 <ul>
-<li>retrouver les Listes des tops 
+<li>Retrouver les Listes des tops
 </ul>
 </p>
 <span class="breadvar">Via le lien <a href="<?=$url?>/joueurs/selection.php">"S&eacute;lection"</a></span> : <br>
@@ -25,7 +25,7 @@ En tant que S&eacute;lectionneur, vous pouvez acc&eacute;der aux diff&eacute;ren
 </p>
 <span class="breadvar">Via le lien <a href="<?=$url?>/aide/contact.php">"Liens utiles"</a></span> : <br>
 <ul>
-<li>retrouver les liens / contacts /aides utiles...
+<li>Retrouver les liens / contacts / aides utiles...
 </ul>
 </p>
 </td></tr></table>
