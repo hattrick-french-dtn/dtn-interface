@@ -90,10 +90,14 @@ case "reactivAdmin":
 
 case "modifAdmin";
 
+if (isset($passAdmin) && $passAdmin !="") {
 	$sql = $conn->exec("UPDATE ht_admin SET   loginAdmin = '".$loginAdmin."', passAdmin  ='".sha1($passAdmin)."',idAdminHT= '".$idAdminHT."' ,
                                          emailAdmin  = '".$emailAdmin."' ,idNiveauAcces_fk = '".$idNiveauAcces_fk."'  ,  idPosition_fk  = '".$idPosition_fk."' WHERE idAdmin = '".$idAdmin."'");
 
 	header("location: equipe/$from.php?msg=L administrateur a bien ete modifie");
+} else {
+	header("location: equipe/$from.php?msg=L administrateur n a pas ete modifie");
+}
 	break;
 
 case "ajoutAdmin":
@@ -718,10 +722,13 @@ case "coeffSelectionneur":
 
 case "chgInfoPerso":
 
+if (isset($mdp) && isset($mdp2) && $mdp !="" && $mdp==$mdp2) {
 	$sql = "UPDATE ht_admin SET loginAdmin = '".$login."', passAdmin = '".sha1($mdp)."', emailAdmin = '".$email."' WHERE idAdmin = '".$sesUser["idAdmin"]."'";
 	$req = $conn->exec($sql);
-
-	header("location: settings.php?modperso=ok&affinfoPerso=1");
+    header("location: settings.php?modperso=ok&affinfoPerso=1");
+} else {
+    header("location: settings.php?modperso=ohno&affinfoPerso=1");
+}
 	break;
 
 

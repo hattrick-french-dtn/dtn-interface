@@ -36,10 +36,10 @@ if (isset($_GET['affCoeff']))
 	$affCoeff = $_GET['affCoeff'];
 if (isset($_GET['affinfoPerso']))
 	$affinfoPerso = $_GET['affinfoPerso'];
-if (isset($_POST['mod']))
-	$mod=$_POST['mod'];
-if (isset($_POST['modperso']))
-	$modperso=$_POST['modperso'];
+if (isset($_GET['mod']))
+	$mod=$_GET['mod'];
+if (isset($_GET['modperso']))
+	$modperso=$_GET['modperso'];
 
 $lstPos = listPosition();
 if(!isset($id_postes)) $id_postes = 1;
@@ -83,7 +83,11 @@ if ($affinfoPerso == 1) {
 		  </tr>
 		  <tr>
 			<td>Mot de passe :</td>
-			<td> <input name="mdp" type="text" id="mdp" ></td>
+			<td> <input name="mdp" type="password" id="mdp" ></td>
+		  </tr>
+		  <tr>
+			<td>Confirmer le Mot de passe :</td>
+			<td> <input name="mdp2" type="password" id="mdp2" ></td>
 		  </tr>
 		  <tr>
 			<td>Email :</td>
@@ -116,6 +120,7 @@ if ($affinfoPerso == 1) {
         <font color="#FF0000">
 <?php if($mod=="ok") echo "Modifications correctements effectu&eacute;es";?>
 <?php if($modperso=="ok") echo "Modifications correctement effectu&eacute;es, vous devez vous d&eacute;connecter pour que les changements prennent effet";?>
+<?php if($modperso=="ohno") echo "Echec de la mise &agrave; jour des donn&eacute;es";?>
 		</font>
 		</center>
 		</td>
