@@ -128,7 +128,7 @@ $buteurColor = "#FFFFFF";
 $ordreDeTri=" ";
 
 $ordreDeTriTxt="";
-$typeExport="recherche"; // Utilisé pour export csv
+$typeExport="recherche"; // UtilisÃ© pour export csv
 
 switch($ht_posteAssigne){
 
@@ -268,7 +268,7 @@ switch($ordreDeTriNb){
 		break;
 	case "20":
 		$ordreDeTri=" ORDER BY salary DESC ";
-		$ordreDeTriTxt=" salaire réel";
+		$ordreDeTriTxt=" salaire rÃ©el";
 		break;				
 	case "21":
 		$ordreDeTri=" ORDER BY salaireDeBase DESC ";
@@ -287,12 +287,12 @@ switch($ordreDeTriNb){
 
   case "24":
 		$ordreDeTri=" ORDER BY ".$SqlAgeJoueur." ASC ,".$SqlJourJoueur." ASC ";
-		$ordreDeTriTxt=" âge";
+		$ordreDeTriTxt=" Ã¢ge";
 	break;
 	
 	case "25":
 		$ordreDeTri=" ORDER BY ".$SqlAgeJoueur." DESC ,".$SqlJourJoueur." DESC ";
-		$ordreDeTriTxt=" âge invers&eacute;";
+		$ordreDeTriTxt=" Ã¢ge invers&eacute;";
 	break;
 	
 	case "26":
@@ -381,8 +381,11 @@ if ($maxAge!="" ){
 }
 
 
-/***** Filtre sur la spécialité ****/
-if ($specialty!=-1 ){
+/***** Filtre sur la spÃ©cialitÃ© ****/
+if ($specialty==99){
+	$sql=$sql." AND (optionJoueur='1' || optionJoueur='2'|| optionJoueur='3' || optionJoueur='4' || optionJoueur='5' || optionJoueur='6' || optionJoueur='8')";
+	?><li> Avec n'importe quelle sp&eacute;cialit&eacute; <?php
+} else if ($specialty!=-1 ){
 	$sql=$sql." AND optionJoueur=".$specialty;
 	?><li> Avec comme sp&eacute;cialit&eacute; :<font color="#CC22DD"><?=$option[$specialty]["FR"]?></font><?php
 } 
@@ -489,16 +492,16 @@ if ($SkillType4!="" && ($SkillMin4!="" || $SkillMax4!="" )){
 
 $retour = $maBase->select("SELECT  count(*) as nb ".$sql);
 
-//ajout dans une variable des clauses FROM et WHERE avant que tout ne soit regroupé (Utilisé pour export csv) par jojoje86 le 22/07/09-->
+//ajout dans une variable des clauses FROM et WHERE avant que tout ne soit regroupÃ© (UtilisÃ© pour export csv) par jojoje86 le 22/07/09-->
 $laSelection=urlencode($sql);
 
 $nbjoueur=$retour[0]["nb"];
 $sql=$sqlreel.$sql.$ordreDeTri;
 
-// Extraction des 50 joueurs de la page (ou moins si page incomplète) pour transfert
-// à ficherecupchoix.php pour affichage de fiches résumé par lots
+// Extraction des 50 joueurs de la page (ou moins si page incomplÃ¨te) pour transfert
+// Ã  ficherecupchoix.php pour affichage de fiches rÃ©sumÃ© par lots
 // Dans ce cas $sql1=$sql et $ListeTotale=$lstJ
-// mais on conserve la routine pour modification rapide du nombre de fiches résumé à extraire 
+// mais on conserve la routine pour modification rapide du nombre de fiches rÃ©sumÃ© Ã  extraire 
 // Fireproofed le 05/11/2010
 // $sql1=$sql."	LIMIT ".$indexDeb.",50;";
 // $ListeTotale=$maBase->select($sql1);
@@ -509,7 +512,7 @@ $sql.="	LIMIT ".$indexDeb.",50;";
 
 $lstJ = $maBase->select($sql);
 
-$_SESSION['ListeFicheResume']=$lstJ //variable _SESSION pour transfert vers fiches résumé en lot - Fireproofed
+$_SESSION['ListeFicheResume']=$lstJ //variable _SESSION pour transfert vers fiches rÃ©sumÃ© en lot - Fireproofed
 
 
 //echo $sql;
@@ -593,14 +596,14 @@ if(count($lstJ)==0) {
 	       
 	       
     } // Fin Si il y a plus de 1 page
-} // Fin else (= au moins 1 joueur trouvé)
+} // Fin else (= au moins 1 joueur trouvÃ©)
 ?>
 				<br>
 				<!--// Ajout du liens permetant l'export CSV par jojoje86 le 22/07/09-->
-				<!--// Ce liens n'est visible que si le niveau d'accès est suffisant par jojoje86 le 25/07/09-->
+				<!--// Ce liens n'est visible que si le niveau d'accÃ¨s est suffisant par jojoje86 le 25/07/09-->
 <?php
 				if ($sesUser["idNiveauAcces"]==1 || $sesUser["idNiveauAcces"]==2 || $sesUser["idNiveauAcces"]==4)
-        //si admin, DTN+ ou sélectionneur alors autoriser export CSV et fiche résumé globale
+        //si admin, DTN+ ou sÃ©lectionneur alors autoriser export CSV et fiche rÃ©sumÃ© globale
 				{
 ?>
 
@@ -609,7 +612,7 @@ if(count($lstJ)==0) {
               <td valign="middle">Export Excel :&nbsp;</td>
               <td valign="middle"><a href="../outils/ExportCsv.php?typeExport=<?=$typeExport?>&laSelection=<?=$laSelection?>&ordre=<?=$ordreDeTri?>"><img border=1 src="../images/icone-excel.jpg" title="Exporter le r&eacute;sultat de ma recherche sur Excel"></a></td>
               
-              <!-- Rajout export vers fiches résumé -->
+              <!-- Rajout export vers fiches rÃ©sumÃ© -->
               <!-- Fireproofed le 05/11/2010 -->
               
               <td valign="middle">
@@ -625,7 +628,7 @@ if(count($lstJ)==0) {
 <?php
 				} else { 
         if ($sesUser["idNiveauAcces"]==3 and ($sesUser["idPosition_fk"]==$ht_posteAssigne or $sesUser["idPosition_fk"]==6 or $sesUser["idPosition_fk"]==0))
-        //Si DTN et secteur DTN=secteur recherché ou si DTN tous secteurs alors autoriser fiche résumé globale
+        //Si DTN et secteur DTN=secteur recherchÃ© ou si DTN tous secteurs alors autoriser fiche rÃ©sumÃ© globale
         //Fireproofed le 23/11/2010
         {
 ?>        
@@ -786,7 +789,7 @@ if(count($lstJ)==0) {
 				<?=$nbjoueur?>&nbsp;joueurs ont &eacute;t&eacute; trouv&eacute;s.&nbsp;<br> 
     <?php			
 
-} // Fin else (= au moins 1 joueur trouvé)
+} // Fin else (= au moins 1 joueur trouvÃ©)
 ?>
 				</TD>
 			</TR>
