@@ -127,7 +127,8 @@ jours</TD>
 						<TD COLSPAN="1" VALIGN="middle"><B>Sp&eacute;cialit&eacute; :&nbsp; </B></TD>
 						<TD COLSPAN="2" VALIGN="top">
 							<Select NAME="specialty">
-							<Option VALUE="-1" SELECTED>-- Toutes --</OPTION>
+							<Option VALUE="-1" SELECTED>-- Pas de pr√©f√©rence --</OPTION>
+							<Option VALUE="99" >Toutes</OPTION>
 							<Option VALUE="0" >Aucune</OPTION>
 							<Option VALUE="1" >Technique</OPTION>
 							<Option VALUE="2" >Rapide</OPTION>
@@ -612,7 +613,7 @@ jours</TD>
 						<INPUT TYPE="radio" NAME="NivEntraineur" VALUE="-1" CHECKED>Tous
 						<INPUT TYPE="radio" NAME="NivEntraineur" VALUE="8" >Excellent
 						<INPUT TYPE="radio" NAME="NivEntraineur" VALUE="7" >Honorable
-						<INPUT TYPE="radio" NAME="NivEntraineur" VALUE="6" >Passable ou infÈrieur
+						<INPUT TYPE="radio" NAME="NivEntraineur" VALUE="6" >Passable ou inf√©rieur
 						<BR>
 						<BR><B>Tri des r&eacute;sultats :</B><BR>
 						<SELECT NAME="ordreDeTriNb" SIZE=1>
@@ -622,11 +623,11 @@ jours</TD>
 							<OPTION VALUE="18">Tri par mise &agrave; jour propri&eacute;taire</OPTION>
 							<OPTION VALUE="19">Tri par mise &agrave; jour propri&eacute;taire invers&eacute;e</OPTION>
 							<OPTION VALUE="3">Tri par TSI </OPTION>
-							<OPTION VALUE="20">Tri par salaire rÈel</OPTION>
+							<OPTION VALUE="20">Tri par salaire r√©el</OPTION>
 							<OPTION VALUE="21">Tri par salaire de base</OPTION>
               <OPTION VALUE="23">Tri par salaire de base invers&eacute;</OPTION>
-              <OPTION VALUE="24">Tri par ‚ge</OPTION>
-              <OPTION VALUE="25">Tri par ‚ge invers&eacute;</OPTION>
+              <OPTION VALUE="24">Tri par √¢ge</OPTION>
+              <OPTION VALUE="25">Tri par √¢ge invers&eacute;</OPTION>
               <OPTION VALUE="26">Tri par TDC</OPTION>
               <OPTION VALUE="4">Tri par id Hattrick </OPTION>
 							<OPTION VALUE="5">Tri par note gK </OPTION>
