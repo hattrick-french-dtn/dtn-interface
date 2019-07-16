@@ -193,7 +193,8 @@ $idHT=$infJ['idHattrickJoueur'];
           	<td width="40%" align="left">&nbsp; <font color="#000099"><b><?=$infJ["idHattrickJoueur"]?>&nbsp;-&nbsp;<?=<?=$infJ["prenomJoueur"]?> $infJ["nomJoueur"]?>&nbsp;-&nbsp;<?php 
 			$ageetjours = ageetjour($infJ["datenaiss"]);
 			$tabage = explode(" - ",$ageetjours);
-			echo $tabage[0];?>&nbsp;ans&nbsp;-&nbsp;<?=$tabage[1]?>&nbsp;jours<br>&nbsp; <?=number_format(round(($infJ["salary"]/10),2),"0"," "," ")?>&nbsp;�/semaine&nbsp;</b></font></td>
+			echo $tabage[0];?>&nbsp;ans&nbsp;-&nbsp;<?=$tabage[1]?>&nbsp;jours<br>&nbsp; <?=number_format(round(($infJ["salary"]/10),2),"0"," "," ")?>&nbsp;�/semaine&nbsp;
+			</b></font></td>
           	<td width="20%" align="left"><b>Club : </b><a href="<?=$url?>/clubs/fiche_club.php?idClubHT=<?=$infJ["teamid"]?>"><?=$infJ["nomClub"]?></a></td>
     	  	<td nowrap align="right" width="40%">
           		<?php
@@ -222,6 +223,9 @@ $idHT=$infJ['idHattrickJoueur'];
 		  ?><font color="#FF0000"><strong>Ce joueur n'est pas suivi !&nbsp;</strong></font><?php
 		 }
 		?></td>
+		<td>
+        <b><a href="https://hattrickportal.pro/Tracker/Player.aspx?playerID=<?=$joueurDTN["idHattrickJoueur"]?>" target="_blank"><img src="../images/htportal.png" width="100" height="20" border="0" align="absmiddle"></a></b>
+        </td>
           
           
         </tr>
