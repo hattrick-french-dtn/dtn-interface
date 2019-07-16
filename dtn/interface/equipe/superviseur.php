@@ -66,8 +66,8 @@ if(!isset($sens)) $sens = "ASC";
                   <td height="20"><input name="loginAdmin" type="text" id="loginAdmin"></td>
                 </tr>
                 <tr>
-                  <td height="20">Mot de passe</td>
-                  <td height="20"><input name="passAdmin" type="text" id="passAdmin"></td>
+                  <td height="20">Mail</td>
+                  <td height="20"><input name="emailAdmin" type="text" id="emailAdmin"></td>
                 </tr>
                 <tr>
                   <td height="10">ID User Hattrick</td>
@@ -138,7 +138,7 @@ if(!isset($sens)) $sens = "ASC";
               <tr>
                 <td width="151" onClick = "chgTri('loginAdmin','<?=$sens?>')"><div align="left"><strong>&nbsp;Login</strong></div></td>
                 <td width="1" bgcolor="#000000"><strong><img src="../images/spacer.gif" width="1" height="1"></strong></td>
-                <td width="135"onClick = "chgTri('passAdmin','<?=$sens?>')"><strong>&nbsp;Code d'acc&egrave;s</strong></td>
+                <td width="135"onClick = "chgTri('emailAdmin','<?=$sens?>')"><strong>&nbsp;Mail</strong></td>
                 <td width="1" bgcolor="#000000"><strong><img src="../images/spacer.gif" width="1" height="1"></strong></td>
                 <td width="119"onClick = "chgTri('intitulePosition','<?=$sens?>')"><div align="center"><strong>Cat&eacute;gorie</strong></div></td>
                 <td width="1" bgcolor="#000000"><strong><img src="../images/spacer.gif" width="1" height="1"></strong></td>
@@ -174,7 +174,7 @@ if(!isset($sens)) $sens = "ASC";
               <tr bgcolor="<?=$bgcolor?>">
                 <td>&nbsp;<a href = "fiche.php?dtn=<?=$l["idAdmin"]?>"><?=$l["loginAdmin"]?></a></td>
                 <td width="1" bgcolor="#000000"><img src="../images/spacer.gif" width="1" height="1"></td>
-                <td>&nbsp;<?=$l["passAdmin"]?></td>
+                <td>&nbsp;<?=$l["emailAdmin"]?></td>
                 <td width="1" bgcolor="#000000"><img src="../images/spacer.gif" width="1" height="1"></td>
                 <td>&nbsp;<?=$l["intitulePosition"]?></td>
                 <td width="1" bgcolor="#000000"><img src="../images/spacer.gif" width="1" height="1"></td>
