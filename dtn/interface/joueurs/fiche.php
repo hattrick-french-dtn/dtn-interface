@@ -298,9 +298,32 @@ if ($datemaj >$mkday -$huit){
               // ####################### Si Joueur Non suivi et archivé ####################### 
               else if($joueurDTN["archiveJoueur"] == 1){
                  ?><font color="#FF0000"><strong>Ce joueur est archiv&eacute;&nbsp;</strong></font><?php
-                 
+
+              // ####################### Si Joueur Non suivi et archivé ####################### 
+              }else if($joueurDTN["ht_posteAssigne"] == 0){
+				?><font color="#FF0000"><strong>Ce joueur n'est pas suivi ! &nbsp; </strong></font><?php
+				if(($_SESSION['sesUser']["idNiveauAcces"]==2 && ($_SESSION['sesUser']["idPosition_fk"]==$joueurDTN["ht_posteAssigne"]  ||  $_SESSION['sesUser']["idPosition_fk"] == 0) ) ||  $_SESSION['sesUser']["idNiveauAcces"] == 1)
+                {
+				    ?><form name="form0" method="post" action="../form.php"><div align="right">
+					<input name="mode" type="hidden" id="mode" value="assigneJoueur">
+					<input name="ordre" type="hidden" id="mode" value="<?=$ordre?>">
+					<input name="sens" type="hidden" id="mode" value="<?=$sens?>">
+					<input name="masque" type="hidden" id="mode" value="<?=$masque?>">
+                    <select name="idPosition" id="idPosition">
+                    <?php
+					for($i=0;$i<count($lstPosition);$i++){
+					if($affPosition == $lstPosition[$i]["idPosition"]) $etat = "selected"; else $etat = "";
+					echo "<option value = ".$lstPosition[$i]["idPosition"]." $etat >".$lstPosition[$i]["intitulePosition"]."</option>";
+					}
+                    }
+                    ?>
+                    </select>
+					<input type="submit" name="Submit" value="Assigner">
+                    </div></form><?php
+				}
+			
               // ####################### Si Joueur Non suivi et non archivé #######################
-              }else {
+               else {
                 ?><font color="#FF0000"><strong>Ce joueur n'est pas suivi ! &nbsp; </strong></font><?php
                 if(($_SESSION['sesUser']["idNiveauAcces"]==2 && ($_SESSION['sesUser']["idPosition_fk"]==$joueurDTN["ht_posteAssigne"]  ||  $_SESSION['sesUser']["idPosition_fk"] == 0) ) ||  $_SESSION['sesUser']["idNiveauAcces"] == 1)
                 {
