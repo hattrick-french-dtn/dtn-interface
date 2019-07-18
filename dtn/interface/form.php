@@ -928,7 +928,7 @@ case "updateTraining":
          nbSemaineButeur = \"".$_POST["nbSemaineButeur"]."\",
          nbSemaineGardien = \"".$_POST["nbSemaineGardien"]."\",
          nbSemainePasses = \"".$_POST["nbSemainePasses"]."\",
-         nbSemaineDefense = \"".$_POST["nbSemaineDefense"]."\"
+         nbSemaineDefense = \"".$_POST["nbSemaineDefense"]."\",
          nbSemaineCoupFranc = \"".$_POST["nbSemaineCoupFranc"]."\"
          WHERE idJoueur_fk = ".$_POST["idJoueur_fk"]."");
     $req = $conn->exec($sql);
