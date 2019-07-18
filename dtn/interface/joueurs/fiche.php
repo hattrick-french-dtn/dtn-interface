@@ -269,6 +269,12 @@ if ($datemaj >$mkday -$huit){
                   &nbsp;<a href="#" onClick='AlertNumServeurHT();'
                 <?php }?>
                 alt="ht">HT-mail</a>
+	<?php 	if ($sesUser["idNiveauAcces"] == "4") { // Mise à jour sur Hattrick pour le sélectionneur
+    ?>          <form method="post" action="../maliste/miseajourunique.php">
+                <input type="hidden" name="joueur" value= <?=$joueurDTN["idHattrickJoueur"]?> />
+                <input type="submit" value="Mettre &agrave; jour sur Hattrick" />
+                </form>
+	<?php	}?>
               </td>
 
               <td  width="35%" nowrap align="right">
