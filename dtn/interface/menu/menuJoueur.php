@@ -1,7 +1,7 @@
 <?php
 if(isset($idHT)) {
-	
-	global $infJ;
+
+global $infJ;
 
 /***********************************************
 * Type de menus :
@@ -17,7 +17,7 @@ if(isset($idHT)) {
 ***********************************************/
 if (($sesUser["idNiveauAcces"]=="1") or ($sesUser["idNiveauAcces"]=="4")) {$TypeMenu=1;}
 else {
-      if (($sesUser["idPosition_fk"] == $infJ["ht_posteAssigne"]) or ($infJ["ht_posteAssigne"]==0) or ($sesUser["idPosition_fk"]==0 and $sesUser["idNiveauAcces"]=="2") ) {$TypeMenu=2;}
+      if (($sesUser["idPosition_fk"] == $joueurDTN["ht_posteAssigne"]) or ($joueurDTN["ht_posteAssigne"]==0) or ($sesUser["idPosition_fk"]==0 and $sesUser["idNiveauAcces"]=="2") ) {$TypeMenu=2;}
       else {$TypeMenu=3;}
 }
 //Un DTN ne doit pas pouvoir modifier la fiche de son propre joueur par Musta56 le 28/07/2009 => http://www.ht-fff.org/bug/view.php?id=98
