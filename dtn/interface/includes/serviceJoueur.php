@@ -1095,8 +1095,29 @@ function validateMinimaPlayer($player,$todaySeason)
 		}
 	}
 	
-	if (!$reqValid) {
-		return -1;
+	if ($reqValid) {
+		 $secteur ==0;
+		if ($player["idGardien"] >=7) {
+			$secteur==1;
+		}
+		if (($player["idDefense"] >$player["idConstruction"]+1) && ($player["idDefense"] >$player["idAilier"]+1) && ($player["idDefense"] >$player["idButeur"]+1)) {
+			// défense
+			$secteur==2;
+		} else {
+			// Ailier
+			if (($player["idAilier"] >$player["idConstruction"]+1) && ($player["idAilier"] >$player["idButeur"]+1)) {
+				$secteur==3;
+			} else {
+				if ($player["idConstruction"] >$player["idButeur"]+1) {
+					//milieu
+					$secteur==4;
+				} else {
+					// buteur
+					$secteur==5;
+				}
+			}
+		}
+		return $secteur;
 	} else {
 		//** ATTENTION! dans ce cas, les joueurs sont tous acceptes, soit la semaine n'est pas valide (>16 ou negative)
 		return -2;
