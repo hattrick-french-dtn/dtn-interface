@@ -1067,6 +1067,7 @@ function validateMinimaPlayer($player,$todaySeason)
 {
 	require($_SERVER['DOCUMENT_ROOT'].'/dtn/interface/includes/nomTables.inc.php');
 	global $conn;
+        global $secteur;
 
 	$ageetjours = ageetjour($player["datenaiss"]);
 	$tabage = explode(" - ",$ageetjours);
