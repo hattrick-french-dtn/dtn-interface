@@ -101,6 +101,7 @@ switch ($sens) {
 		break;
 }
 ?>NomJoueur;idHattrick;Date Maj DTN;Date Maj Proprio;last maj(jours);age;jours;xp;leader;spe;endu;construction;+;ailier;+;buteur;+;gardien;+;passe;+;defenseur;+;coup francs;+;entraineur;entrainement;DTN;note<?php
+
 switch ($sesUser["idPosition_fk"]) {
 	case "1" : //gK
 ?> gardien;<?php
@@ -139,6 +140,15 @@ if ($typeExport=="unjoueur") {$sql .="from $tbl_joueurs where idHattrickJoueur =
 foreach ($conn->query($sql) as $l) {
 	$infJ = getJoueur($l["idJoueur"]);
 	$date = explode("-",$infJ["dateDerniereModifJoueur"]);
+    
+    // Extraction tsi
+            $sql4= "SELECT tsi FROM $tbl_joueurs_histo
+                   WHERE id_joueur_fk=".$l["idHattrickJoueur"]." 
+                   ORDER BY date_histo DESC LIMIT 1";
+            $req4 = $conn->query($sql4);
+            $ligne4 = $req4->fetch(PDO::FETCH_ASSOC);
+            if (is_array($ligne4))
+            extract($ligne4);
 
 	$mkJoueur =  mktime(0,0,0,$date[1],$date[2],$date[0]); 
 	$datesaisie = explode("-",$infJ["dateSaisieJoueur"]);
@@ -157,13 +167,15 @@ foreach ($conn->query($sql) as $l) {
 	echo round(($mkday - $datemaj)/(60*60*24) ).";";
 	echo $l["AgeAn"].";";
 	echo $l["AgeJour"].";";
+	echo $tsi.";";
+	echo $l["salary"].";";
 	echo $l["idExperience_fk"].";";
 	echo $l["idLeader_fk"].";";
 	echo $specabbrevs[$l["optionJoueur"]].";";
 	echo $l["idEndurance"].";";
 
 
-	echo $l["idConstruction"].";".$infJ["nbSemaineConstruction"].";"; 
+	echo  $l["idConstruction"].";".$infJ["nbSemaineConstruction"].";"; 
 	echo  $l["idAilier"].";".$infJ["nbSemaineAilier"].";";
 	echo  $l["idButeur"].";".$infJ["nbSemaineButeur"].";";
 	echo  $l["idGardien"].";".$infJ["nbSemaineGardien"].";";

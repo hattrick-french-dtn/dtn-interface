@@ -154,7 +154,7 @@ document.body.scrollTop = scrollPos;
       <td valign="middle">Export Excel :&nbsp;</td>
       <td valign="middle"><a href="../outils/ExportCsv.php?ordre=<?=$ordre?>&sens=<?=$sens?>&lang=<?=$lang?>&masque=<?=$masque?>&affPosition=<?=$affPosition?>&typeExport=<?=$typeExport?>"><img border=1 src="../images/icone-excel.jpg" title="Exporter Ma Liste sur Excel"></a></td>
     
-      <!-- Rajout export vers fiches résumé -->
+      <!-- Rajout export vers fiches rÃ©sumÃ© -->
       <!-- Fireproofed le 05/11/2010 -->
       
       <td valign="middle">
@@ -186,7 +186,9 @@ document.body.scrollTop = scrollPos;
                     <td width="70" ><font color="#FFFFFF">&nbsp;Potentiel HTMS</font></td>
 <!--                <td width="70" style="cursor:default;" onClick="chgTri('TODO (valeur htms)','<?=$sens?>','<?=$masque?>','<?=$affPosition?>')"><font color="#FFFFFF">&nbsp;Valeur HTMS <i class="fa fa-sort-amount-asc"></i></font></td>
                     <td width="70" style="cursor:default;" onClick="chgTri('TODO (potentiel htms)','<?=$sens?>','<?=$masque?>','<?=$affPosition?>')"><font color="#FFFFFF">&nbsp;Potentiel HTMS <i class="fa fa-sort-amount-asc"></i></font></td> -->
-                    <td width="60" style="cursor:default;" onClick="chgTri('datenaiss','<?=$sens?>','<?=$masque?>','<?=$affPosition?>')"> 
+                    <td width="60" ><div align="center"><font color="#FFFFFF">&nbsp;TSI</font></div></td>
+<!--                <td width="60" style="cursor:default;" onClick="chgTri('TODO (TSI)','<?=$sens?>','<?=$masque?>','<?=$affPosition?>')"><font color="#FFFFFF">&nbsp;Potentiel HTMS <i class="fa fa-sort-amount-asc"></i></font></td> -->
+					<td width="60" style="cursor:default;" onClick="chgTri('datenaiss','<?=$sens?>','<?=$masque?>','<?=$affPosition?>')"> 
                       <div align="center"><font color="#FFFFFF">Age<i class="fa fa-sort-amount-asc"></i></font></div></td>
                     
                     <td width="100"> 
@@ -346,8 +348,8 @@ foreach ($conn->query($sql) as $l) {
 	$ligne3 = $req3->fetch(PDO::FETCH_ASSOC);
 	extract($ligne3);
 
-// Extraction statut du joueur à la dernière MàJ (en vente ou non)
-            $sql4= "SELECT transferListed FROM $tbl_joueurs_histo
+// Extraction statut du joueur Ã  la derniÃ¨re MÃ J (en vente ou non)
+            $sql4= "SELECT transferListed, tsi FROM $tbl_joueurs_histo
                    WHERE id_joueur_fk=".$l["idHattrickJoueur"]." 
                    ORDER BY date_histo DESC LIMIT 1";
             $req4 = $conn->query($sql4);
@@ -403,7 +405,7 @@ foreach ($conn->query($sql) as $l) {
     $ageetjours = ageetjour($infJ["datenaiss"]);
 	$tabage = explode(" - ",$ageetjours);
 	$htms = htmspoint($tabage[0], $tabage[1], $infJ["idGardien"], $infJ["idDefense"], $infJ["idConstruction"], $infJ["idAilier"], $infJ["idPasse"], $infJ["idButeur"], $infJ["idPA"]);
-
+	
 	global $class;
 ?>
                   <tr bgcolor="#FFFFFF" align="right"> 
@@ -427,6 +429,7 @@ foreach ($conn->query($sql) as $l) {
                     <td width="55" nowrap align="center"><?=$date[2]?>/<?=$date[1]?>/<?=$date[0]?></td>
                     <td width="55" nowrap align="center"><?=$htms["value"]?></td>
                     <td width="55" nowrap align="center"><?=$htms["potential"]?></td>
+					<td width="55" nowrap align="center"><?=number_format($tsi, "0"," ", " ")?></td>
                     <td nowrap><div align="center"><?=$l["AgeAn"]."-".$l["AgeJour"]?></div></td>
                     <td width="20"> <div align="center"><?=$libelle_type_entrainement?></div></td>
                     <td width="20"> <div align="center"><?=$intensite?></div></td>
@@ -546,7 +549,7 @@ foreach ($conn->query($sql) as $l) {
 
 }
 
-$listID=substr($listID,0,-1); // enlève le dernier ;
+$listID=substr($listID,0,-1); // enlÃ¨ve le dernier ;
 $_SESSION['ListeFicheResume']=$listID;
 
 ?>
