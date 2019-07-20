@@ -100,7 +100,7 @@ switch ($sens) {
 		$tri = "Tri decroissant";
 		break;
 }
-?>NomJoueur;idHattrick;Date Maj DTN;Date Maj Proprio;last maj(jours);age;jours;xp;leader;spe;endu;construction;+;ailier;+;buteur;+;gardien;+;passe;+;defenseur;+;coup francs;+;entraineur;entrainement;DTN;note<?php
+?>NomJoueur;idHattrick;Date Maj DTN;Date Maj Proprio;last maj(jours);age;jours;tsi;salaire;xp;leader;spe;endu;tx endu;construction;+;ailier;+;buteur;+;gardien;+;passe;+;defenseur;+;coup francs;+;entraineur;entrainement;DTN;note<?php
 
 switch ($sesUser["idPosition_fk"]) {
 	case "1" : //gK
@@ -150,6 +150,16 @@ foreach ($conn->query($sql) as $l) {
             if (is_array($ligne4))
             extract($ligne4);
 
+    // Extraction taux d'endurance du joueur
+            $endurance="-";
+            $sql2 = "SELECT endurance FROM $tbl_clubs_histo 
+                    WHERE idClubHT = ".$l["teamid"]."
+                    ORDER BY date_histo DESC LIMIT 1";
+            $req2 = $conn->query($sql2);
+            $ligne2 = $req2->fetch(PDO::FETCH_ASSOC);
+            if (is_array($ligne2))
+            extract($ligne2);
+            
 	$mkJoueur =  mktime(0,0,0,$date[1],$date[2],$date[0]); 
 	$datesaisie = explode("-",$infJ["dateSaisieJoueur"]);
 	$mkSaisieJoueur= mktime(0,0,0,$datesaisie[1],$datesaisie[2],$datesaisie[0]);
@@ -173,7 +183,7 @@ foreach ($conn->query($sql) as $l) {
 	echo $l["idLeader_fk"].";";
 	echo $specabbrevs[$l["optionJoueur"]].";";
 	echo $l["idEndurance"].";";
-
+    echo $endurance."%;";
 
 	echo  $l["idConstruction"].";".$infJ["nbSemaineConstruction"].";"; 
 	echo  $l["idAilier"].";".$infJ["nbSemaineAilier"].";";
