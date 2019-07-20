@@ -31,7 +31,7 @@ switch($sesUser["idNiveauAcces"]){
 }
 
 
-?><title>Sélectionneurs</title>
+?><title>SÃ©lectionneurs</title>
 <table width="700" border="1" align="center" cellpadding="0" cellspacing="0" bordercolor="#000000">
   <tr><br/><br/><td height="20" bgcolor="#000000"><div align="center"><font color="#FFFFFF">Gestion des s&eacute;lectionneurs</font></div>
             </td>
@@ -43,7 +43,7 @@ switch($sesUser["idNiveauAcces"]){
     if (isset($_POST["loginAdmin"]) && isset($_POST["passAdmin"]) && isset($_POST["idAdminHT"]) && isset($_POST["emailAdmin"])) {
         $req = $conn->prepare('UPDATE ht_admin SET passAdmin = :nvpass, idAdminHT = :nvid, emailAdmin = :nvmail WHERE loginAdmin = :login');
         $req->execute(array(
-            'nvpass' => $_POST["passAdmin"],
+            'nvpass' => sha1($_POST["passAdmin"]),
             'nvid' => $_POST["idAdminHT"],
             'nvmail' => $_POST["emailAdmin"],
             'login' => $_POST["loginAdmin"]

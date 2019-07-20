@@ -90,10 +90,14 @@ case "reactivAdmin":
 
 case "modifAdmin";
 
-	$sql = $conn->exec("UPDATE ht_admin SET   loginAdmin = '".$loginAdmin."', passAdmin  ='".$passAdmin."',idAdminHT= '".$idAdminHT."' ,
+if (isset($passAdmin) && $passAdmin !="") {
+	$sql = $conn->exec("UPDATE ht_admin SET   loginAdmin = '".$loginAdmin."', passAdmin  ='".sha1($passAdmin)."',idAdminHT= '".$idAdminHT."' ,
                                          emailAdmin  = '".$emailAdmin."' ,idNiveauAcces_fk = '".$idNiveauAcces_fk."'  ,  idPosition_fk  = '".$idPosition_fk."' WHERE idAdmin = '".$idAdmin."'");
 
 	header("location: equipe/$from.php?msg=L administrateur a bien ete modifie");
+} else {
+	header("location: equipe/$from.php?msg=L administrateur n a pas ete modifie");
+}
 	break;
 
 case "ajoutAdmin":
@@ -109,7 +113,7 @@ case "ajoutAdmin":
 			break;
 		}
 
-		$conn->exec("UPDATE ht_admin SET loginAdmin = '".$loginAdmin."', passAdmin  ='".$passAdmin."',idAdminHT= '".$idAdminHT."' ,
+		$conn->exec("UPDATE ht_admin SET loginAdmin = '".$loginAdmin."', passAdmin  ='".sha1($passAdmin)."',idAdminHT= '".$idAdminHT."' ,
 					emailAdmin  = '".$emailAdmin."' ,idNiveauAcces_fk = '".$idNiveauAcces_fk."'  ,  idPosition_fk  = '".$idPosition_fk."', affAdmin=1 WHERE idAdmin = '".$row["idAdmin"]."'");
 
 		header("location: equipe/$from.php?msg=L administrateur a bien ete modifie");
@@ -117,7 +121,7 @@ case "ajoutAdmin":
 	else{
 
 		$sql = "INSERT INTO ht_admin (loginAdmin, passAdmin, idAdminHT, emailAdmin, idNiveauAcces_fk , idPosition_fk, affAdmin)";
-		$sql .= "VALUES                          ('$loginAdmin', '$passAdmin', '$idAdminHT', '$emailAdmin', $idNiveauAcces_fk, '$idPosition_fk', 1)";
+		$sql .= "VALUES                          ('$loginAdmin', '".sha1($passAdmin)."', '$idAdminHT', '$emailAdmin', $idNiveauAcces_fk, '$idPosition_fk', 1)";
 		$req = $conn->exec($sql);
 
 		header("location: equipe/$from.php?msg=Administrateur bien ajoute a la liste");
@@ -718,10 +722,13 @@ case "coeffSelectionneur":
 
 case "chgInfoPerso":
 
-	$sql = "UPDATE ht_admin SET loginAdmin = '".$login."', passAdmin = '".$mdp."', emailAdmin = '".$email."' WHERE idAdmin = '".$sesUser["idAdmin"]."'";
+if (isset($mdp) && isset($mdp2) && $mdp !="" && $mdp==$mdp2) {
+	$sql = "UPDATE ht_admin SET loginAdmin = '".$login."', passAdmin = '".sha1($mdp)."', emailAdmin = '".$email."' WHERE idAdmin = '".$sesUser["idAdmin"]."'";
 	$req = $conn->exec($sql);
-
-	header("location: settings.php?modperso=ok&affinfoPerso=1");
+    header("location: settings.php?modperso=ok&affinfoPerso=1");
+} else {
+    header("location: settings.php?modperso=ohno&affinfoPerso=1");
+}
 	break;
 
 
@@ -912,7 +919,7 @@ case "updateTraining":
 		$updatedate_modif_effectif="on";
 	}
 	if($infJoueur["nbSemaineDefense"]!= $_POST["nbSemaineDefense"]){
-		$msg  = $msg." Modif semaines d&eacute;fense (".$infJoueur["nbSemaineDefense"]." ->+".$_POST["nbSemaineDefense"].")  ";
+		$msg  = $msg." Modif semaines defense (".$infJoueur["nbSemaineDefense"]." ->+".$_POST["nbSemaineDefense"].")  ";
 		$updateDateDerniereModiff="on";	
 		$updatedate_modif_effectif="on";
 	}
