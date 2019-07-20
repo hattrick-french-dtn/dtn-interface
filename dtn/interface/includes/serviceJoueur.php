@@ -1119,7 +1119,7 @@ function validateMinimaPlayer($player,$todaySeason)
 		}
 	} else {
 		//** joueur ne rempli pas les pré-requis, on ne l'enregistre pas
-		$secteur== -1;
+		$secteur== -1; 
 	}
 	return $secteur;
 }
