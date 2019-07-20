@@ -1,10 +1,10 @@
 <?php 
-// Variable paramétrage de la page
+// Variable paramÃ©trage de la page
 $nomFicPhpCourant = explode("?",$_SERVER['REQUEST_URI']);
-$callbackUrl="https://".$_SERVER['HTTP_HOST'].$nomFicPhpCourant[0]."?mode=retour"; // Url de retour après authentification sur HT
+$callbackUrl="https://".$_SERVER['HTTP_HOST'].$nomFicPhpCourant[0]."?mode=retour"; // Url de retour aprÃ¨s authentification sur HT
 include($_SERVER['DOCUMENT_ROOT'].'/gestion_session_HT.php');
 include_once($_SERVER['DOCUMENT_ROOT'].'/language/fr.php');
-$_SESSION['acces']="INTERFACE"; // sert à avoir un affichage personnalisé pour les composants utilisés dans le portail et l'interface
+$_SESSION['acces']="INTERFACE"; // sert Ã  avoir un affichage personnalisÃ© pour les composants utilisÃ©s dans le portail et l'interface
 
 if(!isset($_SESSION['sesUser']["idAdmin"]))
 {
@@ -31,7 +31,12 @@ if(!isset($_SESSION['sesUser']["idAdmin"]))
 	<td width="1%" class="bred" nowrap nospan><a href="<?=$url?>/index2.php"><?=$_SESSION['sesUser']["IntituleNiveauAcces"]?></a>&nbsp;&gt;<span class="breadvar"> <?=$_SESSION['sesUser']["loginAdmin"]?></span></td>
 
 	<td colspan=2 align="right" valign="bottom" nowrap width="1%">
-	<A class="smliensorange" href="<?=$url?>/settings.php?affinfoPerso=1" class="btn" alt="configuration">Mon Profil</a>&nbsp;|&nbsp;
+		<form method="get" action="<?=$url?>/formJoueurDirect.php" style="display: inline;">
+		<label for "idJoueurHT">Acc&egrave;s Direct : </label>
+		<input type="text" name="idJoueurHT" value="ID Joueur" size="8" onfocus="if(this.value=='ID Joueur'){this.value=''}" onblur="if(this.value==''){this.value = 'ID Joueur'}"/>
+        <input type="submit" value="Voir" />
+        </form>
+	&nbsp;| <A class="smliensorange" href="<?=$url?>/settings.php?affinfoPerso=1" class="btn" alt="configuration">Mon Profil</a>&nbsp;|&nbsp;
 	<A class="smliensorange" href="<?=$url?>/national_team/team.php?selection=A" class="btn">Equipes Nationales</a>&nbsp;|&nbsp;
 	<A class="smliensorange" href="<?=$url?>/joueurs/toplist.php" class="btn" alt="Chercher">Base de donn&eacute;es</a>&nbsp;|&nbsp;
 	<a class="smliensorange" href="<?=$url?>/consulter/messagesMaListe.php" alt="Messages Proprios">Messages Proprios</a>&nbsp;|&nbsp;
@@ -48,7 +53,7 @@ if(!isset($_SESSION['sesUser']["idAdmin"]))
 
 <tr align="left">
 	<td valign="top" width="99%"><span class="small">Saison <?=$_SESSION['sesUser']["saison"]?>, semaine <?=$numeroSemaine?></span></td>
-	<td align="left" valign="top" ><A class="smliensorange" href="<?=$url?>/index.php?action=logout" class="btn">Quitter Interface</a></td>
+	<td align="right" valign="top" ><A class="smliensorange" href="<?=$url?>/index.php?action=logout" class="btn">Quitter Interface</a></td>
 	<td align="right" valign="top" ><img src="<?=$url?>/images/logo_dtn.jpg" align="right" valign="top"></td>
 </tr>
 </table>

@@ -22,7 +22,7 @@ if (isset($htid))
   $joueurDTN = getJoueurHt($htid);
   $id = $joueurDTN["idJoueur"];
   if (empty($joueurDTN)) {
-    echo("Joueur inexistant dans la base DTN !");
+    header("location: ../joueurs/verifPlayer.php");
     exit;
   }
 } else {
