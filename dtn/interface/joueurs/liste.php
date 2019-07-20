@@ -353,7 +353,7 @@ break;
                     <?php if ($transferListed==1) {?><img height="12" src="../images/enVente.JPG" title="Plac&eacute; sur la liste des transferts"><?php }?>
                     <a href ="<?=$url?>/joueurs/ficheDTN.php?id=<?=$l["idJoueur"]?>" class="bred1"> 
                       <b> 
-                      <?=strtolower($l["prenomJoueur"])?> <?=strtolower($l["nomJoueur"])?>
+                      <?=$l["prenomJoueur"]?> <?=$l["nomJoueur"]?>
 					  <?php if (isset($l["surnomJoueur"])) echo " (".$l["surnomJoueur"].")"; ?>
                       </b> 
                       </a> 
