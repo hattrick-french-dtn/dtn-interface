@@ -603,6 +603,7 @@ $semaine["buteur"] = $infTraining["nbSemaineButeur"];
 $semaine["gardien"] = $infTraining["nbSemaineGardien"];
 $semaine["passe"] = $infTraining["nbSemainePasses"];
 $semaine["defense"] = $infTraining["nbSemaineDefense"];
+$semaine["coupfranc"] = $infTraining["nbSemaineCoupFranc"];
 
 
 	switch($affPosition){

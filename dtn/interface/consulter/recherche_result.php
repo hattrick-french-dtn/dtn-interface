@@ -749,7 +749,7 @@ if(count($lstJ)==0) {
 					<TR>
 
 						<TD><B>Buteur :&nbsp; </B></TD><TD bgcolor="<?=$buteurColor?>"><?=$lstCarac[$lstJ[$j]["idButeur"]]["intituleCaracFR"]?><?php afficheLesPlus($lstJ[$j],"nbSemaineButeur"); ?></TD>
-						<TD><B>&nbsp; &nbsp; Coup franc :&nbsp; </B></TD><TD><?=$lstCarac[$lstJ[$j]["idPA"]]["intituleCaracFR"]?></TD>
+						<TD><B>&nbsp; &nbsp; Coup franc :&nbsp; </B></TD><TD><?=$lstCarac[$lstJ[$j]["idPA"]]["intituleCaracFR"]?><?php afficheLesPlus($lstJ[$j],"nbSemaineCoupFranc"); ?></TD>
 					</TR>
 					</TABLE>
 				</TD>

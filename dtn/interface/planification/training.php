@@ -19,6 +19,7 @@ foreach($conn->query($sql) as $result){
 	$semaine["defense"] = $result["nbSemaineDefense"];
 	$semaine["buteur"] = $result["nbSemaineButeur"];
 	$semaine["ailier"] = $result["nbSemaineAilier"] ;
+	$semaine["coupfranc"] = $result["nbSemaineCoupFranc"] ;
 
 /*
 switch($result["entrainement_id"]){

@@ -139,6 +139,7 @@ $sqlreel = "SELECT
               ht_entrainement.nbSemaineDefense,
               ht_entrainement.nbSemaineAilier,
               ht_entrainement.nbSemaineButeur,
+              ht_entrainement.nbSemaineCoupFranc,
               ht_joueurs.idJoueur,
               ht_joueurs.idHattrickJoueur,
               ht_joueurs.prenomJoueur,
@@ -407,7 +408,7 @@ if(count($lstJ)==0) {
 					</TR>
 					<TR>
 						<TD><B>Buteur :&nbsp; </B></TD><TD bgcolor="<?=$buteurColor?>"><?=$lstCarac[$lstJ[$j]["idButeur"]]["intituleCaracFR"]?><?php afficheLesPlus($lstJ[$j],"nbSemaineButeur"); ?></TD>
-						<TD><B>&nbsp; &nbsp; Coup franc :&nbsp; </B></TD><TD><?=$lstCarac[$lstJ[$j]["idPA"]]["intituleCaracFR"]?></TD>
+						<TD><B>&nbsp; &nbsp; Coup franc :&nbsp; </B></TD><TD><?=$lstCarac[$lstJ[$j]["idPA"]]["intituleCaracFR"]?><?php afficheLesPlus($lstJ[$j],"nbSemaineCoupFranc"); ?><</TD>
 					</TR>
 					<TR>
 						<TD colspan=4><B>Motif Purge :&nbsp;

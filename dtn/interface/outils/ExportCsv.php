@@ -100,28 +100,29 @@ switch ($sens) {
 		$tri = "Tri decroissant";
 		break;
 }
-?>NomJoueur;idHattrick;Date Maj DTN;Date Maj Proprio;last maj(jours);age;jours;tsi;salaire;xp;leader;spe;endu;construction;+;ailier;+;buteur;+;gardien;+;passe;+;defenseur;+;coup francs;entraineur;entrainement;DTN;note<?php
+?>NomJoueur;idHattrick;Date Maj DTN;Date Maj Proprio;last maj(jours);age;jours;xp;leader;spe;endu;construction;+;ailier;+;buteur;+;gardien;+;passe;+;defenseur;+;coup francs;+;entraineur;entrainement;DTN;note<?php
+
 switch ($sesUser["idPosition_fk"]) {
 	case "1" : //gK
 ?> gardien;<?php
 		break;
 	case "2" : // cD
-?> cD;cD off;wB;wB off<?php
+?> cD;cD off;wB;wB off;<?php
 		break;
 	case "3" : // Wg
-?> Wg;Wg towards;Wg off<?php
+?> Wg;Wg towards;Wg off;<?php
 		break;
 	case "4" : //IM 
-?> iM def;iM;iM off<?php
+?> iM def;iM;iM off;<?php
 		break;
 	case "5" : // Fw
-?> Fw def;Fw<?php
+?> Fw def;Fw;<?php
 		break;
 	default :
-?> gK;cD;iM;Wg off;Fw<?php
+?> gK;cD;iM;Wg off;Fw;<?php
 		break;
 }
-?>HTMS<?php
+?>comp HTMS;pot HTMS<?php
 echo "\n";
 
 //correction bug age joueurs par jojoje86 le 20/07/09
@@ -180,7 +181,7 @@ foreach ($conn->query($sql) as $l) {
 	echo  $l["idGardien"].";".$infJ["nbSemaineGardien"].";";
 	echo  $l["idPasse"].";".$infJ["nbSemainePasses"].";"; 
 	echo  $l["idDefense"].";".$infJ["nbSemaineDefense"].";";
-	echo  $l["idPA"].";";
+	echo  $l["idPA"].";".$infJ["nbSemaineCoupFranc"].";";
 
 	echo $infJ["niv_Entraineur"].";";
 	$nom_entrainement=utf8_decode(getEntrainementName($infJ["entrainement_id"],$listEntrainement));
