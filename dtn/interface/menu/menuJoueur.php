@@ -2,6 +2,8 @@
 if(isset($idHT)) {
 
 global $infJ;
+  $joueurDTN = getJoueurHt($htid);
+
 
 /***********************************************
 * Type de menus :
