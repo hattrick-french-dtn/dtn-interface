@@ -912,7 +912,7 @@ case "updateTraining":
 		$updatedate_modif_effectif="on";
 	}
 	if($infJoueur["nbSemaineDefense"]!= $_POST["nbSemaineDefense"]){
-		$msg  = $msg." Modif semaines d&eacute;fense (".$infJoueur["nbSemaineDefense"]." ->+".$_POST["nbSemaineDefense"].")  ";
+		$msg  = $msg." Modif semaines defense (".$infJoueur["nbSemaineDefense"]." ->+".$_POST["nbSemaineDefense"].")  ";
 		$updateDateDerniereModiff="on";	
 		$updatedate_modif_effectif="on";
 	}
