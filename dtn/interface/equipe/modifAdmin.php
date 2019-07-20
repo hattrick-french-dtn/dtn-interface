@@ -54,7 +54,7 @@ $infDTN = getDTN($idAdmin);
                 </tr>
                 <tr>
                   <td height="20">Mot de passe</td>
-                  <td height="20"><input name="passAdmin" type="text" id="passAdmin" value = "<?=$infDTN["passAdmin"]?>"></td>
+                  <td height="20"><input name="passAdmin" type="text" id="passAdmin" ></td>
                 </tr>
                 <tr>
                   <td height="10">ID Hattrick</td>
