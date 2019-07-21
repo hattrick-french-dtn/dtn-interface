@@ -489,6 +489,7 @@ function calculNote($joueur){
   $niveauAttaquant=$joueur["idButeur"] + $joueur["nbSemaineButeur"] * 0.1;
   $niveauPasse=$joueur["idPasse"] + $joueur["nbSemainePasses"] * 0.1;
   $niveauCF=$joueur["idPA"] + $joueur["nbSemaineCoupFranc"] * 0.1;  $xp=$joueur["idExperience_fk"];
+  $xp=$joueur["idExperience_fk"];
 
   // Gardien
   $scoreGardien=((0.75*$niveauGK*$gammaEndu)+(0.25*$niveauDef*$betaEndu))*(0.94+$xp*0.01);
