@@ -657,8 +657,8 @@ function calculNotePotentiel($joueur){
   $semainesAilierPotentiel=$semainesAilier+$nbSemRestant;
   $semainesAttaquantPotentiel=$semainesAttaquant+$nbSemRestant;
   $semainesPassePotentiel=$semainesPasse+$nbSemRestant;
+  $semainesCFPotentiel=$semainesCF+$nbSemRestant;
   
-
   //$niveauGK=$infJ["idGardien"] + ($semainesGK/$tabVitesses["Gardien"][$infJ["ageJoueur"]]);
   $niveauDef=$joueur["idDefense"] + ($semainesDef/$tabVitesses["Defense"][$joueur["ageJoueur"]]);
   $niveauConstruction=$joueur["idConstruction"] + ($semainesConstruction/$tabVitesses["Construction"][$joueur["ageJoueur"]]);
@@ -1156,8 +1156,9 @@ function majCaracJoueur($joueur){
       nbSemaineButeur  = "'.$joueur["nbSemaineButeur"].'",
       nbSemaineGardien = "'.$joueur["nbSemaineGardien"].'",
       nbSemainePasses= "'.$joueur["nbSemainePasses"].'",
-      nbSemaineDefense = "'.$joueur["nbSemaineDefense"].'"
-      WHERE idJoueur_fk = "'.$joueur["idJoueur"].'"';
+      nbSemaineDefense = "'.$joueur["nbSemaineDefense"].'",
+      nbSemaineCoupFranc = "'.$joueur["nbSemaineCoupFranc"].'"
+           WHERE idJoueur_fk = "'.$joueur["idJoueur"].'"';
     $result= $conn->exec($sql);
     
     $sql = 'UPDATE ht_notes_potentiel SET
@@ -1563,7 +1564,7 @@ function ajoutJoueur($ht_user,$role_user,$joueurHT,$joueurDTN,$posteAssigne) {
     $joueurNote["nbSemaineDefense"] =  0.0;
     $joueurNote["nbSemaineButeur"] =  0.0;
     $joueurNote["nbSemaineAilier"] =  0.0;
-    $joueurNote["valeurEnCours"] = $joueurHT['tsi'];
+    $joueurNote["nbSemaineCoupFranc"] =  0.0;    $joueurNote["valeurEnCours"] = $joueurHT['tsi'];
     
     $joueurNote["optionJoueur"] = $joueurHT["optionJoueur"];
     $age=ageetjour($joueurHT["datenaiss"],"2");
@@ -1865,6 +1866,7 @@ function updateEntrainement($entrainement) {
   if (isset($entrainement['nbSemaineGardien']))       {$sql.="nbSemaineGardien = '".$entrainement['nbSemaineGardien']."',";}
   if (isset($entrainement['nbSemainePasses']))        {$sql.="nbSemainePasses = '".$entrainement['nbSemainePasses']."',";}
   if (isset($entrainement['nbSemaineDefense']))       {$sql.="nbSemaineDefense = '".$entrainement['nbSemaineDefense']."',";}
+  if (isset($entrainement['nbSemaineCoupFranc']))       {$sql.="nbSemaineCoupFranc = '".$entrainement['nbSemaineCoupFranc']."',";}
   if (isset($entrainement['valeurEnCours']))          {$sql.="valeurEnCours = '".$entrainement['valeurEnCours']."',";}
   $sql=substr($sql,0,strlen($sql)-1);
   $sql.=" WHERE idJoueur_fk  = ".$entrainement["idJoueur_fk"];
@@ -2174,6 +2176,11 @@ function majJoueur($ht_user,$role_user,$joueurHT,$joueurDTN){
 					$update_joueur['idPA']=$joueurHT['idPA'];
 					$resMAJ['HTML'].=' CF: '.$joueurDTN["idPA"].'-&gt; '.$joueurHT['idPA'].'<br>' ;
 					$histoModifMsg .=' CoupFranc: '.$joueurDTN['idPA'].' -> '.$joueurHT['idPA'];
+                                        if ($joueurDTN['idPA']>$joueurHT['idPA']) {
+					  $update_joueur_entrainement['nbSemaineCoupFranc']=99;
+                                        } else {
+                                          $update_joueur_entrainement['nbSemaineCoupFranc']=0;
+                                        }
 					$joueurDTN["idPA"]=$joueurHT['idPA'];
 					$recalcul_note=true;
 					$update_joueur['date_modif_effectif']=date('Y-m-d');
@@ -2207,6 +2214,7 @@ function majJoueur($ht_user,$role_user,$joueurHT,$joueurDTN){
 				if (isset($update_joueur_entrainement["nbSemaineDefense"]))       {$joueurNote["nbSemaineDefense"]      = $update_joueur_entrainement["nbSemaineDefense"];      } else {$joueurNote["nbSemaineDefense"]       = $joueurDTN["nbSemaineDefense"];}
 				if (isset($update_joueur_entrainement["nbSemaineButeur"]))        {$joueurNote["nbSemaineButeur"]       = $update_joueur_entrainement["nbSemaineButeur"];       } else {$joueurNote["nbSemaineButeur"]        = $joueurDTN["nbSemaineButeur"];}
 				if (isset($update_joueur_entrainement["nbSemaineAilier"]))        {$joueurNote["nbSemaineAilier"]       = $update_joueur_entrainement["nbSemaineAilier"];       } else {$joueurNote["nbSemaineAilier"]        = $joueurDTN["nbSemaineAilier"];}
+                                if (isset($update_joueur_entrainement["nbSemaineCoupFranc"]))        {$joueurNote["nbSemaineCoupFranc"]       = $update_joueur_entrainement["nbSemaineCoupFranc"];       } else {$joueurNote["nbSemaineCoupFranc"]        = $joueurDTN["nbSemaineCoupFranc"];}
 
 				$joueurNote["valeurEnCours"] = $joueurDTN["valeurEnCours"];
 				
