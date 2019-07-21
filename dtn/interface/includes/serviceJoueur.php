@@ -143,6 +143,7 @@ function getTousJoueurSQL(){
         nbSemaineGardien,
         nbSemainePasses,
         nbSemaineDefense,
+        nbSemaineCoupFranc,  
         valeurEnCours,
         commentaire,
         ht_clubs.nomClub,
@@ -487,7 +488,7 @@ function calculNote($joueur){
   $niveauAilier=$joueur["idAilier"] + $joueur["nbSemaineAilier"] * 0.1;
   $niveauAttaquant=$joueur["idButeur"] + $joueur["nbSemaineButeur"] * 0.1;
   $niveauPasse=$joueur["idPasse"] + $joueur["nbSemainePasses"] * 0.1;
-  $xp=$joueur["idExperience_fk"];
+  $niveauCF=$joueur["idPA"] + $joueur["nbSemaineCoupFranc"] * 0.1;  $xp=$joueur["idExperience_fk"];
 
   // Gardien
   $scoreGardien=((0.75*$niveauGK*$gammaEndu)+(0.25*$niveauDef*$betaEndu))*(0.94+$xp*0.01);
@@ -648,7 +649,7 @@ function calculNotePotentiel($joueur){
   $semainesAilier=$joueur["nbSemaineAilier"];
   $semainesAttaquant=$joueur["nbSemaineButeur"];
   $semainesPasse=$joueur["nbSemainePasses"];
-  
+  $semainesCF=$joueur["nbSemaineCoupFranc"];
 
   $semainesGKPotentiel=$semainesGK+$nbSemRestant;
   $semainesDefPotentiel=$semainesDef+$nbSemRestant;
@@ -657,6 +658,7 @@ function calculNotePotentiel($joueur){
   $semainesAttaquantPotentiel=$semainesAttaquant+$nbSemRestant;
   $semainesPassePotentiel=$semainesPasse+$nbSemRestant;
   
+
   //$niveauGK=$infJ["idGardien"] + ($semainesGK/$tabVitesses["Gardien"][$infJ["ageJoueur"]]);
   $niveauDef=$joueur["idDefense"] + ($semainesDef/$tabVitesses["Defense"][$joueur["ageJoueur"]]);
   $niveauConstruction=$joueur["idConstruction"] + ($semainesConstruction/$tabVitesses["Construction"][$joueur["ageJoueur"]]);
