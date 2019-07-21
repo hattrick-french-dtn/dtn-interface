@@ -1100,32 +1100,32 @@ function validateMinimaPlayer($player,$todaySeason)
 	}
 	
 	if ($reqValid==true) {
-		$secteur ==0;
+		$secteur =0;
 		if ($player["idGardien"] >=7) {
             // Gardien
-			$secteur==1;
+			$secteur=1;
 		} else { 
             if (($player["idDefense"] >$player["idConstruction"]+1) && ($player["idDefense"] >$player["idAilier"]+1) && ($player["idDefense"] >$player["idButeur"]+1)) {
                 // Défenseur
-                $secteur==2;
+                $secteur=2;
             } else {
                 if (($player["idAilier"] >$player["idConstruction"]+1) && ($player["idAilier"] >$player["idButeur"]+1)) {
                     // Ailier
-                    $secteur==3;
+                    $secteur=3;
                 } else {
                     if ($player["idConstruction"] >$player["idButeur"]+1) {
                         // Milieu
-                        $secteur==4;
+                        $secteur=4;
                     } else {
                             // Attaquant
-                            $secteur==5;
+                            $secteur=5;
                     }
                 }
             }
         }
 	} else {
 		//** joueur ne rempli pas les pré-requis, on ne l'enregistre pas
-		$secteur== -1; 
+		$secteur= -1; 
 	}
 	return $secteur;
 }
