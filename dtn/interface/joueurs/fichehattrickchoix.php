@@ -582,7 +582,7 @@ $pos=$lstSect[$infJs[1]['ht_posteAssigne']-1]["descriptifPosition"];
 if ($pos=="") $pos="aucun";
 $dtnsuivi="aucun";
 if ($infJs[1]["dtnSuiviJoueur_fk"]!=0) $dtnsuivi=$infJs[1]["loginAdminSuiveur"];    
-if ($origine=="unique") require("../menu/menuJoueur.php");
+if ($origine=="unique") require("../menu/menuJoueur_autres_onglets.php");
 ?>
 <table width="99%" border="1" cellspacing="0" cellpadding="0">
     <tr>
