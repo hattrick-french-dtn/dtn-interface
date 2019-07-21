@@ -1093,34 +1093,36 @@ function validateMinimaPlayer($player,$todaySeason)
 		// Pour les 17-20ans
 		// Pour les joueurs de champs, ne prendre que les joueurs minimum à htms 2050 sans spé et htms 2000 avec spé.
 		if (($player["idGardien"] >5 && $htms["potential"] >1750) || ($player["idGardien"] <5 && ($htms["potential"] >=2050 && $player["optionJoueur"] =="0") || $htms["potential"] >=2000 && $player["optionJoueur"] !="0" )) {
-				$reqValid = true;
+            $reqValid = true;
 		} else {
 			$reqValid = false;
 		}
 	}
 	
-	if ($reqValid) {
+	if ($reqValid==true) {
 		$secteur ==0;
 		if ($player["idGardien"] >=7) {
+            // Gardien
 			$secteur==1;
-		}
-		if (($player["idDefense"] >$player["idConstruction"]+1) && ($player["idDefense"] >$player["idAilier"]+1) && ($player["idDefense"] >$player["idButeur"]+1)) {
-			// défense
-			$secteur==2;
-		} else {
-			// Ailier
-			if (($player["idAilier"] >$player["idConstruction"]+1) && ($player["idAilier"] >$player["idButeur"]+1)) {
-				$secteur==3;
-			} else {
-				if ($player["idConstruction"] >$player["idButeur"]+1) {
-					//milieu
-					$secteur==4;
-				} else {
-					// buteur
-					$secteur==5;
-				}
-			}
-		}
+		} else { 
+            if (($player["idDefense"] >$player["idConstruction"]+1) && ($player["idDefense"] >$player["idAilier"]+1) && ($player["idDefense"] >$player["idButeur"]+1)) {
+                // Défenseur
+                $secteur==2;
+            } else {
+                if (($player["idAilier"] >$player["idConstruction"]+1) && ($player["idAilier"] >$player["idButeur"]+1)) {
+                    // Ailier
+                    $secteur==3;
+                } else {
+                    if ($player["idConstruction"] >$player["idButeur"]+1) {
+                        // Milieu
+                        $secteur==4;
+                    } else {
+                            // Attaquant
+                            $secteur==5;
+                    }
+                }
+            }
+        }
 	} else {
 		//** joueur ne rempli pas les pré-requis, on ne l'enregistre pas
 		$secteur== -1; 
