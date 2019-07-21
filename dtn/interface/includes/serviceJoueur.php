@@ -1565,8 +1565,7 @@ function ajoutJoueur($ht_user,$role_user,$joueurHT,$joueurDTN,$posteAssigne) {
     $joueurNote["nbSemaineDefense"] =  0.0;
     $joueurNote["nbSemaineButeur"] =  0.0;
     $joueurNote["nbSemaineAilier"] =  0.0;
-    $joueurNote["nbSemaineCoupFranc"] =  0.0;    $joueurNote["valeurEnCours"] = $joueurHT['tsi'];
-    
+    $joueurNote["valeurEnCours"] = $joueurHT['tsi'];    $joueurNote["nbSemaineCoupFranc"] =  0.0;    $joueurNote["valeurEnCours"] = $joueurHT['tsi'];
     $joueurNote["optionJoueur"] = $joueurHT["optionJoueur"];
     $age=ageetjour($joueurHT["datenaiss"],"2");
     $joueurNote["ageJoueur"] = $age["ageJoueur"];
