@@ -108,7 +108,7 @@ switch($_SESSION['sesUser']["idNiveauAcces"]){
 }
 
 
-require("../menu/menuJoueur.php");
+require("../menu/menuJoueur_autres_onglets.php");
 
 
 ?>

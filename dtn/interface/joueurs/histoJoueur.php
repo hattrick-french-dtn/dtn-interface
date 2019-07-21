@@ -118,7 +118,7 @@ $id=$idJoueur;
 $idHT=$infJ['idHattrickJoueur'];
 $idClubHT=$infJ['teamid'];
 
-require("../menu/menuJoueur.php");
+require("../menu/menuJoueur_autres_onglets.php");
 
 
 ?>
