@@ -601,6 +601,7 @@ $reqHJ = $conn->query($sqlHJ);
 
           $i=1;
           foreach($conn->query($sqlClubsHisto) as $lHisto) {
+            $lHisto["createur"]='[Autre]';
             if ($lHisto["role_createur"]=="D") {$lHisto["createur"]='[DTN]';}
             else if ($lHisto["role_createur"]=="P") {$lHisto["createur"]='[Proprio]';}
             $lHisto["createur"].=$lHisto["cree_par"];?>
