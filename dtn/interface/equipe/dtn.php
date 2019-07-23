@@ -69,8 +69,8 @@ if(!isset($nbJoueurs)) $nbJoueurs ="false";
                   <td height="20"><input name="loginAdmin" type="text" id="loginAdmin"></td>
                 </tr>
                 <tr>
-                  <td height="20">Mail</td>
-                  <td height="20"><input name="emailAdmin" type="text" id="emailAdmin"></td>
+                  <td height="20">Mot de passe</td>
+                  <td height="20"><input name="passAdmin" type="text" id="passAdmin"></td>
                 </tr>
                 <tr>
                   <td height="10">ID User Hattrick</td>
