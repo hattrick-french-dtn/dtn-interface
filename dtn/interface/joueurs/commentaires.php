@@ -26,23 +26,22 @@ if (isset($htid))
 {
 	$infJ = getJoueurHt($htid);
 	$id = $infJ["idJoueur"];
-}
-else
+} else {
 	$infJ = getJoueur($id);
+	$id = $infJ["idJoueur"];
+}
 
-
-$showLink="true";
+$showLink=true;
 switch($sesUser["idNiveauAcces"]){
 		case "2":
 			if ($sesUser["idPosition_fk"]!= $infJ["ht_posteAssigne"]
-				&& $infJ["ht_posteAssigne"]!=0 
-			){
-				$showLink="false";
+				&& $infJ["ht_posteAssigne"]!=0) {
+				$showLink=false;
 			}
 		break;
 		case "3":
-			if ($sesUser["idAdmin"]!= $infJ["dtnSuiviJoueur_fk"]){
-				$showLink="false";
+			if ($sesUser["idAdmin"]!= $infJ["dtnSuiviJoueur_fk"]) {
+				$showLink=false;
 			 }
 		break;
 		default;
@@ -108,7 +107,10 @@ require("../menu/menuJoueur.php");
           <input name="mode" type="hidden" id="mode" value="updateComment">
           <input name="idJoueur_fk" type="hidden" id="idJoueur_fk" value="<?=$id?>">
           <textarea name="joueurComment" id="joueurComment" style="font-size:8pt;font-family:Arial" cols=220 rows=20><?php echo $infJ["commentaire"]?></textarea>
-          <font size="-1"><input type="submit" name="Submit" value="Enregistrer"></font>
+        <?php 
+		if ($showLink==true) { ?>
+		<font size="-1"><input type="submit" name="Submit" value="Enregistrer"></font>
+	<?php 	} ?>	
         </form>
 
 
