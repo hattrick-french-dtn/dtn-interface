@@ -80,7 +80,7 @@ switch($sesUser["idNiveauAcces"]){
 }
 $idHT=$infJ['idHattrickJoueur'];
 $idClubHT=$infJ['teamid'];
-require("../menu/menuJoueur.php");
+require("../menu/menuJoueur_autres_onglets.php");
 ?>
 <script language="JavaScript" src="../includes/javascript/navigation.js"></script>
 <table width="85%"  border="1" align="center" cellpadding="0" cellspacing="0" bordercolor="#000000">
