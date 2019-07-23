@@ -5,15 +5,15 @@ global $infJ;
 
 /***********************************************
 * Type de menus :
-* 1- Menu Complet (Fiche consultation |  Fiche DTN |  Graphiques |  Histo modifs |  Club |  Fiche Forum |  Fiche Résumé  |  Etoiles |  Commentaires / Notes   |  Chercher un joueur )
-* 2- Menu Complet sans "chercher un joueur" ( Fiche consultation |  Fiche DTN |  Graphiques |  Histo modifs |  Club |  Fiche Forum |  Fiche Résumé  |  Etoiles |  Commentaires / Notes)
-* 3- Menu de consultation  ( Fiche consultation |  Fiche Forum |  Fiche Résumé )
-* Menu 1 pour les sélectionneur et les admins        
+* 1- Menu Complet (Fiche consultation |  Fiche DTN |  Graphiques |  Histo modifs |  Club |  Fiche Forum |  Fiche RÃ©sumÃ©  |  Etoiles |  Commentaires / Notes   |  Chercher un joueur )
+* 2- Menu Complet sans "chercher un joueur" ( Fiche consultation |  Fiche DTN |  Graphiques |  Histo modifs |  Club |  Fiche Forum |  Fiche RÃ©sumÃ©  |  Etoiles |  Commentaires / Notes)
+* 3- Menu de consultation  ( Fiche consultation |  Fiche Forum |  Fiche RÃ©sumÃ© )
+* Menu 1 pour les sÃ©lectionneur et les admins        
 * Menu 2 - Si le joueur appartient au secteur du dtn ou dtn+
-*        - Si le joueur n'appartient à aucun secteur
-*        - Si le dtn + a accès à tous les secteurs
+*        - Si le joueur n'appartient Ã  aucun secteur
+*        - Si le dtn + a accÃ¨s Ã  tous les secteurs
 * Menu 3 - Si joueur n'appartient pas au secteur du dtn ou dtn+
-*        - Si le dtn a accès à tous les secteurs             
+*        - Si le dtn a accÃ¨s Ã  tous les secteurs             
 ***********************************************/
 if (($sesUser["idNiveauAcces"]=="1") or ($sesUser["idNiveauAcces"]=="4")) {$TypeMenu=1;}
 else {
@@ -28,7 +28,7 @@ if ($sesUser["idAdminHT"] == $idClubHT) {$TypeMenu=3;}
 ?>
 <table border=0 width=100%>
 <tr><td align="left" nospan>&nbsp;<a href="<?=$url?>/joueurs/fiche.php?htid=<?=$idHT?>" class="smliensorange" alt="consulter">Fiche consultation</a>&nbsp;|
-<?php // On affiche le menu fiche dtn que si le joueur appartient au secteur du dtn ou si c'est le sélectionneur qui est connecté
+<?php // On affiche le menu fiche dtn que si le joueur appartient au secteur du dtn ou si c'est le sÃ©lectionneur qui est connectÃ©
 if ($TypeMenu <= 2) { ?>
 	&nbsp;<A class="smliensorange" href="<?=$url?>/joueurs/ficheDTN.php?htid=<?=$idHT?>" alt="modifier">Fiche DTN</a>&nbsp;|
 	&nbsp;<A class="smliensorange" href="<?=$url?>/joueurs/graphProgression.php?id=<?=$id?>" alt="graphiques">Graphiques</a>&nbsp;|
@@ -42,8 +42,9 @@ if ($TypeMenu <= 2) { ?>
 	&nbsp;<a class="smliensorange" href="<?=$url?>/joueurs/ficheslackchoix.php?htid=<?=$idHT?>&origine=<?php echo "unique"?>" alt="resume">Fiche Slack</a>&nbsp;|
 	&nbsp;<a class="smliensorange" href="<?=$url?>/joueurs/fichehattrickchoix.php?htid=<?=$idHT?>&origine=<?php echo "unique"?>" alt="resume">Fiche Hattrick</a>&nbsp;
     <?php if ($TypeMenu <= 2) { ?>
-  | &nbsp;<A class="smliensorange" href="<?=$url?>/joueurs/rapportDetaille.php?htid=<?=$idHT?>" alt="etoiles">Matchs</a>&nbsp;|
-    &nbsp;<A class="smliensorange" href="<?=$url?>/joueurs/commentaires.php?htid=<?=$idHT?>" alt="commentaires">Commentaires / Notes</a>
+  | &nbsp;<A class="smliensorange" href="<?=$url?>/joueurs/rapportDetaille.php?htid=<?=$idHT?>" alt="etoiles">Matchs</a>&nbsp;
+    <?php } if ($TypeMenu <= 3) { ?>
+  | &nbsp;<A class="smliensorange" href="<?=$url?>/joueurs/commentaires.php?htid=<?=$idHT?>" alt="commentaires">Commentaires / Notes</a>
 <?php }
 
 if ($TypeMenu <= 1) {  ?>
