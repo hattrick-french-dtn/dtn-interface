@@ -1109,16 +1109,18 @@ function validateMinimaPlayer($player,$todaySeason)
                 // Défenseur
                 $secteur=2;
             } else {
-                if (($player["idAilier"] >$player["idConstruction"]+1) && ($player["idAilier"] >$player["idButeur"]+1)) {
+                if (($player["idAilier"] >$player["idDefense"]+1) && ($player["idAilier"] >$player["idConstruction"]+1) && ($player["idAilier"] >$player["idButeur"]+1)) {
                     // Ailier
                     $secteur=3;
                 } else {
-                    if ($player["idConstruction"] >$player["idButeur"]+1) {
+                    if (($player["idConstruction"] >$player["idDefense"]+1) && ($player["idConstruction"] >$player["idAilier"]+1) && $player["idConstruction"] >$player["idButeur"]+1) {
                         // Milieu
                         $secteur=4;
                     } else {
-                            // Attaquant
-                            $secteur=5;
+			    if (($player["idButeur"] >$player["idDefense"]+1) && ($player["idButeur"] >$player["idConstruction"]+1) && $player["idButeur"] >$player["idAilier"]+1) {
+                            	// Attaquant
+                            	$secteur=5;
+			    }
                     }
                 }
             }
