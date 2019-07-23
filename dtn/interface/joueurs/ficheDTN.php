@@ -168,7 +168,7 @@ if(isset($msg)) {?>
           <td colspan="3">&nbsp;</td>
           </tr>
           <tr> 
-          <td align="left" width="50%">&nbsp;<font color="#000099"> Info: <?=strtolower($joueurDTN["idHattrickJoueur"])?>&nbsp;-&nbsp;<?=strtolower($joueurDTN["prenomJoueur"])?>&nbsp;<?=strtolower($joueurDTN["nomJoueur"])?><?php if (isset($joueurDTN["surnomJoueur"])) echo " (".$joueurDTN["surnomJoueur"].")"; ?>&nbsp;-&nbsp;
+          <td align="left" width="50%">&nbsp;<font color="#000099"> Info: <?=$joueurDTN["idHattrickJoueur"]?>&nbsp;-&nbsp;<?=$joueurDTN["prenomJoueur"]?>&nbsp;<?php if (isset($joueurDTN["surnomJoueur"])) echo '"'.$joueurDTN["surnomJoueur"].'" '; ?><?=$joueurDTN["nomJoueur"]?>&nbsp;-&nbsp;
           <?=$tabage[0];?>&nbsp;ans&nbsp;-&nbsp;<?=$tabage[1]?>&nbsp;jours<br>&nbsp; Salaire: <?=number_format(round(($joueurDTN["salary"]/10),2),"0"," "," ")?>&nbsp;&euro;/semaine&nbsp;-&nbsp;<?=$joueurDTN["intitulePosition"]?> 
            </font>
      			

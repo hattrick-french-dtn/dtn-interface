@@ -418,8 +418,7 @@ foreach ($conn->query($sql) as $l) {
                     <?php if ($transferListed==1) {?><img height="12" src="../images/enVente.JPG" title="Plac&eacute; sur la liste des transferts"><?php }?>
                     <a href ="<?=$url?>/joueurs/ficheDTN.php?id=<?=$l["idJoueur"]?>" class=<?=$class?>> 
                       <b> 
-                      <?=$l["prenomJoueur"]?> <?=$l["nomJoueur"]?>
-					  <?php if (isset($l["surnomJoueur"])) echo " (".$l["surnomJoueur"].")"; ?>
+                      <?=$l["prenomJoueur"]?> <?php if (isset($l["surnomJoueur"])) echo '"'.$l["surnomJoueur"].'" '; ?><?=$l["nomJoueur"]?>
                       </b> 
                       </a> 
                       
