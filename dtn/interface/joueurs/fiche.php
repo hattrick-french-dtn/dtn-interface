@@ -390,7 +390,22 @@ if ($datemaj >$mkday -$huit){
           </td>
         </tr>
         <tr> 
-          <td colspan="2">Un type 
+          <td colspan="2">          
+		  <?php if( $joueurDTN["numLeader"]>=6){?>
+		    Un type 
+            <?=$joueurDTN["intituleCaractereFR"]?>
+            qui est 
+            <?=$joueurDTN["intituleAggresFR"]?>
+            et 
+            <?=$joueurDTN["intituleHonneteteFR"]?>
+            .<br>
+            Il a une 
+            <?=$joueurDTN["nomXP_fr"];?>
+            exp&eacute;rience et un 
+            <font color="#CC22DD"><?=$joueurDTN["intituleLeaderFR"]?></font>
+            temp&eacute;rament de chef
+			<?php } else { ?>
+			Un type 
             <?=$joueurDTN["intituleCaractereFR"]?>
             qui est 
             <?=$joueurDTN["intituleAggresFR"]?>
@@ -402,7 +417,10 @@ if ($datemaj >$mkday -$huit){
             exp&eacute;rience et un 
             <?=$joueurDTN["intituleLeaderFR"]?>
             temp&eacute;rament de chef
-          </td>
+			<?php } ?>
+		  
+		  
+		  </td>
           <td><div align="center">
             <span class="Style1">
             <?php if($msg == "archive") echo "Joueur correctement archiv&eacute;";?>
