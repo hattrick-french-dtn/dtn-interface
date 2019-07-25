@@ -1,5 +1,6 @@
 <?php 
 require_once("../includes/head.inc.php");
+require("../includes/langue.inc.php");
 require("../includes/serviceJoueur.php");
 require("../includes/serviceMatchs.php");
 require("../includes/serviceListesDiverses.php");
@@ -22,13 +23,18 @@ if(!isset($sens)) $sens = "ASC";
 if(!isset($lang)) $lang = "FR";
 if(!isset($masque)) $masque = 1;
 if(!isset($affPosition)) $affPosition = 1;
+
+//ecart sur variable affArchive appelé
 if(!isset($affArchive))  $affArchive = 0;
 if (!is_numeric($affPosition))
 	$affPosition = substr($affPosition, 0, 1);
 
-require("../includes/langue.inc.php");
+$lstPosition = listPosition();
 
-//
+$font = "<font color = black>";
+$ffont = "</font>";
+
+
 $huit = 60 * 60 * 24 * 8; //time_0
 $quinze = 60 * 60 * 24 * 15; //time_1
 $trente = 60 * 60 * 24 * 30; //time_2
@@ -38,10 +44,6 @@ $fourmonths = 60 * 60 * 24 * 120; //time_4
 // Date du jour
 $mkday = mktime(0,0,0,date('m'), date('d'),date('Y'));
 
-$lstPosition = listPosition();
-$lstJoueurs = listJoueur($affArchive, $affPosition);
-$font = "<font color = black>";
-$ffont = "</font>";
 
 $sql = "SELECT count( * ) as sum , dtnSuiviJoueur_fk
 	FROM ht_joueurs
@@ -54,6 +56,7 @@ foreach($conn->query($sql) as $count)
 
 $sql = "select * from $tbl_position";
 
+
 switch($sesUser["idNiveauAcces_fk"]){
 		
 		case "2":
@@ -64,6 +67,7 @@ switch($sesUser["idNiveauAcces_fk"]){
 		}
 		break;
 }
+
 $sql = "select * from $tbl_admin ";
 
 switch($sesUser["idNiveauAcces_fk"]){
@@ -103,6 +107,19 @@ switch($sesUser["idNiveauAcces_fk"]){
 	
 		break;
 }
+
+if($masque == 1) $sql.= " and dtnSuiviJoueur_fk = 0";
+
+$sql .= " order by $ordre $sens";
+
+//ecart sur variable listejoueurs appelé
+$lstJoueurs = listJoueur($affArchive, $affPosition);
+//$lstJoueursv2 = array();
+foreach($conn->query($sql) as $lst){
+array_push($lstJoueurs, $lst);
+}
+//
+
 switch($affPosition){
 
 	case "1":
@@ -164,8 +181,6 @@ switch($affPosition){
 		
 }
 
-?>
-<?php
 switch($sens){
 
 case "ASC":
@@ -209,13 +224,8 @@ switch($sesUser["idNiveauAcces"]){
 .Style1 {color: #FFFFFF}
 .Style3 {color: #FF9933}
 .Style4 {color: #FF0000}
+
 -->
-</style>
-<body onLoad = "init();">
-<br>
-<p>
-<form name="form1" method="post" action="../form.php">
-<br>
 
 <?php
 switch($ordre){
@@ -287,12 +297,12 @@ break;
 }
 ?>
 
-<a href="listeExportCsv.php?ordre=<?=$ordre?>&sens=<?=$sens?>&lang=<?=$lang?>&masque=<?=$masque?>&affPosition=<?=$affPosition?>">Sauvez cette page en CSV pour la consulter sous Excel !</a> 
-
+</style>
+<body onLoad = "init();">
+<br><br>
 <center><h3><?=$tri?> par <?=$ordre?></h3></center>
-
-<br>  
-<form name="form1" method="post" action="../form.php">
+<br>
+<form name="form1" method="post" action="../form.php"> 
   <table width="100%" border="1" align="center" cellpadding="0" cellspacing="0" bgcolor="#000000">
     <tr> 
       <td > 
@@ -312,7 +322,7 @@ break;
                   </select>
                 </div></td>
               <td> <div align="center"><font color="#000000">Liste des joueurs</font></div></td>
-              <td><div align="center">
+              <td><div>
 			  <?php
 			  if($masque == 1){
 			   $masque = 0;
@@ -325,45 +335,45 @@ break;
 			   $texte = "Masquer les joueurs d&eacute;ja attribu&eacute;s";
 			   }
 			  ?>
-	
-			
-            </tr>
+			  <a href="?ordre=<?=$ordre?>&sens=<?=$sens?>&masque=<?=$masque?>&affPosition=<?=$affPosition?>"><?=$texte?></a>
+			  </div></td>
+			  </tr>
             <tr> 
               <td height="1" colspan="3" bgcolor="#000000"><img src="../images/spacer.gif" width="1" height="1"></td>
             </tr>
             <tr> 
               <td colspan="3"><table width="100%" border="0" cellspacing="0" cellpadding="0">
                 <tr bgcolor="#000000">
-                  <td width="200" onClick="chgTri('nomJoueur','<?=$sens?>','<?=$masque?>','<?=$affPosition?>')"><font color="#FFFFFF">Identit&eacute;</font></td>
+                  <td width="200" onClick="chgTri('nomJoueur','<?=$sens?>','<?=$oldMasque?>','<?=$affPosition?>')"><font color="#FFFFFF">Identit&eacute;</font></td>
                   <td width="40" rowspan="5"><div align="center"><span class="Style1">TSI</span></div></td>
                   <!-- largeur de la collone age pour les + de 99 jours par jojoje86 le 21/07/09-->
-				  <td width="35" onClick="chgTri('ageJoueur','<?=$sens?>','<?=$masque?>','<?=$affPosition?>')">
+				  <td width="35" onClick="chgTri('ageJoueur','<?=$sens?>','<?=$oldMasque?>','<?=$affPosition?>')">
                     <div align="center"><font color="#FFFFFF">Age</font></div></td>
-                  <td width="20" onClick="chgTri('idExperience_fk','<?=$sens?>','<?=$masque?>','<?=$affPosition?>')">
+                  <td width="20" onClick="chgTri('idExperience_fk','<?=$sens?>','<?=$oldMasque?>','<?=$affPosition?>')">
                     <div align="center"><font color="#FFFFFF">Xp</font></div></td>
-                  <td width="25" onClick="chgTri('idLeader_fk','<?=$sens?>','<?=$masque?>','<?=$affPosition?>')">
+                  <td width="25" onClick="chgTri('idLeader_fk','<?=$sens?>','<?=$oldMasque?>','<?=$affPosition?>')">
                     <div align="center"><font color="#FFFFFF">TDC</font></div></td>
                   <td width="40" <!-- onClick="chgTri('TODO htms value')"> -->
                     <div align="center"><font color="#FFFFFF">Valeur HTMS</font></div></td>
                   <td width="40" <!-- onClick="chgTri('TODO htms potentiel')"> -->
                     <div align="center"><font color="#FFFFFF">Potentiel HTMS</font></div></td>
-                  <td width="30"  onClick="chgTri('optionJoueur','<?=$sens?>','<?=$masque?>','<?=$affPosition?>')">
+                  <td width="30"  onClick="chgTri('optionJoueur','<?=$sens?>','<?=$oldMasque?>','<?=$affPosition?>')">
                     <div align="center"><font color="#FFFFFF">Sp&eacute;</font></div></td>
-                  <td width="30"onClick="chgTri('idEndurance','<?=$sens?>','<?=$masque?>','<?=$affPosition?>')" witdth = "20">
+                  <td width="30"onClick="chgTri('idEndurance','<?=$sens?>','<?=$oldMasque?>','<?=$affPosition?>')" witdth = "20">
                     <div align="center"><font color="#FFFFFF">E</font></div></td>
-                  <td width="30"onClick="chgTri('idGardien','<?=$sens?>','<?=$masque?>','<?=$affPosition?>')" witdth = "20">
+                  <td width="30"onClick="chgTri('idGardien','<?=$sens?>','<?=$oldMasque?>','<?=$affPosition?>')" witdth = "20">
                     <div align="center"><font color="#FFFFFF">G</font></div></td>
-                  <td width="30" witdth = "20" onClick="chgTri('idDefense','<?=$sens?>','<?=$masque?>','<?=$affPosition?>')">
+                  <td width="30" witdth = "20" onClick="chgTri('idDefense','<?=$sens?>','<?=$oldMasque?>','<?=$affPosition?>')">
                     <div align="center"><font color="#FFFFFF">D</font></div></td>
-                  <td width="30" height="17"onClick="chgTri('idConstruction','<?=$sens?>','<?=$masque?>','<?=$affPosition?>')" witdth = "20">
+                  <td width="30" height="17"onClick="chgTri('idConstruction','<?=$sens?>','<?=$oldMasque?>','<?=$affPosition?>')" witdth = "20">
                     <div align="center"><font color="#FFFFFF">C</font></div></td>
-                  <td width="30"onClick="chgTri('idAilier','<?=$sens?>','<?=$masque?>','<?=$affPosition?>')" witdth = "20">
+                  <td width="30"onClick="chgTri('idAilier','<?=$sens?>','<?=$oldMasque?>','<?=$affPosition?>')" witdth = "20">
                     <div align="center"><font color="#FFFFFF">A</font></div></td>
-                  <td width="30" witdth = "20" onClick="chgTri('idPasse','<?=$sens?>','<?=$masque?>','<?=$affPosition?>')">
+                  <td width="30" witdth = "20" onClick="chgTri('idPasse','<?=$sens?>','<?=$oldMasque?>','<?=$affPosition?>')">
                     <div align="center"><font color="#FFFFFF">P</font></div></td>
-                  <td width="30"onClick="chgTri('idButeur','<?=$sens?>','<?=$masque?>','<?=$affPosition?>')" witdth = "20">
+                  <td width="30"onClick="chgTri('idButeur','<?=$sens?>','<?=$oldMasque?>','<?=$affPosition?>')" witdth = "20">
                     <div align="center"><font color="#FFFFFF">B</font></div></td>
-                  <td width="30" witdth = "20" onClick="chgTri('idPA','<?=$sens?>','<?=$masque?>','<?=$affPosition?>')">
+                  <td width="30" witdth = "20" onClick="chgTri('idPA','<?=$sens?>','<?=$oldMasque?>','<?=$affPosition?>')">
                     <div align="center"><font color="#FFFFFF">CF</font></div></td>
                     
                   
@@ -374,13 +384,7 @@ break;
                   <td width="40">                   
                     <div align="center"><font color="#FFFFFF">Pos</font></div></td>
                   </tr>
-              </table>
-                
-				  <table width="100%" border="0" cellspacing="0" cellpadding="0">
-                  <tr> 
-                    <td bgcolor="#000000"><img src="../images/spacer.gif" width="1" height="1"></td>
-                  </tr>
-                </table>
+
 
 <?php
 	$lst = 1;
@@ -498,11 +502,9 @@ break;
                       <b> 
                       <?=$l["prenomJoueur"]?> <?=$l["nomJoueur"]?>
 					  <?php if (isset($l["surnomJoueur"])) echo " (".$l["surnomJoueur"].")"; ?>
-                      </b> 
-                      </a> 
+                      </b> </a> 
                       
-                    </td>
-                        
+                    </td>                        
                     
                     <td width="1" bgcolor="#000000" ><img src="../images/spacer.gif" width="1" height="1"></td>
                     <td width="40" <div align="right"><img src="../images/spacer.gif" width="1" height="1">
