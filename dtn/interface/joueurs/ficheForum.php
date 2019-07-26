@@ -167,7 +167,63 @@ require("../menu/menuJoueur_autres_onglets.php");
 <p>
 
 
-<A HREF=# style="text-decoration:none" onClick="copy2Clipboard(document.getElementById('textespan'));return(false)">Copier cette fiche dans le presse-papier en un clic</A>
+<!--// ajout du retour vers la fiche DTN du joueur par jojoje86 le 21/07/09-->
+<br><br>
+<A HREF=# style="text-decoration:none" onClick="javascript:history.go(-1);">Retour</A>
+<p style="border: 1px solid black;padding: 10px 10px 10px 10px">
+  <span id="textespan" >
+    [b]<?=$infJ["prenomJoueur"]?> <?php if (isset($infJ["surnomJoueur"])) echo ' "'.$infJ["surnomJoueur"].'"'; ?> <?=$infJ["nomJoueur"]?>
+    [playerId=<?=strtolower($infJ["idHattrickJoueur"])?>] 
+    <br/>
+    <?php 
+      $tabage = ageetjour($infJ["datenaiss"], 2);
+      echo $tabage['ageJoueur'];?>&nbsp;ans&nbsp;-&nbsp;<?=$tabage['jourJoueur']
+    ?> 
+    jours[/b]<br/>
+  Un gars <?=$infJ["intituleCaractereFR"]?> qui est <?=$infJ["intituleAggresFR"]?> et <?=$infJ["intituleHonneteteFR"]?>.<br/>
+  Poss&egrave;de un niveau d'exp&eacute;rience <?=$lstCaractJ[$infJ["idExperience_fk"]]["intituleCaracFR"]?> (<?=$infJ["idExperience_fk"]?>) et un temp&eacute;rament de chef <?=$infJ["intituleLeaderFR"]?> (<?=$infJ["idLeader_fk"]?>)<br/><br/>
+    Propri&eacute;taire :  
+    <?=$infJ["nomClub"]?> 
+    (<?=utf8_decode($nomPays[0])?>)<br/><br/>
+    TSI: 
+    <?=$infJ["valeurEnCours"]?>
+    <br/>
+  Salaire : 
+  <?=round(($infJ["salary"]/10),2)?>
+  &euro;/semaine (<?=round(($infJ["salaireDeBase"]/10),2)?>&euro; en France)<br/>
+  <?php  if( $infJ["optionJoueur"] != 0){?>
+  [b]<?=$option[$infJ["optionJoueur"]]["FR"]?>[/b]
+  <?php } ?><br/>
+  Endurance : <?=$lstCaractJ[$infJ["idEndurance"]]["intituleCaracFR"]?> (<?=$infJ["idEndurance"]?>)<br/>
+<?php    // HTMS du joueur    
+        $ageetjours = ageetjour($infJ["datenaiss"]);
+        $tabage = explode(" - ",$ageetjours);
+        $htms = htmspoint($tabage[0], $tabage[1], $infJ["idGardien"], $infJ["idDefense"], $infJ["idConstruction"], $infJ["idAilier"], $infJ["idPasse"], $infJ["idButeur"], $infJ["idPA"]); ?>
+    [b]HTMS : <?php echo $htms["value"]." (".$htms["potential"].")[/b]"; ?><br/><br/>
+
+  Gardien : <?=$lstCaractJ[$infJ["idGardien"]]["intituleCaracFR"]?> (<?=$infJ["idGardien"]?>) + <?=$infJ["nbSemaineGardien"]?> <br/>
+
+  D&eacute;fense : <?=$lstCaractJ[$infJ["idDefense"]]["intituleCaracFR"]?> (<?=$infJ["idDefense"]?>) + <?=$infJ["nbSemaineDefense"]?> <br/>
+
+  Construction : <?=$lstCaractJ[$infJ["idConstruction"]]["intituleCaracFR"]?> (<?=$infJ["idConstruction"]?>) + <?=$infJ["nbSemaineConstruction"]?> <br/>
+
+  Ailier : <?=$lstCaractJ[$infJ["idAilier"]]["intituleCaracFR"]?> (<?=$infJ["idAilier"]?>) + <?=$infJ["nbSemaineAilier"]?> <br/>
+
+  Passe : <?=$lstCaractJ[$infJ["idPasse"]]["intituleCaracFR"]?> (<?=$infJ["idPasse"]?>) + <?=$infJ["nbSemainePasses"]?> <br/>
+
+  Buteur : <?=$lstCaractJ[$infJ["idButeur"]]["intituleCaracFR"]?> (<?=$infJ["idButeur"]?>) + <?=$infJ["nbSemaineButeur"]?> <br/>
+
+  Coup Franc : <?=$lstCaractJ[$infJ["idPA"]]["intituleCaracFR"]?> (<?=$infJ["idPA"]?>) + <?=$infJ["nbSemaineCoupFranc"]?><br/>
+  <br/>
+  [u]Entrainement et commentaires[/u]: 
+  <br/>
+  </span>
+  </p>
+<p>
+<p>
+<p>
+
+
 <!--// ajout du retour vers la fiche DTN du joueur par jojoje86 le 21/07/09-->
 <br><br>
 <A HREF=# style="text-decoration:none" onClick="javascript:history.go(-1);">Retour</A>
