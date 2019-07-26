@@ -390,7 +390,22 @@ if ($datemaj >$mkday -$huit){
           </td>
         </tr>
         <tr> 
-          <td colspan="2">Un type 
+          <td colspan="2">          
+		  <?php if( $joueurDTN["numLeader"]>=6){?>
+		    Un type 
+            <?=$joueurDTN["intituleCaractereFR"]?>
+            qui est 
+            <?=$joueurDTN["intituleAggresFR"]?>
+            et 
+            <?=$joueurDTN["intituleHonneteteFR"]?>
+            .<br>
+            Il a une 
+            <?=$joueurDTN["nomXP_fr"];?>
+            exp&eacute;rience et un 
+            <font color="#CC22DD"><?=$joueurDTN["intituleLeaderFR"]?></font>
+            temp&eacute;rament de chef
+			<?php } else { ?>
+			Un type 
             <?=$joueurDTN["intituleCaractereFR"]?>
             qui est 
             <?=$joueurDTN["intituleAggresFR"]?>
@@ -402,6 +417,7 @@ if ($datemaj >$mkday -$huit){
             exp&eacute;rience et un 
             <?=$joueurDTN["intituleLeaderFR"]?>
             temp&eacute;rament de chef
+			<?php } ?>
           </td>
           <td><div align="center">
             <span class="Style1">
@@ -471,9 +487,9 @@ if ($datemaj >$mkday -$huit){
                 
                   
               <tr <?php if ($i % 2 == 0) {?>bgcolor="#EEEEEE"<?php }?>>
-              <td><b><?=$int?> :</b></td>
-              <td><?php for ($j=1; $j<=$res["numCarac"]; $j++) {?><img src="../images/carre.JPG">&nbsp;<?php }?></td>
-              <td>&nbsp;<?='['.$res["numCarac"].'] '.$res["intituleCaracFR"]?> <?=$nbSemaineE?></td>
+              <td  width="20%"><div align="left"><b><?=$int?> :</b></div></td>
+              <td width="30%"><div align="left"><?php for ($j=1; $j<=$res["numCarac"]; $j++) {?><img src="../images/carre.JPG">&nbsp;<?php }?></div></td>
+              <td width="50%"><div align="left">&nbsp;<?='['.$res["numCarac"].'] '.$res["intituleCaracFR"]?> <?=$nbSemaineE?></div></td>
               </tr><?php  
               $i++;
             }?>
