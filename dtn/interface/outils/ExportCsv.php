@@ -194,7 +194,11 @@ foreach ($conn->query($sql) as $l) {
 	echo  $l["idPA"].";".$infJ["nbSemaineCoupFranc"].";";
 
 	echo $infJ["niv_Entraineur"].";";
-	$nom_entrainement=utf8_decode(getEntrainementName($infJ["entrainement_id"],$listEntrainement));
+	if ($l['isScannable']==0) { //Si on ne possède pas le scan du joueur
+        $nom_entrainement="??";
+    } else {
+        $nom_entrainement=utf8_decode(getEntrainementName($infJ["entrainement_id"],$listEntrainement));
+    }
 	echo $nom_entrainement.";";
 	if ($infJ["dtnSuiviJoueur_fk"] != 0)	{echo utf8_decode($infJ["loginAdminSuiveur"]).";";}
 	else echo ";";
