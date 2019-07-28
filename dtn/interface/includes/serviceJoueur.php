@@ -2086,6 +2086,18 @@ function majJoueur($ht_user,$role_user,$joueurHT,$joueurDTN){
 				$update_joueur['date_modif_effectif']=date('Y-m-d');
 			}
 	  
+            //******** Mise à jour du statut du Scan *********//
+            if (!existAutorisationClub($joueurDTN['teamid'])) {
+                $sql2 = "UPDATE $tbl_joueurs
+                SET isScannable = 0 
+                WHERE idHattrickJoueur = ".$joueurDTN["idHattrickJoueur"];
+            } else {
+                $sql2 = "UPDATE $tbl_joueurs
+                SET isScannable = 1 
+                WHERE idHattrickJoueur = ".$joueurDTN["idHattrickJoueur"];
+            }
+            $req2 = $conn->query($sql2);
+      
 			//******* SKILL DU JOUEUR *******//
 			if ($joueurHT['caracVisible']==true) {
 				//******* GARDIEN *******//
