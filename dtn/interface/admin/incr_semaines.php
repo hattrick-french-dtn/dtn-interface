@@ -124,40 +124,38 @@ if ( isset($_SESSION['HT']) ) {
 			// Extraction des joueurs
             $SqlAgeJoueur=getCalculAgeAnneeSQL(); // Récupère l'âge (année) dans la BDD
         
-		if ($_REQUEST['ht_posteAssigne'] != -1) {
+            // On récupère tous les joueurs potentiellement scannables
+        if ($_REQUEST['ht_posteAssigne'] != -1) {
             $sql = "SELECT $tbl_joueurs.idHattrickJoueur
-                  FROM $tbl_joueurs 
+                    FROM $tbl_joueurs 
       		        WHERE $tbl_joueurs.ht_posteAssigne = '".$_REQUEST['ht_posteAssigne']."'
-      		        AND $tbl_joueurs.affJoueur = '1' 
+      		        AND $tbl_joueurs.affJoueur = '1'
+                    AND $tbl_joueurs.isScannable = 1 
                     ORDER BY idHattrickJoueur DESC,prenomJoueur,nomJoueur 
-                  LIMIT ".$_GET['startingPlayer'].",".$_REQUEST['nbrePlayersMax'];
+                    LIMIT ".$_GET['startingPlayer'].",".$_REQUEST['nbrePlayersMax'];
 		} else {
             $sql = "SELECT $tbl_joueurs.idHattrickJoueur
-                  FROM $tbl_joueurs 
-      		        WHERE $tbl_joueurs.affJoueur = '1' 
+                    FROM $tbl_joueurs 
+      		        WHERE $tbl_joueurs.affJoueur = '1'
+                    AND $tbl_joueurs.isScannable = 1 
                     ORDER BY idHattrickJoueur DESC,prenomJoueur,nomJoueur 
-                  LIMIT ".$_GET['startingPlayer'].",".$_REQUEST['nbrePlayersMax'];		
-		}
-		
-			$req= $conn->query($sql);
+                    LIMIT ".$_GET['startingPlayer'].",".$_REQUEST['nbrePlayersMax'];		
+		}		
+                    $req = $conn->query($sql);
           
 			if(!$req){
 				echo("Erreur lors de l'extraction des joueurs. Contactez un d&eacute;veloppeurs ou les administrateurs de la DTN.");
 				exit;
 			} elseif ($req->rowCount() == 0) {
 				echo("Pas de joueur trouv&eacute;");
-			} else {
-				$i=0;
-				while($i<$req->rowCount()) {
-					$listeJoueursDTN[$i] = $req->fetch(PDO::FETCH_ASSOC);
-					$i++;
-				}
+			} else { // Création liste id joueur à scanner
+                $i=0;
+                while($i<$req->rowCount()) {
+                    $joueur = $req->fetch(PDO::FETCH_ASSOC);
+                    $listeID[]=$joueur["idHattrickJoueur"];
+                    $i++;
+                }
 				$req=NULL;
-            
-            // Création liste id joueur à scanner
-            foreach($listeJoueursDTN as $joueur) {
-				$listeID[]=$joueur["idHattrickJoueur"];
-            }
             
             // MAJ des joueurs
             unset($resUpdateJoueur);
