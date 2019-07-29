@@ -210,7 +210,12 @@ if(isset($msg)) {?>
             <td width="25%" height="15"><font color="#000099">Popularit&eacute;</font></td>
             <td width="25%" height="15"> <div align="left"><?=$joueurDTN["numCaractere"]?> (<?=$joueurDTN["intituleCaractereFR"]?>)</div></td>
             <td width="25%" height="15"> <div align="left"><font color="#000099">Temp&eacute;rament de chef</font></div></td>
-            <td width="12%" height="15"> <div align="left"><?=$joueurDTN["numLeader"]?> (<?=$joueurDTN["intituleLeaderFR"]?>)</div></td>
+            <td width="12%" height="15"> <div align="left">
+			<?php if( $joueurDTN["numLeader"]>=6){?><font color="#CC22DD"><?=$joueurDTN["numLeader"]?> (<?=$joueurDTN["intituleLeaderFR"]?>)</font>
+			<?php } else { ?>
+			<?=$joueurDTN["numLeader"]?> (<?=$joueurDTN["intituleLeaderFR"]?>)
+			<?php } ?>
+			</div></td>
             <td width="13%" height="15">&nbsp;</td>
             </tr>
             <tr> 
@@ -318,10 +323,9 @@ if(isset($msg)) {?>
                 
                 ?>
                 <tr <?php if ($i % 2 == 0) {?>bgcolor="#EEEEEE"<?php } ?> >
-                <td><b><?=$int?> :</b></td>
-                <td><?php for ($j=1; $j<=$res["numCarac"]; $j++) {?><img src="../images/carre.JPG">&nbsp;<?php }?></td>
-                <td>&nbsp;<?='['.$res["numCarac"].'] '.$res["intituleCaracFR"]?> <?=$nbSemaineE?></td>
-                <td>
+                <td width="20%"><div align="left"><b><?=$int?> :</b></div></td>
+                <td width="30%"><div align="left"><?php for ($j=1; $j<=$res["numCarac"]; $j++) {?><img src="../images/carre.JPG">&nbsp;<?php }?></div></td>
+                <td width="5%"><div align="left">
                   <?php if (isset($nomColCarac)) {?>
                     <?php
                     if($sesUser["idNiveauAcces"] == 1 || ($sesUser["idNiveauAcces"] == 2 && $sesUser["idPosition_fk"] == $joueurDTN["ht_posteAssigne"]) || ($sesUser["idNiveauAcces"] == 2 && $joueurDTN["ht_posteAssigne"]==0) || ($sesUser["idNiveauAcces"] == 3 && $sesUser["idPosition_fk"] == $joueurDTN["ht_posteAssigne"] && (existAutorisationClub($idClubHT,null)==false))){?>
@@ -330,8 +334,9 @@ if(isset($msg)) {?>
                       &nbsp;|&nbsp;
   		              <?php }
                   }?>
-                </td>
-                <td width="20%">&nbsp;
+                </div></td>
+				 <td width="20%"><div align="left">&nbsp;<?='['.$res["numCarac"].'] '.$res["intituleCaracFR"]?> <?=$nbSemaineE?></div></td>
+                <td width="20%"><div align="left">&nbsp;
                   <?php if (isset($nomColNbSem)) {?>
                     <span id="sprytextfield<?=$i?>">
                     <input name="<?=$nomColNbSem?>" type="text" style="height: 1.4em; padding:0em; font-size: 1em;" size="2" value="<?=$joueurDTN[$nomColNbSem]?>" onChange='degriserBouton("bt_maj");'>
@@ -341,7 +346,7 @@ if(isset($msg)) {?>
                     <span class="textfieldRequiredMsg">Obligatoire</span>
                     </span>
                   <?php }?>
-                </td>
+                </div></td>
                 
                 </tr><?php  
                 $i++;
