@@ -417,10 +417,9 @@ if ($datemaj >$mkday -$huit){
             exp&eacute;rience et un 
             <?=$joueurDTN["intituleLeaderFR"]?>
             temp&eacute;rament de chef
-			<?php } ?>
-		  
-		  
+			<?php } ?> 
 		  </td>
+
           <td><div align="center">
             <span class="Style1">
             <?php if($msg == "archive") echo "Joueur correctement archiv&eacute;";?>
@@ -489,9 +488,9 @@ if ($datemaj >$mkday -$huit){
                 
                   
               <tr <?php if ($i % 2 == 0) {?>bgcolor="#EEEEEE"<?php }?>>
-              <td><b><?=$int?> :</b></td>
-              <td><?php for ($j=1; $j<=$res["numCarac"]; $j++) {?><img src="../images/carre.JPG">&nbsp;<?php }?></td>
-              <td>&nbsp;<?='['.$res["numCarac"].'] '.$res["intituleCaracFR"]?> <?=$nbSemaineE?></td>
+              <td  width="20%"><div align="left"><b><?=$int?> :</b></div></td>
+              <td width="30%"><div align="left"><?php for ($j=1; $j<=$res["numCarac"]; $j++) {?><img src="../images/carre.JPG">&nbsp;<?php }?></div></td>
+              <td width="50%"><div align="left">&nbsp;<?='['.$res["numCarac"].'] '.$res["intituleCaracFR"]?> <?=$nbSemaineE?></div></td>
               </tr><?php  
               $i++;
             }?>
