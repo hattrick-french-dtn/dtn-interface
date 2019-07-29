@@ -5,9 +5,9 @@ global $infJ;
 
 /***********************************************
 * Type de menus :
-* 1- Menu Complet (Fiche consultation |  Fiche DTN |  Graphiques |  Histo modifs |  Club |  Fiche Forum |  Fiche Résumé  |  Etoiles |  Commentaires / Notes   |  Chercher un joueur )
-* 2- Menu Complet sans "chercher un joueur" ( Fiche consultation |  Fiche DTN |  Graphiques |  Histo modifs |  Club |  Fiche Forum |  Fiche Résumé  |  Etoiles |  Commentaires / Notes)
-* 3- Menu de consultation  ( Fiche consultation |  Fiche Forum |  Fiche Résumé )
+* 1- Menu Complet (Consultation |  Suivi DTN |  Graphiques |  Histo modifs |  Club |  Fiche Vente |  Résumé Forum DTN  |  Résumé Slack | Résumé Hattrick | Commentaires   |  Chercher un joueur )
+* 2- Menu Complet sans "chercher un joueur" ( Consultation |  Suivi DTN |  Graphiques |  Histo modifs |  Club |  Fiche Vente |  Résumé Forum DTN  |  Résumé Slack | Résumé Hattrick | Commentaires)
+* 3- Menu de consultation  ( Consultation |  Histo modifs |  Fiche Vente |  Résumé Forum DTN  |  Résumé Slack | Résumé Hattrick | Commentaires)
 * Menu 1 pour les sélectionneur et les admins        
 * Menu 2 - Si le joueur appartient au secteur du dtn ou dtn+
 *        - Si le joueur n'appartient à aucun secteur
@@ -27,24 +27,24 @@ if ($sesUser["idAdminHT"] == $idClubHT) {$TypeMenu=3;}
 
 ?>
 <table border=0 width=100%>
-<tr><td align="left" nospan>&nbsp;<a href="<?=$url?>/joueurs/fiche.php?htid=<?=$idHT?>" class="smliensorange" alt="consulter">Fiche consultation</a>&nbsp;|
+<tr><td align="left" nospan>&nbsp;<a href="<?=$url?>/joueurs/fiche.php?htid=<?=$idHT?>" class="smliensorange" alt="consulter">Consultation</a>&nbsp;|
 <?php // On affiche le menu fiche dtn que si le joueur appartient au secteur du dtn ou si c'est le sélectionneur qui est connecté
 if ($TypeMenu <= 2) { ?>
-	&nbsp;<A class="smliensorange" href="<?=$url?>/joueurs/ficheDTN.php?htid=<?=$idHT?>" alt="modifier">Fiche DTN</a>&nbsp;|
+	&nbsp;<A class="smliensorange" href="<?=$url?>/joueurs/ficheDTN.php?htid=<?=$idHT?>" alt="modifier">Suivi DTN</a>&nbsp;|
 	&nbsp;<A class="smliensorange" href="<?=$url?>/joueurs/graphProgression.php?id=<?=$id?>" alt="graphiques">Graphiques</a>&nbsp;|
 <?php } ?>
 	&nbsp;<A class="smliensorange" href="<?=$url?>/joueurs/histoJoueur.php?htid=<?=$idHT?>" alt="Histos">Histo modifs</a>&nbsp;|
 <?php if ($TypeMenu <= 2) { ?>
 	&nbsp;<A class="smliensorange" href="<?=$url?>/clubs/fiche_club.php?idClubHT=<?=$idClubHT?>" alt="Club">Club</a>&nbsp;|
 <?php } ?>
-	&nbsp;<A class="smliensorange" href="<?=$url?>/joueurs/ficheForum.php?htid=<?=$idHT?>" alt="forum">Fiche Forum</a>&nbsp;|
-	&nbsp;<a class="smliensorange" href="<?=$url?>/joueurs/ficheresumechoix.php?htid=<?=$idHT?>&origine=<?php echo "unique"?>" alt="resume">Fiche R&eacute;sum&eacute;</a>&nbsp;|
-	&nbsp;<a class="smliensorange" href="<?=$url?>/joueurs/ficheslackchoix.php?htid=<?=$idHT?>&origine=<?php echo "unique"?>" alt="resume">Fiche Slack</a>&nbsp;|
-	&nbsp;<a class="smliensorange" href="<?=$url?>/joueurs/fichehattrickchoix.php?htid=<?=$idHT?>&origine=<?php echo "unique"?>" alt="resume">Fiche Hattrick</a>&nbsp;
+	&nbsp;<A class="smliensorange" href="<?=$url?>/joueurs/ficheForum.php?htid=<?=$idHT?>" alt="forum">Fiche Vente</a>&nbsp;|
+	&nbsp;<a class="smliensorange" href="<?=$url?>/joueurs/ficheresumechoix.php?htid=<?=$idHT?>&origine=<?php echo "unique"?>" alt="resume">Résumé Forum DTN</a>&nbsp;|
+	&nbsp;<a class="smliensorange" href="<?=$url?>/joueurs/ficheslackchoix.php?htid=<?=$idHT?>&origine=<?php echo "unique"?>" alt="resume">Résumé Slack</a>&nbsp;|
+	&nbsp;<a class="smliensorange" href="<?=$url?>/joueurs/fichehattrickchoix.php?htid=<?=$idHT?>&origine=<?php echo "unique"?>" alt="resume">Résumé Hattrick</a>&nbsp;
     <?php if ($TypeMenu <= 2) { ?>
   | &nbsp;<A class="smliensorange" href="<?=$url?>/joueurs/rapportDetaille.php?htid=<?=$idHT?>" alt="etoiles">Matchs</a>&nbsp;
     <?php } if ($TypeMenu <= 3) { ?>
-  | &nbsp;<A class="smliensorange" href="<?=$url?>/joueurs/commentaires.php?htid=<?=$idHT?>" alt="commentaires">Commentaires / Notes</a>
+  | &nbsp;<A class="smliensorange" href="<?=$url?>/joueurs/commentaires.php?htid=<?=$idHT?>" alt="commentaires">Commentaires</a>
 <?php }
 
 if ($TypeMenu <= 1) {  ?>
