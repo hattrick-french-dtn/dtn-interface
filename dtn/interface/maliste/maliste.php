@@ -164,6 +164,8 @@ document.body.scrollTop = scrollPos;
           <img border=1 src="../images/jst.bmp" title="Exporter la liste des joueurs sous forme d'une fiche r&eacute;sum&eacute; globale"></a></td>
                  
     </tr>
+    <h3 align="center">ATTENTION : La mise à jour des semaines d'entrainement devient AUTOMATIQUE &agrave; compter du 02/08/19. <br>A partir de cette date, merci de faire attention aux doublons ! (contactez votre DTN+ pour plus d'informations)</h3>
+    
 </table> 
 <center>
 <h3><?=$tri?> par [ <?=$ordre?> ]</h3>
