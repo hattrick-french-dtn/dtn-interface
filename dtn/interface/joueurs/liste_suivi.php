@@ -64,10 +64,14 @@ $_SESSION['ListeFicheResume']=$lstJoueur;
       <td height="20" bgcolor="#000000"><div align="center"><font color="#FFFFFF">Liste des joueurs suivi par <?=$infAdmin["loginAdmin"]?></font></div></td>
       </tr>
 	  <tr><td height="20" bgcolor="#000000"><div align="center"><font color="#FFFFFF">
+		  <?php if ($sesUser["idNiveauAcces"] ==1 || ($sesUser["idNiveauAcces"] ==2 && $sesUser["idPosition_fk"]==$infAdmin["idPosition_fk"] )) { ?>
 	  <form method="post" action="../maliste/miseajour.php">
       <input type="hidden" name="dtn" value= <?=$_GET['dtn']?> />
       <input type="submit" value="Mettre &agrave; jour la liste sur Hattrick" />
                 </form>
+		  <?php
+          }
+          ?>
       <form method="post" action="../maliste/dernieresmodifs.php">
       <input type="hidden" name="dtn" value= <?=$_GET['dtn']?> />
       <input type="submit" value="Derni&egrave;res modifications" />
@@ -153,7 +157,7 @@ $_SESSION['ListeFicheResume']=$lstJoueur;
 			$ligne3 = $req3->fetch(PDO::FETCH_ASSOC);
 			if ($ligne3) extract($ligne3);
             
-            // Extraction statut du joueur ‡ la derniËre M‡J (en vente ou non)
+            // Extraction statut du joueur √† la derni√®re M√†J (en vente ou non)
             $sql= "SELECT transferListed FROM $tbl_joueurs_histo
                    WHERE id_joueur_fk=".$lstJoueur[$j]["idHattrickJoueur"]." 
                    ORDER BY date_histo DESC LIMIT 1";
