@@ -444,7 +444,7 @@ function scanid()
 	  active[5] = true;
     }
   
-    if ((document.forms.form2.parasup[6].checked)||(document.forms.form1.typeresume[0].checked)) {
+    if ((document.forms.form2.parasup[6].checked)||(document.forms.form1.typeresume[0].checked)||(document.forms.form1.typeresume[10].checked)) {
       //choix=CF : case à cocher CF ou choix de type de résumé = GK
       b=b+'/CF';
       c=c+' / ';
