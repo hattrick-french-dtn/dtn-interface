@@ -78,14 +78,6 @@ $htms = htmspoint($tabage[0], $tabage[1], $joueurDTN["idGardien"], $joueurDTN["i
 
 ?><html><head><title> Fiche DTN <?=$joueurDTN["prenomJoueur"]?> <?=$joueurDTN["nomJoueur"]?></title>
 
-<script>
-function AlertNumServeurHT()
-{ 
-  alert("Vous devez d\351finir le num\351ro de serveur Hattrick auquel vous \352tes actuellement connect\351 !\n Pour connaitre votre num\351ro de serveur :\n- Aller sur votre fen\352tre Hattrick\n- Il s'agit des 2 chiffres qui suivent 'http://www' et qui pr\351c\350dent '.hattrick.org'\n- Saisir ce num\351ro en bas de la page a l'endroit pr\351vu et valider"); 
-  return; 
-} 
-
-</script>
 <script src="../../../SpryAssets/SpryValidationTextField.js" type="text/javascript"></script>
 <script language="JavaScript" src="../includes/javascript/navigation.js" charset="ISO-8859-1"></script>
 <script language="JavaScript" src="../includes/javascript/popup.js" charset="ISO-8859-1"></script>
@@ -159,7 +151,7 @@ if(isset($msg)) {?>
   <td>
     <table width="100%"  border="0" align="center" cellpadding="0" cellspacing="0">
       <tr> 
-      <td height="15" bgcolor="#000000"><div align="center"><font color="#FFFFFF"><strong>Fiche DTN </strong></font></div></td>
+      <td height="15" bgcolor="#000000"><div align="center"><font color="#FFFFFF"><strong>Suivi DTN </strong></font></div></td>
       </tr>
       <tr>
       <td valign="top">
@@ -181,12 +173,8 @@ if(isset($msg)) {?>
             <img height="16" src="../images/Autorise.PNG" title="Ce club a autoris&eacute; la DTN &agrave; acc&eacute;der &agrave; ses donn&eacute;es">
           <?php }
           ?><a href="https://hattrickportal.pro/Tracker/Player.aspx?playerID=<?=$joueurDTN["idHattrickJoueur"]?>" target="_blank"><img src="../images/htportal.png" width="16" title="Voir le joueur sur HT Portal"></a>
-      		<?php if (!empty($_SESSION['numServeurHT'])){?>
-      			&nbsp;<a href="http://www<?=$_SESSION['numServeurHT']?>.hattrick.org/Club/?TeamID=<?=$idClubHT?>&SendMessage=true" target="_NEW"
-      		<?php } else { ?>
-      			&nbsp;<a href="#" onClick='AlertNumServeurHT();'
-      		<?php } ?>
-      		    alt="ht">HT-mail</a>
+          <a href="https://www.hattrick.org/goto.ashx?path=/Club/Players/Player.aspx?playerId=<?=$joueurDTN["idHattrickJoueur"]?>" target="_blank"><img src="../images/htdirect.png" width="18" title="Voir le joueur sur Hattrick"></a>
+          <a href="https://www.hattrick.org/goto.ashx?path=/Club/Manager/?teamId=<?=$idClubHT;?>" target="_blank"><img src="../images/mail.png" width="18" title="Envoyer un MP"></a>
                 <form method="post" action="../maliste/miseajourunique.php">
                 <input type="hidden" name="joueur" value= <?=$joueurDTN["idHattrickJoueur"]?> />
                 <input type="submit" value="Mettre &agrave; jour sur Hattrick" />
@@ -705,10 +693,7 @@ $reqHJ = $conn->query($sqlHJ);
     <div align="center"><a href="javascript:history.go(-1);">Retour</a></div>
     <br>
     <hr>
-    Pour contacter par HT Mail le propri&eacute;taire, saisissez le num&eacute;ro de serveur HT auquel vous etes connect&eacute;. Dans votre barre de navigation, il s'agit des 2 chiffres se trouvant apr&egrave;s www http://www<b><u>XX</u></b>.hattrick.org.
-    <?php require("../outils/define_numserveurHT.php");?>
-    
-    
+
     
     <form name="formSupprimeDTN" method="post" action="../form.php">
       <input name="idJoueur" type="hidden"value="<?=$id?>">
