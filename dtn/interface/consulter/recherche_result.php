@@ -45,6 +45,7 @@ if(isset($_POST['action']) and $_POST['action'] == 'submitted') {
   $SkillMax4      =$_POST['SkillMax4'];
   $ordreDeTriNb   =$_POST['ordreDeTriNb'];
   $joueurArchive  =$_POST['joueurArchive'];
+  $joueurScanne  =$_POST['joueurScanne'];
   $NivEntraineur  =$_POST['NivEntraineur'];
   $minSalaire     =$_POST['minSalaire'];
   $maxSalaire     =$_POST['maxSalaire'];
@@ -78,6 +79,8 @@ if(isset($_POST['action']) and $_POST['action'] == 'submitted') {
   if(!isset($ordreDeTriNb)) $ordreDeTriNb ="";
   
   if(!isset($joueurArchive)) $joueurArchive =0;
+  
+  if(!isset($joueurScanne)) $joueurScanne =0;
   
 
   if(!isset($NivEntraineur)) $NivEntraineur =0;
@@ -466,6 +469,18 @@ if ($SkillType4!="" && ($SkillMin4!="" || $SkillMax4!="" )){
 				$sql=$sql." AND archiveJoueur=0 ";		
 		
 	}
+	if ($joueurScanne==1){
+		$sql=$sql." AND isScannable=1 ";		
+		?>
+		<li> En montrant uniquement les joueurs scann&eacute;s
+		<?php
+	} elseif ($joueurScanne==0){
+		$sql=$sql." AND isScannable=0 ";		
+		?>
+		<li> En montrant uniquement les joueurs non-scann&eacute;s
+		<?php
+
+	}
 
 	if ($NivEntraineur>=7){
 		$sql=$sql." AND niv_Entraineur=".$NivEntraineur;		
@@ -587,6 +602,7 @@ if(count($lstJ)==0) {
 	       <INPUT TYPE="hidden" NAME="SkillMax4" VALUE="<?=$SkillMax4?>" >
          <INPUT TYPE="hidden" NAME="ordreDeTriNb" VALUE="<?=$ordreDeTriNb?>" >
 	       <INPUT TYPE="hidden" NAME="joueurArchive" VALUE="<?=$joueurArchive?>" >
+	       <INPUT TYPE="hidden" NAME="joueurScanne" VALUE="<?=$joueurScanne?>" >
 	       <INPUT TYPE="hidden" NAME="NivEntraineur" VALUE="<?=$NivEntraineur?>" >
 	       <INPUT TYPE="hidden" NAME="maxSalaire" VALUE="<?=$maxSalaire?>" >
 	       <INPUT TYPE="hidden" NAME="minSalaire" VALUE="<?=$minSalaire?>" >

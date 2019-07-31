@@ -607,6 +607,14 @@ jours</TD>
 						<INPUT TYPE="radio" NAME="joueurArchive" VALUE="0" CHECKED>Cacher les joueurs archiv&eacute;s<BR>
 						<INPUT TYPE="radio" NAME="joueurArchive" VALUE="1" >Seulement dans les joueurs archiv&eacute;s<BR>
 					</TR>
+					<TR>
+						<TD COLSPAN="2" VALIGN="top">
+						<BR>
+						<INPUT TYPE="radio" NAME="joueurScanne" VALUE="99" CHECKED>Tous les joueurs (scann&eacute;s et non-scann&eacute;s)<BR>
+						<INPUT TYPE="radio" NAME="joueurScanne" VALUE="1" >Cacher les joueurs non-scann&eacute;s<BR>
+						<INPUT TYPE="radio" NAME="joueurScanne" VALUE="0" >Seulement dans les joueurs non-scann&eacute;s<BR>
+
+					</TR>
           <TR>
 						<TD COLSPAN="2" VALIGN="top">
 						<BR><B>Niveau de l'entraineur :</B><BR>
