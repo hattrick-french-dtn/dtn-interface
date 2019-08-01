@@ -977,8 +977,11 @@ function majClub($idClubHT=null,$idUserHT=null,$clubDTN=null)
 		$resu["logModif"] .= "-id=".$clubDTN["idClubHT"]."-\n";
 		//$clubHT["idClub"]=$clubDTN["idClub"]; //nécessaire à la fonction update qui repère le club sur son idClub et non son idClubHT
 		$resu["idClub"]=insertionClub($clubHT);
+		//ajout pour correction faux message Echec MaJ club
+		$ht_session=existAutorisationClub($idClubHT);
 
-		if ($resu["idClub"]==False)
+		// if ($resu["idClub"]==False)
+		if ($resu["idClub"]==False && $ht_session==false)
 		{
 			//échec de la maj
 			$resu["logModif"] .= "=> Erreur : échec de la MAJ en base\n";
