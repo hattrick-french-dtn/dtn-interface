@@ -26,29 +26,29 @@ if (isset($origine) && $origine=="unique") //appel provient de la fiche d'un jou
 else  //appel provient de ficherecupchoix.php
 {
 	$origine = "";
-	$tlistID = explode(";",$listID);  //extraire les différents id
+	$tlistID = explode(";",$listID);  //extraire les diffÃ©rents id
 	for($i=0;$i<count($tlistID);$i++)
     {
-		$infJs[$i+1] = getJoueurHt($tlistID[$i]); //reconstruit un tableau contenant toutes les données des joueurs sélectionnés
+		$infJs[$i+1] = getJoueurHt($tlistID[$i]); //reconstruit un tableau contenant toutes les donnÃ©es des joueurs sÃ©lectionnÃ©s
     }
 }
 $infJs[0]=$infJs[1];
 if ($origine!="unique")
 {
 	$infJs[0]['nomJoueur']="R&eacute;sum&eacute; Multijoueurs";
-	$infJs[0]['prenomJoueur']=""; //au cas où !!!
+	$infJs[0]['prenomJoueur']=""; //au cas oÃ¹ !!!
 }
   
 $infJ = $infJs[0];
 	
-//Recherche le libellé du type d'entrainement
+//Recherche le libellÃ© du type d'entrainement
 //Fireproofed le 28/01/2011
 $sql="SELECT libelle_type_entrainement FROM ht_type_entrainement WHERE id_type_entrainement = '".$infJs[1]['entrainement_id']."' ";
 $req = $conn->query($sql);
 $result=$req->fetch();
 $req=NULL;
 $infJs[1]['entrainement_type']=$result['libelle_type_entrainement'];
-if ($infJs[1]['entrainement_type']=='') $infJs[1]['entrainement_type']='non renseigné';
+if ($infJs[1]['entrainement_type']=='') $infJs[1]['entrainement_type']='non renseignÃ©';
 ?><html>
 <head>
 <title>Fiche <?=$infJs[0]["prenomJoueur"]?> <?=$infJs[0]["nomJoueur"]?></title>
@@ -65,15 +65,15 @@ if ($infJs[1]['entrainement_type']=='') $infJs[1]['entrainement_type']='non rens
 </head>
 <body>
 <?php
-	//prépare les variables HTML pour utilisation dans fonction JAVASCRIPT majtext()
+	//prÃ©pare les variables HTML pour utilisation dans fonction JAVASCRIPT majtext()
 	//Fireproofed 28/01/2011 et 30/04/2011
 	$infJs[0]=$infJs[1];
-  //âge du joueur
+  //Ã¢ge du joueur
 	for  ($k=1;$k<count($infJs);$k++)
 	{
     $ageetjours = ageetjour($infJs[$k]["datenaiss"]);
   	$tabage[$k] = explode(" - ",$ageetjours);
-    //calcul du nombre de jours depuis la dernière modification
+    //calcul du nombre de jours depuis la derniÃ¨re modification
     $datemaj = explode("-",$infJs[$k]["date_modif_effectif"]);
     $jdatemaj = mktime(0,0,0,$datemaj[1],$datemaj[2],$datemaj[0]);
     $jdateauj = mktime(0,0,0,date("m"),date("d"),date("Y"));
@@ -81,7 +81,7 @@ if ($infJs[1]['entrainement_type']=='') $infJs[1]['entrainement_type']='non rens
     $dermod[$k]=$i." jour";
     if ($i>1) $dermod[$k]=$dermod[$k]."s";
     $dermod[$k]=$dermod[$k].' ['.date("d/m/Y",mktime(0,0,0,$datemaj[1],$datemaj[2],$datemaj[0])).']';
-    //calcul de l'âge du joueur en jours pour situation par rapport à la CDM
+    //calcul de l'Ã¢ge du joueur en jours pour situation par rapport Ã  la CDM
   	$jourj0 = ($sesUser["dateSemaine0"]+3600-574729200)/3600/24;
    	$jourjoueur[$k] = $jourj0 - $infJs[$k]["datenaiss"];
     }
@@ -102,7 +102,7 @@ function scanid()
   	for ($i=1;$i<count($infJs);$i++)
   	{
   ?>
-    //met à jour en temps réel le textarea
+    //met Ã  jour en temps rÃ©el le textarea
     //Fireproofed le 28/01/2011
     
     // ajout du niveau de l'entraineur par jojoje86 le 21/07/09-->
@@ -165,7 +165,7 @@ function scanid()
   	a=a+' ';
   
     //modification sur toutes les fiches pour l'ajout du CF par jojoje86 le 21/07/09
-    //détermination du choix de l'utilisateur : on regarde le type de résumé choisi par bouton radio
+    //dÃ©termination du choix de l'utilisateur : on regarde le type de rÃ©sumÃ© choisi par bouton radio
     //Fireproofed le 28/01/2011
 	// keeper, defending, playmaking, winger, passing, scoring, setpieces
 	var active = [false, false, false, false, false, false, false];
@@ -399,8 +399,8 @@ function scanid()
     }
   
     if (document.forms.form1.typeresume[10].checked) {
-		//choix=TDL Le CF est charg� dans les param�tres suppl�mentaires
-		b='(D/C/B/CF';
+		//choix=TDL Le CF est chargé dans les paramètres supplémentaires
+		b='(D/C/B';
 		if ('<?=$infJs[$i]["entrainement_id"]?>'==4) c='[b][i]';
 		c=c+'<?=$infJs[$i]["idDefense"]?>+<?=$infJs[$i]["nbSemaineDefense"]?>';
 		if ('<?=$infJs[$i]["entrainement_id"]?>'==4) c=c+'[/i][/b]';
@@ -416,8 +416,8 @@ function scanid()
 		active[1] = true;
 		active[5] = true;
     }
-    //on regarde si des paramètres supplémentaires doivent être ajoutés à la fiche
-    //avec test pour éviter les redondances
+    //on regarde si des paramÃ¨tres supplÃ©mentaires doivent Ãªtre ajoutÃ©s Ã  la fiche
+    //avec test pour Ã©viter les redondances
     //Fireproofed le 28/01/2011
     if ((document.forms.form2.parasup[0].checked)&&(b.indexOf('G')==-1)) {
       //choix=GK
@@ -430,7 +430,7 @@ function scanid()
     }
   
     if ((document.forms.form2.parasup[1].checked)&&(b.indexOf('D')==-1)) {
-      //choix=Défense
+      //choix=DÃ©fense
       b=b+'/D';
       c=c+' / ';
       if ('<?=$infJs[$i]["entrainement_id"]?>'==4) c=c+'[b][i]';
@@ -480,7 +480,7 @@ function scanid()
     }
   
     if ((document.forms.form2.parasup[6].checked)||(document.forms.form1.typeresume[0].checked)||(document.forms.form1.typeresume[10].checked)) {
-      //choix=CF : case à cocher CF ou choix de type de résumé = GK
+      //choix=CF : case Ã  cocher CF ou choix de type de rÃ©sumÃ© = GK
       b=b+'/CF';
       c=c+' / ';
       if ('<?=$infJs[$i]["entrainement_id"]?>'==3) c=c+'[b][i]';
@@ -501,7 +501,7 @@ function scanid()
     if ('<?=$infJs[$i]["idLeader_fk"]?>'==6) c=c+' / [b]TDC 6[/b]';
     //Rajouter le TDC si honorable
     if ('<?=$infJs[$i]["idLeader_fk"]?>'==7) c=c+' / [b]TDC 7[/b]';
-    //Rajouter la spé. si il y en a une
+    //Rajouter la spÃ©. si il y en a une
     if ('<?=$infJs[$i]["optionJoueur"]?>'!=0) c=c+' / '+'[b]<?=$coloredspecabbrevs[$infJs[$i]["optionJoueur"]]?>[/b]';
 	var htmss = htmspoint(<?=$tabage[$i][0]?>, <?=$tabage[$i][1]?>,
 		active[0]?<?=$infJs[$i]["idGardien"]?>:0, <?=$infJs[$i]["nbSemaineGardien"]?>,
@@ -526,7 +526,7 @@ function scanid()
       //choix=HTMS net
 	  c=c+' / HTMS caracs et semaines ' + htmss[2] + ' ('+ htmss[3] +')';
     }
-    //Rajouter la date de dernière modification
+    //Rajouter la date de derniÃ¨re modification
     c=c+' / Dern. Modif : <?=$dermod[$i]?>';
     
     //Rajouter le nom du DTN en charge du joueur
@@ -537,13 +537,13 @@ function scanid()
       else c=c+' / Non suivi';
     }
     
-    //On concatène
+    //On concatÃ¨ne
     totalta=totalta+e+d+a+b+c;
     if ('<?=$origine?>'!='unique') totalta=totalta+'\n';
   <?php
     }
   ?>
-  //et on affiche dans le textarea quand la boucle for est terminée
+  //et on affiche dans le textarea quand la boucle for est terminÃ©e
   document.forms.form3.fires.value=totalta;
   }
 </script>
@@ -697,8 +697,8 @@ if ($origine=="unique") require("../menu/menuJoueur_autres_onglets.php");
 &nbsp;<br>
   
 <!--********************************************************************
-Mise en place pour affichage de la fiche en temps réel selon modif.
-Nécessite une mise en fonction du calcul de la chaine de sortie
+Mise en place pour affichage de la fiche en temps rÃ©el selon modif.
+NÃ©cessite une mise en fonction du calcul de la chaine de sortie
 Fireproofed le 28/01/2011
 *********************************************************************-->
       
@@ -725,8 +725,8 @@ Fireproofed le 28/01/2011
 <script type="text/javascript">
 //ajuste la hauteur du textarea
 if ('<?=count($infJ)?>'<21) document.forms.form3.fires.rows='<?=count($infJ)-1?>';
-//si le joueur est géré par un secteur, alors sélectionne un type de résumé adéquat
-//et appelle une première fois la fonction majtext()
+//si le joueur est gÃ©rÃ© par un secteur, alors sÃ©lectionne un type de rÃ©sumÃ© adÃ©quat
+//et appelle une premiÃ¨re fois la fonction majtext()
 var i='<?=$infJs[1]['ht_posteAssigne']?>';
 var j='0';
 if (i>'7') i='0';
