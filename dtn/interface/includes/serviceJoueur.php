@@ -2507,22 +2507,7 @@ $reqHJ = $conn->query($sqlHJ);
 				$resMAJ['HTML'].='Transfert :'.$joueurDTN['teamid'] .'->'.$joueurHT['teamid'].'<br></b></font>';
 				$histoModifMsg .='Transfert : teamid '.$joueurDTN["teamid"] .'->'.$joueurHT['teamid'];
 			}
-			
-			//******* BLESSE ?? *******//
-			$blessure=false;
-			// Peut ne pas être défini si le joueur joue un match
-			if (isset($joueurHT['blessure']) && $joueurHT['blessure']!=-1 && $joueurHT['blessure']!=null) {
-				$resMAJ['HTML'].='<font color=red><b>Joueur bless&eacute;(+'.$joueurHT['blessure'].')!</b></font><br>';
-				$blessure=true;
-			}
-		  
-	  
-			//******* EN VENTE ?? *******//
-			if ($joueurHT['transferListed']==1) {
-				$transfert=true;
-				$resMAJ['HTML'].='<font color=green><b>Joueur en vente!</b><br></font>';
-			}
-  
+
 			//******* SKILL DU JOUEUR *******//
 			if ($joueurHT['caracVisible']==true) {
 
@@ -2531,12 +2516,12 @@ $reqHJ = $conn->query($sqlHJ);
 				// - Entraînement du proprio dans la semaine
 				// - Position et temps de jeu adéquat du joueur dans un match de la semaine
 				// - Le nombre de semaines n'est pas à 99
-				// - Le joueur n'est pas transféré ou blessé
+				// - Le joueur n'est pas transféré
                 // - Le club entraîne à haute intensité et à endu correcte
 
 				//******* GARDIEN *******//
                 
-		if ($joueurDTN['entrainement_type']=='Gardien' && $role_gardien==true && $joueurDTN['nbSemaineGardien'] != 99 && $transfert==false && $blessure==false && $part_entrainement==true) {
+		if ($joueurDTN['entrainement_type']=='Gardien' && $role_gardien==true && $joueurDTN['nbSemaineGardien'] != 99 && $transfert==false && $part_entrainement==true) {
 		    $update_joueur_entrainement['nbSemaineGardien']=$joueurDTN['nbSemaineGardien']+1;
 		    $resMAJ['HTML'].=' Semaines Gardien : '.$joueurDTN['nbSemaineGardien'].'-&gt; '.$update_joueur_entrainement['nbSemaineGardien'].'<br>' ;
             $histoModifMsg .=' Auto M&agrave;J Semaines Gardien (+1) - maintenant '.$joueurDTN["idGardien"].'+'.$update_joueur_entrainement['nbSemaineGardien'];
@@ -2544,7 +2529,7 @@ $reqHJ = $conn->query($sqlHJ);
         } 
 		
 				//******* CONSTRUCTION *******//
-		if ($joueurDTN['entrainement_type']=='Construction' && $role_construction==true && $joueurDTN['nbSemaineConstruction'] != 99 && $transfert==false && $blessure==false && $part_entrainement==true) {
+		if ($joueurDTN['entrainement_type']=='Construction' && $role_construction==true && $joueurDTN['nbSemaineConstruction'] != 99 && $transfert==false && $part_entrainement==true) {
             $update_joueur_entrainement['nbSemaineConstruction']=$joueurDTN['nbSemaineConstruction']+1;
 		    $resMAJ['HTML'].=' Semaines Construction : '.$joueurDTN['nbSemaineConstruction'].'-&gt; '.$update_joueur_entrainement['nbSemaineConstruction'].'<br>' ;
             $histoModifMsg .=' Auto M&agrave;J Semaines Construction (+1) - maintenant '.$joueurDTN["idConstruction"].'+'.$update_joueur_entrainement['nbSemaineConstruction'];
@@ -2553,7 +2538,7 @@ $reqHJ = $conn->query($sqlHJ);
 	  
 				//******* PASSE *******//
                 
-		if ($joueurDTN['entrainement_type']=='Passe' && $role_passe==true && $joueurDTN['nbSemainePasses'] != 99 && $transfert==false && $blessure==false && $part_entrainement==true) {
+		if ($joueurDTN['entrainement_type']=='Passe' && $role_passe==true && $joueurDTN['nbSemainePasses'] != 99 && $transfert==false && $part_entrainement==true) {
             $update_joueur_entrainement['nbSemainePasses']=$joueurDTN['nbSemainePasses']+1;
 		    $resMAJ['HTML'].=' Semaines Passe: '.$joueurDTN['nbSemainePasses'].'-&gt; '.$update_joueur_entrainement['nbSemainePasses'].'<br>' ;
             $histoModifMsg .=' Auto M&agrave;J Semaines Passe (+1) - maintenant '.$joueurDTN["idPasse"].'+'.$update_joueur_entrainement['nbSemainePasses'];
@@ -2562,7 +2547,7 @@ $reqHJ = $conn->query($sqlHJ);
 	  
 				//******* AILIER *******//
                 
-		if ($joueurDTN['entrainement_type']=='Ailier' && $role_ailier==true && $joueurDTN['nbSemaineAilier'] != 99 && $transfert==false && $blessure==false && $part_entrainement==true) {
+		if ($joueurDTN['entrainement_type']=='Ailier' && $role_ailier==true && $joueurDTN['nbSemaineAilier'] != 99 && $transfert==false && $part_entrainement==true) {
             $update_joueur_entrainement['nbSemaineAilier']=$joueurDTN['nbSemaineAilier']+1;
 		    $resMAJ['HTML'].=' Semaines Ailier : '.$joueurDTN['nbSemaineAilier'].'-&gt; '.$update_joueur_entrainement['nbSemaineAilier'].'<br>' ;
             $histoModifMsg .=' Auto M&agrave;J Semaines Ailier (+1) - maintenant '.$joueurDTN["idAilier"].'+'.$update_joueur_entrainement['nbSemaineAilier'];
@@ -2571,7 +2556,7 @@ $reqHJ = $conn->query($sqlHJ);
 	  
 				//******* DEFENSE *******//
                 
-		if ($joueurDTN['entrainement_type']=='Défense' && $role_defense==true && $joueurDTN['nbSemaineDefense'] != 99 && $transfert==false && $blessure==false && $part_entrainement==true) {
+		if ($joueurDTN['entrainement_type']=='Défense' && $role_defense==true && $joueurDTN['nbSemaineDefense'] != 99 && $transfert==false && $part_entrainement==true) {
             $update_joueur_entrainement['nbSemaineDefense']=$joueurDTN['nbSemaineDefense']+1;
 		    $resMAJ['HTML'].=' Semaines D&eacute;fense : '.$joueurDTN['nbSemaineDefense'].'-&gt; '.$update_joueur_entrainement['nbSemaineDefense'].'<br>' ;
             $histoModifMsg .=' Auto M&agrave;J Semaines D&eacute;fense (+1) - maintenant '.$joueurDTN["idDefense"].'+'.$update_joueur_entrainement['nbSemaineDefense'];
@@ -2580,7 +2565,7 @@ $reqHJ = $conn->query($sqlHJ);
 	  
 				//******* BUTEUR *******//
                 
-		if ($joueurDTN['entrainement_type']=='Buteur' && $role_buteur==true && $joueurDTN['nbSemaineButeur'] != 99 && $transfert==false && $blessure==false && $part_entrainement==true) {
+		if ($joueurDTN['entrainement_type']=='Buteur' && $role_buteur==true && $joueurDTN['nbSemaineButeur'] != 99 && $transfert==false && $part_entrainement==true) {
             $update_joueur_entrainement['nbSemaineButeur']=$joueurDTN['nbSemaineButeur']+1;
 		    $resMAJ['HTML'].=' Semaines Buteur : '.$joueurDTN['nbSemaineButeur'].'-&gt; '.$update_joueur_entrainement['nbSemaineButeur'].'<br>' ;
             $histoModifMsg .=' Auto M&agrave;J Semaines Buteur (+1) - maintenant '.$joueurDTN["idButeur"].'+'.$update_joueur_entrainement['nbSemaineButeur'];
@@ -2589,7 +2574,7 @@ $reqHJ = $conn->query($sqlHJ);
 	  
 				//******* COUP FRANC *******//
                 
-		if ($joueurDTN['entrainement_type']=='Coups francs' && $role_cf==true && $joueurDTN['nbSemaineCoupFranc'] != 99 && $transfert==false && $blessure==false && $part_entrainement==true) {
+		if ($joueurDTN['entrainement_type']=='Coups francs' && $role_cf==true && $joueurDTN['nbSemaineCoupFranc'] != 99 && $transfert==false && $part_entrainement==true) {
             $update_joueur_entrainement['nbSemaineCoupFranc']=$joueurDTN['nbSemaineCoupFranc']+1;
 		    $resMAJ['HTML'].=' Semaines CF : '.$joueurDTN['nbSemaineCoupFranc'].'-&gt; '.$update_joueur_entrainement['nbSemaineCoupFranc'].'<br>' ;
             $histoModifMsg .=' Auto M&agrave;J Semaines CF (+1) - maintenant '.$joueurDTN["idPA"].'+'.$update_joueur_entrainement['nbSemaineCoupFranc'];

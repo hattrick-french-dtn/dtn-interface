@@ -82,7 +82,7 @@ if ( isset($_SESSION['HT']) ) {
           		} 
 				echo $ht_posteAssigne;
      		 } else { ?>
-                    <div align="center"><font color="red">Attention ! Ne lancez cette mise à jour (en mode auto) que le vendredi matin, et v&eacute;rifiez bien que personne d'autre ne l'a lanc&eacute;e avant vous
+                    <div align="center"><font color="red">Attention ! Ne lancez cette mise à jour (en mode auto) que le jeudi soir ou le vendredi matin, et v&eacute;rifiez bien que personne d'autre ne l'a lanc&eacute;e avant vous
                     <br />sous peine de doubler ses effets sans possibilit&eacute; de retour en arrière...</font></div>
                     <br />
 					<SELECT NAME="ht_posteAssigne" SIZE=1>
