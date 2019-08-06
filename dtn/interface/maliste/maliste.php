@@ -162,9 +162,12 @@ document.body.scrollTop = scrollPos;
       <td valign="middle">
         <a href="../joueurs/ficherecupchoix.php?origine=<?php echo "maliste"?>">
           <img border=1 src="../images/jst.bmp" title="Exporter la liste des joueurs sous forme d'une fiche r&eacute;sum&eacute; globale"></a></td>
-                 
+    <h3 align="center" style="color:red" >ATTENTION : La mise à jour des semaines d'entrainement est maintenant AUTOMATIQUE.<br>
+    Elle est ex&eacute;cut&eacute;e la nuit du jeudi au vendredi.</h3>
+    <h4 align="center" >Cela ne vous dispense pas de <font color="red">mettre &agrave; jour votre liste</font> pour afficher les ups de caracs, les transferts, etc.<br>
+    Merci également de surveiller que cette mise &agrave; jour fonctionne correctement.<br>
+    En cas de question ou de remarque, contactez <a style="color:black" href="https://www.hattrick.org/goto.ashx?path=/Club/Manager/?teamId=987538" target="_blank">Eremanth</a> ou votre <u>DTN+</u>.</h4>             
     </tr>
-    <h3 align="center">ATTENTION : La mise à jour des semaines d'entrainement devient AUTOMATIQUE &agrave; compter du 02/08/19. <br>A partir de cette date, merci de faire attention aux doublons ! (contactez votre DTN+ pour plus d'informations)</h3>
     
 </table> 
 <center>
