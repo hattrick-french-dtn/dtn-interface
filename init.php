@@ -18,6 +18,8 @@ if (!isset($_SESSION['lang'])){
 		case "en" :
 		case "de" :
 		case "fr" :
+		case "es" :
+		case "it" :
 			$_SESSION['lang']=$lang_browser;
 		break;
 		//sinon anglais
@@ -40,6 +42,14 @@ switch($_SESSION['lang']){
 
 	case "en";
 	require("language/uk.php");
+	break;
+
+	case "es";
+	require("language/es.php");
+	break;
+
+	case "it";
+	require("language/it.php");
 	break;
 
 	default;

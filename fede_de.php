@@ -14,7 +14,7 @@ Alles, dass Sie hier sehen komm von die Errichtung des erste franz&ouml;sische H
 <strong><u>Mitglieder</u> :</strong> 65 Hattrickspieler [2019/07/31]<br/>
 <strong><u>Sprachen</u> :</strong> franz&ouml;sich<br/><br/>
 
-Wenn Sie will franz&ouml;sische Spieler kaufen und für die U20- oder NT-Nationalmannschaft, wird Sie herzlich willkommen.
+Wenn Sie will franz&ouml;sische Spieler kaufen und f&uuml;r die U20- oder NT-Nationalmannschaft, wird Sie herzlich willkommen.
 <br/><br/>
 
 Um ein Spieler vorzuschlagen, und für andere Frage, bitte scan Ihren Spieler in unsere Hauptseite ein.<br/>

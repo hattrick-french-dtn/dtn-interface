@@ -37,7 +37,7 @@ define("RETENU_PRESENTATION"," Voici le/les joueur(s) &agrave; fort potentiel da
 define("AJOUT_COMMENTAIRE"," Si vous le d&eacute;sirez, vous pouvez nous laisser une remarque concernant ces joueurs et leur " .
 		"entra&icirc;nement.");
 
-define("EVITER_QUESTIONS","Si vous posez des questions ici, il n'est pas certain que vous obteniez une r&eacute;ponse. Prenez plutot contact par HT-mail avec les <u><a href=\"dtn_members.php\">membres</a></u> de la DTN.");
+define("EVITER_QUESTIONS","Si vous posez des questions ici, il n'est pas certain que vous obteniez une r&eacute;ponse. Prenez plut&ocirc;t contact par HT-mail avec les <u><a href=\"dtn_members.php\">membres</a></u> de la DTN.");
 
 define("MERCI_COMMENT"," Merci. Vos remarques ont bien &eacute;t&eacute; enregistr&eacute;es.");
 define("PAS_DE_COMMENT"," Votre commentaire n'a pas pu &ecirc;tre re&ccedil;u. <br> R&eacute;essayez ou contactez nous par un autre moyen.");
@@ -237,7 +237,7 @@ define("ENTETE_FORMULAIRE_IIIHELP","Formulaire Inscription &iexcl;&iexcl;&iexcl;
 
 define("OBJECTIF_AUTORISATION_ACCES_IIIHELP","Pour vous inscrire &agrave &iexcl;&iexcl;&iexcl;help!, nous avons besoin de vous identifier sur Hattrick et de r&eacute;cup&eacute;rer des informations sur votre &eacute;quipe (Identifiant, Nom, Niveau Entraineur ...). Apr&egrave;s cette &eacute;tape, vous acc&egrave;derez au formulaire d'inscription &iexcl;&iexcl;&iexcl;help!.");
 
-define("INTRO_HTFFF","ht-fff.org est un site d&eacute;di&eacute; aux <b>s&eacute;lections fran&ccedil;aises</b> &agrave; <a href=\"http://www.hattrick.org\" target=\"_NEW\"><u>hattrick</u></a>.<br />
+define("INTRO_HTFFF","ht-dtnfff.fr est un site d&eacute;di&eacute; aux <b>s&eacute;lections fran&ccedil;aises</b> de <a href=\"http://www.hattrick.org\" target=\"_NEW\"><u>Hattrick</u></a>.<br />
   				Il rassemble les forces qui oeuvrent pour amener la France-HT et ses deux &eacute;quipes nationales au sommet du Monde-HT.<br />
           Et c'est l&agrave; que vous pouvez agir.");
 

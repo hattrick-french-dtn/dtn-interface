@@ -48,7 +48,6 @@
       <li<?php if ($nomFicPhpCourant[0]=="/fff_help.php") {?> class="active"<?php }?>><a href="fff_help.php" class="info"> Recherche Entraineurs <span>Inscrivez-vous afin de recevoir des propositions de reprise de potentiels internationaux</span></a></li>
       <li<?php if ($nomFicPhpCourant[0]=="/contact.php" || $nomFicPhpCourant[0]=="/dtn_members.php" || $nomFicPhpCourant[0]=="/fff_federation.php") {?> class="active"<?php }?>><a href="contact.php" class="sous_menu"> Contact </a>
         <ul>
-          <li><a href="mailto:dtn@ht-fff.org" class="info"> Mail <span>Contactez nous par mail</span></a></li>
           <li><a href="http://www.htfff.free.fr/dtn/forum"> Forum </a></li>
           <li><a href="dtn_members.php" class="info"> Membres <span>Liste des membres de la DTN</span></a></li>
           <li><a href="fff_federation.php"> DTN </a></li>
@@ -91,7 +90,8 @@
   <tr><td width="30" height="40"><img src="img/lang_01_border.gif" width="30" height="40" /></td></tr>
   <tr><td width="30" height="25"><a href="setlang.php?language=en<?=$redir?>"><img src="img/lang_02_us.gif" alt="en" title="en" width="30" height="25" border="0" /></a></td></tr>
   <tr><td width="30" height="6"><img src="img/lang_06_spacer.gif" width="30" height="6" /></td></tr>
-  <!-- <tr><td width="30" height="25"><a href="setlang.php?language=es<?=$redir?>"><img src="img/lang_03_sp.gif" alt="es" title="es" width="30" height="25" border="0" /></a></td></tr> -->
+  <tr><td width="30" height="25"><a href="setlang.php?language=es<?=$redir?>"><img src="img/lang_03_sp.gif" alt="es" title="es" width="30" height="25" border="0" /></a></td></tr>
+  <tr><td width="30" height="6"><img src="img/lang_06_spacer.gif" width="30" height="6" /></td></tr>
   <!-- <tr><td width="30" height="25"><img src="img/lang_03_sp_gr.gif" alt="es" title="es" width="30" height="25" border="0" /></td></tr>-->
   <tr><td width="30" height="25"><a href="setlang.php?language=fr<?=$redir?>"><img src="img/lang_04_fr.gif" alt="fr" title="fr" width="30" height="25" border="0" /></a></td></tr>
   <tr><td width="30" height="6"><img src="img/lang_06_spacer.gif" width="30" height="6" /></td></tr>
@@ -100,6 +100,8 @@
   <!-- <tr><td width="30" height="25"><a href="setlang.php?language=de<?=$redir?>"><img src="img/lang_07_ge.gif" alt="de" title="de" width="30" height="25" border="0" /></a></td></tr> -->
   <tr><td width="30" height="25"><a href="setlang.php?language=de<?=$redir?>"><img src="img/lang_07_ge.gif" alt="de" title="de" width="30" height="25" border="0" /></a></td>
   </tr>
+  <tr><td width="30" height="6"><img src="img/lang_06_spacer.gif" width="30" height="6" /></td></tr>
+  <tr><td width="30" height="25"><a href="setlang.php?language=it<?=$redir?>"><img src="img/lang_10_it.gif" alt="it" title="it" width="30" height="25" border="0" /></a></td></tr>
   <tr><td width="30" height="6"><img src="img/lang_06_spacer.gif" width="30" height="6" /></td></tr>
   <!-- <tr><td width="30" height="25"><a href="setlang.php?language=zh<?=$redir?>"><img src="img/lang_08_ch.gif" alt="zh" title="zh" width="30" height="25" border="0" /></a></td></tr> -->
   <!-- <tr><td width="30" height="25"><img src="img/lang_08_ch_gr.gif" alt="zh" title="zh" width="30" height="25" border="0" /></td></tr>-->

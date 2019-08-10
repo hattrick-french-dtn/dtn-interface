@@ -2,10 +2,10 @@
   <tr>
 	<td rowspan="6" width="30" height="5">&nbsp;</td>
     <td><div align="justify"><span class="style40"><br>
-	Nous essayons de vous fournir <strong>un &eacute;chantillon d’adresses plus ou moins utiles à diff&eacute;rents moments de la vie-HT</strong>. 
+	Nous essayons de vous fournir <strong>un &eacute;chantillon contenant des liens plus ou moins utiles &agrave; diff&eacute;rents moments de la vie-HT</strong>. 
 	Centr&eacute;s sur la communaut&eacute; fran&ccedil;aise, les liens proposent aussi bien des sites aux ambitions modestes 
-	que les r&eacute;f&eacute;rences internationales de notre si  
-	<a href="http://www.hattrick.org/" target="_blank"><u>« pr&eacute;cieux » hattrick</u></a>, sans quoi rien de tout &ccedil;a n’existerait...
+	que les r&eacute;f&eacute;rences internationales de   
+	<a href="http://www.hattrick.org/" target="_blank"><u>Hattrick</u></a>, sur lequel reposent tous ces liens...
 	<br><br></span></div>
 	</td>
 	 </tr>

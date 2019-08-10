@@ -31,6 +31,7 @@ print_r($res);*/
 /******************************************************************************/
 /******************************************************************************/
 // Ajout Traduction Anglais/Allemand par Musta le 08/08/2009	
+// Ajout Traduction Italien par Alpa le 07/08/2019
 switch($_SESSION['lang']) {
 	case "fr" :
   $motSaison="Saison";
@@ -62,7 +63,37 @@ switch($_SESSION['lang']) {
   $motJoueur="Spieler";
   $phraseIntro="Spieler m&uuml;ssen j&uuml;nger als 21 Jahre sein um in der U20 spielen zu k&ouml;nnen, also maximal 20 jahre 111 Tage am Tag des Spieles.";
 	break;
-	default :
+	case "es" :
+  $motSaison="Temporada";
+  $motSemaine="Semana";
+  $motDate="Fecha";
+  $motJournee="Fecha";
+  $motAgeMaxi="Edad m&aacute;xima actual";
+  $motTour="Ronda";
+  $motanset="a&ntilde;os y";
+  $motjours="d&iacute;as";
+  $motDemi="Semifinal";
+  $motFinale="Final";
+  $parfait="Edad perfecta!";
+  $motJoueur="Jugadores";
+  $phraseIntro="Los jugadores tienen que tener menos de 21 a&ntilde;os para jugar con la selecci&oacute;n U20, as&iacute; que una edad m&aacute;xima de 20 a&ntilde;os y 111 d&iacute;as el d&iacute;a de un partido.";
+	break;
+	case "it" :
+  $motSaison="Stagione";
+  $motSemaine="Settimana";
+  $motDate="Data";
+  $motJournee="Partita";
+  $motAgeMaxi="Max et&agrave; attuale";
+  $motTour="Girone";
+  $motanset="anni e";
+  $motjours="giorni";
+  $motDemi="Semi-finale";
+  $motFinale="Finale";
+  $parfait="Et&agrave; perfetta !";
+  $motJoueur="Giocatori";
+  $phraseIntro="I giocatori devono avere meno di 21 anni per giocare in U20 quindi 20 anni e 111 giorni il giorno della partita.";
+	break;
+ 	default :
   $motSaison="Season";
   $motSemaine="Week";
   $motDate="Date";
