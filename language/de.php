@@ -2,9 +2,6 @@
 
 define("PROPOSER",'It happens that some players slip by unnoticed. <br>
 Using the form on this page, you can submit your players to be added or updated in the database.
-<br><br>
- You can find the minimum requirements on the <a href="http://www.ht-fff.org/C02_dtn.php" target="_new">[A]</a> and <a href="http://www.ht-fff.org/C01_dtn.php" target="_new">[U20]</a> pages.
- Keep in mind they only give a rough idea of what we\'re looking for, since we of course aim for better players.
            
       ');
 
@@ -31,13 +28,13 @@ define("REPONSE_PASDEFRANCAIS"," No french player found in your team." .
 
 define("REPONSE_ERREUR_CXION"," K&ouml;nnen wir keine Verbindung mit Hattrick aufbauen");  
 
-define("RETENU_PRESENTATION"," Die folgenden französichen Spieler aus Ihrem Kader entsprechen den Anforderungen der Nationalmannschafft:");
+define("RETENU_PRESENTATION"," Die folgenden franz&ouml;sichen Spieler aus Ihrem Kader entsprechen den Anforderungen der Nationalmannschafft:");
 
-define("AJOUT_COMMENTAIRE"," Wir würden uns freuen, wenn Sie une weitere Informationen über Ihr(e) Spieler und dessen (deren) Training mitteilen würden.");
+define("AJOUT_COMMENTAIRE"," Wir w&uuml;rden uns freuen, wenn Sie une weitere Informationen &uuml;ber Ihr(e) Spieler und dessen (deren) Training mitteilen w&uuml;rden.");
 
 define("EVITER_QUESTIONS","Wenn Sie hier Fragen stellen, ist nicht sichergestellt dass diese beantwortet werden. Es w&auml;re besser per HT-Mail Kontakt mit einem <u><a href=\"dtn_members.php\">Mitglied</a></u> der Scouting Gruppe (DTN) aufzunehmen.");
 
-define("REMERCIEMENT_SUBMIT"," Wir bedanken uns für das eintragen Ihrer Spieler. ");
+define("REMERCIEMENT_SUBMIT"," Wir bedanken uns f&uuml;r das eintragen Ihrer Spieler. ");
 
 define("MERCI_COMMENT"," Vielen Dank. Ihre Bemerkungen wurden aufgenommen."); 
 
@@ -149,14 +146,14 @@ define("ENTETE_FORMULAIRE_IIIHELP","Anmeldungsformular &iexcl;&iexcl;&iexcl;help
 
 define("OBJECTIF_AUTORISATION_ACCES_IIIHELP","Um Sie bei &iexcl;&iexcl;&iexcl;help! anzumelden m&uuml;ssen wir Sie bei Hattrick identifizieren und die Informationen über Ihr Team (Loginname, Name, Trainerf&auml;higkeit ...) sammeln. Nach diesem Schritt werden Sie zum Anmeldungsformular gelangen.");
 
-define("INTRO_HTFFF","Ht-fff.org ist die Website f&uuml;r <b>franz&ouml;siche <a href=\"http://www.hattrick.org\" target=\"_NEW\"><u>Hattrick</u></a> National Mannschaften</b>.<br />
+define("INTRO_HTFFF","ht-dtnfff.fr ist die Website f&uuml;r <b>franz&ouml;siche <a href=\"http://www.hattrick.org\" target=\"_NEW\"><u>Hattrick</u></a> National Mannschaften</b>.<br />
           Hier werden alle Kr&auml;fte geeinigt, die das HT-Franckreich und seine beiden Mannschaften an die Spitze der HT-Welt bringen wollen. Hier k&ouml;nnen Sie mithelfen.");
 
 define("INTRO_HTFFF2","<b>Es ist m&ouml;glich, da&szlig; ein interessanter Spieler</b> f&uuml;r eine unserer zwei Mannschaften in Ihrem team ist.");
 
 define("OBJECTIF_AUTORISATION_ACCES","<strong>Hier k&ouml;nnen Sie Ihre Mannschaft analysieren.</strong>");
           
-define("EXPLICATION_AUTORISATION_ACCES","Mit dem unten beigef&uuml;gten Link erlauben Sie uns, regelm&auml;ssige Updates Ihrer Spieler in unserer Datenbank durchzuf&uuml;hren. Sie k&ouml;nnen diese Erlaubnis jederzeit in Hattrick im Men&uuml; &quot; CHPP-Produkte &quot; zurückziehen.");
+define("EXPLICATION_AUTORISATION_ACCES","Mit dem unten beigef&uuml;gten Link erlauben Sie uns, regelm&auml;ssige Updates Ihrer Spieler in unserer Datenbank durchzuf&uuml;hren. Sie k&ouml;nnen diese Erlaubnis jederzeit in Hattrick im Men&uuml; &quot; CHPP-Produkte &quot; zur&uuml;ckziehen.");
 
 define("PRISE_CONTACT","Fals einer von euren Spielern unseren Vorrichtungen entspricht, nehmen wir Kontakt zu Ihnen auf.");
 
@@ -176,7 +173,7 @@ define("CONNECTE","Eingeloggt : ");
 
 define("DECONNECTER","Ausloggen");
 
-define("MAIL","Per E-Mail");
+//define("MAIL","Per E-Mail");
 
 define("FORUM","In unserem forum");
 

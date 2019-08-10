@@ -8,7 +8,7 @@ Diese Hintergrundarbeiter haben die Aufgabe die franz&ouml;sichen Spieler mit de
 <strong>Diese &ouml;ffentliche Bekanntgebung folgt einer Erwartung vieler ausl&auml;ndischen Managern</strong>, die sicher gehen wollen, 
 dass die Ansprechpartner auch wirklich der Gruppe angeh&ouml;ren. Die Entscheidung war leicht, zumal wir einige ausl&auml;ndische Benutzer haben.<br/><br/>
 
-<strong>Unten finden Sie die Name der Französische U20- und NT- Scouts.</strong>
+<strong>Unten finden Sie die Name der Franz&ouml;sische U20- und NT- Scouts.</strong>
 <br/><br/>
 			</div>
 		</td>
@@ -43,7 +43,7 @@ dass die Ansprechpartner auch wirklich der Gruppe angeh&ouml;ren. Die Entscheidu
           <td width="10%"><div align="right"><span class="style40">centrocampisti|</span></div></td>
           <td width="16%"><div align="right"><span class="style40">Mittelfeldspieler|</span></div></td>
           <td width="2%"><div align="right"><span class="style40"><strong><span class="style17">iM</span></strong></span></div></td>
-          <td width="27%"><div align="left">[<strong><a href="https://www.hattrick.org/goto.ashx?path=/Club/Manager/?userId=12066508">titounesmile</a></strong>]</div></td>
+          <td width="27%"><div align="left">[<strong><a href="https://www.hattrick.org/goto.ashx?path=/Club/Manager/?userId=6827000">fabinou46</a></strong>]</div></td>
         </tr>
         <tr>
           <td width="8%"><div align="right"><span class="style40"><strong><span class="style17">U-20|</span></strong></span></div></td>

@@ -2,9 +2,6 @@
 
 define("PROPOSER",'It happens that some players slip by unnoticed. <br>
 Using the form on this page, you can submit your players to be added or updated in the database.
-<br><br>
- You can find the minimum requirements on the <a href="http://www.ht-fff.org/C02_dtn.php" target="_new">[A]</a> and <a href="http://www.ht-fff.org/C01_dtn.php" target="_new">[U20]</a> pages.
- Keep in mind they only give a rough idea of what we\'re looking for, since we of course aim for better players.
            
       ');
 
@@ -148,13 +145,13 @@ define("ENTETE_FORMULAIRE_IIIHELP","Registration Form &iexcl;&iexcl;&iexcl;help!
 
 define("OBJECTIF_AUTORISATION_ACCES_IIIHELP","To register to &iexcl;&iexcl;&iexcl;help!, we need to identify you on Hattrick and to get some information about your team (login, Team name, Coach level...). After this step, you will get to &iexcl;&iexcl;&iexcl;help! registration form.");
 
-define("INTRO_HTFFF","ht-fff.org is a website dedicated to <b>french national teams</b> in <a href=\"http://www.hattrick.org\" target=\"_NEW\"><u>hattrick</u></a>.<br>
+define("INTRO_HTFFF","ht-dtnfff.fr is a website dedicated to <b>french national teams</b> in <a href=\"http://www.hattrick.org\" target=\"_NEW\"><u>Hattrick</u></a>.<br>
           It gathers forces that are working to bring HT-France and its two national teams at the top of the HT-World.<br>
           And this is where you can act.");
 
 define("INTRO_HTFFF2","You <b>may possess a player</b> that could be <b>of interest</b> for one of our national teams' coaches.");
 
-define("OBJECTIF_AUTORISATION_ACCES","Here, you have the ability to submit your players, in order to add them to the database.");
+define("OBJECTIF_AUTORISATION_ACCES","Here, you have the ability to <b>submit your players</b>, in order to add them to the database.");
           
 define("EXPLICATION_AUTORISATION_ACCES","Thanks to the link hereafter, you authorize us to update regularly your players in our database. You can revoke this authorization whenever you want on Hattrick in the menu &quot;CHPP Products &quot;.");
 
@@ -176,11 +173,11 @@ define("CONNECTE","Logged in : ");
 
 define("DECONNECTER","Log Off");
 
-define("MAIL","By email");
+//define("MAIL","By email");
 
 define("FORUM","On our forum");
 
-define("HT_MAIL","By HT-Mail : List of french scout");
+define("HT_MAIL","By HT-Mail : List of french scouts");
 
 define("CONF_HT","On HT Forum of DTN &quot; https://www.ht-dtnfff.fr/ &quot;");
 ?>

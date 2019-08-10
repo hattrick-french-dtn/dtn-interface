@@ -46,12 +46,11 @@
       <li<?php if ($nomFicPhpCourant[0]=="/index.php") {?> class="active"<?php }?>><a href="index.php" class="info"> Vorschlagen <span>Reichen Sie Ihre Teamdaten ein damit wir die besten Talente entdecken k&ouml;nnen.</span></a></li>
       <li<?php if ($nomFicPhpCourant[0]=="/dtn_u20age.php") {?> class="active"<?php }?>><a href="dtn_u20age.php" class="info"> U20|Altersgrenze <span>Ermitteln Sie das letzte Spiel, das Ihre U20 Spieler noch mitspielen k&ouml;nnen.</span></a></li>
       <li<?php if ($nomFicPhpCourant[0]=="/dtn_requirement.php") {?> class="active"<?php }?>><a href="dtn_requirement.php" class="info"> Anforderungen <span>Mindestanforderungen um von der Datenbank der franz&ouml;sischen Scouts erfasst zu werden.</span></a></li>
-      <li<?php if ($nomFicPhpCourant[0]=="/fff_help.php") {?> class="active"<?php }?>><a href="fff_help.php" class="info"> &iexcl;&iexcl;&iexcl;help! <span>Meldet euch an um über die besten franz&ouml;sischen Talente die auf dem Markt kommen per Mail informiert zu werden.</span></a></li>
+      <li<?php if ($nomFicPhpCourant[0]=="/fff_help.php") {?> class="active"<?php }?>><a href="fff_help.php" class="info"> Wir suchen nach Trainern <span>Meldet euch an um &uuml;ber die besten franz&ouml;sischen Talente die auf dem Markt kommen per Mail informiert zu werden.</span></a></li>
       <li<?php if ($nomFicPhpCourant[0]=="/contact.php" || $nomFicPhpCourant[0]=="/dtn_members.php" || $nomFicPhpCourant[0]=="/fff_federation.php") {?> class="active"<?php }?>><a href="contact.php" class="sous_menu"> Kontakt </a>
         <ul>
-          <li><a href="mailto:dtn@ht-fff.org" class="info"> Mail <span>Kontaktiert uns per Mail</span></a></li>
           <li><a href="http://www.htfff.free.fr/dtn/forum"> Forum </a></li>
-          <li><a href="dtn_members.php" class="info"> Mitglieder <span>Liste der Mitglieder der französischen Scoutabteilung</span></a></li>
+          <li><a href="dtn_members.php" class="info"> Mitglieder <span>Liste der Mitglieder der franz&ouml;sischen Scoutabteilung</span></a></li>
           <li><a href="fff_federation.php"> Scouting </a></li>
         </ul>
       </li>
@@ -91,7 +90,8 @@
   <tr><td width="30" height="40"><img src="img/lang_01_border.gif" width="30" height="40" /></td></tr>
   <tr><td width="30" height="25"><a href="setlang.php?language=en<?=$redir?>"><img src="img/lang_02_us.gif" alt="en" title="en" width="30" height="25" border="0" /></a></td></tr>
   <tr><td width="30" height="6"><img src="img/lang_06_spacer.gif" width="30" height="6" /></td></tr>
-  <!-- <tr><td width="30" height="25"><a href="setlang.php?language=es<?=$redir?>"><img src="img/lang_03_sp.gif" alt="es" title="es" width="30" height="25" border="0" /></a></td></tr> -->
+  <tr><td width="30" height="25"><a href="setlang.php?language=es<?=$redir?>"><img src="img/lang_03_sp.gif" alt="es" title="es" width="30" height="25" border="0" /></a></td></tr>
+  <tr><td width="30" height="6"><img src="img/lang_06_spacer.gif" width="30" height="6" /></td></tr>
   <!-- <tr><td width="30" height="25"><img src="img/lang_03_sp_gr.gif" alt="es" title="es" width="30" height="25" border="0" /></td></tr>-->
   <tr><td width="30" height="25"><a href="setlang.php?language=fr<?=$redir?>"><img src="img/lang_04_fr.gif" alt="fr" title="fr" width="30" height="25" border="0" /></a></td></tr>
   <tr><td width="30" height="6"><img src="img/lang_06_spacer.gif" width="30" height="6" /></td></tr>
@@ -100,6 +100,8 @@
   <!-- <tr><td width="30" height="25"><a href="setlang.php?language=de<?=$redir?>"><img src="img/lang_07_ge.gif" alt="de" title="de" width="30" height="25" border="0" /></a></td></tr> -->
   <tr><td width="30" height="25"><a href="setlang.php?language=de<?=$redir?>"><img src="img/lang_07_ge.gif" alt="de" title="de" width="30" height="25" border="0" /></a></td>
   </tr>
+  <tr><td width="30" height="6"><img src="img/lang_06_spacer.gif" width="30" height="6" /></td></tr>
+  <tr><td width="30" height="25"><a href="setlang.php?language=it<?=$redir?>"><img src="img/lang_10_it.gif" alt="it" title="it" width="30" height="25" border="0" /></a></td></tr>
   <tr><td width="30" height="6"><img src="img/lang_06_spacer.gif" width="30" height="6" /></td></tr>
   <!-- <tr><td width="30" height="25"><a href="setlang.php?language=zh<?=$redir?>"><img src="img/lang_08_ch.gif" alt="zh" title="zh" width="30" height="25" border="0" /></a></td></tr> -->
   <!-- <tr><td width="30" height="25"><img src="img/lang_08_ch_gr.gif" alt="zh" title="zh" width="30" height="25" border="0" /></td></tr>-->

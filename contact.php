@@ -11,13 +11,11 @@ include("init.php");
 
 <div class="ContenuCentrer">
   <br /><br />
-  <a href="mailto:dtn@ht-fff.org"> 1- <?php echo(MAIL)?> : dtn@ht-fff.org</a>
+  <a href="http://www.htfff.free.fr/dtn/forum"> 1- <?php echo(FORUM)?> </a>
   <br /><br /><br />
-  <a href="http://www.htfff.free.fr/dtn/forum"> 2- <?php echo(FORUM)?> </a>
+  <a href="dtn_members.php"> 2- <?php echo(HT_MAIL)?></a>
   <br /><br /><br />
-  <a href="dtn_members.php"> 3- <?php echo(HT_MAIL)?></a>
-  <br /><br /><br />
-  <a href="fff_federation.php"> 4- <?php echo(CONF_HT)?> </a>
+  <a href="fff_federation.php"> 3- <?php echo(CONF_HT)?> </a>
   <br /><br /><br />
 </div>
 

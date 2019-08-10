@@ -10,7 +10,7 @@ to be part of the DTN. This was a no-brainer, especially since we have some memb
 
 <strong>We would like to take this opportunity for thanking all those persons who are giving some of their time for HT-France. </strong>
 <br/><br/>
-<strong>You will find below the list of head scouts for U-20 and NT teams: : </strong>
+<strong>You will find below the list of head scouts for U-20 and NT teams: </strong>
 <br/><br/>
 			</div>
 		</td>
@@ -45,7 +45,7 @@ to be part of the DTN. This was a no-brainer, especially since we have some memb
           <td width="10%"><div align="right"><span class="style40">centrocampisti|</span></div></td>
           <td width="16%"><div align="right"><span class="style40">Mittelfeldspieler|</span></div></td>
           <td width="2%"><div align="right"><span class="style40"><strong><span class="style17">iM</span></strong></span></div></td>
-          <td width="27%"><div align="left">[<strong><a href="https://www.hattrick.org/goto.ashx?path=/Club/Manager/?userId=12066508">titounesmile</a></strong>]</div></td>
+          <td width="27%"><div align="left">[<strong><a href="https://www.hattrick.org/goto.ashx?path=/Club/Manager/?userId=6827000">fabinou46</a></strong>]</div></td>
         </tr>
         <tr>
           <td width="8%"><div align="right"><span class="style40"><strong><span class="style17">U-20|</span></strong></span></div></td>
