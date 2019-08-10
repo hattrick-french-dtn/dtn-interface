@@ -7,7 +7,6 @@
 	&nbsp;<a class="smliensorange" href="<?=$url?>/settings.php?affinfoPerso=1" alt="configuration">Mon Profil</a>
   <?php
   if($sesUser["idNiveauAcces_fk"] == 1 || $sesUser["idNiveauAcces_fk"] == 2 || $sesUser["selection"] != ""){
-  ?>&nbsp;|&nbsp;<a class="smliensorange" href="<?=$url?>/settings.php?affCoeff=1" alt="configuration">Mes formules de calcul</a>&nbsp;|
-  	&nbsp;<A class="smliensorange" href="<?=$url?>/admin/liste_repreneur_iiihelp.php">iiihelp! proprio</a>&nbsp; |
-  	&nbsp;<A class="smliensorange" href="<?=$url?>/admin/liste_joueur_iiihelp.php">iiihelp! joueur</a>&nbsp; <?php } ?>  
+  ?>&nbsp;|&nbsp;<a class="smliensorange" href="<?=$url?>/settings.php?affCoeff=1" alt="configuration">Mes formules de calcul</a>
+  <?php } ?>  
 </td></tr></table>

@@ -5,10 +5,11 @@ En tant que superviseur DTN#, vous pouvez acc&eacute;der aux diff&eacute;rentes 
 <ul>
 <li>Ajouter / Enlever un Utilisateur DTN+
 <li>Ajouter / Enlever un Utilisateur DTN
+<li>Mettre &agrave; jour les comptes des s&eacute;lectionneurs A & U-20
+<li>Assigner un nouveau joueur sans secteur d&eacute;fini &agrave; un secteur de jeu
 <li>Attribuer un joueur pour &ecirc;tre suivi par un DTN
 <li>Modifier vos informations personnelles
 <li>Modifier le param&eacute;trage des notes de joueurs
-<li>Acc&eacute;der &agrave; iiihelp!
 </ul>
 
 
@@ -26,9 +27,18 @@ En tant que superviseur DTN#, vous pouvez acc&eacute;der aux diff&eacute;rentes 
 <li>Retrouver les Listes de chaque DTN+
 <li>Retrouver les Listes de chaque DTN
 <li>Retrouver les Tops de chaque secteur de jeu (gk/cd/im/wg/fw)
-<li>Consulter la liste des Clubs de la bdd
-<li>Consulter les listes de Pays de la bdd
-<li>Administration des donn&eacute;es</li>
+<li>Ajouter un joueur
+<li>Consulter les joueurs de la base
+<li>Tester l'existence d'un joueur dans la base 
+<li>Purger les joueurs botifi&eacute;s / sans manager humain de n'importe quel secteur
+<li>Consulter les fiches résum&eacute;s de joueurs de la base
+<li>Modifier les joueurs de la base
+<li>Effectuer la mise &agrave; jour des joueurs actifs de n'importe quel secteur de jeu
+<li>Effectuer la mise &agrave; jour des joueurs archiv&eacute;s de n'importe quel secteur de jeu
+<li>Effectuer la mise &agrave; jour automatique hebdomadaire des semaines d'entrainement
+<li>Consulter / modifier les listes de Clubs de la base
+<li>Consulter la liste des joueurs de votre secteur et leurs matchs de la semaine
+<li>Consulter / modifier les listes de Pays de la base
 </ul>
 </p>
 

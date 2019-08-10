@@ -6,12 +6,11 @@ En tant que superviseur DTN+, vous pouvez acc&eacute;der aux diff&eacute;rentes 
 <span class="breadvar">Via le menu <a href="<?=$url?>/equipe/mesdtns.php">"Gestion"</a></span> : <br>
 <ul>
 <li>Consulter la liste de vos DTN (et leurs derni&egrave;res actions)
-<li>Affecter des postulants DTN dans votre secteur
+<li>Affecter des joueurs sans secteur d&eacute;fini dans votre secteur
 <li>Assigner un nouveau joueur &agrave; votre secteur de jeu 
 <li>Attribuer un joueur &agrave; un DTN
 <li>Modifier vos informations personnelles
 <li>Modifier le param&eacute;trage des notes de joueurs
-<li>Acc&eacute;der &agrave; iiihelp!
 </ul>
 
 
@@ -26,10 +25,15 @@ En tant que superviseur DTN+, vous pouvez acc&eacute;der aux diff&eacute;rentes 
 <ul>
 <li>Retrouver les Listes des tops de votre secteur
 <li>Ajouter un joueur
-<li>Tester l'existence d'un joueur dans la base 
 <li>Consulter les joueurs de la base
+<li>Tester l'existence d'un joueur dans la base 
+<li>Purger les joueurs botifi&eacute;s / sans manager humain de votre secteur
+<li>Consulter les fiches résum&eacute;s de joueurs de la base
 <li>Modifier les joueurs de votre secteur de jeu
+<li>Effectuer la mise &agrave; jour des joueurs actifs de votre secteur de jeu
+<li>Effectuer la mise &agrave; jour des joueurs archiv&eacute;s de votre secteur de jeu
 <li>Consulter / modifier les listes de Clubs de la base
+<li>Consulter la liste des joueurs de votre secteur et leurs matchs de la semaine
 <li>Consulter / modifier les listes de Pays de la base
 </ul>
 

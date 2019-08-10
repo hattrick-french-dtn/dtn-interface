@@ -12,7 +12,6 @@
   <?php
   if($sesUser["idNiveauAcces_fk"] == 1 || $sesUser["idNiveauAcces_fk"] == 2 || $sesUser["selection"] != ""){
   ?>&nbsp;|&nbsp;<A class="smliensorange" href="<?=$url?>/settings.php?affCoeff=1" alt="configuration">Mes formules de calcul</a>&nbsp;
-  <?php } ?>|
-  	&nbsp;<A class="smliensorange" href="<?=$url?>/admin/liste_repreneur_iiihelp.php">iiihelp! proprio</a>&nbsp; |
-  	&nbsp;<A class="smliensorange" href="<?=$url?>/admin/liste_joueur_iiihelp.php">iiihelp! joueur</a>&nbsp;  </td>
+  <?php } ?>
+  </td>
 </tr></table>
