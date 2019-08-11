@@ -39,7 +39,8 @@ if(!isset($_SESSION['sesUser']["idAdmin"]))
         <input type="submit" value="Voir" />
         </form>
 	&nbsp;| <a class="smliensorange" href="<?=$url?>/equipe/mesdtns.php">Gestion</a>&nbsp;|&nbsp;
-      <a class="smliensorange" href="<?=$url?>/national_team/team.php?selection=A">Equipes Nationales</a>&nbsp;|&nbsp;
+      <a class="smliensorange" href="<?=$url?>/pays/listeMaJpays.php">Liste Pays & MaJ</a>&nbsp;|&nbsp;
+	  <a class="smliensorange" href="<?=$url?>/national_team/team.php?selection=A">Equipes Nationales</a>&nbsp;|&nbsp;
       <a href="<?=$url?>/joueurs/toplist.php" class="smliensorange" alt="Chercher">Base de donn&eacute;es</a>&nbsp;|&nbsp;
 	<?php if ($sesUser["idPosition_fk"]!=0) { ?>
       <a class="smliensorange" href="<?=$url?>/consulter/messagesMaListe.php" alt="Messages Proprios">Messages Proprios</a>&nbsp;|&nbsp;

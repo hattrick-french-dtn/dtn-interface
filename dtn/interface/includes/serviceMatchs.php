@@ -678,7 +678,7 @@ function insererMatchsJoueur($playerid,$teamid,$dateLastScanMatchJoueur=null)
     $i++;
   }
   if ($nbMatchsInsere==0) {
-    $perf['HTML'].="<td colspan=3>Pas de nouveaux match.</td></tr>";
+    $perf['HTML'].="<td colspan=3>Pas de nouveau match.</td></tr>";
   }
   
   return $perf;
