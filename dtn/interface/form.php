@@ -344,6 +344,26 @@ case "assigneJoueur";
 
 	break;
 
+case "assigne1Joueur";
+
+		$sql2 = "select * from $tbl_position where idPosition = $idPosition";
+		$req2 = $conn->query($sql2);
+		$res2 = $req2->fetch(PDO::FETCH_ASSOC);
+
+		$_POST["idJoueur_fk"] = $assigne;
+		$_POST["idAdmin_fk"] = $sesUser["idAdmin"];
+		$_POST["dateHisto"] = date("Y-m-d");
+		$_POST["heureHisto"] = date("H:i");
+		$_POST["intituleHisto"]  = "Assignation du joueur au poste ".$res2["intitulePosition"];
+
+//$sql3 = insertDB($tbl_histomodif);
+
+		$sql = "update $tbl_joueurs set ht_posteAssigne = $idPosition where idJoueur = $assigne";
+		$req = $conn->exec($sql);
+
+	header("location: joueurs/fiche.php?htid=$htid");
+
+	break;
 
 case "assigneJoueurSelection";
 
