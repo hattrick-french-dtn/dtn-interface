@@ -54,8 +54,7 @@
           <li><a href="fff_federation.php"> DTN </a></li>
         </ul>
       </li>
-      <li<?php if ($nomFicPhpCourant[0]=="/links.php") {?> class="active"<?php }?>><a href="links.php"> Enlaces &uacute;tiles </a></li>
-    </ul>
+      </ul>
     </div>
     <?php
 /*

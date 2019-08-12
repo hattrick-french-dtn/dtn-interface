@@ -53,7 +53,7 @@
           <li><a href="fff_federation.php"> DTN </a></li>
         </ul>
       </li>
-      <li<?php if ($nomFicPhpCourant[0]=="/links.php") {?> class="active"<?php }?>><a href="links.php"> Liens </a></li>
+      <li<?php if ($nomFicPhpCourant[0]=="/links_fr.php") {?> class="active"<?php }?>><a href="links.php"> Liens </a></li>
       <li<?php if ($nomFicPhpCourant[0]=="/faq_index.php") {?> class="active"<?php }?>><a href="faq_index.php" class="info"> FAQ <span>Foire aux questions</span></a></li>
     </ul>
     </div>
