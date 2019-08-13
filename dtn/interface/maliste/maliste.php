@@ -415,11 +415,6 @@ foreach ($conn->query($sql) as $l) {
 ?>
                   <tr bgcolor="#FFFFFF" align="right"> 
                     <td align="left" nowrap>&nbsp;<img src="../images/time_<?=$img_nb?>.gif" onmouseover="return escape('<?=$zealt?>')" >&nbsp;
-                    <?php if (existAutorisationClub($idClubHT,null)==false) {?>
-                      <img height="12" src="../images/non_autorise.JPG" title="Ce club n'a pas autoris&eacute; la DTN &agrave; acc&eacute;der &agrave; ses donn&eacute;es">
-                    <?php } else {?>
-                      <img height="12" src="../images/Autorise.PNG" title="Ce club a autoris&eacute; la DTN &agrave; acc&eacute;der &agrave; ses donn&eacute;es">
-                    <?php }?>
                     <?php if ($transferListed==1) {?><img height="12" src="../images/enVente.JPG" title="Plac&eacute; sur la liste des transferts"><?php }?>
                     <a href ="<?=$url?>/joueurs/ficheDTN.php?id=<?=$l["idJoueur"]?>" class=<?=$class?>> 
                       <b> 
@@ -429,8 +424,14 @@ foreach ($conn->query($sql) as $l) {
                       
                     </td>
                     
-                    <td width="120" nowrap align="center"><?=$ligne3['nomClub']?></td>
-                    <td width="55" nowrap align="center"><?=$date[2]?>/<?=$date[1]?>/<?=$date[0]?></td>
+                    <td width="120" nowrap align="left">
+					<?php if (existAutorisationClub($idClubHT,null)==false) {?>
+                      <img height="12" src="../images/non_autorise.JPG" title="Ce club n'a pas autoris&eacute; la DTN &agrave; acc&eacute;der &agrave; ses donn&eacute;es">
+                    <?php } else {?>
+                      <img height="12" src="../images/Autorise.PNG" title="Ce club a autoris&eacute; la DTN &agrave; acc&eacute;der &agrave; ses donn&eacute;es">
+                    <?php }?>
+					<?=$ligne3['nomClub']?></td>
+                    <td width="55" nowrap align="center"><?=$l["dateDerniereModifJoueur"]?></td>
                     <td width="55" nowrap align="center"><?=$htms["value"]?></td>
                     <td width="55" nowrap align="center"><?=$htms["potential"]?></td>
 					<td width="55" nowrap align="center"><?=number_format($tsi, "0"," ", " ")?></td>
