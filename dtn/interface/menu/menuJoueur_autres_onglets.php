@@ -34,9 +34,7 @@ if ($TypeMenu <= 2) { ?>
 	&nbsp;<A class="smliensorange" href="<?=$url?>/joueurs/graphProgression.php?id=<?=$id?>" alt="graphiques">Graphiques</a>&nbsp;|
 <?php } ?>
 	&nbsp;<A class="smliensorange" href="<?=$url?>/joueurs/histoJoueur.php?htid=<?=$idHT?>" alt="Histos">Histo modifs</a>&nbsp;|
-<?php if ($TypeMenu <= 2) { ?>
 	&nbsp;<A class="smliensorange" href="<?=$url?>/clubs/fiche_club.php?idClubHT=<?=$idClubHT?>" alt="Club">Club</a>&nbsp;|
-<?php } ?>
 	&nbsp;<A class="smliensorange" href="<?=$url?>/joueurs/ficheForum.php?htid=<?=$idHT?>" alt="forum">Fiche Vente</a>&nbsp;|
 	&nbsp;<a class="smliensorange" href="<?=$url?>/joueurs/ficheresumechoix.php?htid=<?=$idHT?>&origine=<?php echo "unique"?>" alt="resume">Résumé Forum DTN</a>&nbsp;|
 	&nbsp;<a class="smliensorange" href="<?=$url?>/joueurs/ficheslackchoix.php?htid=<?=$idHT?>&origine=<?php echo "unique"?>" alt="resume">Résumé Slack</a>&nbsp;|
