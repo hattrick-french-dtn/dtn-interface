@@ -54,8 +54,7 @@
           <li><a href="fff_federation.php"> Sistema di scouting </a></li>
         </ul>
       </li>
-      <li<?php if ($nomFicPhpCourant[0]=="/links.php") {?> class="active"<?php }?>><a href="links.php"> Links Utili </a></li>
-    </ul>
+     </ul>
     </div>
     <?php
 /*
