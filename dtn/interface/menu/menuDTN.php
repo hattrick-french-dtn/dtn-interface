@@ -37,6 +37,7 @@ if(!isset($_SESSION['sesUser']["idAdmin"]))
         <input type="submit" value="Voir" />
         </form>
 	&nbsp;| <A class="smliensorange" href="<?=$url?>/settings.php?affinfoPerso=1" class="btn" alt="configuration">Mon Profil</a>&nbsp;|&nbsp;
+	<a class="smliensorange" href="<?=$url?>/pays/listeMaJpays.php">Liste Pays & MaJ</a>&nbsp;|&nbsp;
 	<A class="smliensorange" href="<?=$url?>/national_team/team.php?selection=A" class="btn">Equipes Nationales</a>&nbsp;|&nbsp;
 	<A class="smliensorange" href="<?=$url?>/joueurs/toplist.php" class="btn" alt="Chercher">Base de donn&eacute;es</a>&nbsp;|&nbsp;
 	<a class="smliensorange" href="<?=$url?>/consulter/messagesMaListe.php" alt="Messages Proprios">Messages Proprios</a>&nbsp;|&nbsp;

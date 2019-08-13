@@ -166,6 +166,8 @@ $lstJ = $maBase->select($sql);
         <?php } else {?>
 			<img src="../images/Autorise.PNG" title="Ce club a autoris&eacute; la DTN &agrave; acc&eacute;der &agrave; ses donn&eacute;es">
 		<?php }?> 
+		<a href="https://www.hattrick.org/goto.ashx?path=/Club/Manager/?teamId=<?=$idClubHT;?>" target="_blank"><img src="../images/mail.png" width="18" title="Envoyer un MP"></a>
+			  <a href="https://www.hattrick.org/goto.ashx?path=/Club/?teamId=<?=$idClubHT;?>" target="_blank"><img src="../images/club.png" width="18" title="Voir le club du manager"></a>
         </TD>
 				<TD align="center">&nbsp; &nbsp; Pays du club:&nbsp; <B><?=$nomPays?></B></TD>
 		</TR>

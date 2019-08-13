@@ -37,6 +37,7 @@ if(!isset($_SESSION['sesUser']["idAdmin"]))
         </form>
 	&nbsp;|	<A class="smliensorange" href="<?=$url?>/settings.php?affinfoPerso=1">Mon Profil</a>&nbsp;|
 	&nbsp;<A class="smliensorange" href="<?=$url?>/joueurs/listeInternational.php">Joueurs</a>&nbsp;|
+	&nbsp;<a class="smliensorange" href="<?=$url?>/pays/listeMaJpays.php">Liste Pays & MaJ</a>&nbsp;|
 	&nbsp;<A class="smliensorange" href="<?=$url?>/joueurs/toplist.php">Base de donn&eacute;es</a>&nbsp;|
 	&nbsp;<A class="smliensorange" href="<?=$url?>/joueurs/selection.php" alt="ma liste">S&eacute;lection</a>&nbsp;|
 	&nbsp;<A class="smliensorange" href="<?=$url?>/aide/contact.php" alt="aide">Aide</a>&nbsp;

@@ -43,6 +43,7 @@ switch($sesUser["idNiveauAcces"]){
 	default;
 	break;
 }
+
 	
 // Variable pour menuJoueur.php
 $idHT = $joueurDTN["idHattrickJoueur"];
@@ -161,7 +162,9 @@ if(isset($msg)) {?>
           </tr>
           <tr> 
           <td align="left" width="50%">&nbsp;<font color="#000099"> Info: <?=$joueurDTN["idHattrickJoueur"]?>&nbsp;-&nbsp;<?=$joueurDTN["prenomJoueur"]?>&nbsp;<?php if (isset($joueurDTN["surnomJoueur"])) echo '"'.$joueurDTN["surnomJoueur"].'" '; ?><?=$joueurDTN["nomJoueur"]?>&nbsp;-&nbsp;
-          <?=$tabage[0];?>&nbsp;ans&nbsp;-&nbsp;<?=$tabage[1]?>&nbsp;jours<br>&nbsp; Salaire: <?=number_format(round(($joueurDTN["salary"]/10),2),"0"," "," ")?>&nbsp;&euro;/semaine&nbsp;-&nbsp;<?=$joueurDTN["intitulePosition"]?> 
+          <?=$tabage[0];?>&nbsp;ans&nbsp;-&nbsp;<?=$tabage[1]?>&nbsp;jours <a href="https://www.hattrick.org/goto.ashx?path=/Club/Players/Player.aspx?playerId=<?=$joueurDTN["idHattrickJoueur"]?>" target="_blank"><img src="../images/htdirect.png" width="18" title="Voir le joueur sur Hattrick"></a>
+		  <a href="https://hattrickportal.pro/Tracker/Player.aspx?playerID=<?=$joueurDTN["idHattrickJoueur"]?>" target="_blank"><img src="../images/htportal.png" width="16" title="Voir le joueur sur HT Portal"></a>
+		  <br>&nbsp; Salaire: <?=number_format(round(($joueurDTN["salary"]/10),2),"0"," "," ")?>&nbsp;&euro;/semaine&nbsp;-&nbsp;<?=$joueurDTN["intitulePosition"]?> 
            </font>
      			
 	       </td>
@@ -172,9 +175,8 @@ if(isset($msg)) {?>
           <?php } else { ?>
             <img height="16" src="../images/Autorise.PNG" title="Ce club a autoris&eacute; la DTN &agrave; acc&eacute;der &agrave; ses donn&eacute;es">
           <?php }
-          ?><a href="https://hattrickportal.pro/Tracker/Player.aspx?playerID=<?=$joueurDTN["idHattrickJoueur"]?>" target="_blank"><img src="../images/htportal.png" width="16" title="Voir le joueur sur HT Portal"></a>
-          <a href="https://www.hattrick.org/goto.ashx?path=/Club/Players/Player.aspx?playerId=<?=$joueurDTN["idHattrickJoueur"]?>" target="_blank"><img src="../images/htdirect.png" width="18" title="Voir le joueur sur Hattrick"></a>
-          <a href="https://www.hattrick.org/goto.ashx?path=/Club/Manager/?teamId=<?=$idClubHT;?>" target="_blank"><img src="../images/mail.png" width="18" title="Envoyer un MP"></a>
+          ?><a href="https://www.hattrick.org/goto.ashx?path=/Club/Manager/?teamId=<?=$idClubHT;?>" target="_blank"><img src="../images/mail.png" width="18" title="Envoyer un MP"></a>
+		  <a href="https://www.hattrick.org/goto.ashx?path=/Club/?teamId=<?=$idClubHT;?>" target="_blank"><img src="../images/club.png" width="18" title="Voir le club du manager"></a>
                 <form method="post" action="../maliste/miseajourunique.php">
                 <input type="hidden" name="joueur" value= <?=$joueurDTN["idHattrickJoueur"]?> />
                 <input type="submit" value="Mettre &agrave; jour sur Hattrick" />

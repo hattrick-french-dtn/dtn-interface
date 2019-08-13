@@ -243,7 +243,9 @@ if ($datemaj >$mkday -$huit){
             </tr>
             <tr> 
               <td width="40%" align="left">&nbsp; <font color="#000099"><b>Info: <?=$joueurDTN["idHattrickJoueur"]?>&nbsp;-&nbsp;<?=$joueurDTN["prenomJoueur"]?>&nbsp;<?php if (isset($joueurDTN["surnomJoueur"])) echo '"'.$joueurDTN["surnomJoueur"].'" '; ?><?=$joueurDTN["nomJoueur"]?>&nbsp;-&nbsp;<?php 
-              echo $tabage[0];?>&nbsp;ans&nbsp;-&nbsp;<?=$tabage[1]?>&nbsp;jours<br>&nbsp; Salaire: <?=number_format(round(($joueurDTN["salary"]/10),2),"0"," "," ")?>&nbsp;&euro;/semaine&nbsp;
+              echo $tabage[0];?>&nbsp;ans&nbsp;-&nbsp;<?=$tabage[1]?>&nbsp;jours <a href="https://www.hattrick.org/goto.ashx?path=/Club/Players/Player.aspx?playerId=<?=$joueurDTN["idHattrickJoueur"]?>" target="_blank"><img src="../images/htdirect.png" width="18" title="Voir le joueur sur Hattrick"></a>
+		  <a href="https://hattrickportal.pro/Tracker/Player.aspx?playerID=<?=$joueurDTN["idHattrickJoueur"]?>" target="_blank"><img src="../images/htportal.png" width="16" title="Voir le joueur sur HT Portal"></a>
+			  <br>&nbsp; Salaire: <?=number_format(round(($joueurDTN["salary"]/10),2),"0"," "," ")?>&nbsp;&euro;/semaine&nbsp;
 			  <br/>&nbsp; HTMS: <?=$htms["value"]?> (<?=$htms["potential"]?>)
               </b></font></td>
               <td width="25%" align="center">
@@ -252,9 +254,8 @@ if ($datemaj >$mkday -$huit){
                 <img height="16" src="../images/non_autorise.JPG" title="Ce club n'a pas autoris&eacute; la DTN &agrave; acc&eacute;der &agrave; ses donn&eacute;es">
               <?php } else {?>
                 <img height="16" src="../images/Autorise.PNG" title="Ce club a autoris&eacute; la DTN &agrave; acc&eacute;der &agrave; ses donn&eacute;es">
-              <?php }?><a href="https://hattrickportal.pro/Tracker/Player.aspx?playerID=<?=$joueurDTN["idHattrickJoueur"]?>" target="_blank"><img src="../images/htportal.png" width="16" title="Voir le joueur sur HT Portal"></a>
-                    <a href="https://www.hattrick.org/goto.ashx?path=/Club/Players/Player.aspx?playerId=<?=$joueurDTN["idHattrickJoueur"]?>" target="_blank"><img src="../images/htdirect.png" width="18" title="Voir le joueur sur Hattrick"></a>
-                    <a href="https://www.hattrick.org/goto.ashx?path=/Club/Manager/?teamId=<?=$idClubHT;?>" target="_blank"><img src="../images/mail.png" width="18" title="Envoyer un MP"></a>
+              <?php }?><a href="https://www.hattrick.org/goto.ashx?path=/Club/Manager/?teamId=<?=$idClubHT;?>" target="_blank"><img src="../images/mail.png" width="18" title="Envoyer un MP"></a>
+			  <a href="https://www.hattrick.org/goto.ashx?path=/Club/?teamId=<?=$idClubHT;?>" target="_blank"><img src="../images/club.png" width="18" title="Voir le club du manager"></a>
               	<?php 	if ($sesUser["idNiveauAcces"] == "4") { // Mise à jour sur Hattrick pour le sélectionneur ?>
                 <form method="post" action="../maliste/miseajourunique.php">
                 <input type="hidden" name="joueur" value= <?=$joueurDTN["idHattrickJoueur"]?> />

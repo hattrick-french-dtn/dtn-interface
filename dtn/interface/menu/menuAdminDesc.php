@@ -12,6 +12,10 @@ En tant que superviseur DTN#, vous pouvez acc&eacute;der aux diff&eacute;rentes 
 <li>Modifier le param&eacute;trage des notes de joueurs
 </ul>
 
+<span class="breadvar">Via le menu <a href="<?=$url?>/pays/listeMaJpays.php">"Liste Pays & MaJ"</a></span> : <br>
+<ul>
+<li>Consulter la liste des pays et les jours / horaires associ&eacute;s des matchs, des mises &agrave; jour de l'entrainement et financi&egrave;s
+</ul>
 
 <span class="breadvar">Via le menu <a href="<?=$url?>/national_team/team.php?selection=A">"&Eacute;quipes Nationales"</a></span> : <br>
 <ul>

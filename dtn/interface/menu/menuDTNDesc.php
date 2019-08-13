@@ -7,6 +7,11 @@ En tant que DTN, vous pouvez acc&eacute;der aux diff&eacute;rentes rubriques sui
 <li>Modifier consulter vos informations personnelles et mots de passe
 </ul>
 
+<span class="breadvar">Via le menu <a href="<?=$url?>/pays/listeMaJpays.php">"Liste Pays & MaJ"</a></span> : <br>
+<ul>
+<li>Consulter la liste des pays et les jours / horaires associ&eacute;s des matchs, des mises &agrave; jour de l'entrainement et financi&egrave;s
+</ul>
+
 <span class="breadvar">Via le menu <a href="<?=$url?>/national_team/team.php?selection=A">"Equipes Nationales"</a></span> : <br>
 <ul>
 <li>Consulter les joueurs de l'&eacute;quipe nationale
