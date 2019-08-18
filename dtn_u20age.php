@@ -89,9 +89,24 @@ switch($_SESSION['lang']) {
   $motjours="giorni";
   $motDemi="Semi-finale";
   $motFinale="Finale";
-  $parfait="Et&agrave; perfetta !";
+  $parfait="Et&agrave; perfetta!";
   $motJoueur="Giocatori";
   $phraseIntro="I giocatori devono avere meno di 21 anni per giocare in U20 quindi 20 anni e 111 giorni il giorno della partita.";
+	break;
+	case "sv" :
+  $motSaison="S&auml;song";
+  $motSemaine="Vecka";
+  $motDate="Datum";
+  $motJournee="Partita";
+  $motAgeMaxi="Max &aring;lder idag";
+  $motTour="Omg&aring;ng";
+  $motanset="&aring;r och";
+  $motjours="dagar";
+  $motDemi="Semifinal";
+  $motFinale="Final";
+  $parfait="Perfekt &aring;lder!";
+  $motJoueur="Spelare";
+  $phraseIntro="Spelare m&aring;ste vara under 21 f&ouml;r att spela i U20, det betyder maximalt 20 &aring;r och 111 dagar n&auml;r matchen spelas.";
 	break;
  	default :
   $motSaison="Season";

@@ -43,18 +43,18 @@
     
     <div id="menu">
     <ul>
-      <li<?php if ($nomFicPhpCourant[0]=="/index.php") {?> class="active"<?php }?>><a href="index.php" class="info"> Caricamento <span>Caricare la tua squadra per vedere se hai un giocatore francese interessante</span></a></li>
-      <li<?php if ($nomFicPhpCourant[0]=="/dtn_u20age.php") {?> class="active"<?php }?>><a href="dtn_u20age.php" class="info"> U20|Max Et&agrave;<span>Calcolare l'ultima partita del tuo giocatore per la squadra U20</span></a></li>
-      <li<?php if ($nomFicPhpCourant[0]=="/dtn_requirement.php") {?> class="active"<?php }?>><a href="dtn_requirement.php" class="info"> Requisiti <span>Requisiti per entrare nel database dei giocatori francesi </span></a></li>
-      <li<?php if ($nomFicPhpCourant[0]=="/fff_help.php") {?> class="active"<?php }?>><a href="fff_help.php" class="info"> Allenatori per papabili <span>Ricevere via una HT-mail un giocatore francese interessante visto sul mercato dei trasferimenti</span></a></li>
-      <li<?php if ($nomFicPhpCourant[0]=="/contact.php" || $nomFicPhpCourant[0]=="/dtn_members.php" || $nomFicPhpCourant[0]=="/fff_federation.php") {?> class="active"<?php }?>><a href="contact.php" class="sous_menu"> Contattaci </a>
+      <li<?php if ($nomFicPhpCourant[0]=="/index.php") {?> class="active"<?php }?>><a href="index.php" class="info"> Registrering <span>Registrera ditt lag f&ouml;r att uppt&auml;cka intressanta franska spelare</span></a></li>
+      <li<?php if ($nomFicPhpCourant[0]=="/dtn_u20age.php") {?> class="active"<?php }?>><a href="dtn_u20age.php" class="info"> U20|Maximal &aring;lder<span>Ber&auml;kna sista m&ouml;jliga match med U20 f&ouml;r din spelare</span></a></li>
+      <li<?php if ($nomFicPhpCourant[0]=="/dtn_requirement.php") {?> class="active"<?php }?>><a href="dtn_requirement.php" class="info"> Krav <span>Krav f&ouml;r att en spelare ska listas i den franska trackern </span></a></li>
+      <li<?php if ($nomFicPhpCourant[0]=="/fff_help.php") {?> class="active"<?php }?>><a href="fff_help.php" class="info"> Tr&auml;nare s&ouml;kes <span>Du f&aring;r tips per HT-mail om intressanta franska spelare p&aring; transfern</span></a></li>
+      <li<?php if ($nomFicPhpCourant[0]=="/contact.php" || $nomFicPhpCourant[0]=="/dtn_members.php" || $nomFicPhpCourant[0]=="/fff_federation.php") {?> class="active"<?php }?>><a href="contact.php" class="sous_menu"> Kontakt </a>
         <ul>
-          <li><a href="http://www.htfff.free.fr/dtn/forum"> Foro </a></li>
-          <li><a href="dtn_members.php" class="info"> Membri <span>Lista degli scout</span></a></li>
-          <li><a href="fff_federation.php"> Sistema di scouting </a></li>
+          <li><a href="http://www.htfff.free.fr/dtn/forum"> Forum </a></li>
+          <li><a href="dtn_members.php" class="info"> Medlemmar <span>Lista &ouml;ver scouter</span></a></li>
+          <li><a href="fff_federation.php"> Scoutsystemet </a></li>
         </ul>
       </li>
-     </ul>
+      </ul>
     </div>
     <?php
 /*

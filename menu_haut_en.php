@@ -46,7 +46,7 @@
       <li<?php if ($nomFicPhpCourant[0]=="/index.php") {?> class="active"<?php }?>><a href="index.php" class="info"> Submitting <span>Submit your team to detect interesting french player</span></a></li>
       <li<?php if ($nomFicPhpCourant[0]=="/dtn_u20age.php") {?> class="active"<?php }?>><a href="dtn_u20age.php" class="info"> U20|Max Age<span>Calculate last match of your player for U20 team</span></a></li>
       <li<?php if ($nomFicPhpCourant[0]=="/dtn_requirement.php") {?> class="active"<?php }?>><a href="dtn_requirement.php" class="info"> Requirements <span>Requirements to enter in french database tracking </span></a></li>
-      <li<?php if ($nomFicPhpCourant[0]=="/fff_help.php") {?> class="active"<?php }?>><a href="fff_help.php" class="info"> Trainers Wanted <span>Receive by htmail the french interesting player detected in transfer market</span></a></li>
+      <li<?php if ($nomFicPhpCourant[0]=="/fff_help.php") {?> class="active"<?php }?>><a href="fff_help.php" class="info"> Trainers Wanted <span>Receive by htmail a french interesting player detected in transfer market</span></a></li>
       <li<?php if ($nomFicPhpCourant[0]=="/contact.php" || $nomFicPhpCourant[0]=="/dtn_members.php" || $nomFicPhpCourant[0]=="/fff_federation.php") {?> class="active"<?php }?>><a href="contact.php" class="sous_menu"> Contact </a>
         <ul>
           <li><a href="http://www.htfff.free.fr/dtn/forum"> Forum </a></li>
@@ -92,13 +92,12 @@
   <!-- <tr><td width="30" height="25"><img src="img/lang_03_sp_gr.gif" alt="es" title="es" width="30" height="25" border="0" /></td></tr>-->
   <tr><td width="30" height="25"><a href="setlang.php?language=fr<?=$redir?>"><img src="img/lang_04_fr.gif" alt="fr" title="fr" width="30" height="25" border="0" /></a></td></tr>
   <tr><td width="30" height="6"><img src="img/lang_06_spacer.gif" width="30" height="6" /></td></tr>
-  <!-- <tr><td width="30" height="25"><a href="setlang.php?language=sv<?=$redir?>"><img src="img/lang_05_sw.gif" alt="sv" title="sv" width="30" height="25" border="0" /></a></td></tr> -->
-  <!-- <tr><td width="30" height="25"><img src="img/lang_05_sw_gr.gif" alt="sv" title="sv" width="30" height="25" border="0" /></td></tr>-->
-  <!-- <tr><td width="30" height="25"><a href="setlang.php?language=de<?=$redir?>"><img src="img/lang_07_ge.gif" alt="de" title="de" width="30" height="25" border="0" /></a></td></tr> -->
-  <tr><td width="30" height="25"><a href="setlang.php?language=de<?=$redir?>"><img src="img/lang_07_ge.gif" alt="de" title="de" width="30" height="25" border="0" /></a></td>
+    <tr><td width="30" height="25"><a href="setlang.php?language=de<?=$redir?>"><img src="img/lang_07_ge.gif" alt="de" title="de" width="30" height="25" border="0" /></a></td>
   </tr>
   <tr><td width="30" height="6"><img src="img/lang_06_spacer.gif" width="30" height="6" /></td></tr>
   <tr><td width="30" height="25"><a href="setlang.php?language=it<?=$redir?>"><img src="img/lang_10_it.gif" alt="it" title="it" width="30" height="25" border="0" /></a></td></tr>
+  <tr><td width="30" height="6"><img src="img/lang_06_spacer.gif" width="30" height="6" /></td></tr>
+  <tr><td width="30" height="25"><a href="setlang.php?language=sv<?=$redir?>"><img src="img/lang_05_sw.gif" alt="sv" title="sv" width="30" height="25" border="0" /></a></td></tr>
   <tr><td width="30" height="6"><img src="img/lang_06_spacer.gif" width="30" height="6" /></td></tr>
   <!-- <tr><td width="30" height="25"><a href="setlang.php?language=zh<?=$redir?>"><img src="img/lang_08_ch.gif" alt="zh" title="zh" width="30" height="25" border="0" /></a></td></tr> -->
   <!-- <tr><td width="30" height="25"><img src="img/lang_08_ch_gr.gif" alt="zh" title="zh" width="30" height="25" border="0" /></td></tr>-->

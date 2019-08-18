@@ -11,7 +11,7 @@ Tout ce que vous pouvez voir ici a pour point de d&eacute;part la cr&eacute;atio
 <strong><u>Sigle Officiel</u></u> :</strong> DTN<br/>
 <strong><u>Date de cr&eacute;ation</u> :</strong> 2002/08/17<br/>
 <strong><u>Page Web</u> :</strong> <a href="https://www.ht-dtnfff.fr/"><u>https://www.ht-dtnfff.fr/</u></a><br/>
-<strong><u>Membres</u> :</strong> 65 membres [2019/07/06]<br/>
+<strong><u>Membres</u> :</strong> 65 membres [2019/07/31]<br/>
 <strong><u>Langues</u> :</strong> fran&ccedil;ais<br/><br/>
 
 Si vous &ecirc;tes francophone (et non d&eacute;j&agrave; impliqu&eacute;(e) dans une autre &eacute;quipe nationale) et que vous d&eacute;sirez suivre des joueurs fran&ccedil;ais, 

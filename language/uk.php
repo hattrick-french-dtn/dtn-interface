@@ -20,7 +20,7 @@ define("PROPOSER_0_MEILLEUR_AGE","Your player is the best player of our database
 
 define("PROPOSER_MISAJOUR"," is updated! Thanks for your participation");
 
-define("REPONSE_PASDEJOUEUR"," No player are suitable for the french national team.(look at the requirements) ." .
+define("REPONSE_PASDEJOUEUR"," No player are suitable for the french national team(look at the requirements) ." .
 		"If there is a mistake please contact us.");
 
 define("REPONSE_PASDEFRANCAIS"," No french player found in your team." .
@@ -28,7 +28,7 @@ define("REPONSE_PASDEFRANCAIS"," No french player found in your team." .
 
 define("REPONSE_ERREUR_CXION"," Hattrick is unreachable at this moment. Please try later. ");
 
-define("RETENU_PRESENTATION"," Here is the list of valuable french player(s) found in your team :");
+define("RETENU_PRESENTATION"," Here is the list of valuable french player(s) found in your team:");
 
 define("AJOUT_COMMENTAIRE"," You can now, let us any information regarding your player(s) and its(their) training.");
 
@@ -37,7 +37,7 @@ define("EVITER_QUESTIONS","If you ask questions here, it is not sure that we ans
 define("REMERCIEMENT_SUBMIT"," We would like to thank you for submitting your player. ");
 
 define("MERCI_COMMENT"," Thanks we have well received your message/information. ");
-define("PAS_DE_COMMENT"," We were unable to process your message. <br> Please, try again later or contact us by (ht-)mail.");
+define("PAS_DE_COMMENT"," We were unable to process your message. <br> Please, try again later or contact us by HT-mail.");
 
 define("HOWTO",'
         <em>How-to: Simply enter your Hattrick login, your security code (NOT the password that you use to login to Hattrick website).</em></font>
@@ -161,15 +161,15 @@ define("TEXTE_BOUTON_AUTORISATION","Authorize the scan of my team");
 
 define("SESS_ACTIVE","Keep me logged in");
 
-define("EXPLICATION_SESS_ACTIVE","By ticking this box, the information regarding your Hattrick team will automatically appear on your next visit (if you don't delete your cookies). Thus, you will not need to log in to Hattrick. Not recommended if you log in from a public computer ");
+define("EXPLICATION_SESS_ACTIVE","By ticking this box, the information regarding your Hattrick team will automatically appear on your next visit (if you don't delete your cookies). Thus, you will not need to log in to Hattrick. Not recommended if you log in from a public computer.");
 
-define("MESSAGE_BIENVENUE","Welcome !");
+define("MESSAGE_BIENVENUE","Welcome!");
 
 define("NON_CONNECTE","Not logged in");
 
 define("INFOBULLE_NON_CONNECTE","You must authorize the scan of your team on Hattrick to see the information concerning your French players.");
 
-define("CONNECTE","Logged in : ");
+define("CONNECTE","Logged in: ");
 
 define("DECONNECTER","Log Off");
 
@@ -177,7 +177,7 @@ define("DECONNECTER","Log Off");
 
 define("FORUM","On our forum");
 
-define("HT_MAIL","By HT-Mail : List of french scouts");
+define("HT_MAIL","By HT-Mail: List of french scouts");
 
 define("CONF_HT","On HT Forum of DTN &quot; https://www.ht-dtnfff.fr/ &quot;");
 ?>

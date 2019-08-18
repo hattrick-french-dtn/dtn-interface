@@ -95,13 +95,12 @@
   <!-- <tr><td width="30" height="25"><img src="img/lang_03_sp_gr.gif" alt="es" title="es" width="30" height="25" border="0" /></td></tr>-->
   <tr><td width="30" height="25"><a href="setlang.php?language=fr<?=$redir?>"><img src="img/lang_04_fr.gif" alt="fr" title="fr" width="30" height="25" border="0" /></a></td></tr>
   <tr><td width="30" height="6"><img src="img/lang_06_spacer.gif" width="30" height="6" /></td></tr>
-  <!-- <tr><td width="30" height="25"><a href="setlang.php?language=sv<?=$redir?>"><img src="img/lang_05_sw.gif" alt="sv" title="sv" width="30" height="25" border="0" /></a></td></tr> -->
-  <!-- <tr><td width="30" height="25"><img src="img/lang_05_sw_gr.gif" alt="sv" title="sv" width="30" height="25" border="0" /></td></tr>-->
-  <!-- <tr><td width="30" height="25"><a href="setlang.php?language=de<?=$redir?>"><img src="img/lang_07_ge.gif" alt="de" title="de" width="30" height="25" border="0" /></a></td></tr> -->
-  <tr><td width="30" height="25"><a href="setlang.php?language=de<?=$redir?>"><img src="img/lang_07_ge.gif" alt="de" title="de" width="30" height="25" border="0" /></a></td>
+    <tr><td width="30" height="25"><a href="setlang.php?language=de<?=$redir?>"><img src="img/lang_07_ge.gif" alt="de" title="de" width="30" height="25" border="0" /></a></td>
   </tr>
   <tr><td width="30" height="6"><img src="img/lang_06_spacer.gif" width="30" height="6" /></td></tr>
   <tr><td width="30" height="25"><a href="setlang.php?language=it<?=$redir?>"><img src="img/lang_10_it.gif" alt="it" title="it" width="30" height="25" border="0" /></a></td></tr>
+  <tr><td width="30" height="6"><img src="img/lang_06_spacer.gif" width="30" height="6" /></td></tr>
+  <tr><td width="30" height="25"><a href="setlang.php?language=sv<?=$redir?>"><img src="img/lang_05_sw.gif" alt="sv" title="sv" width="30" height="25" border="0" /></a></td></tr>
   <tr><td width="30" height="6"><img src="img/lang_06_spacer.gif" width="30" height="6" /></td></tr>
   <!-- <tr><td width="30" height="25"><a href="setlang.php?language=zh<?=$redir?>"><img src="img/lang_08_ch.gif" alt="zh" title="zh" width="30" height="25" border="0" /></a></td></tr> -->
   <!-- <tr><td width="30" height="25"><img src="img/lang_08_ch_gr.gif" alt="zh" title="zh" width="30" height="25" border="0" /></td></tr>-->
