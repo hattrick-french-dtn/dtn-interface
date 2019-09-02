@@ -7,6 +7,18 @@ if(!$sesUser["idAdmin"])
 {
 	header("location: ../index.php?ErrorMsg=Session Expiree");
 }
+if (!isset ($ordre))
+	$ordre = "idHattrickJoueur";
+if (!isset ($sens))
+	$sens = "ASC";
+if (!isset ($lang))
+	$lang = "FR";
+if (!isset ($masque))
+	$masque = 0;
+if (!isset ($affPosition))
+	$affPosition = 0;
+if (!isset ($typeExport))
+  $typeExport = "maliste";
 ?>
 
 <link href="../css/ht.css" rel="stylesheet" type="text/css">
@@ -33,6 +45,16 @@ switch($sesUser["idNiveauAcces"]){
 		exit;
 		break;
 
+}
+switch ($sens) {
+
+	case "ASC" :
+		$tri = "Tri croissant";
+		break;
+
+	case "DESC" :
+		$tri = "Tri decroissant";
+		break;
 }
 
 $huit = 60 * 60 * 24 * 8; //time_0
@@ -79,22 +101,23 @@ $_SESSION['ListeFicheResume']=$lstJoueur;
 	  </tr>
       <tr>
       <td><div align="center">
+		<h3><?=$tri?> par [ <?=$ordre?> ]</h3>
         <table width="100%" border="0" cellspacing="1" cellpadding="0" bgcolor=lightgrey>
         <tr>
+          <td width="300"><div align="left"><strong> &nbsp;(id) Joueur</strong></div></td>
           <td width="300"><div align="left"><strong> &nbsp;(id) Club</strong></div></td>
+          <td width="150"><div align="center"><strong>&nbsp;Derni&egrave;re mise &agrave; jour DTN</strong></div></td>
           <td width="100"><div align="left"><strong>Valeur HTMS</strong></div></td>
           <td width="100"><div align="left"><strong>Potentiel HTMS</strong></div></td>
-          <td width="100"><div align="left"><strong>Entrainement</strong></div></td>
+          <td width="60"><div align="left"><strong>Age</strong></div></td>
+		  <td width="100"><div align="left"><strong>Entrainement</strong></div></td>
           <td width="26"><div align="left"><strong>Int</strong></div></td>
           <td width="26"><div align="left"><strong>End</strong></div></td>
           <td width="26"><div align="left"><strong>Entr.</strong></div></td>
           <td width="26"><div align="left"><strong>Adj</strong></div></td>
           <td width="26"><div align="left"><strong>Doc</strong></div></td>
           <td width="26"><div align="left"><strong>PP</strong></div></td>
-          <td width="300"><div align="left"><strong> &nbsp;(id) Joueur</strong></div></td>
-          <td width="60" ><div align="left"><strong> &nbsp;Age</strong></div></td>
-          <td width="150"><div align="center"><strong>&nbsp;Derni&egrave;re mise &agrave; jour DTN</strong></div></td>
-          <td><div align="center"><strong><CENTER>Voir la fiche</CENTER> </strong></div></td>
+
         </tr>
 			      
 			  <?php
@@ -174,24 +197,33 @@ $_SESSION['ListeFicheResume']=$lstJoueur;
     ?>
 
           <tr bgcolor="<?=$bgcolor?>">
-            <td>
+           <td>
+		   <?php if ($transferListed==1) {?><img height="12" src="../images/enVente.JPG" title="Plac&eacute; sur la liste des transferts"><?php }?>
+                <a href ="../joueurs/fiche.php?id=<?=$lstJoueur[$j]["idJoueur"]?>"> 
+                      <b> 
+                      <?=$lstJoueur[$j]["prenomJoueur"]?> <?php if (isset($lstJoueur[$j]["surnomJoueur"])) echo '"'.$lstJoueur[$j]["surnomJoueur"].'" '; ?><?=$lstJoueur[$j]["nomJoueur"]?>
+                      </b> 
+                      </a> 
+            </td>
+			<td>
             <?php if (existAutorisationClub($lstJoueur[$j]["idClubHT"],null)==false) {?>
               <img height="12" src="../images/non_autorise.JPG" title="Ce club n'a pas autoris&eacute; la DTN &agrave; acc&eacute;der &agrave; ses donn&eacute;es">
             <?php } else {?>
               <img height="12" src="../images/Autorise.PNG" title="Ce club a autoris&eacute; la DTN &agrave; acc&eacute;der &agrave; ses donn&eacute;es">
-            <?php if ($transferListed==1) {?><img height="12" src="../images/enVente.JPG" title="Plac&eacute; sur la liste des transferts"><?php }?>
             <?php }
 				if (isset($lstJoueur[$j]["idClubHT"])) {
 			?>
-            &nbsp;<a href ="../clubs/fiche_club.php?idClubHT=<?=$lstJoueur[$j]["idClubHT"]?>">(<?php echo($lstJoueur[$j]["idClubHT"]);?>)&nbsp;<?php echo($lstJoueur[$j]["nomClub"]);?></a>
+            &nbsp;<a href ="../clubs/fiche_club.php?idClubHT=<?=$lstJoueur[$j]["idClubHT"]?>"><?php echo($lstJoueur[$j]["nomClub"]);?></a>
 			<?php
 				} else { 
 					echo($lstJoueur[$j]["nomClub"]);
 				}
 			?>
             </td>
+            <td><CENTER> <?=($lstJoueur[$j]["dateDerniereModifJoueur"])?></CENTER></td>
             <td width="20"> <div align="center"><?=$htms["value"]?></div></td>
             <td width="20"> <div align="center"><?=$htms["potential"]?></div></td>
+            <td><?=$lstJoueur[$j]["ageJoueur"]." - ".$lstJoueur[$j]["jourJoueur"]?></td>
             <td width="20"> <div align="center"><?=$libelle_type_entrainement?></div></td>
             <td width="20"> <div align="center"><?=$intensite?></div></td>
             <td width="20"> <div align="center"><?=$endurance?></div></td>
@@ -199,15 +231,6 @@ $_SESSION['ListeFicheResume']=$lstJoueur;
             <td width="20"> <div align="center"><?=$adjoints?></div></td>
             <td width="20"> <div align="center"><?=$medecin?></div></td>
             <td width="20"> <div align="center"><?=$physio?></div></td>
-            <td>&nbsp;(<?php echo($lstJoueur[$j]["idHattrickJoueur"]);?>)&nbsp;<?php echo ($lstJoueur[$j]["prenomJoueur"]." ".$lstJoueur[$j]["nomJoueur"]);?><?php if (isset($l["surnomJoueur"])) echo " (".$l["surnomJoueur"].")"; ?>
-                &nbsp;<img src="../images/time_<?=$img_nb?>.gif" onmouseover="return escape('<?=$zealt?>')" ></td>
-            <td><?=$lstJoueur[$j]["ageJoueur"]." - ".$lstJoueur[$j]["jourJoueur"]?></td>
-            <td><CENTER> <?=($lstJoueur[$j]["dateDerniereModifJoueur"])?></CENTER></td>
-            <td><CENTER>
-                <!-- Correction href par musta56 le 30/07/2009 pour bug http://www.ht-fff.org/bug/view.php?id=95-->
-                <a href ="../joueurs/fiche.php?id=<?=$lstJoueur[$j]["idJoueur"]?>">Voir </a>
-                </CENTER>
-            </td>
           </tr>
 			      
           <?php 
