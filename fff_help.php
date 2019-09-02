@@ -35,7 +35,7 @@ Wenn du an diesem Projekt teilnehmen möchtest, melden Sie sich direkt im Hattri
 	$lien = "[U20|A] Recherche Entraineurs Internationaux (Thema im Forum Frankreich)";
 	break;
 	case "it" :
-		$phrase1 = "L'obiettivo del progetto &egrave; molto semplice: <strong>trovare acquirenti per i migliori potenziali giocatori e giocatori delle selezioni nazionali francesi </strong>
+	$phrase1 = "L'obiettivo del progetto &egrave; molto semplice: <strong>trovare acquirenti per i migliori potenziali giocatori e giocatori delle selezioni nazionali francesi </strong>
 	la cui vendita avverr&agrave; in un momento o nell'altro. Se sei interessato ad allenare un giocatore francese e 
 	ad aiutarlo a raggiungere una delle nostre squadre nazionali, sei qui a casa.";
 	$phrase2 = "Come puoi immaginare, abbiamo alcuni requisiti di base, come il livello dell'allenatore (mini buono, eccellente essendo il top)  
@@ -44,13 +44,22 @@ Se ritieni che questo progetto sia adatto a te, registrati direttamente tramite 
 	$lien = "[U20|A] Recherche Entraineurs Internationaux (thread sul foro nazionale della Francia)";
 	break;
 	case "es" :
-		$phrase1 = "El objetivo del proyecto es muy simple: <strong>encontrar compradores para los mejores potenciales y tambi&eacute;n los jugadores de las selecciones nacionales francesas</strong>
+	$phrase1 = "El objetivo del proyecto es muy simple: <strong>encontrar compradores para los mejores potenciales y tambi&eacute;n los jugadores de las selecciones nacionales francesas</strong>
 	que se encontraran en venta en alg&uacute;n momento futuro. Si est&aacute;s interesado en entrenar un jugador franc&eacute;s 
 	e manera que le ayude a llegar a unos de nuestros equipos nacionales, te sentir&aacute;s como en casa.";
 	$phrase2 = "Como podr&aacute;s imaginar, tenemos exigencias principales, como el nivel del entrenador (bueno m&iacute;nimo) y 
 el n&uactute;mero de entrenadores asistentes, pero el fundamento el m&aacute;s importante es tu voluntad de ayudar HT-Francia.
 Si te parece que coincides con este proyecto, regístrate directamente en el foro Hattrick haciendo clic en el siguiente enlace:";
 	$lien = "[U20|A] Recherche Entraineurs Internationaux (hilo en el foro Francia)";
+	break;
+	case "sv" :
+	$phrase1 = "M&aring;let med detta projekt &auml;r enkelt: <strong>att hitta l&auml;mpliga ägare till spelarna med h&ouml;gst potential samt till dagens franska landslagsspelare</strong>
+	i de fall de s&auml;ljs. Om du är intresserad av att tr&auml;na en fransk spelare 
+	mot n&aring;got av landslagen, k&auml;nn dig som hemma.";
+	$phrase2 = "Som du s&auml;kert kan ana har vi mycket h&ouml;ga krav, s&aring;som niv&aring; p&aring; tr&auml;nare (enast&aring;ende &auml;r minimum, fenomenal &auml;r b&auml;ttre) och 
+en perfekt stab, men det viktigaste &auml;r viljan att hj&auml;lpa HT-Frankrike.
+Om k&auml;nner att det h&auml;r projektet passar dig kan du anm&auml;la dig direkt i Hattrick via den h&auml;r l&auml;nken:";
+	$lien = "[U20|A] Recherche Entraineurs Internationaux (tr&aring;d p&aring; franska Hattrick-forumet)";
 	break;
 	default :
 		$phrase1 = "The goal of this project is very simple : <strong>find owners for the best potential players and the current players of French national teams</strong>,

@@ -3,15 +3,14 @@
 		<td rowspan="5" width="30" height="5">&nbsp;</td>
 		<td class="style40">
 			<div align="justify"><br/>
+Här &auml;r de "ber&ouml;mda" medlemmarna av DTN... 
+De arbetar plikttroget borta fr&ouml;n rampljuset med att jaga potentiella franska landslagsspelare över hela HT-planeten.  
+<strong>Denna offentliga lista har &ouml;nskats av flera utl&auml;ndska managers</strong> som oroade sig f&ouml;r att de fått fr&aring;gor fr&aring;n personer l&aring;tsades 
+tillh&ouml;ra DTN. Detta var en sj&auml;lvklarhet, s&auml;rskilt som n&aring;gra av v&aring;ra medlemmar inte kommer fr&aring;n franska ligan. <br/><br/>
 
-Ecco i membri "famosi" della DTN, il sistema di scouting francese ... 
-Sono responsabili, lontano dai riflettori, per la caccia a potenziali internazionali francesi intorno alla HT-Planet. 
-<strong>Questa lista pubblica &egrave; stata richiesta da molti manager stranieri</strong> che erano preoccupati di ricevere richieste da persone che fingevano far parte della DTN. 
-Questo &egrave; stato un gioco da ragazzi, soprattutto perch&eacute; abbiamo anche alcuni membri di altri campionati.. <br/><br/>
-
-<strong>Vorremmo cogliere l'occasione per ringraziare tutte quelle persone che stanno dedicando un po' del loro tempo alla HT-Francia. </strong>
+<strong>Vi vill passa p&aring; att tacka alla dem som ger sin tid till HT-Frankrike. </strong>
 <br/><br/>
-<strong>Di seguito troverai la lista degli capi-scout per le squadre U-20 e NT: </strong>
+<strong>Nedan kan du hitta listan p&aring; huvudscouterna för U20 och seniorlandslaget: </strong>
 <br/><br/>
 			</div>
 		</td>

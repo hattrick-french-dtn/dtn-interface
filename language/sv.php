@@ -1,61 +1,61 @@
 <?php
 
-define("PROPOSER",'It happens that some players slip by unnoticed. <br>
-Using the form on this page, you can submit your players to be added or updated in the database.
+define("PROPOSER",'Det h&auml;nder att talangfulla spelare missas.
+Om du anv&auml;nder formuläret h&auml;r p&aring; sidan, kan du l&auml;gga till dina spelare i v&aring;r databas.
            
       ');
 
 
-define("PROPOSER_N_MEILLEUR","giocatori hanno una classifica migliore di quella del tuo giocatore");
-define("PROPOSER_1_MEILLEUR","giocatore ha una classifica migliore di quella del tuo giocatore");
-define("PROPOSER_0_MEILLEUR","Il tuo giocatore è il miglior giocatore del nostro database per la sua posizione");
+define("PROPOSER_N_MEILLEUR","spelare har b&auml;ttre ranking &auml;n din");
+define("PROPOSER_1_MEILLEUR","spelare har b&auml;ttre ranking &auml;n din");
+define("PROPOSER_0_MEILLEUR","Din spelare &auml;r den b&auml;sta vi har för sin position och &aring;lder");
 
 
-define("PROPOSER_JOUEUR_DE","giocatore di");
-define("PROPOSER_JOUEURS_DE","giocatori di");
+define("PROPOSER_JOUEUR_DE","spelare som &auml;r");
+define("PROPOSER_JOUEURS_DE","spelare som &auml;r");
 
-define("PROPOSER_N_MEILLEUR_AGE"," anni hanno una classifica migliore di quella del tuo giocatore");
-define("PROPOSER_1_MEILLEUR_AGE"," anni ha una classifica migliore di quella del tuo giocatore");
-define("PROPOSER_0_MEILLEUR_AGE","Il tuo giocatore è il miglior giocatore del nostro database per la sua posizione e la sua età");
+define("PROPOSER_N_MEILLEUR_AGE"," &aring;r gamla har b&auml;ttre ranking &auml;n din");
+define("PROPOSER_1_MEILLEUR_AGE"," &aring;r gammal har b&auml;ttre ranking &auml;n din");
+define("PROPOSER_0_MEILLEUR_AGE","Din spelare &auml;r den b&auml;sta vi har f&ouml;r sin position och &aring;lder");
 
-define("PROPOSER_MISAJOUR"," è stato aggiornato! Grazie per il tuo aiuto");
+define("PROPOSER_MISAJOUR"," &auml;r uppdaterad! Tack för din hj&auml;lp");
 
-define("REPONSE_PASDEJOUEUR","Nessun giocatore è adatto alla squadra nazionale francese.(vedere i requisiti) ." .
-		"In caso di errore, ti preghiamo di contattarci.");
+define("REPONSE_PASDEJOUEUR"," Ingen spelare &auml;r intressant f&ouml;r det franska landslaget (Titta p&aring; kraven) ." .
+		"Om detta &auml;r ett misstag, v&auml;nligen kontakta oss.");
 
-define("REPONSE_PASDEFRANCAIS"," Nessun giocatore francese trovato nella tua squadra." .
-		"In caso di errore, ti preghiamo di contattarci.");
+define("REPONSE_PASDEFRANCAIS"," Ingen fransk spelare hittades i ditt lag." .
+		"Om detta &auml;r ett misstag, v&auml;nligen kontakta oss.");
 
-define("REPONSE_ERREUR_CXION"," Hattrick &egrave; irraggiungibile in questo momento. Per favore prova pi&ugrave; tardi. ");
+define("REPONSE_ERREUR_CXION"," Hattrick kan inte n&aring;s just nu. V&auml;nligen f&ouml;rs&ouml;k igen senare. ");
 
-define("RETENU_PRESENTATION"," Ecco la lista dei preziosi giocatori francesi trovati nella tua squadra:");
+define("RETENU_PRESENTATION"," H&auml;r &auml;r en lista p&aring; intressanta franska spelare i ditt lag:");
 
-define("AJOUT_COMMENTAIRE"," Ora puoi darci qualsiasi informazione relativa al tuo giocatore (i) ed al suo (loro) allenamento.");
+define("AJOUT_COMMENTAIRE"," H&auml;r kan du ge oss mer information om din(a) spelare och hans/deras tr&auml;ning.");
 
-define("EVITER_QUESTIONS","Se fai domande qui, non &egrave; sicuro che ti rispondiamo. Meglio contattare <u><a href=\"dtn_members.php\">uno scout</a></u> via una HT-mail in caso di domanda.");
+define("EVITER_QUESTIONS","Det &auml;r inte s&auml;kert att vi kommer att besvara fr&aring;gor som st&auml;lls h&auml;r. V&auml;nligen kontakta <u><a href=\"dtn_members.php\">ansvariga</a></u> per HT-mail för eventuella fr&aring;gor.");
 
-define("REMERCIEMENT_SUBMIT"," Vorremmo ringraziarti per avere caricato il tuo giocatore. ");
+define("REMERCIEMENT_SUBMIT"," Tack f&ouml;r att du registrerat din spelare. ");
 
-define("MERCI_COMMENT"," Grazie abbiamo ricevuto il tuo messaggio / le tue informazioni. ");
-define("PAS_DE_COMMENT"," Impossibile elaborare il tuo messaggio. <br> Per favore, riprova più tardi o contattaci via una (ht-)mail.");
+define("MERCI_COMMENT"," Tack, ditt meddelande har kommit fram. ");
+define("PAS_DE_COMMENT"," Vi lyckades inte spara ditt meddelande. <br> V&auml;nligen f&ouml;rs&ouml;k igen senare, eller kontakta oss per HT-mail.");
 
 define("HOWTO",'
-        <em>How-to: Basta inserire il tuo login Hattrick, il tuo codice di sicurezza (NON la password che si utilizza per accedere al sito Hattricke).</em></font>
-        <strong><font color="#FF0000" size="2" face="Verdana, Arial, Helvetica, sans-serif">Solo le informazioni del giocatore sono memorizzate nel nostro database</font></strong>
+        <em>How-to: Simply enter your Hattrick login, your security code (NOT the password that you use to login to Hattrick website).</em></font>
+        <strong><font color="#FF0000" size="2" face="Verdana, Arial, Helvetica, sans-serif">Only the player\'s information is stored in our database</font></strong>
 ');
 
 define("HOWTO2",'
-        <em>How-to: Basta inserire il tuo login Hattrick, il tuo codice di sicurezza (NON la password che si utilizza per accedere al sito Hattrick).</em></font>
-        <strong><font color="#FF0000" size="2" face="Verdana, Arial, Helvetica, sans-serif">Solo le informazioni del giocatore sono memorizzate nel nostro database</font></strong>
+        <em>How-to: Simply enter your Hattrick login, your security code (NOT the password that you use to login to Hattrick website).</em></font>
+        <strong><font color="#FF0000" size="2" face="Verdana, Arial, Helvetica, sans-serif">Only the player\'s information is stored in our database</font></strong>
 ');
 
 define("LOGIN","HT Login");
-define("PWD","HT Security Code");
-define("IDJ","Player ID");
-define("SEND","Inviare");
-define("SUIVIMSG"," &egrave; il tuo contatto per ulteriori informazioni sul tuo giocatore.");
+define("PWD","HT l&ouml;senord");
+define("IDJ","Spelar-ID");
+define("SEND","Skicka");
+define("SUIVIMSG"," &auml;r din kontakt f&ouml;r vidare information om din spelare.");
 
-define("CONSULTER",'"Questa applicazione utilizza le informazioni del servizio di giochi online Hattrick.org. Questo uso &egrave; stato approvato dagli sviluppatori e dai proprietari dei diritti d\'autore di Hattrick.org, Extralives AB"<br>&nbsp;<p>Puoi vedere i migliori giocatori e confrontarli con i tuoi sulla pagina dei <a href="C04_dtn.php"> [TOPS]<a/>');
+define("CONSULTER",'"Denna applikation anv&auml;nder information fr&aring;n onlinespelplattformen Hattrick.org. Detta har godk&auml;nts av utvecklarna och &auml;garna av Hattrick.org, Extralives AB"<br>&nbsp;<p>Du kan se de b&auml;sta spelarna och j&auml;mf&ouml;ra dem med dina p&aring; sidan <a href="C04_dtn.php"> [TOPS]<a/>');
 
 define("DTN_HOME",'
 The <font color="#2F4399"><strong>DTN</strong></font> is reborn. This entity is responsible for searching, scouting, and following-up on potential international players. <br>
@@ -145,40 +145,39 @@ define("ENTETE_FORMULAIRE_IIIHELP","Registration Form &iexcl;&iexcl;&iexcl;help!
 
 define("OBJECTIF_AUTORISATION_ACCES_IIIHELP","To register to &iexcl;&iexcl;&iexcl;help!, we need to identify you on Hattrick and to get some information about your team (login, Team name, Coach level...). After this step, you will get to &iexcl;&iexcl;&iexcl;help! registration form.");
 
-define("INTRO_HTFFF","ht-dtnfff.fr &egrave; un sito dedicato alle <b>squadre nazionali francesi</b> di <a href=\"http://www.hattrick.org\" target=\"_NEW\"><u>Hattrick</u></a>.<br>
-          Riunisce le forze che lavorano per portare la HT-Francia e le sue due squadre nazionali ai vertici dell' HT-Mondo.<br>
-          Ed è qui che puoi agire.");
+define("INTRO_HTFFF","ht-dtnfff.fr &auml;r en webbplats f&ouml;r de <b>franska landslagen</b> i <a href=\"http://www.hattrick.org\" target=\"_NEW\"><u>Hattrick</u></a>.<br>
+          H&auml;r samlas krafter för att f&ouml;ra HT-Frankrikes landslag till v&auml;rldstoppen.<br>
+          Och s&aring; h&auml;r kan du hj&auml;lpa till.");
 
-define("INTRO_HTFFF2","Puoi <b>avere un giocatore</b> che pu&ograve; essere <b>interessante</b> per uno degli allenatori delle nostre squadre nazionali.");
+define("INTRO_HTFFF2","Du <b>kanske har en spelare</b> som &auml;r <b>av intesse</b> f&ouml;r n&aring;gon av tr&auml;narna i v&aring;ra landslag.");
 
-define("OBJECTIF_AUTORISATION_ACCES","Qui hai la possibilit&agrave; di <b>caricare i tuoi giocatori francesi</b>, per aggiungerli nel database dei giocatori francesi.");
+define("OBJECTIF_AUTORISATION_ACCES","H&auml;r kan du <b>l&auml;gga till dina spelare</b>, till v&aring;r databas.");
           
-define("EXPLICATION_AUTORISATION_ACCES","
-Con l'aiuto del link sottostante, ci autorizzi ad aggiornare regolarmente i tuoi giocatori e la tua squadra nel nostro database. Puoi revocare questa autorizzazione in qualsiasi momento in Hattrick nel menu &quot;Prodotti CHPP &quot;.");
+define("EXPLICATION_AUTORISATION_ACCES","N&auml;r du klickar p&aring; länken nedan till&aring;ter du oss att regelbundet uppdatera dina spelare i v&aring;r databas. Du kan &aring;ngra detta n&auml;r du vill inne i Hattrick i menyn &quot;CHPP-produkter &quot;.");
 
-define("PRISE_CONTACT","Se viene prelevato, uno scout ti contatter&agrave;.");
+define("PRISE_CONTACT","Om en spelare &auml;r av intresse kommer n&aring;gon av v&aring;ra scouter att kontakta dig.");
 
-define("TEXTE_BOUTON_AUTORISATION","Autorizzare la ricerca nella mia squadra");
+define("TEXTE_BOUTON_AUTORISATION","Auktorisera skanning av mitt lag");
 
-define("SESS_ACTIVE","Mantenire attiva la mia sessione");
+define("SESS_ACTIVE","H&aring;ll mig inloggad");
 
-define("EXPLICATION_SESS_ACTIVE","Spuntando questa casella, le informazioni riguardanti la tua squadra Hattrick appariranno automaticamente alla tua prossima visita (se non elimini i cookie). Pertanto, non sar&agrave; necessario accedere a Hattrick. Sconsigliato se si accede da un computer pubblico.");
+define("EXPLICATION_SESS_ACTIVE"," Om du klickar i den h&auml;r rutan kommer informationen g&auml;llande ditt Hattrick-lag automatiskt att visas vid ditt nästa besök (om du inte raderat dina cookies). Alltså kommer du inte att beh&ouml;va logga in på Hattrick. Detta rekommenderas inte om andra &auml;n du har tillg&aring;ng till datorn.");
 
-define("MESSAGE_BIENVENUE","Benvenuto!");
+define("MESSAGE_BIENVENUE","V&auml;lkommen!");
 
-define("NON_CONNECTE","Non ancora collegato");
+define("NON_CONNECTE","Inte inloggad");
 
-define("INFOBULLE_NON_CONNECTE","Devi autorizzare la ricerca automatica nella tua squadra in Hattrick per vedere le informazioni riguardanti i tuoi giocatori francesi.");
+define("INFOBULLE_NON_CONNECTE","Du m&aring;ste godk&auml;nna skanningen av ditt Hattricklag för att kunna se information g&auml;llande dina franska spelare.");
 
-define("CONNECTE","Collegato : ");
+define("CONNECTE","Inloggad : ");
 
-define("DECONNECTER","Scollegato");
+define("DECONNECTER","Logga ut");
 
 //define("MAIL","By email");
 
-define("FORUM","Sul nostro foro");
+define("FORUM","P&aring; v&aring;rt forum");
 
-define("HT_MAIL","Via una HT-Mail : Lista degli scout francesi");
+define("HT_MAIL","Via HT-Mail: Lista &ouml;ver franska scouter");
 
-define("CONF_HT","Sul foro HT del nostro sistema di scouting &quot; https://www.ht-dtnfff.fr/ &quot;");
+define("CONF_HT","P&aring; HT-forumet för DTN &quot; https://www.ht-dtnfff.fr/ &quot;");
 ?>
