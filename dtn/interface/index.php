@@ -41,14 +41,15 @@ if (isset($_POST['nomForm']) && $_POST['nomForm']=='formConnexion') {
   //Envoyer mail et afficher message succès
   if (!$erreurForm) {
 
-    $sql = "SELECT 
+$sql = "SELECT 
                   $tbl_admin.*,
                   $tbl_niveauAcces.*
             FROM  $tbl_admin, 
                   $tbl_niveauAcces
             WHERE $tbl_admin.loginAdmin = '".$_POST['login']."' 
             AND   $tbl_admin.passAdmin = '".sha1($_POST['password'])."' 
-            AND   $tbl_admin.idNiveauAcces_fk = $tbl_niveauAcces.idNiveauAcces";
+            AND   $tbl_admin.idNiveauAcces_fk = $tbl_niveauAcces.idNiveauAcces
+			AND   affAdmin=1";
     
     $req  = $conn->query($sql);
 
