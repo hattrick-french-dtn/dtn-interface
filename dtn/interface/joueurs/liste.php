@@ -305,7 +305,7 @@ break;
 			
             // Entraînement du joueur
             $libelle_type_entrainement="-";
-            $sql2 = "select * from $tbl_clubs_histo A left join $tbl_type_entrainement2 on idEntrainement = id_type_entrainement where idClubHT = ".$l["teamid"]." order by date_histo desc";
+            $sql2 = "select * from $tbl_clubs_histo A left join $tbl_type_entrainement2 on idEntrainement = id_type_entrainement where idClubHT = ".$l["teamid"]." order by date_histo desc limit 1";
             $req2 = $conn->query($sql2);
             $ligne2 = $req2->fetch(PDO::FETCH_ASSOC);
             if (is_array($ligne2))

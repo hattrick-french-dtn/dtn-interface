@@ -341,14 +341,14 @@ foreach ($conn->query($sql) as $l) {
     $physio="-";
     $libelle_type_entrainement="-";
   
-	$sql2 = "select * from $tbl_clubs_histo A left join $tbl_type_entrainement2 on idEntrainement = id_type_entrainement where idClubHT = ".$l["teamid"]." order by date_histo desc";
+	$sql2 = "select * from $tbl_clubs_histo A left join $tbl_type_entrainement2 on idEntrainement = id_type_entrainement where idClubHT = ".$l["teamid"]." order by date_histo desc limit 1";
 	//error_log($sql2);
 	$req2 = $conn->query($sql2);
 	$ligne = $req2->fetch(PDO::FETCH_ASSOC);
 	if (is_array($ligne))
 		extract($ligne);
 
-	$sql3 = "select * from $tbl_clubs where idClubHT = ".$l["teamid"];
+	$sql3 = "select nomClub, niv_Entraineur from $tbl_clubs where idClubHT = ".$l["teamid"];
 	$req3 = $conn->query($sql3);
 	$ligne3 = $req3->fetch(PDO::FETCH_ASSOC);
 	extract($ligne3);
