@@ -73,7 +73,7 @@ $lstPos = listPositionResume();
 <script type='text/javascript'>
 function verifta()
   {
-  if(document.forms.form1.listID.value!="")
+  if(document.forms.form1.listID.value!="") || (document.forms.form2.listID.value!="") || (document.forms.form3.listID.value!="")
     {
     return true;
     }
