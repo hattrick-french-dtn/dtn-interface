@@ -227,6 +227,7 @@ if (isset($_SESSION["HT"]) && isset($_REQUEST['listID']) ) {
                           $commentaireJ="est en-dessous des minimas mais intégré dans la base DTN";
                           $lien="<u><a href='fiche.php?htid=$arrayID[$i]' color='#0000FF' target='_NEW'>Voir</a></u>";
                           $rejet=0;
+		          $poste[$i]=0;
                         }
                         else{
                           $commentaireJ="Ins&eacute;r&eacute; dans la base DTN !!";
