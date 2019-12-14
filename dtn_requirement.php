@@ -35,6 +35,12 @@ switch($_SESSION['lang']) {
 	$phraseMinima2 = "Funcionan con base en las habilidades y potenciales de tus jugadores.";
 	$phraseMinima3 = "Si tienes alguna duda, no dudes en contactar la DTN del sector du jugador para obtener m&aacute;s información (Contacto / Miembros).";
 	break;
+	case "nl" :
+	$titre = "https://www.ht-dtnfff.fr/| DTN| U20&amp;A | Vereisten.";
+	$phraseMinima1 = "De vereisten worden periodiek bijgesteld door de hoofdscouts.";
+	$phraseMinima2 = "Ze zijn gebaseerd op HTMS-waarden en potentiëlen van de spelers.";
+	$phraseMinima3 = "Als je twijfels hebt, neem dan gerust contact op met de scout voor de linie van jouw speler om meer te horen over hoe je speler ervoor staat ten opzichte van onze vereisten (zie het menu Contact / Leden).";
+	break;
 	case "sv" :
 	$titre = "https://www.ht-dtnfff.fr/| DTN| U20&amp;A | krav.";
 	$phraseMinima1 = "Kraven uppdateras av och till av huvudscouterna.";

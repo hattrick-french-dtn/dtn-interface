@@ -52,6 +52,15 @@ el n&uactute;mero de entrenadores asistentes, pero el fundamento el m&aacute;s i
 Si te parece que coincides con este proyecto, regístrate directamente en el foro Hattrick haciendo clic en el siguiente enlace:";
 	$lien = "[U20|A] Recherche Entraineurs Internationaux (hilo en el foro Francia)";
 	break;
+	case "nl" :
+	$phrase1 = "Het doel van dit project is heel eenvoudig: nieuwe eigenaren vinden voor de beste potentiële en huidige spelers van de Franse nationale teams,</strong>
+	wanneer ze verkocht worden. Als je een Franse speler zou willen trainen om hem 
+	in een van onze nationale teams te krijgen, doe hier dan je voordeel mee.";
+	$phrase2 = "Je kunt je voorstellen dat we heel hoge eisen stellen, zoals aan het niveau van je trainer (goed is een absoluut minimum, uitstekend is beter) 
+en je personeel. Maar het belangrijkst is je bereidheid om HT-Frankrijk te helpen.
+Als je denkt dat dit project iets voor jou is, dan kun je je rechtstreeks op Hattrick opgeven via de volgende link:";
+	$lien = "[U20|A] Recherche Entraineurs Internationaux (thread on France national forum)";
+	break;
 	case "sv" :
 	$phrase1 = "M&aring;let med detta projekt &auml;r enkelt: <strong>att hitta l&auml;mpliga ägare till spelarna med h&ouml;gst potential samt till dagens franska landslagsspelare</strong>
 	i de fall de s&auml;ljs. Om du är intresserad av att tr&auml;na en fransk spelare 

@@ -100,6 +100,8 @@
   <tr><td width="30" height="6"><img src="img/lang_06_spacer.gif" width="30" height="6" /></td></tr>
   <tr><td width="30" height="25"><a href="setlang.php?language=it<?=$redir?>"><img src="img/lang_10_it.gif" alt="it" title="it" width="30" height="25" border="0" /></a></td></tr>
   <tr><td width="30" height="6"><img src="img/lang_06_spacer.gif" width="30" height="6" /></td></tr>
+  <tr><td width="30" height="25"><a href="setlang.php?language=nl<?=$redir?>"><img src="img/lang_08_nl.gif" alt="nl" title="it" width="30" height="25" border="0" /></a></td></tr>
+  <tr><td width="30" height="6"><img src="img/lang_06_spacer.gif" width="30" height="6" /></td></tr>
   <tr><td width="30" height="25"><a href="setlang.php?language=sv<?=$redir?>"><img src="img/lang_05_sw.gif" alt="sv" title="sv" width="30" height="25" border="0" /></a></td></tr>
   <tr><td width="30" height="6"><img src="img/lang_06_spacer.gif" width="30" height="6" /></td></tr>
   <!-- <tr><td width="30" height="25"><a href="setlang.php?language=zh<?=$redir?>"><img src="img/lang_08_ch.gif" alt="zh" title="zh" width="30" height="25" border="0" /></a></td></tr> -->

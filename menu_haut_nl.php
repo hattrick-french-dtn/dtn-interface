@@ -27,48 +27,49 @@
   MENU FFF | DTN ...
   ************************************************************************************************************************
   -->
-    
     <!--<table width="100%" border="0" cellpadding="0" cellspacing="0" style="background-image:url(img/sous-menu_cadre_bg.gif)">
       <tr>
         <td width="40" align="left"><img src="img/sous-menu_cadre_left.gif" width="10" height="40" /></td>
         <td width="16%" align="center" valign="middle" class="style11"><a href="index.php"><span style="color:#000000">[<span class="style12">HOME</span>]</font></span></a></td>
-        <td width="16%" align="center" valign="middle" class="style12"><script type="text/javascript">SPop('layer0','<span class="style31">FFF| <\/span><span style="color:#000000">training <\/span>','Status','mouse','fff_index.php');</script></td>
-        <td width="16%" align="center" valign="middle" class="style12"><script type="text/javascript">SPop('layer1','<span class="style17">DTN| <\/span><span style="color:#000000">scouting <\/span>','Status','mouse','dtn_index.php');</script></td>
+        <td width="16%" align="center" valign="middle" class="style12"><script type="text/javascript">SPop('layer0','<span class="style31">FFF| <\/span><span style="color:#000000">former <\/span>','Status','mouse','fff_index.php');</script></td>
+        <td width="16%" align="center" valign="middle" class="style12"><script type="text/javascript">SPop('layer1','<span class="style17">DTN| <\/span><span style="color:#000000">suivre <\/span>','Status','mouse','dtn_index.php');</script></td>
         <td width="16%" align="center" valign="middle" class="style11"><a href="http://www.htfff.free.fr/dtn/forum" target="_blank"><span style="color:#000000">[<span class="style12">FORUM</span>]</span></a></td>
         <td width="16%" align="center" valign="middle" class="style11"><a href="mailto:dtn@ht-fff.org"><span class="style36">[<span class="style12">CONTACT</span>]</span></a></div></td>
-        <td width="16%" align="center" valign="middle" class="style11"><a href="links.php" class="style11"><span style="color:#000000">[<span class="style12">LINKS</span>]</span></a></td>
+        <td width="16%" align="center" valign="middle" class="style11"><a href="links.php" class="style11"><span style="color:#000000">[<span class="style12">LIENS</span>]</span></a></td>
         <td width="40" align="right"><img src="img/sous-menu_cadre_right.gif" width="10" height="40" /></td>
       </tr>
     </table>-->
-    
+
     <div id="menu">
     <ul>
-      <li<?php if ($nomFicPhpCourant[0]=="/index.php") {?> class="active"<?php }?>><a href="index.php" class="info"> Caricamento <span>Caricare la tua squadra per vedere se hai un giocatore francese interessante</span></a></li>
-      <li<?php if ($nomFicPhpCourant[0]=="/dtn_u20age.php") {?> class="active"<?php }?>><a href="dtn_u20age.php" class="info"> U20|Max Et&agrave;<span>Calcolare l'ultima partita del tuo giocatore per la squadra U20</span></a></li>
-      <li<?php if ($nomFicPhpCourant[0]=="/dtn_requirement.php") {?> class="active"<?php }?>><a href="dtn_requirement.php" class="info"> Requisiti <span>Requisiti per entrare nel database dei giocatori francesi </span></a></li>
-      <li<?php if ($nomFicPhpCourant[0]=="/fff_help.php") {?> class="active"<?php }?>><a href="fff_help.php" class="info"> Allenatori per papabili <span>Ricevere via una HT-mail un giocatore francese interessante visto sul mercato dei trasferimenti</span></a></li>
-      <li<?php if ($nomFicPhpCourant[0]=="/contact.php" || $nomFicPhpCourant[0]=="/dtn_members.php" || $nomFicPhpCourant[0]=="/fff_federation.php") {?> class="active"<?php }?>><a href="contact.php" class="sous_menu"> Contattaci </a>
+      <li<?php if ($nomFicPhpCourant[0]=="/index.php") {?> class="active"<?php }?>><a href="index.php" class="info"> Aanmelden <span>Meld je team aan om interessante Franse spelers te laten volgen</span></a></li>
+      <li<?php if ($nomFicPhpCourant[0]=="/dtn_u20age.php") {?> class="active"<?php }?>><a href="dtn_u20age.php" class="info"> U20|Maximumleeftijd <span>Bereken de laatste wedstrijd die je speler voor de U20 kan spelen</span></a></li>
+      <li<?php if ($nomFicPhpCourant[0]=="/dtn_requirement.php") {?> class="active"<?php }?>><a href="dtn_requirement.php" class="info"> Vereisten <span>Vereisten om gevolgd te worden in de Franse database</span></a></li>
+      <li<?php if ($nomFicPhpCourant[0]=="/fff_help.php") {?> class="active"<?php }?>><a href="fff_help.php" class="info"> Trainers gevraagd <span>Ontvang per HT-mail bericht over interessante Franse spelers op de transfermarkt</span></a></li>
+      <li<?php if ($nomFicPhpCourant[0]=="/contact.php" || $nomFicPhpCourant[0]=="/dtn_members.php" || $nomFicPhpCourant[0]=="/fff_federation.php") {?> class="active"<?php }?>><a href="contact.php" class="sous_menu"> Contact </a>
         <ul>
-          <li><a href="http://www.htfff.free.fr/dtn/forum"> Foro </a></li>
-          <li><a href="dtn_members.php" class="info"> Membri <span>Lista degli scout</span></a></li>
-          <li><a href="fff_federation.php"> Sistema di scouting </a></li>
+          <li><a href="http://www.htfff.free.fr/dtn/forum"> Forum </a></li>
+          <li><a href="dtn_members.php" class="info"> Leden <span>Lijst van DTN-leden</span></a></li>
+          <li><a href="fff_federation.php"> Scoutingapparaat </a></li>
         </ul>
       </li>
-     </ul>
+    </ul>
     </div>
+
+
     <?php
-/*
+/*    
   if (isset($_SESSION['menutype'])){
   	if ($_SESSION['menutype']=="fff"){
-  		include("menu_fff_".$_SESSION['lang'].".php");
+  		include("menu_fff.php");
   	}else{
-    		include("menu_dtn_".$_SESSION['lang'].".php");
+    		include("menu_dtn.php");
     }
   }*/
   ?>
 	
 <!-- TABLEAU POUR SEPARER LE MENU LANGUE DU CONTENU ET DU MENU DU BAS -->
-<table border="0" cellpadding="0" cellspacing="0">
+<table border="0" cellpadding="0" cellspacing="0" align="left">
 	<tr>
 	  
   <!--   
@@ -76,7 +77,7 @@
   MENU LANGUE
   ************************************************************************************************************************
   -->
-    <?php
+  <?php
   $redir="";
   if (isset($urlsource)){
   	$redir="&urlsource=".$urlsource;
