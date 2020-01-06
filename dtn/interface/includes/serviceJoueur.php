@@ -1358,6 +1358,15 @@ function getDataUnJoueurFromHT_usingPHT($idJoueurHT){
     $row_joueur['AGEDAYS']          = $player->getDays();
     $row_joueur['NATIVELEAGUENAME'] = $player->getNativeLeagueName();
 
+// pas de manager humain
+	$clubHT=getDataClubFromHT_usingPHT($joueurHT['teamid'],$idUserHT);
+	//$row_club["idUserHT"] = $row_joueur['teamid']->getUserId();
+	echo("passe");
+	if ($row_club["idUserHT"] == "0" || ($row_club["idClubHT"]===null) || ($row_joueur['teamid']->isBot()==true)) {
+		marqueJoueurDisparuHT(getJoueurHt($idJoueurHT));
+		echo("archive");
+	}
+
     // Libération de la mémoire
     unset($ht_session);
     unset($player);
@@ -3113,6 +3122,8 @@ function scanListeJoueurs($listeIDJoueur,$utilisateur,$role,$faireMAJ=true,$char
       
 		} elseif ($faireMAJ==true) {
 			$joueurHT=getDataUnJoueurFromHT_usingPHT($IDJoueur);
+			// récupération des données du club sur HT
+			$clubHT=getDataClubFromHT_usingPHT($idClubHT,$idUserHT);
 			if ($joueurHT != false) {
 				if ($joueurHT['caracVisible']==true) {
 					$poste=validateMinimaPlayer($joueurHT,$todaySeason); // Est-ce que le joueur vérifie les minimas ?
