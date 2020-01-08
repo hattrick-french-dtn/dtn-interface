@@ -1361,11 +1361,10 @@ function getDataUnJoueurFromHT_usingPHT($idJoueurHT){
 // pas de manager humain
 	$clubHT=getDataClubFromHT_usingPHT($joueurHT['teamid'],$idUserHT);
 	//$row_club["idUserHT"] = $row_joueur['teamid']->getUserId();
-	echo("passe");
+	
 	if ($nombre_caps > 3) {
 		if ($row_club["idUserHT"] == "0" || ($row_club["idClubHT"]===null) || ($row_joueur['teamid']->isBot()==true)) {
 			marqueJoueurDisparuHT(getJoueurHt($idJoueurHT));
-			echo("archive");
 		}
 	}
 
