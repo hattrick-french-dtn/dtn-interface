@@ -93,6 +93,21 @@ switch($_SESSION['lang']) {
   $motJoueur="Giocatori";
   $phraseIntro="I giocatori devono avere meno di 21 anni per giocare in U20 quindi 20 anni e 111 giorni il giorno della partita.";
 	break;
+	case "nl" :
+  $motSaison="Seizoen";
+  $motSemaine="Week";
+  $motDate="Datum";
+  $motJournee="Wedstrijddag";
+  $motAgeMaxi="Maximumleeftijd vandaag";
+  $motTour="Ronde";
+  $motanset="jaar en";
+  $motjours="dagen";
+  $motDemi="Halve finale";
+  $motFinale="Finale";
+  $parfait="Ideale leeftijd!";
+  $motJoueur="Spelers";
+  $phraseIntro="Spelers moeten jonger dan 21 jaar zijn om in de U20 te spelen, dat betekent een maximumleeftijd van 20 jaar en 111 dagen op de wedstrijddag.";
+	break;
 	case "sv" :
   $motSaison="S&auml;song";
   $motSemaine="Vecka";

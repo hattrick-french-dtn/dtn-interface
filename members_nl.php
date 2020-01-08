@@ -3,15 +3,14 @@
 		<td rowspan="5" width="30" height="5">&nbsp;</td>
 		<td class="style40">
 			<div align="justify"><br/>
+Dit zijn de onvolprezen leden van de DTN... 
+Zij zijn verantwoordelijk, buiten de schijnwerpers, voor het scouten van potentiële Franse internationals die rondlopen op de HT-planeet. 
+<strong>Deze openbare lijst is op verzoek van vele buitenlandse managers</strong> die berichten kregen van personen 
+die beweerden bij de DTNte horen - prima, ook al omdat we enkele leden uit andere landen hebben. <br/><br/>
 
-Ecco i membri "famosi" della DTN, il sistema di scouting francese ... 
-Sono responsabili, lontano dai riflettori, per la caccia a potenziali internazionali francesi intorno alla HT-Planet. 
-<strong>Questa lista pubblica &egrave; stata richiesta da molti manager stranieri</strong> che erano preoccupati di ricevere richieste da persone che fingevano far parte della DTN. 
-Questo &egrave; stato un gioco da ragazzi, soprattutto perch&eacute; abbiamo anche alcuni membri di altri campionati.. <br/><br/>
-
-<strong>Vorremmo cogliere l'occasione per ringraziare tutte quelle persone che stanno dedicando un po' del loro tempo alla HT-Francia. </strong>
+<strong>We willen graag van de gelegenheid gebruikmaken om al deze mensen te bedanken die een deel van hun tijd aan HT-Frankrijk geven. </strong>
 <br/><br/>
-<strong>Di seguito troverai la lista degli capi-scout per le squadre U-20 e NT: </strong>
+<strong>Hieronder vind je de lijst met hoofdscouts voor de U20 en het NT: </strong>
 <br/><br/>
 			</div>
 		</td>

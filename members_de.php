@@ -32,7 +32,7 @@ dass die Ansprechpartner auch wirklich der Gruppe angeh&ouml;ren. Die Entscheidu
         <tr>
           <td width="8%"><div align="center">[<strong><a href="https://www.hattrick.org/goto.ashx?path=/Club/Manager/?userId=12562654"><strong>HypnooS</a></strong>]</div></td>
           <td width="8%"><div align="center">[<strong><a href="https://www.hattrick.org/goto.ashx?path=/Club/Manager/?userId=4629925">Imperatrice_Tatane</a></strong>]</div></td>
-          <td width="8%"><div align="center">[<strong><a href="https://www.hattrick.org/goto.ashx?path=/Club/Manager/?userId=6827000">fabinou46</a></strong>]</div></td>
+          <td width="8%"><div align="center">[<strong><a href="https://www.hattrick.org/goto.ashx?path=/Club/Manager/?userId=9084806">walde-marre</a></strong>]</div></td>
           <td width="8%"><div align="center">[<strong><a href="https://www.hattrick.org/goto.ashx?path=/Club/Manager/?userId=11567498">keseru</a></strong>]</div></td>
           <td width="8%"><div align="center">[<strong><a href="https://www.hattrick.org/goto.ashx?path=/Club/Manager/?userId=7514635">LA-alpacstily</a></strong>]</div></td>
         </tr>
@@ -72,6 +72,13 @@ dass die Ansprechpartner auch wirklich der Gruppe angeh&ouml;ren. Die Entscheidu
           <td width="8%"><div align="center"><span class="style40">Flügelspieler</span></strong></span></div></td>
           <td width="8%"><div align="center"><span class="style40">Stürmer</span></strong></span></div></td>
         </tr>
+          <td width="8%"><div align="center"><span class="style40">Keepers</span></strong></span></div></td>
+          <td width="8%"><div align="center"><span class="style40">Verdedigers</span></strong></span></div></td>
+          <td width="8%"><div align="center"><span class="style40">Centrale middenvelders</span></strong></span></div></td>
+          <td width="8%"><div align="center"><span class="style40">Vleugelspelers</span></strong></span></div></td>
+          <td width="8%"><div align="center"><span class="style40">Spitsen</span></strong></span></div></td>
+        </tr>
+        </tr>
           <td width="8%"><div align="center"><span class="style40">M&aring;lvakter</span></strong></span></div></td>
           <td width="8%"><div align="center"><span class="style40">F&ouml;rsvarare</span></strong></span></div></td>
           <td width="8%"><div align="center"><span class="style40">Innermittf&auml;ltare</span></strong></span></div></td>
@@ -107,7 +114,7 @@ dass die Ansprechpartner auch wirklich der Gruppe angeh&ouml;ren. Die Entscheidu
           <td width="8%"><div align="center">[<strong><a href="https://www.hattrick.org/goto.ashx?path=/Club/Manager/?userId=13159462"><strong>JackAbbott</a></strong>]</div></td>
           <td width="8%"><div align="center">[<strong><a href="https://www.hattrick.org/goto.ashx?path=/Club/Manager/?userId=11609436">KCelec</a></strong>]</div></td>
           <td width="8%"><div align="center">[<strong><a href="https://www.hattrick.org/goto.ashx?path=/Club/Manager/?userId=9839467">Eremanth</a></strong>]</div></td>
-          <td width="8%"><div align="center">[<strong><a href="https://www.hattrick.org/goto.ashx?path=/Club/Manager/?userId=5372875">Polatch</a></strong>]</div></td>
+          <td width="8%"><div align="center">[<strong><a href="https://www.hattrick.org/goto.ashx?path=/Club/Manager/?userId=13418869">abrincate</a></strong>]</div></td>
           <td width="8%"><div align="center">[<strong><a href="https://www.hattrick.org/goto.ashx?path=/Club/Manager/?userId=2777249">flam_</a></strong>]</div></td>
           <td width="8%"><div align="center">[<strong><a href="https://www.hattrick.org/goto.ashx?path=/Club/Manager/?userId=13418869">abrincate</a></strong>]</div></td>
         </tr>
@@ -151,6 +158,14 @@ dass die Ansprechpartner auch wirklich der Gruppe angeh&ouml;ren. Die Entscheidu
           <td width="8%"><div align="center"><span class="style40">Flügelspieler</span></strong></span></div></td>
           <td width="8%"><div align="center"><span class="style40">Stürmer</span></strong></span></div></td>
           <td width="8%"><div align="center"><span class="style40">Weitschusse</span></strong></span></div></td>
+        </tr>
+        </tr>
+          <td width="8%"><div align="center"><span class="style40">Keepers</span></strong></span></div></td>
+          <td width="8%"><div align="center"><span class="style40">Verdedigers</span></strong></span></div></td>
+          <td width="8%"><div align="center"><span class="style40">Centrale middenvelders</span></strong></span></div></td>
+          <td width="8%"><div align="center"><span class="style40">Vleugelspelers</span></strong></span></div></td>
+          <td width="8%"><div align="center"><span class="style40">Spitsen</span></strong></span></div></td>
+		  <td width="8%"><div align="center"><span class="style40">Afstandsschoten</span></strong></span></div></td>
         </tr>
           <td width="8%"><div align="center"><span class="style40">M&aring;lvakter</span></strong></span></div></td>
           <td width="8%"><div align="center"><span class="style40">F&ouml;rsvarare</span></strong></span></div></td>
