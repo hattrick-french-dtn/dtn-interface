@@ -26,7 +26,7 @@ function ageetjour($datenaissjoueur,$formatSortie=1)
 	$jouractuel = round((mktime(0,0,0,date("m"),date("d"),date("Y"))-574729200)/3600/24,0);
 	$nbjourjoueur = $jouractuel-$datenaissjoueur;
 	$jourjoueur = $nbjourjoueur % 112;
-	$agejoueur = ($nbjourjoueur-$jourjoueur)/112;
+	$agejoueur = ($nbjourjoueur-$jourjoueur)/112; 
 
 	if ($formatSortie==2) {
 		$resu["ageJoueur"] = $agejoueur;
@@ -1357,6 +1357,16 @@ function getDataUnJoueurFromHT_usingPHT($idJoueurHT){
     $row_joueur['AGE']              = $player->getAge();
     $row_joueur['AGEDAYS']          = $player->getDays();
     $row_joueur['NATIVELEAGUENAME'] = $player->getNativeLeagueName();
+	$nombre_caps= $player->getACaps();
+// pas de manager humain
+	$clubHT=getDataClubFromHT_usingPHT($joueurHT['teamid'],$idUserHT);
+	//$row_club["idUserHT"] = $row_joueur['teamid']->getUserId();
+	
+	if ($nombre_caps > 3) {
+		if ($row_club["idUserHT"] == "0" || ($row_club["idClubHT"]===null) || ($row_joueur['teamid']->isBot()==true)) {
+			marqueJoueurDisparuHT(getJoueurHt($idJoueurHT));
+		}
+	}
 
     // Libération de la mémoire
     unset($ht_session);
@@ -3113,6 +3123,8 @@ function scanListeJoueurs($listeIDJoueur,$utilisateur,$role,$faireMAJ=true,$char
       
 		} elseif ($faireMAJ==true) {
 			$joueurHT=getDataUnJoueurFromHT_usingPHT($IDJoueur);
+			// récupération des données du club sur HT
+			$clubHT=getDataClubFromHT_usingPHT($idClubHT,$idUserHT);
 			if ($joueurHT != false) {
 				if ($joueurHT['caracVisible']==true) {
 					$poste=validateMinimaPlayer($joueurHT,$todaySeason); // Est-ce que le joueur vérifie les minimas ?

@@ -366,7 +366,8 @@ if(isset($msg)) {?>
         </table>
       </tr>
       <!-- fin carac physiques -->
-
+	
+	
       <!-- debut histo -->
       <tr> 
         <td colspan="4">
@@ -753,5 +754,7 @@ $reqHJ = $conn->query($sqlHJ);
   //-->
   </script>
 </table>
+
 </body>
+
 </html>
