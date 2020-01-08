@@ -1357,14 +1357,16 @@ function getDataUnJoueurFromHT_usingPHT($idJoueurHT){
     $row_joueur['AGE']              = $player->getAge();
     $row_joueur['AGEDAYS']          = $player->getDays();
     $row_joueur['NATIVELEAGUENAME'] = $player->getNativeLeagueName();
-
+	$nombre_caps= $player->getACaps();
 // pas de manager humain
 	$clubHT=getDataClubFromHT_usingPHT($joueurHT['teamid'],$idUserHT);
 	//$row_club["idUserHT"] = $row_joueur['teamid']->getUserId();
 	echo("passe");
-	if ($row_club["idUserHT"] == "0" || ($row_club["idClubHT"]===null) || ($row_joueur['teamid']->isBot()==true)) {
-		marqueJoueurDisparuHT(getJoueurHt($idJoueurHT));
-		echo("archive");
+	if ($nombre_caps > 3) {
+		if ($row_club["idUserHT"] == "0" || ($row_club["idClubHT"]===null) || ($row_joueur['teamid']->isBot()==true)) {
+			marqueJoueurDisparuHT(getJoueurHt($idJoueurHT));
+			echo("archive");
+		}
 	}
 
     // Libération de la mémoire
