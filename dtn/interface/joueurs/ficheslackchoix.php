@@ -237,7 +237,7 @@ function scanid()
       c=c+'<?=$infJs[$i]["idDefense"]?>+<?=$infJs[$i]["nbSemaineDefense"]?>';
       if ('<?=$infJs[$i]["entrainement_id"]?>'==4) c=c+'*_';
       c=c+' / ';
-	  if ('<?=$infJs[$i]["entrainement_id"]?>'==5) c='_*';
+	  if ('<?=$infJs[$i]["entrainement_id"]?>'==5) c=c+'_*';
       c=c+'<?=$infJs[$i]["idButeur"]?>+<?=$infJs[$i]["nbSemaineButeur"]?>';
       if ('<?=$infJs[$i]["entrainement_id"]?>'==5) c=c+'*_';
 	  active[3] = true;
@@ -503,7 +503,7 @@ function scanid()
     }
     
     //On ajoute le lien vers le joueur sur HT
-    c=c+' _(https://www.hattrick.org/goto.ashx?path=/Club/Players/Player.aspx?playerId=<?=strtolower($infJs[$i]["idHattrickJoueur"])?>)_';
+    c=c+' (https://www.hattrick.org/goto.ashx?path=/Club/Players/Player.aspx?playerId=<?=strtolower($infJs[$i]["idHattrickJoueur"])?>)';
 
     //On concatÃ¨ne
     totalta=totalta+e+d+a+b+c;
