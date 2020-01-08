@@ -1363,7 +1363,7 @@ function getDataUnJoueurFromHT_usingPHT($idJoueurHT){
 	//$row_club["idUserHT"] = $row_joueur['teamid']->getUserId();
 	
 	if ($nombre_caps > 3) {
-		if ($row_club["idUserHT"] == "0" || ($row_club["idClubHT"]===null) || ($row_joueur['teamid']->isBot()==true)) {
+		if ($idUserHT == "0" || ($row_club["idClubHT"]===null) || ($row_joueur['teamid']->isBot()==true)) {
 			marqueJoueurDisparuHT(getJoueurHt($idJoueurHT));
 		}
 	}
