@@ -26,7 +26,7 @@ function ageetjour($datenaissjoueur,$formatSortie=1)
 	$jouractuel = round((mktime(0,0,0,date("m"),date("d"),date("Y"))-574729200)/3600/24,0);
 	$nbjourjoueur = $jouractuel-$datenaissjoueur;
 	$jourjoueur = $nbjourjoueur % 112;
-	$agejoueur = ($nbjourjoueur-$jourjoueur)/112;
+	$agejoueur = ($nbjourjoueur-$jourjoueur)/112; 
 
 	if ($formatSortie==2) {
 		$resu["ageJoueur"] = $agejoueur;
