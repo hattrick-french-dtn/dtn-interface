@@ -100,28 +100,8 @@ switch ($sens) {
 		$tri = "Tri decroissant";
 		break;
 }
-?>NomJoueur;idHattrick;last maj(jours);age;jours;tsi;salaire;xp;leader;spe;endu;tx endu;intensite;construction;+;ailier;+;buteur;+;gardien;+;passe;+;defenseur;+;coup francs;+;entraineur;entrainement;DTN;id manager;Date de dernière connexion;Pays du club;Nombre adjoints;préparateur physique;Médecin;Joueur en vente;Date du jour;Secteur<?php
+?>NomJoueur;idHattrick;last maj(jours);age;jours;tsi;salaire;xp;leader;spe;endu;tx endu;forme;intensite;construction;+;ailier;+;buteur;+;gardien;+;passe;+;defenseur;+;coup francs;+;entraineur;entrainement;DTN;id manager;Date de dernière connexion;Pays du club;Nombre adjoints;préparateur physique;Médecin;Joueur en vente;Date du jour;<?php
 
-switch ($sesUser["idPosition_fk"]) {
-	case "1" : //gK
-?> gardien;<?php
-		break;
-	case "2" : // cD
-?> cD;cD off;wB;wB off;<?php
-		break;
-	case "3" : // Wg
-?> Wg;Wg towards;Wg off;<?php
-		break;
-	case "4" : //IM 
-?> iM def;iM;iM off;<?php
-		break;
-	case "5" : // Fw
-?> Fw def;Fw;<?php
-		break;
-	default :
-?> gK;cD;iM;Wg off;Fw;<?php
-		break;
-}
 ?>comp HTMS;pot HTMS<?php
 echo "\n";
 
@@ -142,7 +122,7 @@ foreach ($conn->query($sql) as $l) {
 	$date = explode("-",$infJ["dateDerniereModifJoueur"]);
     
     // Extraction tsi et transferListed
-            $sql4= "SELECT tsi,transferListed FROM $tbl_joueurs_histo
+            $sql4= "SELECT tsi,transferListed,forme FROM $tbl_joueurs_histo
                    WHERE id_joueur_fk=".$l["idHattrickJoueur"]." 
                    ORDER BY date_histo DESC LIMIT 1";
             $req4 = $conn->query($sql4);
@@ -200,6 +180,7 @@ foreach ($conn->query($sql) as $l) {
 	echo $specabbrevs[$l["optionJoueur"]].";";
 	echo $l["idEndurance"].";";
     echo $endurance."%;";
+	echo $forme."%;";
 	echo $intensite.";";
 	
 	echo  $l["idConstruction"].";".$infJ["nbSemaineConstruction"].";"; 
@@ -234,33 +215,6 @@ foreach ($conn->query($sql) as $l) {
 	}
 	
 	echo $mkday.";";
-	
-	//if($joueur['ht_posteAssigne']==3) {
-	//	$secteur ="Ailier;";
-	//}
-	switch ($joueur['ht_posteAssigne']) {
-		case "1" : //gK
-			$secteur ="Gardien;";
-			break;
-		case "2" : //Def
-			$secteur ="Défenseur;";
-		break;
-		case "3" : //Ailier
-			$secteur ="Ailier;";
-			break;
-		case "4" : //Milieu
-			$secteur ="Ailier;";
-			break;
-		case "5" : //Buteur
-			$secteur ="Buteur;";
-			break;
-		default :
-			$secteur =";";
-			break;
-	}
-		echo $secteur.";";
-	//echo $joueur['ht_posteAssigne'].";";
-	//	echo $ht_posteAssigne;
 			
 	echo $htms["value"].";".$htms["potential"].";";
 		
