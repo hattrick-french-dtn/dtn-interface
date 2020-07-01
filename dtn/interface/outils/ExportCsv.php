@@ -100,7 +100,7 @@ switch ($sens) {
 		$tri = "Tri decroissant";
 		break;
 }
-?>NomJoueur;idHattrick;Date Maj DTN;Date Maj Proprio;last maj(jours);age;jours;tsi;salaire;xp;leader;spe;endu;tx endu;construction;+;ailier;+;buteur;+;gardien;+;passe;+;defenseur;+;coup francs;+;entraineur;entrainement;DTN;note<?php
+?>NomJoueur;idHattrick;last maj(jours);age;jours;tsi;salaire;xp;leader;spe;endu;tx endu;intensite;construction;+;ailier;+;buteur;+;gardien;+;passe;+;defenseur;+;coup francs;+;entraineur;entrainement;DTN;id manager;Date de dernière connexion;Pays du club;Nombre adjoints;préparateur physique;Médecin;Joueur en vente;Date du jour;Secteur<?php
 
 switch ($sesUser["idPosition_fk"]) {
 	case "1" : //gK
@@ -141,8 +141,8 @@ foreach ($conn->query($sql) as $l) {
 	$infJ = getJoueur($l["idJoueur"]);
 	$date = explode("-",$infJ["dateDerniereModifJoueur"]);
     
-    // Extraction tsi
-            $sql4= "SELECT tsi FROM $tbl_joueurs_histo
+    // Extraction tsi et transferListed
+            $sql4= "SELECT tsi,transferListed FROM $tbl_joueurs_histo
                    WHERE id_joueur_fk=".$l["idHattrickJoueur"]." 
                    ORDER BY date_histo DESC LIMIT 1";
             $req4 = $conn->query($sql4);
@@ -152,15 +152,32 @@ foreach ($conn->query($sql) as $l) {
 
     // Extraction taux d'endurance du joueur
             $endurance="-";
-            $sql2 = "SELECT endurance FROM $tbl_clubs_histo 
+            $sql2 = "SELECT endurance,intensite,adjoints,physio,medecin FROM $tbl_clubs_histo 
                     WHERE idClubHT = ".$l["teamid"]."
                     ORDER BY date_histo DESC LIMIT 1";
             $req2 = $conn->query($sql2);
             $ligne2 = $req2->fetch(PDO::FETCH_ASSOC);
             if (is_array($ligne2))
             extract($ligne2);
-            
-	$mkJoueur =  mktime(0,0,0,$date[1],$date[2],$date[0]); 
+           
+		     // Extraction Id manager,date de dernière connexion et le nom du pays du club
+            $idUserHT="-";
+            $sql5 = "SELECT idUserHT,date_last_connexion,nomPays 
+				FROM 
+					$tbl_pays   P,
+					$tbl_clubs  C
+				WHERE idClubHT = ".$l["teamid"]."
+				AND C.idPays_fk = P.idPays
+				LIMIT 1";
+
+            $req5 = $conn->query($sql5);
+            $ligne5 = $req5->fetch(PDO::FETCH_ASSOC);
+            if (is_array($ligne5))
+            extract($ligne5);
+		
+		  
+		   
+		   $mkJoueur =  mktime(0,0,0,$date[1],$date[2],$date[0]); 
 	$datesaisie = explode("-",$infJ["dateSaisieJoueur"]);
 	$mkSaisieJoueur= mktime(0,0,0,$datesaisie[1],$datesaisie[2],$datesaisie[0]);
 	if ($mkSaisieJoueur>$mkJoueur){
@@ -169,11 +186,10 @@ foreach ($conn->query($sql) as $l) {
 		$datemaj=$mkJoueur;
 	}
 	$htms = htmspoint($l["AgeAn"], $l["AgeJour"], $l["idGardien"], $l["idDefense"], $l["idConstruction"], $l["idAilier"], $l["idPasse"], $l["idButeur"], $l["idPA"]);
-
+	
+	
 ?><?=utf8_decode($l["prenomJoueur"])?> <?=utf8_decode($l["nomJoueur"])?>;<?php
 	echo $l["idHattrickJoueur"].";";
-	echo $l["dateDerniereModifJoueur"].";";
-	echo $l["dateSaisieJoueur"].";";
 	echo round(($mkday - $datemaj)/(60*60*24) ).";";
 	echo $l["AgeAn"].";";
 	echo $l["AgeJour"].";";
@@ -184,7 +200,8 @@ foreach ($conn->query($sql) as $l) {
 	echo $specabbrevs[$l["optionJoueur"]].";";
 	echo $l["idEndurance"].";";
     echo $endurance."%;";
-
+	echo $intensite.";";
+	
 	echo  $l["idConstruction"].";".$infJ["nbSemaineConstruction"].";"; 
 	echo  $l["idAilier"].";".$infJ["nbSemaineAilier"].";";
 	echo  $l["idButeur"].";".$infJ["nbSemaineButeur"].";";
@@ -203,39 +220,50 @@ foreach ($conn->query($sql) as $l) {
 	if ($infJ["dtnSuiviJoueur_fk"] != 0)	{echo utf8_decode($infJ["loginAdminSuiveur"]).";";}
 	else echo ";";
 
-	switch ($sesUser["idPosition_fk"]) {
+	//Idt manager
+	echo $idUserHT.";";
+	echo $date_last_connexion.";";
+	echo $nomPays.";";
+	echo $adjoints.";";
+	echo $physio.";";
+	echo $medecin.";";
+	if($transferListed==1) {
+		echo "En vente;";
+	} else {
+		echo ";";
+	}
+	
+	echo $mkday.";";
+	
+	//if($joueur['ht_posteAssigne']==3) {
+	//	$secteur ="Ailier;";
+	//}
+	switch ($joueur['ht_posteAssigne']) {
 		case "1" : //gK
-			echo $l["scoreGardien"].";";
+			$secteur ="Gardien;";
 			break;
-		case "2" : // cD
-			echo $l["scoreDefense"].";";
-			echo $l["scoreDefCentralOff"].";";
-			echo $l["scoreDefLat"].";";
-			echo $l["scoreDefLatOff"].";";
+		case "2" : //Def
+			$secteur ="Défenseur;";
+		break;
+		case "3" : //Ailier
+			$secteur ="Ailier;";
 			break;
-		case "3" : // Wg
-			echo $l["scoreAilier"].";";
-			echo $l["scoreAilierVersMilieu"].";";
-			echo $l["scoreAilierOff"].";";
+		case "4" : //Milieu
+			$secteur ="Ailier;";
 			break;
-		case "4" : //IM 
-			echo $l["scoreMilieuDef"].";";
-			echo $l["scoreMilieu"].";";
-			echo $l["scoreMilieuOff"].";";
-			break;
-		case "5" : // Fw
-			echo $l["scoreAttaquantDef"].";";
-			echo $l["scoreAttaquant"].";";
+		case "5" : //Buteur
+			$secteur ="Buteur;";
 			break;
 		default :
-			echo $l["scoreGardien"].";";
-			echo $l["scoreDefense"].";";
-			echo $l["scoreMilieu"].";";
-			echo $l["scoreAilierOff"].";";
-			echo $l["scoreAttaquant"].";";
+			$secteur =";";
 			break;
 	}
+		echo $secteur.";";
+	//echo $joueur['ht_posteAssigne'].";";
+	//	echo $ht_posteAssigne;
+			
 	echo $htms["value"].";".$htms["potential"].";";
+		
 	echo "\n";
 }
 
