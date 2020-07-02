@@ -350,7 +350,7 @@ Vous avez recherch&eacute; des joueurs :
 <?php
 if ($ht_posteAssigne!=0){
 	if ($sesUser["idNiveauAcces"]=="2" || $sesUser["idNiveauAcces"]=="1" || $sesUser["idNiveauAcces"]=="4"){
-		$sql=$sql." AND ( ht_posteAssigne=".$ht_posteAssigne ." OR ht_posteAssigne=0 )" ;
+		$sql=$sql." AND ( ht_posteAssigne=".$ht_posteAssigne ." )" ;
 ?>
 <li>Dans la cat&eacute;gorie <b><font color="#CC2233"><?=$lstPos[$ht_posteAssigne-1]["descriptifPosition"]?></font></b> ou joueurs <font color="#CC2233"><b>non assign&eacute;s</b></font> 
 <?php	}else{
