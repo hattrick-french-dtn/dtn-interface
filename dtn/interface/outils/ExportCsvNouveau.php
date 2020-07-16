@@ -177,6 +177,14 @@ foreach ($conn->query($sql) as $l) {
 	echo $l["idExperience_fk"].";";
 	echo $l["idLeader_fk"].";";
 	echo $specabbrevs[$l["optionJoueur"]].";";
+	
+	if ($l['isScannable']==0) { //Si on ne possède pas le scan du joueur
+        $l["idEndurance"]="??";
+		$endurance="??";
+		$forme="??";
+		$intensite="??";
+    }
+	
 	echo $l["idEndurance"].";";
     echo $endurance."%;";
 	echo $forme.";";
