@@ -350,7 +350,7 @@ Vous avez recherch&eacute; des joueurs :
 <?php
 if ($ht_posteAssigne!=0){
 	if ($sesUser["idNiveauAcces"]=="2" || $sesUser["idNiveauAcces"]=="1" || $sesUser["idNiveauAcces"]=="4"){
-		$sql=$sql." AND ( ht_posteAssigne=".$ht_posteAssigne ." OR ht_posteAssigne=0 )" ;
+		$sql=$sql." AND ( ht_posteAssigne=".$ht_posteAssigne ." )" ;
 ?>
 <li>Dans la cat&eacute;gorie <b><font color="#CC2233"><?=$lstPos[$ht_posteAssigne-1]["descriptifPosition"]?></font></b> ou joueurs <font color="#CC2233"><b>non assign&eacute;s</b></font> 
 <?php	}else{
@@ -627,7 +627,7 @@ if(count($lstJ)==0) {
             <tr> 
               <td valign="middle">Export Excel :&nbsp;</td>
               <td valign="middle"><a href="../outils/ExportCsv.php?typeExport=<?=$typeExport?>&laSelection=<?=$laSelection?>&ordre=<?=$ordreDeTri?>"><img border=1 src="../images/icone-excel.jpg" title="Exporter le r&eacute;sultat de ma recherche sur Excel"></a></td>
-              
+              <td valign="middle"><a href="../outils/ExportCsvNouveau.php?typeExport=<?=$typeExport?>&laSelection=<?=$laSelection?>&ordre=<?=$ordreDeTri?>"><img border=1 src="../images/icone-excel.jpg" title="Nouvel Export Excel"></a></td>
               <!-- Rajout export vers fiches résumé -->
               <!-- Fireproofed le 05/11/2010 -->
               
