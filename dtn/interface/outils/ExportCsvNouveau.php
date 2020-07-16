@@ -100,7 +100,7 @@ switch ($sens) {
 		$tri = "Tri decroissant";
 		break;
 }
-?>NomJoueur;idHattrick;last maj(jours);age;jours;tsi;salaire;xp;leader;spe;endu;tx endu;forme;intensite;construction;+;ailier;+;buteur;+;gardien;+;passe;+;defenseur;+;coup francs;+;entraineur;entrainement;DTN;id manager;Date de dernière connexion;Pays du club;Nombre adjoints;préparateur physique;Médecin;Joueur en vente;Date du jour;<?php
+?>NomJoueur;idHattrick;last maj(jours);age;jours;tsi;salaire;xp;leader;spe;endu;tx endu;forme;intensite;gardien;+;defense;+;construction;+;ailier;+;passe;+;buteur;+;coup francs;+;entraineur;entrainement;DTN;id manager;Date de dernière connexion;Pays du club;Nombre adjoints;préparateur physique;Médecin;Joueur en vente;Date du jour;<?php
 ?>comp HTMS;pot HTMS<?php
 echo "\n";
 
