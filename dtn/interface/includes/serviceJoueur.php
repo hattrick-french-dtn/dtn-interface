@@ -149,9 +149,10 @@ function getTousJoueurSQL(){
         ht_clubs.nomClub,
         ht_clubs.idClub,
         ht_clubs.idClubHT,
+        ht_clubs.idUserHT as proprioid,
         ht_clubs.niv_Entraineur,
         ht_clubs.isBot,
-        ht_clubs.date_last_connexion 
+        ht_clubs.date_last_connexion
       FROM
       ( ht_joueurs,
         ht_caracteristiques xp,
@@ -172,7 +173,7 @@ function getTousJoueurSQL(){
       LEFT JOIN ht_leadership htl ON idLeader_fk =  htl.numLeader 
       LEFT JOIN ht_caractere htc ON idCaractere_fk = htc.numCaractere 
       LEFT JOIN ht_honnetete hth ON idHonnetete_fk = hth.numHonnetete 
-      LEFT JOIN ht_clubs ON  teamid = ht_clubs.idClubHT 
+      LEFT JOIN ht_clubs ON teamid = ht_clubs.idClubHT
       LEFT JOIN ht_pays ON idPays_fk = idPays
       WHERE
         xp.idCarac = idExperience_fk AND
