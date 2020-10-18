@@ -1,5 +1,6 @@
 <?php
 require_once("../includes/head.inc.php");
+require_once "../fonctions/AccesBase.php"; // fonction de connexion a la base
 require("../includes/serviceEntrainement.php");
 require("../includes/serviceJoueur.php");
 require("../includes/serviceEquipes.php");
@@ -143,7 +144,14 @@ if ($datemaj >$mkday -$huit){
 	$img_nb=5;
 }
 
-
+$maBase = initBD();
+$sqlpays="select nomPays FROM ht_pays, ht_clubs  WHERE idPays_fk = idPays and idClubHT=$idClubHT and idPays!=0 ";
+$pays=$maBase->select($sqlpays);
+if (count($pays)>0){
+	$nomPays=$pays[0]["nomPays"];
+}else{
+	$nomPays="inconnu";
+}
 
 if(isset($msg)) {?>
 <center><span class="premium"><?=$msg?></span></center><?php } ?>
@@ -169,15 +177,18 @@ if(isset($msg)) {?>
      			
 	       </td>
 	       <td width="20%" align="left" colspan="2">
-         <b>Club Actuel : </b><a href="<?=$url?>/clubs/fiche_club.php?idClubHT=<?=$joueurDTN["teamid"]?>"><?php if ($joueurDTN["isBot"]!=0) {?><b><font color="red">[BOT]</b></font><?php }?><?=$joueurDTN["nomClub"]?></a> <img src="../images/time_<?=$img_nb?>.gif" title="Derni&egrave;re connexion du propri&eacute;taire sur HT, il y a <?=($mkday-$datemaj)/(60*60*24)?> jour(s)">
-          <?php if (existAutorisationClub($idClubHT,null)==false) {?>
-            <img height="16" src="../images/non_autorise.JPG" title="Ce club n'a pas autoris&eacute; la DTN &agrave; acc&eacute;der &agrave; ses donn&eacute;es">
-          <?php } else { ?>
-            <img height="16" src="../images/Autorise.PNG" title="Ce club a autoris&eacute; la DTN &agrave; acc&eacute;der &agrave; ses donn&eacute;es">
-          <?php }
-          ?><a href="https://www.hattrick.org/goto.ashx?path=/MyHattrick/Inbox/?actionType=newMail%26userid=<?=$joueurDTN["proprioid"];?>" target="_blank"><img src="../images/mail.png" width="18" title="Envoyer un MP"></a>
-		  <a href="https://www.hattrick.org/goto.ashx?path=/Club/?teamId=<?=$idClubHT;?>" target="_blank"><img src="../images/club.png" width="18" title="Voir le club du manager"></a>
-                <form method="post" action="../maliste/miseajourunique.php">
+              <b>Manager : </b><?=$joueurDTN["proprioname"]?> <img src="../images/time_<?=$img_nb?>.gif" title="Derni&egrave;re connexion du propri&eacute;taire sur HT, il y a <?=($mkday-$datemaj)/(60*60*24)?> jour(s)">
+  			  <a href="https://www.hattrick.org/goto.ashx?path=/Club/Manager/?userId=<?=$joueurDTN["proprioid"];?>" target="_blank"><img src="../images/manager.png" width="18" title="Voir le Manager sur Hattrick"></a>
+              <a href="https://www.hattrick.org/goto.ashx?path=/MyHattrick/Inbox/?actionType=newMail%26userid=<?=$joueurDTN["proprioid"];?>" target="_blank"><img src="../images/mail.png" width="18" title="Envoyer un MP"></a>
+              <?php if (existAutorisationClub($idClubHT,null)==false) {?>
+                <img height="16" src="../images/non_autorise.JPG" title="Ce manager n'a pas autoris&eacute; la DTN &agrave; acc&eacute;der &agrave; ses donn&eacute;es">
+              <?php } else {?>
+                <img height="16" src="../images/Autorise.PNG" title="Ce manager a autoris&eacute; la DTN &agrave; acc&eacute;der &agrave; ses donn&eacute;es">
+              <?php }?>
+              <br/>
+              <b>Club : </b><a href="<?=$url?>/clubs/fiche_club.php?idClubHT=<?=$joueurDTN["teamid"]?>"><?php if ($joueurDTN["isBot"]!=0) {echo '<b><font color="red">[BOT]</b></font>';}?><?=$joueurDTN["nomClub"]?></a>
+              			<b>(<?=$nomPays?>)</b><a href="https://www.hattrick.org/goto.ashx?path=/Club/?teamId=<?=$idClubHT;?>" target="_blank"><img src="../images/club.png" width="18" title="Voir le club sur Hattrick"></a> 
+              <br/><br/>  <form method="post" action="../maliste/miseajourunique.php">
                 <input type="hidden" name="joueur" value= <?=$joueurDTN["idHattrickJoueur"]?> />
                 <input type="submit" value="Mettre &agrave; jour sur Hattrick" />
                 </form>
