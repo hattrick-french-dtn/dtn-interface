@@ -150,6 +150,7 @@ function getTousJoueurSQL(){
         ht_clubs.idClub,
         ht_clubs.idClubHT,
         ht_clubs.idUserHT as proprioid,
+        ht_clubs.nomUser as proprioname,
         ht_clubs.niv_Entraineur,
         ht_clubs.isBot,
         ht_clubs.date_last_connexion
