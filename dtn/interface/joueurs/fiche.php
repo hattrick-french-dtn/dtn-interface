@@ -254,7 +254,7 @@ if ($datemaj >$mkday -$huit){
                 <img height="16" src="../images/non_autorise.JPG" title="Ce club n'a pas autoris&eacute; la DTN &agrave; acc&eacute;der &agrave; ses donn&eacute;es">
               <?php } else {?>
                 <img height="16" src="../images/Autorise.PNG" title="Ce club a autoris&eacute; la DTN &agrave; acc&eacute;der &agrave; ses donn&eacute;es">
-              <?php }?><a href="https://www.hattrick.org/goto.ashx?path=/Club/Manager/?teamId=<?=$idClubHT;?>" target="_blank"><img src="../images/mail.png" width="18" title="Envoyer un MP"></a>
+              <?php }?><a href="https://www.hattrick.org/goto.ashx?path=/MyHattrick/Inbox/?actionType=newMail%26userid=<?=$joueurDTN["proprioid"];?>" target="_blank"><img src="../images/mail.png" width="18" title="Envoyer un MP"></a>
 			  <a href="https://www.hattrick.org/goto.ashx?path=/Club/?teamId=<?=$idClubHT;?>" target="_blank"><img src="../images/club.png" width="18" title="Voir le club du manager"></a>
               	<?php 	if ($sesUser["idNiveauAcces"] == "4") { // Mise à jour sur Hattrick pour le sélectionneur ?>
                 <form method="post" action="../maliste/miseajourunique.php">
