@@ -126,11 +126,11 @@ if ($origine=="maliste")
   <input name="id" type="hidden" id="id" value="<?=$listID?>">
 </form>
 
-<form name="form1" method="post" action="ficheslackchoix.php" onsubmit="return verifta()">
+<form name="form1" method="post" action="fichediscordchoix.php" onsubmit="return verifta()">
   <br>Entrez la liste des IDs (s&eacute;par&eacute;s par un ";") :<br>
     <textarea name="listID" id="listID" style="font-size:7pt;font-family:Arial" cols=220 rows=10><?php echo $listID?></textarea><br>
 
-  <input type="submit" name="button" id="button" value="Fiche Slack">
+  <input type="submit" name="button" id="button" value="Fiche Discord">
   <input name="id" type="hidden" id="id" value="<?=$listID?>">
 </form>
 

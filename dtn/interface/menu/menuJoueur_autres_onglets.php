@@ -5,9 +5,9 @@ global $infJ;
 
 /***********************************************
 * Type de menus :
-* 1- Menu Complet (Consultation |  Suivi DTN |  Graphiques |  Histo modifs |  Club |  Fiche Vente |  Résumé Forum DTN  |  Résumé Slack | Résumé Hattrick | Commentaires   |  Chercher un joueur )
-* 2- Menu Complet sans "chercher un joueur" ( Consultation |  Suivi DTN |  Graphiques |  Histo modifs |  Club |  Fiche Vente |  Résumé Forum DTN  |  Résumé Slack | Résumé Hattrick | Commentaires)
-* 3- Menu de consultation  ( Consultation |  Histo modifs |  Fiche Vente |  Résumé Forum DTN  |  Résumé Slack | Résumé Hattrick | Commentaires)
+* 1- Menu Complet (Consultation |  Suivi DTN |  Graphiques |  Histo modifs |  Club |  Fiche Vente |  Résumé Forum DTN  |  Résumé Discord | Résumé Hattrick | Commentaires   |  Chercher un joueur )
+* 2- Menu Complet sans "chercher un joueur" ( Consultation |  Suivi DTN |  Graphiques |  Histo modifs |  Club |  Fiche Vente |  Résumé Forum DTN  |  Résumé Discord | Résumé Hattrick | Commentaires)
+* 3- Menu de consultation  ( Consultation |  Histo modifs |  Fiche Vente |  Résumé Forum DTN  |  Résumé Discord | Résumé Hattrick | Commentaires)
 * Menu 1 pour les sélectionneur et les admins        
 * Menu 2 - Si le joueur appartient au secteur du dtn ou dtn+
 *        - Si le joueur n'appartient à aucun secteur
@@ -37,7 +37,7 @@ if ($TypeMenu <= 2) { ?>
 	&nbsp;<A class="smliensorange" href="<?=$url?>/clubs/fiche_club.php?idClubHT=<?=$idClubHT?>" alt="Club">Club</a>&nbsp;|
 	&nbsp;<A class="smliensorange" href="<?=$url?>/joueurs/ficheForum.php?htid=<?=$idHT?>" alt="forum">Fiche Vente</a>&nbsp;|
 	&nbsp;<a class="smliensorange" href="<?=$url?>/joueurs/ficheresumechoix.php?htid=<?=$idHT?>&origine=<?php echo "unique"?>" alt="resume">Résumé Forum DTN</a>&nbsp;|
-	&nbsp;<a class="smliensorange" href="<?=$url?>/joueurs/ficheslackchoix.php?htid=<?=$idHT?>&origine=<?php echo "unique"?>" alt="resume">Résumé Slack</a>&nbsp;|
+	&nbsp;<a class="smliensorange" href="<?=$url?>/joueurs/fichediscordchoix.php?htid=<?=$idHT?>&origine=<?php echo "unique"?>" alt="resume">Résumé Discord</a>&nbsp;|
 	&nbsp;<a class="smliensorange" href="<?=$url?>/joueurs/fichehattrickchoix.php?htid=<?=$idHT?>&origine=<?php echo "unique"?>" alt="resume">Résumé Hattrick</a>&nbsp;
     <?php if ($TypeMenu <= 2) { ?>
   | &nbsp;<A class="smliensorange" href="<?=$url?>/joueurs/rapportDetaille.php?htid=<?=$idHT?>" alt="etoiles">Matchs</a>&nbsp;
