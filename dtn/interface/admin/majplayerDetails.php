@@ -1,7 +1,7 @@
 <?php
 ini_set('max_execution_time',600);
-/* Mise a jour des joueurs /matchs xp/transferts  TSI depuis playerdetails quand il semble 
-* que ça n'ait pas ete fait par le DTN.    
+/* Mise a jour des joueurs /matchs xp/transferts  TSI depuis playerdetails quand il semble
+* que ça n'ait pas ete fait par le DTN.
 */
 require_once("../includes/serviceJoueur.php");
 require_once("../includes/serviceEquipes.php");
@@ -10,16 +10,16 @@ require_once("../includes/serviceMatchs.php");
 require_once("../CHPP/config.php");
 
 error_reporting(E_ALL);
-    
+
 //Service reserve aux DTN+ et Admin
 if (($_SESSION['sesUser']["idNiveauAcces"] == 1)||($_SESSION['sesUser']["idNiveauAcces"] == 2)){
-   	
+
   if (!isset($_REQUEST['checkMatch'])) {$_REQUEST['checkMatch']="off";}
   if (!isset($_REQUEST['choixmaj'])) {$_REQUEST['choixmaj']="";}
-       	
+
   $lstPos = listAllPosition();
-  if (!isset($affPosition)) {$affPosition="";}   	
-    
+  if (!isset($affPosition)) {$affPosition="";}
+
   if($affPosition == "") {
   	if ($_SESSION['sesUser']["idPosition_fk"] == ""){
       $affPosition = "0";
@@ -39,26 +39,26 @@ $lstRole=list_role();
 /*      DECLARATION FONCTION                                                  */
 /******************************************************************************/
 function checkNumberMatchPoste($season,$week,$maBase,$poste){
-  $sql = "SELECT	count(1) 
-          FROM 
-            ht_perfs_individuelle 
-  		      LEFT JOIN ht_joueurs ON id_Joueur = idHattrickJoueur 
-  		    WHERE 
-          week='$week' 
-          AND season='$season' 
+  $sql = "SELECT	count(1)
+          FROM
+            ht_perfs_individuelle
+  		      LEFT JOIN ht_joueurs ON id_Joueur = idHattrickJoueur
+  		    WHERE
+          week='$week'
+          AND season='$season'
           AND ht_posteAssigne ='$poste'";
 
   $resMatch = $maBase->select($sql);
   $countMatch  = $resMatch[0][0];
-  return $countMatch; 
-}  
-// This function check number of matchs  in database for a specific week and a specific season  
+  return $countMatch;
+}
+// This function check number of matchs  in database for a specific week and a specific season
 function checkNumberMatch($season,$week,$maBase){
   $sql =  "select	count(1) from ht_perfs_individuelle where week='$week' and season='$season' LIMIT 1";
 
   $resMatch = $maBase->select($sql);
   $countMatch  = $resMatch[0][0];
-  return $countMatch; 
+  return $countMatch;
 }
 
 
@@ -68,7 +68,7 @@ function checkNumberPoste($maBase,$poste){
 
  	$resPlayers= $maBase->select($sql);
 	$countPlayers  = $resPlayers[0][0];
-	return $countPlayers; 
+	return $countPlayers;
 }
 
 
@@ -138,22 +138,22 @@ if ( isset($_SESSION['HT']) ) { ?>
     Votre compte DTN est li&eacute; &agrave; votre compte Hattrick : <?php echo($_SESSION['nomUser']." [".$_SESSION['idUserHT']."]"); ?>
 
 <?php } else {?>
-    
+
     <form name="formConnexionHT" method="get" action="">
       <input name="mode" type="hidden" value="redirectionHT">
       <input type="submit" value="AUTORISER ACC&Egrave;S CHPP" class="bouton" /> <br /><br />
     </form>
 <?php }?>
-<br /> 
+<br />
 </div>
 <?php
 } else {
   ?><p>
-  <center>  
-  <table border=1 width=90% >  
+  <center>
+  <table border=1 width=90% >
   <tr>
   <td align="left">
-    <img src="../images/greenball.jpg"> Votre session hattrick est active ! 
+    <img src="../images/greenball.jpg"> Votre session hattrick est active !
     <br />
     <table width="100%" border="0" cellspacing="0" cellpadding="0">
       <tr>
@@ -162,8 +162,8 @@ if ( isset($_SESSION['HT']) ) { ?>
         <div align="center"><font color="blue">Mise &agrave; jour des joueurs/TSI/match/xp/club</font></div>
         <br />
         <b>Secteur de jeu : </b>
-					
-        <?php if (($affPosition!=0) && ($_SESSION['sesUser']["idNiveauAcces"] == 2)  ) { 
+
+        <?php if (($affPosition!=0) && ($_SESSION['sesUser']["idNiveauAcces"] == 2)  ) {
           // Si c'est un DTN+ qui est connecté et qu'il a un secteur ?>
 					<INPUT TYPE="hidden" NAME="ht_posteAssigne" VALUE="<?=$affPosition?>" >
 					  <b><font color="#CC2233"><?=$lstPos[$affPosition-1]["descriptifPosition"]?></font></b><br />
@@ -185,17 +185,17 @@ if ( isset($_SESSION['HT']) ) { ?>
 						<OPTION VALUE="5">Attaquant</OPTION>
 					</SELECT>
 				<?php }
-         
+
 				if (!isset($_REQUEST['ht_posteAssigne'])) {?>
 					<br />
     <p>Mettre &agrave; jour les donn&eacute;es des potentiels...<br />
     <ul>
-        <li><input type="radio" name="choixmaj" value="u20" >
-    <label for="u20">U20 (17-20 ans)</label><br />
+        <li><input type="radio" name="choixmaj" value="u21" >
+    <label for="u21">u21 (17-20 ans)</label><br />
         <li><input type="radio" name="choixmaj" value="a" >
     <label for="a">A (21 ans et plus)</label><br />
-        <li><input type="radio" name="choixmaj" value="selecu20" > 
-    <label for="selecu20">S&eacute;lectionnables u20 uniquement (19-20 ans)</label><br />
+        <li><input type="radio" name="choixmaj" value="selecu21" >
+    <label for="selecu21">S&eacute;lectionnables u21 uniquement (19-20 ans)</label><br />
         <li><input type="radio" name="choixmaj" value="seleca" >
     <label for="seleca">S&eacute;lectionnables A uniquement (27 ans et plus)</label>
     </ul>
@@ -223,13 +223,13 @@ if ( isset($_SESSION['HT']) ) { ?>
         //echo ("ht_posteassigne=".$_REQUEST['ht_posteAssigne']);
         //echo ("<br />nbrePlayersMax=".$_REQUEST['nbrePlayersMax']);
         if(isset($_REQUEST['ht_posteAssigne'])) {
-        
+
           // Initialisation des variables
          	if(!isset($_REQUEST['nbrePlayersMax'])) { // Transmis par le formulaire
          		$_REQUEST['nbrePlayersMax']=50;
          	}
          	if(!isset($_GET['startingPlayer'])) { // Transmis dans l'URL sauf au premier chargement de la page
-         		$_GET['startingPlayer']=0; 
+         		$_GET['startingPlayer']=0;
          	}
       		// Check Match
       		if ($_REQUEST['checkMatch']=="on") {
@@ -239,70 +239,70 @@ if ( isset($_SESSION['HT']) ) { ?>
       		}
             // Choix MàJ
 			print " <p> CHOIX MAJ : " .$_REQUEST['choixmaj']. " </p>";
-            
+
 		    $todaySeason=getSeasonWeekOfMatch(mktime(0,0,0,date('m'), date('d'),date('Y')));
 
 			// Extraction des joueurs
             $SqlAgeJoueur=getCalculAgeAnneeSQL(); // Récupère l'âge (année) dans la BDD
 
-        if ($_REQUEST['choixmaj']=="u20") {
+        if ($_REQUEST['choixmaj']=="u21") {
       		$sql = "SELECT $tbl_joueurs.idHattrickJoueur
-                  FROM $tbl_joueurs 
-      		        WHERE 
+                  FROM $tbl_joueurs
+      		        WHERE
                         ($tbl_joueurs.ht_posteAssigne = '".$_REQUEST['ht_posteAssigne']."'
                     OR
                         $tbl_joueurs.ht_posteAssigne = '0')
-      		        AND $tbl_joueurs.affJoueur = '1' 
-                    AND $SqlAgeJoueur < '21'
-                    ORDER BY idHattrickJoueur DESC,prenomJoueur,nomJoueur 
+      		        AND $tbl_joueurs.affJoueur = '1'
+                    AND $SqlAgeJoueur < '22'
+                    ORDER BY idHattrickJoueur DESC,prenomJoueur,nomJoueur
                   LIMIT ".$_GET['startingPlayer'].",".$_REQUEST['nbrePlayersMax'];
-        } else if ($_REQUEST['choixmaj']=="a") {          
+        } else if ($_REQUEST['choixmaj']=="a") {
             $sql = "SELECT $tbl_joueurs.idHattrickJoueur
-                  FROM $tbl_joueurs 
-      		        WHERE 
+                  FROM $tbl_joueurs
+      		        WHERE
                       ($tbl_joueurs.ht_posteAssigne = '".$_REQUEST['ht_posteAssigne']."'
                     OR
                         $tbl_joueurs.ht_posteAssigne = '0')
-      		        AND $tbl_joueurs.affJoueur = '1' 
-                    AND $SqlAgeJoueur >= '21'
-                    ORDER BY idHattrickJoueur DESC,prenomJoueur,nomJoueur 
+      		        AND $tbl_joueurs.affJoueur = '1'
+                    AND $SqlAgeJoueur >= '22'
+                    ORDER BY idHattrickJoueur DESC,prenomJoueur,nomJoueur
                   LIMIT ".$_GET['startingPlayer'].",".$_REQUEST['nbrePlayersMax'];
-        } else if ($_REQUEST['choixmaj']=="selecu20") {          
+        } else if ($_REQUEST['choixmaj']=="selecu21") {
             $sql = "SELECT $tbl_joueurs.idHattrickJoueur
-                  FROM $tbl_joueurs 
-      		        WHERE 
+                  FROM $tbl_joueurs
+      		        WHERE
                       ($tbl_joueurs.ht_posteAssigne = '".$_REQUEST['ht_posteAssigne']."'
                     OR
                         $tbl_joueurs.ht_posteAssigne = '0')
-      		        AND $tbl_joueurs.affJoueur = '1' 
-                    AND $SqlAgeJoueur BETWEEN '19' AND '20'
-                    ORDER BY idHattrickJoueur DESC,prenomJoueur,nomJoueur 
+      		        AND $tbl_joueurs.affJoueur = '1'
+                    AND $SqlAgeJoueur BETWEEN '20' AND '21'
+                    ORDER BY idHattrickJoueur DESC,prenomJoueur,nomJoueur
                   LIMIT ".$_GET['startingPlayer'].",".$_REQUEST['nbrePlayersMax'];
-        } else if ($_REQUEST['choixmaj']=="seleca") {          
+        } else if ($_REQUEST['choixmaj']=="seleca") {
             $sql = "SELECT $tbl_joueurs.idHattrickJoueur
-                  FROM $tbl_joueurs 
-      		        WHERE 
+                  FROM $tbl_joueurs
+      		        WHERE
                       ($tbl_joueurs.ht_posteAssigne = '".$_REQUEST['ht_posteAssigne']."'
                     OR
                         $tbl_joueurs.ht_posteAssigne = '0')
-      		        AND $tbl_joueurs.affJoueur = '1' 
+      		        AND $tbl_joueurs.affJoueur = '1'
                     AND $SqlAgeJoueur >= '27'
-                    ORDER BY idHattrickJoueur DESC,prenomJoueur,nomJoueur 
+                    ORDER BY idHattrickJoueur DESC,prenomJoueur,nomJoueur
                   LIMIT ".$_GET['startingPlayer'].",".$_REQUEST['nbrePlayersMax'];
         } else {
             $sql = "SELECT $tbl_joueurs.idHattrickJoueur
-                  FROM $tbl_joueurs 
-      		        WHERE 
+                  FROM $tbl_joueurs
+      		        WHERE
                       ($tbl_joueurs.ht_posteAssigne = '".$_REQUEST['ht_posteAssigne']."'
                     OR
                         $tbl_joueurs.ht_posteAssigne = '0')
-      		        AND $tbl_joueurs.affJoueur = '1' 
-                    ORDER BY idHattrickJoueur DESC,prenomJoueur,nomJoueur 
+      		        AND $tbl_joueurs.affJoueur = '1'
+                    ORDER BY idHattrickJoueur DESC,prenomJoueur,nomJoueur
                   LIMIT ".$_GET['startingPlayer'].",".$_REQUEST['nbrePlayersMax'];
         }
 
 			$req= $conn->query($sql);
-          
+
 			if(!$req){
 				echo("Erreur lors de l'extraction des joueurs. Contactez un d&eacute;veloppeurs ou les administrateurs de la DTN.");
 				exit;
@@ -315,15 +315,15 @@ if ( isset($_SESSION['HT']) ) { ?>
 					$i++;
 				}
 				$req=NULL;
-            
+
             // Création liste id joueur à scanner
             foreach($listeJoueursDTN as $joueur) {
 				$listeID[]=$joueur["idHattrickJoueur"];
             }
 
             $scanMatch=false;
-            if (isset($_REQUEST['checkMatch']) && $_REQUEST['checkMatch']=="on") { 
-				$scanMatch=true; 
+            if (isset($_REQUEST['checkMatch']) && $_REQUEST['checkMatch']=="on") {
+				$scanMatch=true;
             }
 
             // MAJ des joueurs avec chargement des matchs si case cochée
@@ -388,7 +388,7 @@ if ( isset($_SESSION['HT']) ) { ?>
         		<font color=#red> Attention ! Il reste probablement encore des joueurs &agrave; mettre &agrave; jour ! (nombre d'update max : <?php echo($_REQUEST['nbrePlayersMax']);?>)</font><p>
         		<font color=#222299>
             &gt;&gt; <a href="<?php echo($lien);?>">Continuer les mises &agrave; jour </a>&lt;&lt;
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             &gt;&gt; <a href="<?php echo($lien);?>&modemajauto=1">Mode automatique de mise &agrave; jour </a>&lt;&lt;
             </font>
             </center>
