@@ -190,12 +190,12 @@ if ( isset($_SESSION['HT']) ) { ?>
 					<br />
     <p>Mettre &agrave; jour les donn&eacute;es des potentiels...<br />
     <ul>
-        <li><input type="radio" name="choixmaj" value="u20" >
-    <label for="u20">U20 (17-20 ans)</label><br />
+        <li><input type="radio" name="choixmaj" value="u21" >
+    <label for="u21">u21 (17-20 ans)</label><br />
         <li><input type="radio" name="choixmaj" value="a" >
     <label for="a">A (21 ans et plus)</label><br />
-        <li><input type="radio" name="choixmaj" value="selecu20" >
-    <label for="selecu20">S&eacute;lectionnables u20 uniquement (19-20 ans)</label><br />
+        <li><input type="radio" name="choixmaj" value="selecu21" >
+    <label for="selecu21">S&eacute;lectionnables u21 uniquement (19-20 ans)</label><br />
         <li><input type="radio" name="choixmaj" value="seleca" >
     <label for="seleca">S&eacute;lectionnables A uniquement (27 ans et plus)</label>
     </ul>
@@ -245,7 +245,7 @@ if ( isset($_SESSION['HT']) ) { ?>
 			// Extraction des joueurs
             $SqlAgeJoueur=getCalculAgeAnneeSQL(); // Récupère l'âge (année) dans la BDD
 
-        if ($_REQUEST['choixmaj']=="u20") {
+        if ($_REQUEST['choixmaj']=="u21") {
       		$sql = "SELECT $tbl_joueurs.idHattrickJoueur
                   FROM $tbl_joueurs
       		        WHERE
@@ -267,7 +267,7 @@ if ( isset($_SESSION['HT']) ) { ?>
                     AND $SqlAgeJoueur >= '22'
                     ORDER BY idHattrickJoueur DESC,prenomJoueur,nomJoueur
                   LIMIT ".$_GET['startingPlayer'].",".$_REQUEST['nbrePlayersMax'];
-        } else if ($_REQUEST['choixmaj']=="selecu20") {
+        } else if ($_REQUEST['choixmaj']=="selecu21") {
             $sql = "SELECT $tbl_joueurs.idHattrickJoueur
                   FROM $tbl_joueurs
       		        WHERE
