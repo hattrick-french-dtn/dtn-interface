@@ -191,11 +191,11 @@ if ( isset($_SESSION['HT']) ) { ?>
     <p>Mettre &agrave; jour les donn&eacute;es des potentiels...<br />
     <ul>
         <li><input type="radio" name="choixmaj" value="u21" >
-    <label for="u21">u21 (17-20 ans)</label><br />
+    <label for="u21">u21 (17-21 ans)</label><br />
         <li><input type="radio" name="choixmaj" value="a" >
-    <label for="a">A (21 ans et plus)</label><br />
+    <label for="a">A (22 ans et plus)</label><br />
         <li><input type="radio" name="choixmaj" value="selecu21" >
-    <label for="selecu21">S&eacute;lectionnables u21 uniquement (19-20 ans)</label><br />
+    <label for="selecu21">S&eacute;lectionnables u21 uniquement (20-21 ans)</label><br />
         <li><input type="radio" name="choixmaj" value="seleca" >
     <label for="seleca">S&eacute;lectionnables A uniquement (27 ans et plus)</label>
     </ul>
