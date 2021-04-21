@@ -245,6 +245,10 @@ if ( isset($_SESSION['HT']) ) { ?>
 			// Extraction des joueurs
             $SqlAgeJoueur=getCalculAgeAnneeSQL(); // Récupère l'âge (année) dans la BDD
 
+      // Alerte mise à jour pour les admins
+            $valu21 = false;
+            $vala = false;
+
         if ($_REQUEST['choixmaj']=="u21") {
       		$sql = "SELECT $tbl_joueurs.idHattrickJoueur
                   FROM $tbl_joueurs
@@ -256,6 +260,7 @@ if ( isset($_SESSION['HT']) ) { ?>
                     AND $SqlAgeJoueur < '22'
                     ORDER BY idHattrickJoueur DESC,prenomJoueur,nomJoueur
                   LIMIT ".$_GET['startingPlayer'].",".$_REQUEST['nbrePlayersMax'];
+          $valu21 = true;
         } else if ($_REQUEST['choixmaj']=="a") {
             $sql = "SELECT $tbl_joueurs.idHattrickJoueur
                   FROM $tbl_joueurs
@@ -267,6 +272,7 @@ if ( isset($_SESSION['HT']) ) { ?>
                     AND $SqlAgeJoueur >= '22'
                     ORDER BY idHattrickJoueur DESC,prenomJoueur,nomJoueur
                   LIMIT ".$_GET['startingPlayer'].",".$_REQUEST['nbrePlayersMax'];
+          $vala = true;
         } else if ($_REQUEST['choixmaj']=="selecu21") {
             $sql = "SELECT $tbl_joueurs.idHattrickJoueur
                   FROM $tbl_joueurs
@@ -299,8 +305,21 @@ if ( isset($_SESSION['HT']) ) { ?>
       		        AND $tbl_joueurs.affJoueur = '1'
                     ORDER BY idHattrickJoueur DESC,prenomJoueur,nomJoueur
                   LIMIT ".$_GET['startingPlayer'].",".$_REQUEST['nbrePlayersMax'];
+            $valu21 = true;
+            $vala = true;
         }
 
+        // On enregistre l'auteur et la date de la màj dans la bdd
+        if ($valu21 == true) {
+          $sqldatemaj = "UPDATE ht_maj_secteur SET date_majsecteur = NOW(), auteur_majsecteur = '".$_SESSION['nomUser']."' WHERE secteur = '".$_REQUEST['ht_posteAssigne']."' AND type_maj = 'u21'";
+          $reqdatemaj= $conn->query($sqldatemaj);
+        }
+        if ($vala == true) {
+          $sqldatemaj2 = "UPDATE ht_maj_secteur SET date_majsecteur = NOW(), auteur_majsecteur = '".$_SESSION['nomUser']."' WHERE secteur = '".$_REQUEST['ht_posteAssigne']."' AND type_maj = 'A'";
+          $reqdatemaj2= $conn->query($sqldatemaj2);
+        }
+
+      // On exécute la màj
 			$req= $conn->query($sql);
 
 			if(!$req){
