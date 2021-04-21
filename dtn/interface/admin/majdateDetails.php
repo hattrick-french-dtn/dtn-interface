@@ -8,8 +8,8 @@ require_once("../includes/serviceMatchs.php");
 require_once("../CHPP/config.php");
 error_reporting(E_ALL);
 
-// Service réservé aux DTN#
-if ($_SESSION['sesUser']["idNiveauAcces_fk"] == 1){
+//Service reserve aux DTN+ et Admin
+if (($_SESSION['sesUser']["idNiveauAcces"] == 1)||($_SESSION['sesUser']["idNiveauAcces"] == 2)){
 
   $lstPos = listAllPosition();
   if (!isset($affPosition)) {$affPosition="";}
