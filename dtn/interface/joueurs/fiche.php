@@ -188,6 +188,9 @@ switch($_SESSION['sesUser']["idNiveauAcces"]){
     
     default;
     break;
+	case "0":
+    require("../menu/menuSuperviseur.php");
+    break;
 }
 
 
@@ -289,7 +292,8 @@ if (count($pays)>0){
               <?php
               if($_SESSION['sesUser']["idNiveauAcces"] !=3){
                 ?> <a href ="liste_suivi.php?dtn=<?=$joueurDTN["dtnSuiviJoueur_fk"]?>"><?=$joueurDTN["loginAdminSuiveur"]?></a><?php
-                if ( ($_SESSION['sesUser']["idNiveauAcces"] == 1) || ($_SESSION['sesUser']["idNiveauAcces"]==2 && ( ($_SESSION['sesUser']["idPosition_fk"]==$joueurDTN["ht_posteAssigne"]) || ($_SESSION['sesUser']["idPosition_fk"]==0) ) ) ){
+				//if ( ($_SESSION['sesUser']["idNiveauAcces"] == 1) || ($_SESSION['sesUser']["idNiveauAcces"]==2 && ( ($_SESSION['sesUser']["idPosition_fk"]==$joueurDTN["ht_posteAssigne"]) || ($_SESSION['sesUser']["idPosition_fk"]==0) ) ) ){
+				if ( ($_SESSION['sesUser']["idNiveauAcces"] == 1) || (($_SESSION['sesUser']["idNiveauAcces"]==2 || $_SESSION['sesUser']["idNiveauAcces"]==0) && ( ($_SESSION['sesUser']["idPosition_fk"]==$joueurDTN["ht_posteAssigne"] ) || ($_SESSION['sesUser']["idPosition_fk"]==0) ) ) ){
                             
                   if($joueurDTN["dtnSuiviJoueur_fk"] != 0){
                   ?>                     
@@ -310,8 +314,9 @@ if (count($pays)>0){
               // ####################### Si Joueur Non suivi et non archivé #######################
               }else {
                 ?><font color="#FF0000"><strong>Ce joueur n'est pas suivi ! &nbsp; </strong></font><?php
-                if(($_SESSION['sesUser']["idNiveauAcces"]==2 && ($_SESSION['sesUser']["idPosition_fk"]==$joueurDTN["ht_posteAssigne"]  ||  $_SESSION['sesUser']["idPosition_fk"] == 0) ) ||  $_SESSION['sesUser']["idNiveauAcces"] == 1)
-                {
+                //if(($_SESSION['sesUser']["idNiveauAcces"]==2 && ($_SESSION['sesUser']["idPosition_fk"]==$joueurDTN["ht_posteAssigne"]  ||  $_SESSION['sesUser']["idPosition_fk"] == 0) ) ||  $_SESSION['sesUser']["idNiveauAcces"] == 1 ||  $_SESSION['sesUser']["idPosition_fk"] == 0) ) ||  $_SESSION['sesUser']["idNiveauAcces"] == 0)
+                if((($_SESSION['sesUser']["idNiveauAcces"]==2 || $_SESSION['sesUser']["idNiveauAcces"]==0) && ($_SESSION['sesUser']["idPosition_fk"]==$joueurDTN["ht_posteAssigne"]  ||  $_SESSION['sesUser']["idPosition_fk"] == 0) ) ||  $_SESSION['sesUser']["idNiveauAcces"] == 1 ||  $_SESSION['sesUser']["idPosition_fk"] == 0) ) ||  $_SESSION['sesUser']["idNiveauAcces"] == 0)
+				{
                     ?><form name="form1" method="post" action="../form.php"><div align="right">
                     <input name="mode" type="hidden" id="mode2" value="assigne1JoueurDTN">
                     <input name="htid" type="hidden" id="mode2" value="<?=$joueurDTN["idHattrickJoueur"]?>">
@@ -319,7 +324,7 @@ if (count($pays)>0){
                     <select name="idDtn" id="select">
                     <?php
                     if ($_SESSION['sesUser']["idPosition_fk"] == 0) {
-                      $sql = "select * from $tbl_admin where idPosition_fk = 0 AND idNiveauAcces_fk IN (2,3) AND affAdmin = 1 ";
+                      $sql = "select * from $tbl_admin where idPosition_fk = 0 AND idNiveauAcces_fk IN (2,3,0) AND affAdmin = 1 ";
                     } else {
                       $sql = "select * from $tbl_admin where idPosition_fk = ".$joueurDTN["ht_posteAssigne"]." AND affAdmin = 1 ";
                     }
@@ -354,7 +359,7 @@ if (count($pays)>0){
           <td width="50%"><font color="#000099"><b>&nbsp;<?=$joueurDTN["intitulePosition"]?><?php
           if($joueurDTN["ht_posteAssigne"] != 0){
       
-            if(($_SESSION['sesUser']["idNiveauAcces"]==2 && $_SESSION['sesUser']["idPosition_fk"]==$joueurDTN["ht_posteAssigne"]) ||  $_SESSION['sesUser']["idNiveauAcces"] == 1){?>
+            if((($_SESSION['sesUser']["idNiveauAcces"]==2 || $_SESSION['sesUser']["idNiveauAcces"]==0) && ($_SESSION['sesUser']["idPosition_fk"]==$joueurDTN["ht_posteAssigne"] || $_SESSION['sesUser']["idPosition_fk"]==0)) ||  $_SESSION['sesUser']["idNiveauAcces"] == 1){?>
             &nbsp;<a href="javascript:submitSupprimeSecteur()"><u>[<font color="red"><i>D&eacute;saffecter</i></font>]</u></a>         
             <?php }
           }?></b></font>
@@ -367,9 +372,9 @@ if (count($pays)>0){
           <td>&nbsp;</td>
           <td>
           <div align="right"><?php 
-          if ( ($joueurDTN["archiveJoueur"] != 1) && (($_SESSION['sesUser']["idNiveauAcces_fk"] ==2 && $_SESSION['sesUser']["idPosition_fk"]==$joueurDTN["ht_posteAssigne"]) || ($_SESSION['sesUser']["idNiveauAcces_fk"] ==1)) )  {?>
+          if ( ($joueurDTN["archiveJoueur"] != 1) && ((($_SESSION['sesUser']["idNiveauAcces_fk"] ==2 || $_SESSION['sesUser']["idNiveauAcces_fk"] ==0) && ($_SESSION['sesUser']["idPosition_fk"]==$joueurDTN["ht_posteAssigne"] || $_SESSION['sesUser']["idPosition_fk"]==0)) || ($_SESSION['sesUser']["idNiveauAcces_fk"] ==1)) )  {?>
             [ <a href="javascript:checkArchivageSansSecteur()">Archiver ce joueur </a>]
-          <?php } else  if ( ($joueurDTN["archiveJoueur"] == 1) && (($_SESSION['sesUser']["idNiveauAcces_fk"] ==2 && $_SESSION['sesUser']["idPosition_fk"]==$joueurDTN["ht_posteAssigne"]) || ($_SESSION['sesUser']["idNiveauAcces_fk"] ==2 && $joueurDTN["ht_posteAssigne"]==0) || ($_SESSION['sesUser']["idNiveauAcces_fk"] ==1)) )  {?>
+          <?php } else  if ( ($joueurDTN["archiveJoueur"] == 1) && ((($_SESSION['sesUser']["idNiveauAcces_fk"] ==2 || $_SESSION['sesUser']["idNiveauAcces_fk"] ==0) && ($_SESSION['sesUser']["idPosition_fk"]==$joueurDTN["ht_posteAssigne"] || $_SESSION['sesUser']["idPosition_fk"]==0)) || (($_SESSION['sesUser']["idNiveauAcces_fk"] ==2 || $_SESSION['sesUser']["idNiveauAcces_fk"] ==0) && $joueurDTN["ht_posteAssigne"]==0) || ($_SESSION['sesUser']["idNiveauAcces_fk"] ==1)) )  {?>
             [ <a href="../form.php?mode=desarchiveJoueur&id=<?=$joueurDTN["idJoueur"]?>">D&eacute;sarchiver ce joueur </a>]        
           <?php }
           if($_SESSION['sesUser']["idNiveauAcces"] == 1 ){?>
