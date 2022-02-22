@@ -315,7 +315,7 @@ if (count($pays)>0){
               }else {
                 ?><font color="#FF0000"><strong>Ce joueur n'est pas suivi ! &nbsp; </strong></font><?php
                 //if(($_SESSION['sesUser']["idNiveauAcces"]==2 && ($_SESSION['sesUser']["idPosition_fk"]==$joueurDTN["ht_posteAssigne"]  ||  $_SESSION['sesUser']["idPosition_fk"] == 0) ) ||  $_SESSION['sesUser']["idNiveauAcces"] == 1 ||  $_SESSION['sesUser']["idPosition_fk"] == 0) ) ||  $_SESSION['sesUser']["idNiveauAcces"] == 0)
-                if((($_SESSION['sesUser']["idNiveauAcces"]==2 || $_SESSION['sesUser']["idNiveauAcces"]==0) && ($_SESSION['sesUser']["idPosition_fk"]==$joueurDTN["ht_posteAssigne"]  ||  $_SESSION['sesUser']["idPosition_fk"] == 0) ) ||  $_SESSION['sesUser']["idNiveauAcces"] == 1 ||  $_SESSION['sesUser']["idPosition_fk"] == 0) ) ||  $_SESSION['sesUser']["idNiveauAcces"] == 0)
+                if((($_SESSION['sesUser']["idNiveauAcces"]==2 || $_SESSION['sesUser']["idNiveauAcces"]==0) && ($_SESSION['sesUser']["idPosition_fk"]==$joueurDTN["ht_posteAssigne"]  ||  $_SESSION['sesUser']["idPosition_fk"] == 0)  ||  $_SESSION['sesUser']["idNiveauAcces"] == 1 ||  $_SESSION['sesUser']["idPosition_fk"] == 0)  ||  $_SESSION['sesUser']["idNiveauAcces"] == 0)
 				{
                     ?><form name="form1" method="post" action="../form.php"><div align="right">
                     <input name="mode" type="hidden" id="mode2" value="assigne1JoueurDTN">
