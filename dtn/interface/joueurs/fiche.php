@@ -324,7 +324,7 @@ if (count($pays)>0){
                     <select name="idDtn" id="select">
                     <?php
                     if ($_SESSION['sesUser']["idPosition_fk"] == 0) {
-                      $sql = "select * from $tbl_admin where idNiveauAcces_fk IN (2,3,0) AND affAdmin = 1 ";
+                      $sql = "select * from $tbl_admin where (idPosition_fk = 0 or idPosition_fk = ".$joueurDTN["ht_posteAssigne"].") AND idNiveauAcces_fk IN (2,3,0) AND affAdmin = 1 ";
                     } else {
                       $sql = "select * from $tbl_admin where idPosition_fk = ".$joueurDTN["ht_posteAssigne"]." AND affAdmin = 1 ";
                     }

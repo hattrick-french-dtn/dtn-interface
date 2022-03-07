@@ -47,7 +47,11 @@ if(!isset($ordre)) $ordre = "loginAdmin";
 if(!isset($sens)) $sens = "ASC";
 if(!isset($lesmails)) $lesmails = "";
 
+if($sesUser["idPosition_fk"]<> 0) {
 $sql = "select * from $tbl_admin  left join $tbl_position on idPosition = idPosition_fk where idPosition_fk = ".$sesUser["idPosition_fk"]." and affAdmin!=0 ";
+} else {
+	$sql = "select * from $tbl_admin  left join $tbl_position on idPosition = idPosition_fk where affAdmin!=0 ";
+}
 $sql .= "order by $ordre $sens";
 $req = $conn->query($sql);
 
