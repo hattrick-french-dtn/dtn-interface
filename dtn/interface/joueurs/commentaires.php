@@ -32,21 +32,22 @@ if (isset($htid))
 }
 
 $showLink=true;
-switch($sesUser["idNiveauAcces"]){
-		case "2":
-			if ($sesUser["idPosition_fk"]!= $infJ["ht_posteAssigne"]
-				&& $infJ["ht_posteAssigne"]!=0) {
-				$showLink=false;
-			}
-		break;
-		case "3":
-			if ($sesUser["idAdmin"]!= $infJ["dtnSuiviJoueur_fk"]) {
-				$showLink=false;
-			 }
-		break;
-		default;
-		break;
-}
+//switch($sesUser["idNiveauAcces"]){
+//		case "2":
+//			if ($sesUser["idPosition_fk"]!= $infJ["ht_posteAssigne"]
+//				&& $infJ["ht_posteAssigne"]!=0) {
+//				$showLink=false;
+//			}
+//		break;
+//		case "3":
+//			if ($sesUser["idAdmin"]!= $infJ["dtnSuiviJoueur_fk"]) {
+//				$showLink=false;
+//			 }
+//		break;
+		
+//		default;
+//		break;
+//}
 
 
 
