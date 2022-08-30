@@ -14,6 +14,7 @@ class CHPPConnection
     const PRIMARY = 1;
     const SECONDARY = 2;
     const INTERNATIONAL = 3;
+	const QUATERNY = 4;
 
 	//---global---
 	private $consumerKey;
@@ -145,6 +146,7 @@ class CHPPConnection
 	private $primaryTeam = array();
 	private $secondaryTeam = array();
 	private $internationalTeam = array();
+	private $quaternyTeam = array();
 	private $tournament = array();
 	private $tournaments = array();
 	private $tournamentLeagues = array();
@@ -862,6 +864,48 @@ class CHPPConnection
 	public function clearInternationalTeams()
 	{
 		$this->internationalTeam = array();
+	}
+
+/**
+	 * Returns HTTeam object with the user's secondary team (or tertiary if $secIndex is specified)
+	 *
+	 * @param Integer $userId
+	 * @param Integer $secIndex
+	 * @return HTTeam
+	 */
+	public function getQuaternyTeam($userId = null)
+	{
+		if(!isset($this->QuaternyTeam[$userId]) || $this->QuaternyTeam[$userId] === null)
+		{
+			$doc = $this->getSpecificTeam(CHPPConnection::QUATERNY, $userId);
+			if($doc->getElementsByTagName('Team')->length)
+			{
+				$this->QuaternyTeam[$userId] = new HTTeam($doc->saveXML());
+			}
+			else
+			{
+				return null;
+			}
+		}
+		return $this->quaternyTeam[$userId];
+	}
+
+	/**
+	 * Clear secondary team
+	 *
+	 * @param Integer $userId
+	 */
+	public function clearQuaternyTeam($userId = null)
+	{
+		$this->quaternyTeam[$userId] = null;
+	}
+
+	/**
+	 * Clear all secondary teams
+	 */
+	public function clearQuaternyTeams()
+	{
+		$this->quaternyTeam = array();
 	}
 
 	/**
