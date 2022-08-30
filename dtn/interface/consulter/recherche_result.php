@@ -325,7 +325,7 @@ $sqlreel = "SELECT  *,
               ".$SqlJourJoueur." as jourJoueur,
               ht_caracteristiques.intituleCaracFR as Lib_Niv_entrainement";
 $sql= " FROM ht_joueurs
-        	INNER JOIN ht_clubs ON teamid = idClubHT
+        	LEFT JOIN ht_clubs ON teamid = idClubHT
         	LEFT JOIN ht_pays ON idPays_fk = idPays
         	LEFT JOIN ht_entrainement ON idJoueur_fk = idJoueur
         	LEFT JOIN ht_caracteristiques ON ht_clubs.niv_Entraineur =ht_caracteristiques.idCarac
