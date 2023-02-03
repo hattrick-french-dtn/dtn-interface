@@ -725,14 +725,18 @@ class CHPPConnection
 			$txml = new DOMDocument('1.0', 'UTF-8');
 			$txml->appendChild($txml->importNode($teams->item($t), true));
 			$isHti = $txml->getElementsByTagName('LeagueID')->item(0)->nodeValue == 1000;
+			$isHta = $txml->getElementsByTagName('LeagueID')->item(0)->nodeValue == 1002;
 			$isPrimary = strtolower($txml->getElementsByTagName('IsPrimaryClub')->item(0)->nodeValue) == 'true';
 			if($type == CHPPConnection::PRIMARY && $isPrimary) {
 				continue;
 			}
-			if($type == CHPPConnection::SECONDARY && !$isPrimary && !$isHti) {
+			if($type == CHPPConnection::SECONDARY && !$isPrimary && !$isHti && !$isHta) {
 				continue;
 			}
 			if($type == CHPPConnection::INTERNATIONAL && $isHti) {
+				continue;
+			}
+			if($type == CHPPConnection::QUATERNY && $isHta) {
 				continue;
 			}
 			$doc->getElementsByTagName('Teams')->item(0)->removeChild($teams->item($t));
@@ -7496,7 +7500,7 @@ class HTTeam extends HTCommonTeam
 	public function __construct($xml, $id = null)
 	{
 		parent::__construct($xml);
-		if($this->xml->getElementsByTagName('Team')->length == 2)
+		if($this->xml->getElementsByTagName('Team')->length == 3)
 		{
 			$teams = $this->xml->getElementsByTagName('Team');
 			if($id === null)
