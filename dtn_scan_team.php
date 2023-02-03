@@ -158,7 +158,7 @@ if ($team != NULL) {
 		$resuScan=scanListeJoueurs($listeID, $_SESSION['nomUser'], 'P', false, false);
 		$scan_code=count($resuScan);
 	}
-	$teams[1] = array('id' => $team->getTeamId(), 'name' => $team->getTeamName(), 'scan' => $resuScan, 'code' => $scan_code);
+	$teams[3] = array('id' => $team->getTeamId(), 'name' => $team->getTeamName(), 'scan' => $resuScan, 'code' => $scan_code);
 }
 
 $listeID = null;
@@ -280,7 +280,7 @@ foreach($teams as $te) {
 	?><?=$msg?><?php
 
 	}
-	echo '<pre>';print_r($te);echo '</pre>';
+
 	echo"</font>";
 } // end foreach
 
