@@ -205,6 +205,7 @@ if ($team != NULL) {
 /******************************************************************************/
 /*      GESTION AFFICHAGE LISTE JOUEURS                                       */
 /******************************************************************************/
+
 foreach($teams as $te) {
 	if ($te['code'] == -1)
 	{
@@ -277,8 +278,9 @@ foreach($teams as $te) {
 	if (isset($msg))
 	{
 	?><?=$msg?><?php
-	echo '<pre>';print_r($te);echo '</pre>';
+
 	}
+	echo '<pre>';print_r($te);echo '</pre>';
 	echo"</font>";
 } // end foreach
 
