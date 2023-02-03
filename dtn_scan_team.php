@@ -277,8 +277,8 @@ foreach($teams as $te) {
 	if (isset($msg))
 	{
 	?><?=$msg?><?php
+	echo '<pre>';print_r($te);echo '</pre>';
 	}
-	<?php echo "Teamid =".$te->getTeamId() ; ?>
 	echo"</font>";
 } // end foreach
 
