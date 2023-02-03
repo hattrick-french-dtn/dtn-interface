@@ -107,13 +107,7 @@ if (!isset($_SESSION['horsConnexion'])) {
 			$majClub=insertionClub($clubHT); // Insertion ou Maj des tokens dans la bdd DTN
 		}
 
-		$team = $_SESSION['HT']->getQuaternyTeam($userId);
-		if ($team) {
-			$clubHT = getDataClubFromHT_usingPHT($team->getTeamId(), $userId);
-			$clubHT['userToken'] = $_SESSION['HT']->getOauthToken();
-			$clubHT['userTokenSecret'] = $_SESSION['HT']->getOauthTokenSecret();
-			$majClub=insertionClub($clubHT); // Insertion ou Maj des tokens dans la bdd DTN
-		}
+		
 		
         $clubHT = getDataClubFromHT_usingPHT($_SESSION['HT']->getPrimaryTeam($userId)->getTeamId(), $userId); // On récupère sur HT les informations sur le club connecté
         $clubHT['userToken'] = $_SESSION['HT']->getOauthToken();

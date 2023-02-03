@@ -100,7 +100,7 @@ switch ($sens) {
 		$tri = "Tri decroissant";
 		break;
 }
-?>NomJoueur;idHattrick;last maj(jours);age;jours;tsi;salaire;xp;leader;spe;endu;tx endu;forme;intensite;gardien;+;defense;+;construction;+;ailier;+;passe;+;buteur;+;coup francs;+;entraineur;entrainement;DTN;id manager;Date de dernière connexion;Pays du club;Nombre adjoints;préparateur physique;Médecin;Joueur en vente;Date du jour;<?php
+?>NomJoueur;idHattrick;last maj(jours);age;jours;tsi;salaire;xp;leader;spe;endu;tx endu;forme;intensite;gardien;+;defense;+;construction;+;ailier;+;passe;+;buteur;+;coup francs;+;entraineur;entrainement;DTN;id manager;Nom manager;Date de dernière connexion;Pays du club;Nombre adjoints;préparateur physique;Médecin;Joueur en vente;Date du jour;<?php
 ?>comp HTMS;pot HTMS<?php
 echo "\n";
 
@@ -141,7 +141,7 @@ foreach ($conn->query($sql) as $l) {
            
 		     // Extraction Id manager,date de dernière connexion et le nom du pays du club
             $idUserHT="-";
-            $sql5 = "SELECT idUserHT,date_last_connexion,nomAnglais,idPays_fk
+            $sql5 = "SELECT idUserHT,date_last_connexion,nomAnglais,idPays_fk,nomUser
 				FROM 
 					$tbl_pays   P,
 					$tbl_clubs  C
@@ -210,6 +210,7 @@ foreach ($conn->query($sql) as $l) {
 
 	//Idt manager
 	echo $idUserHT.";";
+	echo $nomUser.";";
 	echo $date_last_connexion.";";
 	
 	if ($idPays_fk == 126) echo "Cote d'Ivoire;";
