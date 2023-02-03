@@ -120,6 +120,46 @@ if ($team != NULL) {
 	}
 	$teams[1] = array('id' => $team->getTeamId(), 'name' => $team->getTeamName(), 'scan' => $resuScan, 'code' => $scan_code);
 }
+$listeID = null;
+$team = $_SESSION['HT']->getQuaternyTeam($userId);
+if ($team != NULL) {
+	// Récupération de la liste des joueurs
+	$list_joueur_HT = getDataMesJoueursFromHT_usingPHT($team->getTeamId());
+	if ((isset($_SESSION['newVisit']) && $_SESSION['newVisit']==1))  
+	{ // On met à jour les informations clubs et les informations joueurs 
+		if ($list_joueur_HT==false) 
+		{
+			$scan_code=-1;
+			$resuScan = null;
+		}
+		else
+		{
+			// Insertion ou mise à jour 
+			if (count($list_joueur_HT)>0)
+			{
+				foreach($list_joueur_HT as $joueur)
+				{
+					$listeID[]=$joueur["idHattrickJoueur"];
+				}
+				$listeID=array_unique($listeID); // Suppression des doublons
+				// Insertion ou mise à jour des joueurs
+				$resuScan=scanListeJoueurs($listeID, $_SESSION['nomUser'], 'P');
+				$scan_code=count($resuScan);
+			} 
+			else
+			{
+				$scan_code=-2; // pas de français
+			}
+		}
+	} 
+	else 
+	{
+		// Scan des joueurs sans mise à jour
+		$resuScan=scanListeJoueurs($listeID, $_SESSION['nomUser'], 'P', false, false);
+		$scan_code=count($resuScan);
+	}
+	$teams[1] = array('id' => $team->getTeamId(), 'name' => $team->getTeamName(), 'scan' => $resuScan, 'code' => $scan_code);
+}
 
 $listeID = null;
 $team = $_SESSION['HT']->getPrimaryTeam($userId);
