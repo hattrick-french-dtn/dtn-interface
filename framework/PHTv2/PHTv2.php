@@ -800,7 +800,8 @@ class CHPPConnection
 			$doc = $this->getSpecificTeam(CHPPConnection::SECONDARY, $userId);
 			if($doc->getElementsByTagName('Team')->length)
 			{
-				$this->secondaryTeam[$userId] = new HTTeam($doc->saveXML());
+				//$this->secondaryTeam[$userId] = new HTTeam($doc->saveXML());
+				return null;
 			}
 			else
 			{
