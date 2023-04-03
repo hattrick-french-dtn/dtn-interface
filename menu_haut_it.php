@@ -49,7 +49,7 @@
       <li<?php if ($nomFicPhpCourant[0]=="/fff_help.php") {?> class="active"<?php }?>><a href="fff_help.php" class="info"> Allenatori per papabili <span>Ricevere via una HT-mail un giocatore francese interessante visto sul mercato dei trasferimenti</span></a></li>
       <li<?php if ($nomFicPhpCourant[0]=="/contact.php" || $nomFicPhpCourant[0]=="/dtn_members.php" || $nomFicPhpCourant[0]=="/fff_federation.php") {?> class="active"<?php }?>><a href="contact.php" class="sous_menu"> Contattaci </a>
         <ul>
-          <li><a href="http://www.htfff.free.fr/dtn/forum"> Foro </a></li>
+          <!--<li><a href="http://www.htfff.free.fr/dtn/forum"> Forum </a></li>-->
           <li><a href="dtn_members.php" class="info"> Membri <span>Lista degli scout</span></a></li>
           <li><a href="fff_federation.php"> Sistema di scouting </a></li>
         </ul>

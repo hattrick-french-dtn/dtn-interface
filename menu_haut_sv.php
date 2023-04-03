@@ -49,7 +49,7 @@
       <li<?php if ($nomFicPhpCourant[0]=="/fff_help.php") {?> class="active"<?php }?>><a href="fff_help.php" class="info"> Tr&auml;nare s&ouml;kes <span>Du f&aring;r tips per HT-mail om intressanta franska spelare p&aring; transfern</span></a></li>
       <li<?php if ($nomFicPhpCourant[0]=="/contact.php" || $nomFicPhpCourant[0]=="/dtn_members.php" || $nomFicPhpCourant[0]=="/fff_federation.php") {?> class="active"<?php }?>><a href="contact.php" class="sous_menu"> Kontakt </a>
         <ul>
-          <li><a href="http://www.htfff.free.fr/dtn/forum"> Forum </a></li>
+          <!--<li><a href="http://www.htfff.free.fr/dtn/forum"> Forum </a></li>-->
           <li><a href="dtn_members.php" class="info"> Medlemmar <span>Lista &ouml;ver scouter</span></a></li>
           <li><a href="fff_federation.php"> Scoutsystemet </a></li>
         </ul>

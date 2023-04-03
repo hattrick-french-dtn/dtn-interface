@@ -49,7 +49,7 @@
       <li<?php if ($nomFicPhpCourant[0]=="/fff_help.php") {?> class="active"<?php }?>><a href="fff_help.php" class="info"> Wir suchen nach Trainern <span>Meldet euch an um &uuml;ber die besten franz&ouml;sischen Talente die auf dem Markt kommen per Mail informiert zu werden.</span></a></li>
       <li<?php if ($nomFicPhpCourant[0]=="/contact.php" || $nomFicPhpCourant[0]=="/dtn_members.php" || $nomFicPhpCourant[0]=="/fff_federation.php") {?> class="active"<?php }?>><a href="contact.php" class="sous_menu"> Kontakt </a>
         <ul>
-          <li><a href="http://www.htfff.free.fr/dtn/forum"> Forum </a></li>
+          <!--<li><a href="http://www.htfff.free.fr/dtn/forum"> Forum </a></li>-->
           <li><a href="dtn_members.php" class="info"> Mitglieder <span>Liste der Mitglieder der franz&ouml;sischen Scoutabteilung</span></a></li>
           <li><a href="fff_federation.php"> Scouting </a></li>
         </ul>
