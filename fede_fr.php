@@ -19,7 +19,7 @@ soyez certain que nous nous ferons un plaisir de vous accueillir. Cela sera &eac
 
 Pour proposer un joueur et voir s'il a un potentiel pour int&eacute;grer les &eacute;quipes U-20 ou A, veuillez scanner votre &eacute;quipe sur la page web mentionn&eacute;e pr&eacute;c&eacute;demment.
 <br><br>Pour proposer votre candidature &agrave; la DTN ou toutes autres questions, rendez-vous sur hattrick sur le forum France.<br/> 
-<strong>Sujet : <a href=""https://www.hattrick.org/goto.ashx?path=/Forum/Read.aspx?t=17244326&n=1&v=0"><u>La DTN recrute</u></a><br/>
+<strong>Sujet : <a href="https://www.hattrick.org/goto.ashx?path=/Forum/Read.aspx?n=1&nm=179&t=17380397&v=0"><u>La DTN recrute</u></a><br/>
 <strong>Langues :</strong> fran&ccedil;ais<br/><br/>
 				</div>
 
