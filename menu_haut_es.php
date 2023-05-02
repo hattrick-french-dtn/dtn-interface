@@ -49,7 +49,7 @@
       <li<?php if ($nomFicPhpCourant[0]=="/fff_help.php") {?> class="active"<?php }?>><a href="fff_help.php" class="info"> B&uacute;squeda de Entrenadores <span>Inscríbete para recibir propuestas de recuperaciones de potenciales internacionales</span></a></li>
       <li<?php if ($nomFicPhpCourant[0]=="/contact.php" || $nomFicPhpCourant[0]=="/dtn_members.php" || $nomFicPhpCourant[0]=="/fff_federation.php") {?> class="active"<?php }?>><a href="contact.php" class="sous_menu"> Contacto </a>
         <ul>
-          <li><a href="http://www.htfff.free.fr/dtn/forum"> Foro </a></li>
+          <!--<li><a href="http://www.htfff.free.fr/dtn/forum"> Forum </a></li>-->
           <li><a href="dtn_members.php" class="info"> Miembros <span>Lista de los miembros de la DTN</span></a></li>
           <li><a href="fff_federation.php"> DTN </a></li>
         </ul>

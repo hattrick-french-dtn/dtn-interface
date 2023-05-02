@@ -48,7 +48,7 @@
       <li<?php if ($nomFicPhpCourant[0]=="/fff_help.php") {?> class="active"<?php }?>><a href="fff_help.php" class="info"> Trainers gevraagd <span>Ontvang per HT-mail bericht over interessante Franse spelers op de transfermarkt</span></a></li>
       <li<?php if ($nomFicPhpCourant[0]=="/contact.php" || $nomFicPhpCourant[0]=="/dtn_members.php" || $nomFicPhpCourant[0]=="/fff_federation.php") {?> class="active"<?php }?>><a href="contact.php" class="sous_menu"> Contact </a>
         <ul>
-          <li><a href="http://www.htfff.free.fr/dtn/forum"> Forum </a></li>
+          <!--<li><a href="http://www.htfff.free.fr/dtn/forum"> Forum </a></li>-->
           <li><a href="dtn_members.php" class="info"> Leden <span>Lijst van DTN-leden</span></a></li>
           <li><a href="fff_federation.php"> Scoutingapparaat </a></li>
         </ul>
